@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Practice</title>
+    <style>
+      /* 박스 크기 기준[box sizing] 통일 */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      :root {
+        /* 전역 변수[custom property] */
+        --bg-color: #f5f7fb;
+        --card-color: #ffffff;
+        --accent-color: #2563eb;
+        --text-color: #1f2937;
+        --gap-size: 16px;
+      }
+
+      /* 박스 크기 기준[box sizing] 통일 */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      :root {
+        /* 전역 변수[custom property] */
+        --bg-color: #f5f7fb;
+        --card-color: #ffffff;
+        --accent-color: #2563eb;
+        --text-color: #1f2937;
+        --gap-size: 16px;
+      }
+
+      /* 박스 크기 기준[box sizing] 통일 */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      :root {
+        /* 전역 변수[custom property] */
+        --bg-color: #f5f7fb;
+        --card-color: #ffffff;
+        --accent-color: #2563eb;
+        --text-color: #1f2937;
+        --gap-size: 16px;
+      }
+
+      /* 박스 크기 기준[box sizing] 통일 */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      :root {
+        /* 전역 변수[custom property] */
+        --bg-color: #f5f7fb;
+        --card-color: #ffffff;
+        --accent-color: #2563eb;
+        --text-color: #1f2937;
+        --gap-size: 16px;
+      }
+
+      body {
+        margin: 0;
+        font-family: sans-serif;
+        background: var(--bg-color);
+        color: var(--text-color);
+      }
+
+      .page-wrapper {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+      }
+
+      .card-grid {
+        width: min(900px, 100%);
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--gap-size);
+      }
+
+      .card-item {
+        background: var(--card-color);
+        border: 1px solid #dbe3f0;
+        border-radius: 16px;
+        padding: 20px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+      }
+
+      .card-item.is-active {
+        border-color: var(--accent-color);
+        transform: translateY(-4px);
+      }
+
+      .title-text {
+        margin: 0 0 8px;
+        font-size: 20px;
+      }
+
+      .button-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-top: 16px;
+      }
+
+      .primary-button {
+        padding: 10px 14px;
+        border: none;
+        border-radius: 10px;
+        background: var(--accent-color);
+        color: white;
+        cursor: pointer;
+      }
+
+      .primary-button:hover {
+        opacity: 0.9;
+      }
+
+      .primary-button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .badge-text::before {
+        /* 의사 요소[pseudo element] */
+        content: "#";
+        margin-right: 4px;
+        color: var(--accent-color);
+      }
+
+      @media (max-width: 768px) {
+        /* 반응형[responsive] */
+        .card-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page-wrapper">
+      <section class="card-grid">
+        <article class="card-item is-active">
+          <h1 class="title-text">카드 1</h1>
+          <p class="badge-text">active</p>
+          <div class="button-row">
+            <button class="primary-button">확인</button>
+            <button class="primary-button" disabled>대기</button>
+          </div>
+        </article>
+
+        <article class="card-item">
+          <h2 class="title-text">카드 2</h2>
+          <p>grid + flex 조합 예문</p>
+        </article>
+
+        <article class="card-item">
+          <h2 class="title-text">카드 3</h2>
+          <p>모바일에서는 1열로 바뀜</p>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

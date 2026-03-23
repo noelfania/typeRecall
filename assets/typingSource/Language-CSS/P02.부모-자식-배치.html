@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Layout Practice</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: sans-serif;
+        background: #f8fafc;
+      }
+
+      .page {
+        padding: 24px;
+      }
+
+      .section {
+        max-width: 860px;
+        margin: 0 auto 24px;
+        padding: 20px;
+        background: white;
+        border: 1px solid #dbe3f0;
+        border-radius: 16px;
+      }
+
+      .box {
+        width: 80px;
+        height: 80px;
+        background: #2563eb;
+        color: white;
+        display: grid;
+        place-items: center;
+        border-radius: 12px;
+      }
+
+      /* 글자 정렬[text align] - 글자 같은 인라인 내용 */
+      .text-left {
+        text-align: left;
+      }
+
+      .text-center {
+        text-align: center;
+      }
+
+      .text-right {
+        text-align: right;
+      }
+
+      /* flex - 부모가 자식 위치를 잡음 */
+      .row-parent {
+        display: flex;
+        justify-content: space-between; /* 가로축[main axis] */
+        align-items: center;            /* 세로축[cross axis] */
+        gap: 12px;
+        min-height: 120px;
+        padding: 12px;
+        background: #eff6ff;
+      }
+
+      .center-parent {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 160px;
+        background: #ecfeff;
+      }
+
+      .column-parent {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 12px;
+        min-height: 200px;
+        background: #fef3c7;
+        padding: 12px;
+      }
+
+      /* grid - 부모가 칸을 만들고 자식을 배치 */
+      .grid-parent {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        background: #f3e8ff;
+        padding: 12px;
+      }
+
+      .grid-center {
+        display: grid;
+        place-items: center; /* 가로 + 세로 한 번에 중앙 정렬 */
+        min-height: 180px;
+        background: #dcfce7;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="section">
+        <h2>글자 정렬[text align]</h2>
+        <p class="text-left">왼쪽 정렬[left]</p>
+        <p class="text-center">가운데 정렬[center]</p>
+        <p class="text-right">오른쪽 정렬[right]</p>
+      </section>
+
+      <section class="section">
+        <h2>가로 배치[row layout]</h2>
+        <div class="row-parent">
+          <div class="box">A</div>
+          <div class="box">B</div>
+          <div class="box">C</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>부모 중앙 정렬[parent center]</h2>
+        <div class="center-parent">
+          <div class="box">CENTER</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>세로 배치[column layout]</h2>
+        <div class="column-parent">
+          <div class="box">1</div>
+          <div class="box">2</div>
+          <div class="box">3</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>그리드 배치[grid layout]</h2>
+        <div class="grid-parent">
+          <div class="box">A</div>
+          <div class="box">B</div>
+          <div class="box">C</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>그리드 중앙 정렬[place-items]</h2>
+        <div class="grid-center">
+          <div class="box">BOX</div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
