@@ -4,7 +4,10 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "generate:language-lessons": "node scripts/generate-language-lessons.mjs",
+    "predev": "npm run generate:language-lessons",
     "dev": "vite",
+    "prebuild": "npm run generate:language-lessons",
     "build": "tsc -b && vite build",
     "preview": "vite preview"
   },

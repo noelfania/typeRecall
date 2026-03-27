@@ -1,11 +1,11 @@
-# 훈민정음 타이핑 연습
+# 개발 예문 타이핑 연습
 
-훈민정음 원문을 고정 텍스트로 두고 따라 입력하는 프론트엔드 전용 타이핑 연습 앱입니다.
+`assets/typingSource/Language-*` 예문을 따라 치면서 손에 익히는 프론트엔드 전용 타이핑 연습 앱입니다.
 
 ## 목표
 
 - 서버 없이 바로 화면을 띄운다.
-- DB 없이 고정 원문만으로 연습한다.
+- DB 없이 `Language-*` 예문을 빌드 시 불러와 연습한다.
 - 복잡한 기능 없이 핵심 타이핑 연습만 남긴다.
 
 ## 실행 방법
@@ -29,26 +29,39 @@ npm run build
 
 빌드 결과물은 `dist/`에 생성됩니다.
 
+## 예문 데이터 생성
+
+`dev` 와 `build` 실행 전에는 아래 스크립트가 자동으로 실행됩니다.
+
+```bash
+npm run generate:language-lessons
+```
+
+이 스크립트는 `assets/typingSource/Language-*` 파일을 읽어 `src/generated/languageLessons.ts` 를 생성합니다.
+
 ## 현재 기능
 
-- 훈민정음 원문 표시
+- 언어 트랙 선택
+- 파일 단위 예문 선택
+- 예문 원문 그대로 표시
 - 입력값과 원문 문자 단위 비교
-- 현재 위치 표시
-- 맞은 글자 / 틀린 글자 구분
-- 진행률 표시
-- 정확도 표시
-- 다시 시작 버튼
+- 공백 / 줄바꿈 무시
+- 오타 시 진행 정지
+- 영문 `input` / 한글 `compositionend` 분리 처리
+- 조합 중 현재 글자 미리보기
+- 진행률 / 정확도 표시
+- 다시 시작 / 다음 예문 이동
 
-## 사용 문구
+## 예문 소스
 
-```text
-훈민정음
-
-나라의 말이 중국과 달라
-문자와 서로 통하지 아니하니,
-이런 까닭으로 어리석은[6] 백성이 이르고자 할 바가 있어도
-마침내 제 뜻을 능히 펴지 못할 사람이 많으니라.
-내가 이를 위하여 가엾이 여겨
-새로 스물여덟 자를 만드노니
-사람마다 하여금 쉬이 익혀 날로 쓰는 데 편하게 하고자 할 따름이니라.
-```
+- `assets/typingSource/Language-JavaScript`
+- `assets/typingSource/Language-TypeScript`
+- `assets/typingSource/Language-Python`
+- `assets/typingSource/Language-go`
+- `assets/typingSource/Language-Java`
+- `assets/typingSource/Language-Rust`
+- `assets/typingSource/Language-SQL`
+- `assets/typingSource/Language-git`
+- `assets/typingSource/Language-bash-Shell`
+- `assets/typingSource/Language-CSS`
+- `assets/typingSource/Language-RegEx-for-Javascript`

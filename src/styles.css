@@ -15,7 +15,8 @@ body {
 }
 
 button,
-textarea {
+textarea,
+select {
   font: inherit;
 }
 
@@ -44,6 +45,55 @@ textarea {
   color: #4b5563;
 }
 
+.toolbar {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.toolbarGroup {
+  display: grid;
+  gap: 10px;
+}
+
+.toolbarLabel {
+  color: #4b5563;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.trackList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.trackButton,
+.lessonSelect,
+.nextButton {
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.trackButton {
+  padding: 8px 12px;
+  color: #334155;
+  cursor: pointer;
+}
+
+.trackButton.isActive {
+  border-color: #2563eb;
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.lessonSelect {
+  width: 100%;
+  padding: 10px 12px;
+  color: #111827;
+}
+
 .stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -64,8 +114,28 @@ textarea {
 }
 
 .textPanel,
-.actions {
+.actions,
+.lessonMeta {
   margin-top: 24px;
+}
+
+.lessonMeta {
+  display: grid;
+  gap: 4px;
+}
+
+.lessonTitle {
+  font-size: 20px;
+}
+
+.lessonFile {
+  color: #334155;
+  font-size: 15px;
+}
+
+.lessonPath {
+  color: #64748b;
+  font-size: 14px;
 }
 
 .textPanel h2 {
@@ -77,15 +147,18 @@ textarea {
   padding: 20px;
   border-radius: 16px;
   background: #0f172a;
-  color: #cbd5e1;
   white-space: pre-wrap;
   word-break: keep-all;
   font-size: 22px;
   line-height: 1.9;
 }
 
+.char {
+  color: var(--char-color, #cbd5e1);
+}
+
 .char.isCorrect {
-  color: #f8fafc;
+  color: var(--char-correct-color, #f8fafc);
 }
 
 .char.isWrong {
@@ -101,6 +174,51 @@ textarea {
 
 .char.isGap {
   color: #cbd5e1;
+}
+
+.tone-plain {
+  --char-color: #cbd5e1;
+  --char-correct-color: #f8fafc;
+}
+
+.tone-keyword,
+.tone-tag {
+  --char-color: #93c5fd;
+  --char-correct-color: #bfdbfe;
+}
+
+.tone-string {
+  --char-color: #86efac;
+  --char-correct-color: #bbf7d0;
+}
+
+.tone-number {
+  --char-color: #fdba74;
+  --char-correct-color: #fed7aa;
+}
+
+.tone-function,
+.tone-attribute {
+  --char-color: #c4b5fd;
+  --char-correct-color: #ddd6fe;
+}
+
+.tone-type,
+.tone-property {
+  --char-color: #f9a8d4;
+  --char-correct-color: #fbcfe8;
+}
+
+.tone-variable {
+  --char-color: #67e8f9;
+  --char-correct-color: #a5f3fc;
+}
+
+.tone-comment {
+  --char-color: #94a3b8;
+  --char-correct-color: #94a3b8;
+  font-style: italic;
+  opacity: 0.92;
 }
 
 .char.hasPreview {
@@ -142,6 +260,23 @@ textarea {
   opacity: 0.92;
 }
 
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.nextButton {
+  padding: 10px 16px;
+  color: #1f2937;
+  cursor: pointer;
+}
+
+.nextButton:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
 @media (max-width: 720px) {
   .stats {
     grid-template-columns: 1fr;
@@ -157,5 +292,10 @@ textarea {
 
   .charPreview {
     font-size: 12px;
+  }
+
+  .trackList,
+  .actions {
+    flex-direction: column;
   }
 }

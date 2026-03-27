@@ -1,42 +1,83 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 
-const practiceText = `훈민정음
-
-나라의 말이 중국과 달라
-문자와 서로 통하지 아니하니,
-이런 까닭으로 어리석은[6] 백성이 이르고자 할 바가 있어도
-마침내 제 뜻을 능히 펴지 못할 사람이 많으니라.
-내가 이를 위하여 가엾이 여겨
-새로 스물여덟 자를 만드노니
-사람마다 하여금 쉬이 익혀 날로 쓰는 데 편하게 하고자 할 따름이니라.`;
+import { languageTracks } from './generated/languageLessons';
+import { buildHighlightChars } from './lib/codeHighlight';
 
 function App() {
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const [inputValue, setInputValue] = useState('');
   const [draftValue, setDraftValue] = useState('');
   const [isComposing, setIsComposing] = useState(false);
+  const [selectedTrackId, setSelectedTrackId] = useState(languageTracks[0]?.id ?? '');
+  const [selectedLessonId, setSelectedLessonId] = useState(languageTracks[0]?.lessons[0]?.id ?? '');
+  const [selectedPartId, setSelectedPartId] = useState(languageTracks[0]?.lessons[0]?.parts[0]?.id ?? '');
 
-  const normalizedTarget = useMemo(() => practiceText.replace(/\s/g, ''), []);
+  const selectedTrack = useMemo(() => {
+    return languageTracks.find((track) => track.id === selectedTrackId) ?? languageTracks[0] ?? null;
+  }, [selectedTrackId]);
+
+  useEffect(() => {
+    if (!selectedTrack) {
+      setSelectedLessonId('');
+      return;
+    }
+
+    const hasSelectedLesson = selectedTrack.lessons.some((lesson) => lesson.id === selectedLessonId);
+    if (!hasSelectedLesson) {
+      setSelectedLessonId(selectedTrack.lessons[0]?.id ?? '');
+    }
+  }, [selectedLessonId, selectedTrack]);
+
+  const selectedLesson = useMemo(() => {
+    if (!selectedTrack) {
+      return null;
+    }
+
+    return selectedTrack.lessons.find((lesson) => lesson.id === selectedLessonId) ?? selectedTrack.lessons[0] ?? null;
+  }, [selectedLessonId, selectedTrack]);
+
+  useEffect(() => {
+    if (!selectedLesson) {
+      setSelectedPartId('');
+      return;
+    }
+
+    const hasSelectedPart = selectedLesson.parts.some((part) => part.id === selectedPartId);
+    if (!hasSelectedPart) {
+      setSelectedPartId(selectedLesson.parts[0]?.id ?? '');
+    }
+  }, [selectedLesson, selectedPartId]);
+
+  const selectedPart = useMemo(() => {
+    if (!selectedLesson) {
+      return null;
+    }
+
+    return selectedLesson.parts.find((part) => part.id === selectedPartId) ?? selectedLesson.parts[0] ?? null;
+  }, [selectedLesson, selectedPartId]);
+
+  const practiceText = selectedPart?.content ?? '예문 데이터가 없습니다.';
+  const displayText = selectedPart?.displayContent ?? practiceText;
+  const practiceLanguage = selectedLesson?.language ?? 'text';
+
+  const normalizedTarget = useMemo(() => practiceText.replace(/\s/g, ''), [practiceText]);
   const limitedValue = inputValue.slice(0, normalizedTarget.length);
   const totalCount = normalizedTarget.length;
   const typedCount = limitedValue.length;
 
   useEffect(() => {
     inputRef.current?.focus();
-  }, []);
+  }, [selectedPart?.id]);
+
+  useEffect(() => {
+    setInputValue('');
+    setDraftValue('');
+    setIsComposing(false);
+  }, [selectedPart?.id]);
 
   const displayChars = useMemo(() => {
-    let logicalIndex = 0;
-    return practiceText.split('').map((char, index) => {
-      if (/\s/.test(char)) {
-        return { char, key: `${char}-${index}`, logicalIndex: null };
-      }
-
-      const item = { char, key: `${char}-${index}`, logicalIndex };
-      logicalIndex += 1;
-      return item;
-    });
-  }, []);
+    return buildHighlightChars(displayText, practiceLanguage);
+  }, [displayText, practiceLanguage]);
 
   const correctCount = useMemo(() => {
     let count = 0;
@@ -54,6 +95,20 @@ function App() {
     ? normalizedDraft.slice(limitedValue.length)
     : '';
   const previewChar = previewText[previewText.length - 1] ?? '';
+  const trackIndex = selectedTrack ? languageTracks.findIndex((track) => track.id === selectedTrack.id) : -1;
+  const lessonIndex = selectedTrack && selectedLesson
+    ? selectedTrack.lessons.findIndex((lesson) => lesson.id === selectedLesson.id)
+    : -1;
+  const partIndex = selectedLesson && selectedPart
+    ? selectedLesson.parts.findIndex((part) => part.id === selectedPart.id)
+    : -1;
+  const hasLessons = languageTracks.some((track) => track.lessons.length > 0);
+  const isLastLesson = selectedTrack !== null
+    && selectedLesson !== null
+    && selectedPart !== null
+    && trackIndex === languageTracks.length - 1
+    && lessonIndex === selectedTrack.lessons.length - 1
+    && partIndex === selectedLesson.parts.length - 1;
 
   const acceptInput = (rawValue: string) => {
     const normalizedInput = rawValue.replace(/\s/g, '');
@@ -70,13 +125,124 @@ function App() {
     setDraftValue(nextAcceptedValue);
   };
 
+  const resetTyping = () => {
+    setInputValue('');
+    setDraftValue('');
+    setIsComposing(false);
+    inputRef.current?.focus();
+  };
+
+  const moveToNextLesson = () => {
+    if (!selectedTrack || !selectedLesson || !selectedPart) {
+      return;
+    }
+
+    const nextPart = selectedLesson.parts[partIndex + 1];
+    if (nextPart) {
+      setSelectedPartId(nextPart.id);
+      return;
+    }
+
+    const nextLesson = selectedTrack.lessons[lessonIndex + 1];
+    if (nextLesson) {
+      setSelectedLessonId(nextLesson.id);
+      setSelectedPartId(nextLesson.parts[0]?.id ?? '');
+      return;
+    }
+
+    const nextTrack = languageTracks[trackIndex + 1];
+    if (nextTrack?.lessons[0]) {
+      setSelectedTrackId(nextTrack.id);
+      setSelectedLessonId(nextTrack.lessons[0].id);
+      setSelectedPartId(nextTrack.lessons[0].parts[0]?.id ?? '');
+      return;
+    }
+
+    const firstTrack = languageTracks[0];
+    const firstLesson = firstTrack?.lessons[0];
+    if (firstTrack && firstLesson) {
+      setSelectedTrackId(firstTrack.id);
+      setSelectedLessonId(firstLesson.id);
+      setSelectedPartId(firstLesson.parts[0]?.id ?? '');
+    }
+  };
+
   return (
-    <main className="page" onClick={() => inputRef.current?.focus()}>
+    <main
+      className="page"
+      onClick={(event) => {
+        const target = event.target;
+        if (target instanceof HTMLElement && target.closest('button, select, option, label')) {
+          return;
+        }
+        inputRef.current?.focus();
+      }}
+    >
       <section className="panel">
         <header className="header">
-          <h1>훈민정음 타이핑 연습</h1>
+          <h1>개발 예문 타이핑 연습</h1>
           <p className="subtitle">영어는 바로 반영되고, 한글 조합 입력은 글자가 완성되는 순간 판정합니다. 공백과 줄바꿈은 무시됩니다.</p>
         </header>
+
+        <section className="toolbar" aria-label="예문 선택">
+          <div className="toolbarGroup">
+            <span className="toolbarLabel">언어</span>
+            <div className="trackList">
+              {languageTracks.map((track) => {
+                const className = track.id === selectedTrack?.id ? 'trackButton isActive' : 'trackButton';
+                return (
+                  <button
+                    key={track.id}
+                    type="button"
+                    className={className}
+                    onClick={() => setSelectedTrackId(track.id)}
+                  >
+                    {track.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="toolbarGroup">
+            <label className="toolbarLabel" htmlFor="lesson-select">파일</label>
+            <select
+              id="lesson-select"
+              className="lessonSelect"
+              value={selectedLesson?.id ?? ''}
+              onChange={(event) => {
+                const nextLessonId = event.target.value;
+                const nextLesson = selectedTrack?.lessons.find((lesson) => lesson.id === nextLessonId);
+                setSelectedLessonId(nextLessonId);
+                setSelectedPartId(nextLesson?.parts[0]?.id ?? '');
+              }}
+              disabled={!selectedTrack}
+            >
+              {selectedTrack?.lessons.map((lesson) => (
+                <option key={lesson.id} value={lesson.id}>
+                  {lesson.title}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="toolbarGroup">
+            <label className="toolbarLabel" htmlFor="part-select">파트</label>
+            <select
+              id="part-select"
+              className="lessonSelect"
+              value={selectedPart?.id ?? ''}
+              onChange={(event) => setSelectedPartId(event.target.value)}
+              disabled={!selectedLesson}
+            >
+              {selectedLesson?.parts.map((part) => (
+                <option key={part.id} value={part.id}>
+                  {part.title}
+                </option>
+              ))}
+            </select>
+          </div>
+        </section>
 
         <div className="stats">
           <div className="statCard">
@@ -88,23 +254,30 @@ function App() {
             <strong>{accuracyValue}%</strong>
           </div>
           <div className="statCard">
-            <span className="statLabel">상태</span>
-            <strong>{isDone ? '완료' : '연습 중'}</strong>
+            <span className="statLabel">파트</span>
+            <strong>{selectedPart ? `${partIndex + 1} / ${selectedLesson?.parts.length ?? 0}` : '없음'}</strong>
           </div>
         </div>
 
-        <section className="textPanel" aria-label="원문">
-          <h2>원문</h2>
-          <p className="practiceText">
-            {displayChars.map(({ char, key, logicalIndex }) => {
-              let className = 'char';
+        <section className="lessonMeta" aria-label="현재 예문 정보">
+          <strong className="lessonTitle">{selectedPart?.title ?? selectedLesson?.title ?? '예문 없음'}</strong>
+          <span className="lessonFile">{selectedLesson?.title ?? '파일 없음'}</span>
+          <span className="lessonPath">{selectedLesson?.sourcePath ?? 'assets/typingSource/Language-*'}</span>
+        </section>
 
-              if (logicalIndex === null) {
-                className = 'char isGap';
-              } else if (logicalIndex < limitedValue.length) {
-                className = limitedValue[logicalIndex] === char ? 'char isCorrect' : 'char isWrong';
-              } else if (logicalIndex === limitedValue.length) {
-                className = previewChar ? 'char isCurrent hasPreview' : 'char isCurrent';
+        <section className="textPanel" aria-label="원문">
+          <h2>예문 원문</h2>
+          <p className="practiceText">
+            {displayChars.map(({ char, key, logicalIndex, tone }) => {
+              let className = `char tone-${tone}`;
+              const isWhitespace = /\s/.test(char);
+
+              if (logicalIndex === null && isWhitespace) {
+                className = `${className} isGap`;
+              } else if (logicalIndex !== null && logicalIndex < limitedValue.length) {
+                className = limitedValue[logicalIndex] === char ? `${className} isCorrect` : 'char isWrong';
+              } else if (logicalIndex !== null && logicalIndex === limitedValue.length) {
+                className = previewChar ? `${className} isCurrent hasPreview` : `${className} isCurrent`;
               }
 
               return (
@@ -123,6 +296,12 @@ function App() {
           ref={inputRef}
           className="hiddenInput"
           value={isComposing ? draftValue : limitedValue}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter' && event.ctrlKey) {
+              event.preventDefault();
+              moveToNextLesson();
+            }
+          }}
           onChange={(event) => {
             const nextValue = event.target.value;
 
@@ -134,6 +313,9 @@ function App() {
             acceptInput(nextValue);
           }}
           onCompositionStart={() => {
+            if (!hasLessons) {
+              return;
+            }
             setIsComposing(true);
             setDraftValue(limitedValue);
           }}
@@ -151,13 +333,17 @@ function App() {
           <button
             type="button"
             className="resetButton"
-            onClick={() => {
-              setInputValue('');
-              setDraftValue('');
-              setIsComposing(false);
-            }}
+            onClick={resetTyping}
           >
             다시 시작
+          </button>
+          <button
+            type="button"
+            className="nextButton"
+            onClick={moveToNextLesson}
+            disabled={!selectedPart}
+          >
+            {isLastLesson ? '처음으로' : '다음 파트'}
           </button>
         </div>
       </section>
