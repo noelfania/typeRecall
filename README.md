@@ -1,41 +1,54 @@
-[![CI](https://github.com/aradzie/keybr.com/actions/workflows/ci.yml/badge.svg)](https://github.com/aradzie/keybr.com/actions/workflows/ci.yml)
+# 훈민정음 타이핑 연습
 
-# [keybr.com](https://www.keybr.com/) is not (just) a typing test
+훈민정음 원문을 고정 텍스트로 두고 따라 입력하는 프론트엔드 전용 타이핑 연습 앱입니다.
 
-<p align="center">
-    <img src="assets/screenshot.png" alt="screenshot" width="600"/>
-</p>
+## 목표
 
-It's the smartest way to learn touch typing and improve your typing speed.
-On the surface, it looks pretty simple: it shows you a piece of text, and you type it out.
-But the devil is in the details — keybr.com offers a few unique features:
+- 서버 없이 바로 화면을 띄운다.
+- DB 없이 고정 원문만으로 연습한다.
+- 복잡한 기능 없이 핵심 타이핑 연습만 남긴다.
 
-* keybr.com tracks every single keystroke and computes statistics for each individual key.
-* It automatically generates lessons that focus on your weakest keys.
-* You can set your own target typing speed, and it tracks your progress toward that goal.
-* It starts with a small set of the most frequent letters in your language.
-* More letters are added once you reach the target speed with the current ones.
-* It can even predict how many more lessons you will need to complete to reach your target speed.
-* It provides a beautiful profile page with detailed graphs showing your learning progress.
-* It offers plenty of modes and configuration options.
+## 실행 방법
 
-<p align="center">
-    <img src="docs/assets/graph.png" alt="screenshot" width="600"/>
-</p>
+```bash
+npm install
+npm run dev
+```
 
-## Can I contribute?
+기본 개발 서버 주소:
 
-Yes!
+```text
+http://localhost:5173
+```
 
-* **[Give us a ⭐️.](https://github.com/aradzie/keybr.com)** Help this project gain visibility and stand out.
-* **[Report a bug.](https://github.com/aradzie/keybr.com/issues)** If something is not working, let us know.
-* **[Suggest a feature.](https://github.com/aradzie/keybr.com/issues)** We are open to new ideas.
-* **[Translate.](./docs/translations.md)** If you want to see keybr.com in your language.
-* **[Getting started.](./docs/getting_started.md)** Launch a local instance of keybr.com, make a pull request.
-* **[Add a keyboard.](docs/custom_keyboard.md)** Add a custom keyboard to keybr.com
-* **[Add a language.](docs/custom_language.md)** Add a custom language to keybr.com
-* **[Join our Discord server](https://discord.gg/gY4RA4enVH).** To discuss things in a less formal way.
+## 빌드
 
-## License
+```bash
+npm run build
+```
 
-Released under the GNU Affero General Public License v3.0.
+빌드 결과물은 `dist/`에 생성됩니다.
+
+## 현재 기능
+
+- 훈민정음 원문 표시
+- 입력값과 원문 문자 단위 비교
+- 현재 위치 표시
+- 맞은 글자 / 틀린 글자 구분
+- 진행률 표시
+- 정확도 표시
+- 다시 시작 버튼
+
+## 사용 문구
+
+```text
+훈민정음
+
+나라의 말이 중국과 달라
+문자와 서로 통하지 아니하니,
+이런 까닭으로 어리석은[6] 백성이 이르고자 할 바가 있어도
+마침내 제 뜻을 능히 펴지 못할 사람이 많으니라.
+내가 이를 위하여 가엾이 여겨
+새로 스물여덟 자를 만드노니
+사람마다 하여금 쉬이 익혀 날로 쓰는 데 편하게 하고자 할 따름이니라.
+```
