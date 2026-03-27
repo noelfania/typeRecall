@@ -311,216 +311,246 @@ export const languageTracks: LanguageTrack[] = [
       {
         "id": "language-git-p01",
         "title": "P01.기본-흐름",
-        "fileName": "P01.기본-흐름.md",
-        "sourcePath": "assets/typingSource/Language-git/P01.기본-흐름.md",
-        "language": "markdown",
+        "fileName": "P01.기본-흐름.sh",
+        "sourcePath": "assets/typingSource/Language-git/P01.기본-흐름.sh",
+        "language": "shell",
         "parts": [
           {
             "id": "language-git-p01-part-1",
             "title": "깃 상태 확인[git status]",
-            "content": "현재 상태를 확인한다.\n깃 상태 확인[git status]\n예: 작업 전에 `git status`부터 본다.",
-            "displayContent": "현재 상태를 확인한다.\n깃 상태 확인[git status]\n예: 작업 전에 `git status`부터 본다."
+            "content": "git status",
+            "displayContent": "# 깃 상태 확인[git status]\ngit status\n# 결과: 현재 브랜치와 변경 파일 목록 확인"
           },
           {
             "id": "language-git-p01-part-2",
             "title": "차이 확인[git diff]",
-            "content": "변경 파일 차이를 확인한다.\n차이 확인[git diff]\n예: 커밋 전에 `git diff`로 실제 수정 내용을 검토한다.",
-            "displayContent": "변경 파일 차이를 확인한다.\n차이 확인[git diff]\n예: 커밋 전에 `git diff`로 실제 수정 내용을 검토한다."
+            "content": "git diff\ngit diff --staged",
+            "displayContent": "# 차이 확인[git diff]\ngit diff\ngit diff --staged\n# 결과: 작업 트리와 스테이징 차이 확인"
           },
           {
             "id": "language-git-p01-part-3",
             "title": "스테이징[git add]",
-            "content": "변경 파일을 스테이징 영역에 올린다.\n스테이징[git add]\n예: `git add src/app.ts`처럼 필요한 파일만 올린다.",
-            "displayContent": "변경 파일을 스테이징 영역에 올린다.\n스테이징[git add]\n예: `git add src/app.ts`처럼 필요한 파일만 올린다."
+            "content": "git add src/app.ts\ngit add .",
+            "displayContent": "# 스테이징[git add]\ngit add src/app.ts\ngit add .\n# 결과: 지정 파일 또는 전체 변경을 스테이징"
           },
           {
             "id": "language-git-p01-part-4",
             "title": "커밋[git commit]",
-            "content": "스테이징된 변경을 커밋으로 저장한다.\n커밋[git commit]\n예: `git commit -m \"fix: handle null user response\"`처럼 의도를 남긴다.",
-            "displayContent": "스테이징된 변경을 커밋으로 저장한다.\n커밋[git commit]\n예: `git commit -m \"fix: handle null user response\"`처럼 의도를 남긴다."
+            "content": "git commit -m \"fix: handle null user response\"",
+            "displayContent": "# 커밋[git commit]\ngit commit -m \"fix: handle null user response\"\n# 결과: 변경 이력을 메시지와 함께 저장"
           },
           {
             "id": "language-git-p01-part-5",
             "title": "푸시[git push]",
-            "content": "원격 저장소에 변경을 보낸다.\n푸시[git push]\n예: 작업이 끝나면 `git push origin feature/login`을 실행한다.",
-            "displayContent": "원격 저장소에 변경을 보낸다.\n푸시[git push]\n예: 작업이 끝나면 `git push origin feature/login`을 실행한다."
+            "content": "git push origin feature/login",
+            "displayContent": "# 푸시[git push]\ngit push origin feature/login\n# 결과: 현재 브랜치 변경을 원격 저장소에 반영"
           },
           {
             "id": "language-git-p01-part-6",
             "title": "풀[git pull]",
-            "content": "원격 변경을 가져와 현재 브랜치에 반영한다.\n풀[git pull]\n예: 작업 시작 전에 `git pull origin main`으로 최신 상태를 맞춘다.",
-            "displayContent": "원격 변경을 가져와 현재 브랜치에 반영한다.\n풀[git pull]\n예: 작업 시작 전에 `git pull origin main`으로 최신 상태를 맞춘다."
+            "content": "git pull origin main",
+            "displayContent": "# 풀[git pull]\ngit pull origin main\n# 결과: 원격 main 최신 이력을 가져와 현재 브랜치에 반영"
           },
           {
             "id": "language-git-p01-part-7",
             "title": "브랜치 생성[git branch]",
-            "content": "새 작업 브랜치를 만든다.\n브랜치 생성[git branch]\n예: `git branch feature/profile-page`로 브랜치를 만든다.",
-            "displayContent": "새 작업 브랜치를 만든다.\n브랜치 생성[git branch]\n예: `git branch feature/profile-page`로 브랜치를 만든다."
+            "content": "git branch feature/profile-page\ngit branch",
+            "displayContent": "# 브랜치 생성[git branch]\ngit branch feature/profile-page\ngit branch\n# 결과: 새 브랜치 생성 후 목록 확인"
           },
           {
             "id": "language-git-p01-part-8",
             "title": "체크아웃[git checkout]",
-            "content": "다른 브랜치로 이동한다.\n체크아웃[git checkout]\n예: `git checkout main`으로 메인 브랜치로 돌아간다.",
-            "displayContent": "다른 브랜치로 이동한다.\n체크아웃[git checkout]\n예: `git checkout main`으로 메인 브랜치로 돌아간다."
+            "content": "git checkout main",
+            "displayContent": "# 체크아웃[git checkout]\ngit checkout main\n# 결과: main 브랜치로 이동"
           },
           {
             "id": "language-git-p01-part-9",
             "title": "스위치 생성[git checkout -b]",
-            "content": "브랜치 생성과 이동을 한 번에 한다.\n스위치 생성[git checkout -b]\n예: `git checkout -b feature/cart`로 새 브랜치에서 바로 작업 시작한다.",
-            "displayContent": "브랜치 생성과 이동을 한 번에 한다.\n스위치 생성[git checkout -b]\n예: `git checkout -b feature/cart`로 새 브랜치에서 바로 작업 시작한다."
+            "content": "git checkout -b feature/cart",
+            "displayContent": "# 스위치 생성[git checkout -b]\ngit checkout -b feature/cart\n# 결과: 새 브랜치를 만들고 즉시 이동"
           },
           {
             "id": "language-git-p01-part-10",
             "title": "스위치[git switch]",
-            "content": "최신 방식으로 브랜치를 전환한다.\n스위치[git switch]\n예: `git switch main`은 브랜치 전환에만 집중된 명령이다.",
-            "displayContent": "최신 방식으로 브랜치를 전환한다.\n스위치[git switch]\n예: `git switch main`은 브랜치 전환에만 집중된 명령이다."
+            "content": "git switch main\ngit switch -c feature/search",
+            "displayContent": "# 스위치[git switch]\ngit switch main\ngit switch -c feature/search\n# 결과: 브랜치 이동 또는 생성 후 이동"
           },
           {
             "id": "language-git-p01-part-11",
             "title": "머지[git merge]",
-            "content": "다른 브랜치의 이력을 현재 브랜치에 합친다.\n머지[git merge]\n예: `git merge feature/cart`로 기능 브랜치를 합친다.",
-            "displayContent": "다른 브랜치의 이력을 현재 브랜치에 합친다.\n머지[git merge]\n예: `git merge feature/cart`로 기능 브랜치를 합친다."
+            "content": "git merge feature/cart",
+            "displayContent": "# 머지[git merge]\ngit merge feature/cart\n# 결과: feature/cart 내용을 현재 브랜치에 병합"
           },
           {
             "id": "language-git-p01-part-12",
             "title": "리베이스[git rebase]",
-            "content": "커밋을 다시 쌓아 이력을 깔끔하게 정리한다.\n리베이스[git rebase]\n예: `git rebase main`으로 최신 메인 위에 커밋을 다시 올린다.",
-            "displayContent": "커밋을 다시 쌓아 이력을 깔끔하게 정리한다.\n리베이스[git rebase]\n예: `git rebase main`으로 최신 메인 위에 커밋을 다시 올린다."
+            "content": "git rebase main",
+            "displayContent": "# 리베이스[git rebase]\ngit rebase main\n# 결과: 현재 커밋을 최신 main 위로 다시 정렬"
           },
           {
             "id": "language-git-p01-part-13",
             "title": "충돌 해결[merge conflict resolution]",
-            "content": "충돌 난 파일을 직접 수정한 뒤 병합을 마무리한다.\n충돌 해결[merge conflict resolution]\n예: 충돌 마커를 지운 뒤 다시 `git add` 한다.",
-            "displayContent": "충돌 난 파일을 직접 수정한 뒤 병합을 마무리한다.\n충돌 해결[merge conflict resolution]\n예: 충돌 마커를 지운 뒤 다시 `git add` 한다."
+            "content": "git status\ngit add src/app.ts\ngit commit -m \"fix: resolve merge conflict\"",
+            "displayContent": "# 충돌 해결[merge conflict resolution]\ngit status\ngit add src/app.ts\ngit commit -m \"fix: resolve merge conflict\"\n# 결과: 충돌 파일 수정 후 병합 마무리"
           },
           {
             "id": "language-git-p01-part-14",
             "title": "리셋[git reset]",
-            "content": "특정 커밋으로 작업 트리를 되돌린다.\n리셋[git reset]\n예: `git reset --soft HEAD~1`은 커밋만 취소하고 변경은 남긴다.",
-            "displayContent": "특정 커밋으로 작업 트리를 되돌린다.\n리셋[git reset]\n예: `git reset --soft HEAD~1`은 커밋만 취소하고 변경은 남긴다."
+            "content": "git reset --soft HEAD~1",
+            "displayContent": "# 리셋[git reset]\ngit reset --soft HEAD~1\n# 결과: 마지막 커밋만 취소하고 변경 내용은 유지"
           },
           {
             "id": "language-git-p01-part-15",
             "title": "리버트[git revert]",
-            "content": "기존 커밋을 취소하는 새 커밋을 만든다.\n리버트[git revert]\n예: 협업 중이면 `git revert <commit>`가 더 안전한 경우가 많다.",
-            "displayContent": "기존 커밋을 취소하는 새 커밋을 만든다.\n리버트[git revert]\n예: 협업 중이면 `git revert <commit>`가 더 안전한 경우가 많다."
+            "content": "git revert abc1234",
+            "displayContent": "# 리버트[git revert]\ngit revert abc1234\n# 결과: 특정 커밋을 되돌리는 새 커밋 생성"
           },
           {
             "id": "language-git-p01-part-16",
             "title": "체리픽[git cherry-pick]",
-            "content": "특정 커밋 하나만 현재 브랜치에 가져온다.\n체리픽[git cherry-pick]\n예: 긴급 수정 커밋만 `git cherry-pick <hash>`로 가져올 수 있다.",
-            "displayContent": "특정 커밋 하나만 현재 브랜치에 가져온다.\n체리픽[git cherry-pick]\n예: 긴급 수정 커밋만 `git cherry-pick <hash>`로 가져올 수 있다."
+            "content": "git cherry-pick abc1234",
+            "displayContent": "# 체리픽[git cherry-pick]\ngit cherry-pick abc1234\n# 결과: 필요한 커밋 하나만 현재 브랜치에 가져옴"
           },
           {
             "id": "language-git-p01-part-17",
-            "title": "작업 시작 흐름[status → pull → switch]",
-            "content": "작업 시작 패턴.\n작업 시작 흐름[status → pull → switch]\n예: `git status` → `git pull` → `git switch -c feature/x`",
-            "displayContent": "작업 시작 패턴.\n작업 시작 흐름[status → pull → switch]\n예: `git status` → `git pull` → `git switch -c feature/x`"
+            "title": "작업 시작 흐름[status -> pull -> switch]",
+            "content": "git status\ngit pull origin main\ngit switch -c feature/x",
+            "displayContent": "# 작업 시작 흐름[status -> pull -> switch]\ngit status\ngit pull origin main\ngit switch -c feature/x\n# 결과: 작업 시작 전에 최신 상태를 맞추고 새 브랜치로 이동"
           },
           {
             "id": "language-git-p01-part-18",
-            "title": "작업 저장 흐름[diff → add → commit]",
-            "content": "작업 저장 패턴.\n작업 저장 흐름[diff → add → commit]\n예: `git diff` → `git add .` → `git commit -m \"...\"`",
-            "displayContent": "작업 저장 패턴.\n작업 저장 흐름[diff → add → commit]\n예: `git diff` → `git add .` → `git commit -m \"...\"`"
+            "title": "작업 저장 흐름[diff -> add -> commit]",
+            "content": "git diff\ngit add .\ngit commit -m \"feat: update dashboard widgets\"",
+            "displayContent": "# 작업 저장 흐름[diff -> add -> commit]\ngit diff\ngit add .\ngit commit -m \"feat: update dashboard widgets\"\n# 결과: 변경 검토 후 저장"
           },
           {
             "id": "language-git-p01-part-19",
-            "title": "반영 흐름[switch → pull → merge]",
-            "content": "배포 전 반영 패턴.\n반영 흐름[switch → pull → merge]\n예: `git switch main` → `git pull` → `git merge feature/x`",
-            "displayContent": "배포 전 반영 패턴.\n반영 흐름[switch → pull → merge]\n예: `git switch main` → `git pull` → `git merge feature/x`"
+            "title": "반영 흐름[switch -> pull -> merge]",
+            "content": "git switch main\ngit pull origin main\ngit merge feature/x",
+            "displayContent": "# 반영 흐름[switch -> pull -> merge]\ngit switch main\ngit pull origin main\ngit merge feature/x\n# 결과: 메인 브랜치에 기능 브랜치 내용을 반영"
           }
         ]
       },
       {
         "id": "language-git-p02",
         "title": "P02.실무-패턴",
-        "fileName": "P02.실무-패턴.md",
-        "sourcePath": "assets/typingSource/Language-git/P02.실무-패턴.md",
-        "language": "markdown",
+        "fileName": "P02.실무-패턴.sh",
+        "sourcePath": "assets/typingSource/Language-git/P02.실무-패턴.sh",
+        "language": "shell",
         "parts": [
           {
             "id": "language-git-p02-part-1",
-            "title": "기능 추가[feat]",
-            "content": "새 기능 추가를 나타내는 커밋 유형.\n기능 추가[feat]\n예: `feat(auth): add social login`",
-            "displayContent": "새 기능 추가를 나타내는 커밋 유형.\n기능 추가[feat]\n예: `feat(auth): add social login`"
+            "title": "기능 추가 커밋[feat]",
+            "content": "git commit -m \"feat(auth): add social login\"",
+            "displayContent": "# 기능 추가 커밋[feat]\ngit commit -m \"feat(auth): add social login\"\n# 결과: 새 기능 추가 이력을 남김"
           },
           {
             "id": "language-git-p02-part-2",
-            "title": "버그 수정[fix]",
-            "content": "버그 수정을 나타내는 커밋 유형.\n버그 수정[fix]\n예: `fix(api): handle empty response`",
-            "displayContent": "버그 수정을 나타내는 커밋 유형.\n버그 수정[fix]\n예: `fix(api): handle empty response`"
+            "title": "버그 수정 커밋[fix]",
+            "content": "git commit -m \"fix(api): handle empty response\"",
+            "displayContent": "# 버그 수정 커밋[fix]\ngit commit -m \"fix(api): handle empty response\"\n# 결과: 버그 수정 이력을 남김"
           },
           {
             "id": "language-git-p02-part-3",
-            "title": "문서 수정[docs]",
-            "content": "문서 변경을 나타내는 커밋 유형.\n문서 수정[docs]\n예: `docs: update setup guide`",
-            "displayContent": "문서 변경을 나타내는 커밋 유형.\n문서 수정[docs]\n예: `docs: update setup guide`"
+            "title": "문서 수정 커밋[docs]",
+            "content": "git commit -m \"docs: update setup guide\"",
+            "displayContent": "# 문서 수정 커밋[docs]\ngit commit -m \"docs: update setup guide\"\n# 결과: 문서 변경 이력을 남김"
           },
           {
             "id": "language-git-p02-part-4",
-            "title": "리팩터링[refactor]",
-            "content": "동작 변화 없는 구조 개선을 나타내는 커밋 유형.\n리팩터링[refactor]\n예: `refactor(ui): simplify modal props`",
-            "displayContent": "동작 변화 없는 구조 개선을 나타내는 커밋 유형.\n리팩터링[refactor]\n예: `refactor(ui): simplify modal props`"
+            "title": "리팩터링 커밋[refactor]",
+            "content": "git commit -m \"refactor(ui): simplify modal props\"",
+            "displayContent": "# 리팩터링 커밋[refactor]\ngit commit -m \"refactor(ui): simplify modal props\"\n# 결과: 동작 변화 없는 구조 개선 이력을 남김"
           },
           {
             "id": "language-git-p02-part-5",
-            "title": "잡무[chore]",
-            "content": "설정, 의존성, 빌드 같은 잡무성 변경을 나타내는 커밋 유형.\n잡무[chore]\n예: `chore: update eslint config`",
-            "displayContent": "설정, 의존성, 빌드 같은 잡무성 변경을 나타내는 커밋 유형.\n잡무[chore]\n예: `chore: update eslint config`"
+            "title": "잡무 커밋[chore]",
+            "content": "git commit -m \"chore: update eslint config\"",
+            "displayContent": "# 잡무 커밋[chore]\ngit commit -m \"chore: update eslint config\"\n# 결과: 설정 또는 의존성 변경 이력을 남김"
           },
           {
             "id": "language-git-p02-part-6",
-            "title": "기능 브랜치[feature branch]",
-            "content": "기능 개발용 브랜치 이름.\n기능 브랜치[feature branch]\n예: `feature/profile-page`",
-            "displayContent": "기능 개발용 브랜치 이름.\n기능 브랜치[feature branch]\n예: `feature/profile-page`"
+            "title": "스타일 커밋[style]",
+            "content": "git commit -m \"style: lint code\"",
+            "displayContent": "# 스타일 커밋[style]\ngit commit -m \"style: lint code\"\n# 결과: 포맷 또는 스타일 정리 이력을 남김"
           },
           {
             "id": "language-git-p02-part-7",
-            "title": "핫픽스 브랜치[hotfix branch]",
-            "content": "긴급 수정용 브랜치 이름.\n핫픽스 브랜치[hotfix branch]\n예: `hotfix/login-error`",
-            "displayContent": "긴급 수정용 브랜치 이름.\n핫픽스 브랜치[hotfix branch]\n예: `hotfix/login-error`"
+            "title": "기능 브랜치[feature branch]",
+            "content": "git switch -c feature/profile-page",
+            "displayContent": "# 기능 브랜치[feature branch]\ngit switch -c feature/profile-page\n# 결과: 기능 개발용 브랜치 생성"
           },
           {
             "id": "language-git-p02-part-8",
-            "title": "버그픽스 브랜치[bugfix branch]",
-            "content": "버그 수정용 브랜치 이름.\n버그픽스 브랜치[bugfix branch]\n예: `bugfix/cart-total`",
-            "displayContent": "버그 수정용 브랜치 이름.\n버그픽스 브랜치[bugfix branch]\n예: `bugfix/cart-total`"
+            "title": "핫픽스 브랜치[hotfix branch]",
+            "content": "git switch -c hotfix/login-error",
+            "displayContent": "# 핫픽스 브랜치[hotfix branch]\ngit switch -c hotfix/login-error\n# 결과: 긴급 수정용 브랜치 생성"
           },
           {
             "id": "language-git-p02-part-9",
-            "title": "페치[git fetch]",
-            "content": "원격 저장소 브랜치 목록까지 포함해 최신 상태를 가져온다.\n페치[git fetch]\n예: 리뷰 전에 `git fetch origin`으로 원격 이력을 먼저 가져온다.",
-            "displayContent": "원격 저장소 브랜치 목록까지 포함해 최신 상태를 가져온다.\n페치[git fetch]\n예: 리뷰 전에 `git fetch origin`으로 원격 이력을 먼저 가져온다."
+            "title": "버그픽스 브랜치[bugfix branch]",
+            "content": "git switch -c bugfix/cart-total",
+            "displayContent": "# 버그픽스 브랜치[bugfix branch]\ngit switch -c bugfix/cart-total\n# 결과: 버그 수정용 브랜치 생성"
           },
           {
             "id": "language-git-p02-part-10",
-            "title": "로그 비교[git log --oneline --graph]",
-            "content": "현재 브랜치가 원격과 얼마나 차이 나는지 본다.\n로그 비교[git log --oneline --graph]\n예: 머지 전에 `git log --oneline --graph --decorate`를 자주 본다.",
-            "displayContent": "현재 브랜치가 원격과 얼마나 차이 나는지 본다.\n로그 비교[git log --oneline --graph]\n예: 머지 전에 `git log --oneline --graph --decorate`를 자주 본다."
+            "title": "페치[git fetch]",
+            "content": "git fetch origin",
+            "displayContent": "# 페치[git fetch]\ngit fetch origin\n# 결과: 원격 저장소 최신 이력을 가져옴"
           },
           {
             "id": "language-git-p02-part-11",
-            "title": "이력 추적[git blame]",
-            "content": "어떤 파일이 언제 바뀌었는지 추적한다.\n이력 추적[git blame]\n예: `git blame src/app.ts`로 마지막 수정자를 확인한다.",
-            "displayContent": "어떤 파일이 언제 바뀌었는지 추적한다.\n이력 추적[git blame]\n예: `git blame src/app.ts`로 마지막 수정자를 확인한다."
+            "title": "프룬[git prune]",
+            "content": "git prune --dry-run",
+            "displayContent": "# 프룬[git prune]\ngit prune --dry-run\n# 결과: 어떤 loose object 가 정리 대상인지 미리 확인"
           },
           {
             "id": "language-git-p02-part-12",
-            "title": "커밋 보기[git show]",
-            "content": "이전 커밋의 상세 내용을 본다.\n커밋 보기[git show]\n예: `git show HEAD~1`로 바로 전 커밋 내용을 볼 수 있다.",
-            "displayContent": "이전 커밋의 상세 내용을 본다.\n커밋 보기[git show]\n예: `git show HEAD~1`로 바로 전 커밋 내용을 볼 수 있다."
+            "title": "원격 삭제 브랜치 정리[git fetch --prune]",
+            "content": "git fetch --prune origin",
+            "displayContent": "# 원격 삭제 브랜치 정리[git fetch --prune]\ngit fetch --prune origin\n# 결과: 원격에서 이미 삭제된 origin/* 추적 브랜치를 정리"
           },
           {
             "id": "language-git-p02-part-13",
-            "title": "스태시[git stash]",
-            "content": "스테이징하지 않고 임시 저장한다.\n스태시[git stash]\n예: 급하게 브랜치 바꿔야 할 때 `git stash`로 잠깐 치운다.",
-            "displayContent": "스테이징하지 않고 임시 저장한다.\n스태시[git stash]\n예: 급하게 브랜치 바꿔야 할 때 `git stash`로 잠깐 치운다."
+            "title": "원격 추적 브랜치 정리[git remote prune]",
+            "content": "git remote prune origin",
+            "displayContent": "# 원격 추적 브랜치 정리[git remote prune]\ngit remote prune origin\n# 결과: 더 이상 없는 원격 브랜치 참조를 한 번에 정리"
           },
           {
             "id": "language-git-p02-part-14",
+            "title": "로그 비교[git log --oneline --graph]",
+            "content": "git log --oneline --graph --decorate",
+            "displayContent": "# 로그 비교[git log --oneline --graph]\ngit log --oneline --graph --decorate\n# 결과: 브랜치 이력 구조를 한눈에 확인"
+          },
+          {
+            "id": "language-git-p02-part-15",
+            "title": "이력 추적[git blame]",
+            "content": "git blame src/app.ts",
+            "displayContent": "# 이력 추적[git blame]\ngit blame src/app.ts\n# 결과: 각 줄의 마지막 수정 커밋과 작성자 확인"
+          },
+          {
+            "id": "language-git-p02-part-16",
+            "title": "커밋 보기[git show]",
+            "content": "git show HEAD~1",
+            "displayContent": "# 커밋 보기[git show]\ngit show HEAD~1\n# 결과: 바로 전 커밋의 diff와 메타데이터 확인"
+          },
+          {
+            "id": "language-git-p02-part-17",
+            "title": "스태시[git stash]",
+            "content": "git stash",
+            "displayContent": "# 스태시[git stash]\ngit stash\n# 결과: 현재 변경을 임시로 치움"
+          },
+          {
+            "id": "language-git-p02-part-18",
+            "title": "스태시 목록[git stash list]",
+            "content": "git stash list",
+            "displayContent": "# 스태시 목록[git stash list]\ngit stash list\n# 결과: 임시 저장한 항목 목록 확인"
+          },
+          {
+            "id": "language-git-p02-part-19",
             "title": "스태시 복원[git stash pop]",
-            "content": "임시 저장한 변경을 다시 꺼낸다.\n스태시 복원[git stash pop]\n예: 돌아와서 `git stash pop`으로 이어서 작업한다.",
-            "displayContent": "임시 저장한 변경을 다시 꺼낸다.\n스태시 복원[git stash pop]\n예: 돌아와서 `git stash pop`으로 이어서 작업한다."
+            "content": "git stash pop",
+            "displayContent": "# 스태시 복원[git stash pop]\ngit stash pop\n# 결과: 마지막 스태시를 복원하고 목록에서 제거"
           }
         ]
       }
@@ -960,14 +990,14 @@ export const languageTracks: LanguageTrack[] = [
           {
             "id": "language-javascript-p02-part-15",
             "title": "이터레이터[iterator] (entries / keys / values)",
-            "content": "var iterSrc = ['X', 'Y', 'Z'];\nfor (var [idx, val] of iterSrc.entries()) {\n  console.log(idx, val);\n}\n\n[...iterSrc.keys()]\n[...iterSrc.values()]",
-            "displayContent": "/*** 이터레이터[iterator] (entries / keys / values) ***/\nvar iterSrc = ['X', 'Y', 'Z'];\nfor (var [idx, val] of iterSrc.entries()) {\n  console.log(idx, val);\n}\n// 0 'X'\n// 1 'Y'\n// 2 'Z'\n\n[...iterSrc.keys()]    // [0, 1, 2]\n[...iterSrc.values()]  // ['X', 'Y', 'Z']"
+            "content": "var iterSrc = ['X', 'Y', 'Z'];\nfor (var [idx, val] of iterSrc.entries()) {\n  console.log(idx, val);\n}\n\n[...iterSrc.keys()];\n[...iterSrc.values()];",
+            "displayContent": "/*** 이터레이터[iterator] (entries / keys / values) ***/\nvar iterSrc = ['X', 'Y', 'Z'];\nfor (var [idx, val] of iterSrc.entries()) {\n  console.log(idx, val);\n}\n// 0 'X'\n// 1 'Y'\n// 2 'Z'\n\n[...iterSrc.keys()];    // [0, 1, 2]\n[...iterSrc.values()];  // ['X', 'Y', 'Z']"
           },
           {
             "id": "language-javascript-p02-part-16",
             "title": "concat / 스프레드[spread] 비교",
-            "content": "[1, 2].concat([3, 4], 5)\n[...[1, 2], ...[3, 4], 5]",
-            "displayContent": "/*** concat / 스프레드[spread] 비교 ***/\n[1, 2].concat([3, 4], 5)   // [1, 2, 3, 4, 5]\n[...[1, 2], ...[3, 4], 5]  // [1, 2, 3, 4, 5]"
+            "content": "[1, 2].concat([3, 4], 5);\n[...[1, 2], ...[3, 4], 5];",
+            "displayContent": "/*** concat / 스프레드[spread] 비교 ***/\n[1, 2].concat([3, 4], 5);   // [1, 2, 3, 4, 5]\n[...[1, 2], ...[3, 4], 5];  // [1, 2, 3, 4, 5]"
           }
         ]
       },
