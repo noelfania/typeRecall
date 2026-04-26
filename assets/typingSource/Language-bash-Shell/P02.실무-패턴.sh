@@ -57,3 +57,9 @@ tar -czf logs.tar.gz *.txt
 export APP_ENV=local
 echo "$APP_ENV"
 # 결과: local
+
+
+
+
+
+

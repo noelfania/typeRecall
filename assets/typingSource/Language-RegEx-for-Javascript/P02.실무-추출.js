@@ -32,3 +32,35 @@ Array.from(logText.matchAll(/(\w+)=(\d+)/g), item => ({
 // 태그 안 내용 추출
 '<title>Hello</title>'.match(/(?<=<title>).*?(?=<\/title>)/)[0];
 // 결과: Hello
+
+
+
+functionAAAAA(asdfasdfas, asdfasdf, asdfasdfsdf) 이렇게 개행이 들어간 함수를 regex로 vscod에서 찾을때 매칭패턴은?
+
+functionAAAAA\s*([\s\S]*?)
+
+
+123ㅁㄴㅇㄹ.mp4 (= ㅁㄴㅇㄹ)만 선택
+숫자와 mp4 사이 텍스트
+(?<=\d)(.?)(?=.mp4)
+호환성 중시
+\d+(.?).mp4
+
+
+
+Day 2
+
+func(
+  a,
+  b,
+  c
+)
+
+→ 함수 전체 매칭
+
+Day 4
+
+// AAA()
+AAA()
+
+→ 주석 제외하고 AAA 호출만
