@@ -7,78 +7,160 @@ track:
   label: Python
 title: P02.실무-패턴
 source:
-  origin: assets/typingSource/Language-Python/P02.실무-패턴.py
+  origin: chat-raw 실무형 파이썬 2026-07-18
+  note: list/dict 처리, try, json, class 최소. 매일 쓰는 패턴만.
 parts:
   - id: language-python-p02-part-1
-    title: 예제 데이터[sample data] - 딕셔너리 리스트
+    title: 예제 데이터[list of dict]
     display: |-
-      # 예제 데이터[sample data] - 딕셔너리 리스트
-      user_list = [
+      # 예제 데이터[list of dict]
+      users = [
           {"name": "kim", "age": 30},
           {"name": "lee", "age": 20},
           {"name": "park", "age": 25},
       ]
     typing: |-
-      user_list = [
+      users = [
           {"name": "kim", "age": 30},
           {"name": "lee", "age": 20},
           {"name": "park", "age": 25},
       ]
   - id: language-python-p02-part-2
-    title: 필터링[filtering]
+    title: 필터[list comprehension]
     display: |-
-      # 필터링[filtering]
-      adult_list = [user for user in user_list if user["age"] >= 25]
-      print(adult_list)
-      # 결과: [{'name': 'kim', 'age': 30}, {'name': 'park', 'age': 25}]
+      # 필터[list comprehension]
+      # 나이 25 이상만 뽑기
+      adults = [u for u in users if u["age"] >= 25]
+      print(adults)
     typing: |-
-      adult_list = [user for user in user_list if user["age"] >= 25]
-      print(adult_list)
+      adults = [u for u in users if u["age"] >= 25]
+      print(adults)
   - id: language-python-p02-part-3
-    title: 변환[mapping]
+    title: 변환[list comprehension]
     display: |-
-      # 변환[mapping]
-      name_list = [user["name"] for user in user_list]
-      print(name_list)
+      # 변환[list comprehension]
+      # 이름만 리스트로 만들기
+      names = [u["name"] for u in users]
+      print(names)
       # 결과: ['kim', 'lee', 'park']
     typing: |-
-      name_list = [user["name"] for user in user_list]
-      print(name_list)
+      names = [u["name"] for u in users]
+      print(names)
   - id: language-python-p02-part-4
-    title: 정렬[sorting]
+    title: 숫자 필터·변환[even double]
     display: |-
-      # 정렬[sorting]
-      sorted_list = sorted(user_list, key=lambda user: user["age"], reverse=True)
-      print(sorted_list[0]["name"])
-      # 결과: kim
+      # 숫자 필터·변환[even double]
+      nums = [1, 2, 3, 4]
+      even = [n for n in nums if n % 2 == 0]
+      double = [n * 2 for n in nums]
+      print(even, double)
+      # 결과: [2, 4] [2, 4, 6, 8]
     typing: |-
-      sorted_list = sorted(user_list, key=lambda user: user["age"], reverse=True)
-      print(sorted_list[0]["name"])
+      nums = [1, 2, 3, 4]
+      even = [n for n in nums if n % 2 == 0]
+      double = [n * 2 for n in nums]
+      print(even, double)
   - id: language-python-p02-part-5
-    title: 기본값 처리[default handling]
+    title: 기본값[get default]
     display: |-
-      # 기본값 처리[default handling]
-      config = {"timeout": 3}
-      retry_count = config.get("retry", 0)
-      print(retry_count)
+      # 기본값[get default]
+      user = {"name": "kim"}
+      age = user.get("age", 0)
+      print(age)
       # 결과: 0
     typing: |-
-      config = {"timeout": 3}
-      retry_count = config.get("retry", 0)
-      print(retry_count)
+      user = {"name": "kim"}
+      age = user.get("age", 0)
+      print(age)
   - id: language-python-p02-part-6
-    title: 함수 조합[function composition]
+    title: 값 추가[dict assign]
     display: |-
-      # 함수 조합[function composition]
-      def format_user(user):
-          return f'{user["name"]}:{user["age"]}'
-
-      formatted_list = list(map(format_user, user_list))
-      print(formatted_list)
-      # 결과: ['kim:30', 'lee:20', 'park:25']
+      # 값 추가[dict assign]
+      user["email"] = "a@a.com"
+      print(user["email"])
     typing: |-
-      def format_user(user):
-          return f'{user["name"]}:{user["age"]}'
+      user["email"] = "a@a.com"
+      print(user["email"])
+  - id: language-python-p02-part-7
+    title: 정렬[sorted key]
+    display: |-
+      # 정렬[sorted key]
+      sorted_users = sorted(users, key=lambda u: u["age"], reverse=True)
+      print(sorted_users[0]["name"])
+      # 결과: kim
+    typing: |-
+      sorted_users = sorted(users, key=lambda u: u["age"], reverse=True)
+      print(sorted_users[0]["name"])
+  - id: language-python-p02-part-8
+    title: 예외 처리[try except]
+    display: |-
+      # 예외 처리[try except]
+      # 프로그램이 죽지 않게 막는 장치
+      try:
+          age = int("abc")
+      except ValueError:
+          age = 0
+      print(age)
+      # 결과: 0
+    typing: |-
+      try:
+          age = int("abc")
+      except ValueError:
+          age = 0
+      print(age)
+  - id: language-python-p02-part-9
+    title: JSON 파싱[json.loads]
+    display: |-
+      # JSON 파싱[json.loads]
+      # API / 로그 / 설정 = 거의 다 JSON
+      import json
 
-      formatted_list = list(map(format_user, user_list))
-      print(formatted_list)
+      data = json.loads('{"name": "kim"}')
+      print(data["name"])
+    typing: |-
+      import json
+
+      data = json.loads('{"name": "kim"}')
+      print(data["name"])
+  - id: language-python-p02-part-10
+    title: JSON 문자열화[json.dumps]
+    display: |-
+      # JSON 문자열화[json.dumps]
+      import json
+
+      text = json.dumps({"name": "kim", "age": 30})
+      print(text)
+    typing: |-
+      import json
+
+      text = json.dumps({"name": "kim", "age": 30})
+      print(text)
+  - id: language-python-p02-part-11
+    title: 클래스 최소[class]
+    display: |-
+      # 클래스 최소[class]
+      # 실무에서는 데이터 묶음 정도로만 먼저 쓴다
+      class User:
+          def __init__(self, name):
+              self.name = name
+
+      u = User("kim")
+      print(u.name)
+    typing: |-
+      class User:
+          def __init__(self, name):
+              self.name = name
+
+      u = User("kim")
+      print(u.name)
+  - id: language-python-p02-part-12
+    title: 미션 한 줄[filter + names]
+    display: |-
+      # 미션 한 줄[filter + names]
+      # 25세 이상 이름만
+      result = [u["name"] for u in users if u["age"] >= 25]
+      print(result)
+      # 결과: ['kim', 'park']
+    typing: |-
+      result = [u["name"] for u in users if u["age"] >= 25]
+      print(result)

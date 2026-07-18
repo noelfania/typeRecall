@@ -10,6 +10,7 @@ const KEYWORDS = {
   shell: ['if', 'then', 'else', 'fi', 'for', 'do', 'done', 'echo', 'export', 'local'],
   sql: ['select', 'from', 'where', 'join', 'left', 'right', 'inner', 'group', 'by', 'order', 'having', 'insert', 'into', 'values', 'update', 'set', 'delete', 'create', 'table', 'and', 'or', 'as'],
   typescript: ['const', 'let', 'var', 'function', 'return', 'if', 'else', 'for', 'of', 'new', 'class', 'extends', 'async', 'await', 'type', 'interface', 'readonly', 'null', 'undefined', 'true', 'false'],
+  csharp: ['class', 'public', 'private', 'protected', 'static', 'void', 'new', 'return', 'if', 'else', 'for', 'foreach', 'using', 'namespace', 'true', 'false', 'null', 'override', 'virtual', 'event', 'get', 'set'],
 };
 
 const FUNCTION_WORDS = new Set(['if', 'for', 'while', 'switch', 'catch', 'return']);
@@ -152,7 +153,7 @@ function buildTypableMask(line: string, language: string, blockCommentState: { a
       }
     }
 
-    if (['javascript', 'typescript', 'java', 'go', 'rust', 'html'].includes(language) && line.startsWith('/*', index)) {
+    if (['javascript', 'typescript', 'java', 'go', 'rust', 'csharp', 'html'].includes(language) && line.startsWith('/*', index)) {
       const endIndex = line.indexOf('*/', index + 2);
       if (endIndex === -1) {
         markCommentRange(index, line.length);
@@ -164,7 +165,7 @@ function buildTypableMask(line: string, language: string, blockCommentState: { a
       continue;
     }
 
-    if (['javascript', 'typescript', 'java', 'go', 'rust'].includes(language) && line.startsWith('//', index)) {
+    if (['javascript', 'typescript', 'java', 'go', 'rust', 'csharp'].includes(language) && line.startsWith('//', index)) {
       markCommentRange(index, line.length);
       return mask;
     }

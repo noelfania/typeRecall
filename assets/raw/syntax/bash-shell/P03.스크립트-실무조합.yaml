@@ -1,0 +1,117 @@
+id: language-bash-shell-p03
+category: syntax
+kind: command
+language: shell
+track:
+  id: bash-shell
+  label: Bash / Shell
+title: P03.스크립트-실무조합
+source:
+  origin: chat-raw Shell 실무 TOP10 2026-07-18
+  note: shebang·변수·if·for와 자주 쓰는 명령 조합. systemd/docker 심화는 제외.
+parts:
+  - id: language-bash-shell-p03-part-1
+    title: 스크립트 시작[shebang]
+    display: |-
+      # 스크립트 시작[shebang]
+      # 파일 첫 줄에 #!/bin/bash 를 둔다 (주석이 아니라 인터프리터 지정)
+      set -euo pipefail
+      echo "start"
+    typing: |-
+      set -euo pipefail
+      echo "start"
+  - id: language-bash-shell-p03-part-2
+    title: 변수[variable]
+    display: |-
+      # 변수[variable]
+      NAME="kim"
+      echo "hello $NAME"
+      echo "home=$HOME"
+    typing: |-
+      NAME="kim"
+      echo "hello $NAME"
+      echo "home=$HOME"
+  - id: language-bash-shell-p03-part-3
+    title: 조건문[if]
+    display: |-
+      # 조건문[if]
+      if [ -f app.log ]; then
+        echo "log exists"
+      else
+        echo "no log"
+      fi
+    typing: |-
+      if [ -f app.log ]; then
+        echo "log exists"
+      else
+        echo "no log"
+      fi
+  - id: language-bash-shell-p03-part-4
+    title: 반복문[for]
+    display: |-
+      # 반복문[for]
+      for f in *.txt; do
+        echo "File: $f"
+      done
+    typing: |-
+      for f in *.txt; do
+        echo "File: $f"
+      done
+  - id: language-bash-shell-p03-part-5
+    title: && / || 연결
+    display: |-
+      # && / || 연결
+      mkdir -p temp_dir && echo "created"
+      ls not_found.txt || echo "fallback"
+    typing: |-
+      mkdir -p temp_dir && echo "created"
+      ls not_found.txt || echo "fallback"
+  - id: language-bash-shell-p03-part-6
+    title: 실행 권한 후 실행[chmod +x]
+    display: |-
+      # 실행 권한 후 실행[chmod +x]
+      chmod +x deploy.sh
+      ./deploy.sh
+    typing: |-
+      chmod +x deploy.sh
+      ./deploy.sh
+  - id: language-bash-shell-p03-part-7
+    title: 로그 찾기 조합[find + grep]
+    display: |-
+      # 로그 찾기 조합[find + grep]
+      find . -name "*.log" | xargs grep "ERROR"
+      grep -rn "ERROR" /var/log/app
+    typing: |-
+      find . -name "*.log" | xargs grep "ERROR"
+      grep -rn "ERROR" /var/log/app
+  - id: language-bash-shell-p03-part-8
+    title: wget 다운로드
+    display: |-
+      # wget 다운로드
+      wget https://example.com/file.tar.gz
+      wget -O out.tar.gz https://example.com/file.tar.gz
+    typing: |-
+      wget https://example.com/file.tar.gz
+      wget -O out.tar.gz https://example.com/file.tar.gz
+  - id: language-bash-shell-p03-part-9
+    title: 디스크·용량[df du]
+    display: |-
+      # 디스크·용량[df du]
+      df -h
+      du -sh *
+    typing: |-
+      df -h
+      du -sh *
+  - id: language-bash-shell-p03-part-10
+    title: 배포 전 점검 루틴[check]
+    display: |-
+      # 배포 전 점검 루틴[check]
+      pwd
+      git status
+      curl -I https://example.com
+      ss -tulpn | grep 3000
+    typing: |-
+      pwd
+      git status
+      curl -I https://example.com
+      ss -tulpn | grep 3000

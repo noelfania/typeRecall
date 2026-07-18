@@ -1,0 +1,202 @@
+id: language-yup-p01
+category: syntax
+kind: code-snippet
+language: typescript
+track:
+  id: yup
+  label: Yup
+title: P01.기본-패턴
+source:
+  origin: chat-raw Yup 스키마 검증 2026-07-18
+  note: 필수·고빈도만. when/lazy·희귀 transform 제외. 각 파트 단독 타이핑.
+parts:
+  - id: language-yup-p01-part-1
+    title: 문자열 필수·최소[string required min]
+    display: |-
+      // 문자열 필수[required] · 최소 길이[min]
+      import * as yup from "yup";
+
+      const nameSchema = yup.string().required().min(2);
+      // 결과: "ki" 이상이어야 통과
+    typing: |-
+      import * as yup from "yup";
+
+      const nameSchema = yup.string().required().min(2);
+  - id: language-yup-p01-part-2
+    title: 객체 스키마[object]
+    display: |-
+      // 객체 스키마[object] — name / age / email
+      import * as yup from "yup";
+
+      const userSchema = yup.object({
+        name: yup.string().required(),
+        age: yup.number().required().positive().integer(),
+        email: yup.string().email().required(),
+      });
+    typing: |-
+      import * as yup from "yup";
+
+      const userSchema = yup.object({
+        name: yup.string().required(),
+        age: yup.number().required().positive().integer(),
+        email: yup.string().email().required(),
+      });
+  - id: language-yup-p01-part-3
+    title: 배열 of[array of]
+    display: |-
+      // 배열[array] · 요소 스키마[of]
+      import * as yup from "yup";
+
+      const tagsSchema = yup.array().of(yup.string().required());
+    typing: |-
+      import * as yup from "yup";
+
+      const tagsSchema = yup.array().of(yup.string().required());
+  - id: language-yup-p01-part-4
+    title: 필수·널·선택[required nullable optional]
+    display: |-
+      // 필수[required] · 널 허용[nullable] · 선택[optional]
+      import * as yup from "yup";
+
+      const requiredName = yup.string().required();
+      const nullableBio = yup.string().nullable();
+      const optionalNick = yup.string().optional();
+    typing: |-
+      import * as yup from "yup";
+
+      const requiredName = yup.string().required();
+      const nullableBio = yup.string().nullable();
+      const optionalNick = yup.string().optional();
+  - id: language-yup-p01-part-5
+    title: email · matches · oneOf
+    display: |-
+      // 이메일[email] · 정규식[matches] · 허용값[oneOf]
+      import * as yup from "yup";
+
+      const emailSchema = yup.string().email().required();
+      const codeSchema = yup.string().matches(/^[A-Z]{3}$/).required();
+      const roleSchema = yup.string().oneOf(["admin", "member"]).required();
+    typing: |-
+      import * as yup from "yup";
+
+      const emailSchema = yup.string().email().required();
+      const codeSchema = yup.string().matches(/^[A-Z]{3}$/).required();
+      const roleSchema = yup.string().oneOf(["admin", "member"]).required();
+  - id: language-yup-p01-part-6
+    title: 숫자 min/max integer positive
+    display: |-
+      // 숫자[number] — min / max / integer / positive
+      import * as yup from "yup";
+
+      const ageSchema = yup
+        .number()
+        .required()
+        .integer()
+        .positive()
+        .min(1)
+        .max(120);
+    typing: |-
+      import * as yup from "yup";
+
+      const ageSchema = yup
+        .number()
+        .required()
+        .integer()
+        .positive()
+        .min(1)
+        .max(120);
+  - id: language-yup-p01-part-7
+    title: 배열 of + min
+    display: |-
+      // 배열[array] of + 최소 개수[min]
+      import * as yup from "yup";
+
+      const idsSchema = yup
+        .array()
+        .of(yup.number().integer().positive())
+        .min(1)
+        .required();
+    typing: |-
+      import * as yup from "yup";
+
+      const idsSchema = yup
+        .array()
+        .of(yup.number().integer().positive())
+        .min(1)
+        .required();
+  - id: language-yup-p01-part-8
+    title: 폼 스키마[agree boolean]
+    display: |-
+      // 폼 스키마[form] — 동의[agree]는 true만 허용
+      import * as yup from "yup";
+
+      const formSchema = yup.object({
+        email: yup.string().email().required(),
+        agree: yup.boolean().oneOf([true]).required(),
+      });
+    typing: |-
+      import * as yup from "yup";
+
+      const formSchema = yup.object({
+        email: yup.string().email().required(),
+        agree: yup.boolean().oneOf([true]).required(),
+      });
+  - id: language-yup-p01-part-9
+    title: validate · abortEarly
+    display: |-
+      // 검증[validate] — abortEarly: false 면 오류 전부 수집
+      import * as yup from "yup";
+
+      const schema = yup.object({
+        name: yup.string().required(),
+        age: yup.number().required().min(18),
+      });
+
+      await schema.validate(
+        { name: "", age: 10 },
+        { abortEarly: false },
+      );
+    typing: |-
+      import * as yup from "yup";
+
+      const schema = yup.object({
+        name: yup.string().required(),
+        age: yup.number().required().min(18),
+      });
+
+      await schema.validate(
+        { name: "", age: 10 },
+        { abortEarly: false },
+      );
+  - id: language-yup-p01-part-10
+    title: isValid
+    display: |-
+      // 유효 여부[isValid] — boolean만 필요할 때
+      import * as yup from "yup";
+
+      const schema = yup.object({ name: yup.string().required() });
+      const ok = await schema.isValid({ name: "kim" });
+      // 결과: true
+    typing: |-
+      import * as yup from "yup";
+
+      const schema = yup.object({ name: yup.string().required() });
+      const ok = await schema.isValid({ name: "kim" });
+  - id: language-yup-p01-part-11
+    title: InferType
+    display: |-
+      // 타입 추론[InferType] — 스키마에서 TS 타입 뽑기
+      import { InferType, object, string } from "yup";
+
+      const userSchema = object({
+        name: string().required(),
+      });
+      type User = InferType<typeof userSchema>;
+      // 결과: { name: string }
+    typing: |-
+      import { InferType, object, string } from "yup";
+
+      const userSchema = object({
+        name: string().required(),
+      });
+      type User = InferType<typeof userSchema>;

@@ -1,0 +1,71 @@
+id: knowledge-notes-rest-patterns
+category: knowledge
+kind: note
+topic: rest
+title: REST 통신 필수 패턴 (고빈도만)
+source:
+  origin: chat-raw REST 공부방 2026-07-18
+  note: 특수 케이스 제외. 용어 카드는 terms/rest-terms.yaml. 아래는 실무 흐름·Express 예시 참고.
+scope: |
+  ✅ GET/POST/PUT/PATCH/DELETE, 200·201·400·401·403·404·500
+  ✅ Header: Content-Type, Authorization, Accept, Cookie
+  ✅ Body: application/json, form-urlencoded, multipart/form-data
+  ✅ cookie / localStorage / sessionStorage, Session, JWT Bearer
+  ✅ CORS, Same-Origin, Preflight(OPTIONS), Allow-Origin
+  ❌ 난해한 캐시 헤더 조합, 희귀 상태 코드, 특수 프록시 설정
+
+patterns:
+  - id: login-json
+    title: 패턴1 - 로그인 요청
+    steps:
+      - "POST /login"
+      - "Content-Type: application/json"
+      - 'Body: { "id": "test", "pw": "1234" }'
+      - "성공 → 200 + token 또는 Set-Cookie"
+      - "실패 → 401"
+  - id: bearer-call
+    title: 패턴2 - 토큰을 헤더에 넣어 API 호출
+    steps:
+      - "Authorization: Bearer <jwt>"
+      - "보호된 GET/POST 호출"
+      - "없거나 만료 → 401"
+  - id: cookie-session
+    title: 패턴3 - 쿠키 저장 후 자동 인증
+    steps:
+      - "로그인 응답 Set-Cookie (가능하면 HttpOnly)"
+      - "이후 같은 출처 요청에 쿠키 자동 첨부"
+      - "서버는 세션 저장소에서 로그인 상태 확인"
+  - id: cors-allow
+    title: 패턴4 - 다른 도메인 + CORS
+    steps:
+      - "프론트 localhost:3000 / API localhost:4000 → 다른 출처"
+      - "브라우저가 Preflight OPTIONS 먼저 보낼 수 있음"
+      - "서버 Access-Control-Allow-Origin (+ credentials면 Allow-Credentials)"
+
+expressExample: |
+  import express from "express";
+  import cors from "cors";
+
+  const app = express();
+  app.use(express.json());
+  app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+
+  app.get("/set-cookie", (req, res) => {
+    res.cookie("user", "chatgpt", { httpOnly: true });
+    res.send("쿠키 저장 완료");
+  });
+
+  app.post("/login", (req, res) => {
+    const { id, pw } = req.body;
+    if (id === "test" && pw === "1234") {
+      return res.json({ message: "로그인 성공", token: "jwt-token-example" });
+    }
+    res.status(401).json({ message: "로그인 실패" });
+  });
+
+  app.listen(4000, () => console.log("Server running on 4000"));
+
+storageCompare:
+  - { name: Cookie, role: "서버↔브라우저 자동 전송, 세션 ID·HttpOnly에 적합" }
+  - { name: localStorage, role: "장기 보관, JS가 읽고 Authorization에 직접 넣음" }
+  - { name: sessionStorage, role: "탭 단위 임시 보관" }

@@ -1,0 +1,266 @@
+id: language-csharp-unity-p02
+category: syntax
+kind: code-snippet
+language: csharp
+track:
+  id: csharp-unity
+  label: C# for Unity
+title: P02.실무-패턴
+source:
+  origin: chat-raw Unity C# 실무 2026-07-18
+  note: 충돌, 코루틴, 이벤트, 싱글톤 최소, List. 엔진 마법·고급 C# 제외.
+parts:
+  - id: language-csharp-unity-p02-part-1
+    title: OnTriggerEnter[트리거]
+    display: |-
+      // OnTriggerEnter[트리거]
+      using UnityEngine;
+
+      public class Coin : MonoBehaviour
+      {
+          void OnTriggerEnter(Collider other)
+          {
+              if (other.CompareTag("Player"))
+              {
+                  Destroy(gameObject);
+              }
+          }
+      }
+    typing: |-
+      using UnityEngine;
+
+      public class Coin : MonoBehaviour
+      {
+          void OnTriggerEnter(Collider other)
+          {
+              if (other.CompareTag("Player"))
+              {
+                  Destroy(gameObject);
+              }
+          }
+      }
+  - id: language-csharp-unity-p02-part-2
+    title: 코루틴[IEnumerator]
+    display: |-
+      // 코루틴[IEnumerator]
+      using System.Collections;
+      using UnityEngine;
+
+      public class DamageFlash : MonoBehaviour
+      {
+          IEnumerator Flash()
+          {
+              yield return new WaitForSeconds(0.2f);
+              Debug.Log("flash done");
+          }
+
+          void Start()
+          {
+              StartCoroutine(Flash());
+          }
+      }
+    typing: |-
+      using System.Collections;
+      using UnityEngine;
+
+      public class DamageFlash : MonoBehaviour
+      {
+          IEnumerator Flash()
+          {
+              yield return new WaitForSeconds(0.2f);
+              Debug.Log("flash done");
+          }
+
+          void Start()
+          {
+              StartCoroutine(Flash());
+          }
+      }
+  - id: language-csharp-unity-p02-part-3
+    title: List 사용[List]
+    display: |-
+      // List 사용[List]
+      using System.Collections.Generic;
+      using UnityEngine;
+
+      public class Inventory : MonoBehaviour
+      {
+          private readonly List<string> items = new List<string>();
+
+          void AddItem(string name)
+          {
+              items.Add(name);
+              Debug.Log(items.Count);
+          }
+      }
+    typing: |-
+      using System.Collections.Generic;
+      using UnityEngine;
+
+      public class Inventory : MonoBehaviour
+      {
+          private readonly List<string> items = new List<string>();
+
+          void AddItem(string name)
+          {
+              items.Add(name);
+              Debug.Log(items.Count);
+          }
+      }
+  - id: language-csharp-unity-p02-part-4
+    title: 이벤트[Action]
+    display: |-
+      // 이벤트[Action]
+      using System;
+      using UnityEngine;
+
+      public class Health : MonoBehaviour
+      {
+          public event Action<int> OnHpChanged;
+
+          private int hp = 100;
+
+          public void TakeDamage(int amount)
+          {
+              hp -= amount;
+              OnHpChanged?.Invoke(hp);
+          }
+      }
+    typing: |-
+      using System;
+      using UnityEngine;
+
+      public class Health : MonoBehaviour
+      {
+          public event Action<int> OnHpChanged;
+
+          private int hp = 100;
+
+          public void TakeDamage(int amount)
+          {
+              hp -= amount;
+              OnHpChanged?.Invoke(hp);
+          }
+      }
+  - id: language-csharp-unity-p02-part-5
+    title: 싱글톤 최소[Instance]
+    display: |-
+      // 싱글톤 최소[Instance]
+      // 남용하지 말고, 게임 매니저 정도에만
+      using UnityEngine;
+
+      public class GameManager : MonoBehaviour
+      {
+          public static GameManager Instance { get; private set; }
+
+          void Awake()
+          {
+              if (Instance != null)
+              {
+                  Destroy(gameObject);
+                  return;
+              }
+
+              Instance = this;
+          }
+      }
+    typing: |-
+      using UnityEngine;
+
+      public class GameManager : MonoBehaviour
+      {
+          public static GameManager Instance { get; private set; }
+
+          void Awake()
+          {
+              if (Instance != null)
+              {
+                  Destroy(gameObject);
+                  return;
+              }
+
+              Instance = this;
+          }
+      }
+  - id: language-csharp-unity-p02-part-6
+    title: 레이어 마스크[LayerMask]
+    display: |-
+      // 레이어 마스크[LayerMask]
+      using UnityEngine;
+
+      public class GroundCheck : MonoBehaviour
+      {
+          [SerializeField] private LayerMask groundMask;
+          [SerializeField] private float distance = 1f;
+
+          bool IsGrounded()
+          {
+              return Physics.Raycast(transform.position, Vector3.down, distance, groundMask);
+          }
+      }
+    typing: |-
+      using UnityEngine;
+
+      public class GroundCheck : MonoBehaviour
+      {
+          [SerializeField] private LayerMask groundMask;
+          [SerializeField] private float distance = 1f;
+
+          bool IsGrounded()
+          {
+              return Physics.Raycast(transform.position, Vector3.down, distance, groundMask);
+          }
+      }
+  - id: language-csharp-unity-p02-part-7
+    title: ScriptableObject[데이터]
+    display: |-
+      // ScriptableObject[데이터]
+      // 밸런스·설정을 에셋으로 분리할 때
+      using UnityEngine;
+
+      [CreateAssetMenu(menuName = "Game/EnemyData")]
+      public class EnemyData : ScriptableObject
+      {
+          public string enemyName;
+          public int maxHp = 50;
+          public float moveSpeed = 2f;
+      }
+    typing: |-
+      using UnityEngine;
+
+      [CreateAssetMenu(menuName = "Game/EnemyData")]
+      public class EnemyData : ScriptableObject
+      {
+          public string enemyName;
+          public int maxHp = 50;
+          public float moveSpeed = 2f;
+      }
+  - id: language-csharp-unity-p02-part-8
+    title: RequireComponent[의존 강제]
+    display: |-
+      // RequireComponent[의존 강제]
+      using UnityEngine;
+
+      [RequireComponent(typeof(Rigidbody))]
+      public class Knockback : MonoBehaviour
+      {
+          private Rigidbody rb;
+
+          void Awake()
+          {
+              rb = GetComponent<Rigidbody>();
+          }
+      }
+    typing: |-
+      using UnityEngine;
+
+      [RequireComponent(typeof(Rigidbody))]
+      public class Knockback : MonoBehaviour
+      {
+          private Rigidbody rb;
+
+          void Awake()
+          {
+              rb = GetComponent<Rigidbody>();
+          }
+      }

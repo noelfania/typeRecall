@@ -1,0 +1,172 @@
+id: language-rust-p03
+category: syntax
+kind: code-snippet
+language: rust
+track:
+  id: rust
+  label: Rust
+title: P03.컬렉션-모듈
+source:
+  origin: chat-raw Rust 기초 커리큘럼 2026-07-18
+  note: Vec·HashMap·iter·mod/pub·serde 맛보기 + Trait/? 최소. 각 파트 단독 타이핑.
+parts:
+  - id: language-rust-p03-part-1
+    title: 벡터[Vec]
+    display: |-
+      // 벡터[Vec]
+      let mut nums = vec![1, 2, 3];
+      nums.push(4);
+      println!("{:?}", nums);
+      // 결과: [1, 2, 3, 4]
+    typing: |-
+      let mut nums = vec![1, 2, 3];
+      nums.push(4);
+      println!("{:?}", nums);
+  - id: language-rust-p03-part-2
+    title: 해시맵[HashMap]
+    display: |-
+      // 해시맵[HashMap]
+      use std::collections::HashMap;
+
+      let mut ages = HashMap::new();
+      ages.insert("kim", 30);
+      ages.insert("lee", 25);
+      println!("{:?}", ages.get("kim"));
+      // 결과: Some(30)
+    typing: |-
+      use std::collections::HashMap;
+
+      let mut ages = HashMap::new();
+      ages.insert("kim", 30);
+      ages.insert("lee", 25);
+      println!("{:?}", ages.get("kim"));
+  - id: language-rust-p03-part-3
+    title: 반복자[iter / map / filter]
+    display: |-
+      // 반복자[iter / map / filter]
+      let nums = vec![1, 2, 3, 4];
+      let evens: Vec<i32> = nums
+          .iter()
+          .filter(|n| *n % 2 == 0)
+          .map(|n| n * 10)
+          .collect();
+      println!("{:?}", evens);
+      // 결과: [20, 40]
+    typing: |-
+      let nums = vec![1, 2, 3, 4];
+      let evens: Vec<i32> = nums
+          .iter()
+          .filter(|n| *n % 2 == 0)
+          .map(|n| n * 10)
+          .collect();
+      println!("{:?}", evens);
+  - id: language-rust-p03-part-4
+    title: 모듈[mod / pub]
+    display: |-
+      // 모듈[mod / pub]
+      mod util {
+          pub fn greet(name: &str) -> String {
+              format!("hi {}", name)
+          }
+      }
+
+      println!("{}", util::greet("kim"));
+      // 결과: hi kim
+    typing: |-
+      mod util {
+          pub fn greet(name: &str) -> String {
+              format!("hi {}", name)
+          }
+      }
+
+      println!("{}", util::greet("kim"));
+  - id: language-rust-p03-part-5
+    title: 의존성 예시[Cargo.toml / serde]
+    display: |-
+      // 의존성 예시[Cargo.toml / serde] - toml은 참고용 주석
+      // [dependencies]
+      // serde = { version = "1", features = ["derive"] }
+      use serde::Serialize;
+
+      #[derive(Serialize)]
+      struct User {
+          name: String,
+      }
+
+      let user = User {
+          name: String::from("kim"),
+      };
+      println!("{}", user.name);
+      // 결과: kim
+    typing: |-
+      use serde::Serialize;
+
+      #[derive(Serialize)]
+      struct User {
+          name: String,
+      }
+
+      let user = User {
+          name: String::from("kim"),
+      };
+      println!("{}", user.name);
+  - id: language-rust-p03-part-6
+    title: 트레이트 맛보기[trait]
+    display: |-
+      // 트레이트 맛보기[trait] - 공통 동작 약속
+      trait Greet {
+          fn hello(&self) -> String;
+      }
+
+      struct Guest {
+          name: String,
+      }
+
+      impl Greet for Guest {
+          fn hello(&self) -> String {
+              format!("hi {}", self.name)
+          }
+      }
+
+      let g = Guest {
+          name: String::from("kim"),
+      };
+      println!("{}", g.hello());
+      // 결과: hi kim
+    typing: |-
+      trait Greet {
+          fn hello(&self) -> String;
+      }
+
+      struct Guest {
+          name: String,
+      }
+
+      impl Greet for Guest {
+          fn hello(&self) -> String {
+              format!("hi {}", self.name)
+          }
+      }
+
+      let g = Guest {
+          name: String::from("kim"),
+      };
+      println!("{}", g.hello());
+  - id: language-rust-p03-part-7
+    title: 에러 전파 맛보기[?]
+    display: |-
+      // 에러 전파 맛보기[?] - Err면 바로 반환
+      fn parse_score(text: &str) -> Result<i32, std::num::ParseIntError> {
+          let value = text.parse::<i32>()?;
+          Ok(value)
+      }
+
+      println!("{:?}", parse_score("90"));
+      // 결과: Ok(90)
+    typing: |-
+      fn parse_score(text: &str) -> Result<i32, std::num::ParseIntError> {
+          let value = text.parse::<i32>()?;
+          Ok(value)
+      }
+
+      println!("{:?}", parse_score("90"));

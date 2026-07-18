@@ -1,0 +1,129 @@
+id: language-postgresql-p01
+category: syntax
+kind: code-snippet
+language: sql
+track:
+  id: postgresql
+  label: PostgreSQL
+title: P01.기본-패턴
+source:
+  origin: chat-raw PostgreSQL 고빈도 2026-07-18
+  note: CREATE·CRUD·RETURNING·WHERE/ILIKE·JOIN. 파티셔닝·고급 윈도우 제외.
+parts:
+  - id: language-postgresql-p01-part-1
+    title: 테이블 생성[create table]
+    display: |-
+      -- 테이블 생성[create table]
+      -- 자주 쓰는 타입만: SERIAL, TEXT, INTEGER, BOOLEAN, TIMESTAMPTZ
+      CREATE TABLE users (
+          user_id      SERIAL PRIMARY KEY,
+          user_name    TEXT NOT NULL,
+          user_age     INTEGER,
+          is_active    BOOLEAN DEFAULT TRUE,
+          created_at   TIMESTAMPTZ DEFAULT NOW()
+      );
+    typing: |-
+      CREATE TABLE users (
+          user_id      SERIAL PRIMARY KEY,
+          user_name    TEXT NOT NULL,
+          user_age     INTEGER,
+          is_active    BOOLEAN DEFAULT TRUE,
+          created_at   TIMESTAMPTZ DEFAULT NOW()
+      );
+  - id: language-postgresql-p01-part-2
+    title: 삽입과 반환[insert returning]
+    display: |-
+      -- 삽입과 반환[insert returning]
+      INSERT INTO users (user_name, user_age)
+      VALUES ('kim', 30)
+      RETURNING user_id, user_name;
+    typing: |-
+      INSERT INTO users (user_name, user_age)
+      VALUES ('kim', 30)
+      RETURNING user_id, user_name;
+  - id: language-postgresql-p01-part-3
+    title: 조회[select]
+    display: |-
+      -- 조회[select]
+      SELECT user_id, user_name, user_age
+      FROM users;
+    typing: |-
+      SELECT user_id, user_name, user_age
+      FROM users;
+  - id: language-postgresql-p01-part-4
+    title: 수정과 반환[update returning]
+    display: |-
+      -- 수정과 반환[update returning]
+      UPDATE users
+      SET user_age = 31
+      WHERE user_id = 1
+      RETURNING user_id, user_age;
+    typing: |-
+      UPDATE users
+      SET user_age = 31
+      WHERE user_id = 1
+      RETURNING user_id, user_age;
+  - id: language-postgresql-p01-part-5
+    title: 삭제와 반환[delete returning]
+    display: |-
+      -- 삭제와 반환[delete returning]
+      DELETE FROM users
+      WHERE user_id = 2
+      RETURNING user_id;
+    typing: |-
+      DELETE FROM users
+      WHERE user_id = 2
+      RETURNING user_id;
+  - id: language-postgresql-p01-part-6
+    title: 조건·대소문자무시[where ilike]
+    display: |-
+      -- 조건·대소문자무시[where ilike]
+      -- ILIKE는 대소문자를 무시하는 LIKE
+      SELECT user_name
+      FROM users
+      WHERE user_name ILIKE 'k%'
+        AND user_age >= 20;
+    typing: |-
+      SELECT user_name
+      FROM users
+      WHERE user_name ILIKE 'k%'
+        AND user_age >= 20;
+  - id: language-postgresql-p01-part-7
+    title: 정렬·개수제한[order by limit]
+    display: |-
+      -- 정렬·개수제한[order by limit]
+      SELECT user_name, user_age
+      FROM users
+      ORDER BY user_age DESC
+      LIMIT 10;
+    typing: |-
+      SELECT user_name, user_age
+      FROM users
+      ORDER BY user_age DESC
+      LIMIT 10;
+  - id: language-postgresql-p01-part-8
+    title: 내부 조인[inner join]
+    display: |-
+      -- 내부 조인[inner join]
+      SELECT u.user_name, o.total_price
+      FROM users u
+      INNER JOIN orders o
+        ON u.user_id = o.user_id;
+    typing: |-
+      SELECT u.user_name, o.total_price
+      FROM users u
+      INNER JOIN orders o
+        ON u.user_id = o.user_id;
+  - id: language-postgresql-p01-part-9
+    title: 왼쪽 조인[left join]
+    display: |-
+      -- 왼쪽 조인[left join]
+      SELECT u.user_name, o.total_price
+      FROM users u
+      LEFT JOIN orders o
+        ON u.user_id = o.user_id;
+    typing: |-
+      SELECT u.user_name, o.total_price
+      FROM users u
+      LEFT JOIN orders o
+        ON u.user_id = o.user_id;

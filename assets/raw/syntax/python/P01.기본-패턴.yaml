@@ -7,133 +7,119 @@ track:
   label: Python
 title: P01.기본-패턴
 source:
-  origin: assets/typingSource/Language-Python/P01.기본-패턴.py
+  origin: chat-raw 실무형 파이썬 2026-07-18
+  note: 희귀 문법 제외. 변수·조건·반복·함수·get 등 매일 쓰는 패턴만.
 parts:
   - id: language-python-p01-part-1
-    title: 변수[variable]
+    title: 기본 타입[int float str bool]
     display: |-
-      # 변수[variable]
+      # 기본 타입[int float str bool]
       user_name = "kim"
       user_age = 30
+      score = 4.5
       is_admin = True
-      print(user_name, user_age, is_admin)
-      # 결과: kim 30 True
+      print(user_name, user_age, score, is_admin)
     typing: |-
       user_name = "kim"
       user_age = 30
+      score = 4.5
       is_admin = True
-      print(user_name, user_age, is_admin)
+      print(user_name, user_age, score, is_admin)
   - id: language-python-p01-part-2
     title: 리스트[list]
     display: |-
       # 리스트[list]
-      score_list = [10, 20, 30]
-      print(score_list[0])
-      # 결과: 10
+      skills = ["python", "sql"]
+      print(skills[0])
+      # 결과: python
     typing: |-
-      score_list = [10, 20, 30]
-      print(score_list[0])
+      skills = ["python", "sql"]
+      print(skills[0])
   - id: language-python-p01-part-3
-    title: 딕셔너리[dictionary]
+    title: 딕셔너리[dict = JSON]
     display: |-
-      # 딕셔너리[dictionary]
-      user_item = {
-          "name": "lee",
-          "age": 25,
+      # 딕셔너리[dict = JSON]
+      # 실무 데이터는 list + dict 조합이 대부분이다
+      user = {
+          "name": "kim",
+          "age": 30,
           "skills": ["python", "sql"],
       }
-      print(user_item["name"])
-      print(user_item.get("email"))
-      # 결과:
-      # lee
-      # None
+      print(user["name"])
     typing: |-
-      user_item = {
-          "name": "lee",
-          "age": 25,
+      user = {
+          "name": "kim",
+          "age": 30,
           "skills": ["python", "sql"],
       }
-      print(user_item["name"])
-      print(user_item.get("email"))
+      print(user["name"])
   - id: language-python-p01-part-4
-    title: 조건문[condition]
+    title: None - 값 없음[None]
     display: |-
-      # 조건문[condition]
-      if user_age >= 20:
-          print("adult")
-      else:
-          print("minor")
-      # 결과: adult
+      # None - 값 없음[None]
+      email = None
+      print(email)
     typing: |-
-      if user_age >= 20:
-          print("adult")
-      else:
-          print("minor")
+      email = None
+      print(email)
   - id: language-python-p01-part-5
-    title: 반복문[loop]
+    title: 조건문[if]
     display: |-
-      # 반복문[loop]
-      for skill_item in user_item["skills"]:
-          print(skill_item)
-      # 결과:
-      # python
-      # sql
+      # 조건문[if]
+      if user["age"] > 20:
+          print("성인")
     typing: |-
-      for skill_item in user_item["skills"]:
-          print(skill_item)
+      if user["age"] > 20:
+          print("성인")
   - id: language-python-p01-part-6
-    title: 리스트 컴프리헨션[list comprehension]
+    title: 값 없을 때[if not get]
     display: |-
-      # 리스트 컴프리헨션[list comprehension]
-      even_list = [num for num in score_list if num % 2 == 0]
-      print(even_list)
-      # 결과: [10, 20, 30]
+      # 값 없을 때[if not get] — 실무 핵심
+      if not user.get("email"):
+          print("이메일 없음")
     typing: |-
-      even_list = [num for num in score_list if num % 2 == 0]
-      print(even_list)
+      if not user.get("email"):
+          print("이메일 없음")
   - id: language-python-p01-part-7
-    title: 함수[function]
+    title: 리스트 순회[for]
     display: |-
-      # 함수[function]
-      def get_display_name(user):
-          return f'{user["name"]}({user["age"]})'
-
-      print(get_display_name(user_item))
-      # 결과: lee(25)
+      # 리스트 순회[for]
+      for skill in user["skills"]:
+          print(skill)
     typing: |-
-      def get_display_name(user):
-          return f'{user["name"]}({user["age"]})'
-
-      print(get_display_name(user_item))
+      for skill in user["skills"]:
+          print(skill)
   - id: language-python-p01-part-8
-    title: 예외 처리[exception handling]
+    title: 딕셔너리 순회[items]
     display: |-
-      # 예외 처리[exception handling]
-      try:
-          parsed_value = int("123")
-          print(parsed_value)
-      except ValueError:
-          print("parse error")
-      # 결과: 123
+      # 딕셔너리 순회[items]
+      for key, value in user.items():
+          print(key, value)
     typing: |-
-      try:
-          parsed_value = int("123")
-          print(parsed_value)
-      except ValueError:
-          print("parse error")
+      for key, value in user.items():
+          print(key, value)
   - id: language-python-p01-part-9
-    title: 파일 / JSON 실무 패턴[file / json pattern]
+    title: 함수[def] - 한 역할
     display: |-
-      # 파일 / JSON 실무 패턴[file / json pattern]
-      import json
+      # 함수[def] - 한 역할
+      def get_user_name(user):
+          return user["name"]
 
-      json_text = '{"name": "park", "age": 28}'
-      parsed_user = json.loads(json_text)
-      print(parsed_user["name"])
-      # 결과: park
+      print(get_user_name(user))
     typing: |-
-      import json
+      def get_user_name(user):
+          return user["name"]
 
-      json_text = '{"name": "park", "age": 28}'
-      parsed_user = json.loads(json_text)
-      print(parsed_user["name"])
+      print(get_user_name(user))
+  - id: language-python-p01-part-10
+    title: get 안전 접근[get]
+    display: |-
+      # get 안전 접근[get]
+      # user["name"] = 키가 확실할 때
+      # user.get("name") = 없을 수도 있을 때
+      print(user.get("name"))
+      print(user.get("email"))
+      # 결과: kim / None
+    typing: |-
+      print(user.get("name"))
+      print(user.get("email"))

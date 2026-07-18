@@ -1,0 +1,110 @@
+id: language-bash-shell-p01
+category: syntax
+kind: command
+language: shell
+track:
+  id: bash-shell
+  label: Bash / Shell
+title: P01.파일-탐색-검색
+source:
+  origin: chat-raw Shell 실무 TOP10 2026-07-18
+  note: 파일/디렉토리·내용 확인·검색·리다이렉션. 희귀 문법 제외.
+parts:
+  - id: language-bash-shell-p01-part-1
+    title: 현재 경로[pwd]
+    display: |-
+      # 현재 경로[pwd]
+      pwd
+    typing: pwd
+  - id: language-bash-shell-p01-part-2
+    title: 목록[ls]
+    display: |-
+      # 목록[ls]
+      ls
+      ls -al
+    typing: |-
+      ls
+      ls -al
+  - id: language-bash-shell-p01-part-3
+    title: 이동[cd]
+    display: |-
+      # 이동[cd]
+      cd ~/project
+      cd -
+      cd ..
+    typing: |-
+      cd ~/project
+      cd -
+      cd ..
+  - id: language-bash-shell-p01-part-4
+    title: 만들기[mkdir touch]
+    display: |-
+      # 만들기[mkdir touch]
+      mkdir logs
+      mkdir -p app/cache/images
+      touch app.log
+    typing: |-
+      mkdir logs
+      mkdir -p app/cache/images
+      touch app.log
+  - id: language-bash-shell-p01-part-5
+    title: 복사·이동·삭제[cp mv rm]
+    display: |-
+      # 복사·이동·삭제[cp mv rm]
+      cp -r src/ dest/
+      mv file.txt docs/
+      rm -rf folder/
+    typing: |-
+      cp -r src/ dest/
+      mv file.txt docs/
+      rm -rf folder/
+  - id: language-bash-shell-p01-part-6
+    title: 내용 보기[cat head tail]
+    display: |-
+      # 내용 보기[cat head tail]
+      cat app.log
+      head -n 20 app.log
+      tail -n 50 app.log
+      tail -f app.log
+    typing: |-
+      cat app.log
+      head -n 20 app.log
+      tail -n 50 app.log
+      tail -f app.log
+  - id: language-bash-shell-p01-part-7
+    title: 검색[grep]
+    display: |-
+      # 검색[grep]
+      grep "keyword" file.txt
+      grep -rn "keyword" src
+    typing: |-
+      grep "keyword" file.txt
+      grep -rn "keyword" src
+  - id: language-bash-shell-p01-part-8
+    title: 파일 찾기[find]
+    display: |-
+      # 파일 찾기[find]
+      find . -name "*.sh"
+      find . -type d -name "node_modules"
+    typing: |-
+      find . -name "*.sh"
+      find . -type d -name "node_modules"
+  - id: language-bash-shell-p01-part-9
+    title: 리다이렉션[> >>]
+    display: |-
+      # 리다이렉션[> >>]
+      # > 덮어쓰기, >> 이어쓰기
+      echo "first" > app.log
+      echo "log" >> app.log
+    typing: |-
+      echo "first" > app.log
+      echo "log" >> app.log
+  - id: language-bash-shell-p01-part-10
+    title: 파이프[|]
+    display: |-
+      # 파이프[|]
+      ls -al | grep ".sh"
+      ps aux | grep nginx
+    typing: |-
+      ls -al | grep ".sh"
+      ps aux | grep nginx

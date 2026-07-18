@@ -1,0 +1,80 @@
+id: language-excel-p01
+category: syntax
+kind: code-snippet
+language: shell
+track:
+  id: excel
+  label: Excel
+title: P01.조회-조건-함수
+source:
+  origin: chat-raw 2026-07-18 / assets/raw/_inbox/excel.txt
+  note: INDEX+MATCH, IF+COUNTIF 실무 조합. 주석은 # 로 두고 수식만 타이핑한다.
+parts:
+  - id: language-excel-p01-part-1
+    title: 표로 만들기[Ctrl+T]
+    display: |-
+      # 표로 만들기[Ctrl+T]
+      # 데이터 범위를 선택한 뒤 Ctrl+T → Excel 표[Table]가 된다
+      # 표 이름 예: 사원목록 → 구조화 참조[_사원목록[성명]]를 쓸 수 있다
+      Ctrl+T
+    typing: Ctrl+T
+  - id: language-excel-p01-part-2
+    title: MATCH - 위치 찾기[match]
+    display: |-
+      # MATCH - 위치 찾기[match]
+      # =MATCH(찾을값, 찾을범위, 0)
+      # 0 = 완전 일치. "몇 번째 행/열인지" 숫자를 돌려준다
+      =MATCH(B7, A2:A100, 0)
+    typing: |-
+      =MATCH(B7, A2:A100, 0)
+  - id: language-excel-p01-part-3
+    title: INDEX - 값 꺼내기[index]
+    display: |-
+      # INDEX - 값 꺼내기[index]
+      # =INDEX(꺼낼범위, 행번호, [열번호])
+      # 지정한 행·열 위치의 값을 가져온다. 한 열이면 열번호는 생략 가능
+      =INDEX(C2:C100, 3)
+    typing: |-
+      =INDEX(C2:C100, 3)
+  - id: language-excel-p01-part-4
+    title: INDEX+MATCH 조합[vlookup 대체]
+    display: |-
+      # INDEX+MATCH 조합[vlookup 대체]
+      # MATCH로 위치를 찾고, INDEX로 그 위치의 값을 꺼낸다
+      # 표 열: 사원목록[사원ID], 사원목록[성명]
+      =INDEX(사원목록[성명], MATCH(B7, 사원목록[사원ID], 0))
+    typing: |-
+      =INDEX(사원목록[성명], MATCH(B7, 사원목록[사원ID], 0))
+  - id: language-excel-p01-part-5
+    title: COUNTIF - 개수 세기[countif]
+    display: |-
+      # COUNTIF - 개수 세기[countif]
+      # =COUNTIF(범위, 조건)
+      # 범위 안에서 조건과 같은 칸이 몇 개인지 센다
+      =COUNTIF(D4:F4, "●")
+    typing: |-
+      =COUNTIF(D4:F4, "●")
+  - id: language-excel-p01-part-6
+    title: IF+COUNTIF - 하나라도 있으면[if countif]
+    display: |-
+      # IF+COUNTIF - 하나라도 있으면[if countif]
+      # D4:F4에 ●이 1개 이상이면 ●, 없으면 빈칸
+      =IF(COUNTIF(D4:F4, "●") > 0, "●", "")
+    typing: |-
+      =IF(COUNTIF(D4:F4, "●") > 0, "●", "")
+  - id: language-excel-p01-part-7
+    title: IF+COUNTIF 두 기호[● 또는 ※]
+    display: |-
+      # IF+COUNTIF 두 기호[● 또는 ※]
+      # ● 또는 ※가 하나라도 있으면 ● 표시
+      =IF(COUNTIF(D4:F4, "●") + COUNTIF(D4:F4, "※") > 0, "●", "")
+    typing: |-
+      =IF(COUNTIF(D4:F4, "●") + COUNTIF(D4:F4, "※") > 0, "●", "")
+  - id: language-excel-p01-part-8
+    title: COUNTIF 배열 - 기호 추가 쉽게[array]
+    display: |-
+      # COUNTIF 배열 - 기호 추가 쉽게[array]
+      # {} 안에 기호만 더하면 유지보수가 쉽다
+      =IF(SUM(COUNTIF(D4:F4, {"●", "※"})) > 0, "●", "")
+    typing: |-
+      =IF(SUM(COUNTIF(D4:F4, {"●", "※"})) > 0, "●", "")

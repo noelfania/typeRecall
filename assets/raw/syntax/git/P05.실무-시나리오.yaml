@@ -1,0 +1,130 @@
+id: language-git-p05
+category: syntax
+kind: command
+language: shell
+track:
+  id: git
+  label: Git
+title: P05.실무-시나리오
+source:
+  origin: chat-raw 2026-07-18
+  note: 단일 명령보다 실무에서 자주 쓰는 시나리오 흐름을 짧은 파트로 연습한다.
+parts:
+  - id: language-git-p05-part-1
+    title: 페치로 최신 맞추기[fetch]
+    display: |-
+      # 페치로 최신 맞추기[fetch]
+      # 원격 이력만 가져오고 작업 트리는 건드리지 않는다
+      git fetch origin
+      git log --oneline HEAD..origin/main
+    typing: |-
+      git fetch origin
+      git log --oneline HEAD..origin/main
+  - id: language-git-p05-part-2
+    title: 브랜치 만들고 main에 머지[branch + merge]
+    display: |-
+      # 브랜치 만들고 main에 머지[branch + merge]
+      git switch main
+      git pull origin main
+      git switch -c feature/login
+      # ... 작업 후 ...
+      git switch main
+      git merge feature/login
+      git push origin main
+    typing: |-
+      git switch main
+      git pull origin main
+      git switch -c feature/login
+      git switch main
+      git merge feature/login
+      git push origin main
+  - id: language-git-p05-part-3
+    title: 체리픽[cherry-pick]
+    display: |-
+      # 체리픽[cherry-pick]
+      # 다른 브랜치의 커밋 하나만 현재 브랜치로 가져온다
+      git switch main
+      git cherry-pick abc1234
+      git push origin main
+    typing: |-
+      git switch main
+      git cherry-pick abc1234
+      git push origin main
+  - id: language-git-p05-part-4
+    title: 리버트[revert]
+    display: |-
+      # 리버트[revert]
+      # 이미 공유된 커밋은 reset 대신 되돌리는 새 커밋을 만든다
+      git revert abc1234
+      git push origin main
+    typing: |-
+      git revert abc1234
+      git push origin main
+  - id: language-git-p05-part-5
+    title: 브랜치 삭제[delete branch]
+    display: |-
+      # 브랜치 삭제[delete branch]
+      git switch main
+      git branch -d feature/login
+      git push origin -d feature/login
+    typing: |-
+      git switch main
+      git branch -d feature/login
+      git push origin -d feature/login
+  - id: language-git-p05-part-6
+    title: 커밋 스쿼시[squash]
+    display: |-
+      # 커밋 스쿼시[squash]
+      # 최근 커밋 3개를 스테이징에 풀어 한 커밋으로 다시 묶는다
+      git reset --soft HEAD~3
+      git commit -m "feat(auth): add oauth login"
+      git push --force-with-lease origin feature/login
+    typing: |-
+      git reset --soft HEAD~3
+      git commit -m "feat(auth): add oauth login"
+      git push --force-with-lease origin feature/login
+  - id: language-git-p05-part-7
+    title: 원격 삭제 브랜치 프룬[prune]
+    display: |-
+      # 원격 삭제 브랜치 프룬[prune]
+      # 원격에서 지워진 origin/* 추적 브랜치를 로컬에서 정리한다
+      git fetch --prune origin
+      git remote prune origin
+    typing: |-
+      git fetch --prune origin
+      git remote prune origin
+  - id: language-git-p05-part-8
+    title: 커밋 후 푸시[commit + push]
+    display: |-
+      # 커밋 후 푸시[commit + push]
+      git status
+      git add .
+      git commit -m "fix(api): handle null response"
+      git push -u origin HEAD
+    typing: |-
+      git status
+      git add .
+      git commit -m "fix(api): handle null response"
+      git push -u origin HEAD
+  - id: language-git-p05-part-9
+    title: 원격 확인[remote -v / show]
+    display: |-
+      # 원격 확인[remote -v / show]
+      git remote -v
+      git remote show origin
+    typing: |-
+      git remote -v
+      git remote show origin
+  - id: language-git-p05-part-10
+    title: 오리진 URL 변경[remote set-url]
+    display: |-
+      # 오리진 URL 변경[remote set-url]
+      git remote -v
+      git remote set-url origin https://github.com/user/repo.git
+      git remote -v
+      git push -u origin main
+    typing: |-
+      git remote -v
+      git remote set-url origin https://github.com/user/repo.git
+      git remote -v
+      git push -u origin main

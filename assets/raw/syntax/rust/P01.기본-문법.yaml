@@ -1,0 +1,140 @@
+id: language-rust-p01
+category: syntax
+kind: code-snippet
+language: rust
+track:
+  id: rust
+  label: Rust
+title: P01.기본-문법
+source:
+  origin: chat-raw Rust 기초 커리큘럼 2026-07-18
+  note: 환경·변수·타입·제어문·함수. cargo는 주석만. 각 파트 단독 타이핑.
+parts:
+  - id: language-rust-p01-part-1
+    title: 변수와 가변성[let / let mut]
+    display: |-
+      // 변수와 가변성[let / let mut]
+      // cargo new hello && cargo run 으로 실행한다 (주석만)
+      let user_name = "kim";
+      let mut count = 1;
+      count += 1;
+      println!("{} {}", user_name, count);
+      // 결과: kim 2
+    typing: |-
+      let user_name = "kim";
+      let mut count = 1;
+      count += 1;
+      println!("{} {}", user_name, count);
+  - id: language-rust-p01-part-2
+    title: 기본 타입[i32 u32 f64 bool char]
+    display: |-
+      // 기본 타입[i32 u32 f64 bool char]
+      let score: i32 = 95;
+      let count: u32 = 3;
+      let ratio: f64 = 3.14;
+      let is_ok: bool = true;
+      let grade: char = 'A';
+      println!("{} {} {} {} {}", score, count, ratio, is_ok, grade);
+      // 결과: 95 3 3.14 true A
+    typing: |-
+      let score: i32 = 95;
+      let count: u32 = 3;
+      let ratio: f64 = 3.14;
+      let is_ok: bool = true;
+      let grade: char = 'A';
+      println!("{} {} {} {} {}", score, count, ratio, is_ok, grade);
+  - id: language-rust-p01-part-3
+    title: 문자열[String / &str]
+    display: |-
+      // 문자열[String / &str]
+      // &str = 문자열 슬라이스, String = 소유하는 문자열
+      let label: &str = "hello";
+      let text: String = String::from("rust");
+      println!("{} {}", label, text);
+      // 결과: hello rust
+    typing: |-
+      let label: &str = "hello";
+      let text: String = String::from("rust");
+      println!("{} {}", label, text);
+  - id: language-rust-p01-part-4
+    title: 연산[operator]
+    display: |-
+      // 연산[operator]
+      let sum = 10 + 3;
+      let rem = 10 % 3;
+      let ok = sum > 10 && rem == 1;
+      println!("{} {} {}", sum, rem, ok);
+      // 결과: 13 1 true
+    typing: |-
+      let sum = 10 + 3;
+      let rem = 10 % 3;
+      let ok = sum > 10 && rem == 1;
+      println!("{} {} {}", sum, rem, ok);
+  - id: language-rust-p01-part-5
+    title: 조건문[if / else]
+    display: |-
+      // 조건문[if / else]
+      let score = 95;
+      if score >= 90 {
+          println!("A");
+      } else {
+          println!("B");
+      }
+      // 결과: A
+    typing: |-
+      let score = 95;
+      if score >= 90 {
+          println!("A");
+      } else {
+          println!("B");
+      }
+  - id: language-rust-p01-part-6
+    title: 조건 표현식[if expression]
+    display: |-
+      // 조건 표현식[if expression] - if도 값을 만든다
+      let score = 80;
+      let grade = if score >= 90 { "A" } else { "B" };
+      println!("{}", grade);
+      // 결과: B
+    typing: |-
+      let score = 80;
+      let grade = if score >= 90 { "A" } else { "B" };
+      println!("{}", grade);
+  - id: language-rust-p01-part-7
+    title: 반복[loop / while / for]
+    display: |-
+      // 반복[loop / while / for]
+      let mut n = 0;
+      while n < 3 {
+          n += 1;
+      }
+      for i in 0..5 {
+          println!("{}", i);
+      }
+      // 결과: 0 1 2 3 4
+    typing: |-
+      let mut n = 0;
+      while n < 3 {
+          n += 1;
+      }
+      for i in 0..5 {
+          println!("{}", i);
+      }
+  - id: language-rust-p01-part-8
+    title: 함수[fn]
+    display: |-
+      // 함수[fn] - 마지막 표현식이 반환값 (세미콜론 없음)
+      fn add(a: i32, b: i32) -> i32 {
+          a + b
+      }
+
+      let sum = add(3, 4);
+      println!("{}", sum);
+      // 결과: 7
+    typing: |-
+      fn add(a: i32, b: i32) -> i32 {
+          a + b
+      }
+
+      let sum = add(3, 4);
+      println!("{}", sum);

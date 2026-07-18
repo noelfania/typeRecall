@@ -1,0 +1,93 @@
+id: knowledge-notes-project-structure
+category: knowledge
+kind: note
+topic: architecture
+title: 백엔드·프론트엔드 프로젝트 폴더 구조 (고빈도만)
+source:
+  origin: chat-raw 프로젝트 폴더 구조 2026-07-18
+  note: |
+    feature 단위 + 계층(레이어) 조합이 실무에서 가장 흔함.
+    용어 카드는 terms/architecture-terms.yaml 참고. 타이핑 예문 없음.
+scope: |
+  ✅ feature 단위 폴더 (user / order / payment)
+  ✅ BE: controller · service · repository · dto · entity
+  ✅ FE: api · hooks · components · types
+  ❌ 프레임워크별 세부 컨벤션, monorepo 도구, 희귀 아키텍처
+
+# 핵심: 기능[Feature]으로 묶고, 그 안에서 계층[Layer]을 나눈다
+idea: |
+  도메인(기능)별로 폴더를 먼저 나누면 관련 코드가 한곳에 모인다.
+  각 feature 안에서는 역할(요청 처리 / 비즈니스 / 저장 / 전송 형태)을 계층으로 분리한다.
+
+backend:
+  title: 백엔드 (feature + 계층)
+  # 사용자 원본 트리 (파일 예시 포함) — 앱/마크다운에서 pre·code fence로 표시
+  tree: |
+    src
+     ├ user
+     │   ├ controller
+     │   │   └ UserController.java
+     │   │
+     │   ├ service
+     │   │   └ UserService.java
+     │   │
+     │   ├ repository
+     │   │   └ UserRepository.java
+     │   │
+     │   ├ dto
+     │   │   ├ UserCreateRequest.java
+     │   │   └ UserResponse.java
+     │   │
+     │   └ entity
+     │       └ User.java
+     │
+     ├ order
+     │   ├ controller
+     │   ├ service
+     │   ├ repository
+     │   └ dto
+     │
+     └ payment
+  layers:
+    - { name: Controller, role: "HTTP 요청 수신·응답. 검증·라우팅만, 비즈니스는 Service로" }
+    - { name: Service, role: "비즈니스 로직[Business Logic]. 트랜잭션·규칙·여러 Repository 조합" }
+    - { name: Repository, role: "DB 접근 추상화. 쿼리·영속화만 담당" }
+    - { name: DTO, role: "계층 간 데이터 전달 객체. API 입출력 형태를 Entity와 분리" }
+    - { name: Entity, role: "DB 테이블에 대응하는 도메인/영속 모델" }
+
+frontend:
+  title: 프론트엔드 (feature + 역할)
+  # 사용자 원본 트리 (파일 예시 포함) — 앱/마크다운에서 pre·code fence로 표시
+  tree: |
+    src
+     ├ user
+     │   ├ api
+     │   │   └ userApi.ts
+     │   │
+     │   ├ hooks
+     │   │   └ useUser.ts
+     │   │
+     │   ├ components
+     │   │   ├ UserList.tsx
+     │   │   └ UserProfileCard.tsx
+     │   │
+     │   └ types
+     │       └ user.ts
+     │
+     ├ order
+     │   ├ api
+     │   ├ hooks
+     │   └ components
+     │
+     └ payment
+  folders:
+    - { name: api, role: "엔드포인트 호출·클라이언트 래퍼" }
+    - { name: hooks, role: "데이터 fetch·상태·사이드이펙트를 훅으로 묶음" }
+    - { name: components, role: "해당 feature UI만. 공통 UI는 shared로" }
+    - { name: types, role: "요청/응답·화면용 타입 정의" }
+
+quickChecks:
+  - "새 기능이 생기면 기존 layers에 끼워 넣지 말고 feature 폴더를 먼저 만들었는가?"
+  - "Controller에 비즈니스 로직이 들어가 있지 않은가?"
+  - "DTO와 Entity를 섞어 API에 그대로 노출하지 않았는가?"
+  - "프론트에서 api 호출이 컴포넌트에 직접 흩어져 있지 않은가?"

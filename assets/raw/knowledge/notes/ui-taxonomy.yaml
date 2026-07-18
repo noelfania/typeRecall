@@ -55,3 +55,58 @@ taxonomy:
     categories:
       - name: Components
         items: [Button, Input, Table, Sidebar, Checkbox, Combobox, Radio groups, Switch, Description list, Badge, Listbox, Pagination, Dropdown, Alert, Navbar, Avatar, Divider, Textarea, Heading, Text, Fieldset, Dialog, Sidebar layout, Stacked layout, Auth layout]
+
+# 마케팅 랜딩에서 섹션을 역할로 묶을 때 쓰는 관례
+roleGroups:
+  - role: Introduction
+    label: 소개
+    items: [Hero, About, Content]
+  - role: Trust
+    label: 신뢰
+    items: [Logo Cloud, Testimonials, Stats]
+  - role: Function
+    label: 기능
+    items: [Features, Bento Grid]
+  - role: Sales
+    label: 판매
+    items: [Pricing, CTA]
+  - role: Support
+    label: 지원
+    items: [FAQ, Contact, Newsletter]
+  - role: Common
+    label: 공통 UI
+    items: [Header, Footer, Banner, Flyout Menu, Navigation, Sidebar]
+
+# MUI 카테고리 요약 (고빈도만 · 카드화된 용어는 terms/web-terms.yaml)
+muiCategories:
+  - name: Inputs
+    items: [Autocomplete, Button Group, Rating, Switch, Toggle Button, Date Picker]
+  - name: Data Display
+    items: [Avatar, Chip, Divider, Tooltip, Typography, Data Grid]
+  - name: Feedback
+    items: [Alert, Progress, Skeleton, Toast/Snackbar]
+  - name: Surfaces
+    items: [App Bar, Paper, Accordion, Card]
+  - name: Navigation
+    items: [Bottom Navigation, Breadcrumbs, Link, Menu, Stepper, Tabs, Drawer]
+  - name: Layout
+    items: [Stack, Container]
+  - name: Utils
+    items: [Popover, Modal Dialog]
+
+# 고빈도 섹션 (★ 많을수록 거의 모든 사이트)
+frequency:
+  - { name: Header, stars: 5 }
+  - { name: Hero, stars: 5 }
+  - { name: Feature, stars: 5 }
+  - { name: CTA, stars: 5 }
+  - { name: Footer, stars: 5 }
+  - { name: Pricing, stars: 4 }
+  - { name: FAQ, stars: 4 }
+  - { name: Testimonials, stars: 4 }
+  - { name: Contact, stars: 4 }
+  - { name: Stats, stars: 3 }
+  - { name: Logo Cloud, stars: 3 }
+  - { name: Newsletter, stars: 3 }
+  - { name: Team, stars: 2 }
+  - { name: Bento Grid, stars: 2 }

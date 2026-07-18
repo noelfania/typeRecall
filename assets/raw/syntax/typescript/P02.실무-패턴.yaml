@@ -7,123 +7,272 @@ track:
   label: TypeScript
 title: P02.실무-패턴
 source:
-  origin: assets/typingSource/Language-TypeScript/P02.실무-패턴.ts
+  origin: chat-raw 실무형 TypeScript 2026-07-18
+  note: interface/교차, 제네릭, 좁히기, as const, Record/keyof. 복잡한 conditional 제외.
 parts:
   - id: language-typescript-p02-part-1
-    title: 도메인 타입[domain type]
+    title: interface 확장[extends]
     display: |-
-      // 도메인 타입[domain type]
-      type Product = {
+      // interface 확장[extends]
+      interface BaseEntity {
         id: number;
-        name: string;
-        price: number;
+        createdAt: string;
+      }
+
+      interface Account extends BaseEntity {
+        email: string;
+      }
+
+      const acc: Account = {
+        id: 10,
+        createdAt: "2025-01-01",
+        email: "x@y.com",
       };
+      console.log(acc.email);
     typing: |-
-      type Product = {
+      interface BaseEntity {
         id: number;
-        name: string;
-        price: number;
+        createdAt: string;
+      }
+
+      interface Account extends BaseEntity {
+        email: string;
+      }
+
+      const acc: Account = {
+        id: 10,
+        createdAt: "2025-01-01",
+        email: "x@y.com",
       };
-  - id: language-typescript-p02-part-1b
-    title: 판별 유니온[discriminated union]
-    display: |-
-      // 판별 유니온[discriminated union] - status로 상태별 데이터 구분
-      type FetchState<T> =
-        | { status: 'idle' }
-        | { status: 'loading' }
-        | { status: 'success'; data: T }
-        | { status: 'error'; message: string };
-    typing: |-
-      type FetchState<T> =
-        | { status: 'idle' }
-        | { status: 'loading' }
-        | { status: 'success'; data: T }
-        | { status: 'error'; message: string };
+      console.log(acc.email);
   - id: language-typescript-p02-part-2
-    title: 리터럴 유니온[literal union]
+    title: 교차 타입[&]
     display: |-
-      // 리터럴 유니온[literal union]
-      let sortOrder: 'asc' | 'desc' = 'asc';
-      console.log(sortOrder);
-      // 결과: asc
+      // 교차 타입[&]
+      type BaseEntity = { id: number; createdAt: string };
+      type Profile = { displayName: string } & BaseEntity;
+
+      const prof: Profile = {
+        id: 11,
+        createdAt: "2025-02-01",
+        displayName: "Kim",
+      };
+      console.log(prof.displayName);
     typing: |-
-      let sortOrder: 'asc' | 'desc' = 'asc';
-      console.log(sortOrder);
+      type BaseEntity = { id: number; createdAt: string };
+      type Profile = { displayName: string } & BaseEntity;
+
+      const prof: Profile = {
+        id: 11,
+        createdAt: "2025-02-01",
+        displayName: "Kim",
+      };
+      console.log(prof.displayName);
   - id: language-typescript-p02-part-3
-    title: 타입 별칭[type alias]
+    title: 제네릭 함수[wrapArray]
     display: |-
-      // 타입 별칭[type alias]
-      const productItem: Product = {
-        id: 1,
-        name: 'keyboard',
-        price: 50000,
-      };
-      console.log(productItem.name);
-      // 결과: keyboard
+      // 제네릭 함수[wrapArray]
+      function wrapArray<T>(value: T): T[] {
+        return [value];
+      }
+
+      const a1 = wrapArray(123);
+      const a2 = wrapArray({ x: 1 });
+      console.log(a1, a2);
     typing: |-
-      const productItem: Product = {
-        id: 1,
-        name: 'keyboard',
-        price: 50000,
-      };
-      console.log(productItem.name);
+      function wrapArray<T>(value: T): T[] {
+        return [value];
+      }
+
+      const a1 = wrapArray(123);
+      const a2 = wrapArray({ x: 1 });
+      console.log(a1, a2);
   - id: language-typescript-p02-part-4
-    title: 읽기 전용[readonly]
+    title: 제네릭 + keyof[getProp]
     display: |-
-      // 읽기 전용[readonly]
-      type UserProfile = {
-        readonly id: number;
-        nickname: string;
-      };
+      // 제네릭 + keyof[getProp]
+      function getProp<T, K extends keyof T>(obj: T, key: K): T[K] {
+        return obj[key];
+      }
 
-      const profileItem: UserProfile = {
-        id: 1,
-        nickname: 'neo',
-      };
-      console.log(profileItem.id);
-      // 결과: 1
+      const user = { id: 1, name: "Lee", role: "member" as const };
+      console.log(getProp(user, "name"));
     typing: |-
-      type UserProfile = {
-        readonly id: number;
-        nickname: string;
-      };
+      function getProp<T, K extends keyof T>(obj: T, key: K): T[K] {
+        return obj[key];
+      }
 
-      const profileItem: UserProfile = {
-        id: 1,
-        nickname: 'neo',
-      };
-      console.log(profileItem.id);
+      const user = { id: 1, name: "Lee", role: "member" as const };
+      console.log(getProp(user, "name"));
   - id: language-typescript-p02-part-5
-    title: 상태 분기[discriminated union]
+    title: 타입 가드[is string]
     display: |-
-      // 상태 분기[discriminated union]
-      const fetchState: FetchState<Product> = {
-        status: 'success',
-        data: productItem,
-      };
-
-      if (fetchState.status === 'success') {
-        console.log(fetchState.data.price);
+      // 타입 가드[is string]
+      function isString(x: unknown): x is string {
+        return typeof x === "string";
       }
-      // 결과: 50000
+
+      function printLen(x: unknown) {
+        if (isString(x)) {
+          console.log("length:", x.length);
+        } else if (typeof x === "number") {
+          console.log("double:", x * 2);
+        }
+      }
+
+      printLen("abc");
+      printLen(10);
     typing: |-
-      const fetchState: FetchState<Product> = {
-        status: 'success',
-        data: productItem,
-      };
-
-      if (fetchState.status === 'success') {
-        console.log(fetchState.data.price);
+      function isString(x: unknown): x is string {
+        return typeof x === "string";
       }
+
+      function printLen(x: unknown) {
+        if (isString(x)) {
+          console.log("length:", x.length);
+        } else if (typeof x === "number") {
+          console.log("double:", x * 2);
+        }
+      }
+
+      printLen("abc");
+      printLen(10);
   - id: language-typescript-p02-part-6
-    title: 배열 패턴[array pattern]
+    title: 판별 유니온[ok]
     display: |-
-      // 배열 패턴[array pattern]
-      const productList: Product[] = [productItem];
-      const productNameList = productList.map(item => item.name);
-      console.log(productNameList);
-      // 결과: ['keyboard']
+      // 판별 유니온[ok]
+      type ApiOk<T> = { ok: true; data: T };
+      type ApiErr = { ok: false; error: string };
+      type ApiResult<T> = ApiOk<T> | ApiErr;
+
+      function handleResult<T>(res: ApiResult<T>) {
+        if (res.ok) {
+          console.log("data:", res.data);
+        } else {
+          console.error("error:", res.error);
+        }
+      }
+
+      handleResult({ ok: true, data: { id: 1 } });
     typing: |-
-      const productList: Product[] = [productItem];
-      const productNameList = productList.map(item => item.name);
-      console.log(productNameList);
+      type ApiOk<T> = { ok: true; data: T };
+      type ApiErr = { ok: false; error: string };
+      type ApiResult<T> = ApiOk<T> | ApiErr;
+
+      function handleResult<T>(res: ApiResult<T>) {
+        if (res.ok) {
+          console.log("data:", res.data);
+        } else {
+          console.error("error:", res.error);
+        }
+      }
+
+      handleResult({ ok: true, data: { id: 1 } });
+  - id: language-typescript-p02-part-7
+    title: as const 리터럴[as const]
+    display: |-
+      // as const 리터럴[as const]
+      const ROLES = ["admin", "member", "guest"] as const;
+      type Role = (typeof ROLES)[number];
+
+      function createUser(name: string, role: Role) {
+        return { id: Date.now(), name, role };
+      }
+
+      console.log(createUser("Park", "admin"));
+    typing: |-
+      const ROLES = ["admin", "member", "guest"] as const;
+      type Role = (typeof ROLES)[number];
+
+      function createUser(name: string, role: Role) {
+        return { id: Date.now(), name, role };
+      }
+
+      console.log(createUser("Park", "admin"));
+  - id: language-typescript-p02-part-8
+    title: Record / keyof[Record]
+    display: |-
+      // Record / keyof[Record]
+      type Locale = "en" | "ko" | "ja";
+      const messages: Record<Locale, string> = {
+        en: "Hello",
+        ko: "안녕하세요",
+        ja: "こんにちは",
+      };
+
+      type MsgKeys = keyof typeof messages;
+      function t(key: MsgKeys) {
+        return messages[key];
+      }
+
+      console.log(t("ko"));
+    typing: |-
+      type Locale = "en" | "ko" | "ja";
+      const messages: Record<Locale, string> = {
+        en: "Hello",
+        ko: "안녕하세요",
+        ja: "こんにちは",
+      };
+
+      type MsgKeys = keyof typeof messages;
+      function t(key: MsgKeys) {
+        return messages[key];
+      }
+
+      console.log(t("ko"));
+  - id: language-typescript-p02-part-9
+    title: typeof로 타입 뽑기[typeof]
+    display: |-
+      // typeof로 타입 뽑기[typeof]
+      const CONFIG = {
+        apiBase: "/api",
+        timeoutMs: 3000,
+        features: { metrics: true, beta: false },
+      } as const;
+
+      type Config = typeof CONFIG;
+      type FeatureFlags = keyof Config["features"];
+
+      function isFeatureOn(flag: FeatureFlags) {
+        return CONFIG.features[flag];
+      }
+
+      console.log(isFeatureOn("metrics"));
+    typing: |-
+      const CONFIG = {
+        apiBase: "/api",
+        timeoutMs: 3000,
+        features: { metrics: true, beta: false },
+      } as const;
+
+      type Config = typeof CONFIG;
+      type FeatureFlags = keyof Config["features"];
+
+      function isFeatureOn(flag: FeatureFlags) {
+        return CONFIG.features[flag];
+      }
+
+      console.log(isFeatureOn("metrics"));
+  - id: language-typescript-p02-part-10
+    title: 상태 객체[State]
+    display: |-
+      // 상태 객체[State]
+      type User = { id: number; name: string };
+
+      type State = {
+        loading: boolean;
+        data: User | null;
+      };
+
+      const state: State = { loading: false, data: null };
+      console.log(state.loading);
+    typing: |-
+      type User = { id: number; name: string };
+
+      type State = {
+        loading: boolean;
+        data: User | null;
+      };
+
+      const state: State = { loading: false, data: null };
+      console.log(state.loading);

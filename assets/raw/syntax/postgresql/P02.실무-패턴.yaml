@@ -1,0 +1,78 @@
+id: language-postgresql-p02
+category: syntax
+kind: code-snippet
+language: sql
+track:
+  id: postgresql
+  label: PostgreSQL
+title: P02.실무-패턴
+source:
+  origin: chat-raw PostgreSQL 고빈도 2026-07-18
+  note: GROUP BY/HAVING, CTE, UPSERT, jsonb. 확장·파티셔닝·복잡한 윈도우 제외.
+parts:
+  - id: language-postgresql-p02-part-1
+    title: 그룹·집계[group by having]
+    display: |-
+      -- 그룹·집계[group by having]
+      SELECT user_id, COUNT(*) AS order_count
+      FROM orders
+      GROUP BY user_id
+      HAVING COUNT(*) >= 2;
+    typing: |-
+      SELECT user_id, COUNT(*) AS order_count
+      FROM orders
+      GROUP BY user_id
+      HAVING COUNT(*) >= 2;
+  - id: language-postgresql-p02-part-2
+    title: 공통 테이블 식[with cte]
+    display: |-
+      -- 공통 테이블 식[with cte]
+      WITH order_sum AS (
+          SELECT user_id, SUM(total_price) AS total_amount
+          FROM orders
+          GROUP BY user_id
+      )
+      SELECT u.user_name, o.total_amount
+      FROM users u
+      JOIN order_sum o
+        ON u.user_id = o.user_id;
+    typing: |-
+      WITH order_sum AS (
+          SELECT user_id, SUM(total_price) AS total_amount
+          FROM orders
+          GROUP BY user_id
+      )
+      SELECT u.user_name, o.total_amount
+      FROM users u
+      JOIN order_sum o
+        ON u.user_id = o.user_id;
+  - id: language-postgresql-p02-part-3
+    title: 업서트[upsert]
+    display: |-
+      -- 업서트[upsert]
+      -- 충돌 시 UPDATE — INSERT ON CONFLICT DO UPDATE
+      INSERT INTO users (user_id, user_name, user_age)
+      VALUES (1, 'kim', 31)
+      ON CONFLICT (user_id)
+      DO UPDATE SET
+          user_name = EXCLUDED.user_name,
+          user_age = EXCLUDED.user_age;
+    typing: |-
+      INSERT INTO users (user_id, user_name, user_age)
+      VALUES (1, 'kim', 31)
+      ON CONFLICT (user_id)
+      DO UPDATE SET
+          user_name = EXCLUDED.user_name,
+          user_age = EXCLUDED.user_age;
+  - id: language-postgresql-p02-part-4
+    title: jsonb 접근[jsonb]
+    display: |-
+      -- jsonb 접근[jsonb]
+      -- -> 는 jsonb, ->> 는 text
+      SELECT meta -> 'city' AS city_json,
+             meta ->> 'city' AS city_text
+      FROM users;
+    typing: |-
+      SELECT meta -> 'city' AS city_json,
+             meta ->> 'city' AS city_text
+      FROM users;

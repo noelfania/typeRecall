@@ -1,0 +1,113 @@
+id: knowledge-notes-frontend-design-process
+category: knowledge
+kind: note
+topic: frontend
+title: 프론트엔드 화면 상세설계 방식 (고빈도만)
+source:
+  origin: chat-raw 유수 대기업 FE 화면 설계 관행 2026-07-18
+  note: |
+    긴 Word/PDF 설계서보다 Figma·API Schema·코드·PR이 설계 산출물인 흐름을 요약.
+    용어 카드는 terms/web-terms.yaml · terms/rest-terms.yaml 참고.
+scope: |
+  ✅ 4레이어(UX/Figma, API 명세, 프론트 기술설계, Design System)
+  ✅ 화면 상세설계서에 넣을 개요·API·상태·validation·예외
+  ✅ 서버 상태 vs 클라이언트 상태, Empty/Loading, 코드 분할
+  ❌ 특정 회사 내부 툴명, 희귀 패턴, 프레임워크 전용 API 나열
+
+# 요즘 트렌드: 「설계서」보다 「살아있는 산출물」
+trend: |
+  유수 대기업 프론트엔드에서는 두꺼운 화면 상세설계서 한 장보다
+  Figma + API Schema(OpenAPI) + 구현 코드 + PR 리뷰가 곧 설계다.
+  문서는 의사결정·예외·권한처럼 코드만으로는 안 보이는 합의를 짧게 남긴다.
+
+# 4레이어 요약
+layers:
+  - id: ux-figma
+    name: UX / Figma
+    role: 화면 구조·플로우·인터랙션의 시각적 합의
+    artifacts:
+      - "Figma 프레임·컴포넌트·오토레이아웃"
+      - "유저 플로우(진입→성공/실패 분기)"
+      - "상태별 화면(Empty / Loading / Error / Success)"
+    checklist:
+      - "모바일·데스크톱 브레이크포인트"
+      - "주요 CTA·비활성·로딩 피드백"
+      - "접근성(포커스, 대비, 라벨)"
+
+  - id: api-spec
+    name: API 명세
+    role: 프론트↔백엔드 계약[contract]
+    artifacts:
+      - "OpenAPI / Swagger (경로·메서드·스키마·에러 코드)"
+      - "요청/응답 예시, 페이지네이션·필터 규칙"
+      - "권한·인증 헤더 요구사항"
+    checklist:
+      - "필드명·타입·필수 여부 확정"
+      - "4xx/5xx 시 프론트가 보여줄 메시지 합의"
+      - "목[Mock] / 스텁[Stub]으로 병렬 개발 가능 여부"
+
+  - id: fe-tech
+    name: 프론트 기술설계
+    role: 구현 단위·상태·라우팅·성능의 기술 결정
+    artifacts:
+      - "라우트·페이지·컴포넌트 경계"
+      - "서버 상태[Server State] vs 클라이언트 상태[Client State]"
+      - "폼 validation, 낙관적 갱신 여부"
+      - "코드 분할[Code Splitting] / 지연 로딩[Lazy Loading]"
+    checklist:
+      - "데이터 fetch 위치(페이지/훅/컨테이너)"
+      - "캐시·재시도·무효화 규칙"
+      - "긴 목록이면 가상화[Virtualization] 검토"
+
+  - id: design-system
+    name: Design System
+    role: 재사용 UI·토큰으로 일관성 유지
+    artifacts:
+      - "컴포넌트 라이브러리(Button, Input, Modal…)"
+      - "디자인 토큰[Design Token] (색·간격·타이포)"
+      - "상태 패턴(Skeleton, Empty State, Toast)"
+    checklist:
+      - "새 화면은 DS 컴포넌트 우선, 예외만 커스텀"
+      - "토큰 밖 하드코딩 색/간격 최소화"
+
+# 화면 상세설계서 예시 구조 (짧게 쓸 때)
+specTemplate:
+  - section: 개요
+    items:
+      - "화면 목적·대상 사용자·진입 경로"
+      - "관련 Figma 링크·담당(FE/BE/Design)"
+      - "권한·노출 조건(로그인/역할)"
+
+  - section: API
+    items:
+      - "엔드포인트·메서드·인증"
+      - "요청 파라미터·바디 스키마"
+      - "성공 응답 필드 → UI 매핑"
+      - "에러 코드 → 화면 메시지"
+
+  - section: 상태
+    items:
+      - "로딩[Loading State] / 스켈레톤[Skeleton]"
+      - "빈 목록[Empty State]"
+      - "에러·재시도"
+      - "서버 상태 vs 로컬 UI 상태 구분"
+
+  - section: validation
+    items:
+      - "필드별 규칙(필수·길이·형식)"
+      - "제출 전/서버 응답 후 검증 시점"
+      - "인라인 에러 vs 토스트"
+
+  - section: 예외
+    items:
+      - "권한 없음·세션 만료"
+      - "부분 실패·타임아웃"
+      - "동시 편집·중복 제출 방지"
+
+# 실무에서 자주 쓰는 한 줄 체크
+quickChecks:
+  - "Figma에 Empty·Loading·Error가 있는가?"
+  - "OpenAPI와 화면 필드명이 같은가?"
+  - "서버에서 오는 데이터와 폼 입력 상태가 섞이지 않았는가?"
+  - "DS에 있는 컴포넌트로 충분한가?"
+  - "첫 로드 번들이 비대하면 라우트 단위 코드 분할을 했는가?"

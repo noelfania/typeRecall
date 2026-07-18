@@ -1,0 +1,117 @@
+id: language-sql-p03
+category: syntax
+kind: code-snippet
+language: sql
+track:
+  id: sql
+  label: SQL
+title: P03.조인-패턴
+source:
+  origin: chat-raw MSSQL JOIN 심화 → 표준 SQL 2026-07-18
+  note: INNER/LEFT는 P01·P02와 테이블만 달리 짧게. RIGHT/FULL·복합키·ON/WHERE·미매칭 행에 집중.
+parts:
+  - id: language-sql-p03-part-1
+    title: 내부 조인[inner join]
+    display: |-
+      -- 내부 조인[inner join]
+      -- 양쪽에 매칭되는 행만 남긴다
+      SELECT e.emp_name, d.dept_name
+      FROM employees e
+      INNER JOIN departments d
+        ON e.dept_id = d.dept_id;
+    typing: |-
+      SELECT e.emp_name, d.dept_name
+      FROM employees e
+      INNER JOIN departments d
+        ON e.dept_id = d.dept_id;
+  - id: language-sql-p03-part-2
+    title: 왼쪽 조인[left join]
+    display: |-
+      -- 왼쪽 조인[left join]
+      -- 왼쪽(employees)은 전부, 오른쪽 없으면 NULL
+      SELECT e.emp_name, d.dept_name
+      FROM employees e
+      LEFT JOIN departments d
+        ON e.dept_id = d.dept_id;
+    typing: |-
+      SELECT e.emp_name, d.dept_name
+      FROM employees e
+      LEFT JOIN departments d
+        ON e.dept_id = d.dept_id;
+  - id: language-sql-p03-part-3
+    title: 오른쪽 조인[right join]
+    display: |-
+      -- 오른쪽 조인[right join]
+      -- 오른쪽(departments)은 전부 유지
+      SELECT e.emp_name, d.dept_name
+      FROM employees e
+      RIGHT JOIN departments d
+        ON e.dept_id = d.dept_id;
+    typing: |-
+      SELECT e.emp_name, d.dept_name
+      FROM employees e
+      RIGHT JOIN departments d
+        ON e.dept_id = d.dept_id;
+  - id: language-sql-p03-part-4
+    title: 완전 외부 조인[full outer join]
+    display: |-
+      -- 완전 외부 조인[full outer join]
+      -- 양쪽 모두 유지, 없으면 NULL
+      SELECT e.emp_name, d.dept_name
+      FROM employees e
+      FULL OUTER JOIN departments d
+        ON e.dept_id = d.dept_id;
+    typing: |-
+      SELECT e.emp_name, d.dept_name
+      FROM employees e
+      FULL OUTER JOIN departments d
+        ON e.dept_id = d.dept_id;
+  - id: language-sql-p03-part-5
+    title: ON 다중 조건[composite key]
+    display: |-
+      -- ON 다중 조건[composite key]
+      -- 복합키[composite key]는 AND로 묶는다
+      SELECT o.order_id, i.item_name
+      FROM orders o
+      INNER JOIN order_items i
+        ON o.order_id = i.order_id
+       AND o.store_id = i.store_id;
+    typing: |-
+      SELECT o.order_id, i.item_name
+      FROM orders o
+      INNER JOIN order_items i
+        ON o.order_id = i.order_id
+       AND o.store_id = i.store_id;
+  - id: language-sql-p03-part-6
+    title: ON 필터[on filter]
+    display: |-
+      -- ON 필터[on filter]
+      -- WHERE에 오른쪽 컬럼 조건을 쓰면 LEFT가 INNER처럼 된다
+      -- 필터는 ON에 두고 왼쪽 행을 지킨다
+      SELECT e.emp_name, d.dept_name
+      FROM employees e
+      LEFT JOIN departments d
+        ON e.dept_id = d.dept_id
+       AND d.is_active = 1;
+    typing: |-
+      SELECT e.emp_name, d.dept_name
+      FROM employees e
+      LEFT JOIN departments d
+        ON e.dept_id = d.dept_id
+       AND d.is_active = 1;
+  - id: language-sql-p03-part-7
+    title: 미매칭 행[left join is null]
+    display: |-
+      -- 미매칭 행[left join is null]
+      -- 부서에 없는 사원만 찾는다
+      SELECT e.emp_name
+      FROM employees e
+      LEFT JOIN departments d
+        ON e.dept_id = d.dept_id
+      WHERE d.dept_id IS NULL;
+    typing: |-
+      SELECT e.emp_name
+      FROM employees e
+      LEFT JOIN departments d
+        ON e.dept_id = d.dept_id
+      WHERE d.dept_id IS NULL;

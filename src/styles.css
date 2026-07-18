@@ -822,6 +822,154 @@ html.dark .themeToggle .moonIcon {
   margin-top: 0.25rem;
 }
 
+/* —— 참고 노트 카드 —— */
+
+.noteBody {
+  display: grid;
+  gap: 0.85rem;
+  padding: 1rem 1.25rem 1.25rem;
+}
+
+.noteProse {
+  display: grid;
+  gap: 0.45rem;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--muted-strong);
+  white-space: pre-wrap;
+}
+
+.noteProse p {
+  margin: 0;
+}
+
+.typingCard.isActive .noteProse {
+  color: #d4d4d8;
+}
+
+.notePre {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  overflow-x: auto;
+  border-radius: 0.5rem;
+  font-family: ui-monospace, "Cascadia Code", "Consolas", "Noto Sans KR", monospace;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  white-space: pre;
+  color: var(--muted-strong);
+  background: rgba(0, 0, 0, 0.04);
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+
+.typingCard.isActive .notePre {
+  color: #e4e4e7;
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0 0 0 1px var(--code-border);
+}
+
+.noteHeading {
+  margin: 0.15rem 0 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  text-transform: none;
+}
+
+.typingCard.isActive .noteHeading {
+  color: #a1a1aa;
+}
+
+.noteList {
+  margin: 0;
+  padding: 0 0 0 1.15rem;
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--muted-strong);
+}
+
+.typingCard.isActive .noteList {
+  color: #d4d4d8;
+}
+
+.noteKv {
+  margin: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.noteKvRow {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.noteKv dt {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-family: ui-monospace, "Cascadia Code", "Consolas", monospace;
+  color: var(--muted);
+}
+
+.noteKv dd {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--muted-strong);
+}
+
+.typingCard.isActive .noteKv dt {
+  color: #a1a1aa;
+}
+
+.typingCard.isActive .noteKv dd {
+  color: #d4d4d8;
+}
+
+.noteTableWrap {
+  overflow-x: auto;
+}
+
+.noteTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.noteTable th,
+.noteTable td {
+  padding: 0.45rem 0.6rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.noteTable th {
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.noteTable td {
+  color: var(--muted-strong);
+  font-family: ui-monospace, "Cascadia Code", "Consolas", "Noto Sans KR", monospace;
+  font-size: 0.8rem;
+}
+
+.typingCard.isActive .noteTable th,
+.typingCard.isActive .noteTable td {
+  border-bottom-color: var(--code-border);
+}
+
+.typingCard.isActive .noteTable th {
+  color: #a1a1aa;
+}
+
+.typingCard.isActive .noteTable td {
+  color: #d4d4d8;
+}
+
 /* —— 타이핑 카드 —— */
 
 .typingCard {

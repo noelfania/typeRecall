@@ -8,370 +8,329 @@ export const languageTracks: LanguageTrack[] = [
     "lessons": [
       {
         "id": "language-bash-shell-p01",
-        "title": "P01.기본-패턴",
-        "fileName": "P01.기본-패턴.yaml",
-        "sourcePath": "assets/raw/syntax/bash-shell/P01.기본-패턴.yaml",
+        "title": "P01.파일-탐색-검색",
+        "fileName": "P01.파일-탐색-검색.yaml",
+        "sourcePath": "assets/raw/syntax/bash-shell/P01.파일-탐색-검색.yaml",
         "language": "shell",
         "parts": [
           {
             "id": "language-bash-shell-p01-part-1",
-            "title": "현재 작업 디렉터리[current working directory]",
+            "title": "현재 경로[pwd]",
             "content": "pwd",
-            "displayContent": "# 현재 작업 디렉터리[current working directory]\npwd\n# 결과: /home/user/project"
+            "displayContent": "# 현재 경로[pwd]\npwd"
           },
           {
             "id": "language-bash-shell-p01-part-2",
-            "title": "파일 / 디렉터리 목록 나열[list]",
+            "title": "목록[ls]",
             "content": "ls\nls -al",
-            "displayContent": "# 파일 / 디렉터리 목록 나열[list]\nls\nls -al\n# 결과: 숨김 파일까지 자세히 출력"
+            "displayContent": "# 목록[ls]\nls\nls -al"
           },
           {
             "id": "language-bash-shell-p01-part-3",
-            "title": "디렉터리 이동[change directory]",
-            "content": "cd /tmp\ncd -",
-            "displayContent": "# 디렉터리 이동[change directory]\ncd /tmp\ncd -\n# 결과: 이전 디렉터리로 복귀"
+            "title": "이동[cd]",
+            "content": "cd ~/project\ncd -\ncd ..",
+            "displayContent": "# 이동[cd]\ncd ~/project\ncd -\ncd .."
           },
           {
             "id": "language-bash-shell-p01-part-4",
-            "title": "디렉터리 생성[make directory]",
-            "content": "mkdir logs\nmkdir -p app/cache/images",
-            "displayContent": "# 디렉터리 생성[make directory]\nmkdir logs\nmkdir -p app/cache/images\n# 결과: 중간 경로까지 한 번에 생성"
+            "title": "만들기[mkdir touch]",
+            "content": "mkdir logs\nmkdir -p app/cache/images\ntouch app.log",
+            "displayContent": "# 만들기[mkdir touch]\nmkdir logs\nmkdir -p app/cache/images\ntouch app.log"
           },
           {
             "id": "language-bash-shell-p01-part-5",
-            "title": "빈 파일 생성[create file]",
-            "content": "touch app.log",
-            "displayContent": "# 빈 파일 생성[create file]\ntouch app.log\n# 결과: app.log 생성"
+            "title": "복사·이동·삭제[cp mv rm]",
+            "content": "cp -r src/ dest/\nmv file.txt docs/\nrm -rf folder/",
+            "displayContent": "# 복사·이동·삭제[cp mv rm]\ncp -r src/ dest/\nmv file.txt docs/\nrm -rf folder/"
           },
           {
             "id": "language-bash-shell-p01-part-6",
-            "title": "표준 출력[stdout] 쓰기",
-            "content": "echo \"hello shell\"",
-            "displayContent": "# 표준 출력[stdout] 쓰기\necho \"hello shell\"\n# 결과: hello shell"
+            "title": "내용 보기[cat head tail]",
+            "content": "cat app.log\nhead -n 20 app.log\ntail -n 50 app.log\ntail -f app.log",
+            "displayContent": "# 내용 보기[cat head tail]\ncat app.log\nhead -n 20 app.log\ntail -n 50 app.log\ntail -f app.log"
           },
           {
             "id": "language-bash-shell-p01-part-7",
-            "title": "리다이렉션[redirection]",
-            "content": "echo \"first line\" > app.log\necho \"second line\" >> app.log",
-            "displayContent": "# 리다이렉션[redirection]\necho \"first line\" > app.log\necho \"second line\" >> app.log\n# 결과: app.log에 줄 단위 추가"
+            "title": "검색[grep]",
+            "content": "grep \"keyword\" file.txt\ngrep -rn \"keyword\" src",
+            "displayContent": "# 검색[grep]\ngrep \"keyword\" file.txt\ngrep -rn \"keyword\" src"
           },
           {
             "id": "language-bash-shell-p01-part-8",
-            "title": "파일 내용 확인[read file]",
-            "content": "cat app.log\nhead -n 1 app.log\ntail -n 1 app.log",
-            "displayContent": "# 파일 내용 확인[read file]\ncat app.log\nhead -n 1 app.log\ntail -n 1 app.log\n# 결과: 앞 / 뒤 줄 확인"
+            "title": "파일 찾기[find]",
+            "content": "find . -name \"*.sh\"\nfind . -type d -name \"node_modules\"",
+            "displayContent": "# 파일 찾기[find]\nfind . -name \"*.sh\"\nfind . -type d -name \"node_modules\""
           },
           {
             "id": "language-bash-shell-p01-part-9",
-            "title": "검색[search]",
-            "content": "grep \"second\" app.log",
-            "displayContent": "# 검색[search]\ngrep \"second\" app.log\n# 결과: second line"
+            "title": "리다이렉션[> >>]",
+            "content": "echo \"first\" > app.log\necho \"log\" >> app.log",
+            "displayContent": "# 리다이렉션[> >>]\n# > 덮어쓰기, >> 이어쓰기\necho \"first\" > app.log\necho \"log\" >> app.log"
           },
           {
             "id": "language-bash-shell-p01-part-10",
-            "title": "파이프[pipeline]",
-            "content": "ls -al | grep \".log\"",
-            "displayContent": "# 파이프[pipeline]\nls -al | grep \".log\"\n# 결과: .log 파일만 필터링"
-          },
-          {
-            "id": "language-bash-shell-p01-part-11",
-            "title": "파일 복사[copy] / 이동[move]",
-            "content": "cp app.log backup.log\nmv backup.log archive.log",
-            "displayContent": "# 파일 복사[copy] / 이동[move]\ncp app.log backup.log\nmv backup.log archive.log\n# 결과: 복사 후 이름 변경"
-          },
-          {
-            "id": "language-bash-shell-p01-part-12",
-            "title": "파일 삭제[remove]",
-            "content": "rm archive.log",
-            "displayContent": "# 파일 삭제[remove]\nrm archive.log\n# 결과: 파일 삭제"
-          },
-          {
-            "id": "language-bash-shell-p01-part-13",
-            "title": "변수[variable]",
-            "content": "user_name=\"kim\"\necho \"$user_name\"",
-            "displayContent": "# 변수[variable]\nuser_name=\"kim\"\necho \"$user_name\"\n# 결과: kim"
-          },
-          {
-            "id": "language-bash-shell-p01-part-14",
-            "title": "환경 변수[environment variable]",
-            "content": "echo \"$HOME\"\necho \"$SHELL\"",
-            "displayContent": "# 환경 변수[environment variable]\necho \"$HOME\"\necho \"$SHELL\"\n# 결과: 홈 디렉터리 / 현재 셸"
-          },
-          {
-            "id": "language-bash-shell-p01-part-15",
-            "title": "조건문[condition]",
-            "content": "file_name=\"app.log\"\nif [ -f \"$file_name\" ]; then\n  echo \"file exists\"\nelse\n  echo \"file missing\"\nfi",
-            "displayContent": "# 조건문[condition]\nfile_name=\"app.log\"\nif [ -f \"$file_name\" ]; then\n  echo \"file exists\"\nelse\n  echo \"file missing\"\nfi\n# 결과: file exists"
-          },
-          {
-            "id": "language-bash-shell-p01-part-16",
-            "title": "반복문[loop]",
-            "content": "for item in apple banana cherry; do\n  echo \"$item\"\ndone",
-            "displayContent": "# 반복문[loop]\nfor item in apple banana cherry; do\n  echo \"$item\"\ndone\n# 결과:\n# apple\n# banana\n# cherry"
-          },
-          {
-            "id": "language-bash-shell-p01-part-17",
-            "title": "명령 치환[command substitution]",
-            "content": "today_value=$(date +%Y-%m-%d)\necho \"$today_value\"",
-            "displayContent": "# 명령 치환[command substitution]\ntoday_value=$(date +%Y-%m-%d)\necho \"$today_value\"\n# 결과: 2026-03-18"
-          },
-          {
-            "id": "language-bash-shell-p01-part-18",
-            "title": "함수[function]",
-            "content": "print_user() {\n  local input_name=\"$1\"\n  echo \"user=$input_name\"\n}\nprint_user \"park\"",
-            "displayContent": "# 함수[function]\nprint_user() {\n  local input_name=\"$1\"\n  echo \"user=$input_name\"\n}\nprint_user \"park\"\n# 결과: user=park"
-          },
-          {
-            "id": "language-bash-shell-p01-part-19",
-            "title": "종료 코드[exit code]",
-            "content": "grep \"missing\" app.log\necho $?",
-            "displayContent": "# 종료 코드[exit code]\ngrep \"missing\" app.log\necho $?\n# 결과: 1 (검색 실패)"
+            "title": "파이프[|]",
+            "content": "ls -al | grep \".sh\"\nps aux | grep nginx",
+            "displayContent": "# 파이프[|]\nls -al | grep \".sh\"\nps aux | grep nginx"
           }
         ]
       },
       {
         "id": "language-bash-shell-p02",
-        "title": "P02.실무-패턴",
-        "fileName": "P02.실무-패턴.yaml",
-        "sourcePath": "assets/raw/syntax/bash-shell/P02.실무-패턴.yaml",
+        "title": "P02.권한-프로세스-네트워크",
+        "fileName": "P02.권한-프로세스-네트워크.yaml",
+        "sourcePath": "assets/raw/syntax/bash-shell/P02.권한-프로세스-네트워크.yaml",
         "language": "shell",
         "parts": [
           {
             "id": "language-bash-shell-p02-part-1",
-            "title": "현재 셸 프로세스 확인[current shell process]",
-            "content": "ps -p $$",
-            "displayContent": "# 현재 셸 프로세스 확인[current shell process]\nps -p $$\n# 결과: 현재 셸 PID 출력"
+            "title": "권한[chmod]",
+            "content": "chmod +x script.sh\nchmod 755 script.sh",
+            "displayContent": "# 권한[chmod]\nchmod +x script.sh\nchmod 755 script.sh"
           },
           {
             "id": "language-bash-shell-p02-part-2",
-            "title": "여러 파일 한 번에 생성[brace expansion]",
-            "content": "touch log_{a,b,c}.txt",
-            "displayContent": "# 여러 파일 한 번에 생성[brace expansion]\ntouch log_{a,b,c}.txt\n# 결과: log_a.txt log_b.txt log_c.txt 생성"
+            "title": "소유권[chown]",
+            "content": "chown user:group file.txt\nsudo chown -R www-data:www-data /var/www/app",
+            "displayContent": "# 소유권[chown]\nchown user:group file.txt\nsudo chown -R www-data:www-data /var/www/app"
           },
           {
             "id": "language-bash-shell-p02-part-3",
-            "title": "와일드카드[glob]",
-            "content": "ls *.txt",
-            "displayContent": "# 와일드카드[glob]\nls *.txt\n# 결과: .txt 파일만 출력"
+            "title": "프로세스[ps kill]",
+            "content": "ps aux | grep nginx\nkill 12345\nkill -9 12345",
+            "displayContent": "# 프로세스[ps kill]\nps aux | grep nginx\nkill 12345\nkill -9 12345"
           },
           {
             "id": "language-bash-shell-p02-part-4",
-            "title": "파일 개수 세기[count]",
-            "content": "ls -1 *.txt | wc -l",
-            "displayContent": "# 파일 개수 세기[count]\nls -1 *.txt | wc -l\n# 결과: 3"
+            "title": "백그라운드[jobs fg bg]",
+            "content": "sleep 60 &\njobs\nfg %1\nbg %1",
+            "displayContent": "# 백그라운드[jobs fg bg]\nsleep 60 &\njobs\nfg %1\nbg %1"
           },
           {
             "id": "language-bash-shell-p02-part-5",
-            "title": "표준 출력 + 표준 에러 분리[stdout / stderr]",
-            "content": "ls exists.txt 1> out.log 2> err.log",
-            "displayContent": "# 표준 출력 + 표준 에러 분리[stdout / stderr]\nls exists.txt 1> out.log 2> err.log\n# 결과: 성공 출력은 out.log, 에러는 err.log"
+            "title": "네트워크[curl ping]",
+            "content": "ping -c 3 example.com\ncurl -I https://example.com\ncurl -s https://example.com/api/health",
+            "displayContent": "# 네트워크[curl ping]\nping -c 3 example.com\ncurl -I https://example.com\ncurl -s https://example.com/api/health"
           },
           {
             "id": "language-bash-shell-p02-part-6",
-            "title": "성공일 때만 다음 명령 실행[and list]",
-            "content": "mkdir -p temp_dir && echo \"created\"",
-            "displayContent": "# 성공일 때만 다음 명령 실행[and list]\nmkdir -p temp_dir && echo \"created\"\n# 결과: created"
+            "title": "포트 확인[ss]",
+            "content": "ss -tulpn\nss -tulpn | grep 80",
+            "displayContent": "# 포트 확인[ss]\n# netstat 대신 ss를 자주 쓴다\nss -tulpn\nss -tulpn | grep 80"
           },
           {
             "id": "language-bash-shell-p02-part-7",
-            "title": "실패했을 때만 다음 명령 실행[or list]",
-            "content": "ls not_found.txt || echo \"fallback\"",
-            "displayContent": "# 실패했을 때만 다음 명령 실행[or list]\nls not_found.txt || echo \"fallback\"\n# 결과: fallback"
+            "title": "압축[tar]",
+            "content": "tar -czvf archive.tar.gz folder/\ntar -xzvf archive.tar.gz",
+            "displayContent": "# 압축[tar]\ntar -czvf archive.tar.gz folder/\ntar -xzvf archive.tar.gz"
           },
           {
             "id": "language-bash-shell-p02-part-8",
-            "title": "xargs 패턴[xargs pattern]",
-            "content": "echo \"a.txt b.txt\" | xargs touch",
-            "displayContent": "# xargs 패턴[xargs pattern]\necho \"a.txt b.txt\" | xargs touch\n# 결과: a.txt, b.txt 생성"
+            "title": "zip[unzip]",
+            "content": "unzip archive.zip\nunzip -l archive.zip",
+            "displayContent": "# zip[unzip]\nunzip archive.zip\nunzip -l archive.zip"
           },
           {
             "id": "language-bash-shell-p02-part-9",
-            "title": "awk 기본 패턴[awk]",
-            "content": "echo \"kim 30\" | awk '{print $1}'",
-            "displayContent": "# awk 기본 패턴[awk]\necho \"kim 30\" | awk '{print $1}'\n# 결과: kim"
+            "title": "환경 변수[export]",
+            "content": "echo $PATH\nexport JAVA_HOME=/usr/lib/jvm/java-17\nexport PATH=\"$JAVA_HOME/bin:$PATH\"",
+            "displayContent": "# 환경 변수[export]\necho $PATH\nexport JAVA_HOME=/usr/lib/jvm/java-17\nexport PATH=\"$JAVA_HOME/bin:$PATH\""
           },
           {
             "id": "language-bash-shell-p02-part-10",
-            "title": "sed 기본 치환[sed replace]",
-            "content": "echo \"hello world\" | sed 's/world/shell/'",
-            "displayContent": "# sed 기본 치환[sed replace]\necho \"hello world\" | sed 's/world/shell/'\n# 결과: hello shell"
-          },
-          {
-            "id": "language-bash-shell-p02-part-11",
-            "title": "백그라운드 실행[background job]",
-            "content": "sleep 30 &\njobs",
-            "displayContent": "# 백그라운드 실행[background job]\nsleep 30 &\njobs\n# 결과: 백그라운드 작업 표시"
-          },
-          {
-            "id": "language-bash-shell-p02-part-12",
-            "title": "압축[archive]",
-            "content": "tar -czf logs.tar.gz *.txt",
-            "displayContent": "# 압축[archive]\ntar -czf logs.tar.gz *.txt\n# 결과: tar.gz 생성"
-          },
-          {
-            "id": "language-bash-shell-p02-part-13",
-            "title": "환경 변수 내보내기[export]",
-            "content": "export APP_ENV=local\necho \"$APP_ENV\"",
-            "displayContent": "# 환경 변수 내보내기[export]\nexport APP_ENV=local\necho \"$APP_ENV\"\n# 결과: local"
+            "title": "히스토리[history]",
+            "content": "history\nhistory | grep curl\n!!",
+            "displayContent": "# 히스토리[history]\n# Ctrl+R = 이전 명령 검색, Ctrl+C = 중단\nhistory\nhistory | grep curl\n!!"
           }
         ]
       },
       {
-        "id": "language-bash-shell-linux",
-        "title": "P03.리눅스-실무",
-        "fileName": "P03.리눅스-실무.yaml",
-        "sourcePath": "assets/raw/syntax/bash-shell/P03.리눅스-실무.yaml",
+        "id": "language-bash-shell-p03",
+        "title": "P03.스크립트-실무조합",
+        "fileName": "P03.스크립트-실무조합.yaml",
+        "sourcePath": "assets/raw/syntax/bash-shell/P03.스크립트-실무조합.yaml",
         "language": "shell",
         "parts": [
           {
-            "id": "language-bash-shell-linux-part-1",
-            "title": "주요 경로[filesystem layout]",
-            "content": "/etc\n/var/log\n/tmp\n/usr/local/bin\n/home/user\n/proc",
-            "displayContent": "# 주요 경로[filesystem layout]\n/etc              # 설정 파일 (nginx.conf, hosts)\n/var/log          # 시스템·앱 로그\n/tmp              # 임시 파일 (재부팅 시 삭제)\n/usr/local/bin    # 직접 설치한 툴\n/home/user        # 일반 사용자 홈 (~)\n/proc             # 실행 중 프로세스 정보 (가상)"
+            "id": "language-bash-shell-p03-part-1",
+            "title": "스크립트 시작[shebang]",
+            "content": "set -euo pipefail\necho \"start\"",
+            "displayContent": "# 스크립트 시작[shebang]\n# 파일 첫 줄에 #!/bin/bash 를 둔다 (주석이 아니라 인터프리터 지정)\nset -euo pipefail\necho \"start\""
           },
           {
-            "id": "language-bash-shell-linux-part-2",
-            "title": "탐색[navigation]",
-            "content": "pwd\nls -al\ncd ~/project\ncd -",
-            "displayContent": "# 탐색[navigation]\npwd               # 현재 경로 출력\nls -al            # 숨김파일 포함 상세 목록\ncd ~/project      # 디렉토리 이동\ncd -              # 이전 디렉토리로 이동"
+            "id": "language-bash-shell-p03-part-2",
+            "title": "변수[variable]",
+            "content": "NAME=\"kim\"\necho \"hello $NAME\"\necho \"home=$HOME\"",
+            "displayContent": "# 변수[variable]\nNAME=\"kim\"\necho \"hello $NAME\"\necho \"home=$HOME\""
           },
           {
-            "id": "language-bash-shell-linux-part-3",
-            "title": "파일 조작[file operation]",
-            "content": "touch file.txt\nmkdir -p a/b/c\ncp -r dir1 dir2\nmv file.txt docs/\nrm -rf folder",
-            "displayContent": "# 파일 조작[file operation]\ntouch file.txt          # 파일 생성\nmkdir -p a/b/c          # 중첩 폴더 한번에 생성\ncp -r dir1 dir2         # 폴더 복사 (-r 필수)\nmv file.txt docs/       # 이동 / 이름 변경\nrm -rf folder           # 폴더 강제 삭제 (주의!)"
-          },
-          {
-            "id": "language-bash-shell-linux-part-4",
-            "title": "파일 내용 보기[view file]",
-            "content": "cat file.txt\nless file.txt\nhead -n 20 file.txt\ntail -n 50 app.log\ntail -f app.log",
-            "displayContent": "# 파일 내용 보기[view file]\ncat file.txt            # 전체 출력\nless file.txt           # 페이지 단위로 보기 (q로 종료)\nhead -n 20 file.txt     # 앞 20줄\ntail -n 50 app.log      # 마지막 50줄\ntail -f app.log         # 실시간 로그 스트리밍 (서버 필수)"
-          },
-          {
-            "id": "language-bash-shell-linux-part-5",
-            "title": "검색[grep / find]",
-            "content": "grep -rn \"keyword\" src\nfind . -name \"*.ts\"\nfind . -type d -name \"node_modules\"\nfind . -name \"*.ts\" | xargs grep \"api\"",
-            "displayContent": "# 검색[grep / find]\ngrep -rn \"keyword\" src               # 재귀 + 줄번호 검색\nfind . -name \"*.ts\"                  # 확장자로 파일 찾기\nfind . -type d -name \"node_modules\"  # 폴더 타입으로 찾기\nfind . -name \"*.ts\" | xargs grep \"api\"   # 찾은 파일에서 검색"
-          },
-          {
-            "id": "language-bash-shell-linux-part-6",
-            "title": "권한[permission]",
-            "content": "ls -l\nchmod +x script.sh\nchmod 755 file.sh\nchown user:group file",
-            "displayContent": "# 권한[permission]\nls -l                   # 권한 확인\nchmod +x script.sh      # 실행 권한 추가 (심볼 방식)\nchmod 755 file.sh       # rwxr-xr-x (숫자 방식)\nchown user:group file   # 소유자 변경"
-          },
-          {
-            "id": "language-bash-shell-linux-part-7",
-            "title": "사용자[user]",
-            "content": "whoami\nid\nsudo command\nsu - username",
-            "displayContent": "# 사용자[user]\nwhoami          # 현재 사용자 확인\nid              # UID, GID 확인\nsudo command    # root 권한으로 실행\nsu - username   # 다른 사용자로 전환"
-          },
-          {
-            "id": "language-bash-shell-linux-part-8",
-            "title": "프로세스[process]",
-            "content": "ps aux | grep node\ntop\nkill 1234\nkill -9 1234",
-            "displayContent": "# 프로세스[process]\nps aux | grep node  # 특정 프로세스 검색\ntop                 # 실시간 모니터링\nkill 1234           # PID로 종료\nkill -9 1234        # 강제 종료 (SIGKILL)"
-          },
-          {
-            "id": "language-bash-shell-linux-part-9",
-            "title": "디스크 용량[disk usage]",
-            "content": "df -h\ndu -sh *",
-            "displayContent": "# 디스크 용량[disk usage]\ndf -h           # 전체 디스크 사용량 (human-readable)\ndu -sh *        # 현재 폴더 항목별 용량"
-          },
-          {
-            "id": "language-bash-shell-linux-part-10",
-            "title": "압축[tar / zip]",
-            "content": "tar -czvf backup.tar.gz folder\ntar -xzvf backup.tar.gz\nzip -r archive.zip folder\nunzip archive.zip",
-            "displayContent": "# 압축[tar / zip]\ntar -czvf backup.tar.gz folder    # 압축 생성\ntar -xzvf backup.tar.gz           # 압축 해제\nzip -r archive.zip folder         # zip 압축\nunzip archive.zip                 # zip 해제"
-          },
-          {
-            "id": "language-bash-shell-linux-part-11",
-            "title": "네트워크[network]",
-            "content": "curl -I https://google.com\ncurl -X POST -d '{}' url\nssh -p 2222 user@server\nscp file.txt user@server:~/",
-            "displayContent": "# 네트워크[network]\ncurl -I https://google.com       # 헤더만 확인\ncurl -X POST -d '{}' url         # POST 요청\nssh -p 2222 user@server          # 포트 지정 접속\nscp file.txt user@server:~/      # 서버로 파일 전송"
-          },
-          {
-            "id": "language-bash-shell-linux-part-12",
-            "title": "패키지 관리[apt]",
-            "content": "sudo apt update\nsudo apt install nodejs\nsudo apt remove nginx\napt list --installed",
-            "displayContent": "# 패키지 관리[apt] (Ubuntu / Debian)\nsudo apt update                  # 목록 갱신 (설치 전 필수)\nsudo apt install nodejs          # 설치\nsudo apt remove nginx            # 제거\napt list --installed             # 설치된 패키지 목록"
-          },
-          {
-            "id": "language-bash-shell-linux-part-13",
-            "title": "서비스 관리[systemd]",
-            "content": "sudo systemctl status nginx\nsudo systemctl restart nginx\nsudo systemctl enable nginx\njournalctl -u nginx -f",
-            "displayContent": "# 서비스 관리[systemd]\nsudo systemctl status nginx       # 상태 확인\nsudo systemctl restart nginx      # 재시작\nsudo systemctl enable nginx       # 부팅 시 자동 시작\njournalctl -u nginx -f            # 서비스 로그 실시간"
-          },
-          {
-            "id": "language-bash-shell-linux-part-14",
-            "title": "셸 설정[shell config]",
-            "content": "source ~/.bashrc\nalias gs=\"git status\"\nalias ll=\"ls -al\"",
-            "displayContent": "# 셸 설정[shell config]\n# ~/.bashrc: bash 실행 시마다 / ~/.bash_profile: 로그인 시 1회\nsource ~/.bashrc                # 설정 다시 읽기\nalias gs=\"git status\"           # 자주 쓰는 명령 단축\nalias ll=\"ls -al\""
-          },
-          {
-            "id": "language-bash-shell-linux-part-15",
-            "title": "환경 변수[environment variable]",
-            "content": "export PATH=$PATH:/usr/local/bin\nexport NODE_ENV=production\necho $PATH\nenv",
-            "displayContent": "# 환경 변수[environment variable]\nexport PATH=$PATH:/usr/local/bin   # PATH에 경로 추가\nexport NODE_ENV=production         # 변수 설정\necho $PATH                         # 변수 확인\nenv                                # 전체 출력"
-          },
-          {
-            "id": "language-bash-shell-linux-part-16",
-            "title": "스크립트 변수[script variable]",
-            "content": "NAME=\"linux\"\necho \"hello $NAME\"",
-            "displayContent": "#!/bin/bash\n# 스크립트 변수[script variable] — = 양옆 공백 금지\nNAME=\"linux\"\necho \"hello $NAME\""
-          },
-          {
-            "id": "language-bash-shell-linux-part-17",
+            "id": "language-bash-shell-p03-part-3",
             "title": "조건문[if]",
-            "content": "if [ -f \"file.txt\" ]; then\n  echo \"파일 있음\"\nfi",
-            "displayContent": "# 조건문[if] — -f 는 파일 존재 검사\nif [ -f \"file.txt\" ]; then\n  echo \"파일 있음\"\nfi"
+            "content": "if [ -f app.log ]; then\n  echo \"log exists\"\nelse\n  echo \"no log\"\nfi",
+            "displayContent": "# 조건문[if]\nif [ -f app.log ]; then\n  echo \"log exists\"\nelse\n  echo \"no log\"\nfi"
           },
           {
-            "id": "language-bash-shell-linux-part-18",
+            "id": "language-bash-shell-p03-part-4",
             "title": "반복문[for]",
-            "content": "for file in *.ts; do\n  echo $file\ndone",
-            "displayContent": "# 반복문[for] — 글롭 패턴 순회\nfor file in *.ts; do\n  echo $file\ndone"
+            "content": "for f in *.txt; do\n  echo \"File: $f\"\ndone",
+            "displayContent": "# 반복문[for]\nfor f in *.txt; do\n  echo \"File: $f\"\ndone"
           },
           {
-            "id": "language-bash-shell-linux-part-19",
-            "title": "스크립트 실행[run script]",
-            "content": "chmod +x script.sh\n./script.sh",
-            "displayContent": "# 스크립트 실행[run script]\nchmod +x script.sh   # 실행 권한 부여\n./script.sh          # 실행"
+            "id": "language-bash-shell-p03-part-5",
+            "title": "/ || 연결",
+            "content": "mkdir -p temp_dir && echo \"created\"\nls not_found.txt || echo \"fallback\"",
+            "displayContent": "# && / || 연결\nmkdir -p temp_dir && echo \"created\"\nls not_found.txt || echo \"fallback\""
           },
           {
-            "id": "language-bash-shell-linux-part-20",
-            "title": "도커 기본[docker]",
-            "content": "docker ps -a\ndocker run -d -p 80:80 nginx\ndocker exec -it container_id bash\ndocker logs container_id\ndocker compose up -d",
-            "displayContent": "# 도커 기본[docker]\ndocker ps -a                       # 전체 컨테이너\ndocker run -d -p 80:80 nginx       # 백그라운드 + 포트 매핑\ndocker exec -it container_id bash  # 내부 접속\ndocker logs container_id           # 로그\ndocker compose up -d               # compose 실행"
+            "id": "language-bash-shell-p03-part-6",
+            "title": "실행 권한 후 실행[chmod +x]",
+            "content": "chmod +x deploy.sh\n./deploy.sh",
+            "displayContent": "# 실행 권한 후 실행[chmod +x]\nchmod +x deploy.sh\n./deploy.sh"
           },
           {
-            "id": "language-bash-shell-linux-part-21",
-            "title": "파이프와 리다이렉션[pipe / redirection]",
-            "content": "cat log.txt | grep \"error\" | tail -20\necho \"hello\" > file.txt\necho \"world\" >> file.txt\ncat file.txt 2>/dev/null",
-            "displayContent": "# 파이프와 리다이렉션[pipe / redirection]\ncat log.txt | grep \"error\" | tail -20   # 명령 연결\necho \"hello\" > file.txt     # 덮어쓰기\necho \"world\" >> file.txt    # 이어쓰기\ncat file.txt 2>/dev/null    # 에러 출력 버리기"
+            "id": "language-bash-shell-p03-part-7",
+            "title": "로그 찾기 조합[find + grep]",
+            "content": "find . -name \"*.log\" | xargs grep \"ERROR\"\ngrep -rn \"ERROR\" /var/log/app",
+            "displayContent": "# 로그 찾기 조합[find + grep]\nfind . -name \"*.log\" | xargs grep \"ERROR\"\ngrep -rn \"ERROR\" /var/log/app"
           },
           {
-            "id": "language-bash-shell-linux-part-22",
-            "title": "히스토리[history]",
-            "content": "history | grep git\n!!",
-            "displayContent": "# 히스토리[history]\nhistory | grep git  # 기록에서 검색\n!!                  # 직전 명령어 재실행\n# Ctrl+R: 히스토리 검색 / Ctrl+C: 중단 / Ctrl+L: 화면 지우기"
+            "id": "language-bash-shell-p03-part-8",
+            "title": "wget 다운로드",
+            "content": "wget https://example.com/file.tar.gz\nwget -O out.tar.gz https://example.com/file.tar.gz",
+            "displayContent": "# wget 다운로드\nwget https://example.com/file.tar.gz\nwget -O out.tar.gz https://example.com/file.tar.gz"
           },
           {
-            "id": "language-bash-shell-linux-part-23",
-            "title": "tmux 기본[tmux]",
-            "content": "tmux new\ntmux ls\ntmux attach -t 0",
-            "displayContent": "# tmux 기본[tmux] — 세션 유지 다중 터미널\ntmux new                # 새 세션\ntmux ls                 # 세션 목록\ntmux attach -t 0        # 세션 재접속\n# Ctrl+B, D: 세션 분리 / Ctrl+B, C: 새 창"
+            "id": "language-bash-shell-p03-part-9",
+            "title": "디스크·용량[df du]",
+            "content": "df -h\ndu -sh *",
+            "displayContent": "# 디스크·용량[df du]\ndf -h\ndu -sh *"
           },
           {
-            "id": "language-bash-shell-linux-part-24",
-            "title": "서버 디버깅 루틴[debug routine]",
-            "content": "ps aux | grep node\ngrep -r \"ERROR\" /var/log/\ndf -h\ncurl http://localhost:3000",
-            "displayContent": "# 서버 디버깅 루틴[debug routine]\nps aux | grep node          # 프로세스 확인\ngrep -r \"ERROR\" /var/log/   # 에러 로그 검색\ndf -h                       # 디스크 여유 확인\ncurl http://localhost:3000  # API 직접 확인"
+            "id": "language-bash-shell-p03-part-10",
+            "title": "배포 전 점검 루틴[check]",
+            "content": "pwd\ngit status\ncurl -I https://example.com\nss -tulpn | grep 3000",
+            "displayContent": "# 배포 전 점검 루틴[check]\npwd\ngit status\ncurl -I https://example.com\nss -tulpn | grep 3000"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "csharp-unity",
+    "label": "C# for Unity",
+    "folderName": "csharp-unity",
+    "lessons": [
+      {
+        "id": "language-csharp-unity-p01",
+        "title": "P01.기본-패턴",
+        "fileName": "P01.기본-패턴.yaml",
+        "sourcePath": "assets/raw/syntax/csharp-unity/P01.기본-패턴.yaml",
+        "language": "csharp",
+        "parts": [
+          {
+            "id": "language-csharp-unity-p01-part-1",
+            "title": "MonoBehaviour 골격[MonoBehaviour]",
+            "content": "using UnityEngine;\n\npublic class Player : MonoBehaviour\n{\n    void Start()\n    {\n        Debug.Log(\"start\");\n    }\n\n    void Update()\n    {\n    }\n}",
+            "displayContent": "// MonoBehaviour 골격[MonoBehaviour]\nusing UnityEngine;\n\npublic class Player : MonoBehaviour\n{\n    void Start()\n    {\n        Debug.Log(\"start\");\n    }\n\n    void Update()\n    {\n    }\n}"
           },
           {
-            "id": "language-bash-shell-linux-part-25",
-            "title": "배포 루틴[deploy routine]",
-            "content": "git pull\nnpm run build\nsudo systemctl restart app\ntail -f /var/log/app.log",
-            "displayContent": "# 배포 루틴[deploy routine]\ngit pull\nnpm run build\nsudo systemctl restart app\ntail -f /var/log/app.log    # 배포 후 로그 확인"
+            "id": "language-csharp-unity-p01-part-2",
+            "title": "SerializeField[인스펙터 노출]",
+            "content": "using UnityEngine;\n\npublic class Player : MonoBehaviour\n{\n    [SerializeField] private float moveSpeed = 5f;\n    [SerializeField] private int maxHp = 100;\n}",
+            "displayContent": "// SerializeField[인스펙터 노출]\n// private이지만 인스펙터에서 값을 넣을 수 있다\nusing UnityEngine;\n\npublic class Player : MonoBehaviour\n{\n    [SerializeField] private float moveSpeed = 5f;\n    [SerializeField] private int maxHp = 100;\n}"
+          },
+          {
+            "id": "language-csharp-unity-p01-part-3",
+            "title": "Transform 이동[transform]",
+            "content": "using UnityEngine;\n\npublic class Mover : MonoBehaviour\n{\n    [SerializeField] private float speed = 3f;\n\n    void Update()\n    {\n        transform.Translate(Vector3.forward * speed * Time.deltaTime);\n    }\n}",
+            "displayContent": "// Transform 이동[transform]\nusing UnityEngine;\n\npublic class Mover : MonoBehaviour\n{\n    [SerializeField] private float speed = 3f;\n\n    void Update()\n    {\n        transform.Translate(Vector3.forward * speed * Time.deltaTime);\n    }\n}"
+          },
+          {
+            "id": "language-csharp-unity-p01-part-4",
+            "title": "GetComponent[컴포넌트 가져오기]",
+            "content": "using UnityEngine;\n\npublic class HealthUI : MonoBehaviour\n{\n    private Rigidbody rb;\n\n    void Awake()\n    {\n        rb = GetComponent<Rigidbody>();\n    }\n}",
+            "displayContent": "// GetComponent[컴포넌트 가져오기]\nusing UnityEngine;\n\npublic class HealthUI : MonoBehaviour\n{\n    private Rigidbody rb;\n\n    void Awake()\n    {\n        rb = GetComponent<Rigidbody>();\n    }\n}"
+          },
+          {
+            "id": "language-csharp-unity-p01-part-5",
+            "title": "null 체크[null check]",
+            "content": "using UnityEngine;\n\npublic class TargetFinder : MonoBehaviour\n{\n    [SerializeField] private Transform target;\n\n    void Update()\n    {\n        if (target == null)\n        {\n            return;\n        }\n\n        transform.LookAt(target);\n    }\n}",
+            "displayContent": "// null 체크[null check]\nusing UnityEngine;\n\npublic class TargetFinder : MonoBehaviour\n{\n    [SerializeField] private Transform target;\n\n    void Update()\n    {\n        if (target == null)\n        {\n            return;\n        }\n\n        transform.LookAt(target);\n    }\n}"
+          },
+          {
+            "id": "language-csharp-unity-p01-part-6",
+            "title": "Input 입력[Input]",
+            "content": "using UnityEngine;\n\npublic class PlayerInput : MonoBehaviour\n{\n    void Update()\n    {\n        float h = Input.GetAxis(\"Horizontal\");\n        float v = Input.GetAxis(\"Vertical\");\n        transform.Translate(new Vector3(h, 0f, v) * Time.deltaTime);\n    }\n}",
+            "displayContent": "// Input 입력[Input]\nusing UnityEngine;\n\npublic class PlayerInput : MonoBehaviour\n{\n    void Update()\n    {\n        float h = Input.GetAxis(\"Horizontal\");\n        float v = Input.GetAxis(\"Vertical\");\n        transform.Translate(new Vector3(h, 0f, v) * Time.deltaTime);\n    }\n}"
+          },
+          {
+            "id": "language-csharp-unity-p01-part-7",
+            "title": "Instantiate / Destroy",
+            "content": "using UnityEngine;\n\npublic class Spawner : MonoBehaviour\n{\n    [SerializeField] private GameObject bulletPrefab;\n\n    void Fire()\n    {\n        GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);\n        Destroy(bullet, 2f);\n    }\n}",
+            "displayContent": "// Instantiate / Destroy\nusing UnityEngine;\n\npublic class Spawner : MonoBehaviour\n{\n    [SerializeField] private GameObject bulletPrefab;\n\n    void Fire()\n    {\n        GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);\n        Destroy(bullet, 2f);\n    }\n}"
+          },
+          {
+            "id": "language-csharp-unity-p01-part-8",
+            "title": "태그로 찾기[FindWithTag]",
+            "content": "using UnityEngine;\n\npublic class EnemyAI : MonoBehaviour\n{\n    private Transform player;\n\n    void Start()\n    {\n        GameObject go = GameObject.FindWithTag(\"Player\");\n        if (go != null)\n        {\n            player = go.transform;\n        }\n    }\n}",
+            "displayContent": "// 태그로 찾기[FindWithTag]\nusing UnityEngine;\n\npublic class EnemyAI : MonoBehaviour\n{\n    private Transform player;\n\n    void Start()\n    {\n        GameObject go = GameObject.FindWithTag(\"Player\");\n        if (go != null)\n        {\n            player = go.transform;\n        }\n    }\n}"
+          }
+        ]
+      },
+      {
+        "id": "language-csharp-unity-p02",
+        "title": "P02.실무-패턴",
+        "fileName": "P02.실무-패턴.yaml",
+        "sourcePath": "assets/raw/syntax/csharp-unity/P02.실무-패턴.yaml",
+        "language": "csharp",
+        "parts": [
+          {
+            "id": "language-csharp-unity-p02-part-1",
+            "title": "OnTriggerEnter[트리거]",
+            "content": "using UnityEngine;\n\npublic class Coin : MonoBehaviour\n{\n    void OnTriggerEnter(Collider other)\n    {\n        if (other.CompareTag(\"Player\"))\n        {\n            Destroy(gameObject);\n        }\n    }\n}",
+            "displayContent": "// OnTriggerEnter[트리거]\nusing UnityEngine;\n\npublic class Coin : MonoBehaviour\n{\n    void OnTriggerEnter(Collider other)\n    {\n        if (other.CompareTag(\"Player\"))\n        {\n            Destroy(gameObject);\n        }\n    }\n}"
+          },
+          {
+            "id": "language-csharp-unity-p02-part-2",
+            "title": "코루틴[IEnumerator]",
+            "content": "using System.Collections;\nusing UnityEngine;\n\npublic class DamageFlash : MonoBehaviour\n{\n    IEnumerator Flash()\n    {\n        yield return new WaitForSeconds(0.2f);\n        Debug.Log(\"flash done\");\n    }\n\n    void Start()\n    {\n        StartCoroutine(Flash());\n    }\n}",
+            "displayContent": "// 코루틴[IEnumerator]\nusing System.Collections;\nusing UnityEngine;\n\npublic class DamageFlash : MonoBehaviour\n{\n    IEnumerator Flash()\n    {\n        yield return new WaitForSeconds(0.2f);\n        Debug.Log(\"flash done\");\n    }\n\n    void Start()\n    {\n        StartCoroutine(Flash());\n    }\n}"
+          },
+          {
+            "id": "language-csharp-unity-p02-part-3",
+            "title": "List 사용[List]",
+            "content": "using System.Collections.Generic;\nusing UnityEngine;\n\npublic class Inventory : MonoBehaviour\n{\n    private readonly List<string> items = new List<string>();\n\n    void AddItem(string name)\n    {\n        items.Add(name);\n        Debug.Log(items.Count);\n    }\n}",
+            "displayContent": "// List 사용[List]\nusing System.Collections.Generic;\nusing UnityEngine;\n\npublic class Inventory : MonoBehaviour\n{\n    private readonly List<string> items = new List<string>();\n\n    void AddItem(string name)\n    {\n        items.Add(name);\n        Debug.Log(items.Count);\n    }\n}"
+          },
+          {
+            "id": "language-csharp-unity-p02-part-4",
+            "title": "이벤트[Action]",
+            "content": "using System;\nusing UnityEngine;\n\npublic class Health : MonoBehaviour\n{\n    public event Action<int> OnHpChanged;\n\n    private int hp = 100;\n\n    public void TakeDamage(int amount)\n    {\n        hp -= amount;\n        OnHpChanged?.Invoke(hp);\n    }\n}",
+            "displayContent": "// 이벤트[Action]\nusing System;\nusing UnityEngine;\n\npublic class Health : MonoBehaviour\n{\n    public event Action<int> OnHpChanged;\n\n    private int hp = 100;\n\n    public void TakeDamage(int amount)\n    {\n        hp -= amount;\n        OnHpChanged?.Invoke(hp);\n    }\n}"
+          },
+          {
+            "id": "language-csharp-unity-p02-part-5",
+            "title": "싱글톤 최소[Instance]",
+            "content": "using UnityEngine;\n\npublic class GameManager : MonoBehaviour\n{\n    public static GameManager Instance { get; private set; }\n\n    void Awake()\n    {\n        if (Instance != null)\n        {\n            Destroy(gameObject);\n            return;\n        }\n\n        Instance = this;\n    }\n}",
+            "displayContent": "// 싱글톤 최소[Instance]\n// 남용하지 말고, 게임 매니저 정도에만\nusing UnityEngine;\n\npublic class GameManager : MonoBehaviour\n{\n    public static GameManager Instance { get; private set; }\n\n    void Awake()\n    {\n        if (Instance != null)\n        {\n            Destroy(gameObject);\n            return;\n        }\n\n        Instance = this;\n    }\n}"
+          },
+          {
+            "id": "language-csharp-unity-p02-part-6",
+            "title": "레이어 마스크[LayerMask]",
+            "content": "using UnityEngine;\n\npublic class GroundCheck : MonoBehaviour\n{\n    [SerializeField] private LayerMask groundMask;\n    [SerializeField] private float distance = 1f;\n\n    bool IsGrounded()\n    {\n        return Physics.Raycast(transform.position, Vector3.down, distance, groundMask);\n    }\n}",
+            "displayContent": "// 레이어 마스크[LayerMask]\nusing UnityEngine;\n\npublic class GroundCheck : MonoBehaviour\n{\n    [SerializeField] private LayerMask groundMask;\n    [SerializeField] private float distance = 1f;\n\n    bool IsGrounded()\n    {\n        return Physics.Raycast(transform.position, Vector3.down, distance, groundMask);\n    }\n}"
+          },
+          {
+            "id": "language-csharp-unity-p02-part-7",
+            "title": "ScriptableObject[데이터]",
+            "content": "using UnityEngine;\n\n[CreateAssetMenu(menuName = \"Game/EnemyData\")]\npublic class EnemyData : ScriptableObject\n{\n    public string enemyName;\n    public int maxHp = 50;\n    public float moveSpeed = 2f;\n}",
+            "displayContent": "// ScriptableObject[데이터]\n// 밸런스·설정을 에셋으로 분리할 때\nusing UnityEngine;\n\n[CreateAssetMenu(menuName = \"Game/EnemyData\")]\npublic class EnemyData : ScriptableObject\n{\n    public string enemyName;\n    public int maxHp = 50;\n    public float moveSpeed = 2f;\n}"
+          },
+          {
+            "id": "language-csharp-unity-p02-part-8",
+            "title": "RequireComponent[의존 강제]",
+            "content": "using UnityEngine;\n\n[RequireComponent(typeof(Rigidbody))]\npublic class Knockback : MonoBehaviour\n{\n    private Rigidbody rb;\n\n    void Awake()\n    {\n        rb = GetComponent<Rigidbody>();\n    }\n}",
+            "displayContent": "// RequireComponent[의존 강제]\nusing UnityEngine;\n\n[RequireComponent(typeof(Rigidbody))]\npublic class Knockback : MonoBehaviour\n{\n    private Rigidbody rb;\n\n    void Awake()\n    {\n        rb = GetComponent<Rigidbody>();\n    }\n}"
           }
         ]
       }
@@ -505,6 +464,236 @@ export const languageTracks: LanguageTrack[] = [
             "title": "배치 마크업[layout markup]",
             "content": "<div class=\"row-parent\">\n  <div class=\"box\">A</div>\n  <div class=\"box\">B</div>\n  <div class=\"box\">C</div>\n</div>",
             "displayContent": "/* 배치 마크업[layout markup] — 부모 클래스 아래 자식 박스 */\n<div class=\"row-parent\">\n  <div class=\"box\">A</div>\n  <div class=\"box\">B</div>\n  <div class=\"box\">C</div>\n</div>"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "docker",
+    "label": "Docker",
+    "folderName": "docker",
+    "lessons": [
+      {
+        "id": "language-docker-p01",
+        "title": "P01.컨테이너-이미지-기본",
+        "fileName": "P01.컨테이너-이미지-기본.yaml",
+        "sourcePath": "assets/raw/syntax/docker/P01.컨테이너-이미지-기본.yaml",
+        "language": "shell",
+        "parts": [
+          {
+            "id": "language-docker-p01-part-1",
+            "title": "실행[docker run]",
+            "content": "docker run -d -p 8080:80 --name web nginx",
+            "displayContent": "# 실행[docker run]\n# -d 백그라운드, -p 호스트:컨테이너 포트\ndocker run -d -p 8080:80 --name web nginx"
+          },
+          {
+            "id": "language-docker-p01-part-2",
+            "title": "목록[docker ps]",
+            "content": "docker ps\ndocker ps -a",
+            "displayContent": "# 목록[docker ps]\ndocker ps\ndocker ps -a"
+          },
+          {
+            "id": "language-docker-p01-part-3",
+            "title": "중지·시작·재시작[stop start restart]",
+            "content": "docker stop web\ndocker start web\ndocker restart web",
+            "displayContent": "# 중지·시작·재시작[stop start restart]\ndocker stop web\ndocker start web\ndocker restart web"
+          },
+          {
+            "id": "language-docker-p01-part-4",
+            "title": "삭제[docker rm]",
+            "content": "docker rm web\ndocker rm -f web",
+            "displayContent": "# 삭제[docker rm]\n# 중지된 컨테이너만 삭제 가능 (-f 강제)\ndocker rm web\ndocker rm -f web"
+          },
+          {
+            "id": "language-docker-p01-part-5",
+            "title": "이미지 받기[docker pull]",
+            "content": "docker pull nginx\ndocker pull nginx:1.27",
+            "displayContent": "# 이미지 받기[docker pull]\ndocker pull nginx\ndocker pull nginx:1.27"
+          },
+          {
+            "id": "language-docker-p01-part-6",
+            "title": "이미지 목록[docker images]",
+            "content": "docker images",
+            "displayContent": "# 이미지 목록[docker images]\ndocker images"
+          },
+          {
+            "id": "language-docker-p01-part-7",
+            "title": "이미지 삭제[docker rmi]",
+            "content": "docker rmi nginx\ndocker rmi nginx:1.27",
+            "displayContent": "# 이미지 삭제[docker rmi]\ndocker rmi nginx\ndocker rmi nginx:1.27"
+          },
+          {
+            "id": "language-docker-p01-part-8",
+            "title": "이미지 빌드[docker build]",
+            "content": "docker build -t my-app:1.0 .",
+            "displayContent": "# 이미지 빌드[docker build]\n# -t 태그, . 는 Dockerfile 있는 현재 디렉터리\ndocker build -t my-app:1.0 ."
+          }
+        ]
+      },
+      {
+        "id": "language-docker-p02",
+        "title": "P02.접속-볼륨-네트워크-compose",
+        "fileName": "P02.접속-볼륨-네트워크-compose.yaml",
+        "sourcePath": "assets/raw/syntax/docker/P02.접속-볼륨-네트워크-compose.yaml",
+        "language": "shell",
+        "parts": [
+          {
+            "id": "language-docker-p02-part-1",
+            "title": "접속[docker exec]",
+            "content": "docker exec -it web bash",
+            "displayContent": "# 접속[docker exec]\n# -it 대화형 터미널\ndocker exec -it web bash"
+          },
+          {
+            "id": "language-docker-p02-part-2",
+            "title": "로그 따라보기[docker logs]",
+            "content": "docker logs -f web",
+            "displayContent": "# 로그 따라보기[docker logs]\ndocker logs -f web"
+          },
+          {
+            "id": "language-docker-p02-part-3",
+            "title": "볼륨 마운트[-v]",
+            "content": "docker run -d -v /data/html:/usr/share/nginx/html --name web nginx",
+            "displayContent": "# 볼륨 마운트[-v]\n# 호스트 경로:컨테이너 경로\ndocker run -d -v /data/html:/usr/share/nginx/html --name web nginx"
+          },
+          {
+            "id": "language-docker-p02-part-4",
+            "title": "볼륨 관리[volume]",
+            "content": "docker volume create app-data\ndocker volume ls",
+            "displayContent": "# 볼륨 관리[volume]\ndocker volume create app-data\ndocker volume ls"
+          },
+          {
+            "id": "language-docker-p02-part-5",
+            "title": "네트워크[network]",
+            "content": "docker network ls\ndocker network create app-net",
+            "displayContent": "# 네트워크[network]\ndocker network ls\ndocker network create app-net"
+          },
+          {
+            "id": "language-docker-p02-part-6",
+            "title": "네트워크 연결[--network]",
+            "content": "docker run -d --network app-net --name web nginx",
+            "displayContent": "# 네트워크 연결[--network]\ndocker run -d --network app-net --name web nginx"
+          },
+          {
+            "id": "language-docker-p02-part-7",
+            "title": "Compose 기동[compose up]",
+            "content": "docker compose up -d",
+            "displayContent": "# Compose 기동[compose up]\ndocker compose up -d"
+          },
+          {
+            "id": "language-docker-p02-part-8",
+            "title": "Compose 종료·로그[compose down logs]",
+            "content": "docker compose down\ndocker compose logs -f",
+            "displayContent": "# Compose 종료·로그[compose down logs]\ndocker compose down\ndocker compose logs -f"
+          },
+          {
+            "id": "language-docker-p02-part-9",
+            "title": "상세 정보[docker inspect]",
+            "content": "docker inspect web",
+            "displayContent": "# 상세 정보[docker inspect]\ndocker inspect web"
+          },
+          {
+            "id": "language-docker-p02-part-10",
+            "title": "자원 사용[docker stats]",
+            "content": "docker stats",
+            "displayContent": "# 자원 사용[docker stats]\ndocker stats"
+          },
+          {
+            "id": "language-docker-p02-part-11",
+            "title": "디스크·정리[system df prune]",
+            "content": "docker system df\ndocker system prune",
+            "displayContent": "# 디스크·정리[system df prune]\ndocker system df\ndocker system prune"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "excel",
+    "label": "Excel",
+    "folderName": "excel",
+    "lessons": [
+      {
+        "id": "language-excel-p01",
+        "title": "P01.조회-조건-함수",
+        "fileName": "P01.조회-조건-함수.yaml",
+        "sourcePath": "assets/raw/syntax/excel/P01.조회-조건-함수.yaml",
+        "language": "shell",
+        "parts": [
+          {
+            "id": "language-excel-p01-part-1",
+            "title": "표로 만들기[Ctrl+T]",
+            "content": "Ctrl+T",
+            "displayContent": "# 표로 만들기[Ctrl+T]\n# 데이터 범위를 선택한 뒤 Ctrl+T → Excel 표[Table]가 된다\n# 표 이름 예: 사원목록 → 구조화 참조[_사원목록[성명]]를 쓸 수 있다\nCtrl+T"
+          },
+          {
+            "id": "language-excel-p01-part-2",
+            "title": "MATCH - 위치 찾기[match]",
+            "content": "=MATCH(B7, A2:A100, 0)",
+            "displayContent": "# MATCH - 위치 찾기[match]\n# =MATCH(찾을값, 찾을범위, 0)\n# 0 = 완전 일치. \"몇 번째 행/열인지\" 숫자를 돌려준다\n=MATCH(B7, A2:A100, 0)"
+          },
+          {
+            "id": "language-excel-p01-part-3",
+            "title": "INDEX - 값 꺼내기[index]",
+            "content": "=INDEX(C2:C100, 3)",
+            "displayContent": "# INDEX - 값 꺼내기[index]\n# =INDEX(꺼낼범위, 행번호, [열번호])\n# 지정한 행·열 위치의 값을 가져온다. 한 열이면 열번호는 생략 가능\n=INDEX(C2:C100, 3)"
+          },
+          {
+            "id": "language-excel-p01-part-4",
+            "title": "INDEX+MATCH 조합[vlookup 대체]",
+            "content": "=INDEX(사원목록[성명], MATCH(B7, 사원목록[사원ID], 0))",
+            "displayContent": "# INDEX+MATCH 조합[vlookup 대체]\n# MATCH로 위치를 찾고, INDEX로 그 위치의 값을 꺼낸다\n# 표 열: 사원목록[사원ID], 사원목록[성명]\n=INDEX(사원목록[성명], MATCH(B7, 사원목록[사원ID], 0))"
+          },
+          {
+            "id": "language-excel-p01-part-5",
+            "title": "COUNTIF - 개수 세기[countif]",
+            "content": "=COUNTIF(D4:F4, \"●\")",
+            "displayContent": "# COUNTIF - 개수 세기[countif]\n# =COUNTIF(범위, 조건)\n# 범위 안에서 조건과 같은 칸이 몇 개인지 센다\n=COUNTIF(D4:F4, \"●\")"
+          },
+          {
+            "id": "language-excel-p01-part-6",
+            "title": "IF+COUNTIF - 하나라도 있으면[if countif]",
+            "content": "=IF(COUNTIF(D4:F4, \"●\") > 0, \"●\", \"\")",
+            "displayContent": "# IF+COUNTIF - 하나라도 있으면[if countif]\n# D4:F4에 ●이 1개 이상이면 ●, 없으면 빈칸\n=IF(COUNTIF(D4:F4, \"●\") > 0, \"●\", \"\")"
+          },
+          {
+            "id": "language-excel-p01-part-7",
+            "title": "IF+COUNTIF 두 기호[● 또는 ※]",
+            "content": "=IF(COUNTIF(D4:F4, \"●\") + COUNTIF(D4:F4, \"※\") > 0, \"●\", \"\")",
+            "displayContent": "# IF+COUNTIF 두 기호[● 또는 ※]\n# ● 또는 ※가 하나라도 있으면 ● 표시\n=IF(COUNTIF(D4:F4, \"●\") + COUNTIF(D4:F4, \"※\") > 0, \"●\", \"\")"
+          },
+          {
+            "id": "language-excel-p01-part-8",
+            "title": "COUNTIF 배열 - 기호 추가 쉽게[array]",
+            "content": "=IF(SUM(COUNTIF(D4:F4, {\"●\", \"※\"})) > 0, \"●\", \"\")",
+            "displayContent": "# COUNTIF 배열 - 기호 추가 쉽게[array]\n# {} 안에 기호만 더하면 유지보수가 쉽다\n=IF(SUM(COUNTIF(D4:F4, {\"●\", \"※\"})) > 0, \"●\", \"\")"
+          }
+        ]
+      },
+      {
+        "id": "language-excel-p02",
+        "title": "P02.조인-조회",
+        "fileName": "P02.조인-조회.yaml",
+        "sourcePath": "assets/raw/syntax/excel/P02.조인-조회.yaml",
+        "language": "shell",
+        "parts": [
+          {
+            "id": "language-excel-p02-part-1",
+            "title": "XLOOKUP - 부서명 붙이기[left join]",
+            "content": "=XLOOKUP(B2, 부서목록[부서ID], 부서목록[부서명], \"\")",
+            "displayContent": "# XLOOKUP - 부서명 붙이기[left join]\n# =XLOOKUP(찾을값, 찾을범위, 반환범위, [없으면값])\n# SQL LEFT JOIN처럼 없으면 빈칸(또는 지정값)\n=XLOOKUP(B2, 부서목록[부서ID], 부서목록[부서명], \"\")"
+          },
+          {
+            "id": "language-excel-p02-part-2",
+            "title": "IFERROR+VLOOKUP[left join]",
+            "content": "=IFERROR(VLOOKUP(B2, 부서목록!A:B, 2, FALSE), \"\")",
+            "displayContent": "# IFERROR+VLOOKUP[left join]\n# VLOOKUP 실패(N/A)를 빈칸으로 — LEFT JOIN과 같은 느낌\n=IFERROR(VLOOKUP(B2, 부서목록!A:B, 2, FALSE), \"\")"
+          },
+          {
+            "id": "language-excel-p02-part-3",
+            "title": "복합키 헬퍼[composite key]",
+            "content": "=A2&B2",
+            "displayContent": "# 복합키 헬퍼[composite key]\n# 두 열을 이어 하나의 키로 만든다 (조회 보조열)\n=A2&B2"
           }
         ]
       }
@@ -770,93 +959,93 @@ export const languageTracks: LanguageTrack[] = [
         "parts": [
           {
             "id": "language-git-temp-part-1",
-            "title": "기본 공식[commit formula]",
-            "content": "git commit -m \"feat: Add pagination (to search results)\"",
-            "displayContent": "# 기본 공식[commit formula] — type: Verb Target (Context)\ngit commit -m \"feat: Add pagination (to search results)\"\n# 결과: 타입 + 동사 + 대상 + 맥락이 한 줄에 드러남"
+            "title": "기본 구조[conventional commits]",
+            "content": "git commit -m \"feat(auth): add oauth login\"",
+            "displayContent": "# 기본 구조[conventional commits]\n# <type>(<scope>): <subject>\n#\n# <body>\n#\n# <footer>\ngit commit -m \"feat(auth): add oauth login\""
           },
           {
             "id": "language-git-temp-part-2",
-            "title": "feat - 기능 추가[Add / Implement]",
-            "content": "git commit -m \"feat: Add login validation logic\"\ngit commit -m \"feat: Implement dark mode toggle\"",
-            "displayContent": "# feat - 기능 추가[Add / Implement]\ngit commit -m \"feat: Add login validation logic\"\ngit commit -m \"feat: Implement dark mode toggle\"\n# Add=추가, Implement=구현"
+            "title": "feat - 새 기능[feat]",
+            "content": "git commit -m \"feat(player): add progress bar to music player\"",
+            "displayContent": "# feat - 새 기능[feat]\ngit commit -m \"feat(player): add progress bar to music player\""
           },
           {
             "id": "language-git-temp-part-3",
-            "title": "feat - 지원·연동[Support / Integrate]",
-            "content": "git commit -m \"feat: Support CSV export for transaction history\"\ngit commit -m \"feat: Integrate Kakao Maps API for store locations\"",
-            "displayContent": "# feat - 지원·연동[Support / Integrate]\ngit commit -m \"feat: Support CSV export for transaction history\"\ngit commit -m \"feat: Integrate Kakao Maps API for store locations\"\n# Support=지원, Integrate=외부 연동"
+            "title": "fix - 버그 수정[fix]",
+            "content": "git commit -m \"fix(api): handle 404 error gracefully\"",
+            "displayContent": "# fix - 버그 수정[fix]\ngit commit -m \"fix(api): handle 404 error gracefully\""
           },
           {
             "id": "language-git-temp-part-4",
-            "title": "feat - 허용·활성화[Allow / Enable]",
-            "content": "git commit -m \"feat: Allow users to upload multiple photos\"\ngit commit -m \"feat: Enable auto-save on post editor\"",
-            "displayContent": "# feat - 허용·활성화[Allow / Enable]\ngit commit -m \"feat: Allow users to upload multiple photos\"\ngit commit -m \"feat: Enable auto-save on post editor\"\n# Allow=사용자 행동 허용, Enable=기능 켜기"
+            "title": "docs - 문서[docs]",
+            "content": "git commit -m \"docs(readme): add setup guide for devs\"",
+            "displayContent": "# docs - 문서[docs]\ngit commit -m \"docs(readme): add setup guide for devs\""
           },
           {
             "id": "language-git-temp-part-5",
-            "title": "fix - 수정·해결[Fix / Resolve]",
-            "content": "git commit -m \"fix: Fix crash on image upload\"\ngit commit -m \"fix: Resolve race condition in login flow\"",
-            "displayContent": "# fix - 수정·해결[Fix / Resolve]\ngit commit -m \"fix: Fix crash on image upload\"\ngit commit -m \"fix: Resolve race condition in login flow\"\n# Fix=단순 수정, Resolve=원인 있는 문제 해결"
+            "title": "style - 포맷만[style]",
+            "content": "git commit -m \"style: apply prettier formatting\"",
+            "displayContent": "# style - 포맷만[style] — 동작 변화 없음\ngit commit -m \"style: apply prettier formatting\""
           },
           {
             "id": "language-git-temp-part-6",
-            "title": "fix - 방지·보장[Prevent / Ensure]",
-            "content": "git commit -m \"fix: Prevent double-click on checkout button\"\ngit commit -m \"fix: Ensure auth token is refreshed before expiry\"",
-            "displayContent": "# fix - 방지·보장[Prevent / Ensure]\ngit commit -m \"fix: Prevent double-click on checkout button\"\ngit commit -m \"fix: Ensure auth token is refreshed before expiry\"\n# Prevent=문제가 안 생기게, Ensure=항상 되도록"
+            "title": "refactor - 구조 개선[refactor]",
+            "content": "git commit -m \"refactor(auth): extract token logic into utils\"",
+            "displayContent": "# refactor - 구조 개선[refactor] — 동작 변화 없음\ngit commit -m \"refactor(auth): extract token logic into utils\""
           },
           {
             "id": "language-git-temp-part-7",
-            "title": "fix - 예외 처리[Handle]",
-            "content": "git commit -m \"fix: Handle network timeout during file upload\"\ngit commit -m \"fix: Handle edge case for empty search results\"",
-            "displayContent": "# fix - 예외 처리[Handle]\ngit commit -m \"fix: Handle network timeout during file upload\"\ngit commit -m \"fix: Handle edge case for empty search results\"\n# Handle=상황·예외를 받아서 처리"
+            "title": "perf - 성능[perf]",
+            "content": "git commit -m \"perf(db): optimize query speed\"",
+            "displayContent": "# perf - 성능[perf]\ngit commit -m \"perf(db): optimize query speed\""
           },
           {
             "id": "language-git-temp-part-8",
-            "title": "refactor - 분리·단순화[Extract / Simplify]",
-            "content": "git commit -m \"refactor: Extract validation logic to a separate helper\"\ngit commit -m \"refactor: Simplify nested ternary operators\"",
-            "displayContent": "# refactor - 분리·단순화[Extract / Simplify]\ngit commit -m \"refactor: Extract validation logic to a separate helper\"\ngit commit -m \"refactor: Simplify nested ternary operators\"\n# Extract=빼내기, Simplify=단순화"
+            "title": "test - 테스트[test]",
+            "content": "git commit -m \"test: add unit tests for utils\"",
+            "displayContent": "# test - 테스트[test]\ngit commit -m \"test: add unit tests for utils\""
           },
           {
             "id": "language-git-temp-part-9",
-            "title": "refactor - 교체·이름 변경[Replace / Rename]",
-            "content": "git commit -m \"refactor: Replace hardcoded strings with constants\"\ngit commit -m \"refactor: Rename confusing variables in payment service\"",
-            "displayContent": "# refactor - 교체·이름 변경[Replace / Rename]\ngit commit -m \"refactor: Replace hardcoded strings with constants\"\ngit commit -m \"refactor: Rename confusing variables in payment service\"\n# Replace=다른 것으로 교체, Rename=이름 변경"
+            "title": "chore - 잡무[chore]",
+            "content": "git commit -m \"chore(deps): bump react to v18.2.0\"",
+            "displayContent": "# chore - 잡무[chore] — 빌드·설정·의존성\ngit commit -m \"chore(deps): bump react to v18.2.0\""
           },
           {
             "id": "language-git-temp-part-10",
-            "title": "refactor - 이전·최적화[Migrate / Optimize]",
-            "content": "git commit -m \"refactor: Migrate from class components to functional\"\ngit commit -m \"refactor: Optimize heavy loop performance\"",
-            "displayContent": "# refactor - 이전·최적화[Migrate / Optimize]\ngit commit -m \"refactor: Migrate from class components to functional\"\ngit commit -m \"refactor: Optimize heavy loop performance\"\n# Migrate=구조 이전, Optimize=성능 개선"
+            "title": "build - 빌드[build]",
+            "content": "git commit -m \"build: update vite build script\"",
+            "displayContent": "# build - 빌드[build]\ngit commit -m \"build: update vite build script\""
           },
           {
             "id": "language-git-temp-part-11",
-            "title": "chore - 버전·설정[Bump / Configure]",
-            "content": "git commit -m \"chore: Bump Next.js version to 15.x\"\ngit commit -m \"chore: Configure CORS policy for development\"\ngit commit -m \"chore: Set up ESLint and Husky\"",
-            "displayContent": "# chore - 버전·설정[Bump / Configure]\ngit commit -m \"chore: Bump Next.js version to 15.x\"\ngit commit -m \"chore: Configure CORS policy for development\"\ngit commit -m \"chore: Set up ESLint and Husky\"\n# Bump=버전 올림, Configure=설정, Set up=구성"
+            "title": "ci - CI/CD[ci]",
+            "content": "git commit -m \"ci: add build cache to github actions\"",
+            "displayContent": "# ci - CI/CD[ci]\ngit commit -m \"ci: add build cache to github actions\""
           },
           {
             "id": "language-git-temp-part-12",
-            "title": "style - 정리·포맷[Clean up / Format]",
-            "content": "git commit -m \"style: Clean up console logs and commented-out code\"\ngit commit -m \"style: Format code with Prettier\"",
-            "displayContent": "# style - 정리·포맷[Clean up / Format]\ngit commit -m \"style: Clean up console logs and commented-out code\"\ngit commit -m \"style: Format code with Prettier\"\n# 동작 변화 없는 코드 정리"
+            "title": "revert - 되돌림[revert]",
+            "content": "git commit -m \"revert: revert \\\"feat: dark mode support\\\"\"",
+            "displayContent": "# revert - 되돌림[revert]\ngit commit -m \"revert: revert \\\"feat: dark mode support\\\"\""
           },
           {
             "id": "language-git-temp-part-13",
-            "title": "test - 테스트[Add / Increase]",
-            "content": "git commit -m \"test: Add unit tests for password encryption\"\ngit commit -m \"test: Increase test coverage for billing logic\"",
-            "displayContent": "# test - 테스트[Add / Increase]\ngit commit -m \"test: Add unit tests for password encryption\"\ngit commit -m \"test: Increase test coverage for billing logic\""
+            "title": "body로 이유 적기[commit body]",
+            "content": "git commit -m \"$(cat <<'EOF'\nfix(api): handle null user response\n\nUpstream sometimes returns null user; guard before access.\nEOF\n)\"",
+            "displayContent": "# body로 이유 적기[commit body]\n# subject는 무엇을, body는 왜를 적는다\ngit commit -m \"$(cat <<'EOF'\nfix(api): handle null user response\n\nUpstream sometimes returns null user; guard before access.\nEOF\n)\""
           },
           {
             "id": "language-git-temp-part-14",
-            "title": "docs - 문서[Update / Clarify]",
-            "content": "git commit -m \"docs: Update README.md with API guide\"\ngit commit -m \"docs: Clarify usage of auth parameters\"",
-            "displayContent": "# docs - 문서[Update / Clarify]\ngit commit -m \"docs: Update README.md with API guide\"\ngit commit -m \"docs: Clarify usage of auth parameters\"\n# Update=갱신, Clarify=설명 보강"
+            "title": "footer로 이슈 연결[closes]",
+            "content": "git commit -m \"$(cat <<'EOF'\nfeat(auth): add oauth login\n\nCloses #123\nEOF\n)\"",
+            "displayContent": "# footer로 이슈 연결[closes]\ngit commit -m \"$(cat <<'EOF'\nfeat(auth): add oauth login\n\nCloses #123\nEOF\n)\""
           },
           {
             "id": "language-git-temp-part-15",
-            "title": "상황별 동사 정리[verb by situation]",
-            "content": "git commit -m \"feat: Improve search relevance\"\ngit commit -m \"chore: Remove unused imports\"\ngit commit -m \"feat: Complete user profile page\"\ngit commit -m \"chore: Adjust cache TTL to 60s\"",
-            "displayContent": "# 상황별 동사 정리[verb by situation]\ngit commit -m \"feat: Improve search relevance\"      # 더 좋게\ngit commit -m \"chore: Remove unused imports\"        # 없앰\ngit commit -m \"feat: Complete user profile page\"    # 부족한 부분 채움\ngit commit -m \"chore: Adjust cache TTL to 60s\"      # 설정 변경"
+            "title": "커밋 템플릿 설정[commit.template]",
+            "content": "git config --global commit.template ~/.gitmessage.txt",
+            "displayContent": "# 커밋 템플릿 설정[commit.template]\n# .gitmessage.txt를 기본 메시지로 쓴다\ngit config --global commit.template ~/.gitmessage.txt"
           }
         ]
       },
@@ -940,6 +1129,75 @@ export const languageTracks: LanguageTrack[] = [
             "displayContent": "# 커밋 스코프 예시[commit scope]\n# type(scope): subject 형태로 변경 범위를 명시한다\ngit commit -m \"fix(typo): enought -> enough\"\ngit commit -m \"docs(readme): added demo image\"\ngit commit -m \"feat(i18n): add Indonesian translations\"\ngit commit -m \"chore(deps): update dependency typescript to v5.8.2\"\n# 결과: 스코프로 변경 위치가 한눈에 드러나는 커밋 이력"
           }
         ]
+      },
+      {
+        "id": "language-git-p05",
+        "title": "P05.실무-시나리오",
+        "fileName": "P05.실무-시나리오.yaml",
+        "sourcePath": "assets/raw/syntax/git/P05.실무-시나리오.yaml",
+        "language": "shell",
+        "parts": [
+          {
+            "id": "language-git-p05-part-1",
+            "title": "페치로 최신 맞추기[fetch]",
+            "content": "git fetch origin\ngit log --oneline HEAD..origin/main",
+            "displayContent": "# 페치로 최신 맞추기[fetch]\n# 원격 이력만 가져오고 작업 트리는 건드리지 않는다\ngit fetch origin\ngit log --oneline HEAD..origin/main"
+          },
+          {
+            "id": "language-git-p05-part-2",
+            "title": "브랜치 만들고 main에 머지[branch + merge]",
+            "content": "git switch main\ngit pull origin main\ngit switch -c feature/login\ngit switch main\ngit merge feature/login\ngit push origin main",
+            "displayContent": "# 브랜치 만들고 main에 머지[branch + merge]\ngit switch main\ngit pull origin main\ngit switch -c feature/login\n# ... 작업 후 ...\ngit switch main\ngit merge feature/login\ngit push origin main"
+          },
+          {
+            "id": "language-git-p05-part-3",
+            "title": "체리픽[cherry-pick]",
+            "content": "git switch main\ngit cherry-pick abc1234\ngit push origin main",
+            "displayContent": "# 체리픽[cherry-pick]\n# 다른 브랜치의 커밋 하나만 현재 브랜치로 가져온다\ngit switch main\ngit cherry-pick abc1234\ngit push origin main"
+          },
+          {
+            "id": "language-git-p05-part-4",
+            "title": "리버트[revert]",
+            "content": "git revert abc1234\ngit push origin main",
+            "displayContent": "# 리버트[revert]\n# 이미 공유된 커밋은 reset 대신 되돌리는 새 커밋을 만든다\ngit revert abc1234\ngit push origin main"
+          },
+          {
+            "id": "language-git-p05-part-5",
+            "title": "브랜치 삭제[delete branch]",
+            "content": "git switch main\ngit branch -d feature/login\ngit push origin -d feature/login",
+            "displayContent": "# 브랜치 삭제[delete branch]\ngit switch main\ngit branch -d feature/login\ngit push origin -d feature/login"
+          },
+          {
+            "id": "language-git-p05-part-6",
+            "title": "커밋 스쿼시[squash]",
+            "content": "git reset --soft HEAD~3\ngit commit -m \"feat(auth): add oauth login\"\ngit push --force-with-lease origin feature/login",
+            "displayContent": "# 커밋 스쿼시[squash]\n# 최근 커밋 3개를 스테이징에 풀어 한 커밋으로 다시 묶는다\ngit reset --soft HEAD~3\ngit commit -m \"feat(auth): add oauth login\"\ngit push --force-with-lease origin feature/login"
+          },
+          {
+            "id": "language-git-p05-part-7",
+            "title": "원격 삭제 브랜치 프룬[prune]",
+            "content": "git fetch --prune origin\ngit remote prune origin",
+            "displayContent": "# 원격 삭제 브랜치 프룬[prune]\n# 원격에서 지워진 origin/* 추적 브랜치를 로컬에서 정리한다\ngit fetch --prune origin\ngit remote prune origin"
+          },
+          {
+            "id": "language-git-p05-part-8",
+            "title": "커밋 후 푸시[commit + push]",
+            "content": "git status\ngit add .\ngit commit -m \"fix(api): handle null response\"\ngit push -u origin HEAD",
+            "displayContent": "# 커밋 후 푸시[commit + push]\ngit status\ngit add .\ngit commit -m \"fix(api): handle null response\"\ngit push -u origin HEAD"
+          },
+          {
+            "id": "language-git-p05-part-9",
+            "title": "원격 확인[remote -v / show]",
+            "content": "git remote -v\ngit remote show origin",
+            "displayContent": "# 원격 확인[remote -v / show]\ngit remote -v\ngit remote show origin"
+          },
+          {
+            "id": "language-git-p05-part-10",
+            "title": "오리진 URL 변경[remote set-url]",
+            "content": "git remote -v\ngit remote set-url origin https://github.com/user/repo.git\ngit remote -v\ngit push -u origin main",
+            "displayContent": "# 오리진 URL 변경[remote set-url]\ngit remote -v\ngit remote set-url origin https://github.com/user/repo.git\ngit remote -v\ngit push -u origin main"
+          }
+        ]
       }
     ]
   },
@@ -957,81 +1215,99 @@ export const languageTracks: LanguageTrack[] = [
         "parts": [
           {
             "id": "language-go-p01-part-1",
-            "title": "패키지와 임포트[package / import]",
-            "content": "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n)",
-            "displayContent": "// 패키지와 임포트[package / import]\npackage main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n)"
+            "title": "변수 선언[:= / var]",
+            "content": "userName := \"kim\"\nvar userAge int = 30\nfmt.Println(userName, userAge)",
+            "displayContent": "// 변수 선언[:= / var]\n// := 는 함수 안에서 타입 추론으로 선언한다\nuserName := \"kim\"\nvar userAge int = 30\nfmt.Println(userName, userAge)\n// 결과: kim 30"
           },
           {
             "id": "language-go-p01-part-2",
-            "title": "구조체 정의[struct]",
-            "content": "type User struct {\n\tName  string\n\tAge   int\n\tAdmin bool\n}",
-            "displayContent": "// 구조체 정의[struct]\ntype User struct {\n\tName  string\n\tAge   int\n\tAdmin bool\n}"
-          },
-          {
-            "id": "language-go-p01-part-2b",
-            "title": "함수 정의[function]",
-            "content": "func add(numA int, numB int) int {\n\treturn numA + numB\n}",
-            "displayContent": "// 함수 정의[function] - 매개변수와 반환 타입을 뒤에 쓴다\nfunc add(numA int, numB int) int {\n\treturn numA + numB\n}"
-          },
-          {
-            "id": "language-go-p01-part-2c",
-            "title": "에러 반환[error return]",
-            "content": "func divide(numA int, numB int) (int, error) {\n\tif numB == 0 {\n\t\treturn 0, fmt.Errorf(\"0으로 나눌 수 없음\")\n\t}\n\treturn numA / numB, nil\n}",
-            "displayContent": "// 에러 반환[error return] - (값, error) 복수 반환이 Go 관례\nfunc divide(numA int, numB int) (int, error) {\n\tif numB == 0 {\n\t\treturn 0, fmt.Errorf(\"0으로 나눌 수 없음\")\n\t}\n\treturn numA / numB, nil\n}"
+            "title": "기본 타입[int float64 string bool]",
+            "content": "var count int = 3\nvar ratio float64 = 1.5\nvar label string = \"go\"\nvar ok bool = true\nfmt.Println(count, ratio, label, ok)",
+            "displayContent": "// 기본 타입[int float64 string bool]\nvar count int = 3\nvar ratio float64 = 1.5\nvar label string = \"go\"\nvar ok bool = true\nfmt.Println(count, ratio, label, ok)\n// 결과: 3 1.5 go true"
           },
           {
             "id": "language-go-p01-part-3",
-            "title": "변수 선언[variable declaration]",
-            "content": "\tvar userName string = \"kim\"\n\tuserAge := 30\n\tconst serviceName = \"gmtl\"\n\tfmt.Println(userName, userAge, serviceName)",
-            "displayContent": "\t// 변수 선언[variable declaration]\n\tvar userName string = \"kim\"\n\tuserAge := 30\n\tconst serviceName = \"gmtl\"\n\tfmt.Println(userName, userAge, serviceName)\n\t// 결과: kim 30 gmtl"
+            "title": "상수[const]",
+            "content": "const serviceName = \"gmtl\"\nconst maxRetry = 3\nfmt.Println(serviceName, maxRetry)",
+            "displayContent": "// 상수[const]\nconst serviceName = \"gmtl\"\nconst maxRetry = 3\nfmt.Println(serviceName, maxRetry)\n// 결과: gmtl 3"
           },
           {
             "id": "language-go-p01-part-4",
-            "title": "조건문[condition]",
-            "content": "\tif userAge >= 20 {\n\t\tfmt.Println(\"adult\")\n\t} else {\n\t\tfmt.Println(\"minor\")\n\t}",
-            "displayContent": "\t// 조건문[condition]\n\tif userAge >= 20 {\n\t\tfmt.Println(\"adult\")\n\t} else {\n\t\tfmt.Println(\"minor\")\n\t}\n\t// 결과: adult"
+            "title": "이오타[iota]",
+            "content": "const (\n\tStatusReady = iota\n\tStatusRunning\n\tStatusDone\n)\nfmt.Println(StatusReady, StatusRunning, StatusDone)",
+            "displayContent": "// 이오타[iota] — const 블록에서 0부터 자동 증가\nconst (\n\tStatusReady = iota\n\tStatusRunning\n\tStatusDone\n)\nfmt.Println(StatusReady, StatusRunning, StatusDone)\n// 결과: 0 1 2"
           },
           {
             "id": "language-go-p01-part-5",
-            "title": "반복문[loop]",
-            "content": "\tscoreList := []int{10, 20, 30}\n\tfor index, score := range scoreList {\n\t\tfmt.Println(index, score)\n\t}",
-            "displayContent": "\t// 반복문[loop]\n\tscoreList := []int{10, 20, 30}\n\tfor index, score := range scoreList {\n\t\tfmt.Println(index, score)\n\t}\n\t// 결과:\n\t// 0 10\n\t// 1 20\n\t// 2 30"
+            "title": "조건문[if / else]",
+            "content": "userAge := 30\nif userAge >= 20 {\n\tfmt.Println(\"adult\")\n} else {\n\tfmt.Println(\"minor\")\n}",
+            "displayContent": "// 조건문[if / else]\nuserAge := 30\nif userAge >= 20 {\n\tfmt.Println(\"adult\")\n} else {\n\tfmt.Println(\"minor\")\n}\n// 결과: adult"
           },
           {
             "id": "language-go-p01-part-6",
-            "title": "맵[map]",
-            "content": "\tuserMap := map[string]string{\n\t\t\"name\": \"lee\",\n\t\t\"role\": \"admin\",\n\t}\n\tfmt.Println(userMap[\"name\"])",
-            "displayContent": "\t// 맵[map]\n\tuserMap := map[string]string{\n\t\t\"name\": \"lee\",\n\t\t\"role\": \"admin\",\n\t}\n\tfmt.Println(userMap[\"name\"])\n\t// 결과: lee"
+            "title": "반복문[for]",
+            "content": "count := 0\nfor count < 3 {\n\tcount++\n}\nfmt.Println(count)",
+            "displayContent": "// 반복문[for] — Go에는 while이 없고 for만 쓴다\ncount := 0\nfor count < 3 {\n\tcount++\n}\nfmt.Println(count)\n// 결과: 3"
           },
           {
             "id": "language-go-p01-part-7",
-            "title": "구조체[struct]",
-            "content": "\tuserItem := User{Name: \"park\", Age: 25, Admin: true}\n\tfmt.Println(userItem.Name, userItem.Admin)",
-            "displayContent": "\t// 구조체[struct]\n\tuserItem := User{Name: \"park\", Age: 25, Admin: true}\n\tfmt.Println(userItem.Name, userItem.Admin)\n\t// 결과: park true"
+            "title": "범위 순회[for range]",
+            "content": "scoreList := []int{10, 20, 30}\nfor index, score := range scoreList {\n\tfmt.Println(index, score)\n}",
+            "displayContent": "// 범위 순회[for range]\nscoreList := []int{10, 20, 30}\nfor index, score := range scoreList {\n\tfmt.Println(index, score)\n}\n// 결과: 0 10 / 1 20 / 2 30"
           },
           {
             "id": "language-go-p01-part-8",
-            "title": "함수[function]",
-            "content": "\tsumValue := add(3, 4)\n\tfmt.Println(sumValue)",
-            "displayContent": "\t// 함수[function]\n\tsumValue := add(3, 4)\n\tfmt.Println(sumValue)\n\t// 결과: 7"
+            "title": "분기[switch]",
+            "content": "role := \"admin\"\nswitch role {\ncase \"admin\":\n\tfmt.Println(\"full\")\ncase \"member\":\n\tfmt.Println(\"read\")\ndefault:\n\tfmt.Println(\"none\")\n}",
+            "displayContent": "// 분기[switch]\nrole := \"admin\"\nswitch role {\ncase \"admin\":\n\tfmt.Println(\"full\")\ncase \"member\":\n\tfmt.Println(\"read\")\ndefault:\n\tfmt.Println(\"none\")\n}\n// 결과: full"
           },
           {
             "id": "language-go-p01-part-9",
-            "title": "다중 반환값[multiple return values] + 에러 처리[error handling]",
-            "content": "\tquotientValue, err := divide(10, 2)\n\tif err != nil {\n\t\tfmt.Println(err)\n\t\treturn\n\t}\n\tfmt.Println(quotientValue)",
-            "displayContent": "\t// 다중 반환값[multiple return values] + 에러 처리[error handling]\n\tquotientValue, err := divide(10, 2)\n\tif err != nil {\n\t\tfmt.Println(err)\n\t\treturn\n\t}\n\tfmt.Println(quotientValue)\n\t// 결과: 5"
+            "title": "함수[func]",
+            "content": "func add(numA int, numB int) int {\n\treturn numA + numB\n}\n\nfmt.Println(add(3, 4))",
+            "displayContent": "// 함수[func] — 매개변수·반환 타입을 이름 뒤에 쓴다\nfunc add(numA int, numB int) int {\n\treturn numA + numB\n}\n\nfmt.Println(add(3, 4))\n// 결과: 7"
           },
           {
             "id": "language-go-p01-part-10",
-            "title": "문자열 처리[string handling]",
-            "content": "\ttagText := \"go,api,server\"\n\ttagList := strings.Split(tagText, \",\")\n\tfmt.Println(tagList)",
-            "displayContent": "\t// 문자열 처리[string handling]\n\ttagText := \"go,api,server\"\n\ttagList := strings.Split(tagText, \",\")\n\tfmt.Println(tagList)\n\t// 결과: [go api server]"
+            "title": "다중 반환[multiple return]",
+            "content": "func divide(numA int, numB int) (int, bool) {\n\tif numB == 0 {\n\t\treturn 0, false\n\t}\n\treturn numA / numB, true\n}\n\nquotient, ok := divide(10, 2)\nfmt.Println(quotient, ok)",
+            "displayContent": "// 다중 반환[multiple return]\nfunc divide(numA int, numB int) (int, bool) {\n\tif numB == 0 {\n\t\treturn 0, false\n\t}\n\treturn numA / numB, true\n}\n\nquotient, ok := divide(10, 2)\nfmt.Println(quotient, ok)\n// 결과: 5 true"
           },
           {
             "id": "language-go-p01-part-11",
-            "title": "포인터[pointer]",
-            "content": "\tcountValue := 1\n\tcountPtr := &countValue\n\t*countPtr = 2\n\tfmt.Println(countValue)\n}",
-            "displayContent": "\t// 포인터[pointer]\n\tcountValue := 1\n\tcountPtr := &countValue\n\t*countPtr = 2\n\tfmt.Println(countValue)\n\t// 결과: 2\n}"
+            "title": "이름 있는 반환[named return]",
+            "content": "func sumPair(numA int, numB int) (sum int) {\n\tsum = numA + numB\n\treturn\n}\n\nfmt.Println(sumPair(2, 3))",
+            "displayContent": "// 이름 있는 반환[named return]\nfunc sumPair(numA int, numB int) (sum int) {\n\tsum = numA + numB\n\treturn\n}\n\nfmt.Println(sumPair(2, 3))\n// 결과: 5"
+          },
+          {
+            "id": "language-go-p01-part-12",
+            "title": "가변 인자[variadic ...]",
+            "content": "func total(nums ...int) int {\n\tsum := 0\n\tfor _, n := range nums {\n\t\tsum += n\n\t}\n\treturn sum\n}\n\nfmt.Println(total(1, 2, 3))",
+            "displayContent": "// 가변 인자[variadic ...]\nfunc total(nums ...int) int {\n\tsum := 0\n\tfor _, n := range nums {\n\t\tsum += n\n\t}\n\treturn sum\n}\n\nfmt.Println(total(1, 2, 3))\n// 결과: 6"
+          },
+          {
+            "id": "language-go-p01-part-13",
+            "title": "슬라이스[slice]",
+            "content": "skills := []string{\"go\", \"sql\"}\nfmt.Println(skills[0], len(skills))",
+            "displayContent": "// 슬라이스[slice]\nskills := []string{\"go\", \"sql\"}\nfmt.Println(skills[0], len(skills))\n// 결과: go 2"
+          },
+          {
+            "id": "language-go-p01-part-14",
+            "title": "슬라이스 추가[append]",
+            "content": "valueList := []int{1, 2}\nvalueList = append(valueList, 3, 4)\nfmt.Println(valueList)",
+            "displayContent": "// 슬라이스 추가[append]\nvalueList := []int{1, 2}\nvalueList = append(valueList, 3, 4)\nfmt.Println(valueList)\n// 결과: [1 2 3 4]"
+          },
+          {
+            "id": "language-go-p01-part-15",
+            "title": "맵[map]",
+            "content": "userMap := map[string]string{\n\t\"name\": \"lee\",\n\t\"role\": \"admin\",\n}\nfmt.Println(userMap[\"name\"])",
+            "displayContent": "// 맵[map]\nuserMap := map[string]string{\n\t\"name\": \"lee\",\n\t\"role\": \"admin\",\n}\nfmt.Println(userMap[\"name\"])\n// 결과: lee"
+          },
+          {
+            "id": "language-go-p01-part-16",
+            "title": "맵 존재 확인[comma ok]",
+            "content": "roleMap := map[string]string{\"kim\": \"admin\"}\nroleValue, ok := roleMap[\"kim\"]\nfmt.Println(roleValue, ok)",
+            "displayContent": "// 맵 존재 확인[comma ok]\nroleMap := map[string]string{\"kim\": \"admin\"}\nroleValue, ok := roleMap[\"kim\"]\nfmt.Println(roleValue, ok)\n// 결과: admin true"
           }
         ]
       },
@@ -1044,51 +1320,87 @@ export const languageTracks: LanguageTrack[] = [
         "parts": [
           {
             "id": "language-go-p02-part-1",
-            "title": "패키지와 임포트[package / import]",
-            "content": "package main\n\nimport (\n\t\"encoding/json\"\n\t\"fmt\"\n)",
-            "displayContent": "// 패키지와 임포트[package / import]\npackage main\n\nimport (\n\t\"encoding/json\"\n\t\"fmt\"\n)"
+            "title": "구조체[struct]",
+            "content": "type User struct {\n\tName  string\n\tAge   int\n\tAdmin bool\n}\n\nuserItem := User{Name: \"park\", Age: 25, Admin: true}\nfmt.Println(userItem.Name, userItem.Admin)",
+            "displayContent": "// 구조체[struct]\ntype User struct {\n\tName  string\n\tAge   int\n\tAdmin bool\n}\n\nuserItem := User{Name: \"park\", Age: 25, Admin: true}\nfmt.Println(userItem.Name, userItem.Admin)\n// 결과: park true"
           },
           {
             "id": "language-go-p02-part-2",
-            "title": "JSON 태그 구조체[struct tag]",
-            "content": "type Product struct {\n\tName  string `json:\"name\"`\n\tPrice int    `json:\"price\"`\n}",
-            "displayContent": "// JSON 태그 구조체[struct tag] - 직렬화 필드명 지정\ntype Product struct {\n\tName  string `json:\"name\"`\n\tPrice int    `json:\"price\"`\n}"
-          },
-          {
-            "id": "language-go-p02-part-2b",
-            "title": "슬라이스 변환 함수[slice transform]",
-            "content": "func makeDoubles(input []int) []int {\n\tresult := make([]int, 0, len(input))\n\tfor _, item := range input {\n\t\tresult = append(result, item*2)\n\t}\n\treturn result\n}",
-            "displayContent": "// 슬라이스 변환 함수[slice transform] - make로 용량 미리 확보\nfunc makeDoubles(input []int) []int {\n\tresult := make([]int, 0, len(input))\n\tfor _, item := range input {\n\t\tresult = append(result, item*2)\n\t}\n\treturn result\n}"
+            "title": "메서드[pointer receiver]",
+            "content": "type Counter struct {\n\tValue int\n}\n\nfunc (c *Counter) Inc() {\n\tc.Value++\n}\n\ncounter := &Counter{Value: 1}\ncounter.Inc()\nfmt.Println(counter.Value)",
+            "displayContent": "// 메서드[pointer receiver] — 필드를 바꿀 때 포인터 리시버가 흔하다\ntype Counter struct {\n\tValue int\n}\n\nfunc (c *Counter) Inc() {\n\tc.Value++\n}\n\ncounter := &Counter{Value: 1}\ncounter.Inc()\nfmt.Println(counter.Value)\n// 결과: 2"
           },
           {
             "id": "language-go-p02-part-3",
-            "title": "슬라이스 추가[append]",
-            "content": "\tvalueList := []int{1, 2}\n\tvalueList = append(valueList, 3, 4)\n\tfmt.Println(valueList)",
-            "displayContent": "\t// 슬라이스 추가[append]\n\tvalueList := []int{1, 2}\n\tvalueList = append(valueList, 3, 4)\n\tfmt.Println(valueList)\n\t// 결과: [1 2 3 4]"
+            "title": "에러 생성[errors.New / fmt.Errorf]",
+            "content": "import (\n\t\"errors\"\n\t\"fmt\"\n)\n\nerrA := errors.New(\"not found\")\nerrB := fmt.Errorf(\"user %d missing\", 7)\nfmt.Println(errA, errB)",
+            "displayContent": "// 에러 생성[errors.New / fmt.Errorf]\nimport (\n\t\"errors\"\n\t\"fmt\"\n)\n\nerrA := errors.New(\"not found\")\nerrB := fmt.Errorf(\"user %d missing\", 7)\nfmt.Println(errA, errB)\n// 결과: not found user 7 missing"
           },
           {
             "id": "language-go-p02-part-4",
-            "title": "맵 존재 확인[comma ok]",
-            "content": "\troleMap := map[string]string{\"kim\": \"admin\"}\n\troleValue, ok := roleMap[\"kim\"]\n\tfmt.Println(roleValue, ok)",
-            "displayContent": "\t// 맵 존재 확인[comma ok]\n\troleMap := map[string]string{\"kim\": \"admin\"}\n\troleValue, ok := roleMap[\"kim\"]\n\tfmt.Println(roleValue, ok)\n\t// 결과: admin true"
+            "title": "에러 반환[error return]",
+            "content": "func divide(numA int, numB int) (int, error) {\n\tif numB == 0 {\n\t\treturn 0, fmt.Errorf(\"0으로 나눌 수 없음\")\n\t}\n\treturn numA / numB, nil\n}\n\nquotient, err := divide(10, 2)\nfmt.Println(quotient, err)",
+            "displayContent": "// 에러 반환[error return] — (값, error) 가 Go 관례\nfunc divide(numA int, numB int) (int, error) {\n\tif numB == 0 {\n\t\treturn 0, fmt.Errorf(\"0으로 나눌 수 없음\")\n\t}\n\treturn numA / numB, nil\n}\n\nquotient, err := divide(10, 2)\nfmt.Println(quotient, err)\n// 결과: 5 <nil>"
           },
           {
             "id": "language-go-p02-part-5",
-            "title": "구조체 + JSON",
-            "content": "\tproductItem := Product{Name: \"keyboard\", Price: 50000}\n\tjsonBytes, _ := json.Marshal(productItem)\n\tfmt.Println(string(jsonBytes))",
-            "displayContent": "\t// 구조체 + JSON\n\tproductItem := Product{Name: \"keyboard\", Price: 50000}\n\tjsonBytes, _ := json.Marshal(productItem)\n\tfmt.Println(string(jsonBytes))\n\t// 결과: {\"name\":\"keyboard\",\"price\":50000}"
+            "title": "에러 검사[if err != nil]",
+            "content": "err := fmt.Errorf(\"0으로 나눌 수 없음\")\nif err != nil {\n\tfmt.Println(err)\n\treturn\n}",
+            "displayContent": "// 에러 검사[if err != nil]\nerr := fmt.Errorf(\"0으로 나눌 수 없음\")\nif err != nil {\n\tfmt.Println(err)\n\treturn\n}\n// 결과: 0으로 나눌 수 없음"
           },
           {
             "id": "language-go-p02-part-6",
-            "title": "인터페이스 대신 에러 우선 처리[error first]",
-            "content": "\t_, err := json.Marshal(make(chan int))\n\tif err != nil {\n\t\tfmt.Println(\"marshal error\")\n\t}",
-            "displayContent": "\t// 인터페이스 대신 에러 우선 처리[error first]\n\t_, err := json.Marshal(make(chan int))\n\tif err != nil {\n\t\tfmt.Println(\"marshal error\")\n\t}\n\t// 결과: marshal error"
+            "title": "포인터[pointer & *]",
+            "content": "countValue := 1\ncountPtr := &countValue\n*countPtr = 2\nfmt.Println(countValue)",
+            "displayContent": "// 포인터[pointer & *] — 주소로 값을 공유·변경한다\ncountValue := 1\ncountPtr := &countValue\n*countPtr = 2\nfmt.Println(countValue)\n// 결과: 2"
           },
           {
             "id": "language-go-p02-part-7",
-            "title": "슬라이스 변환 패턴[transform pattern]",
-            "content": "\tdoubleList := makeDoubles([]int{1, 2, 3})\n\tfmt.Println(doubleList)\n}",
-            "displayContent": "\t// 슬라이스 변환 패턴[transform pattern]\n\tdoubleList := makeDoubles([]int{1, 2, 3})\n\tfmt.Println(doubleList)\n\t// 결과: [2 4 6]\n}"
+            "title": "구조체 포인터[struct pointer]",
+            "content": "type User struct {\n\tName string\n}\n\nuserItem := &User{Name: \"kim\"}\nuserItem.Name = \"lee\"\nfmt.Println(userItem.Name)",
+            "displayContent": "// 구조체 포인터[struct pointer]\ntype User struct {\n\tName string\n}\n\nuserItem := &User{Name: \"kim\"}\nuserItem.Name = \"lee\"\nfmt.Println(userItem.Name)\n// 결과: lee"
+          },
+          {
+            "id": "language-go-p02-part-8",
+            "title": "인터페이스[interface / Stringer]",
+            "content": "type Labeler interface {\n\tLabel() string\n}\n\ntype Product struct {\n\tName string\n}\n\nfunc (p Product) Label() string {\n\treturn p.Name\n}\n\nvar item Labeler = Product{Name: \"keyboard\"}\nfmt.Println(item.Label())",
+            "displayContent": "// 인터페이스[interface / Stringer] — 메서드 집합만 맞으면 구현\ntype Labeler interface {\n\tLabel() string\n}\n\ntype Product struct {\n\tName string\n}\n\nfunc (p Product) Label() string {\n\treturn p.Name\n}\n\nvar item Labeler = Product{Name: \"keyboard\"}\nfmt.Println(item.Label())\n// 결과: keyboard"
+          },
+          {
+            "id": "language-go-p02-part-9",
+            "title": "고루틴[go func]",
+            "content": "done := make(chan bool)\ngo func() {\n\tfmt.Println(\"worker\")\n\tdone <- true\n}()\n<-done",
+            "displayContent": "// 고루틴[go func] — 가벼운 동시 실행\ndone := make(chan bool)\ngo func() {\n\tfmt.Println(\"worker\")\n\tdone <- true\n}()\n<-done\n// 결과: worker"
+          },
+          {
+            "id": "language-go-p02-part-10",
+            "title": "채널[chan]",
+            "content": "messages := make(chan string, 1)\nmessages <- \"ping\"\nfmt.Println(<-messages)",
+            "displayContent": "// 채널[chan]\nmessages := make(chan string, 1)\nmessages <- \"ping\"\nfmt.Println(<-messages)\n// 결과: ping"
+          },
+          {
+            "id": "language-go-p02-part-11",
+            "title": "셀렉트[select]",
+            "content": "chA := make(chan string, 1)\nchA <- \"a\"\nselect {\ncase msg := <-chA:\n\tfmt.Println(msg)\ndefault:\n\tfmt.Println(\"none\")\n}",
+            "displayContent": "// 셀렉트[select] — 준비된 채널 하나와 통신한다\nchA := make(chan string, 1)\nchA <- \"a\"\nselect {\ncase msg := <-chA:\n\tfmt.Println(msg)\ndefault:\n\tfmt.Println(\"none\")\n}\n// 결과: a"
+          },
+          {
+            "id": "language-go-p02-part-12",
+            "title": "문자열 처리[strings]",
+            "content": "import (\n\t\"fmt\"\n\t\"strings\"\n)\n\ntagText := \"go,api,server\"\ntagList := strings.Split(tagText, \",\")\nfmt.Println(tagList)",
+            "displayContent": "// 문자열 처리[strings]\nimport (\n\t\"fmt\"\n\t\"strings\"\n)\n\ntagText := \"go,api,server\"\ntagList := strings.Split(tagText, \",\")\nfmt.Println(tagList)\n// 결과: [go api server]"
+          },
+          {
+            "id": "language-go-p02-part-13",
+            "title": "시간[time]",
+            "content": "import (\n\t\"fmt\"\n\t\"time\"\n)\n\nnow := time.Now()\nfmt.Println(now.Format(\"2006-01-02\"))",
+            "displayContent": "// 시간[time]\nimport (\n\t\"fmt\"\n\t\"time\"\n)\n\nnow := time.Now()\nfmt.Println(now.Format(\"2006-01-02\"))"
+          },
+          {
+            "id": "language-go-p02-part-14",
+            "title": "HTTP 서버[net/http]",
+            "content": "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n)\n\nfunc main() {\n\thttp.HandleFunc(\"/\", func(w http.ResponseWriter, r *http.Request) {\n\t\tfmt.Fprint(w, \"Hello\")\n\t})\n\thttp.ListenAndServe(\":8080\", nil)\n}",
+            "displayContent": "// HTTP 서버[net/http] — Hello 응답 최소 예\npackage main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n)\n\nfunc main() {\n\thttp.HandleFunc(\"/\", func(w http.ResponseWriter, r *http.Request) {\n\t\tfmt.Fprint(w, \"Hello\")\n\t})\n\thttp.ListenAndServe(\":8080\", nil)\n}"
           }
         ]
       }
@@ -1108,57 +1420,75 @@ export const languageTracks: LanguageTrack[] = [
         "parts": [
           {
             "id": "language-java-p01-part-1",
-            "title": "클래스 골격[class / enum / static method]",
-            "content": "class P01BasicPatterns {\n\n    enum UserRole {\n        USER, ADMIN\n    }\n\n    static int add(int numA, int numB) {\n        return numA + numB;\n    }\n\n    public static void main(String[] args) {",
-            "displayContent": "// 클래스 골격[class / enum / static method]\nclass P01BasicPatterns {\n\n    enum UserRole {\n        USER, ADMIN\n    }\n\n    static int add(int numA, int numB) {\n        return numA + numB;\n    }\n\n    public static void main(String[] args) {"
+            "title": "기본 타입[primitive / String]",
+            "content": "int userAge = 30;\ndouble scoreValue = 95.5;\nboolean isAdmin = true;\nString userName = \"kim\";\nSystem.out.println(userAge + \" \" + scoreValue + \" \" + isAdmin + \" \" + userName);",
+            "displayContent": "// 기본 타입[primitive / String]\nint userAge = 30;\ndouble scoreValue = 95.5;\nboolean isAdmin = true;\nString userName = \"kim\";\nSystem.out.println(userAge + \" \" + scoreValue + \" \" + isAdmin + \" \" + userName);\n// 결과: 30 95.5 true kim"
           },
           {
             "id": "language-java-p01-part-2",
-            "title": "기본 타입[primitive type]",
-            "content": "        int userAge = 30;\n        double scoreValue = 95.5;\n        boolean isAdmin = true;\n        char gradeValue = 'A';\n        System.out.println(userAge);\n        System.out.println(scoreValue);\n        System.out.println(isAdmin);\n        System.out.println(gradeValue);",
-            "displayContent": "        // 기본 타입[primitive type]\n        int userAge = 30;\n        double scoreValue = 95.5;\n        boolean isAdmin = true;\n        char gradeValue = 'A';\n        System.out.println(userAge);\n        System.out.println(scoreValue);\n        System.out.println(isAdmin);\n        System.out.println(gradeValue);\n        // 결과: 30 / 95.5 / true / A"
+            "title": "조건문[if / else]",
+            "content": "int userAge = 30;\nif (userAge >= 20) {\n    System.out.println(\"adult\");\n} else {\n    System.out.println(\"minor\");\n}",
+            "displayContent": "// 조건문[if / else]\nint userAge = 30;\nif (userAge >= 20) {\n    System.out.println(\"adult\");\n} else {\n    System.out.println(\"minor\");\n}\n// 결과: adult"
           },
           {
             "id": "language-java-p01-part-3",
-            "title": "문자열[string]",
-            "content": "        String userName = \"kim\";\n        System.out.println(userName.toUpperCase());",
-            "displayContent": "        // 문자열[string]\n        String userName = \"kim\";\n        System.out.println(userName.toUpperCase());\n        // 결과: KIM"
+            "title": "분기[switch]",
+            "content": "String roleName = \"admin\";\nswitch (roleName) {\n    case \"user\":\n        System.out.println(\"user\");\n        break;\n    case \"admin\":\n        System.out.println(\"admin\");\n        break;\n    default:\n        System.out.println(\"unknown\");\n        break;\n}",
+            "displayContent": "// 분기[switch]\nString roleName = \"admin\";\nswitch (roleName) {\n    case \"user\":\n        System.out.println(\"user\");\n        break;\n    case \"admin\":\n        System.out.println(\"admin\");\n        break;\n    default:\n        System.out.println(\"unknown\");\n        break;\n}\n// 결과: admin"
           },
           {
             "id": "language-java-p01-part-4",
-            "title": "조건문[condition]",
-            "content": "        if (userAge >= 20) {\n            System.out.println(\"adult\");\n        } else {\n            System.out.println(\"minor\");\n        }",
-            "displayContent": "        // 조건문[condition]\n        if (userAge >= 20) {\n            System.out.println(\"adult\");\n        } else {\n            System.out.println(\"minor\");\n        }\n        // 결과: adult"
+            "title": "반복[for]",
+            "content": "for (int index = 0; index < 3; index++) {\n    System.out.println(index);\n}",
+            "displayContent": "// 반복[for]\nfor (int index = 0; index < 3; index++) {\n    System.out.println(index);\n}\n// 결과: 0 1 2"
           },
           {
             "id": "language-java-p01-part-5",
-            "title": "배열[array]",
-            "content": "        String[] colorList = { \"red\", \"green\", \"blue\" };\n        for (String colorItem : colorList) {\n            System.out.println(colorItem);\n        }",
-            "displayContent": "        // 배열[array]\n        String[] colorList = { \"red\", \"green\", \"blue\" };\n        for (String colorItem : colorList) {\n            System.out.println(colorItem);\n        }\n        // 결과:\n        // red\n        // green\n        // blue"
+            "title": "반복[while]",
+            "content": "int count = 0;\nwhile (count < 3) {\n    System.out.println(count);\n    count++;\n}",
+            "displayContent": "// 반복[while]\nint count = 0;\nwhile (count < 3) {\n    System.out.println(count);\n    count++;\n}\n// 결과: 0 1 2"
           },
           {
             "id": "language-java-p01-part-6",
-            "title": "다차원 배열[multidimensional array]",
-            "content": "        int[][] matrixValue = { { 1, 2 }, { 3, 4 } };\n        System.out.println(matrixValue[1][0]);",
-            "displayContent": "        // 다차원 배열[multidimensional array]\n        int[][] matrixValue = { { 1, 2 }, { 3, 4 } };\n        System.out.println(matrixValue[1][0]);\n        // 결과: 3"
+            "title": "향상된 for[for-each]",
+            "content": "String[] colorList = { \"red\", \"green\", \"blue\" };\nfor (String colorItem : colorList) {\n    System.out.println(colorItem);\n}",
+            "displayContent": "// 향상된 for[for-each]\nString[] colorList = { \"red\", \"green\", \"blue\" };\nfor (String colorItem : colorList) {\n    System.out.println(colorItem);\n}\n// 결과: red green blue"
           },
           {
             "id": "language-java-p01-part-7",
-            "title": "열거형[enum]",
-            "content": "        UserRole roleValue = UserRole.ADMIN;\n        switch (roleValue) {\n            case USER:\n                System.out.println(\"user\");\n                break;\n            case ADMIN:\n                System.out.println(\"admin\");\n                break;\n        }",
-            "displayContent": "        // 열거형[enum]\n        UserRole roleValue = UserRole.ADMIN;\n        switch (roleValue) {\n            case USER:\n                System.out.println(\"user\");\n                break;\n            case ADMIN:\n                System.out.println(\"admin\");\n                break;\n        }\n        // 결과: admin"
+            "title": "메서드[method]",
+            "content": "class Calc {\n    static int add(int numA, int numB) {\n        return numA + numB;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(add(5, 7));\n    }\n}",
+            "displayContent": "// 메서드[method]\nclass Calc {\n    static int add(int numA, int numB) {\n        return numA + numB;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(add(5, 7));\n    }\n}\n// 결과: 12"
           },
           {
             "id": "language-java-p01-part-8",
-            "title": "형변환[type casting]",
-            "content": "        double ratioValue = 9.8;\n        int intValue = (int) ratioValue;\n        System.out.println(intValue);",
-            "displayContent": "        // 형변환[type casting]\n        double ratioValue = 9.8;\n        int intValue = (int) ratioValue;\n        System.out.println(intValue);\n        // 결과: 9"
+            "title": "메서드 오버로딩[method overloading]",
+            "content": "class Calc {\n    static int add(int numA, int numB) {\n        return numA + numB;\n    }\n\n    static double add(double numA, double numB) {\n        return numA + numB;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(add(1, 2));\n        System.out.println(add(1.5, 2.5));\n    }\n}",
+            "displayContent": "// 메서드 오버로딩[method overloading]\n// 이름 같고 매개변수 타입·개수가 다르면 된다\nclass Calc {\n    static int add(int numA, int numB) {\n        return numA + numB;\n    }\n\n    static double add(double numA, double numB) {\n        return numA + numB;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(add(1, 2));\n        System.out.println(add(1.5, 2.5));\n    }\n}\n// 결과: 3 / 4.0"
           },
           {
             "id": "language-java-p01-part-9",
-            "title": "정적 메서드[static method]",
-            "content": "        int sumValue = add(5, 7);\n        System.out.println(sumValue);\n    }\n}",
-            "displayContent": "        // 정적 메서드[static method]\n        int sumValue = add(5, 7);\n        System.out.println(sumValue);\n        // 결과: 12\n    }\n}"
+            "title": "리스트[ArrayList]",
+            "content": "import java.util.ArrayList;\nimport java.util.List;\n\nList<String> nameList = new ArrayList<>();\nnameList.add(\"kim\");\nnameList.add(\"lee\");\nSystem.out.println(nameList);",
+            "displayContent": "// 리스트[ArrayList]\nimport java.util.ArrayList;\nimport java.util.List;\n\nList<String> nameList = new ArrayList<>();\nnameList.add(\"kim\");\nnameList.add(\"lee\");\nSystem.out.println(nameList);\n// 결과: [kim, lee]"
+          },
+          {
+            "id": "language-java-p01-part-10",
+            "title": "맵[HashMap]",
+            "content": "import java.util.HashMap;\nimport java.util.Map;\n\nMap<String, Integer> ageMap = new HashMap<>();\nageMap.put(\"kim\", 30);\nageMap.put(\"lee\", 25);\nSystem.out.println(ageMap.get(\"kim\"));",
+            "displayContent": "// 맵[HashMap]\nimport java.util.HashMap;\nimport java.util.Map;\n\nMap<String, Integer> ageMap = new HashMap<>();\nageMap.put(\"kim\", 30);\nageMap.put(\"lee\", 25);\nSystem.out.println(ageMap.get(\"kim\"));\n// 결과: 30"
+          },
+          {
+            "id": "language-java-p01-part-11",
+            "title": "집합[HashSet]",
+            "content": "import java.util.HashSet;\nimport java.util.Set;\n\nSet<String> tagSet = new HashSet<>();\ntagSet.add(\"java\");\ntagSet.add(\"java\");\ntagSet.add(\"sql\");\nSystem.out.println(tagSet);",
+            "displayContent": "// 집합[HashSet]\n// 중복을 자동으로 제거한다\nimport java.util.HashSet;\nimport java.util.Set;\n\nSet<String> tagSet = new HashSet<>();\ntagSet.add(\"java\");\ntagSet.add(\"java\");\ntagSet.add(\"sql\");\nSystem.out.println(tagSet);\n// 결과: [java, sql] (순서는 보장되지 않음)"
+          },
+          {
+            "id": "language-java-p01-part-12",
+            "title": "컬렉션 순회[for-each]",
+            "content": "import java.util.ArrayList;\nimport java.util.List;\n\nList<String> nameList = new ArrayList<>();\nnameList.add(\"kim\");\nnameList.add(\"lee\");\nfor (String nameItem : nameList) {\n    System.out.println(nameItem);\n}",
+            "displayContent": "// 컬렉션 순회[for-each]\nimport java.util.ArrayList;\nimport java.util.List;\n\nList<String> nameList = new ArrayList<>();\nnameList.add(\"kim\");\nnameList.add(\"lee\");\nfor (String nameItem : nameList) {\n    System.out.println(nameItem);\n}\n// 결과: kim lee"
           }
         ]
       },
@@ -1171,39 +1501,87 @@ export const languageTracks: LanguageTrack[] = [
         "parts": [
           {
             "id": "language-java-p02-part-1",
-            "title": "임포트와 클래스 골격[import / class]",
-            "content": "import java.util.ArrayList;\nimport java.util.HashMap;\nimport java.util.List;\nimport java.util.Map;\n\nclass P02PracticalPatterns {\n    public static void main(String[] args) {",
-            "displayContent": "import java.util.ArrayList;\nimport java.util.HashMap;\nimport java.util.List;\nimport java.util.Map;\n\nclass P02PracticalPatterns {\n    public static void main(String[] args) {"
+            "title": "클래스와 생성자[class / constructor]",
+            "content": "class User {\n    String name;\n    int age;\n\n    User(String name, int age) {\n        this.name = name;\n        this.age = age;\n    }\n}\n\nUser user = new User(\"kim\", 30);\nSystem.out.println(user.name + \"(\" + user.age + \")\");",
+            "displayContent": "// 클래스와 생성자[class / constructor]\nclass User {\n    String name;\n    int age;\n\n    User(String name, int age) {\n        this.name = name;\n        this.age = age;\n    }\n}\n\nUser user = new User(\"kim\", 30);\nSystem.out.println(user.name + \"(\" + user.age + \")\");\n// 결과: kim(30)"
           },
           {
             "id": "language-java-p02-part-2",
-            "title": "리스트[list]",
-            "content": "        List<String> nameList = new ArrayList<>();\n        nameList.add(\"kim\");\n        nameList.add(\"lee\");\n        System.out.println(nameList);",
-            "displayContent": "        // 리스트[list]\n        List<String> nameList = new ArrayList<>();\n        nameList.add(\"kim\");\n        nameList.add(\"lee\");\n        System.out.println(nameList);\n        // 결과: [kim, lee]"
+            "title": "접근 제어[public / private]",
+            "content": "class Account {\n    private int balance;\n\n    public void deposit(int amount) {\n        balance += amount;\n    }\n\n    public int getBalance() {\n        return balance;\n    }\n}\n\nAccount account = new Account();\naccount.deposit(100);\nSystem.out.println(account.getBalance());",
+            "displayContent": "// 접근 제어[public / private]\nclass Account {\n    private int balance;\n\n    public void deposit(int amount) {\n        balance += amount;\n    }\n\n    public int getBalance() {\n        return balance;\n    }\n}\n\nAccount account = new Account();\naccount.deposit(100);\nSystem.out.println(account.getBalance());\n// 결과: 100"
           },
           {
             "id": "language-java-p02-part-3",
-            "title": "맵[map]",
-            "content": "        Map<String, Integer> ageMap = new HashMap<>();\n        ageMap.put(\"kim\", 30);\n        ageMap.put(\"lee\", 25);\n        System.out.println(ageMap.get(\"kim\"));",
-            "displayContent": "        // 맵[map]\n        Map<String, Integer> ageMap = new HashMap<>();\n        ageMap.put(\"kim\", 30);\n        ageMap.put(\"lee\", 25);\n        System.out.println(ageMap.get(\"kim\"));\n        // 결과: 30"
+            "title": "정적·상수[static / final]",
+            "content": "class Config {\n    static final int MAX_SIZE = 100;\n\n    static int doubleValue(int num) {\n        return num * 2;\n    }\n}\n\nSystem.out.println(Config.MAX_SIZE);\nSystem.out.println(Config.doubleValue(5));",
+            "displayContent": "// 정적·상수[static / final]\nclass Config {\n    static final int MAX_SIZE = 100;\n\n    static int doubleValue(int num) {\n        return num * 2;\n    }\n}\n\nSystem.out.println(Config.MAX_SIZE);\nSystem.out.println(Config.doubleValue(5));\n// 결과: 100 / 10"
           },
           {
             "id": "language-java-p02-part-4",
-            "title": "람다[lambda]",
-            "content": "        nameList.forEach(item -> System.out.println(item.toUpperCase()));",
-            "displayContent": "        // 람다[lambda]\n        nameList.forEach(item -> System.out.println(item.toUpperCase()));\n        // 결과:\n        // KIM\n        // LEE"
+            "title": "상속[extends]",
+            "content": "class Animal {\n    String name;\n\n    Animal(String name) {\n        this.name = name;\n    }\n}\n\nclass Dog extends Animal {\n    Dog(String name) {\n        super(name);\n    }\n}\n\nDog dog = new Dog(\"happy\");\nSystem.out.println(dog.name);",
+            "displayContent": "// 상속[extends]\nclass Animal {\n    String name;\n\n    Animal(String name) {\n        this.name = name;\n    }\n}\n\nclass Dog extends Animal {\n    Dog(String name) {\n        super(name);\n    }\n}\n\nDog dog = new Dog(\"happy\");\nSystem.out.println(dog.name);\n// 결과: happy"
           },
           {
             "id": "language-java-p02-part-5",
-            "title": "예외 처리[exception handling]",
-            "content": "        try {\n            int parsedValue = Integer.parseInt(\"123\");\n            System.out.println(parsedValue);\n        } catch (NumberFormatException err) {\n            System.out.println(\"parse error\");\n        }",
-            "displayContent": "        // 예외 처리[exception handling]\n        try {\n            int parsedValue = Integer.parseInt(\"123\");\n            System.out.println(parsedValue);\n        } catch (NumberFormatException err) {\n            System.out.println(\"parse error\");\n        }\n        // 결과: 123"
+            "title": "인터페이스[interface / implements]",
+            "content": "interface Printer {\n    void print(String text);\n}\n\nclass ConsolePrinter implements Printer {\n    public void print(String text) {\n        System.out.println(text);\n    }\n}\n\nPrinter printer = new ConsolePrinter();\nprinter.print(\"hello\");",
+            "displayContent": "// 인터페이스[interface / implements]\ninterface Printer {\n    void print(String text);\n}\n\nclass ConsolePrinter implements Printer {\n    public void print(String text) {\n        System.out.println(text);\n    }\n}\n\nPrinter printer = new ConsolePrinter();\nprinter.print(\"hello\");\n// 결과: hello"
           },
           {
             "id": "language-java-p02-part-6",
-            "title": "메서드 분리[method extraction]",
-            "content": "        System.out.println(formatUser(\"park\", 28));\n    }\n\n    static String formatUser(String nameValue, int ageValue) {\n        return nameValue + \"(\" + ageValue + \")\";\n    }\n}",
-            "displayContent": "        // 메서드 분리[method extraction]\n        System.out.println(formatUser(\"park\", 28));\n        // 결과: park(28)\n    }\n\n    static String formatUser(String nameValue, int ageValue) {\n        return nameValue + \"(\" + ageValue + \")\";\n    }\n}"
+            "title": "재정의[override]",
+            "content": "class Animal {\n    String speak() {\n        return \"...\";\n    }\n}\n\nclass Dog extends Animal {\n    @Override\n    String speak() {\n        return \"woof\";\n    }\n}\n\nSystem.out.println(new Dog().speak());",
+            "displayContent": "// 재정의[override]\nclass Animal {\n    String speak() {\n        return \"...\";\n    }\n}\n\nclass Dog extends Animal {\n    @Override\n    String speak() {\n        return \"woof\";\n    }\n}\n\nSystem.out.println(new Dog().speak());\n// 결과: woof"
+          },
+          {
+            "id": "language-java-p02-part-7",
+            "title": "추상 클래스[abstract]",
+            "content": "abstract class Shape {\n    abstract double area();\n}\n\nclass Square extends Shape {\n    double side;\n\n    Square(double side) {\n        this.side = side;\n    }\n\n    double area() {\n        return side * side;\n    }\n}\n\nSystem.out.println(new Square(3).area());",
+            "displayContent": "// 추상 클래스[abstract]\n// 구현을 강제하고 싶을 때 짧게 쓴다\nabstract class Shape {\n    abstract double area();\n}\n\nclass Square extends Shape {\n    double side;\n\n    Square(double side) {\n        this.side = side;\n    }\n\n    double area() {\n        return side * side;\n    }\n}\n\nSystem.out.println(new Square(3).area());\n// 결과: 9.0"
+          },
+          {
+            "id": "language-java-p02-part-8",
+            "title": "예외 처리[try / catch / finally]",
+            "content": "try {\n    int parsedValue = Integer.parseInt(\"123\");\n    System.out.println(parsedValue);\n} catch (NumberFormatException err) {\n    System.out.println(\"parse error\");\n} finally {\n    System.out.println(\"done\");\n}",
+            "displayContent": "// 예외 처리[try / catch / finally]\ntry {\n    int parsedValue = Integer.parseInt(\"123\");\n    System.out.println(parsedValue);\n} catch (NumberFormatException err) {\n    System.out.println(\"parse error\");\n} finally {\n    System.out.println(\"done\");\n}\n// 결과: 123 / done"
+          },
+          {
+            "id": "language-java-p02-part-9",
+            "title": "예외 던지기[throw / throws]",
+            "content": "class AgeGuard {\n    static void checkAge(int age) throws Exception {\n        if (age < 0) {\n            throw new Exception(\"invalid age\");\n        }\n    }\n\n    public static void main(String[] args) {\n        try {\n            checkAge(-1);\n        } catch (Exception err) {\n            System.out.println(err.getMessage());\n        }\n    }\n}",
+            "displayContent": "// 예외 던지기[throw / throws]\n// Checked: 호출부가 반드시 처리(또는 throws 선언)\n// Unchecked(RuntimeException): 선언 없이도 던질 수 있음\nclass AgeGuard {\n    static void checkAge(int age) throws Exception {\n        if (age < 0) {\n            throw new Exception(\"invalid age\");\n        }\n    }\n\n    public static void main(String[] args) {\n        try {\n            checkAge(-1);\n        } catch (Exception err) {\n            System.out.println(err.getMessage());\n        }\n    }\n}\n// 결과: invalid age"
+          },
+          {
+            "id": "language-java-p02-part-10",
+            "title": "제네릭[List of String]",
+            "content": "import java.util.ArrayList;\nimport java.util.List;\n\nList<String> nameList = new ArrayList<>();\nnameList.add(\"kim\");\nString firstName = nameList.get(0);\nSystem.out.println(firstName);",
+            "displayContent": "// 제네릭[List of String]\n// 타입을 <>로 고정해 캐스팅을 줄인다\nimport java.util.ArrayList;\nimport java.util.List;\n\nList<String> nameList = new ArrayList<>();\nnameList.add(\"kim\");\nString firstName = nameList.get(0);\nSystem.out.println(firstName);\n// 결과: kim"
+          },
+          {
+            "id": "language-java-p02-part-11",
+            "title": "람다[forEach]",
+            "content": "import java.util.Arrays;\nimport java.util.List;\n\nList<String> nameList = Arrays.asList(\"kim\", \"lee\");\nnameList.forEach(item -> System.out.println(item.toUpperCase()));",
+            "displayContent": "// 람다[forEach]\nimport java.util.Arrays;\nimport java.util.List;\n\nList<String> nameList = Arrays.asList(\"kim\", \"lee\");\nnameList.forEach(item -> System.out.println(item.toUpperCase()));\n// 결과: KIM / LEE"
+          },
+          {
+            "id": "language-java-p02-part-12",
+            "title": "스트림[filter / map / collect]",
+            "content": "import java.util.Arrays;\nimport java.util.List;\nimport java.util.stream.Collectors;\n\nList<Integer> numList = Arrays.asList(1, 2, 3, 4);\nList<Integer> resultList = numList.stream()\n        .filter(num -> num % 2 == 0)\n        .map(num -> num * 10)\n        .collect(Collectors.toList());\nSystem.out.println(resultList);",
+            "displayContent": "// 스트림[filter / map / collect]\nimport java.util.Arrays;\nimport java.util.List;\nimport java.util.stream.Collectors;\n\nList<Integer> numList = Arrays.asList(1, 2, 3, 4);\nList<Integer> resultList = numList.stream()\n        .filter(num -> num % 2 == 0)\n        .map(num -> num * 10)\n        .collect(Collectors.toList());\nSystem.out.println(resultList);\n// 결과: [20, 40]"
+          },
+          {
+            "id": "language-java-p02-part-13",
+            "title": "파일 읽기[BufferedReader]",
+            "content": "import java.io.BufferedReader;\nimport java.io.FileReader;\nimport java.io.IOException;\n\ntry (BufferedReader reader = new BufferedReader(new FileReader(\"data.txt\"))) {\n    String line = reader.readLine();\n    System.out.println(line);\n} catch (IOException err) {\n    System.out.println(\"io error\");\n}",
+            "displayContent": "// 파일 읽기[BufferedReader]\nimport java.io.BufferedReader;\nimport java.io.FileReader;\nimport java.io.IOException;\n\ntry (BufferedReader reader = new BufferedReader(new FileReader(\"data.txt\"))) {\n    String line = reader.readLine();\n    System.out.println(line);\n} catch (IOException err) {\n    System.out.println(\"io error\");\n}"
+          },
+          {
+            "id": "language-java-p02-part-14",
+            "title": "스레드[Thread / Runnable]",
+            "content": "Runnable task = () -> System.out.println(\"run\");\nThread worker = new Thread(task);\nworker.start();",
+            "displayContent": "// 스레드[Thread / Runnable]\n// 작업을 별도 흐름으로 실행하는 개념만\nRunnable task = () -> System.out.println(\"run\");\nThread worker = new Thread(task);\nworker.start();\n// 결과: run"
           }
         ]
       }
@@ -2267,6 +2645,272 @@ export const languageTracks: LanguageTrack[] = [
     ]
   },
   {
+    "id": "lodash",
+    "label": "Lodash",
+    "folderName": "lodash",
+    "lessons": [
+      {
+        "id": "language-lodash-p01",
+        "title": "P01.핵심-메서드",
+        "fileName": "P01.핵심-메서드.yaml",
+        "sourcePath": "assets/raw/syntax/lodash/P01.핵심-메서드.yaml",
+        "language": "javascript",
+        "parts": [
+          {
+            "id": "language-lodash-p01-part-1",
+            "title": "청크[chunk]",
+            "content": "import _ from \"lodash\";\n\nconst pages = _.chunk([1, 2, 3, 4, 5], 2);",
+            "displayContent": "// 청크[chunk] — 배열을 고정 길이 묶음으로 나눔\nimport _ from \"lodash\";\n\nconst pages = _.chunk([1, 2, 3, 4, 5], 2);\n// 결과: [[1,2],[3,4],[5]]"
+          },
+          {
+            "id": "language-lodash-p01-part-2",
+            "title": "빈값 제거[compact]",
+            "content": "import _ from \"lodash\";\n\nconst clean = _.compact([0, 1, false, 2, \"\", 3, null]);",
+            "displayContent": "// 빈값 제거[compact] — falsy(false, null, 0, \"\", undefined, NaN) 제거\nimport _ from \"lodash\";\n\nconst clean = _.compact([0, 1, false, 2, \"\", 3, null]);\n// 결과: [1, 2, 3]"
+          },
+          {
+            "id": "language-lodash-p01-part-3",
+            "title": "안전 조회[get]",
+            "content": "import _ from \"lodash\";\n\nconst user = { profile: { name: \"kim\" } };\nconst name = _.get(user, \"profile.name\", \"guest\");\nconst city = _.get(user, \"profile.city\", \"unknown\");",
+            "displayContent": "// 안전 조회[get] — 중첩 경로 + 기본값[default]\nimport _ from \"lodash\";\n\nconst user = { profile: { name: \"kim\" } };\nconst name = _.get(user, \"profile.name\", \"guest\");\nconst city = _.get(user, \"profile.city\", \"unknown\");\n// 결과: name=\"kim\", city=\"unknown\""
+          },
+          {
+            "id": "language-lodash-p01-part-4",
+            "title": "경로 설정[set]",
+            "content": "import _ from \"lodash\";\n\nconst draft = {};\n_.set(draft, \"profile.city\", \"seoul\");",
+            "displayContent": "// 경로 설정[set] — 중간 객체가 없으면 만들어 둠\nimport _ from \"lodash\";\n\nconst draft = {};\n_.set(draft, \"profile.city\", \"seoul\");\n// 결과: { profile: { city: \"seoul\" } }"
+          },
+          {
+            "id": "language-lodash-p01-part-5",
+            "title": "일부만 뽑기[pick]",
+            "content": "import _ from \"lodash\";\n\nconst user = { id: 1, name: \"kim\", password: \"secret\", role: \"admin\" };\nconst publicUser = _.pick(user, [\"id\", \"name\", \"role\"]);",
+            "displayContent": "// 일부만 뽑기[pick]\nimport _ from \"lodash\";\n\nconst user = { id: 1, name: \"kim\", password: \"secret\", role: \"admin\" };\nconst publicUser = _.pick(user, [\"id\", \"name\", \"role\"]);\n// 결과: { id: 1, name: \"kim\", role: \"admin\" }"
+          },
+          {
+            "id": "language-lodash-p01-part-6",
+            "title": "일부 제외[omit]",
+            "content": "import _ from \"lodash\";\n\nconst user = { id: 1, name: \"kim\", password: \"secret\" };\nconst safe = _.omit(user, [\"password\"]);",
+            "displayContent": "// 일부 제외[omit] — 민감 필드 제거에 자주 씀\nimport _ from \"lodash\";\n\nconst user = { id: 1, name: \"kim\", password: \"secret\" };\nconst safe = _.omit(user, [\"password\"]);\n// 결과: { id: 1, name: \"kim\" }"
+          },
+          {
+            "id": "language-lodash-p01-part-7",
+            "title": "깊은 병합[merge]",
+            "content": "import _ from \"lodash\";\n\nconst base = { a: 1, nested: { x: 1, y: 2 } };\nconst patch = { nested: { y: 9, z: 3 } };\nconst merged = _.merge({}, base, patch);",
+            "displayContent": "// 깊은 병합[merge] — 중첩 객체를 재귀적으로 합침\nimport _ from \"lodash\";\n\nconst base = { a: 1, nested: { x: 1, y: 2 } };\nconst patch = { nested: { y: 9, z: 3 } };\nconst merged = _.merge({}, base, patch);\n// 결과: { a: 1, nested: { x: 1, y: 9, z: 3 } }"
+          },
+          {
+            "id": "language-lodash-p01-part-8",
+            "title": "변환[map] 필터[filter]",
+            "content": "import _ from \"lodash\";\n\nconst users = [\n  { id: 1, name: \"kim\", active: true },\n  { id: 2, name: \"lee\", active: false },\n];\nconst names = _.map(users, \"name\");\nconst active = _.filter(users, { active: true });",
+            "displayContent": "// 변환[map] · 필터[filter]\nimport _ from \"lodash\";\n\nconst users = [\n  { id: 1, name: \"kim\", active: true },\n  { id: 2, name: \"lee\", active: false },\n];\nconst names = _.map(users, \"name\");\nconst active = _.filter(users, { active: true });\n// 결과: names=[\"kim\",\"lee\"], active=[{id:1,...}]"
+          },
+          {
+            "id": "language-lodash-p01-part-9",
+            "title": "찾기[find] 인덱스[findIndex]",
+            "content": "import _ from \"lodash\";\n\nconst users = [\n  { id: 1, name: \"kim\" },\n  { id: 2, name: \"lee\" },\n];\nconst found = _.find(users, { id: 2 });\nconst idx = _.findIndex(users, { id: 2 });",
+            "displayContent": "// 찾기[find] · 인덱스[findIndex]\nimport _ from \"lodash\";\n\nconst users = [\n  { id: 1, name: \"kim\" },\n  { id: 2, name: \"lee\" },\n];\nconst found = _.find(users, { id: 2 });\nconst idx = _.findIndex(users, { id: 2 });\n// 결과: found={id:2,name:\"lee\"}, idx=1"
+          },
+          {
+            "id": "language-lodash-p01-part-10",
+            "title": "그룹화[groupBy]",
+            "content": "import _ from \"lodash\";\n\nconst rows = [\n  { dept: \"dev\", name: \"kim\" },\n  { dept: \"dev\", name: \"lee\" },\n  { dept: \"hr\", name: \"park\" },\n];\nconst byDept = _.groupBy(rows, \"dept\");",
+            "displayContent": "// 그룹화[groupBy] — 같은 키끼리 배열로 묶을 때\nimport _ from \"lodash\";\n\nconst rows = [\n  { dept: \"dev\", name: \"kim\" },\n  { dept: \"dev\", name: \"lee\" },\n  { dept: \"hr\", name: \"park\" },\n];\nconst byDept = _.groupBy(rows, \"dept\");\n// 결과: { dev: [kim,lee], hr: [park] }"
+          },
+          {
+            "id": "language-lodash-p01-part-11",
+            "title": "키 맵[keyBy]",
+            "content": "import _ from \"lodash\";\n\nconst users = [\n  { id: 1, name: \"kim\" },\n  { id: 2, name: \"lee\" },\n];\nconst byId = _.keyBy(users, \"id\");",
+            "displayContent": "// 키 맵[keyBy] — id로 바로 찾을 조회표[lookup]를 만들 때\nimport _ from \"lodash\";\n\nconst users = [\n  { id: 1, name: \"kim\" },\n  { id: 2, name: \"lee\" },\n];\nconst byId = _.keyBy(users, \"id\");\n// 결과: { 1: {id:1,...}, 2: {id:2,...} }"
+          },
+          {
+            "id": "language-lodash-p01-part-12",
+            "title": "정렬[sortBy] 중복제거[uniq]",
+            "content": "import _ from \"lodash\";\n\nconst scores = [\n  { name: \"lee\", score: 90 },\n  { name: \"kim\", score: 70 },\n];\nconst ranked = _.sortBy(scores, \"score\");\nconst tags = _.uniq([\"js\", \"ts\", \"js\", \"go\"]);",
+            "displayContent": "// 정렬[sortBy] · 중복 제거[uniq]\nimport _ from \"lodash\";\n\nconst scores = [\n  { name: \"lee\", score: 90 },\n  { name: \"kim\", score: 70 },\n];\nconst ranked = _.sortBy(scores, \"score\");\nconst tags = _.uniq([\"js\", \"ts\", \"js\", \"go\"]);\n// 결과: ranked=kim→lee, tags=[\"js\",\"ts\",\"go\"]"
+          },
+          {
+            "id": "language-lodash-p01-part-13",
+            "title": "케이스 변환[camelCase kebabCase]",
+            "content": "import _ from \"lodash\";\n\nconst camel = _.camelCase(\"user_name\");\nconst kebab = _.kebabCase(\"UserName\");",
+            "displayContent": "// 케이스 변환[camelCase · kebabCase]\nimport _ from \"lodash\";\n\nconst camel = _.camelCase(\"user_name\");\nconst kebab = _.kebabCase(\"UserName\");\n// 결과: camel=\"userName\", kebab=\"user-name\""
+          },
+          {
+            "id": "language-lodash-p01-part-14",
+            "title": "디바운스[debounce]",
+            "content": "import _ from \"lodash\";\n\nconst onSearch = _.debounce((q) => {\n  console.log(\"search\", q);\n}, 300);",
+            "displayContent": "// 디바운스[debounce] — 입력이 멈춘 뒤 한 번만 실행\nimport _ from \"lodash\";\n\nconst onSearch = _.debounce((q) => {\n  console.log(\"search\", q);\n}, 300);"
+          },
+          {
+            "id": "language-lodash-p01-part-15",
+            "title": "스로틀[throttle]",
+            "content": "import _ from \"lodash\";\n\nconst onScroll = _.throttle(() => {\n  console.log(\"scroll\");\n}, 200);",
+            "displayContent": "// 스로틀[throttle] — 일정 간격으로만 실행 (스크롤·리사이즈)\nimport _ from \"lodash\";\n\nconst onScroll = _.throttle(() => {\n  console.log(\"scroll\");\n}, 200);"
+          }
+        ]
+      },
+      {
+        "id": "language-lodash-p02",
+        "title": "P02.체인-변환",
+        "fileName": "P02.체인-변환.yaml",
+        "sourcePath": "assets/raw/syntax/lodash/P02.체인-변환.yaml",
+        "language": "javascript",
+        "parts": [
+          {
+            "id": "language-lodash-p02-part-1",
+            "title": "체인 파이프라인[chain]",
+            "content": "import _ from \"lodash\";\n\nconst users = [\n  { name: \"lee\", score: 90, active: true },\n  { name: \"kim\", score: 70, active: true },\n  { name: \"park\", score: 80, active: false },\n];\nconst names = _.chain(users)\n  .filter({ active: true })\n  .sortBy(\"score\")\n  .map(\"name\")\n  .value();",
+            "displayContent": "// 체인 파이프라인[chain] — filter → sortBy → map → value\nimport _ from \"lodash\";\n\nconst users = [\n  { name: \"lee\", score: 90, active: true },\n  { name: \"kim\", score: 70, active: true },\n  { name: \"park\", score: 80, active: false },\n];\nconst names = _.chain(users)\n  .filter({ active: true })\n  .sortBy(\"score\")\n  .map(\"name\")\n  .value();\n// 결과: [\"kim\", \"lee\"]"
+          },
+          {
+            "id": "language-lodash-p02-part-2",
+            "title": "그룹 평균[groupBy mapValues meanBy]",
+            "content": "import _ from \"lodash\";\n\nconst scores = [\n  { dept: \"dev\", score: 80 },\n  { dept: \"dev\", score: 90 },\n  { dept: \"hr\", score: 70 },\n];\nconst avgByDept = _.mapValues(_.groupBy(scores, \"dept\"), (rows) =>\n  _.meanBy(rows, \"score\"),\n);",
+            "displayContent": "// 그룹 평균[groupBy + mapValues + meanBy]\nimport _ from \"lodash\";\n\nconst scores = [\n  { dept: \"dev\", score: 80 },\n  { dept: \"dev\", score: 90 },\n  { dept: \"hr\", score: 70 },\n];\nconst avgByDept = _.mapValues(_.groupBy(scores, \"dept\"), (rows) =>\n  _.meanBy(rows, \"score\"),\n);\n// 결과: { dev: 85, hr: 70 }"
+          },
+          {
+            "id": "language-lodash-p02-part-3",
+            "title": "조회표 조인[keyBy map]",
+            "content": "import _ from \"lodash\";\n\nconst users = [\n  { id: 1, name: \"kim\" },\n  { id: 2, name: \"lee\" },\n];\nconst orders = [\n  { userId: 1, total: 100 },\n  { userId: 2, total: 200 },\n];\nconst byId = _.keyBy(users, \"id\");\nconst joined = _.map(orders, (o) => ({\n  ...o,\n  userName: byId[o.userId]?.name,\n}));",
+            "displayContent": "// 조회표 조인[keyBy + map] — id로 이름 붙이기\nimport _ from \"lodash\";\n\nconst users = [\n  { id: 1, name: \"kim\" },\n  { id: 2, name: \"lee\" },\n];\nconst orders = [\n  { userId: 1, total: 100 },\n  { userId: 2, total: 200 },\n];\nconst byId = _.keyBy(users, \"id\");\nconst joined = _.map(orders, (o) => ({\n  ...o,\n  userName: byId[o.userId]?.name,\n}));\n// 결과: [{userId:1,total:100,userName:\"kim\"}, ...]"
+          },
+          {
+            "id": "language-lodash-p02-part-4",
+            "title": "평탄화 정리[flatten uniq sort]",
+            "content": "import _ from \"lodash\";\n\nconst nested = [\n  [\"js\", \"ts\"],\n  [\"go\", \"js\"],\n  [\"ts\"],\n];\nconst tags = _.sortBy(_.uniq(_.flatten(nested)));",
+            "displayContent": "// 평탄화 정리[flatten + uniq + sort]\nimport _ from \"lodash\";\n\nconst nested = [\n  [\"js\", \"ts\"],\n  [\"go\", \"js\"],\n  [\"ts\"],\n];\nconst tags = _.sortBy(_.uniq(_.flatten(nested)));\n// 결과: [\"go\", \"js\", \"ts\"]"
+          },
+          {
+            "id": "language-lodash-p02-part-5",
+            "title": "배열→객체[transform]",
+            "content": "import _ from \"lodash\";\n\nconst pairs = [\n  [\"a\", 1],\n  [\"b\", 2],\n];\nconst obj = _.transform(\n  pairs,\n  (acc, [k, v]) => {\n    acc[k] = v;\n  },\n  {},\n);",
+            "displayContent": "// 배열→객체[transform] — reduce 대신 누적 객체 만들기\nimport _ from \"lodash\";\n\nconst pairs = [\n  [\"a\", 1],\n  [\"b\", 2],\n];\nconst obj = _.transform(\n  pairs,\n  (acc, [k, v]) => {\n    acc[k] = v;\n  },\n  {},\n);\n// 결과: { a: 1, b: 2 }"
+          },
+          {
+            "id": "language-lodash-p02-part-6",
+            "title": "조건 누적[transform]",
+            "content": "import _ from \"lodash\";\n\nconst rows = [\n  { pass: true, score: 80 },\n  { pass: false, score: 40 },\n  { pass: true, score: 90 },\n];\nconst total = _.transform(\n  rows,\n  (acc, row) => {\n    if (row.pass) acc.sum += row.score;\n  },\n  { sum: 0 },\n);",
+            "displayContent": "// 조건 누적[transform] — 합격만 합산\nimport _ from \"lodash\";\n\nconst rows = [\n  { pass: true, score: 80 },\n  { pass: false, score: 40 },\n  { pass: true, score: 90 },\n];\nconst total = _.transform(\n  rows,\n  (acc, row) => {\n    if (row.pass) acc.sum += row.score;\n  },\n  { sum: 0 },\n);\n// 결과: { sum: 170 }"
+          },
+          {
+            "id": "language-lodash-p02-part-7",
+            "title": "커스텀 그룹[transform]",
+            "content": "import _ from \"lodash\";\n\nconst users = [\n  { role: \"admin\", name: \"kim\" },\n  { role: \"member\", name: \"lee\" },\n  { role: \"admin\", name: \"park\" },\n];\nconst namesByRole = _.transform(\n  users,\n  (acc, u) => {\n    (acc[u.role] || (acc[u.role] = [])).push(u.name);\n  },\n  {},\n);",
+            "displayContent": "// 커스텀 그룹[transform] — groupBy와 비슷하되 값을 직접 가공\nimport _ from \"lodash\";\n\nconst users = [\n  { role: \"admin\", name: \"kim\" },\n  { role: \"member\", name: \"lee\" },\n  { role: \"admin\", name: \"park\" },\n];\nconst namesByRole = _.transform(\n  users,\n  (acc, u) => {\n    (acc[u.role] || (acc[u.role] = [])).push(u.name);\n  },\n  {},\n);\n// 결과: { admin: [\"kim\",\"park\"], member: [\"lee\"] }"
+          },
+          {
+            "id": "language-lodash-p02-part-8",
+            "title": "keyBy vs groupBy 비교",
+            "content": "import _ from \"lodash\";\n\nconst users = [\n  { id: 1, dept: \"dev\", name: \"kim\" },\n  { id: 2, dept: \"dev\", name: \"lee\" },\n];\nconst byId = _.keyBy(users, \"id\");\nconst byDept = _.groupBy(users, \"dept\");",
+            "displayContent": "// keyBy vs groupBy 비교\n// keyBy: 키 → 단일 객체 (조회표[lookup])\n// groupBy: 키 → 배열 (묶음[bucket])\nimport _ from \"lodash\";\n\nconst users = [\n  { id: 1, dept: \"dev\", name: \"kim\" },\n  { id: 2, dept: \"dev\", name: \"lee\" },\n];\nconst byId = _.keyBy(users, \"id\");\nconst byDept = _.groupBy(users, \"dept\");\n// byId[1] → 객체 하나 / byDept.dev → 배열"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "postgresql",
+    "label": "PostgreSQL",
+    "folderName": "postgresql",
+    "lessons": [
+      {
+        "id": "language-postgresql-p01",
+        "title": "P01.기본-패턴",
+        "fileName": "P01.기본-패턴.yaml",
+        "sourcePath": "assets/raw/syntax/postgresql/P01.기본-패턴.yaml",
+        "language": "sql",
+        "parts": [
+          {
+            "id": "language-postgresql-p01-part-1",
+            "title": "테이블 생성[create table]",
+            "content": "CREATE TABLE users (\n    user_id      SERIAL PRIMARY KEY,\n    user_name    TEXT NOT NULL,\n    user_age     INTEGER,\n    is_active    BOOLEAN DEFAULT TRUE,\n    created_at   TIMESTAMPTZ DEFAULT NOW()\n);",
+            "displayContent": "-- 테이블 생성[create table]\n-- 자주 쓰는 타입만: SERIAL, TEXT, INTEGER, BOOLEAN, TIMESTAMPTZ\nCREATE TABLE users (\n    user_id      SERIAL PRIMARY KEY,\n    user_name    TEXT NOT NULL,\n    user_age     INTEGER,\n    is_active    BOOLEAN DEFAULT TRUE,\n    created_at   TIMESTAMPTZ DEFAULT NOW()\n);"
+          },
+          {
+            "id": "language-postgresql-p01-part-2",
+            "title": "삽입과 반환[insert returning]",
+            "content": "INSERT INTO users (user_name, user_age)\nVALUES ('kim', 30)\nRETURNING user_id, user_name;",
+            "displayContent": "-- 삽입과 반환[insert returning]\nINSERT INTO users (user_name, user_age)\nVALUES ('kim', 30)\nRETURNING user_id, user_name;"
+          },
+          {
+            "id": "language-postgresql-p01-part-3",
+            "title": "조회[select]",
+            "content": "SELECT user_id, user_name, user_age\nFROM users;",
+            "displayContent": "-- 조회[select]\nSELECT user_id, user_name, user_age\nFROM users;"
+          },
+          {
+            "id": "language-postgresql-p01-part-4",
+            "title": "수정과 반환[update returning]",
+            "content": "UPDATE users\nSET user_age = 31\nWHERE user_id = 1\nRETURNING user_id, user_age;",
+            "displayContent": "-- 수정과 반환[update returning]\nUPDATE users\nSET user_age = 31\nWHERE user_id = 1\nRETURNING user_id, user_age;"
+          },
+          {
+            "id": "language-postgresql-p01-part-5",
+            "title": "삭제와 반환[delete returning]",
+            "content": "DELETE FROM users\nWHERE user_id = 2\nRETURNING user_id;",
+            "displayContent": "-- 삭제와 반환[delete returning]\nDELETE FROM users\nWHERE user_id = 2\nRETURNING user_id;"
+          },
+          {
+            "id": "language-postgresql-p01-part-6",
+            "title": "조건·대소문자무시[where ilike]",
+            "content": "SELECT user_name\nFROM users\nWHERE user_name ILIKE 'k%'\n  AND user_age >= 20;",
+            "displayContent": "-- 조건·대소문자무시[where ilike]\n-- ILIKE는 대소문자를 무시하는 LIKE\nSELECT user_name\nFROM users\nWHERE user_name ILIKE 'k%'\n  AND user_age >= 20;"
+          },
+          {
+            "id": "language-postgresql-p01-part-7",
+            "title": "정렬·개수제한[order by limit]",
+            "content": "SELECT user_name, user_age\nFROM users\nORDER BY user_age DESC\nLIMIT 10;",
+            "displayContent": "-- 정렬·개수제한[order by limit]\nSELECT user_name, user_age\nFROM users\nORDER BY user_age DESC\nLIMIT 10;"
+          },
+          {
+            "id": "language-postgresql-p01-part-8",
+            "title": "내부 조인[inner join]",
+            "content": "SELECT u.user_name, o.total_price\nFROM users u\nINNER JOIN orders o\n  ON u.user_id = o.user_id;",
+            "displayContent": "-- 내부 조인[inner join]\nSELECT u.user_name, o.total_price\nFROM users u\nINNER JOIN orders o\n  ON u.user_id = o.user_id;"
+          },
+          {
+            "id": "language-postgresql-p01-part-9",
+            "title": "왼쪽 조인[left join]",
+            "content": "SELECT u.user_name, o.total_price\nFROM users u\nLEFT JOIN orders o\n  ON u.user_id = o.user_id;",
+            "displayContent": "-- 왼쪽 조인[left join]\nSELECT u.user_name, o.total_price\nFROM users u\nLEFT JOIN orders o\n  ON u.user_id = o.user_id;"
+          }
+        ]
+      },
+      {
+        "id": "language-postgresql-p02",
+        "title": "P02.실무-패턴",
+        "fileName": "P02.실무-패턴.yaml",
+        "sourcePath": "assets/raw/syntax/postgresql/P02.실무-패턴.yaml",
+        "language": "sql",
+        "parts": [
+          {
+            "id": "language-postgresql-p02-part-1",
+            "title": "그룹·집계[group by having]",
+            "content": "SELECT user_id, COUNT(*) AS order_count\nFROM orders\nGROUP BY user_id\nHAVING COUNT(*) >= 2;",
+            "displayContent": "-- 그룹·집계[group by having]\nSELECT user_id, COUNT(*) AS order_count\nFROM orders\nGROUP BY user_id\nHAVING COUNT(*) >= 2;"
+          },
+          {
+            "id": "language-postgresql-p02-part-2",
+            "title": "공통 테이블 식[with cte]",
+            "content": "WITH order_sum AS (\n    SELECT user_id, SUM(total_price) AS total_amount\n    FROM orders\n    GROUP BY user_id\n)\nSELECT u.user_name, o.total_amount\nFROM users u\nJOIN order_sum o\n  ON u.user_id = o.user_id;",
+            "displayContent": "-- 공통 테이블 식[with cte]\nWITH order_sum AS (\n    SELECT user_id, SUM(total_price) AS total_amount\n    FROM orders\n    GROUP BY user_id\n)\nSELECT u.user_name, o.total_amount\nFROM users u\nJOIN order_sum o\n  ON u.user_id = o.user_id;"
+          },
+          {
+            "id": "language-postgresql-p02-part-3",
+            "title": "업서트[upsert]",
+            "content": "INSERT INTO users (user_id, user_name, user_age)\nVALUES (1, 'kim', 31)\nON CONFLICT (user_id)\nDO UPDATE SET\n    user_name = EXCLUDED.user_name,\n    user_age = EXCLUDED.user_age;",
+            "displayContent": "-- 업서트[upsert]\n-- 충돌 시 UPDATE — INSERT ON CONFLICT DO UPDATE\nINSERT INTO users (user_id, user_name, user_age)\nVALUES (1, 'kim', 31)\nON CONFLICT (user_id)\nDO UPDATE SET\n    user_name = EXCLUDED.user_name,\n    user_age = EXCLUDED.user_age;"
+          },
+          {
+            "id": "language-postgresql-p02-part-4",
+            "title": "jsonb 접근[jsonb]",
+            "content": "SELECT meta -> 'city' AS city_json,\n       meta ->> 'city' AS city_text\nFROM users;",
+            "displayContent": "-- jsonb 접근[jsonb]\n-- -> 는 jsonb, ->> 는 text\nSELECT meta -> 'city' AS city_json,\n       meta ->> 'city' AS city_text\nFROM users;"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "python",
     "label": "Python",
     "folderName": "python",
@@ -2280,57 +2924,63 @@ export const languageTracks: LanguageTrack[] = [
         "parts": [
           {
             "id": "language-python-p01-part-1",
-            "title": "변수[variable]",
-            "content": "user_name = \"kim\"\nuser_age = 30\nis_admin = True\nprint(user_name, user_age, is_admin)",
-            "displayContent": "# 변수[variable]\nuser_name = \"kim\"\nuser_age = 30\nis_admin = True\nprint(user_name, user_age, is_admin)\n# 결과: kim 30 True"
+            "title": "기본 타입[int float str bool]",
+            "content": "user_name = \"kim\"\nuser_age = 30\nscore = 4.5\nis_admin = True\nprint(user_name, user_age, score, is_admin)",
+            "displayContent": "# 기본 타입[int float str bool]\nuser_name = \"kim\"\nuser_age = 30\nscore = 4.5\nis_admin = True\nprint(user_name, user_age, score, is_admin)"
           },
           {
             "id": "language-python-p01-part-2",
             "title": "리스트[list]",
-            "content": "score_list = [10, 20, 30]\nprint(score_list[0])",
-            "displayContent": "# 리스트[list]\nscore_list = [10, 20, 30]\nprint(score_list[0])\n# 결과: 10"
+            "content": "skills = [\"python\", \"sql\"]\nprint(skills[0])",
+            "displayContent": "# 리스트[list]\nskills = [\"python\", \"sql\"]\nprint(skills[0])\n# 결과: python"
           },
           {
             "id": "language-python-p01-part-3",
-            "title": "딕셔너리[dictionary]",
-            "content": "user_item = {\n    \"name\": \"lee\",\n    \"age\": 25,\n    \"skills\": [\"python\", \"sql\"],\n}\nprint(user_item[\"name\"])\nprint(user_item.get(\"email\"))",
-            "displayContent": "# 딕셔너리[dictionary]\nuser_item = {\n    \"name\": \"lee\",\n    \"age\": 25,\n    \"skills\": [\"python\", \"sql\"],\n}\nprint(user_item[\"name\"])\nprint(user_item.get(\"email\"))\n# 결과:\n# lee\n# None"
+            "title": "딕셔너리[dict = JSON]",
+            "content": "user = {\n    \"name\": \"kim\",\n    \"age\": 30,\n    \"skills\": [\"python\", \"sql\"],\n}\nprint(user[\"name\"])",
+            "displayContent": "# 딕셔너리[dict = JSON]\n# 실무 데이터는 list + dict 조합이 대부분이다\nuser = {\n    \"name\": \"kim\",\n    \"age\": 30,\n    \"skills\": [\"python\", \"sql\"],\n}\nprint(user[\"name\"])"
           },
           {
             "id": "language-python-p01-part-4",
-            "title": "조건문[condition]",
-            "content": "if user_age >= 20:\n    print(\"adult\")\nelse:\n    print(\"minor\")",
-            "displayContent": "# 조건문[condition]\nif user_age >= 20:\n    print(\"adult\")\nelse:\n    print(\"minor\")\n# 결과: adult"
+            "title": "None - 값 없음[None]",
+            "content": "email = None\nprint(email)",
+            "displayContent": "# None - 값 없음[None]\nemail = None\nprint(email)"
           },
           {
             "id": "language-python-p01-part-5",
-            "title": "반복문[loop]",
-            "content": "for skill_item in user_item[\"skills\"]:\n    print(skill_item)",
-            "displayContent": "# 반복문[loop]\nfor skill_item in user_item[\"skills\"]:\n    print(skill_item)\n# 결과:\n# python\n# sql"
+            "title": "조건문[if]",
+            "content": "if user[\"age\"] > 20:\n    print(\"성인\")",
+            "displayContent": "# 조건문[if]\nif user[\"age\"] > 20:\n    print(\"성인\")"
           },
           {
             "id": "language-python-p01-part-6",
-            "title": "리스트 컴프리헨션[list comprehension]",
-            "content": "even_list = [num for num in score_list if num % 2 == 0]\nprint(even_list)",
-            "displayContent": "# 리스트 컴프리헨션[list comprehension]\neven_list = [num for num in score_list if num % 2 == 0]\nprint(even_list)\n# 결과: [10, 20, 30]"
+            "title": "값 없을 때[if not get]",
+            "content": "if not user.get(\"email\"):\n    print(\"이메일 없음\")",
+            "displayContent": "# 값 없을 때[if not get] — 실무 핵심\nif not user.get(\"email\"):\n    print(\"이메일 없음\")"
           },
           {
             "id": "language-python-p01-part-7",
-            "title": "함수[function]",
-            "content": "def get_display_name(user):\n    return f'{user[\"name\"]}({user[\"age\"]})'\n\nprint(get_display_name(user_item))",
-            "displayContent": "# 함수[function]\ndef get_display_name(user):\n    return f'{user[\"name\"]}({user[\"age\"]})'\n\nprint(get_display_name(user_item))\n# 결과: lee(25)"
+            "title": "리스트 순회[for]",
+            "content": "for skill in user[\"skills\"]:\n    print(skill)",
+            "displayContent": "# 리스트 순회[for]\nfor skill in user[\"skills\"]:\n    print(skill)"
           },
           {
             "id": "language-python-p01-part-8",
-            "title": "예외 처리[exception handling]",
-            "content": "try:\n    parsed_value = int(\"123\")\n    print(parsed_value)\nexcept ValueError:\n    print(\"parse error\")",
-            "displayContent": "# 예외 처리[exception handling]\ntry:\n    parsed_value = int(\"123\")\n    print(parsed_value)\nexcept ValueError:\n    print(\"parse error\")\n# 결과: 123"
+            "title": "딕셔너리 순회[items]",
+            "content": "for key, value in user.items():\n    print(key, value)",
+            "displayContent": "# 딕셔너리 순회[items]\nfor key, value in user.items():\n    print(key, value)"
           },
           {
             "id": "language-python-p01-part-9",
-            "title": "파일 / JSON 실무 패턴[file / json pattern]",
-            "content": "import json\n\njson_text = '{\"name\": \"park\", \"age\": 28}'\nparsed_user = json.loads(json_text)\nprint(parsed_user[\"name\"])",
-            "displayContent": "# 파일 / JSON 실무 패턴[file / json pattern]\nimport json\n\njson_text = '{\"name\": \"park\", \"age\": 28}'\nparsed_user = json.loads(json_text)\nprint(parsed_user[\"name\"])\n# 결과: park"
+            "title": "함수[def] - 한 역할",
+            "content": "def get_user_name(user):\n    return user[\"name\"]\n\nprint(get_user_name(user))",
+            "displayContent": "# 함수[def] - 한 역할\ndef get_user_name(user):\n    return user[\"name\"]\n\nprint(get_user_name(user))"
+          },
+          {
+            "id": "language-python-p01-part-10",
+            "title": "get 안전 접근[get]",
+            "content": "print(user.get(\"name\"))\nprint(user.get(\"email\"))",
+            "displayContent": "# get 안전 접근[get]\n# user[\"name\"] = 키가 확실할 때\n# user.get(\"name\") = 없을 수도 있을 때\nprint(user.get(\"name\"))\nprint(user.get(\"email\"))\n# 결과: kim / None"
           }
         ]
       },
@@ -2343,39 +2993,139 @@ export const languageTracks: LanguageTrack[] = [
         "parts": [
           {
             "id": "language-python-p02-part-1",
-            "title": "예제 데이터[sample data] - 딕셔너리 리스트",
-            "content": "user_list = [\n    {\"name\": \"kim\", \"age\": 30},\n    {\"name\": \"lee\", \"age\": 20},\n    {\"name\": \"park\", \"age\": 25},\n]",
-            "displayContent": "# 예제 데이터[sample data] - 딕셔너리 리스트\nuser_list = [\n    {\"name\": \"kim\", \"age\": 30},\n    {\"name\": \"lee\", \"age\": 20},\n    {\"name\": \"park\", \"age\": 25},\n]"
+            "title": "예제 데이터[list of dict]",
+            "content": "users = [\n    {\"name\": \"kim\", \"age\": 30},\n    {\"name\": \"lee\", \"age\": 20},\n    {\"name\": \"park\", \"age\": 25},\n]",
+            "displayContent": "# 예제 데이터[list of dict]\nusers = [\n    {\"name\": \"kim\", \"age\": 30},\n    {\"name\": \"lee\", \"age\": 20},\n    {\"name\": \"park\", \"age\": 25},\n]"
           },
           {
             "id": "language-python-p02-part-2",
-            "title": "필터링[filtering]",
-            "content": "adult_list = [user for user in user_list if user[\"age\"] >= 25]\nprint(adult_list)",
-            "displayContent": "# 필터링[filtering]\nadult_list = [user for user in user_list if user[\"age\"] >= 25]\nprint(adult_list)\n# 결과: [{'name': 'kim', 'age': 30}, {'name': 'park', 'age': 25}]"
+            "title": "필터[list comprehension]",
+            "content": "adults = [u for u in users if u[\"age\"] >= 25]\nprint(adults)",
+            "displayContent": "# 필터[list comprehension]\n# 나이 25 이상만 뽑기\nadults = [u for u in users if u[\"age\"] >= 25]\nprint(adults)"
           },
           {
             "id": "language-python-p02-part-3",
-            "title": "변환[mapping]",
-            "content": "name_list = [user[\"name\"] for user in user_list]\nprint(name_list)",
-            "displayContent": "# 변환[mapping]\nname_list = [user[\"name\"] for user in user_list]\nprint(name_list)\n# 결과: ['kim', 'lee', 'park']"
+            "title": "변환[list comprehension]",
+            "content": "names = [u[\"name\"] for u in users]\nprint(names)",
+            "displayContent": "# 변환[list comprehension]\n# 이름만 리스트로 만들기\nnames = [u[\"name\"] for u in users]\nprint(names)\n# 결과: ['kim', 'lee', 'park']"
           },
           {
             "id": "language-python-p02-part-4",
-            "title": "정렬[sorting]",
-            "content": "sorted_list = sorted(user_list, key=lambda user: user[\"age\"], reverse=True)\nprint(sorted_list[0][\"name\"])",
-            "displayContent": "# 정렬[sorting]\nsorted_list = sorted(user_list, key=lambda user: user[\"age\"], reverse=True)\nprint(sorted_list[0][\"name\"])\n# 결과: kim"
+            "title": "숫자 필터·변환[even double]",
+            "content": "nums = [1, 2, 3, 4]\neven = [n for n in nums if n % 2 == 0]\ndouble = [n * 2 for n in nums]\nprint(even, double)",
+            "displayContent": "# 숫자 필터·변환[even double]\nnums = [1, 2, 3, 4]\neven = [n for n in nums if n % 2 == 0]\ndouble = [n * 2 for n in nums]\nprint(even, double)\n# 결과: [2, 4] [2, 4, 6, 8]"
           },
           {
             "id": "language-python-p02-part-5",
-            "title": "기본값 처리[default handling]",
-            "content": "config = {\"timeout\": 3}\nretry_count = config.get(\"retry\", 0)\nprint(retry_count)",
-            "displayContent": "# 기본값 처리[default handling]\nconfig = {\"timeout\": 3}\nretry_count = config.get(\"retry\", 0)\nprint(retry_count)\n# 결과: 0"
+            "title": "기본값[get default]",
+            "content": "user = {\"name\": \"kim\"}\nage = user.get(\"age\", 0)\nprint(age)",
+            "displayContent": "# 기본값[get default]\nuser = {\"name\": \"kim\"}\nage = user.get(\"age\", 0)\nprint(age)\n# 결과: 0"
           },
           {
             "id": "language-python-p02-part-6",
-            "title": "함수 조합[function composition]",
-            "content": "def format_user(user):\n    return f'{user[\"name\"]}:{user[\"age\"]}'\n\nformatted_list = list(map(format_user, user_list))\nprint(formatted_list)",
-            "displayContent": "# 함수 조합[function composition]\ndef format_user(user):\n    return f'{user[\"name\"]}:{user[\"age\"]}'\n\nformatted_list = list(map(format_user, user_list))\nprint(formatted_list)\n# 결과: ['kim:30', 'lee:20', 'park:25']"
+            "title": "값 추가[dict assign]",
+            "content": "user[\"email\"] = \"a@a.com\"\nprint(user[\"email\"])",
+            "displayContent": "# 값 추가[dict assign]\nuser[\"email\"] = \"a@a.com\"\nprint(user[\"email\"])"
+          },
+          {
+            "id": "language-python-p02-part-7",
+            "title": "정렬[sorted key]",
+            "content": "sorted_users = sorted(users, key=lambda u: u[\"age\"], reverse=True)\nprint(sorted_users[0][\"name\"])",
+            "displayContent": "# 정렬[sorted key]\nsorted_users = sorted(users, key=lambda u: u[\"age\"], reverse=True)\nprint(sorted_users[0][\"name\"])\n# 결과: kim"
+          },
+          {
+            "id": "language-python-p02-part-8",
+            "title": "예외 처리[try except]",
+            "content": "try:\n    age = int(\"abc\")\nexcept ValueError:\n    age = 0\nprint(age)",
+            "displayContent": "# 예외 처리[try except]\n# 프로그램이 죽지 않게 막는 장치\ntry:\n    age = int(\"abc\")\nexcept ValueError:\n    age = 0\nprint(age)\n# 결과: 0"
+          },
+          {
+            "id": "language-python-p02-part-9",
+            "title": "JSON 파싱[json.loads]",
+            "content": "import json\n\ndata = json.loads('{\"name\": \"kim\"}')\nprint(data[\"name\"])",
+            "displayContent": "# JSON 파싱[json.loads]\n# API / 로그 / 설정 = 거의 다 JSON\nimport json\n\ndata = json.loads('{\"name\": \"kim\"}')\nprint(data[\"name\"])"
+          },
+          {
+            "id": "language-python-p02-part-10",
+            "title": "JSON 문자열화[json.dumps]",
+            "content": "import json\n\ntext = json.dumps({\"name\": \"kim\", \"age\": 30})\nprint(text)",
+            "displayContent": "# JSON 문자열화[json.dumps]\nimport json\n\ntext = json.dumps({\"name\": \"kim\", \"age\": 30})\nprint(text)"
+          },
+          {
+            "id": "language-python-p02-part-11",
+            "title": "클래스 최소[class]",
+            "content": "class User:\n    def __init__(self, name):\n        self.name = name\n\nu = User(\"kim\")\nprint(u.name)",
+            "displayContent": "# 클래스 최소[class]\n# 실무에서는 데이터 묶음 정도로만 먼저 쓴다\nclass User:\n    def __init__(self, name):\n        self.name = name\n\nu = User(\"kim\")\nprint(u.name)"
+          },
+          {
+            "id": "language-python-p02-part-12",
+            "title": "미션 한 줄[filter + names]",
+            "content": "result = [u[\"name\"] for u in users if u[\"age\"] >= 25]\nprint(result)",
+            "displayContent": "# 미션 한 줄[filter + names]\n# 25세 이상 이름만\nresult = [u[\"name\"] for u in users if u[\"age\"] >= 25]\nprint(result)\n# 결과: ['kim', 'park']"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "react",
+    "label": "React",
+    "folderName": "react",
+    "lessons": [
+      {
+        "id": "language-react-p01",
+        "title": "P01.immer-상태업데이트",
+        "fileName": "P01.immer-상태업데이트.yaml",
+        "sourcePath": "assets/raw/syntax/react/P01.immer-상태업데이트.yaml",
+        "language": "typescript",
+        "parts": [
+          {
+            "id": "language-react-p01-part-1",
+            "title": "produce + find 토글[toggle]",
+            "content": "type Task = { id: number; title: string; done: boolean };\ntype Member = { id: number; name: string; tasks: Task[] };\ntype Org = { teams: { members: Member[] }[] };\n\nconst toggleTask = (taskId: number) => {\n  setOrg((prev) =>\n    produce(prev, (draft) => {\n      const task = _.find(\n        _.flatMap(draft.teams, (t) => _.flatMap(t.members, (m) => m.tasks)),\n        { id: taskId },\n      );\n      if (task) task.done = !task.done;\n    }),\n  );\n};",
+            "displayContent": "// produce + find 토글[toggle] — 깊은 노드를 찾아 done 반전\ntype Task = { id: number; title: string; done: boolean };\ntype Member = { id: number; name: string; tasks: Task[] };\ntype Org = { teams: { members: Member[] }[] };\n\nconst toggleTask = (taskId: number) => {\n  setOrg((prev) =>\n    produce(prev, (draft) => {\n      const task = _.find(\n        _.flatMap(draft.teams, (t) => _.flatMap(t.members, (m) => m.tasks)),\n        { id: taskId },\n      );\n      if (task) task.done = !task.done;\n    }),\n  );\n};"
+          },
+          {
+            "id": "language-react-p01-part-2",
+            "title": "assign 부분 패치[Partial]",
+            "content": "type Task = { id: number; title: string; done: boolean };\n\nconst patchTask = (taskId: number, patch: Partial<Task>) => {\n  setOrg((prev) =>\n    produce(prev, (draft) => {\n      const task = _.find(\n        _.flatMap(draft.teams, (t) => _.flatMap(t.members, (m) => m.tasks)),\n        { id: taskId },\n      );\n      if (task) _.assign(task, patch);\n    }),\n  );\n};",
+            "displayContent": "// assign 부분 패치[Partial] — 찾은 객체에 필드만 덮어씀\ntype Task = { id: number; title: string; done: boolean };\n\nconst patchTask = (taskId: number, patch: Partial<Task>) => {\n  setOrg((prev) =>\n    produce(prev, (draft) => {\n      const task = _.find(\n        _.flatMap(draft.teams, (t) => _.flatMap(t.members, (m) => m.tasks)),\n        { id: taskId },\n      );\n      if (task) _.assign(task, patch);\n    }),\n  );\n};"
+          },
+          {
+            "id": "language-react-p01-part-3",
+            "title": "findIndex + splice 삭제[remove]",
+            "content": "type Task = { id: number; title: string; done: boolean };\ntype Member = { id: number; tasks: Task[] };\n\nconst removeTask = (memberId: number, taskId: number) => {\n  setOrg((prev) =>\n    produce(prev, (draft) => {\n      const member = _.find(\n        _.flatMap(draft.teams, (t) => t.members),\n        { id: memberId },\n      ) as Member | undefined;\n      if (!member) return;\n      const idx = _.findIndex(member.tasks, { id: taskId });\n      if (idx >= 0) member.tasks.splice(idx, 1);\n    }),\n  );\n};",
+            "displayContent": "// findIndex + splice 삭제[remove]\ntype Task = { id: number; title: string; done: boolean };\ntype Member = { id: number; tasks: Task[] };\n\nconst removeTask = (memberId: number, taskId: number) => {\n  setOrg((prev) =>\n    produce(prev, (draft) => {\n      const member = _.find(\n        _.flatMap(draft.teams, (t) => t.members),\n        { id: memberId },\n      ) as Member | undefined;\n      if (!member) return;\n      const idx = _.findIndex(member.tasks, { id: taskId });\n      if (idx >= 0) member.tasks.splice(idx, 1);\n    }),\n  );\n};"
+          },
+          {
+            "id": "language-react-p01-part-4",
+            "title": "변경 없음[same reference]",
+            "content": "const noopUpdate = () => {\n  setOrg((prev) =>\n    produce(prev, (_draft) => {\n    }),\n  );\n};",
+            "displayContent": "// 변경 없음[same reference]\n// draft를 건드리지 않으면 Immer가 원본[original]을 그대로 반환 → React 리렌더[re-render] 없음\nconst noopUpdate = () => {\n  setOrg((prev) =>\n    produce(prev, (_draft) => {\n      // 의도적으로 수정하지 않음\n    }),\n  );\n};\n// 결과: prev === next (참조 동일)"
+          },
+          {
+            "id": "language-react-p01-part-5",
+            "title": "변경 있음[new reference]",
+            "content": "const bumpName = () => {\n  setOrg((prev) =>\n    produce(prev, (draft) => {\n      draft.name = draft.name + \"!\";\n    }),\n  );\n};",
+            "displayContent": "// 변경 있음[new reference]\n// draft를 수정하면 Immer가 새 객체[new object]를 반환 → 리렌더[re-render] 발생\nconst bumpName = () => {\n  setOrg((prev) =>\n    produce(prev, (draft) => {\n      draft.name = draft.name + \"!\";\n    }),\n  );\n};\n// 결과: prev !== next (새 참조)"
+          },
+          {
+            "id": "language-react-p01-part-6",
+            "title": "업데이터 팩토리[makeTaskUpdater]",
+            "content": "type Task = { id: number; title: string; done: boolean };\n\nconst makeTaskUpdater = (fn: (task: Task) => void) => (taskId: number) => {\n  setOrg((prev) =>\n    produce(prev, (draft) => {\n      const task = _.find(\n        _.flatMap(draft.teams, (t) => _.flatMap(t.members, (m) => m.tasks)),\n        { id: taskId },\n      );\n      if (task) fn(task);\n    }),\n  );\n};\n\nconst markDone = makeTaskUpdater((task) => {\n  task.done = true;\n});",
+            "displayContent": "// 업데이터 팩토리[makeTaskUpdater] — 같은 produce 뼈대를 재사용\ntype Task = { id: number; title: string; done: boolean };\n\nconst makeTaskUpdater = (fn: (task: Task) => void) => (taskId: number) => {\n  setOrg((prev) =>\n    produce(prev, (draft) => {\n      const task = _.find(\n        _.flatMap(draft.teams, (t) => _.flatMap(t.members, (m) => m.tasks)),\n        { id: taskId },\n      );\n      if (task) fn(task);\n    }),\n  );\n};\n\nconst markDone = makeTaskUpdater((task) => {\n  task.done = true;\n});"
+          },
+          {
+            "id": "language-react-p01-part-7",
+            "title": "배치 패치[batch assign]",
+            "content": "type Task = { id: number; title: string; done: boolean };\n\nconst patchMany = (items: { id: number; patch: Partial<Task> }[]) => {\n  setOrg((prev) =>\n    produce(prev, (draft) => {\n      const all = _.flatMap(draft.teams, (t) =>\n        _.flatMap(t.members, (m) => m.tasks),\n      );\n      for (const item of items) {\n        const task = _.find(all, { id: item.id });\n        if (task) _.assign(task, item.patch);\n      }\n    }),\n  );\n};",
+            "displayContent": "// 배치 패치[batch assign] — 한 번의 produce 안에서 여러 건 갱신\ntype Task = { id: number; title: string; done: boolean };\n\nconst patchMany = (items: { id: number; patch: Partial<Task> }[]) => {\n  setOrg((prev) =>\n    produce(prev, (draft) => {\n      const all = _.flatMap(draft.teams, (t) =>\n        _.flatMap(t.members, (m) => m.tasks),\n      );\n      for (const item of items) {\n        const task = _.find(all, { id: item.id });\n        if (task) _.assign(task, item.patch);\n      }\n    }),\n  );\n};"
+          },
+          {
+            "id": "language-react-p01-part-8",
+            "title": "get + 키 재할당[path update]",
+            "content": "type Member = { id: number; name: string };\n\nconst renameMember = (memberId: number, name: string) => {\n  setOrg((prev) =>\n    produce(prev, (draft) => {\n      const members = _.get(draft, \"teams[0].members\") as Member[] | undefined;\n      if (!members) return;\n      const idx = _.findIndex(members, { id: memberId });\n      if (idx < 0) return;\n      members[idx] = { ...members[idx], name };\n    }),\n  );\n};",
+            "displayContent": "// get + 키 재할당[path update]\n// _.get으로 부모를 찾고, 부모[key]에 새 값을 넣으면 Immer가 경로를 추적한다\ntype Member = { id: number; name: string };\n\nconst renameMember = (memberId: number, name: string) => {\n  setOrg((prev) =>\n    produce(prev, (draft) => {\n      const members = _.get(draft, \"teams[0].members\") as Member[] | undefined;\n      if (!members) return;\n      const idx = _.findIndex(members, { id: memberId });\n      if (idx < 0) return;\n      members[idx] = { ...members[idx], name };\n    }),\n  );\n};"
           }
         ]
       }
@@ -2517,6 +3267,75 @@ export const languageTracks: LanguageTrack[] = [
             "displayContent": "// 주석 줄 제외하고 호출만[negative lookahead] — m 플래그로 줄 단위 검사\nvar codeText = '// AAA()\\nAAA()';\ncodeText.match(/^(?!\\s*\\/\\/).*AAA\\(\\)/m)[0];\n// 결과: AAA()  (주석 처리된 첫 줄은 제외)"
           }
         ]
+      },
+      {
+        "id": "language-regex-for-javascript-p03",
+        "title": "P03.VSCode-실무검색",
+        "fileName": "P03.VSCode-실무검색.yaml",
+        "sourcePath": "assets/raw/syntax/regex-for-javascript/P03.VSCode-실무검색.yaml",
+        "language": "javascript",
+        "parts": [
+          {
+            "id": "language-regex-for-javascript-p03-part-1",
+            "title": "함수 호출만[\\\\bAAA\\\\s*\\\\(]",
+            "content": "var code = \"AAA(); const x = AAA(1);\";\ncode.match(/\\bAAA\\s*\\(/g);",
+            "displayContent": "// 함수 호출만[\\bAAA\\s*\\(]\n// VS Code: Ctrl+Shift+F → Regex ON\n// 정의·주석도 같이 잡힐 수 있음\nvar code = \"AAA(); const x = AAA(1);\";\ncode.match(/\\bAAA\\s*\\(/g);\n// 결과: ['AAA(', 'AAA(']"
+          },
+          {
+            "id": "language-regex-for-javascript-p03-part-2",
+            "title": "정의부 제외 호출[lookbehind]",
+            "content": "var src = \"function AAA() {}\\nAAA();\";\nsrc.match(/(?<!function\\s)\\bAAA\\s*\\(/g);",
+            "displayContent": "// 정의부 제외 호출[lookbehind]\n// function AAA( 는 빼고 호출만 (JS/TS용)\nvar src = \"function AAA() {}\\nAAA();\";\nsrc.match(/(?<!function\\s)\\bAAA\\s*\\(/g);\n// 결과: ['AAA(']"
+          },
+          {
+            "id": "language-regex-for-javascript-p03-part-3",
+            "title": "주석 줄 제외[negative lookahead]",
+            "content": "var code = \"// AAA()\\nAAA()\";\ncode.match(/^(?!\\s*\\/\\/).*?\\bAAA\\s*\\(/m);",
+            "displayContent": "// 주석 줄 제외[negative lookahead]\nvar code = \"// AAA()\\nAAA()\";\ncode.match(/^(?!\\s*\\/\\/).*?\\bAAA\\s*\\(/m);\n// 결과: 두 번째 줄의 AAA("
+          },
+          {
+            "id": "language-regex-for-javascript-p03-part-4",
+            "title": "Day1 - 확장자 앞 글자[lookaround]",
+            "content": "\"123abc.mp4\".match(/(?<=\\\\d+)[A-Za-z]+(?=\\\\.)/)[0];",
+            "displayContent": "// Day1 - 확장자 앞 글자[lookaround]\n// 123abc.mp4 → abc\n\"123abc.mp4\".match(/(?<=\\d+)[A-Za-z]+(?=\\.)/)[0];\n// 결과: abc"
+          },
+          {
+            "id": "language-regex-for-javascript-p03-part-5",
+            "title": "Day2 - 여러 줄 함수[\\\\s\\\\S]",
+            "content": "var fn = `func(\n  a,\n  b,\n  c\n)`;\nfn.match(/func\\([\\s\\S]*?\\)/)[0];",
+            "displayContent": "// Day2 - 여러 줄 함수[\\s\\S]\nvar fn = `func(\n  a,\n  b,\n  c\n)`;\nfn.match(/func\\([\\s\\S]*?\\)/)[0];"
+          },
+          {
+            "id": "language-regex-for-javascript-p03-part-6",
+            "title": "Day3 - error 줄만",
+            "content": "var log = \"error: xxx\\ninfo: yyy\\nerror: zzz\";\nlog.match(/^error:.*$/gm);",
+            "displayContent": "// Day3 - error 줄만\nvar log = \"error: xxx\\ninfo: yyy\\nerror: zzz\";\nlog.match(/^error:.*$/gm);\n// 결과: ['error: xxx', 'error: zzz']"
+          },
+          {
+            "id": "language-regex-for-javascript-p03-part-7",
+            "title": "Day5 - 파일명 숫자만",
+            "content": "\"img_001.png\".match(/\\d+/)[0];\n\"img_002.png\".match(/\\d+/)[0];",
+            "displayContent": "// Day5 - 파일명 숫자만\n\"img_001.png\".match(/\\d+/)[0];\n\"img_002.png\".match(/\\d+/)[0];\n// 결과: 001 / 002"
+          },
+          {
+            "id": "language-regex-for-javascript-p03-part-8",
+            "title": "Day6 - 실무용 이메일",
+            "content": "var emailRe = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\nemailRe.test(\"user@email.com\");",
+            "displayContent": "// Day6 - 실무용 이메일 (완벽 검증 X, 실무용 O)\nvar emailRe = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\nemailRe.test(\"user@email.com\");\n// 결과: true"
+          },
+          {
+            "id": "language-regex-for-javascript-p03-part-9",
+            "title": "Day7 - 문자열 안 호출 제외",
+            "content": "var src = 'const a = \"AAA()\";\\nAAA();';\nsrc.match(/(?<![\"'`])\\bAAA\\s*\\(/g);",
+            "displayContent": "// Day7 - 문자열 안 호출 제외 (단순 버전)\n// 따옴표 안 AAA()는 빼고, 코드의 AAA()만\nvar src = 'const a = \"AAA()\";\\nAAA();';\nsrc.match(/(?<![\"'`])\\bAAA\\s*\\(/g);\n// 결과: ['AAA(']  (문자열 쪽은 제외 시도)"
+          },
+          {
+            "id": "language-regex-for-javascript-p03-part-10",
+            "title": "치환 - 날짜 포맷[replace]",
+            "content": "\"2026-03-18\".replace(/(\\\\d{4})-(\\\\d{2})-(\\\\d{2})/, \"$3/$2/$1\");",
+            "displayContent": "// 치환 - 날짜 포맷[replace]\n\"2026-03-18\".replace(/(\\d{4})-(\\d{2})-(\\d{2})/, \"$3/$2/$1\");\n// 결과: 18/03/2026"
+          }
+        ]
       }
     ]
   },
@@ -2527,109 +3346,172 @@ export const languageTracks: LanguageTrack[] = [
     "lessons": [
       {
         "id": "language-rust-p01",
-        "title": "P01.기본-패턴",
-        "fileName": "P01.기본-패턴.yaml",
-        "sourcePath": "assets/raw/syntax/rust/P01.기본-패턴.yaml",
+        "title": "P01.기본-문법",
+        "fileName": "P01.기본-문법.yaml",
+        "sourcePath": "assets/raw/syntax/rust/P01.기본-문법.yaml",
         "language": "rust",
         "parts": [
           {
             "id": "language-rust-p01-part-1",
-            "title": "구조체 정의[struct / derive]",
-            "content": "#[derive(Debug)]\nstruct User {\n    name: String,\n    age: u32,\n}",
-            "displayContent": "// 구조체 정의[struct / derive] - Debug 파생으로 {:?} 출력 가능\n#[derive(Debug)]\nstruct User {\n    name: String,\n    age: u32,\n}"
-          },
-          {
-            "id": "language-rust-p01-part-1b",
-            "title": "함수 정의[function]",
-            "content": "fn add(num_a: i32, num_b: i32) -> i32 {\n    num_a + num_b\n}\n\nfn main() {",
-            "displayContent": "// 함수 정의[function] - 마지막 표현식이 반환값 (세미콜론 없음)\nfn add(num_a: i32, num_b: i32) -> i32 {\n    num_a + num_b\n}\n\nfn main() {"
+            "title": "변수와 가변성[let / let mut]",
+            "content": "let user_name = \"kim\";\nlet mut count = 1;\ncount += 1;\nprintln!(\"{} {}\", user_name, count);",
+            "displayContent": "// 변수와 가변성[let / let mut]\n// cargo new hello && cargo run 으로 실행한다 (주석만)\nlet user_name = \"kim\";\nlet mut count = 1;\ncount += 1;\nprintln!(\"{} {}\", user_name, count);\n// 결과: kim 2"
           },
           {
             "id": "language-rust-p01-part-2",
-            "title": "변수와 가변성[mutability]",
-            "content": "    let user_name = \"kim\";\n    let mut count_value = 1;\n    count_value += 1;\n    println!(\"{} {}\", user_name, count_value);",
-            "displayContent": "    // 변수와 가변성[mutability]\n    let user_name = \"kim\";\n    let mut count_value = 1;\n    count_value += 1;\n    println!(\"{} {}\", user_name, count_value);\n    // 결과: kim 2"
+            "title": "기본 타입[i32 u32 f64 bool char]",
+            "content": "let score: i32 = 95;\nlet count: u32 = 3;\nlet ratio: f64 = 3.14;\nlet is_ok: bool = true;\nlet grade: char = 'A';\nprintln!(\"{} {} {} {} {}\", score, count, ratio, is_ok, grade);",
+            "displayContent": "// 기본 타입[i32 u32 f64 bool char]\nlet score: i32 = 95;\nlet count: u32 = 3;\nlet ratio: f64 = 3.14;\nlet is_ok: bool = true;\nlet grade: char = 'A';\nprintln!(\"{} {} {} {} {}\", score, count, ratio, is_ok, grade);\n// 결과: 95 3 3.14 true A"
           },
           {
             "id": "language-rust-p01-part-3",
-            "title": "기본 타입[primitive type]",
-            "content": "    let score_value: i32 = 95;\n    let ratio_value: f64 = 3.14;\n    let is_admin: bool = true;\n    println!(\"{} {} {}\", score_value, ratio_value, is_admin);",
-            "displayContent": "    // 기본 타입[primitive type]\n    let score_value: i32 = 95;\n    let ratio_value: f64 = 3.14;\n    let is_admin: bool = true;\n    println!(\"{} {} {}\", score_value, ratio_value, is_admin);\n    // 결과: 95 3.14 true"
+            "title": "문자열[String / &str]",
+            "content": "let label: &str = \"hello\";\nlet text: String = String::from(\"rust\");\nprintln!(\"{} {}\", label, text);",
+            "displayContent": "// 문자열[String / &str]\n// &str = 문자열 슬라이스, String = 소유하는 문자열\nlet label: &str = \"hello\";\nlet text: String = String::from(\"rust\");\nprintln!(\"{} {}\", label, text);\n// 결과: hello rust"
           },
           {
             "id": "language-rust-p01-part-4",
-            "title": "조건문[condition]",
-            "content": "    if score_value >= 90 {\n        println!(\"A\");\n    } else {\n        println!(\"B\");\n    }",
-            "displayContent": "    // 조건문[condition]\n    if score_value >= 90 {\n        println!(\"A\");\n    } else {\n        println!(\"B\");\n    }\n    // 결과: A"
+            "title": "연산[operator]",
+            "content": "let sum = 10 + 3;\nlet rem = 10 % 3;\nlet ok = sum > 10 && rem == 1;\nprintln!(\"{} {} {}\", sum, rem, ok);",
+            "displayContent": "// 연산[operator]\nlet sum = 10 + 3;\nlet rem = 10 % 3;\nlet ok = sum > 10 && rem == 1;\nprintln!(\"{} {} {}\", sum, rem, ok);\n// 결과: 13 1 true"
           },
           {
             "id": "language-rust-p01-part-5",
-            "title": "반복문[loop]",
-            "content": "    let color_list = [\"red\", \"green\", \"blue\"];\n    for color_item in color_list {\n        println!(\"{}\", color_item);\n    }",
-            "displayContent": "    // 반복문[loop]\n    let color_list = [\"red\", \"green\", \"blue\"];\n    for color_item in color_list {\n        println!(\"{}\", color_item);\n    }\n    // 결과: red / green / blue"
+            "title": "조건문[if / else]",
+            "content": "let score = 95;\nif score >= 90 {\n    println!(\"A\");\n} else {\n    println!(\"B\");\n}",
+            "displayContent": "// 조건문[if / else]\nlet score = 95;\nif score >= 90 {\n    println!(\"A\");\n} else {\n    println!(\"B\");\n}\n// 결과: A"
           },
           {
             "id": "language-rust-p01-part-6",
-            "title": "벡터[vector]",
-            "content": "    let mut number_list = vec![1, 2, 3];\n    number_list.push(4);\n    println!(\"{:?}\", number_list);",
-            "displayContent": "    // 벡터[vector]\n    let mut number_list = vec![1, 2, 3];\n    number_list.push(4);\n    println!(\"{:?}\", number_list);\n    // 결과: [1, 2, 3, 4]"
+            "title": "조건 표현식[if expression]",
+            "content": "let score = 80;\nlet grade = if score >= 90 { \"A\" } else { \"B\" };\nprintln!(\"{}\", grade);",
+            "displayContent": "// 조건 표현식[if expression] - if도 값을 만든다\nlet score = 80;\nlet grade = if score >= 90 { \"A\" } else { \"B\" };\nprintln!(\"{}\", grade);\n// 결과: B"
           },
           {
             "id": "language-rust-p01-part-7",
-            "title": "구조체[struct]",
-            "content": "    let user_item = User {\n        name: String::from(\"lee\"),\n        age: 28,\n    };\n    println!(\"{:?}\", user_item);\n    println!(\"{} {}\", user_item.name, user_item.age);",
-            "displayContent": "    // 구조체[struct]\n    let user_item = User {\n        name: String::from(\"lee\"),\n        age: 28,\n    };\n    println!(\"{:?}\", user_item);\n    println!(\"{} {}\", user_item.name, user_item.age);\n    // 결과: lee 28"
+            "title": "반복[loop / while / for]",
+            "content": "let mut n = 0;\nwhile n < 3 {\n    n += 1;\n}\nfor i in 0..5 {\n    println!(\"{}\", i);\n}",
+            "displayContent": "// 반복[loop / while / for]\nlet mut n = 0;\nwhile n < 3 {\n    n += 1;\n}\nfor i in 0..5 {\n    println!(\"{}\", i);\n}\n// 결과: 0 1 2 3 4"
           },
           {
             "id": "language-rust-p01-part-8",
-            "title": "옵션[option]",
-            "content": "    let maybe_value = Some(10);\n    match maybe_value {\n        Some(value) => println!(\"{}\", value),\n        None => println!(\"none\"),\n    }",
-            "displayContent": "    // 옵션[option]\n    let maybe_value = Some(10);\n    match maybe_value {\n        Some(value) => println!(\"{}\", value),\n        None => println!(\"none\"),\n    }\n    // 결과: 10"
-          },
-          {
-            "id": "language-rust-p01-part-9",
-            "title": "함수[function]",
-            "content": "    let sum_value = add(3, 4);\n    println!(\"{}\", sum_value);\n}",
-            "displayContent": "    // 함수[function]\n    let sum_value = add(3, 4);\n    println!(\"{}\", sum_value);\n    // 결과: 7\n}"
+            "title": "함수[fn]",
+            "content": "fn add(a: i32, b: i32) -> i32 {\n    a + b\n}\n\nlet sum = add(3, 4);\nprintln!(\"{}\", sum);",
+            "displayContent": "// 함수[fn] - 마지막 표현식이 반환값 (세미콜론 없음)\nfn add(a: i32, b: i32) -> i32 {\n    a + b\n}\n\nlet sum = add(3, 4);\nprintln!(\"{}\", sum);\n// 결과: 7"
           }
         ]
       },
       {
         "id": "language-rust-p02",
-        "title": "P02.실무-패턴",
-        "fileName": "P02.실무-패턴.yaml",
-        "sourcePath": "assets/raw/syntax/rust/P02.실무-패턴.yaml",
+        "title": "P02.소유권-구조체",
+        "fileName": "P02.소유권-구조체.yaml",
+        "sourcePath": "assets/raw/syntax/rust/P02.소유권-구조체.yaml",
         "language": "rust",
         "parts": [
           {
             "id": "language-rust-p02-part-1",
-            "title": "임포트[use]",
-            "content": "use std::collections::HashMap;\n\nfn main() {",
-            "displayContent": "// 임포트[use] - 표준 라이브러리 컬렉션 가져오기\nuse std::collections::HashMap;\n\nfn main() {"
+            "title": "이동과 복사[move / copy]",
+            "content": "let a = 10;\nlet b = a;\nlet s1 = String::from(\"kim\");\nlet s2 = s1;\nprintln!(\"{} {}\", b, s2);",
+            "displayContent": "// 이동과 복사[move / copy]\n// i32는 Copy, String은 이동[move]된다\nlet a = 10;\nlet b = a;\nlet s1 = String::from(\"kim\");\nlet s2 = s1;\nprintln!(\"{} {}\", b, s2);\n// 결과: 10 kim"
+          },
+          {
+            "id": "language-rust-p02-part-2",
+            "title": "문자열 소유[String vs &str]",
+            "content": "let owned = String::from(\"hello\");\nlet borrowed: &str = &owned;\nprintln!(\"{} {}\", owned, borrowed);",
+            "displayContent": "// 문자열 소유[String vs &str]\nlet owned = String::from(\"hello\");\nlet borrowed: &str = &owned;\nprintln!(\"{} {}\", owned, borrowed);\n// 결과: hello hello"
           },
           {
             "id": "language-rust-p02-part-3",
-            "title": "문자열[string]",
-            "content": "    let text_value = String::from(\"hello rust\");\n    println!(\"{}\", text_value.to_uppercase());",
-            "displayContent": "    // 문자열[string]\n    let text_value = String::from(\"hello rust\");\n    println!(\"{}\", text_value.to_uppercase());\n    // 결과: HELLO RUST"
+            "title": "불변 참조[reference &]",
+            "content": "fn len_of(text: &str) -> usize {\n    text.len()\n}\n\nlet name = String::from(\"rust\");\nprintln!(\"{}\", len_of(&name));",
+            "displayContent": "// 불변 참조[reference &]\nfn len_of(text: &str) -> usize {\n    text.len()\n}\n\nlet name = String::from(\"rust\");\nprintln!(\"{}\", len_of(&name));\n// 결과: 4"
           },
           {
             "id": "language-rust-p02-part-4",
-            "title": "해시맵[hash map]",
-            "content": "    let mut age_map = HashMap::new();\n    age_map.insert(\"kim\", 30);\n    age_map.insert(\"lee\", 25);\n    println!(\"{:?}\", age_map.get(\"kim\"));",
-            "displayContent": "    // 해시맵[hash map]\n    let mut age_map = HashMap::new();\n    age_map.insert(\"kim\", 30);\n    age_map.insert(\"lee\", 25);\n    println!(\"{:?}\", age_map.get(\"kim\"));\n    // 결과: Some(30)"
+            "title": "가변 참조[&mut]",
+            "content": "fn bump(value: &mut i32) {\n    *value += 1;\n}\n\nlet mut count = 1;\nbump(&mut count);\nprintln!(\"{}\", count);",
+            "displayContent": "// 가변 참조[&mut]\nfn bump(value: &mut i32) {\n    *value += 1;\n}\n\nlet mut count = 1;\nbump(&mut count);\nprintln!(\"{}\", count);\n// 결과: 2"
           },
           {
             "id": "language-rust-p02-part-5",
-            "title": "패턴 매칭[pattern matching]",
-            "content": "    let maybe_score = Some(100);\n    if let Some(score) = maybe_score {\n        println!(\"{}\", score);\n    }\n\n    let parsed_value = \"42\".parse::<i32>();\n    match parsed_value {\n        Ok(value) => println!(\"{}\", value),\n        Err(_) => println!(\"parse error\"),\n    }",
-            "displayContent": "    // 패턴 매칭[pattern matching]\n    let maybe_score = Some(100);\n    if let Some(score) = maybe_score {\n        println!(\"{}\", score);\n    }\n    // 결과: 100\n\n    // 결과 타입[result]\n    let parsed_value = \"42\".parse::<i32>();\n    match parsed_value {\n        Ok(value) => println!(\"{}\", value),\n        Err(_) => println!(\"parse error\"),\n    }\n    // 결과: 42"
+            "title": "구조체[struct]",
+            "content": "#[derive(Debug)]\nstruct User {\n    name: String,\n    age: u32,\n}\n\nlet user = User {\n    name: String::from(\"lee\"),\n    age: 28,\n};\nprintln!(\"{} {}\", user.name, user.age);",
+            "displayContent": "// 구조체[struct]\n#[derive(Debug)]\nstruct User {\n    name: String,\n    age: u32,\n}\n\nlet user = User {\n    name: String::from(\"lee\"),\n    age: 28,\n};\nprintln!(\"{} {}\", user.name, user.age);\n// 결과: lee 28"
           },
           {
             "id": "language-rust-p02-part-6",
-            "title": "반복자[iterator]",
-            "content": "    let nums = vec![1, 2, 3];\n    let doubled: Vec<i32> = nums.iter().map(|item| item * 2).collect();\n    println!(\"{:?}\", doubled);\n}",
-            "displayContent": "    // 반복자[iterator]\n    let nums = vec![1, 2, 3];\n    let doubled: Vec<i32> = nums.iter().map(|item| item * 2).collect();\n    println!(\"{:?}\", doubled);\n    // 결과: [2, 4, 6]\n}"
+            "title": "메서드[impl]",
+            "content": "struct Rect {\n    w: u32,\n    h: u32,\n}\n\nimpl Rect {\n    fn area(&self) -> u32 {\n        self.w * self.h\n    }\n}\n\nlet r = Rect { w: 3, h: 4 };\nprintln!(\"{}\", r.area());",
+            "displayContent": "// 메서드[impl]\nstruct Rect {\n    w: u32,\n    h: u32,\n}\n\nimpl Rect {\n    fn area(&self) -> u32 {\n        self.w * self.h\n    }\n}\n\nlet r = Rect { w: 3, h: 4 };\nprintln!(\"{}\", r.area());\n// 결과: 12"
+          },
+          {
+            "id": "language-rust-p02-part-7",
+            "title": "열거형[enum / match]",
+            "content": "enum Role {\n    Admin,\n    Member,\n}\n\nlet role = Role::Admin;\nmatch role {\n    Role::Admin => println!(\"admin\"),\n    Role::Member => println!(\"member\"),\n}",
+            "displayContent": "// 열거형[enum / match]\nenum Role {\n    Admin,\n    Member,\n}\n\nlet role = Role::Admin;\nmatch role {\n    Role::Admin => println!(\"admin\"),\n    Role::Member => println!(\"member\"),\n}\n// 결과: admin"
+          },
+          {
+            "id": "language-rust-p02-part-8",
+            "title": "옵션[Option]",
+            "content": "let maybe = Some(10);\nmatch maybe {\n    Some(v) => println!(\"{}\", v),\n    None => println!(\"none\"),\n}",
+            "displayContent": "// 옵션[Option] - 값이 있을 수도 없을 수도 있다\nlet maybe = Some(10);\nmatch maybe {\n    Some(v) => println!(\"{}\", v),\n    None => println!(\"none\"),\n}\n// 결과: 10"
+          },
+          {
+            "id": "language-rust-p02-part-9",
+            "title": "결과[Result]",
+            "content": "let parsed = \"42\".parse::<i32>();\nmatch parsed {\n    Ok(v) => println!(\"{}\", v),\n    Err(_) => println!(\"parse error\"),\n}",
+            "displayContent": "// 결과[Result] - 성공 Ok / 실패 Err\nlet parsed = \"42\".parse::<i32>();\nmatch parsed {\n    Ok(v) => println!(\"{}\", v),\n    Err(_) => println!(\"parse error\"),\n}\n// 결과: 42"
+          }
+        ]
+      },
+      {
+        "id": "language-rust-p03",
+        "title": "P03.컬렉션-모듈",
+        "fileName": "P03.컬렉션-모듈.yaml",
+        "sourcePath": "assets/raw/syntax/rust/P03.컬렉션-모듈.yaml",
+        "language": "rust",
+        "parts": [
+          {
+            "id": "language-rust-p03-part-1",
+            "title": "벡터[Vec]",
+            "content": "let mut nums = vec![1, 2, 3];\nnums.push(4);\nprintln!(\"{:?}\", nums);",
+            "displayContent": "// 벡터[Vec]\nlet mut nums = vec![1, 2, 3];\nnums.push(4);\nprintln!(\"{:?}\", nums);\n// 결과: [1, 2, 3, 4]"
+          },
+          {
+            "id": "language-rust-p03-part-2",
+            "title": "해시맵[HashMap]",
+            "content": "use std::collections::HashMap;\n\nlet mut ages = HashMap::new();\nages.insert(\"kim\", 30);\nages.insert(\"lee\", 25);\nprintln!(\"{:?}\", ages.get(\"kim\"));",
+            "displayContent": "// 해시맵[HashMap]\nuse std::collections::HashMap;\n\nlet mut ages = HashMap::new();\nages.insert(\"kim\", 30);\nages.insert(\"lee\", 25);\nprintln!(\"{:?}\", ages.get(\"kim\"));\n// 결과: Some(30)"
+          },
+          {
+            "id": "language-rust-p03-part-3",
+            "title": "반복자[iter / map / filter]",
+            "content": "let nums = vec![1, 2, 3, 4];\nlet evens: Vec<i32> = nums\n    .iter()\n    .filter(|n| *n % 2 == 0)\n    .map(|n| n * 10)\n    .collect();\nprintln!(\"{:?}\", evens);",
+            "displayContent": "// 반복자[iter / map / filter]\nlet nums = vec![1, 2, 3, 4];\nlet evens: Vec<i32> = nums\n    .iter()\n    .filter(|n| *n % 2 == 0)\n    .map(|n| n * 10)\n    .collect();\nprintln!(\"{:?}\", evens);\n// 결과: [20, 40]"
+          },
+          {
+            "id": "language-rust-p03-part-4",
+            "title": "모듈[mod / pub]",
+            "content": "mod util {\n    pub fn greet(name: &str) -> String {\n        format!(\"hi {}\", name)\n    }\n}\n\nprintln!(\"{}\", util::greet(\"kim\"));",
+            "displayContent": "// 모듈[mod / pub]\nmod util {\n    pub fn greet(name: &str) -> String {\n        format!(\"hi {}\", name)\n    }\n}\n\nprintln!(\"{}\", util::greet(\"kim\"));\n// 결과: hi kim"
+          },
+          {
+            "id": "language-rust-p03-part-5",
+            "title": "의존성 예시[Cargo.toml / serde]",
+            "content": "use serde::Serialize;\n\n#[derive(Serialize)]\nstruct User {\n    name: String,\n}\n\nlet user = User {\n    name: String::from(\"kim\"),\n};\nprintln!(\"{}\", user.name);",
+            "displayContent": "// 의존성 예시[Cargo.toml / serde] - toml은 참고용 주석\n// [dependencies]\n// serde = { version = \"1\", features = [\"derive\"] }\nuse serde::Serialize;\n\n#[derive(Serialize)]\nstruct User {\n    name: String,\n}\n\nlet user = User {\n    name: String::from(\"kim\"),\n};\nprintln!(\"{}\", user.name);\n// 결과: kim"
+          },
+          {
+            "id": "language-rust-p03-part-6",
+            "title": "트레이트 맛보기[trait]",
+            "content": "trait Greet {\n    fn hello(&self) -> String;\n}\n\nstruct Guest {\n    name: String,\n}\n\nimpl Greet for Guest {\n    fn hello(&self) -> String {\n        format!(\"hi {}\", self.name)\n    }\n}\n\nlet g = Guest {\n    name: String::from(\"kim\"),\n};\nprintln!(\"{}\", g.hello());",
+            "displayContent": "// 트레이트 맛보기[trait] - 공통 동작 약속\ntrait Greet {\n    fn hello(&self) -> String;\n}\n\nstruct Guest {\n    name: String,\n}\n\nimpl Greet for Guest {\n    fn hello(&self) -> String {\n        format!(\"hi {}\", self.name)\n    }\n}\n\nlet g = Guest {\n    name: String::from(\"kim\"),\n};\nprintln!(\"{}\", g.hello());\n// 결과: hi kim"
+          },
+          {
+            "id": "language-rust-p03-part-7",
+            "title": "에러 전파 맛보기[?]",
+            "content": "fn parse_score(text: &str) -> Result<i32, std::num::ParseIntError> {\n    let value = text.parse::<i32>()?;\n    Ok(value)\n}\n\nprintln!(\"{:?}\", parse_score(\"90\"));",
+            "displayContent": "// 에러 전파 맛보기[?] - Err면 바로 반환\nfn parse_score(text: &str) -> Result<i32, std::num::ParseIntError> {\n    let value = text.parse::<i32>()?;\n    Ok(value)\n}\n\nprintln!(\"{:?}\", parse_score(\"90\"));\n// 결과: Ok(90)"
           }
         ]
       }
@@ -2709,9 +3591,9 @@ export const languageTracks: LanguageTrack[] = [
           },
           {
             "id": "language-sql-p01-part-11",
-            "title": "조인[join]",
-            "content": "CREATE TABLE orders (\n    order_id    INTEGER PRIMARY KEY,\n    user_id     INTEGER,\n    total_price INTEGER\n);\n\nINSERT INTO orders (order_id, user_id, total_price)\nVALUES (100, 1, 5000);\n\nSELECT u.user_name, o.total_price\nFROM users u\nJOIN orders o\n  ON u.user_id = o.user_id;",
-            "displayContent": "-- 조인[join]\nCREATE TABLE orders (\n    order_id    INTEGER PRIMARY KEY,\n    user_id     INTEGER,\n    total_price INTEGER\n);\n\nINSERT INTO orders (order_id, user_id, total_price)\nVALUES (100, 1, 5000);\n\nSELECT u.user_name, o.total_price\nFROM users u\nJOIN orders o\n  ON u.user_id = o.user_id;\n-- 결과:\n-- kim, 5000"
+            "title": "내부 조인[inner join]",
+            "content": "SELECT u.user_name, o.total_price\nFROM users u\nINNER JOIN orders o\n  ON u.user_id = o.user_id;",
+            "displayContent": "-- 내부 조인[inner join]\n-- 조인 조건이 맞는 행만 합친다\nSELECT u.user_name, o.total_price\nFROM users u\nINNER JOIN orders o\n  ON u.user_id = o.user_id;\n-- 결과: 주문이 있는 사용자만"
           },
           {
             "id": "language-sql-p01-part-12",
@@ -2775,6 +3657,69 @@ export const languageTracks: LanguageTrack[] = [
             "title": "케이스[case]",
             "content": "SELECT user_name,\n       CASE\n           WHEN user_age >= 30 THEN 'senior'\n           ELSE 'junior'\n       END AS age_group\nFROM users;",
             "displayContent": "-- 케이스[case]\nSELECT user_name,\n       CASE\n           WHEN user_age >= 30 THEN 'senior'\n           ELSE 'junior'\n       END AS age_group\nFROM users;\n-- 결과: 조건에 따라 문자열 분기"
+          },
+          {
+            "id": "language-sql-p02-part-8",
+            "title": "커밋[commit]",
+            "content": "COMMIT;",
+            "displayContent": "-- 커밋[commit]\n-- 트랜잭션 변경을 DB에 확정한다\nCOMMIT;"
+          },
+          {
+            "id": "language-sql-p02-part-9",
+            "title": "롤백[rollback]",
+            "content": "ROLLBACK;",
+            "displayContent": "-- 롤백[rollback]\n-- 트랜잭션 변경을 전부 취소한다\nROLLBACK;"
+          }
+        ]
+      },
+      {
+        "id": "language-sql-p03",
+        "title": "P03.조인-패턴",
+        "fileName": "P03.조인-패턴.yaml",
+        "sourcePath": "assets/raw/syntax/sql/P03.조인-패턴.yaml",
+        "language": "sql",
+        "parts": [
+          {
+            "id": "language-sql-p03-part-1",
+            "title": "내부 조인[inner join]",
+            "content": "SELECT e.emp_name, d.dept_name\nFROM employees e\nINNER JOIN departments d\n  ON e.dept_id = d.dept_id;",
+            "displayContent": "-- 내부 조인[inner join]\n-- 양쪽에 매칭되는 행만 남긴다\nSELECT e.emp_name, d.dept_name\nFROM employees e\nINNER JOIN departments d\n  ON e.dept_id = d.dept_id;"
+          },
+          {
+            "id": "language-sql-p03-part-2",
+            "title": "왼쪽 조인[left join]",
+            "content": "SELECT e.emp_name, d.dept_name\nFROM employees e\nLEFT JOIN departments d\n  ON e.dept_id = d.dept_id;",
+            "displayContent": "-- 왼쪽 조인[left join]\n-- 왼쪽(employees)은 전부, 오른쪽 없으면 NULL\nSELECT e.emp_name, d.dept_name\nFROM employees e\nLEFT JOIN departments d\n  ON e.dept_id = d.dept_id;"
+          },
+          {
+            "id": "language-sql-p03-part-3",
+            "title": "오른쪽 조인[right join]",
+            "content": "SELECT e.emp_name, d.dept_name\nFROM employees e\nRIGHT JOIN departments d\n  ON e.dept_id = d.dept_id;",
+            "displayContent": "-- 오른쪽 조인[right join]\n-- 오른쪽(departments)은 전부 유지\nSELECT e.emp_name, d.dept_name\nFROM employees e\nRIGHT JOIN departments d\n  ON e.dept_id = d.dept_id;"
+          },
+          {
+            "id": "language-sql-p03-part-4",
+            "title": "완전 외부 조인[full outer join]",
+            "content": "SELECT e.emp_name, d.dept_name\nFROM employees e\nFULL OUTER JOIN departments d\n  ON e.dept_id = d.dept_id;",
+            "displayContent": "-- 완전 외부 조인[full outer join]\n-- 양쪽 모두 유지, 없으면 NULL\nSELECT e.emp_name, d.dept_name\nFROM employees e\nFULL OUTER JOIN departments d\n  ON e.dept_id = d.dept_id;"
+          },
+          {
+            "id": "language-sql-p03-part-5",
+            "title": "ON 다중 조건[composite key]",
+            "content": "SELECT o.order_id, i.item_name\nFROM orders o\nINNER JOIN order_items i\n  ON o.order_id = i.order_id\n AND o.store_id = i.store_id;",
+            "displayContent": "-- ON 다중 조건[composite key]\n-- 복합키[composite key]는 AND로 묶는다\nSELECT o.order_id, i.item_name\nFROM orders o\nINNER JOIN order_items i\n  ON o.order_id = i.order_id\n AND o.store_id = i.store_id;"
+          },
+          {
+            "id": "language-sql-p03-part-6",
+            "title": "ON 필터[on filter]",
+            "content": "SELECT e.emp_name, d.dept_name\nFROM employees e\nLEFT JOIN departments d\n  ON e.dept_id = d.dept_id\n AND d.is_active = 1;",
+            "displayContent": "-- ON 필터[on filter]\n-- WHERE에 오른쪽 컬럼 조건을 쓰면 LEFT가 INNER처럼 된다\n-- 필터는 ON에 두고 왼쪽 행을 지킨다\nSELECT e.emp_name, d.dept_name\nFROM employees e\nLEFT JOIN departments d\n  ON e.dept_id = d.dept_id\n AND d.is_active = 1;"
+          },
+          {
+            "id": "language-sql-p03-part-7",
+            "title": "미매칭 행[left join is null]",
+            "content": "SELECT e.emp_name\nFROM employees e\nLEFT JOIN departments d\n  ON e.dept_id = d.dept_id\nWHERE d.dept_id IS NULL;",
+            "displayContent": "-- 미매칭 행[left join is null]\n-- 부서에 없는 사원만 찾는다\nSELECT e.emp_name\nFROM employees e\nLEFT JOIN departments d\n  ON e.dept_id = d.dept_id\nWHERE d.dept_id IS NULL;"
           }
         ]
       }
@@ -2794,63 +3739,63 @@ export const languageTracks: LanguageTrack[] = [
         "parts": [
           {
             "id": "language-typescript-p01-part-1",
-            "title": "객체 타입[object type] - 옵셔널·리터럴 유니온",
-            "content": "type User = {\n  id: number;\n  name: string;\n  age?: number;\n  role: 'user' | 'admin';\n};",
-            "displayContent": "// 객체 타입[object type] - age?는 옵셔널, role은 리터럴 유니온\ntype User = {\n  id: number;\n  name: string;\n  age?: number;\n  role: 'user' | 'admin';\n};"
-          },
-          {
-            "id": "language-typescript-p01-part-1b",
-            "title": "제네릭 타입[generic type]",
-            "content": "type ApiResponse<T> = {\n  ok: boolean;\n  data: T;\n};",
-            "displayContent": "// 제네릭 타입[generic type] - T 자리에 실제 타입이 들어감\ntype ApiResponse<T> = {\n  ok: boolean;\n  data: T;\n};"
+            "title": "기본 타입[string number boolean]",
+            "content": "let name: string = \"kim\";\nlet age: number | null = null;\nlet isLogin: boolean = false;\nconsole.log(name, age, isLogin);",
+            "displayContent": "// 기본 타입[string number boolean]\nlet name: string = \"kim\";\nlet age: number | null = null;\nlet isLogin: boolean = false;\nconsole.log(name, age, isLogin);"
           },
           {
             "id": "language-typescript-p01-part-2",
-            "title": "기본 타입[basic type]",
-            "content": "let userName: string = 'kim';\nlet userAge: number | null = 30;\nlet isOpen: boolean = false;\n\nconsole.log(userName, userAge, isOpen);",
-            "displayContent": "// 기본 타입[basic type]\nlet userName: string = 'kim';\nlet userAge: number | null = 30;\nlet isOpen: boolean = false;\n\nconsole.log(userName, userAge, isOpen);\n// 결과: kim 30 false"
+            "title": "타입 별칭[type User]",
+            "content": "type UserId = number;\ntype UserRole = \"admin\" | \"member\";\n\ntype User = {\n  id: UserId;\n  name: string;\n  role: UserRole;\n  email?: string;\n};",
+            "displayContent": "// 타입 별칭[type User]\ntype UserId = number;\ntype UserRole = \"admin\" | \"member\";\n\ntype User = {\n  id: UserId;\n  name: string;\n  role: UserRole;\n  email?: string;\n};"
           },
           {
             "id": "language-typescript-p01-part-3",
-            "title": "배열[array]",
-            "content": "const numberList: number[] = [1, 2, 3];\nconst nameList: Array<string> = ['lee', 'park'];\nconsole.log(numberList, nameList);",
-            "displayContent": "// 배열[array]\nconst numberList: number[] = [1, 2, 3];\nconst nameList: Array<string> = ['lee', 'park'];\nconsole.log(numberList, nameList);\n// 결과: [1, 2, 3] ['lee', 'park']"
+            "title": "객체 사용[object]",
+            "content": "type User = {\n  id: number;\n  name: string;\n  role: \"admin\" | \"member\";\n  email?: string;\n};\n\nconst u1: User = { id: 1, name: \"A\", role: \"admin\" };\nconst u2: User = { id: 2, name: \"B\", role: \"member\", email: \"b@x.com\" };\nconsole.log(u1.name, u2.email);",
+            "displayContent": "// 객체 사용[object]\ntype User = {\n  id: number;\n  name: string;\n  role: \"admin\" | \"member\";\n  email?: string;\n};\n\nconst u1: User = { id: 1, name: \"A\", role: \"admin\" };\nconst u2: User = { id: 2, name: \"B\", role: \"member\", email: \"b@x.com\" };\nconsole.log(u1.name, u2.email);"
           },
           {
             "id": "language-typescript-p01-part-4",
-            "title": "객체 타입[object type]",
-            "content": "const userItem: User = {\n  id: 1,\n  name: 'lee',\n  role: 'admin',\n};\nconsole.log(userItem.name);",
-            "displayContent": "// 객체 타입[object type]\nconst userItem: User = {\n  id: 1,\n  name: 'lee',\n  role: 'admin',\n};\nconsole.log(userItem.name);\n// 결과: lee"
+            "title": "배열[User[]]",
+            "content": "type User = { id: number; name: string };\n\nconst users: User[] = [\n  { id: 1, name: \"kim\" },\n  { id: 2, name: \"lee\" },\n];\nconst ids: number[] = [1, 2, 3];\nconsole.log(users[0].name, ids);",
+            "displayContent": "// 배열[User[]]\ntype User = { id: number; name: string };\n\nconst users: User[] = [\n  { id: 1, name: \"kim\" },\n  { id: 2, name: \"lee\" },\n];\nconst ids: number[] = [1, 2, 3];\nconsole.log(users[0].name, ids);"
           },
           {
             "id": "language-typescript-p01-part-5",
-            "title": "함수[function]",
-            "content": "function add(numA: number, numB: number): number {\n  return numA + numB;\n}\nconsole.log(add(3, 4));",
-            "displayContent": "// 함수[function]\nfunction add(numA: number, numB: number): number {\n  return numA + numB;\n}\nconsole.log(add(3, 4));\n// 결과: 7"
+            "title": "유니온[string | number]",
+            "content": "type IdOrName = number | string;\nconst ids: IdOrName[] = [1, \"2\", 3];\nconsole.log(ids);",
+            "displayContent": "// 유니온[string | number]\ntype IdOrName = number | string;\nconst ids: IdOrName[] = [1, \"2\", 3];\nconsole.log(ids);"
           },
           {
             "id": "language-typescript-p01-part-6",
-            "title": "유니온 타입[union type]",
-            "content": "function formatValue(input: string | number): string {\n  return typeof input === 'number' ? input.toFixed(2) : input.toUpperCase();\n}\nconsole.log(formatValue(3.14));\nconsole.log(formatValue('ts'));",
-            "displayContent": "// 유니온 타입[union type]\nfunction formatValue(input: string | number): string {\n  return typeof input === 'number' ? input.toFixed(2) : input.toUpperCase();\n}\nconsole.log(formatValue(3.14));\nconsole.log(formatValue('ts'));\n// 결과:\n// 3.14\n// TS"
+            "title": "함수 타입[function]",
+            "content": "function add(a: number, b: number): number {\n  return a + b;\n}\n\nfunction log(msg: string): void {\n  console.log(msg);\n}\n\nconsole.log(add(2, 3));\nlog(\"ok\");",
+            "displayContent": "// 함수 타입[function]\nfunction add(a: number, b: number): number {\n  return a + b;\n}\n\nfunction log(msg: string): void {\n  console.log(msg);\n}\n\nconsole.log(add(2, 3));\nlog(\"ok\");"
           },
           {
             "id": "language-typescript-p01-part-7",
-            "title": "인터페이스 대체 패턴[object response pattern]",
-            "content": "const userResponse: ApiResponse<User> = {\n  ok: true,\n  data: userItem,\n};\nconsole.log(userResponse.data.role);",
-            "displayContent": "// 인터페이스 대체 패턴[object response pattern]\nconst userResponse: ApiResponse<User> = {\n  ok: true,\n  data: userItem,\n};\nconsole.log(userResponse.data.role);\n// 결과: admin"
+            "title": "화살표 함수 타입[arrow]",
+            "content": "const add: (a: number, b: number) => number = (a, b) => a + b;\nconsole.log(add(2, 3));",
+            "displayContent": "// 화살표 함수 타입[arrow]\nconst add: (a: number, b: number) => number = (a, b) => a + b;\nconsole.log(add(2, 3));"
           },
           {
             "id": "language-typescript-p01-part-8",
-            "title": "옵셔널 체이닝[optional chaining] / null 병합[nullish coalescing]",
-            "content": "const maybeAge = userItem.age ?? 0;\nconsole.log(maybeAge);",
-            "displayContent": "// 옵셔널 체이닝[optional chaining] / null 병합[nullish coalescing]\nconst maybeAge = userItem.age ?? 0;\nconsole.log(maybeAge);\n// 결과: 0"
+            "title": "옵셔널·기본값[optional default]",
+            "content": "type SendOptions = { retry?: number };\n\nconst send = (url: string, opts: SendOptions = {}) => {\n  const retry = opts.retry ?? 0;\n  console.log(`send -> ${url} (retry=${retry})`);\n};\n\nsend(\"/ping\");\nsend(\"/ping\", { retry: 3 });",
+            "displayContent": "// 옵셔널·기본값[optional default]\ntype SendOptions = { retry?: number };\n\nconst send = (url: string, opts: SendOptions = {}) => {\n  const retry = opts.retry ?? 0;\n  console.log(`send -> ${url} (retry=${retry})`);\n};\n\nsend(\"/ping\");\nsend(\"/ping\", { retry: 3 });"
           },
           {
             "id": "language-typescript-p01-part-9",
-            "title": "제네릭[generic]",
-            "content": "function firstItem<T>(items: T[]): T | undefined {\n  return items[0];\n}\nconsole.log(firstItem<number>([10, 20, 30]));",
-            "displayContent": "// 제네릭[generic]\nfunction firstItem<T>(items: T[]): T | undefined {\n  return items[0];\n}\nconsole.log(firstItem<number>([10, 20, 30]));\n// 결과: 10"
+            "title": "readonly 필드[readonly]",
+            "content": "type User = {\n  readonly id: number;\n  name: string;\n};\n\nconst user: User = { id: 1, name: \"kim\" };\nconsole.log(user.id);",
+            "displayContent": "// readonly 필드[readonly]\ntype User = {\n  readonly id: number;\n  name: string;\n};\n\nconst user: User = { id: 1, name: \"kim\" };\nconsole.log(user.id);"
+          },
+          {
+            "id": "language-typescript-p01-part-10",
+            "title": "상태 리터럴[status union]",
+            "content": "type Status = \"loading\" | \"success\" | \"error\";\n\nfunction handle(status: Status) {\n  if (status === \"loading\") {\n    console.log(\"wait\");\n  }\n}\n\nhandle(\"loading\");",
+            "displayContent": "// 상태 리터럴[status union] — enum 대신 자주 씀\ntype Status = \"loading\" | \"success\" | \"error\";\n\nfunction handle(status: Status) {\n  if (status === \"loading\") {\n    console.log(\"wait\");\n  }\n}\n\nhandle(\"loading\");"
           }
         ]
       },
@@ -2863,45 +3808,290 @@ export const languageTracks: LanguageTrack[] = [
         "parts": [
           {
             "id": "language-typescript-p02-part-1",
-            "title": "도메인 타입[domain type]",
-            "content": "type Product = {\n  id: number;\n  name: string;\n  price: number;\n};",
-            "displayContent": "// 도메인 타입[domain type]\ntype Product = {\n  id: number;\n  name: string;\n  price: number;\n};"
-          },
-          {
-            "id": "language-typescript-p02-part-1b",
-            "title": "판별 유니온[discriminated union]",
-            "content": "type FetchState<T> =\n  | { status: 'idle' }\n  | { status: 'loading' }\n  | { status: 'success'; data: T }\n  | { status: 'error'; message: string };",
-            "displayContent": "// 판별 유니온[discriminated union] - status로 상태별 데이터 구분\ntype FetchState<T> =\n  | { status: 'idle' }\n  | { status: 'loading' }\n  | { status: 'success'; data: T }\n  | { status: 'error'; message: string };"
+            "title": "interface 확장[extends]",
+            "content": "interface BaseEntity {\n  id: number;\n  createdAt: string;\n}\n\ninterface Account extends BaseEntity {\n  email: string;\n}\n\nconst acc: Account = {\n  id: 10,\n  createdAt: \"2025-01-01\",\n  email: \"x@y.com\",\n};\nconsole.log(acc.email);",
+            "displayContent": "// interface 확장[extends]\ninterface BaseEntity {\n  id: number;\n  createdAt: string;\n}\n\ninterface Account extends BaseEntity {\n  email: string;\n}\n\nconst acc: Account = {\n  id: 10,\n  createdAt: \"2025-01-01\",\n  email: \"x@y.com\",\n};\nconsole.log(acc.email);"
           },
           {
             "id": "language-typescript-p02-part-2",
-            "title": "리터럴 유니온[literal union]",
-            "content": "let sortOrder: 'asc' | 'desc' = 'asc';\nconsole.log(sortOrder);",
-            "displayContent": "// 리터럴 유니온[literal union]\nlet sortOrder: 'asc' | 'desc' = 'asc';\nconsole.log(sortOrder);\n// 결과: asc"
+            "title": "교차 타입[&]",
+            "content": "type BaseEntity = { id: number; createdAt: string };\ntype Profile = { displayName: string } & BaseEntity;\n\nconst prof: Profile = {\n  id: 11,\n  createdAt: \"2025-02-01\",\n  displayName: \"Kim\",\n};\nconsole.log(prof.displayName);",
+            "displayContent": "// 교차 타입[&]\ntype BaseEntity = { id: number; createdAt: string };\ntype Profile = { displayName: string } & BaseEntity;\n\nconst prof: Profile = {\n  id: 11,\n  createdAt: \"2025-02-01\",\n  displayName: \"Kim\",\n};\nconsole.log(prof.displayName);"
           },
           {
             "id": "language-typescript-p02-part-3",
-            "title": "타입 별칭[type alias]",
-            "content": "const productItem: Product = {\n  id: 1,\n  name: 'keyboard',\n  price: 50000,\n};\nconsole.log(productItem.name);",
-            "displayContent": "// 타입 별칭[type alias]\nconst productItem: Product = {\n  id: 1,\n  name: 'keyboard',\n  price: 50000,\n};\nconsole.log(productItem.name);\n// 결과: keyboard"
+            "title": "제네릭 함수[wrapArray]",
+            "content": "function wrapArray<T>(value: T): T[] {\n  return [value];\n}\n\nconst a1 = wrapArray(123);\nconst a2 = wrapArray({ x: 1 });\nconsole.log(a1, a2);",
+            "displayContent": "// 제네릭 함수[wrapArray]\nfunction wrapArray<T>(value: T): T[] {\n  return [value];\n}\n\nconst a1 = wrapArray(123);\nconst a2 = wrapArray({ x: 1 });\nconsole.log(a1, a2);"
           },
           {
             "id": "language-typescript-p02-part-4",
-            "title": "읽기 전용[readonly]",
-            "content": "type UserProfile = {\n  readonly id: number;\n  nickname: string;\n};\n\nconst profileItem: UserProfile = {\n  id: 1,\n  nickname: 'neo',\n};\nconsole.log(profileItem.id);",
-            "displayContent": "// 읽기 전용[readonly]\ntype UserProfile = {\n  readonly id: number;\n  nickname: string;\n};\n\nconst profileItem: UserProfile = {\n  id: 1,\n  nickname: 'neo',\n};\nconsole.log(profileItem.id);\n// 결과: 1"
+            "title": "제네릭 + keyof[getProp]",
+            "content": "function getProp<T, K extends keyof T>(obj: T, key: K): T[K] {\n  return obj[key];\n}\n\nconst user = { id: 1, name: \"Lee\", role: \"member\" as const };\nconsole.log(getProp(user, \"name\"));",
+            "displayContent": "// 제네릭 + keyof[getProp]\nfunction getProp<T, K extends keyof T>(obj: T, key: K): T[K] {\n  return obj[key];\n}\n\nconst user = { id: 1, name: \"Lee\", role: \"member\" as const };\nconsole.log(getProp(user, \"name\"));"
           },
           {
             "id": "language-typescript-p02-part-5",
-            "title": "상태 분기[discriminated union]",
-            "content": "const fetchState: FetchState<Product> = {\n  status: 'success',\n  data: productItem,\n};\n\nif (fetchState.status === 'success') {\n  console.log(fetchState.data.price);\n}",
-            "displayContent": "// 상태 분기[discriminated union]\nconst fetchState: FetchState<Product> = {\n  status: 'success',\n  data: productItem,\n};\n\nif (fetchState.status === 'success') {\n  console.log(fetchState.data.price);\n}\n// 결과: 50000"
+            "title": "타입 가드[is string]",
+            "content": "function isString(x: unknown): x is string {\n  return typeof x === \"string\";\n}\n\nfunction printLen(x: unknown) {\n  if (isString(x)) {\n    console.log(\"length:\", x.length);\n  } else if (typeof x === \"number\") {\n    console.log(\"double:\", x * 2);\n  }\n}\n\nprintLen(\"abc\");\nprintLen(10);",
+            "displayContent": "// 타입 가드[is string]\nfunction isString(x: unknown): x is string {\n  return typeof x === \"string\";\n}\n\nfunction printLen(x: unknown) {\n  if (isString(x)) {\n    console.log(\"length:\", x.length);\n  } else if (typeof x === \"number\") {\n    console.log(\"double:\", x * 2);\n  }\n}\n\nprintLen(\"abc\");\nprintLen(10);"
           },
           {
             "id": "language-typescript-p02-part-6",
-            "title": "배열 패턴[array pattern]",
-            "content": "const productList: Product[] = [productItem];\nconst productNameList = productList.map(item => item.name);\nconsole.log(productNameList);",
-            "displayContent": "// 배열 패턴[array pattern]\nconst productList: Product[] = [productItem];\nconst productNameList = productList.map(item => item.name);\nconsole.log(productNameList);\n// 결과: ['keyboard']"
+            "title": "판별 유니온[ok]",
+            "content": "type ApiOk<T> = { ok: true; data: T };\ntype ApiErr = { ok: false; error: string };\ntype ApiResult<T> = ApiOk<T> | ApiErr;\n\nfunction handleResult<T>(res: ApiResult<T>) {\n  if (res.ok) {\n    console.log(\"data:\", res.data);\n  } else {\n    console.error(\"error:\", res.error);\n  }\n}\n\nhandleResult({ ok: true, data: { id: 1 } });",
+            "displayContent": "// 판별 유니온[ok]\ntype ApiOk<T> = { ok: true; data: T };\ntype ApiErr = { ok: false; error: string };\ntype ApiResult<T> = ApiOk<T> | ApiErr;\n\nfunction handleResult<T>(res: ApiResult<T>) {\n  if (res.ok) {\n    console.log(\"data:\", res.data);\n  } else {\n    console.error(\"error:\", res.error);\n  }\n}\n\nhandleResult({ ok: true, data: { id: 1 } });"
+          },
+          {
+            "id": "language-typescript-p02-part-7",
+            "title": "as const 리터럴[as const]",
+            "content": "const ROLES = [\"admin\", \"member\", \"guest\"] as const;\ntype Role = (typeof ROLES)[number];\n\nfunction createUser(name: string, role: Role) {\n  return { id: Date.now(), name, role };\n}\n\nconsole.log(createUser(\"Park\", \"admin\"));",
+            "displayContent": "// as const 리터럴[as const]\nconst ROLES = [\"admin\", \"member\", \"guest\"] as const;\ntype Role = (typeof ROLES)[number];\n\nfunction createUser(name: string, role: Role) {\n  return { id: Date.now(), name, role };\n}\n\nconsole.log(createUser(\"Park\", \"admin\"));"
+          },
+          {
+            "id": "language-typescript-p02-part-8",
+            "title": "Record / keyof[Record]",
+            "content": "type Locale = \"en\" | \"ko\" | \"ja\";\nconst messages: Record<Locale, string> = {\n  en: \"Hello\",\n  ko: \"안녕하세요\",\n  ja: \"こんにちは\",\n};\n\ntype MsgKeys = keyof typeof messages;\nfunction t(key: MsgKeys) {\n  return messages[key];\n}\n\nconsole.log(t(\"ko\"));",
+            "displayContent": "// Record / keyof[Record]\ntype Locale = \"en\" | \"ko\" | \"ja\";\nconst messages: Record<Locale, string> = {\n  en: \"Hello\",\n  ko: \"안녕하세요\",\n  ja: \"こんにちは\",\n};\n\ntype MsgKeys = keyof typeof messages;\nfunction t(key: MsgKeys) {\n  return messages[key];\n}\n\nconsole.log(t(\"ko\"));"
+          },
+          {
+            "id": "language-typescript-p02-part-9",
+            "title": "typeof로 타입 뽑기[typeof]",
+            "content": "const CONFIG = {\n  apiBase: \"/api\",\n  timeoutMs: 3000,\n  features: { metrics: true, beta: false },\n} as const;\n\ntype Config = typeof CONFIG;\ntype FeatureFlags = keyof Config[\"features\"];\n\nfunction isFeatureOn(flag: FeatureFlags) {\n  return CONFIG.features[flag];\n}\n\nconsole.log(isFeatureOn(\"metrics\"));",
+            "displayContent": "// typeof로 타입 뽑기[typeof]\nconst CONFIG = {\n  apiBase: \"/api\",\n  timeoutMs: 3000,\n  features: { metrics: true, beta: false },\n} as const;\n\ntype Config = typeof CONFIG;\ntype FeatureFlags = keyof Config[\"features\"];\n\nfunction isFeatureOn(flag: FeatureFlags) {\n  return CONFIG.features[flag];\n}\n\nconsole.log(isFeatureOn(\"metrics\"));"
+          },
+          {
+            "id": "language-typescript-p02-part-10",
+            "title": "상태 객체[State]",
+            "content": "type User = { id: number; name: string };\n\ntype State = {\n  loading: boolean;\n  data: User | null;\n};\n\nconst state: State = { loading: false, data: null };\nconsole.log(state.loading);",
+            "displayContent": "// 상태 객체[State]\ntype User = { id: number; name: string };\n\ntype State = {\n  loading: boolean;\n  data: User | null;\n};\n\nconst state: State = { loading: false, data: null };\nconsole.log(state.loading);"
+          }
+        ]
+      },
+      {
+        "id": "language-typescript-p03",
+        "title": "P03.유틸-API-패턴",
+        "fileName": "P03.유틸-API-패턴.yaml",
+        "sourcePath": "assets/raw/syntax/typescript/P03.유틸-API-패턴.yaml",
+        "language": "typescript",
+        "parts": [
+          {
+            "id": "language-typescript-p03-part-1",
+            "title": "Partial - PATCH용[Partial]",
+            "content": "type User = {\n  id: number;\n  name: string;\n  email: string;\n};\n\nfunction updateUserPartially(id: number, data: Partial<User>) {\n  console.log(\"PATCH:\", id, data);\n}\n\nupdateUserPartially(1, { name: \"Kim\" });\nupdateUserPartially(1, { email: \"x@y.com\" });",
+            "displayContent": "// Partial - PATCH용[Partial]\n// 모든 필드를 optional로 바꿔 \"일부만 수정\"을 허용한다\ntype User = {\n  id: number;\n  name: string;\n  email: string;\n};\n\nfunction updateUserPartially(id: number, data: Partial<User>) {\n  console.log(\"PATCH:\", id, data);\n}\n\nupdateUserPartially(1, { name: \"Kim\" });\nupdateUserPartially(1, { email: \"x@y.com\" });"
+          },
+          {
+            "id": "language-typescript-p03-part-2",
+            "title": "Partial 안 쓸 때[required POST]",
+            "content": "type User = {\n  id: number;\n  name: string;\n  email: string;\n};\n\nfunction createUser(u: User) {\n  console.log(\"POST:\", u);\n}\n\ncreateUser({ id: 1, name: \"Kim\", email: \"x@y.com\" });",
+            "displayContent": "// Partial 안 쓸 때[required POST]\n// 생성(POST)은 필수 필드를 모두 받는다\ntype User = {\n  id: number;\n  name: string;\n  email: string;\n};\n\nfunction createUser(u: User) {\n  console.log(\"POST:\", u);\n}\n\ncreateUser({ id: 1, name: \"Kim\", email: \"x@y.com\" });"
+          },
+          {
+            "id": "language-typescript-p03-part-3",
+            "title": "Partial+Pick 조합[PatchUser]",
+            "content": "type User = {\n  id: number;\n  name: string;\n  email: string;\n  role: \"admin\" | \"member\";\n};\n\ntype PatchUser = Partial<Pick<User, \"name\" | \"email\" | \"role\">>;\n\nconst body: PatchUser = { email: \"new@x.com\" };\nconsole.log(body);",
+            "displayContent": "// Partial+Pick 조합[PatchUser]\n// 수정 가능한 필드만 고르고, 각각 optional로 만든다\ntype User = {\n  id: number;\n  name: string;\n  email: string;\n  role: \"admin\" | \"member\";\n};\n\ntype PatchUser = Partial<Pick<User, \"name\" | \"email\" | \"role\">>;\n\nconst body: PatchUser = { email: \"new@x.com\" };\nconsole.log(body);"
+          },
+          {
+            "id": "language-typescript-p03-part-4",
+            "title": "Pick - 화면용 축소[Pick]",
+            "content": "type UserDTO = {\n  id: number;\n  name: string;\n  email: string;\n  role: \"admin\" | \"member\";\n};\n\ntype UserVM = Pick<UserDTO, \"id\" | \"name\" | \"role\">;\n\nfunction toUserVM(u: UserDTO): UserVM {\n  return { id: u.id, name: u.name, role: u.role };\n}\n\nconsole.log(toUserVM({ id: 1, name: \"Jane\", email: \"j@x.com\", role: \"member\" }));",
+            "displayContent": "// Pick - 화면용 축소[Pick]\ntype UserDTO = {\n  id: number;\n  name: string;\n  email: string;\n  role: \"admin\" | \"member\";\n};\n\ntype UserVM = Pick<UserDTO, \"id\" | \"name\" | \"role\">;\n\nfunction toUserVM(u: UserDTO): UserVM {\n  return { id: u.id, name: u.name, role: u.role };\n}\n\nconsole.log(toUserVM({ id: 1, name: \"Jane\", email: \"j@x.com\", role: \"member\" }));"
+          },
+          {
+            "id": "language-typescript-p03-part-5",
+            "title": "Omit - 필드 제외[Omit]",
+            "content": "type FullUser = {\n  id: number;\n  name: string;\n  email: string;\n};\n\ntype PublicUser = Omit<FullUser, \"email\">;\n\nconst pub: PublicUser = { id: 1, name: \"Kim\" };\nconsole.log(pub);",
+            "displayContent": "// Omit - 필드 제외[Omit]\ntype FullUser = {\n  id: number;\n  name: string;\n  email: string;\n};\n\ntype PublicUser = Omit<FullUser, \"email\">;\n\nconst pub: PublicUser = { id: 1, name: \"Kim\" };\nconsole.log(pub);"
+          },
+          {
+            "id": "language-typescript-p03-part-6",
+            "title": "Readonly[Readonly]",
+            "content": "type UserCard = { id: number; name: string };\ntype FrozenUser = Readonly<UserCard>;\n\nconst fu: FrozenUser = { id: 1, name: \"Kim\" };\nconsole.log(fu.name);",
+            "displayContent": "// Readonly[Readonly]\ntype UserCard = { id: number; name: string };\ntype FrozenUser = Readonly<UserCard>;\n\nconst fu: FrozenUser = { id: 1, name: \"Kim\" };\nconsole.log(fu.name);"
+          },
+          {
+            "id": "language-typescript-p03-part-7",
+            "title": "API 응답 껍데기[ApiEnvelope]",
+            "content": "type ApiEnvelope<T> = {\n  status: number;\n  data: T;\n  meta?: { requestId: string };\n};\n\ntype UserDTO = { id: number; name: string };\n\nconst detail: ApiEnvelope<UserDTO> = {\n  status: 200,\n  data: { id: 1, name: \"AA\" },\n};\nconsole.log(detail.data.name);",
+            "displayContent": "// API 응답 껍데기[ApiEnvelope]\ntype ApiEnvelope<T> = {\n  status: number;\n  data: T;\n  meta?: { requestId: string };\n};\n\ntype UserDTO = { id: number; name: string };\n\nconst detail: ApiEnvelope<UserDTO> = {\n  status: 200,\n  data: { id: 1, name: \"AA\" },\n};\nconsole.log(detail.data.name);"
+          },
+          {
+            "id": "language-typescript-p03-part-8",
+            "title": "목록 응답[ListResponse]",
+            "content": "type ApiEnvelope<T> = { status: number; data: T };\ntype ListResponse<T> = ApiEnvelope<{ items: T[]; total: number }>;\ntype UserDTO = { id: number; name: string };\n\nconst list: ListResponse<UserDTO> = {\n  status: 200,\n  data: { items: [{ id: 1, name: \"AA\" }], total: 1 },\n};\nconsole.log(list.data.total);",
+            "displayContent": "// 목록 응답[ListResponse]\ntype ApiEnvelope<T> = { status: number; data: T };\ntype ListResponse<T> = ApiEnvelope<{ items: T[]; total: number }>;\ntype UserDTO = { id: number; name: string };\n\nconst list: ListResponse<UserDTO> = {\n  status: 200,\n  data: { items: [{ id: 1, name: \"AA\" }], total: 1 },\n};\nconsole.log(list.data.total);"
+          },
+          {
+            "id": "language-typescript-p03-part-9",
+            "title": "얕은 머지[spread patch]",
+            "content": "type UserDTO = {\n  id: number;\n  name: string;\n  email: string;\n};\ntype PatchUser = Partial<Pick<UserDTO, \"name\" | \"email\">>;\n\nfunction mergeUser(u: UserDTO, patch: PatchUser): UserDTO {\n  return { ...u, ...patch };\n}\n\nconst merged = mergeUser(\n  { id: 1, name: \"Jane\", email: \"j@x.com\" },\n  { name: \"Jane Park\" },\n);\nconsole.log(merged.name);",
+            "displayContent": "// 얕은 머지[spread patch]\ntype UserDTO = {\n  id: number;\n  name: string;\n  email: string;\n};\ntype PatchUser = Partial<Pick<UserDTO, \"name\" | \"email\">>;\n\nfunction mergeUser(u: UserDTO, patch: PatchUser): UserDTO {\n  return { ...u, ...patch };\n}\n\nconst merged = mergeUser(\n  { id: 1, name: \"Jane\", email: \"j@x.com\" },\n  { name: \"Jane Park\" },\n);\nconsole.log(merged.name);"
+          },
+          {
+            "id": "language-typescript-p03-part-10",
+            "title": "React Props 명시[Props]",
+            "content": "type ButtonProps = {\n  label: string;\n  onClick: () => void;\n  disabled?: boolean;\n};\n\nfunction Button({ label, onClick, disabled = false }: ButtonProps) {\n  console.log(label, disabled);\n  onClick();\n}\n\nButton({ label: \"Save\", onClick: () => console.log(\"click\") });",
+            "displayContent": "// React Props 명시[Props]\n// FC<Props> 대신 props 타입을 직접 적는 패턴\ntype ButtonProps = {\n  label: string;\n  onClick: () => void;\n  disabled?: boolean;\n};\n\nfunction Button({ label, onClick, disabled = false }: ButtonProps) {\n  console.log(label, disabled);\n  onClick();\n}\n\nButton({ label: \"Save\", onClick: () => console.log(\"click\") });"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "vscode",
+    "label": "VS Code",
+    "folderName": "vscode",
+    "lessons": [
+      {
+        "id": "language-vscode-p01",
+        "title": "P01.참조-검색",
+        "fileName": "P01.참조-검색.yaml",
+        "sourcePath": "assets/raw/syntax/vscode/P01.참조-검색.yaml",
+        "language": "shell",
+        "parts": [
+          {
+            "id": "language-vscode-p01-part-1",
+            "title": "Find All References[Shift+F12]",
+            "content": "Shift+F12",
+            "displayContent": "# Find All References[Shift+F12]\n# 정의부에 커서 → 호출 위치 전부 (언어 서버 있을 때 최우선)\nShift+F12"
+          },
+          {
+            "id": "language-vscode-p01-part-2",
+            "title": "Peek References[Alt+Shift+F12]",
+            "content": "Alt+Shift+F12",
+            "displayContent": "# Peek References[Alt+Shift+F12]\n# 사이드 패널 대신 인라인으로 참조 미리보기\nAlt+Shift+F12"
+          },
+          {
+            "id": "language-vscode-p01-part-3",
+            "title": "Go to Definition[F12]",
+            "content": "F12\nAlt+F12",
+            "displayContent": "# Go to Definition[F12]\nF12\nAlt+F12"
+          },
+          {
+            "id": "language-vscode-p01-part-4",
+            "title": "워크스페이스 검색[Ctrl+Shift+F]",
+            "content": "Ctrl+Shift+F",
+            "displayContent": "# 워크스페이스 검색[Ctrl+Shift+F]\n# 언어 서버 없을 때 → Regex ON 후 \\bAAA\\s*\\(\nCtrl+Shift+F"
+          },
+          {
+            "id": "language-vscode-p01-part-5",
+            "title": "호출만 regex[\\\\bAAA\\\\s*\\\\(]",
+            "content": "\\bAAA\\s*\\(",
+            "displayContent": "# 호출만 regex[\\bAAA\\s*\\(]\n# Ctrl+Shift+F → .* (Regex) ON\n\\bAAA\\s*\\("
+          },
+          {
+            "id": "language-vscode-p01-part-6",
+            "title": "정의 제외 regex[lookbehind]",
+            "content": "(?<!function\\s)\\bAAA\\s*\\(",
+            "displayContent": "# 정의 제외 regex[lookbehind]\n# JS/TS에서 function AAA 정의는 빼고 호출만\n(?<!function\\s)\\bAAA\\s*\\("
+          },
+          {
+            "id": "language-vscode-p01-part-7",
+            "title": "Call Hierarchy[호출 계층]",
+            "content": "Ctrl+Shift+H",
+            "displayContent": "# Call Hierarchy[호출 계층]\n# 정의부 우클릭 → Peek → Call Hierarchy → Incoming Calls\n# 실제 호출 흐름 추적\nCtrl+Shift+H"
+          },
+          {
+            "id": "language-vscode-p01-part-8",
+            "title": "심볼로 이동[Ctrl+T]",
+            "content": "Ctrl+T",
+            "displayContent": "# 심볼로 이동[Ctrl+T]\n# 워크스페이스 심볼(함수·클래스) 빠른 검색\nCtrl+T"
+          },
+          {
+            "id": "language-vscode-p01-part-9",
+            "title": "파일 내 심볼[Ctrl+Shift+O]",
+            "content": "Ctrl+Shift+O",
+            "displayContent": "# 파일 내 심볼[Ctrl+Shift+O]\nCtrl+Shift+O"
+          },
+          {
+            "id": "language-vscode-p01-part-10",
+            "title": "추천 순서[우선순위]",
+            "content": "Shift+F12\nCtrl+Shift+F",
+            "displayContent": "# 추천 순서[우선순위]\n# 1) Shift+F12 Find All References\n# 2) Call Hierarchy Incoming Calls\n# 3) Ctrl+Shift+F + \\bAAA\\s*\\(\nShift+F12\nCtrl+Shift+F"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "yup",
+    "label": "Yup",
+    "folderName": "yup",
+    "lessons": [
+      {
+        "id": "language-yup-p01",
+        "title": "P01.기본-패턴",
+        "fileName": "P01.기본-패턴.yaml",
+        "sourcePath": "assets/raw/syntax/yup/P01.기본-패턴.yaml",
+        "language": "typescript",
+        "parts": [
+          {
+            "id": "language-yup-p01-part-1",
+            "title": "문자열 필수·최소[string required min]",
+            "content": "import * as yup from \"yup\";\n\nconst nameSchema = yup.string().required().min(2);",
+            "displayContent": "// 문자열 필수[required] · 최소 길이[min]\nimport * as yup from \"yup\";\n\nconst nameSchema = yup.string().required().min(2);\n// 결과: \"ki\" 이상이어야 통과"
+          },
+          {
+            "id": "language-yup-p01-part-2",
+            "title": "객체 스키마[object]",
+            "content": "import * as yup from \"yup\";\n\nconst userSchema = yup.object({\n  name: yup.string().required(),\n  age: yup.number().required().positive().integer(),\n  email: yup.string().email().required(),\n});",
+            "displayContent": "// 객체 스키마[object] — name / age / email\nimport * as yup from \"yup\";\n\nconst userSchema = yup.object({\n  name: yup.string().required(),\n  age: yup.number().required().positive().integer(),\n  email: yup.string().email().required(),\n});"
+          },
+          {
+            "id": "language-yup-p01-part-3",
+            "title": "배열 of[array of]",
+            "content": "import * as yup from \"yup\";\n\nconst tagsSchema = yup.array().of(yup.string().required());",
+            "displayContent": "// 배열[array] · 요소 스키마[of]\nimport * as yup from \"yup\";\n\nconst tagsSchema = yup.array().of(yup.string().required());"
+          },
+          {
+            "id": "language-yup-p01-part-4",
+            "title": "필수·널·선택[required nullable optional]",
+            "content": "import * as yup from \"yup\";\n\nconst requiredName = yup.string().required();\nconst nullableBio = yup.string().nullable();\nconst optionalNick = yup.string().optional();",
+            "displayContent": "// 필수[required] · 널 허용[nullable] · 선택[optional]\nimport * as yup from \"yup\";\n\nconst requiredName = yup.string().required();\nconst nullableBio = yup.string().nullable();\nconst optionalNick = yup.string().optional();"
+          },
+          {
+            "id": "language-yup-p01-part-5",
+            "title": "email · matches · oneOf",
+            "content": "import * as yup from \"yup\";\n\nconst emailSchema = yup.string().email().required();\nconst codeSchema = yup.string().matches(/^[A-Z]{3}$/).required();\nconst roleSchema = yup.string().oneOf([\"admin\", \"member\"]).required();",
+            "displayContent": "// 이메일[email] · 정규식[matches] · 허용값[oneOf]\nimport * as yup from \"yup\";\n\nconst emailSchema = yup.string().email().required();\nconst codeSchema = yup.string().matches(/^[A-Z]{3}$/).required();\nconst roleSchema = yup.string().oneOf([\"admin\", \"member\"]).required();"
+          },
+          {
+            "id": "language-yup-p01-part-6",
+            "title": "숫자 min/max integer positive",
+            "content": "import * as yup from \"yup\";\n\nconst ageSchema = yup\n  .number()\n  .required()\n  .integer()\n  .positive()\n  .min(1)\n  .max(120);",
+            "displayContent": "// 숫자[number] — min / max / integer / positive\nimport * as yup from \"yup\";\n\nconst ageSchema = yup\n  .number()\n  .required()\n  .integer()\n  .positive()\n  .min(1)\n  .max(120);"
+          },
+          {
+            "id": "language-yup-p01-part-7",
+            "title": "배열 of + min",
+            "content": "import * as yup from \"yup\";\n\nconst idsSchema = yup\n  .array()\n  .of(yup.number().integer().positive())\n  .min(1)\n  .required();",
+            "displayContent": "// 배열[array] of + 최소 개수[min]\nimport * as yup from \"yup\";\n\nconst idsSchema = yup\n  .array()\n  .of(yup.number().integer().positive())\n  .min(1)\n  .required();"
+          },
+          {
+            "id": "language-yup-p01-part-8",
+            "title": "폼 스키마[agree boolean]",
+            "content": "import * as yup from \"yup\";\n\nconst formSchema = yup.object({\n  email: yup.string().email().required(),\n  agree: yup.boolean().oneOf([true]).required(),\n});",
+            "displayContent": "// 폼 스키마[form] — 동의[agree]는 true만 허용\nimport * as yup from \"yup\";\n\nconst formSchema = yup.object({\n  email: yup.string().email().required(),\n  agree: yup.boolean().oneOf([true]).required(),\n});"
+          },
+          {
+            "id": "language-yup-p01-part-9",
+            "title": "validate · abortEarly",
+            "content": "import * as yup from \"yup\";\n\nconst schema = yup.object({\n  name: yup.string().required(),\n  age: yup.number().required().min(18),\n});\n\nawait schema.validate(\n  { name: \"\", age: 10 },\n  { abortEarly: false },\n);",
+            "displayContent": "// 검증[validate] — abortEarly: false 면 오류 전부 수집\nimport * as yup from \"yup\";\n\nconst schema = yup.object({\n  name: yup.string().required(),\n  age: yup.number().required().min(18),\n});\n\nawait schema.validate(\n  { name: \"\", age: 10 },\n  { abortEarly: false },\n);"
+          },
+          {
+            "id": "language-yup-p01-part-10",
+            "title": "isValid",
+            "content": "import * as yup from \"yup\";\n\nconst schema = yup.object({ name: yup.string().required() });\nconst ok = await schema.isValid({ name: \"kim\" });",
+            "displayContent": "// 유효 여부[isValid] — boolean만 필요할 때\nimport * as yup from \"yup\";\n\nconst schema = yup.object({ name: yup.string().required() });\nconst ok = await schema.isValid({ name: \"kim\" });\n// 결과: true"
+          },
+          {
+            "id": "language-yup-p01-part-11",
+            "title": "InferType",
+            "content": "import { InferType, object, string } from \"yup\";\n\nconst userSchema = object({\n  name: string().required(),\n});\ntype User = InferType<typeof userSchema>;",
+            "displayContent": "// 타입 추론[InferType] — 스키마에서 TS 타입 뽑기\nimport { InferType, object, string } from \"yup\";\n\nconst userSchema = object({\n  name: string().required(),\n});\ntype User = InferType<typeof userSchema>;\n// 결과: { name: string }"
           }
         ]
       }

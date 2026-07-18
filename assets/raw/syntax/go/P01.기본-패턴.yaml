@@ -7,194 +7,269 @@ track:
   label: Go
 title: P01.기본-패턴
 source:
-  origin: assets/typingSource/Language-go/P01.기본-패턴.go
+  origin: chat-raw Go 필수·고빈도 커리큘럼 2026-07-18
+  note: 변수·제어·함수·slice/map. 희귀 문법 제외. 각 파트 단독 타이핑.
 parts:
   - id: language-go-p01-part-1
-    title: 패키지와 임포트[package / import]
+    title: 변수 선언[:= / var]
     display: |-
-      // 패키지와 임포트[package / import]
-      package main
-
-      import (
-      	"fmt"
-      	"strings"
-      )
+      // 변수 선언[:= / var]
+      // := 는 함수 안에서 타입 추론으로 선언한다
+      userName := "kim"
+      var userAge int = 30
+      fmt.Println(userName, userAge)
+      // 결과: kim 30
     typing: |-
-      package main
-
-      import (
-      	"fmt"
-      	"strings"
-      )
+      userName := "kim"
+      var userAge int = 30
+      fmt.Println(userName, userAge)
   - id: language-go-p01-part-2
-    title: 구조체 정의[struct]
+    title: 기본 타입[int float64 string bool]
     display: |-
-      // 구조체 정의[struct]
-      type User struct {
-      	Name  string
-      	Age   int
-      	Admin bool
-      }
+      // 기본 타입[int float64 string bool]
+      var count int = 3
+      var ratio float64 = 1.5
+      var label string = "go"
+      var ok bool = true
+      fmt.Println(count, ratio, label, ok)
+      // 결과: 3 1.5 go true
     typing: |-
-      type User struct {
-      	Name  string
-      	Age   int
-      	Admin bool
-      }
-  - id: language-go-p01-part-2b
-    title: 함수 정의[function]
-    display: |-
-      // 함수 정의[function] - 매개변수와 반환 타입을 뒤에 쓴다
-      func add(numA int, numB int) int {
-      	return numA + numB
-      }
-    typing: |-
-      func add(numA int, numB int) int {
-      	return numA + numB
-      }
-  - id: language-go-p01-part-2c
-    title: 에러 반환[error return]
-    display: |-
-      // 에러 반환[error return] - (값, error) 복수 반환이 Go 관례
-      func divide(numA int, numB int) (int, error) {
-      	if numB == 0 {
-      		return 0, fmt.Errorf("0으로 나눌 수 없음")
-      	}
-      	return numA / numB, nil
-      }
-    typing: |-
-      func divide(numA int, numB int) (int, error) {
-      	if numB == 0 {
-      		return 0, fmt.Errorf("0으로 나눌 수 없음")
-      	}
-      	return numA / numB, nil
-      }
+      var count int = 3
+      var ratio float64 = 1.5
+      var label string = "go"
+      var ok bool = true
+      fmt.Println(count, ratio, label, ok)
   - id: language-go-p01-part-3
-    title: 변수 선언[variable declaration]
+    title: 상수[const]
     display: |-
-      	// 변수 선언[variable declaration]
-      	var userName string = "kim"
-      	userAge := 30
-      	const serviceName = "gmtl"
-      	fmt.Println(userName, userAge, serviceName)
-      	// 결과: kim 30 gmtl
+      // 상수[const]
+      const serviceName = "gmtl"
+      const maxRetry = 3
+      fmt.Println(serviceName, maxRetry)
+      // 결과: gmtl 3
     typing: |-
-      	var userName string = "kim"
-      	userAge := 30
-      	const serviceName = "gmtl"
-      	fmt.Println(userName, userAge, serviceName)
+      const serviceName = "gmtl"
+      const maxRetry = 3
+      fmt.Println(serviceName, maxRetry)
   - id: language-go-p01-part-4
-    title: 조건문[condition]
+    title: 이오타[iota]
     display: |-
-      	// 조건문[condition]
-      	if userAge >= 20 {
-      		fmt.Println("adult")
-      	} else {
-      		fmt.Println("minor")
-      	}
-      	// 결과: adult
+      // 이오타[iota] — const 블록에서 0부터 자동 증가
+      const (
+      	StatusReady = iota
+      	StatusRunning
+      	StatusDone
+      )
+      fmt.Println(StatusReady, StatusRunning, StatusDone)
+      // 결과: 0 1 2
     typing: |-
-      	if userAge >= 20 {
-      		fmt.Println("adult")
-      	} else {
-      		fmt.Println("minor")
-      	}
+      const (
+      	StatusReady = iota
+      	StatusRunning
+      	StatusDone
+      )
+      fmt.Println(StatusReady, StatusRunning, StatusDone)
   - id: language-go-p01-part-5
-    title: 반복문[loop]
+    title: 조건문[if / else]
     display: |-
-      	// 반복문[loop]
-      	scoreList := []int{10, 20, 30}
-      	for index, score := range scoreList {
-      		fmt.Println(index, score)
-      	}
-      	// 결과:
-      	// 0 10
-      	// 1 20
-      	// 2 30
+      // 조건문[if / else]
+      userAge := 30
+      if userAge >= 20 {
+      	fmt.Println("adult")
+      } else {
+      	fmt.Println("minor")
+      }
+      // 결과: adult
     typing: |-
-      	scoreList := []int{10, 20, 30}
-      	for index, score := range scoreList {
-      		fmt.Println(index, score)
-      	}
+      userAge := 30
+      if userAge >= 20 {
+      	fmt.Println("adult")
+      } else {
+      	fmt.Println("minor")
+      }
   - id: language-go-p01-part-6
+    title: 반복문[for]
+    display: |-
+      // 반복문[for] — Go에는 while이 없고 for만 쓴다
+      count := 0
+      for count < 3 {
+      	count++
+      }
+      fmt.Println(count)
+      // 결과: 3
+    typing: |-
+      count := 0
+      for count < 3 {
+      	count++
+      }
+      fmt.Println(count)
+  - id: language-go-p01-part-7
+    title: 범위 순회[for range]
+    display: |-
+      // 범위 순회[for range]
+      scoreList := []int{10, 20, 30}
+      for index, score := range scoreList {
+      	fmt.Println(index, score)
+      }
+      // 결과: 0 10 / 1 20 / 2 30
+    typing: |-
+      scoreList := []int{10, 20, 30}
+      for index, score := range scoreList {
+      	fmt.Println(index, score)
+      }
+  - id: language-go-p01-part-8
+    title: 분기[switch]
+    display: |-
+      // 분기[switch]
+      role := "admin"
+      switch role {
+      case "admin":
+      	fmt.Println("full")
+      case "member":
+      	fmt.Println("read")
+      default:
+      	fmt.Println("none")
+      }
+      // 결과: full
+    typing: |-
+      role := "admin"
+      switch role {
+      case "admin":
+      	fmt.Println("full")
+      case "member":
+      	fmt.Println("read")
+      default:
+      	fmt.Println("none")
+      }
+  - id: language-go-p01-part-9
+    title: 함수[func]
+    display: |-
+      // 함수[func] — 매개변수·반환 타입을 이름 뒤에 쓴다
+      func add(numA int, numB int) int {
+      	return numA + numB
+      }
+
+      fmt.Println(add(3, 4))
+      // 결과: 7
+    typing: |-
+      func add(numA int, numB int) int {
+      	return numA + numB
+      }
+
+      fmt.Println(add(3, 4))
+  - id: language-go-p01-part-10
+    title: 다중 반환[multiple return]
+    display: |-
+      // 다중 반환[multiple return]
+      func divide(numA int, numB int) (int, bool) {
+      	if numB == 0 {
+      		return 0, false
+      	}
+      	return numA / numB, true
+      }
+
+      quotient, ok := divide(10, 2)
+      fmt.Println(quotient, ok)
+      // 결과: 5 true
+    typing: |-
+      func divide(numA int, numB int) (int, bool) {
+      	if numB == 0 {
+      		return 0, false
+      	}
+      	return numA / numB, true
+      }
+
+      quotient, ok := divide(10, 2)
+      fmt.Println(quotient, ok)
+  - id: language-go-p01-part-11
+    title: 이름 있는 반환[named return]
+    display: |-
+      // 이름 있는 반환[named return]
+      func sumPair(numA int, numB int) (sum int) {
+      	sum = numA + numB
+      	return
+      }
+
+      fmt.Println(sumPair(2, 3))
+      // 결과: 5
+    typing: |-
+      func sumPair(numA int, numB int) (sum int) {
+      	sum = numA + numB
+      	return
+      }
+
+      fmt.Println(sumPair(2, 3))
+  - id: language-go-p01-part-12
+    title: 가변 인자[variadic ...]
+    display: |-
+      // 가변 인자[variadic ...]
+      func total(nums ...int) int {
+      	sum := 0
+      	for _, n := range nums {
+      		sum += n
+      	}
+      	return sum
+      }
+
+      fmt.Println(total(1, 2, 3))
+      // 결과: 6
+    typing: |-
+      func total(nums ...int) int {
+      	sum := 0
+      	for _, n := range nums {
+      		sum += n
+      	}
+      	return sum
+      }
+
+      fmt.Println(total(1, 2, 3))
+  - id: language-go-p01-part-13
+    title: 슬라이스[slice]
+    display: |-
+      // 슬라이스[slice]
+      skills := []string{"go", "sql"}
+      fmt.Println(skills[0], len(skills))
+      // 결과: go 2
+    typing: |-
+      skills := []string{"go", "sql"}
+      fmt.Println(skills[0], len(skills))
+  - id: language-go-p01-part-14
+    title: 슬라이스 추가[append]
+    display: |-
+      // 슬라이스 추가[append]
+      valueList := []int{1, 2}
+      valueList = append(valueList, 3, 4)
+      fmt.Println(valueList)
+      // 결과: [1 2 3 4]
+    typing: |-
+      valueList := []int{1, 2}
+      valueList = append(valueList, 3, 4)
+      fmt.Println(valueList)
+  - id: language-go-p01-part-15
     title: 맵[map]
     display: |-
-      	// 맵[map]
-      	userMap := map[string]string{
-      		"name": "lee",
-      		"role": "admin",
-      	}
-      	fmt.Println(userMap["name"])
-      	// 결과: lee
-    typing: |-
-      	userMap := map[string]string{
-      		"name": "lee",
-      		"role": "admin",
-      	}
-      	fmt.Println(userMap["name"])
-  - id: language-go-p01-part-7
-    title: 구조체[struct]
-    display: |-
-      	// 구조체[struct]
-      	userItem := User{Name: "park", Age: 25, Admin: true}
-      	fmt.Println(userItem.Name, userItem.Admin)
-      	// 결과: park true
-    typing: |-
-      	userItem := User{Name: "park", Age: 25, Admin: true}
-      	fmt.Println(userItem.Name, userItem.Admin)
-  - id: language-go-p01-part-8
-    title: 함수[function]
-    display: |-
-      	// 함수[function]
-      	sumValue := add(3, 4)
-      	fmt.Println(sumValue)
-      	// 결과: 7
-    typing: |-
-      	sumValue := add(3, 4)
-      	fmt.Println(sumValue)
-  - id: language-go-p01-part-9
-    title: 다중 반환값[multiple return values] + 에러 처리[error handling]
-    display: |-
-      	// 다중 반환값[multiple return values] + 에러 처리[error handling]
-      	quotientValue, err := divide(10, 2)
-      	if err != nil {
-      		fmt.Println(err)
-      		return
-      	}
-      	fmt.Println(quotientValue)
-      	// 결과: 5
-    typing: |-
-      	quotientValue, err := divide(10, 2)
-      	if err != nil {
-      		fmt.Println(err)
-      		return
-      	}
-      	fmt.Println(quotientValue)
-  - id: language-go-p01-part-10
-    title: 문자열 처리[string handling]
-    display: |-
-      	// 문자열 처리[string handling]
-      	tagText := "go,api,server"
-      	tagList := strings.Split(tagText, ",")
-      	fmt.Println(tagList)
-      	// 결과: [go api server]
-    typing: |-
-      	tagText := "go,api,server"
-      	tagList := strings.Split(tagText, ",")
-      	fmt.Println(tagList)
-  - id: language-go-p01-part-11
-    title: 포인터[pointer]
-    display: |-
-      	// 포인터[pointer]
-      	countValue := 1
-      	countPtr := &countValue
-      	*countPtr = 2
-      	fmt.Println(countValue)
-      	// 결과: 2
+      // 맵[map]
+      userMap := map[string]string{
+      	"name": "lee",
+      	"role": "admin",
       }
+      fmt.Println(userMap["name"])
+      // 결과: lee
     typing: |-
-      	countValue := 1
-      	countPtr := &countValue
-      	*countPtr = 2
-      	fmt.Println(countValue)
+      userMap := map[string]string{
+      	"name": "lee",
+      	"role": "admin",
       }
+      fmt.Println(userMap["name"])
+  - id: language-go-p01-part-16
+    title: 맵 존재 확인[comma ok]
+    display: |-
+      // 맵 존재 확인[comma ok]
+      roleMap := map[string]string{"kim": "admin"}
+      roleValue, ok := roleMap["kim"]
+      fmt.Println(roleValue, ok)
+      // 결과: admin true
+    typing: |-
+      roleMap := map[string]string{"kim": "admin"}
+      roleValue, ok := roleMap["kim"]
+      fmt.Println(roleValue, ok)

@@ -1,0 +1,262 @@
+id: language-lodash-p01
+category: syntax
+kind: code-snippet
+language: javascript
+track:
+  id: lodash
+  label: Lodash
+title: P01.핵심-메서드
+source:
+  origin: chat-raw Lodash 핵심 메서드 2026-07-18
+  note: 필수·고빈도만. zip/xor/fp 제외. 각 파트 단독 타이핑.
+parts:
+  - id: language-lodash-p01-part-1
+    title: 청크[chunk]
+    display: |-
+      // 청크[chunk] — 배열을 고정 길이 묶음으로 나눔
+      import _ from "lodash";
+
+      const pages = _.chunk([1, 2, 3, 4, 5], 2);
+      // 결과: [[1,2],[3,4],[5]]
+    typing: |-
+      import _ from "lodash";
+
+      const pages = _.chunk([1, 2, 3, 4, 5], 2);
+  - id: language-lodash-p01-part-2
+    title: 빈값 제거[compact]
+    display: |-
+      // 빈값 제거[compact] — falsy(false, null, 0, "", undefined, NaN) 제거
+      import _ from "lodash";
+
+      const clean = _.compact([0, 1, false, 2, "", 3, null]);
+      // 결과: [1, 2, 3]
+    typing: |-
+      import _ from "lodash";
+
+      const clean = _.compact([0, 1, false, 2, "", 3, null]);
+  - id: language-lodash-p01-part-3
+    title: 안전 조회[get]
+    display: |-
+      // 안전 조회[get] — 중첩 경로 + 기본값[default]
+      import _ from "lodash";
+
+      const user = { profile: { name: "kim" } };
+      const name = _.get(user, "profile.name", "guest");
+      const city = _.get(user, "profile.city", "unknown");
+      // 결과: name="kim", city="unknown"
+    typing: |-
+      import _ from "lodash";
+
+      const user = { profile: { name: "kim" } };
+      const name = _.get(user, "profile.name", "guest");
+      const city = _.get(user, "profile.city", "unknown");
+  - id: language-lodash-p01-part-4
+    title: 경로 설정[set]
+    display: |-
+      // 경로 설정[set] — 중간 객체가 없으면 만들어 둠
+      import _ from "lodash";
+
+      const draft = {};
+      _.set(draft, "profile.city", "seoul");
+      // 결과: { profile: { city: "seoul" } }
+    typing: |-
+      import _ from "lodash";
+
+      const draft = {};
+      _.set(draft, "profile.city", "seoul");
+  - id: language-lodash-p01-part-5
+    title: 일부만 뽑기[pick]
+    display: |-
+      // 일부만 뽑기[pick]
+      import _ from "lodash";
+
+      const user = { id: 1, name: "kim", password: "secret", role: "admin" };
+      const publicUser = _.pick(user, ["id", "name", "role"]);
+      // 결과: { id: 1, name: "kim", role: "admin" }
+    typing: |-
+      import _ from "lodash";
+
+      const user = { id: 1, name: "kim", password: "secret", role: "admin" };
+      const publicUser = _.pick(user, ["id", "name", "role"]);
+  - id: language-lodash-p01-part-6
+    title: 일부 제외[omit]
+    display: |-
+      // 일부 제외[omit] — 민감 필드 제거에 자주 씀
+      import _ from "lodash";
+
+      const user = { id: 1, name: "kim", password: "secret" };
+      const safe = _.omit(user, ["password"]);
+      // 결과: { id: 1, name: "kim" }
+    typing: |-
+      import _ from "lodash";
+
+      const user = { id: 1, name: "kim", password: "secret" };
+      const safe = _.omit(user, ["password"]);
+  - id: language-lodash-p01-part-7
+    title: 깊은 병합[merge]
+    display: |-
+      // 깊은 병합[merge] — 중첩 객체를 재귀적으로 합침
+      import _ from "lodash";
+
+      const base = { a: 1, nested: { x: 1, y: 2 } };
+      const patch = { nested: { y: 9, z: 3 } };
+      const merged = _.merge({}, base, patch);
+      // 결과: { a: 1, nested: { x: 1, y: 9, z: 3 } }
+    typing: |-
+      import _ from "lodash";
+
+      const base = { a: 1, nested: { x: 1, y: 2 } };
+      const patch = { nested: { y: 9, z: 3 } };
+      const merged = _.merge({}, base, patch);
+  - id: language-lodash-p01-part-8
+    title: 변환[map] 필터[filter]
+    display: |-
+      // 변환[map] · 필터[filter]
+      import _ from "lodash";
+
+      const users = [
+        { id: 1, name: "kim", active: true },
+        { id: 2, name: "lee", active: false },
+      ];
+      const names = _.map(users, "name");
+      const active = _.filter(users, { active: true });
+      // 결과: names=["kim","lee"], active=[{id:1,...}]
+    typing: |-
+      import _ from "lodash";
+
+      const users = [
+        { id: 1, name: "kim", active: true },
+        { id: 2, name: "lee", active: false },
+      ];
+      const names = _.map(users, "name");
+      const active = _.filter(users, { active: true });
+  - id: language-lodash-p01-part-9
+    title: 찾기[find] 인덱스[findIndex]
+    display: |-
+      // 찾기[find] · 인덱스[findIndex]
+      import _ from "lodash";
+
+      const users = [
+        { id: 1, name: "kim" },
+        { id: 2, name: "lee" },
+      ];
+      const found = _.find(users, { id: 2 });
+      const idx = _.findIndex(users, { id: 2 });
+      // 결과: found={id:2,name:"lee"}, idx=1
+    typing: |-
+      import _ from "lodash";
+
+      const users = [
+        { id: 1, name: "kim" },
+        { id: 2, name: "lee" },
+      ];
+      const found = _.find(users, { id: 2 });
+      const idx = _.findIndex(users, { id: 2 });
+  - id: language-lodash-p01-part-10
+    title: 그룹화[groupBy]
+    display: |-
+      // 그룹화[groupBy] — 같은 키끼리 배열로 묶을 때
+      import _ from "lodash";
+
+      const rows = [
+        { dept: "dev", name: "kim" },
+        { dept: "dev", name: "lee" },
+        { dept: "hr", name: "park" },
+      ];
+      const byDept = _.groupBy(rows, "dept");
+      // 결과: { dev: [kim,lee], hr: [park] }
+    typing: |-
+      import _ from "lodash";
+
+      const rows = [
+        { dept: "dev", name: "kim" },
+        { dept: "dev", name: "lee" },
+        { dept: "hr", name: "park" },
+      ];
+      const byDept = _.groupBy(rows, "dept");
+  - id: language-lodash-p01-part-11
+    title: 키 맵[keyBy]
+    display: |-
+      // 키 맵[keyBy] — id로 바로 찾을 조회표[lookup]를 만들 때
+      import _ from "lodash";
+
+      const users = [
+        { id: 1, name: "kim" },
+        { id: 2, name: "lee" },
+      ];
+      const byId = _.keyBy(users, "id");
+      // 결과: { 1: {id:1,...}, 2: {id:2,...} }
+    typing: |-
+      import _ from "lodash";
+
+      const users = [
+        { id: 1, name: "kim" },
+        { id: 2, name: "lee" },
+      ];
+      const byId = _.keyBy(users, "id");
+  - id: language-lodash-p01-part-12
+    title: 정렬[sortBy] 중복제거[uniq]
+    display: |-
+      // 정렬[sortBy] · 중복 제거[uniq]
+      import _ from "lodash";
+
+      const scores = [
+        { name: "lee", score: 90 },
+        { name: "kim", score: 70 },
+      ];
+      const ranked = _.sortBy(scores, "score");
+      const tags = _.uniq(["js", "ts", "js", "go"]);
+      // 결과: ranked=kim→lee, tags=["js","ts","go"]
+    typing: |-
+      import _ from "lodash";
+
+      const scores = [
+        { name: "lee", score: 90 },
+        { name: "kim", score: 70 },
+      ];
+      const ranked = _.sortBy(scores, "score");
+      const tags = _.uniq(["js", "ts", "js", "go"]);
+  - id: language-lodash-p01-part-13
+    title: 케이스 변환[camelCase kebabCase]
+    display: |-
+      // 케이스 변환[camelCase · kebabCase]
+      import _ from "lodash";
+
+      const camel = _.camelCase("user_name");
+      const kebab = _.kebabCase("UserName");
+      // 결과: camel="userName", kebab="user-name"
+    typing: |-
+      import _ from "lodash";
+
+      const camel = _.camelCase("user_name");
+      const kebab = _.kebabCase("UserName");
+  - id: language-lodash-p01-part-14
+    title: 디바운스[debounce]
+    display: |-
+      // 디바운스[debounce] — 입력이 멈춘 뒤 한 번만 실행
+      import _ from "lodash";
+
+      const onSearch = _.debounce((q) => {
+        console.log("search", q);
+      }, 300);
+    typing: |-
+      import _ from "lodash";
+
+      const onSearch = _.debounce((q) => {
+        console.log("search", q);
+      }, 300);
+  - id: language-lodash-p01-part-15
+    title: 스로틀[throttle]
+    display: |-
+      // 스로틀[throttle] — 일정 간격으로만 실행 (스크롤·리사이즈)
+      import _ from "lodash";
+
+      const onScroll = _.throttle(() => {
+        console.log("scroll");
+      }, 200);
+    typing: |-
+      import _ from "lodash";
+
+      const onScroll = _.throttle(() => {
+        console.log("scroll");
+      }, 200);

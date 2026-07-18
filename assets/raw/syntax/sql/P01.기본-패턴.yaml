@@ -136,37 +136,19 @@ parts:
       FROM users
       GROUP BY created_at;
   - id: language-sql-p01-part-11
-    title: 조인[join]
+    title: 내부 조인[inner join]
     display: |-
-      -- 조인[join]
-      CREATE TABLE orders (
-          order_id    INTEGER PRIMARY KEY,
-          user_id     INTEGER,
-          total_price INTEGER
-      );
-
-      INSERT INTO orders (order_id, user_id, total_price)
-      VALUES (100, 1, 5000);
-
+      -- 내부 조인[inner join]
+      -- 조인 조건이 맞는 행만 합친다
       SELECT u.user_name, o.total_price
       FROM users u
-      JOIN orders o
+      INNER JOIN orders o
         ON u.user_id = o.user_id;
-      -- 결과:
-      -- kim, 5000
+      -- 결과: 주문이 있는 사용자만
     typing: |-
-      CREATE TABLE orders (
-          order_id    INTEGER PRIMARY KEY,
-          user_id     INTEGER,
-          total_price INTEGER
-      );
-
-      INSERT INTO orders (order_id, user_id, total_price)
-      VALUES (100, 1, 5000);
-
       SELECT u.user_name, o.total_price
       FROM users u
-      JOIN orders o
+      INNER JOIN orders o
         ON u.user_id = o.user_id;
   - id: language-sql-p01-part-12
     title: 서브쿼리[subquery]

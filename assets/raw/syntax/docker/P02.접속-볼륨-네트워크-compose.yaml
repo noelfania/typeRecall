@@ -1,0 +1,92 @@
+id: language-docker-p02
+category: syntax
+kind: command
+language: shell
+track:
+  id: docker
+  label: Docker
+title: P02.접속-볼륨-네트워크-compose
+source:
+  origin: chat-raw Docker 필수·고빈도 2026-07-18
+  note: 접속·볼륨·네트워크·compose·트러블슈팅. Swarm/Secret 제외.
+parts:
+  - id: language-docker-p02-part-1
+    title: 접속[docker exec]
+    display: |-
+      # 접속[docker exec]
+      # -it 대화형 터미널
+      docker exec -it web bash
+    typing: docker exec -it web bash
+  - id: language-docker-p02-part-2
+    title: 로그 따라보기[docker logs]
+    display: |-
+      # 로그 따라보기[docker logs]
+      docker logs -f web
+    typing: docker logs -f web
+  - id: language-docker-p02-part-3
+    title: 볼륨 마운트[-v]
+    display: |-
+      # 볼륨 마운트[-v]
+      # 호스트 경로:컨테이너 경로
+      docker run -d -v /data/html:/usr/share/nginx/html --name web nginx
+    typing: docker run -d -v /data/html:/usr/share/nginx/html --name web nginx
+  - id: language-docker-p02-part-4
+    title: 볼륨 관리[volume]
+    display: |-
+      # 볼륨 관리[volume]
+      docker volume create app-data
+      docker volume ls
+    typing: |-
+      docker volume create app-data
+      docker volume ls
+  - id: language-docker-p02-part-5
+    title: 네트워크[network]
+    display: |-
+      # 네트워크[network]
+      docker network ls
+      docker network create app-net
+    typing: |-
+      docker network ls
+      docker network create app-net
+  - id: language-docker-p02-part-6
+    title: 네트워크 연결[--network]
+    display: |-
+      # 네트워크 연결[--network]
+      docker run -d --network app-net --name web nginx
+    typing: docker run -d --network app-net --name web nginx
+  - id: language-docker-p02-part-7
+    title: Compose 기동[compose up]
+    display: |-
+      # Compose 기동[compose up]
+      docker compose up -d
+    typing: docker compose up -d
+  - id: language-docker-p02-part-8
+    title: Compose 종료·로그[compose down logs]
+    display: |-
+      # Compose 종료·로그[compose down logs]
+      docker compose down
+      docker compose logs -f
+    typing: |-
+      docker compose down
+      docker compose logs -f
+  - id: language-docker-p02-part-9
+    title: 상세 정보[docker inspect]
+    display: |-
+      # 상세 정보[docker inspect]
+      docker inspect web
+    typing: docker inspect web
+  - id: language-docker-p02-part-10
+    title: 자원 사용[docker stats]
+    display: |-
+      # 자원 사용[docker stats]
+      docker stats
+    typing: docker stats
+  - id: language-docker-p02-part-11
+    title: 디스크·정리[system df prune]
+    display: |-
+      # 디스크·정리[system df prune]
+      docker system df
+      docker system prune
+    typing: |-
+      docker system df
+      docker system prune

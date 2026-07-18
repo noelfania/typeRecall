@@ -1,0 +1,51 @@
+id: knowledge-terms-architecture
+category: knowledge
+kind: term
+topic: architecture
+title: 프로젝트 구조·계층 용어
+source:
+  origin: chat-raw 프로젝트 폴더 구조 2026-07-18
+  note: feature 단위 + 계층 구조 고빈도만. 상세 트리는 notes/project-structure.yaml.
+terms:
+  - id: arch-layered
+    section: 구조
+    title: 계층형 아키텍처
+    prompt: 요청 처리·비즈니스·데이터 접근처럼 역할을 층으로 나누는 구조.
+    answer: Layered architecture
+    example: 계층형 아키텍처[Layered architecture]에서 Controller는 Service만 호출한다.
+  - id: arch-feature-based
+    section: 구조
+    title: 기능 단위 구조
+    prompt: user·order처럼 도메인(기능)별로 폴더를 묶어 관련 코드를 한곳에 두는 방식.
+    answer: Feature-based structure
+    example: 기능 단위 구조[Feature-based structure]면 payment 관련 파일이 한 폴더에 모인다.
+  - id: arch-controller
+    section: 백엔드 계층
+    title: 컨트롤러
+    prompt: HTTP 요청을 받아 응답하는 진입점. 비즈니스 로직은 두지 않는다.
+    answer: Controller
+    example: 컨트롤러[Controller]는 입력 검증 후 Service를 호출한다.
+  - id: arch-service
+    section: 백엔드 계층
+    title: 서비스
+    prompt: 비즈니스 규칙과 흐름을 담당하는 계층.
+    answer: Service
+    example: 주문 취소 규칙은 서비스[Service]에 둔다.
+  - id: arch-repository
+    section: 백엔드 계층
+    title: 리포지토리
+    prompt: DB 조회·저장을 추상화하는 데이터 접근 계층.
+    answer: Repository
+    example: 리포지토리[Repository]에서만 SQL·ORM 호출을 한다.
+  - id: arch-dto
+    section: 백엔드 계층
+    title: 전송 객체
+    prompt: API·계층 간에 데이터를 전달하기 위한 전송용 객체. Entity와 분리한다.
+    answer: DTO
+    example: 로그인 요청 바디는 전송 객체[DTO]로 받고 Entity를 그대로 노출하지 않는다.
+  - id: arch-entity
+    section: 백엔드 계층
+    title: 엔티티
+    prompt: DB 테이블에 대응하는 영속·도메인 모델.
+    answer: Entity
+    example: User 엔티티[Entity]는 users 테이블과 매핑된다.

@@ -1,0 +1,250 @@
+id: language-lodash-p02
+category: syntax
+kind: code-snippet
+language: javascript
+track:
+  id: lodash
+  label: Lodash
+title: P02.체인-변환
+source:
+  origin: chat-raw Lodash 체인·변환 실무 2026-07-18
+  note: 실무 파이프라인만. zip/xor/fp 제외. keyBy vs groupBy 비교 포함.
+parts:
+  - id: language-lodash-p02-part-1
+    title: 체인 파이프라인[chain]
+    display: |-
+      // 체인 파이프라인[chain] — filter → sortBy → map → value
+      import _ from "lodash";
+
+      const users = [
+        { name: "lee", score: 90, active: true },
+        { name: "kim", score: 70, active: true },
+        { name: "park", score: 80, active: false },
+      ];
+      const names = _.chain(users)
+        .filter({ active: true })
+        .sortBy("score")
+        .map("name")
+        .value();
+      // 결과: ["kim", "lee"]
+    typing: |-
+      import _ from "lodash";
+
+      const users = [
+        { name: "lee", score: 90, active: true },
+        { name: "kim", score: 70, active: true },
+        { name: "park", score: 80, active: false },
+      ];
+      const names = _.chain(users)
+        .filter({ active: true })
+        .sortBy("score")
+        .map("name")
+        .value();
+  - id: language-lodash-p02-part-2
+    title: 그룹 평균[groupBy mapValues meanBy]
+    display: |-
+      // 그룹 평균[groupBy + mapValues + meanBy]
+      import _ from "lodash";
+
+      const scores = [
+        { dept: "dev", score: 80 },
+        { dept: "dev", score: 90 },
+        { dept: "hr", score: 70 },
+      ];
+      const avgByDept = _.mapValues(_.groupBy(scores, "dept"), (rows) =>
+        _.meanBy(rows, "score"),
+      );
+      // 결과: { dev: 85, hr: 70 }
+    typing: |-
+      import _ from "lodash";
+
+      const scores = [
+        { dept: "dev", score: 80 },
+        { dept: "dev", score: 90 },
+        { dept: "hr", score: 70 },
+      ];
+      const avgByDept = _.mapValues(_.groupBy(scores, "dept"), (rows) =>
+        _.meanBy(rows, "score"),
+      );
+  - id: language-lodash-p02-part-3
+    title: 조회표 조인[keyBy map]
+    display: |-
+      // 조회표 조인[keyBy + map] — id로 이름 붙이기
+      import _ from "lodash";
+
+      const users = [
+        { id: 1, name: "kim" },
+        { id: 2, name: "lee" },
+      ];
+      const orders = [
+        { userId: 1, total: 100 },
+        { userId: 2, total: 200 },
+      ];
+      const byId = _.keyBy(users, "id");
+      const joined = _.map(orders, (o) => ({
+        ...o,
+        userName: byId[o.userId]?.name,
+      }));
+      // 결과: [{userId:1,total:100,userName:"kim"}, ...]
+    typing: |-
+      import _ from "lodash";
+
+      const users = [
+        { id: 1, name: "kim" },
+        { id: 2, name: "lee" },
+      ];
+      const orders = [
+        { userId: 1, total: 100 },
+        { userId: 2, total: 200 },
+      ];
+      const byId = _.keyBy(users, "id");
+      const joined = _.map(orders, (o) => ({
+        ...o,
+        userName: byId[o.userId]?.name,
+      }));
+  - id: language-lodash-p02-part-4
+    title: 평탄화 정리[flatten uniq sort]
+    display: |-
+      // 평탄화 정리[flatten + uniq + sort]
+      import _ from "lodash";
+
+      const nested = [
+        ["js", "ts"],
+        ["go", "js"],
+        ["ts"],
+      ];
+      const tags = _.sortBy(_.uniq(_.flatten(nested)));
+      // 결과: ["go", "js", "ts"]
+    typing: |-
+      import _ from "lodash";
+
+      const nested = [
+        ["js", "ts"],
+        ["go", "js"],
+        ["ts"],
+      ];
+      const tags = _.sortBy(_.uniq(_.flatten(nested)));
+  - id: language-lodash-p02-part-5
+    title: 배열→객체[transform]
+    display: |-
+      // 배열→객체[transform] — reduce 대신 누적 객체 만들기
+      import _ from "lodash";
+
+      const pairs = [
+        ["a", 1],
+        ["b", 2],
+      ];
+      const obj = _.transform(
+        pairs,
+        (acc, [k, v]) => {
+          acc[k] = v;
+        },
+        {},
+      );
+      // 결과: { a: 1, b: 2 }
+    typing: |-
+      import _ from "lodash";
+
+      const pairs = [
+        ["a", 1],
+        ["b", 2],
+      ];
+      const obj = _.transform(
+        pairs,
+        (acc, [k, v]) => {
+          acc[k] = v;
+        },
+        {},
+      );
+  - id: language-lodash-p02-part-6
+    title: 조건 누적[transform]
+    display: |-
+      // 조건 누적[transform] — 합격만 합산
+      import _ from "lodash";
+
+      const rows = [
+        { pass: true, score: 80 },
+        { pass: false, score: 40 },
+        { pass: true, score: 90 },
+      ];
+      const total = _.transform(
+        rows,
+        (acc, row) => {
+          if (row.pass) acc.sum += row.score;
+        },
+        { sum: 0 },
+      );
+      // 결과: { sum: 170 }
+    typing: |-
+      import _ from "lodash";
+
+      const rows = [
+        { pass: true, score: 80 },
+        { pass: false, score: 40 },
+        { pass: true, score: 90 },
+      ];
+      const total = _.transform(
+        rows,
+        (acc, row) => {
+          if (row.pass) acc.sum += row.score;
+        },
+        { sum: 0 },
+      );
+  - id: language-lodash-p02-part-7
+    title: 커스텀 그룹[transform]
+    display: |-
+      // 커스텀 그룹[transform] — groupBy와 비슷하되 값을 직접 가공
+      import _ from "lodash";
+
+      const users = [
+        { role: "admin", name: "kim" },
+        { role: "member", name: "lee" },
+        { role: "admin", name: "park" },
+      ];
+      const namesByRole = _.transform(
+        users,
+        (acc, u) => {
+          (acc[u.role] || (acc[u.role] = [])).push(u.name);
+        },
+        {},
+      );
+      // 결과: { admin: ["kim","park"], member: ["lee"] }
+    typing: |-
+      import _ from "lodash";
+
+      const users = [
+        { role: "admin", name: "kim" },
+        { role: "member", name: "lee" },
+        { role: "admin", name: "park" },
+      ];
+      const namesByRole = _.transform(
+        users,
+        (acc, u) => {
+          (acc[u.role] || (acc[u.role] = [])).push(u.name);
+        },
+        {},
+      );
+  - id: language-lodash-p02-part-8
+    title: keyBy vs groupBy 비교
+    display: |-
+      // keyBy vs groupBy 비교
+      // keyBy: 키 → 단일 객체 (조회표[lookup])
+      // groupBy: 키 → 배열 (묶음[bucket])
+      import _ from "lodash";
+
+      const users = [
+        { id: 1, dept: "dev", name: "kim" },
+        { id: 2, dept: "dev", name: "lee" },
+      ];
+      const byId = _.keyBy(users, "id");
+      const byDept = _.groupBy(users, "dept");
+      // byId[1] → 객체 하나 / byDept.dev → 배열
+    typing: |-
+      import _ from "lodash";
+
+      const users = [
+        { id: 1, dept: "dev", name: "kim" },
+        { id: 2, dept: "dev", name: "lee" },
+      ];
+      const byId = _.keyBy(users, "id");
+      const byDept = _.groupBy(users, "dept");

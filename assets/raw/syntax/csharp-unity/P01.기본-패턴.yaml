@@ -1,0 +1,245 @@
+id: language-csharp-unity-p01
+category: syntax
+kind: code-snippet
+language: csharp
+track:
+  id: csharp-unity
+  label: C# for Unity
+title: P01.기본-패턴
+source:
+  origin: chat-raw Unity C# 실무 2026-07-18
+  note: MonoBehaviour·SerializeField·Transform·GetComponent 등 매일 쓰는 패턴만.
+parts:
+  - id: language-csharp-unity-p01-part-1
+    title: MonoBehaviour 골격[MonoBehaviour]
+    display: |-
+      // MonoBehaviour 골격[MonoBehaviour]
+      using UnityEngine;
+
+      public class Player : MonoBehaviour
+      {
+          void Start()
+          {
+              Debug.Log("start");
+          }
+
+          void Update()
+          {
+          }
+      }
+    typing: |-
+      using UnityEngine;
+
+      public class Player : MonoBehaviour
+      {
+          void Start()
+          {
+              Debug.Log("start");
+          }
+
+          void Update()
+          {
+          }
+      }
+  - id: language-csharp-unity-p01-part-2
+    title: SerializeField[인스펙터 노출]
+    display: |-
+      // SerializeField[인스펙터 노출]
+      // private이지만 인스펙터에서 값을 넣을 수 있다
+      using UnityEngine;
+
+      public class Player : MonoBehaviour
+      {
+          [SerializeField] private float moveSpeed = 5f;
+          [SerializeField] private int maxHp = 100;
+      }
+    typing: |-
+      using UnityEngine;
+
+      public class Player : MonoBehaviour
+      {
+          [SerializeField] private float moveSpeed = 5f;
+          [SerializeField] private int maxHp = 100;
+      }
+  - id: language-csharp-unity-p01-part-3
+    title: Transform 이동[transform]
+    display: |-
+      // Transform 이동[transform]
+      using UnityEngine;
+
+      public class Mover : MonoBehaviour
+      {
+          [SerializeField] private float speed = 3f;
+
+          void Update()
+          {
+              transform.Translate(Vector3.forward * speed * Time.deltaTime);
+          }
+      }
+    typing: |-
+      using UnityEngine;
+
+      public class Mover : MonoBehaviour
+      {
+          [SerializeField] private float speed = 3f;
+
+          void Update()
+          {
+              transform.Translate(Vector3.forward * speed * Time.deltaTime);
+          }
+      }
+  - id: language-csharp-unity-p01-part-4
+    title: GetComponent[컴포넌트 가져오기]
+    display: |-
+      // GetComponent[컴포넌트 가져오기]
+      using UnityEngine;
+
+      public class HealthUI : MonoBehaviour
+      {
+          private Rigidbody rb;
+
+          void Awake()
+          {
+              rb = GetComponent<Rigidbody>();
+          }
+      }
+    typing: |-
+      using UnityEngine;
+
+      public class HealthUI : MonoBehaviour
+      {
+          private Rigidbody rb;
+
+          void Awake()
+          {
+              rb = GetComponent<Rigidbody>();
+          }
+      }
+  - id: language-csharp-unity-p01-part-5
+    title: null 체크[null check]
+    display: |-
+      // null 체크[null check]
+      using UnityEngine;
+
+      public class TargetFinder : MonoBehaviour
+      {
+          [SerializeField] private Transform target;
+
+          void Update()
+          {
+              if (target == null)
+              {
+                  return;
+              }
+
+              transform.LookAt(target);
+          }
+      }
+    typing: |-
+      using UnityEngine;
+
+      public class TargetFinder : MonoBehaviour
+      {
+          [SerializeField] private Transform target;
+
+          void Update()
+          {
+              if (target == null)
+              {
+                  return;
+              }
+
+              transform.LookAt(target);
+          }
+      }
+  - id: language-csharp-unity-p01-part-6
+    title: Input 입력[Input]
+    display: |-
+      // Input 입력[Input]
+      using UnityEngine;
+
+      public class PlayerInput : MonoBehaviour
+      {
+          void Update()
+          {
+              float h = Input.GetAxis("Horizontal");
+              float v = Input.GetAxis("Vertical");
+              transform.Translate(new Vector3(h, 0f, v) * Time.deltaTime);
+          }
+      }
+    typing: |-
+      using UnityEngine;
+
+      public class PlayerInput : MonoBehaviour
+      {
+          void Update()
+          {
+              float h = Input.GetAxis("Horizontal");
+              float v = Input.GetAxis("Vertical");
+              transform.Translate(new Vector3(h, 0f, v) * Time.deltaTime);
+          }
+      }
+  - id: language-csharp-unity-p01-part-7
+    title: Instantiate / Destroy
+    display: |-
+      // Instantiate / Destroy
+      using UnityEngine;
+
+      public class Spawner : MonoBehaviour
+      {
+          [SerializeField] private GameObject bulletPrefab;
+
+          void Fire()
+          {
+              GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
+              Destroy(bullet, 2f);
+          }
+      }
+    typing: |-
+      using UnityEngine;
+
+      public class Spawner : MonoBehaviour
+      {
+          [SerializeField] private GameObject bulletPrefab;
+
+          void Fire()
+          {
+              GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
+              Destroy(bullet, 2f);
+          }
+      }
+  - id: language-csharp-unity-p01-part-8
+    title: 태그로 찾기[FindWithTag]
+    display: |-
+      // 태그로 찾기[FindWithTag]
+      using UnityEngine;
+
+      public class EnemyAI : MonoBehaviour
+      {
+          private Transform player;
+
+          void Start()
+          {
+              GameObject go = GameObject.FindWithTag("Player");
+              if (go != null)
+              {
+                  player = go.transform;
+              }
+          }
+      }
+    typing: |-
+      using UnityEngine;
+
+      public class EnemyAI : MonoBehaviour
+      {
+          private Transform player;
+
+          void Start()
+          {
+              GameObject go = GameObject.FindWithTag("Player");
+              if (go != null)
+              {
+                  player = go.transform;
+              }
+          }
+      }

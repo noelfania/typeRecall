@@ -7,157 +7,258 @@ track:
   label: Java
 title: P01.기본-패턴
 source:
-  origin: assets/typingSource/Language-Java/P01.기본-패턴.java
+  origin: chat-raw 실무형 Java 2026-07-18
+  note: 변수·제어·메서드·컬렉션. 희귀 문법 제외. 각 파트는 단독 타이핑 가능.
 parts:
   - id: language-java-p01-part-1
-    title: 클래스 골격[class / enum / static method]
+    title: 기본 타입[primitive / String]
     display: |-
-      // 클래스 골격[class / enum / static method]
-      class P01BasicPatterns {
-
-          enum UserRole {
-              USER, ADMIN
-          }
-
-          static int add(int numA, int numB) {
-              return numA + numB;
-          }
-
-          public static void main(String[] args) {
+      // 기본 타입[primitive / String]
+      int userAge = 30;
+      double scoreValue = 95.5;
+      boolean isAdmin = true;
+      String userName = "kim";
+      System.out.println(userAge + " " + scoreValue + " " + isAdmin + " " + userName);
+      // 결과: 30 95.5 true kim
     typing: |-
-      class P01BasicPatterns {
-
-          enum UserRole {
-              USER, ADMIN
-          }
-
+      int userAge = 30;
+      double scoreValue = 95.5;
+      boolean isAdmin = true;
+      String userName = "kim";
+      System.out.println(userAge + " " + scoreValue + " " + isAdmin + " " + userName);
+  - id: language-java-p01-part-2
+    title: 조건문[if / else]
+    display: |-
+      // 조건문[if / else]
+      int userAge = 30;
+      if (userAge >= 20) {
+          System.out.println("adult");
+      } else {
+          System.out.println("minor");
+      }
+      // 결과: adult
+    typing: |-
+      int userAge = 30;
+      if (userAge >= 20) {
+          System.out.println("adult");
+      } else {
+          System.out.println("minor");
+      }
+  - id: language-java-p01-part-3
+    title: 분기[switch]
+    display: |-
+      // 분기[switch]
+      String roleName = "admin";
+      switch (roleName) {
+          case "user":
+              System.out.println("user");
+              break;
+          case "admin":
+              System.out.println("admin");
+              break;
+          default:
+              System.out.println("unknown");
+              break;
+      }
+      // 결과: admin
+    typing: |-
+      String roleName = "admin";
+      switch (roleName) {
+          case "user":
+              System.out.println("user");
+              break;
+          case "admin":
+              System.out.println("admin");
+              break;
+          default:
+              System.out.println("unknown");
+              break;
+      }
+  - id: language-java-p01-part-4
+    title: 반복[for]
+    display: |-
+      // 반복[for]
+      for (int index = 0; index < 3; index++) {
+          System.out.println(index);
+      }
+      // 결과: 0 1 2
+    typing: |-
+      for (int index = 0; index < 3; index++) {
+          System.out.println(index);
+      }
+  - id: language-java-p01-part-5
+    title: 반복[while]
+    display: |-
+      // 반복[while]
+      int count = 0;
+      while (count < 3) {
+          System.out.println(count);
+          count++;
+      }
+      // 결과: 0 1 2
+    typing: |-
+      int count = 0;
+      while (count < 3) {
+          System.out.println(count);
+          count++;
+      }
+  - id: language-java-p01-part-6
+    title: 향상된 for[for-each]
+    display: |-
+      // 향상된 for[for-each]
+      String[] colorList = { "red", "green", "blue" };
+      for (String colorItem : colorList) {
+          System.out.println(colorItem);
+      }
+      // 결과: red green blue
+    typing: |-
+      String[] colorList = { "red", "green", "blue" };
+      for (String colorItem : colorList) {
+          System.out.println(colorItem);
+      }
+  - id: language-java-p01-part-7
+    title: 메서드[method]
+    display: |-
+      // 메서드[method]
+      class Calc {
           static int add(int numA, int numB) {
               return numA + numB;
           }
 
           public static void main(String[] args) {
-  - id: language-java-p01-part-2
-    title: 기본 타입[primitive type]
-    display: |2-
-              // 기본 타입[primitive type]
-              int userAge = 30;
-              double scoreValue = 95.5;
-              boolean isAdmin = true;
-              char gradeValue = 'A';
-              System.out.println(userAge);
-              System.out.println(scoreValue);
-              System.out.println(isAdmin);
-              System.out.println(gradeValue);
-              // 결과: 30 / 95.5 / true / A
-    typing: |2-
-              int userAge = 30;
-              double scoreValue = 95.5;
-              boolean isAdmin = true;
-              char gradeValue = 'A';
-              System.out.println(userAge);
-              System.out.println(scoreValue);
-              System.out.println(isAdmin);
-              System.out.println(gradeValue);
-  - id: language-java-p01-part-3
-    title: 문자열[string]
-    display: |2-
-              // 문자열[string]
-              String userName = "kim";
-              System.out.println(userName.toUpperCase());
-              // 결과: KIM
-    typing: |2-
-              String userName = "kim";
-              System.out.println(userName.toUpperCase());
-  - id: language-java-p01-part-4
-    title: 조건문[condition]
-    display: |2-
-              // 조건문[condition]
-              if (userAge >= 20) {
-                  System.out.println("adult");
-              } else {
-                  System.out.println("minor");
-              }
-              // 결과: adult
-    typing: |2-
-              if (userAge >= 20) {
-                  System.out.println("adult");
-              } else {
-                  System.out.println("minor");
-              }
-  - id: language-java-p01-part-5
-    title: 배열[array]
-    display: |2-
-              // 배열[array]
-              String[] colorList = { "red", "green", "blue" };
-              for (String colorItem : colorList) {
-                  System.out.println(colorItem);
-              }
-              // 결과:
-              // red
-              // green
-              // blue
-    typing: |2-
-              String[] colorList = { "red", "green", "blue" };
-              for (String colorItem : colorList) {
-                  System.out.println(colorItem);
-              }
-  - id: language-java-p01-part-6
-    title: 다차원 배열[multidimensional array]
-    display: |2-
-              // 다차원 배열[multidimensional array]
-              int[][] matrixValue = { { 1, 2 }, { 3, 4 } };
-              System.out.println(matrixValue[1][0]);
-              // 결과: 3
-    typing: |2-
-              int[][] matrixValue = { { 1, 2 }, { 3, 4 } };
-              System.out.println(matrixValue[1][0]);
-  - id: language-java-p01-part-7
-    title: 열거형[enum]
-    display: |2-
-              // 열거형[enum]
-              UserRole roleValue = UserRole.ADMIN;
-              switch (roleValue) {
-                  case USER:
-                      System.out.println("user");
-                      break;
-                  case ADMIN:
-                      System.out.println("admin");
-                      break;
-              }
-              // 결과: admin
-    typing: |2-
-              UserRole roleValue = UserRole.ADMIN;
-              switch (roleValue) {
-                  case USER:
-                      System.out.println("user");
-                      break;
-                  case ADMIN:
-                      System.out.println("admin");
-                      break;
-              }
-  - id: language-java-p01-part-8
-    title: 형변환[type casting]
-    display: |2-
-              // 형변환[type casting]
-              double ratioValue = 9.8;
-              int intValue = (int) ratioValue;
-              System.out.println(intValue);
-              // 결과: 9
-    typing: |2-
-              double ratioValue = 9.8;
-              int intValue = (int) ratioValue;
-              System.out.println(intValue);
-  - id: language-java-p01-part-9
-    title: 정적 메서드[static method]
-    display: |2-
-              // 정적 메서드[static method]
-              int sumValue = add(5, 7);
-              System.out.println(sumValue);
-              // 결과: 12
+              System.out.println(add(5, 7));
           }
       }
-    typing: |2-
-              int sumValue = add(5, 7);
-              System.out.println(sumValue);
+      // 결과: 12
+    typing: |-
+      class Calc {
+          static int add(int numA, int numB) {
+              return numA + numB;
           }
+
+          public static void main(String[] args) {
+              System.out.println(add(5, 7));
+          }
+      }
+  - id: language-java-p01-part-8
+    title: 메서드 오버로딩[method overloading]
+    display: |-
+      // 메서드 오버로딩[method overloading]
+      // 이름 같고 매개변수 타입·개수가 다르면 된다
+      class Calc {
+          static int add(int numA, int numB) {
+              return numA + numB;
+          }
+
+          static double add(double numA, double numB) {
+              return numA + numB;
+          }
+
+          public static void main(String[] args) {
+              System.out.println(add(1, 2));
+              System.out.println(add(1.5, 2.5));
+          }
+      }
+      // 결과: 3 / 4.0
+    typing: |-
+      class Calc {
+          static int add(int numA, int numB) {
+              return numA + numB;
+          }
+
+          static double add(double numA, double numB) {
+              return numA + numB;
+          }
+
+          public static void main(String[] args) {
+              System.out.println(add(1, 2));
+              System.out.println(add(1.5, 2.5));
+          }
+      }
+  - id: language-java-p01-part-9
+    title: 리스트[ArrayList]
+    display: |-
+      // 리스트[ArrayList]
+      import java.util.ArrayList;
+      import java.util.List;
+
+      List<String> nameList = new ArrayList<>();
+      nameList.add("kim");
+      nameList.add("lee");
+      System.out.println(nameList);
+      // 결과: [kim, lee]
+    typing: |-
+      import java.util.ArrayList;
+      import java.util.List;
+
+      List<String> nameList = new ArrayList<>();
+      nameList.add("kim");
+      nameList.add("lee");
+      System.out.println(nameList);
+  - id: language-java-p01-part-10
+    title: 맵[HashMap]
+    display: |-
+      // 맵[HashMap]
+      import java.util.HashMap;
+      import java.util.Map;
+
+      Map<String, Integer> ageMap = new HashMap<>();
+      ageMap.put("kim", 30);
+      ageMap.put("lee", 25);
+      System.out.println(ageMap.get("kim"));
+      // 결과: 30
+    typing: |-
+      import java.util.HashMap;
+      import java.util.Map;
+
+      Map<String, Integer> ageMap = new HashMap<>();
+      ageMap.put("kim", 30);
+      ageMap.put("lee", 25);
+      System.out.println(ageMap.get("kim"));
+  - id: language-java-p01-part-11
+    title: 집합[HashSet]
+    display: |-
+      // 집합[HashSet]
+      // 중복을 자동으로 제거한다
+      import java.util.HashSet;
+      import java.util.Set;
+
+      Set<String> tagSet = new HashSet<>();
+      tagSet.add("java");
+      tagSet.add("java");
+      tagSet.add("sql");
+      System.out.println(tagSet);
+      // 결과: [java, sql] (순서는 보장되지 않음)
+    typing: |-
+      import java.util.HashSet;
+      import java.util.Set;
+
+      Set<String> tagSet = new HashSet<>();
+      tagSet.add("java");
+      tagSet.add("java");
+      tagSet.add("sql");
+      System.out.println(tagSet);
+  - id: language-java-p01-part-12
+    title: 컬렉션 순회[for-each]
+    display: |-
+      // 컬렉션 순회[for-each]
+      import java.util.ArrayList;
+      import java.util.List;
+
+      List<String> nameList = new ArrayList<>();
+      nameList.add("kim");
+      nameList.add("lee");
+      for (String nameItem : nameList) {
+          System.out.println(nameItem);
+      }
+      // 결과: kim lee
+    typing: |-
+      import java.util.ArrayList;
+      import java.util.List;
+
+      List<String> nameList = new ArrayList<>();
+      nameList.add("kim");
+      nameList.add("lee");
+      for (String nameItem : nameList) {
+          System.out.println(nameItem);
       }

@@ -1,0 +1,89 @@
+id: language-vscode-p01
+category: syntax
+kind: command
+language: shell
+track:
+  id: vscode
+  label: VS Code
+title: P01.참조-검색
+source:
+  origin: chat-raw VS Code Find All References 2026-07-18
+  note: 함수 호출 찾기. 정확도는 References > Call Hierarchy > 문자열/regex 검색 순.
+parts:
+  - id: language-vscode-p01-part-1
+    title: Find All References[Shift+F12]
+    display: |-
+      # Find All References[Shift+F12]
+      # 정의부에 커서 → 호출 위치 전부 (언어 서버 있을 때 최우선)
+      Shift+F12
+    typing: Shift+F12
+  - id: language-vscode-p01-part-2
+    title: Peek References[Alt+Shift+F12]
+    display: |-
+      # Peek References[Alt+Shift+F12]
+      # 사이드 패널 대신 인라인으로 참조 미리보기
+      Alt+Shift+F12
+    typing: Alt+Shift+F12
+  - id: language-vscode-p01-part-3
+    title: Go to Definition[F12]
+    display: |-
+      # Go to Definition[F12]
+      F12
+      Alt+F12
+    typing: |-
+      F12
+      Alt+F12
+  - id: language-vscode-p01-part-4
+    title: 워크스페이스 검색[Ctrl+Shift+F]
+    display: |-
+      # 워크스페이스 검색[Ctrl+Shift+F]
+      # 언어 서버 없을 때 → Regex ON 후 \bAAA\s*\(
+      Ctrl+Shift+F
+    typing: Ctrl+Shift+F
+  - id: language-vscode-p01-part-5
+    title: 호출만 regex[\\bAAA\\s*\\(]
+    display: |-
+      # 호출만 regex[\bAAA\s*\(]
+      # Ctrl+Shift+F → .* (Regex) ON
+      \bAAA\s*\(
+    typing: \bAAA\s*\(
+  - id: language-vscode-p01-part-6
+    title: 정의 제외 regex[lookbehind]
+    display: |-
+      # 정의 제외 regex[lookbehind]
+      # JS/TS에서 function AAA 정의는 빼고 호출만
+      (?<!function\s)\bAAA\s*\(
+    typing: (?<!function\s)\bAAA\s*\(
+  - id: language-vscode-p01-part-7
+    title: Call Hierarchy[호출 계층]
+    display: |-
+      # Call Hierarchy[호출 계층]
+      # 정의부 우클릭 → Peek → Call Hierarchy → Incoming Calls
+      # 실제 호출 흐름 추적
+      Ctrl+Shift+H
+    typing: Ctrl+Shift+H
+  - id: language-vscode-p01-part-8
+    title: 심볼로 이동[Ctrl+T]
+    display: |-
+      # 심볼로 이동[Ctrl+T]
+      # 워크스페이스 심볼(함수·클래스) 빠른 검색
+      Ctrl+T
+    typing: Ctrl+T
+  - id: language-vscode-p01-part-9
+    title: 파일 내 심볼[Ctrl+Shift+O]
+    display: |-
+      # 파일 내 심볼[Ctrl+Shift+O]
+      Ctrl+Shift+O
+    typing: Ctrl+Shift+O
+  - id: language-vscode-p01-part-10
+    title: 추천 순서[우선순위]
+    display: |-
+      # 추천 순서[우선순위]
+      # 1) Shift+F12 Find All References
+      # 2) Call Hierarchy Incoming Calls
+      # 3) Ctrl+Shift+F + \bAAA\s*\(
+      Shift+F12
+      Ctrl+Shift+F
+    typing: |-
+      Shift+F12
+      Ctrl+Shift+F

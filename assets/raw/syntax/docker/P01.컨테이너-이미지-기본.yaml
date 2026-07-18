@@ -1,0 +1,80 @@
+id: language-docker-p01
+category: syntax
+kind: command
+language: shell
+track:
+  id: docker
+  label: Docker
+title: P01.컨테이너-이미지-기본
+source:
+  origin: chat-raw Docker 필수·고빈도 2026-07-18
+  note: 컨테이너·이미지 기본. Swarm/Secret/Buildx 제외.
+parts:
+  - id: language-docker-p01-part-1
+    title: 실행[docker run]
+    display: |-
+      # 실행[docker run]
+      # -d 백그라운드, -p 호스트:컨테이너 포트
+      docker run -d -p 8080:80 --name web nginx
+    typing: docker run -d -p 8080:80 --name web nginx
+  - id: language-docker-p01-part-2
+    title: 목록[docker ps]
+    display: |-
+      # 목록[docker ps]
+      docker ps
+      docker ps -a
+    typing: |-
+      docker ps
+      docker ps -a
+  - id: language-docker-p01-part-3
+    title: 중지·시작·재시작[stop start restart]
+    display: |-
+      # 중지·시작·재시작[stop start restart]
+      docker stop web
+      docker start web
+      docker restart web
+    typing: |-
+      docker stop web
+      docker start web
+      docker restart web
+  - id: language-docker-p01-part-4
+    title: 삭제[docker rm]
+    display: |-
+      # 삭제[docker rm]
+      # 중지된 컨테이너만 삭제 가능 (-f 강제)
+      docker rm web
+      docker rm -f web
+    typing: |-
+      docker rm web
+      docker rm -f web
+  - id: language-docker-p01-part-5
+    title: 이미지 받기[docker pull]
+    display: |-
+      # 이미지 받기[docker pull]
+      docker pull nginx
+      docker pull nginx:1.27
+    typing: |-
+      docker pull nginx
+      docker pull nginx:1.27
+  - id: language-docker-p01-part-6
+    title: 이미지 목록[docker images]
+    display: |-
+      # 이미지 목록[docker images]
+      docker images
+    typing: docker images
+  - id: language-docker-p01-part-7
+    title: 이미지 삭제[docker rmi]
+    display: |-
+      # 이미지 삭제[docker rmi]
+      docker rmi nginx
+      docker rmi nginx:1.27
+    typing: |-
+      docker rmi nginx
+      docker rmi nginx:1.27
+  - id: language-docker-p01-part-8
+    title: 이미지 빌드[docker build]
+    display: |-
+      # 이미지 빌드[docker build]
+      # -t 태그, . 는 Dockerfile 있는 현재 디렉터리
+      docker build -t my-app:1.0 .
+    typing: docker build -t my-app:1.0 .

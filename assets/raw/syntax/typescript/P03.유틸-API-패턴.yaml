@@ -1,0 +1,292 @@
+id: language-typescript-p03
+category: syntax
+kind: code-snippet
+language: typescript
+track:
+  id: typescript
+  label: TypeScript
+title: P03.유틸-API-패턴
+source:
+  origin: chat-raw 실무형 TypeScript 2026-07-18
+  note: Partial/Pick/Omit, PATCH vs POST, API envelope. infer·복잡한 mapped type 제외.
+parts:
+  - id: language-typescript-p03-part-1
+    title: Partial - PATCH용[Partial]
+    display: |-
+      // Partial - PATCH용[Partial]
+      // 모든 필드를 optional로 바꿔 "일부만 수정"을 허용한다
+      type User = {
+        id: number;
+        name: string;
+        email: string;
+      };
+
+      function updateUserPartially(id: number, data: Partial<User>) {
+        console.log("PATCH:", id, data);
+      }
+
+      updateUserPartially(1, { name: "Kim" });
+      updateUserPartially(1, { email: "x@y.com" });
+    typing: |-
+      type User = {
+        id: number;
+        name: string;
+        email: string;
+      };
+
+      function updateUserPartially(id: number, data: Partial<User>) {
+        console.log("PATCH:", id, data);
+      }
+
+      updateUserPartially(1, { name: "Kim" });
+      updateUserPartially(1, { email: "x@y.com" });
+  - id: language-typescript-p03-part-2
+    title: Partial 안 쓸 때[required POST]
+    display: |-
+      // Partial 안 쓸 때[required POST]
+      // 생성(POST)은 필수 필드를 모두 받는다
+      type User = {
+        id: number;
+        name: string;
+        email: string;
+      };
+
+      function createUser(u: User) {
+        console.log("POST:", u);
+      }
+
+      createUser({ id: 1, name: "Kim", email: "x@y.com" });
+    typing: |-
+      type User = {
+        id: number;
+        name: string;
+        email: string;
+      };
+
+      function createUser(u: User) {
+        console.log("POST:", u);
+      }
+
+      createUser({ id: 1, name: "Kim", email: "x@y.com" });
+  - id: language-typescript-p03-part-3
+    title: Partial+Pick 조합[PatchUser]
+    display: |-
+      // Partial+Pick 조합[PatchUser]
+      // 수정 가능한 필드만 고르고, 각각 optional로 만든다
+      type User = {
+        id: number;
+        name: string;
+        email: string;
+        role: "admin" | "member";
+      };
+
+      type PatchUser = Partial<Pick<User, "name" | "email" | "role">>;
+
+      const body: PatchUser = { email: "new@x.com" };
+      console.log(body);
+    typing: |-
+      type User = {
+        id: number;
+        name: string;
+        email: string;
+        role: "admin" | "member";
+      };
+
+      type PatchUser = Partial<Pick<User, "name" | "email" | "role">>;
+
+      const body: PatchUser = { email: "new@x.com" };
+      console.log(body);
+  - id: language-typescript-p03-part-4
+    title: Pick - 화면용 축소[Pick]
+    display: |-
+      // Pick - 화면용 축소[Pick]
+      type UserDTO = {
+        id: number;
+        name: string;
+        email: string;
+        role: "admin" | "member";
+      };
+
+      type UserVM = Pick<UserDTO, "id" | "name" | "role">;
+
+      function toUserVM(u: UserDTO): UserVM {
+        return { id: u.id, name: u.name, role: u.role };
+      }
+
+      console.log(toUserVM({ id: 1, name: "Jane", email: "j@x.com", role: "member" }));
+    typing: |-
+      type UserDTO = {
+        id: number;
+        name: string;
+        email: string;
+        role: "admin" | "member";
+      };
+
+      type UserVM = Pick<UserDTO, "id" | "name" | "role">;
+
+      function toUserVM(u: UserDTO): UserVM {
+        return { id: u.id, name: u.name, role: u.role };
+      }
+
+      console.log(toUserVM({ id: 1, name: "Jane", email: "j@x.com", role: "member" }));
+  - id: language-typescript-p03-part-5
+    title: Omit - 필드 제외[Omit]
+    display: |-
+      // Omit - 필드 제외[Omit]
+      type FullUser = {
+        id: number;
+        name: string;
+        email: string;
+      };
+
+      type PublicUser = Omit<FullUser, "email">;
+
+      const pub: PublicUser = { id: 1, name: "Kim" };
+      console.log(pub);
+    typing: |-
+      type FullUser = {
+        id: number;
+        name: string;
+        email: string;
+      };
+
+      type PublicUser = Omit<FullUser, "email">;
+
+      const pub: PublicUser = { id: 1, name: "Kim" };
+      console.log(pub);
+  - id: language-typescript-p03-part-6
+    title: Readonly[Readonly]
+    display: |-
+      // Readonly[Readonly]
+      type UserCard = { id: number; name: string };
+      type FrozenUser = Readonly<UserCard>;
+
+      const fu: FrozenUser = { id: 1, name: "Kim" };
+      console.log(fu.name);
+    typing: |-
+      type UserCard = { id: number; name: string };
+      type FrozenUser = Readonly<UserCard>;
+
+      const fu: FrozenUser = { id: 1, name: "Kim" };
+      console.log(fu.name);
+  - id: language-typescript-p03-part-7
+    title: API 응답 껍데기[ApiEnvelope]
+    display: |-
+      // API 응답 껍데기[ApiEnvelope]
+      type ApiEnvelope<T> = {
+        status: number;
+        data: T;
+        meta?: { requestId: string };
+      };
+
+      type UserDTO = { id: number; name: string };
+
+      const detail: ApiEnvelope<UserDTO> = {
+        status: 200,
+        data: { id: 1, name: "AA" },
+      };
+      console.log(detail.data.name);
+    typing: |-
+      type ApiEnvelope<T> = {
+        status: number;
+        data: T;
+        meta?: { requestId: string };
+      };
+
+      type UserDTO = { id: number; name: string };
+
+      const detail: ApiEnvelope<UserDTO> = {
+        status: 200,
+        data: { id: 1, name: "AA" },
+      };
+      console.log(detail.data.name);
+  - id: language-typescript-p03-part-8
+    title: 목록 응답[ListResponse]
+    display: |-
+      // 목록 응답[ListResponse]
+      type ApiEnvelope<T> = { status: number; data: T };
+      type ListResponse<T> = ApiEnvelope<{ items: T[]; total: number }>;
+      type UserDTO = { id: number; name: string };
+
+      const list: ListResponse<UserDTO> = {
+        status: 200,
+        data: { items: [{ id: 1, name: "AA" }], total: 1 },
+      };
+      console.log(list.data.total);
+    typing: |-
+      type ApiEnvelope<T> = { status: number; data: T };
+      type ListResponse<T> = ApiEnvelope<{ items: T[]; total: number }>;
+      type UserDTO = { id: number; name: string };
+
+      const list: ListResponse<UserDTO> = {
+        status: 200,
+        data: { items: [{ id: 1, name: "AA" }], total: 1 },
+      };
+      console.log(list.data.total);
+  - id: language-typescript-p03-part-9
+    title: 얕은 머지[spread patch]
+    display: |-
+      // 얕은 머지[spread patch]
+      type UserDTO = {
+        id: number;
+        name: string;
+        email: string;
+      };
+      type PatchUser = Partial<Pick<UserDTO, "name" | "email">>;
+
+      function mergeUser(u: UserDTO, patch: PatchUser): UserDTO {
+        return { ...u, ...patch };
+      }
+
+      const merged = mergeUser(
+        { id: 1, name: "Jane", email: "j@x.com" },
+        { name: "Jane Park" },
+      );
+      console.log(merged.name);
+    typing: |-
+      type UserDTO = {
+        id: number;
+        name: string;
+        email: string;
+      };
+      type PatchUser = Partial<Pick<UserDTO, "name" | "email">>;
+
+      function mergeUser(u: UserDTO, patch: PatchUser): UserDTO {
+        return { ...u, ...patch };
+      }
+
+      const merged = mergeUser(
+        { id: 1, name: "Jane", email: "j@x.com" },
+        { name: "Jane Park" },
+      );
+      console.log(merged.name);
+  - id: language-typescript-p03-part-10
+    title: React Props 명시[Props]
+    display: |-
+      // React Props 명시[Props]
+      // FC<Props> 대신 props 타입을 직접 적는 패턴
+      type ButtonProps = {
+        label: string;
+        onClick: () => void;
+        disabled?: boolean;
+      };
+
+      function Button({ label, onClick, disabled = false }: ButtonProps) {
+        console.log(label, disabled);
+        onClick();
+      }
+
+      Button({ label: "Save", onClick: () => console.log("click") });
+    typing: |-
+      type ButtonProps = {
+        label: string;
+        onClick: () => void;
+        disabled?: boolean;
+      };
+
+      function Button({ label, onClick, disabled = false }: ButtonProps) {
+        console.log(label, disabled);
+        onClick();
+      }
+
+      Button({ label: "Save", onClick: () => console.log("click") });

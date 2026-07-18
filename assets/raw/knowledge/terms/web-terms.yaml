@@ -218,3 +218,423 @@ terms:
       - Modal
       - Dialog
     example: 삭제 확인은 modal dialog로 한 번 더 물어보자.
+  - id: web-convention
+    section: 네이밍 컨벤션
+    title: 컨벤션
+    prompt: 코드·문서·스타일에서 팀이나 업계가 공통으로 쓰는 이름 규칙과 약속된 표현.
+    answer: Convention
+    example: 클래스 이름을 마음대로 짓지 말고 팀 convention을 따르자.
+  - id: web-semantic-html
+    section: 네이밍 컨벤션
+    title: 시맨틱 HTML
+    prompt: header, nav, main, section, article, footer처럼 의미에 맞는 HTML 태그로 구조를 표현하는 방식.
+    answer: Semantic HTML
+    aliases:
+      - Semantic Tags
+    example: div만 쓰지 말고 semantic HTML로 구역을 나눠 보자.
+  - id: web-bem
+    section: 네이밍 컨벤션
+    title: BEM
+    prompt: Block__Element--Modifier 형태로 CSS 클래스 이름을 짓는 네이밍 패턴.
+    answer: BEM
+    aliases:
+      - Block Element Modifier
+    example: card__title--large처럼 BEM으로 상태를 표현한다.
+  - id: web-container
+    section: 네이밍 컨벤션
+    title: 컨테이너
+    prompt: 콘텐츠 폭을 가운데로 제한하는 레이아웃용 래퍼. CSS 클래스명으로도 자주 쓴다.
+    answer: Container
+    example: 본문은 max-width가 있는 container 안에 넣자.
+  - id: web-wrapper
+    section: 네이밍 컨벤션
+    title: 래퍼
+    prompt: 여러 요소를 묶어 배치·스타일을 주기 위한 바깥 감싸개. container와 비슷하게 쓰이지만 더 일반적이다.
+    answer: Wrapper
+    example: 카드들을 한 덩어리로 묶을 때 wrapper를 둔다.
+  - id: web-layout-classes
+    section: 네이밍 컨벤션
+    title: 레이아웃 클래스
+    prompt: row, col, grid, flex, gap처럼 배치·반응형을 나타내는 흔한 클래스·유틸 이름.
+    answer: Layout Classes
+    aliases:
+      - Utility Classes
+    example: flex와 gap으로 카드 간격을 맞추는 layout classes를 쓴다.
+  - id: web-state-class
+    section: 네이밍 컨벤션
+    title: 상태 클래스
+    prompt: is-active, is-hidden, disabled, error, success처럼 UI 상태를 나타내는 클래스·속성 이름.
+    answer: State Class
+    aliases:
+      - is-active
+    example: 열린 탭에 is-active state class를 붙인다.
+  - id: web-boolean-naming
+    section: 네이밍 컨벤션
+    title: 불리언 네이밍
+    prompt: isOpen, hasError, canSubmit처럼 true/false 변수에 is·has·can 접두를 쓰는 이름 규칙.
+    answer: Boolean Naming
+    example: open 대신 isOpen처럼 boolean naming을 쓴다.
+  - id: web-handler-naming
+    section: 네이밍 컨벤션
+    title: 핸들러 네이밍
+    prompt: handleClick, onSubmit, fetchData, renderItem처럼 이벤트·데이터·렌더 함수에 쓰는 관례적 이름.
+    answer: Handler Naming
+    aliases:
+      - Event Handler Naming
+    example: 클릭 처리는 handleClick으로 handler naming을 맞춘다.
+  - id: web-react-file-convention
+    section: 네이밍 컨벤션
+    title: React 파일 컨벤션
+    prompt: components/Button.tsx, hooks/useFetch.ts처럼 폴더·파일·훅 이름(use*)을 역할에 맞게 나누는 규칙.
+    answer: React File Convention
+    example: 커스텀 훅은 hooks/에 use로 시작하는 React file convention을 따른다.
+  - id: web-sidebar
+    section: 컴포넌트 / UI 명칭
+    title: 사이드바
+    prompt: 화면 옆쪽에 두는 보조 네비게이션이나 패널 영역.
+    answer: Sidebar
+    example: 설정 메뉴는 sidebar에 모아 두자.
+  - id: web-dashboard
+    section: 컴포넌트 / UI 명칭
+    title: 대시보드
+    prompt: 지표·목록·요약 카드를 한눈에 보는 관리·현황 화면.
+    answer: Dashboard
+    example: 관리자용 dashboard에 오늘 주문 수를 올렸다.
+  - id: web-breadcrumb
+    section: 컴포넌트 / UI 명칭
+    title: 브레드크럼
+    prompt: 현재 위치가 어디인지 경로로 보여주는 탐색 보조 UI. 홈 > 카테고리 > 상품처럼 쓴다.
+    answer: Breadcrumb
+    aliases:
+      - Breadcrumbs
+    example: 깊은 카테고리에는 breadcrumb이 필요하다.
+  - id: web-tabs
+    section: 컴포넌트 / UI 명칭
+    title: 탭
+    prompt: 같은 영역 안에서 여러 패널을 전환해 보여주는 네비게이션 UI.
+    answer: Tabs
+    example: 상세/리뷰/문의는 tabs로 나누자.
+  - id: web-accordion
+    section: 컴포넌트 / UI 명칭
+    title: 아코디언
+    prompt: 클릭하면 펼쳐지고 접히는 FAQ형 콘텐츠 UI.
+    answer: Accordion
+    aliases:
+      - Disclosure
+    example: FAQ는 accordion으로 구현하는 경우가 많다.
+  - id: web-carousel
+    section: 컴포넌트 / UI 명칭
+    title: 캐러셀
+    prompt: 이미지·카드를 좌우로 넘겨 보는 슬라이드 UI.
+    answer: Carousel
+    aliases:
+      - Slider
+    example: 메인 배너는 carousel로 돌린다.
+  - id: web-navigation
+    section: 컴포넌트 / UI 명칭
+    title: 네비게이션
+    prompt: 메뉴 링크 묶음. 헤더·사이드바·탭 등에서 화면 이동을 담당한다.
+    answer: Navigation
+    aliases:
+      - Nav
+      - Navbar
+    example: 주요 페이지 링크는 header navigation에 둔다.
+  - id: web-badge
+    section: 컴포넌트 / UI 명칭
+    title: 뱃지
+    prompt: 상태·개수·라벨을 작게 표시하는 UI. New, 3, Sale 같은 표시에 쓴다.
+    answer: Badge
+    example: 읽지 않은 알림 개수는 badge로 보여 주자.
+  - id: web-card
+    section: 컴포넌트 / UI 명칭
+    title: 카드
+    prompt: 관련 정보를 하나의 블록으로 묶은 UI 단위. 기능·상품·후기 목록에 자주 쓴다.
+    answer: Card
+    example: Feature 목록은 card 그리드로 배치한다.
+  - id: web-button
+    section: 컴포넌트 / UI 명칭
+    title: 버튼
+    prompt: 클릭으로 행동을 실행하는 기본 UI. CTA, 제출, 취소에 쓴다.
+    answer: Button
+    aliases:
+      - btn
+    example: 가입 CTA는 큰 primary button으로 둔다.
+  - id: web-design-system
+    section: 화면 설계 / 프론트 아키텍처
+    title: 디자인 시스템
+    prompt: 재사용 UI 컴포넌트·토큰·사용 규칙을 묶어 제품 전반의 일관성을 유지하는 체계.
+    answer: Design System
+    answerDisplay: 디자인 시스템[Design System]
+    example: 새 화면은 Design System 버튼부터 쓰고 예외만 커스텀한다.
+  - id: web-design-token
+    section: 화면 설계 / 프론트 아키텍처
+    title: 디자인 토큰
+    prompt: 색·간격·타이포·그림자 같은 디자인 값을 이름 있는 변수로 관리하는 단위.
+    answer: Design Token
+    answerDisplay: 디자인 토큰[Design Token]
+    aliases:
+      - Design Tokens
+    example: primary 색은 hex 대신 Design Token으로 참조한다.
+  - id: web-server-state
+    section: 화면 설계 / 프론트 아키텍처
+    title: 서버 상태
+    prompt: API에서 가져와 캐시·동기화하는 원격 데이터 상태. 목록·상세·권한 정보가 해당한다.
+    answer: Server State
+    answerDisplay: 서버 상태[Server State]
+    example: 주문 목록은 Server State라서 캐시 무효화로 갱신한다.
+  - id: web-client-state
+    section: 화면 설계 / 프론트 아키텍처
+    title: 클라이언트 상태
+    prompt: 모달 열림·탭 선택·입력 초안처럼 브라우저 UI에만 존재하는 로컬 상태.
+    answer: Client State
+    answerDisplay: 클라이언트 상태[Client State]
+    example: isOpen 같은 모달 플래그는 Client State로 둔다.
+  - id: web-container-presentational
+    section: 화면 설계 / 프론트 아키텍처
+    title: 컨테이너 프레젠테이셔널 패턴
+    prompt: 데이터·로직은 Container, 표시만 Presentational로 나누는 컴포넌트 분리 패턴.
+    answer: Container Presentational
+    answerDisplay: 컨테이너/프레젠테이셔널[Container Presentational]
+    aliases:
+      - Container/Presentational
+      - Smart Dumb Components
+    example: fetch는 Container에, 카드 마크업은 Presentational에 둔다.
+  - id: web-empty-state
+    section: 화면 설계 / 프론트 아키텍처
+    title: 빈 상태
+    prompt: 데이터가 없을 때 보여주는 안내 UI. 목록이 비었을 때 행동 유도 문구·버튼을 둔다.
+    answer: Empty State
+    answerDisplay: 빈 상태[Empty State]
+    aliases:
+      - Empty States
+    example: 검색 결과가 없으면 Empty State에 다시 검색 CTA를 넣는다.
+  - id: web-loading-state
+    section: 화면 설계 / 프론트 아키텍처
+    title: 로딩 상태
+    prompt: 데이터를 기다리는 동안의 UI 상태. 스피너·스켈레톤·비활성 버튼으로 표현한다.
+    answer: Loading State
+    answerDisplay: 로딩 상태[Loading State]
+    example: 첫 진입은 Loading State로 스켈레톤을 보여 준다.
+  - id: web-code-splitting
+    section: 화면 설계 / 프론트 아키텍처
+    title: 코드 분할
+    prompt: 번들을 여러 조각으로 나눠 필요한 시점에만 내려받게 하는 최적화 기법.
+    answer: Code Splitting
+    answerDisplay: 코드 분할[Code Splitting]
+    example: 관리자 라우트는 Code Splitting으로 첫 로드에서 뺀다.
+  - id: web-lazy-loading
+    section: 화면 설계 / 프론트 아키텍처
+    title: 지연 로딩
+    prompt: 컴포넌트·이미지·라우트를 당장 쓰지 않을 때 나중에 불러오는 기법.
+    answer: Lazy Loading
+    answerDisplay: 지연 로딩[Lazy Loading]
+    example: 아래쪽 차트는 Lazy Loading으로 뷰포트 진입 시 로드한다.
+  - id: web-virtualization
+    section: 화면 설계 / 프론트 아키텍처
+    title: 가상화
+    prompt: 긴 목록에서 보이는 행만 DOM에 그려 스크롤 성능을 유지하는 기법.
+    answer: Virtualization
+    answerDisplay: 가상화[Virtualization]
+    aliases:
+      - Windowing
+      - Virtual List
+    example: 수천 행 테이블은 Virtualization으로 렌더 비용을 줄인다.
+  - id: web-error-state
+    section: 화면 설계 / 프론트 아키텍처
+    title: 에러 상태
+    prompt: 요청 실패·권한 오류 등 실패를 사용자에게 알리고 재시도를 유도하는 UI 상태.
+    answer: Error State
+    answerDisplay: 에러 상태[Error State]
+    example: 500이면 Error State에 재시도 버튼을 둔다.
+  - id: web-ui-autocomplete
+    section: 입력
+    title: 오토컴플리트
+    prompt: 입력하며 후보 목록을 좁혀 고르는 검색형 입력 UI.
+    answer: Autocomplete
+    example: 도시 검색은 autocomplete로 후보를 띄운다.
+  - id: web-ui-button-group
+    section: 입력
+    title: 버튼 그룹
+    prompt: 관련 버튼을 한 묶음으로 붙여 배치하는 UI.
+    answer: Button Group
+    example: 정렬 옵션은 button group으로 묶는다.
+  - id: web-ui-rating
+    section: 입력
+    title: 평점
+    prompt: 별점처럼 점수를 고르거나 표시하는 입력·표시 UI.
+    answer: Rating
+    example: 리뷰 작성 시 rating으로 점수를 받는다.
+  - id: web-ui-switch
+    section: 입력
+    title: 스위치
+    prompt: 켜짐/꺼짐 두 상태를 토글하는 스위치형 입력.
+    answer: Switch
+    aliases:
+      - Toggle
+    example: 알림 수신 여부는 switch로 바꾼다.
+  - id: web-ui-toggle-button
+    section: 입력
+    title: 토글 버튼
+    prompt: 눌린/안 눌린 상태를 유지하는 버튼. 정렬·필터처럼 선택 상태를 보여 줄 때 쓴다.
+    answer: Toggle Button
+    example: 그리드/리스트 전환은 toggle button으로 둔다.
+  - id: web-ui-avatar
+    section: 데이터 표시
+    title: 아바타
+    prompt: 사용자나 엔티티를 나타내는 원형·사각 프로필 이미지 UI.
+    answer: Avatar
+    example: 댓글 작성자는 avatar와 닉네임을 함께 보여 준다.
+  - id: web-ui-chip
+    section: 데이터 표시
+    title: 칩
+    prompt: 태그·필터·선택을 작은 알약 형태로 보여 주는 UI.
+    answer: Chip
+    aliases:
+      - Tag
+    example: 선택된 필터는 chip으로 표시하고 개별 삭제한다.
+  - id: web-ui-divider
+    section: 데이터 표시
+    title: 디바이더
+    prompt: 구역을 가로·세로 선으로 나누는 구분선 UI.
+    answer: Divider
+    example: 메뉴 항목 그룹 사이에 divider를 넣는다.
+  - id: web-ui-tooltip
+    section: 데이터 표시
+    title: 툴팁
+    prompt: 호버·포커스 시 짧게 떠서 부가 설명을 보여 주는 UI.
+    answer: Tooltip
+    example: 아이콘 버튼에는 tooltip으로 이름을 붙인다.
+  - id: web-ui-typography
+    section: 데이터 표시
+    title: 타이포그래피
+    prompt: 제목·본문·캡션 등 텍스트 위계를 맞추는 타이포 컴포넌트·체계.
+    answer: Typography
+    example: 페이지 제목은 Typography의 h1 스타일로 통일한다.
+  - id: web-ui-alert
+    section: 피드백
+    title: 알림 배너
+    prompt: 성공·경고·오류 메시지를 페이지 안에 고정해 보여 주는 피드백 UI.
+    answer: Alert
+    example: 저장 실패는 alert로 원인을 보여 준다.
+  - id: web-ui-progress
+    section: 피드백
+    title: 진행 표시
+    prompt: 작업·로딩 진행률을 막대나 원형으로 보여 주는 UI.
+    answer: Progress Bar
+    aliases:
+      - Progress
+      - Circular Progress
+    example: 파일 업로드는 progress bar로 진행률을 표시한다.
+  - id: web-ui-app-bar
+    section: 서피스
+    title: 앱 바
+    prompt: 화면 상단에 고정되는 앱용 헤더 바. 로고·메뉴·액션을 담는다.
+    answer: App Bar
+    aliases:
+      - AppBar
+    example: 대시보드 상단은 app bar에 검색과 프로필을 둔다.
+  - id: web-ui-paper
+    section: 서피스
+    title: 페이퍼
+    prompt: 배경 위에 살짝 떠 보이는 면 컨테이너. 카드·패널의 기본 표면으로 쓴다.
+    answer: Paper
+    example: 설정 패널은 paper 위에 폼을 올린다.
+  - id: web-ui-bottom-nav
+    section: 네비게이션
+    title: 하단 네비게이션
+    prompt: 모바일 화면 하단에 주요 탭을 고정하는 네비게이션.
+    answer: Bottom Navigation
+    example: 홈·검색·마이페이지는 bottom navigation으로 전환한다.
+  - id: web-ui-link
+    section: 네비게이션
+    title: 링크
+    prompt: 다른 페이지·앵커로 이동하는 텍스트·인라인 내비게이션 요소.
+    answer: Link
+    example: 약관 문구 안의 link로 상세 페이지를 연다.
+  - id: web-ui-menu
+    section: 네비게이션
+    title: 메뉴
+    prompt: 클릭 시 항목 목록이 펼쳐지는 드롭다운형 선택 UI.
+    answer: Menu
+    aliases:
+      - Dropdown Menu
+    example: 계정 설정은 아바타 옆 menu로 연다.
+  - id: web-ui-stepper
+    section: 네비게이션
+    title: 스테퍼
+    prompt: 다단계 절차의 현재 단계를 순서대로 보여 주는 네비게이션.
+    answer: Stepper
+    example: 가입 흐름은 stepper로 1·2·3단계를 표시한다.
+  - id: web-ui-stack
+    section: 레이아웃
+    title: 스택
+    prompt: 자식 요소를 세로·가로로 일정한 간격 두고 쌓는 레이아웃 헬퍼.
+    answer: Stack
+    example: 폼 필드는 stack으로 세로 간격을 맞춘다.
+  - id: web-ui-popover
+    section: 오버레이 / 알림
+    title: 팝오버
+    prompt: 앵커 요소 옆에 떠서 추가 내용·액션을 보여 주는 오버레이.
+    answer: Popover
+    example: 필터 상세는 버튼 옆 popover로 연다.
+  - id: web-ui-data-grid
+    section: 데이터 표시
+    title: 데이터 그리드
+    prompt: 정렬·필터·페이징이 있는 표 형태의 대용량 데이터 UI.
+    answer: Data Grid
+    example: 주문 목록 관리는 data grid로 구현한다.
+  - id: web-ui-date-picker
+    section: 입력
+    title: 날짜 선택
+    prompt: 달력 UI로 날짜·기간을 고르는 입력 컴포넌트.
+    answer: Date Picker
+    example: 예약일은 date picker로 고르게 한다.
+  - id: web-ui-combobox
+    section: 입력
+    title: 콤보박스
+    prompt: 입력과 목록 선택을 합친 검색 가능 선택 UI. 헤드리스 UI에서 자주 쓴다.
+    answer: Combobox
+    aliases:
+      - Comboboxes
+    example: 담당자 지정은 combobox로 검색해 고른다.
+  - id: web-ui-listbox
+    section: 입력
+    title: 리스트박스
+    prompt: 목록에서 하나 또는 여러 항목을 고르는 선택 UI.
+    answer: Listbox
+    example: 권한 목록은 listbox로 다중 선택한다.
+  - id: web-ui-fieldset
+    section: 입력
+    title: 필드셋
+    prompt: 관련 폼 컨트롤을 하나의 그룹으로 묶는 HTML·UI 단위.
+    answer: Fieldset
+    example: 배송 주소 입력은 fieldset으로 묶는다.
+  - id: web-ui-primary-button
+    section: 실무 패턴
+    title: 프라이머리 버튼
+    prompt: 화면에서 가장 중요한 행동을 강조하는 기본(강조) 버튼.
+    answer: Primary Button
+    example: 저장은 primary button, 취소는 텍스트 버튼으로 둔다.
+  - id: web-ui-signup-form
+    section: 실무 패턴
+    title: 회원가입 폼
+    prompt: 계정 생성을 위한 가입 입력 폼. 이메일·비밀번호·약관 동의가 흔하다.
+    answer: Sign-up Form
+    aliases:
+      - Signup Form
+      - Registration Form
+    example: 랜딩 CTA는 sign-up form으로 연결한다.
+  - id: web-ui-cta-button
+    section: 실무 패턴
+    title: 행동 유도 버튼
+    prompt: 가입·구매·문의처럼 전환을 유도하는 핵심 클릭 버튼.
+    answer: Call-to-action Button
+    aliases:
+      - CTA Button
+    example: 히어로에는 call-to-action button을 하나만 둔다.
+  - id: web-ui-card-layout
+    section: 실무 패턴
+    title: 카드 레이아웃
+    prompt: 카드 단위로 콘텐츠를 격자·목록 배치하는 화면 구성 방식.
+    answer: Card Layout
+    example: 기능 소개는 card layout으로 3열 배치한다.

@@ -1,0 +1,197 @@
+id: language-rust-p02
+category: syntax
+kind: code-snippet
+language: rust
+track:
+  id: rust
+  label: Rust
+title: P02.소유권-구조체
+source:
+  origin: chat-raw Rust 기초 커리큘럼 2026-07-18
+  note: 소유권·참조·struct·enum·Option/Result. 각 파트 단독 타이핑.
+parts:
+  - id: language-rust-p02-part-1
+    title: 이동과 복사[move / copy]
+    display: |-
+      // 이동과 복사[move / copy]
+      // i32는 Copy, String은 이동[move]된다
+      let a = 10;
+      let b = a;
+      let s1 = String::from("kim");
+      let s2 = s1;
+      println!("{} {}", b, s2);
+      // 결과: 10 kim
+    typing: |-
+      let a = 10;
+      let b = a;
+      let s1 = String::from("kim");
+      let s2 = s1;
+      println!("{} {}", b, s2);
+  - id: language-rust-p02-part-2
+    title: 문자열 소유[String vs &str]
+    display: |-
+      // 문자열 소유[String vs &str]
+      let owned = String::from("hello");
+      let borrowed: &str = &owned;
+      println!("{} {}", owned, borrowed);
+      // 결과: hello hello
+    typing: |-
+      let owned = String::from("hello");
+      let borrowed: &str = &owned;
+      println!("{} {}", owned, borrowed);
+  - id: language-rust-p02-part-3
+    title: 불변 참조[reference &]
+    display: |-
+      // 불변 참조[reference &]
+      fn len_of(text: &str) -> usize {
+          text.len()
+      }
+
+      let name = String::from("rust");
+      println!("{}", len_of(&name));
+      // 결과: 4
+    typing: |-
+      fn len_of(text: &str) -> usize {
+          text.len()
+      }
+
+      let name = String::from("rust");
+      println!("{}", len_of(&name));
+  - id: language-rust-p02-part-4
+    title: 가변 참조[&mut]
+    display: |-
+      // 가변 참조[&mut]
+      fn bump(value: &mut i32) {
+          *value += 1;
+      }
+
+      let mut count = 1;
+      bump(&mut count);
+      println!("{}", count);
+      // 결과: 2
+    typing: |-
+      fn bump(value: &mut i32) {
+          *value += 1;
+      }
+
+      let mut count = 1;
+      bump(&mut count);
+      println!("{}", count);
+  - id: language-rust-p02-part-5
+    title: 구조체[struct]
+    display: |-
+      // 구조체[struct]
+      #[derive(Debug)]
+      struct User {
+          name: String,
+          age: u32,
+      }
+
+      let user = User {
+          name: String::from("lee"),
+          age: 28,
+      };
+      println!("{} {}", user.name, user.age);
+      // 결과: lee 28
+    typing: |-
+      #[derive(Debug)]
+      struct User {
+          name: String,
+          age: u32,
+      }
+
+      let user = User {
+          name: String::from("lee"),
+          age: 28,
+      };
+      println!("{} {}", user.name, user.age);
+  - id: language-rust-p02-part-6
+    title: 메서드[impl]
+    display: |-
+      // 메서드[impl]
+      struct Rect {
+          w: u32,
+          h: u32,
+      }
+
+      impl Rect {
+          fn area(&self) -> u32 {
+              self.w * self.h
+          }
+      }
+
+      let r = Rect { w: 3, h: 4 };
+      println!("{}", r.area());
+      // 결과: 12
+    typing: |-
+      struct Rect {
+          w: u32,
+          h: u32,
+      }
+
+      impl Rect {
+          fn area(&self) -> u32 {
+              self.w * self.h
+          }
+      }
+
+      let r = Rect { w: 3, h: 4 };
+      println!("{}", r.area());
+  - id: language-rust-p02-part-7
+    title: 열거형[enum / match]
+    display: |-
+      // 열거형[enum / match]
+      enum Role {
+          Admin,
+          Member,
+      }
+
+      let role = Role::Admin;
+      match role {
+          Role::Admin => println!("admin"),
+          Role::Member => println!("member"),
+      }
+      // 결과: admin
+    typing: |-
+      enum Role {
+          Admin,
+          Member,
+      }
+
+      let role = Role::Admin;
+      match role {
+          Role::Admin => println!("admin"),
+          Role::Member => println!("member"),
+      }
+  - id: language-rust-p02-part-8
+    title: 옵션[Option]
+    display: |-
+      // 옵션[Option] - 값이 있을 수도 없을 수도 있다
+      let maybe = Some(10);
+      match maybe {
+          Some(v) => println!("{}", v),
+          None => println!("none"),
+      }
+      // 결과: 10
+    typing: |-
+      let maybe = Some(10);
+      match maybe {
+          Some(v) => println!("{}", v),
+          None => println!("none"),
+      }
+  - id: language-rust-p02-part-9
+    title: 결과[Result]
+    display: |-
+      // 결과[Result] - 성공 Ok / 실패 Err
+      let parsed = "42".parse::<i32>();
+      match parsed {
+          Ok(v) => println!("{}", v),
+          Err(_) => println!("parse error"),
+      }
+      // 결과: 42
+    typing: |-
+      let parsed = "42".parse::<i32>();
+      match parsed {
+          Ok(v) => println!("{}", v),
+          Err(_) => println!("parse error"),
+      }

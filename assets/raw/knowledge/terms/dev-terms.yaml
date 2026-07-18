@@ -32,12 +32,13 @@ terms:
   - id: rule-dev-terms-readme-terms-dev-term-4
     section: 프로젝트 시작 / 구조
     title: 스켈레톤 화면
-    prompt: 실제 콘텐츠가 오기 전에 자리만 먼저 보여주는 뼈대 화면.
+    prompt: 실제 콘텐츠 대신 회색 플레이스홀더로 레이아웃 뼈대를 먼저 보여 주는 로딩 UI. 스피너보다 최종 화면 구조를 미리 보여 준다.
     answer: Skeleton
-    answerDisplay: 스켈레톤 화면[Skeleton / Skeleton Screen]
+    answerDisplay: 스켈레톤 화면[Skeleton / Loading Skeleton]
     aliases:
       - Skeleton Screen
-    example: API 응답을 기다리는 동안 skeleton screen을 보여주자.
+      - Loading Skeleton
+    example: API 응답을 기다리는 동안 loading skeleton으로 카드 자리를 먼저 잡자.
   - id: rule-dev-terms-readme-terms-dev-term-5
     section: 프로젝트 시작 / 구조
     title: 스텁

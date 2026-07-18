@@ -7,98 +7,402 @@ track:
   label: Java
 title: P02.실무-패턴
 source:
-  origin: assets/typingSource/Language-Java/P02.실무-패턴.java
+  origin: chat-raw 실무형 Java 2026-07-18
+  note: OOP·예외·제네릭·람다/스트림·IO·스레드 최소. 희귀 문법 제외. 각 파트는 단독 타이핑 가능.
 parts:
   - id: language-java-p02-part-1
-    title: 임포트와 클래스 골격[import / class]
+    title: 클래스와 생성자[class / constructor]
     display: |-
-      import java.util.ArrayList;
-      import java.util.HashMap;
-      import java.util.List;
-      import java.util.Map;
+      // 클래스와 생성자[class / constructor]
+      class User {
+          String name;
+          int age;
 
-      class P02PracticalPatterns {
+          User(String name, int age) {
+              this.name = name;
+              this.age = age;
+          }
+      }
+
+      User user = new User("kim", 30);
+      System.out.println(user.name + "(" + user.age + ")");
+      // 결과: kim(30)
+    typing: |-
+      class User {
+          String name;
+          int age;
+
+          User(String name, int age) {
+              this.name = name;
+              this.age = age;
+          }
+      }
+
+      User user = new User("kim", 30);
+      System.out.println(user.name + "(" + user.age + ")");
+  - id: language-java-p02-part-2
+    title: 접근 제어[public / private]
+    display: |-
+      // 접근 제어[public / private]
+      class Account {
+          private int balance;
+
+          public void deposit(int amount) {
+              balance += amount;
+          }
+
+          public int getBalance() {
+              return balance;
+          }
+      }
+
+      Account account = new Account();
+      account.deposit(100);
+      System.out.println(account.getBalance());
+      // 결과: 100
+    typing: |-
+      class Account {
+          private int balance;
+
+          public void deposit(int amount) {
+              balance += amount;
+          }
+
+          public int getBalance() {
+              return balance;
+          }
+      }
+
+      Account account = new Account();
+      account.deposit(100);
+      System.out.println(account.getBalance());
+  - id: language-java-p02-part-3
+    title: 정적·상수[static / final]
+    display: |-
+      // 정적·상수[static / final]
+      class Config {
+          static final int MAX_SIZE = 100;
+
+          static int doubleValue(int num) {
+              return num * 2;
+          }
+      }
+
+      System.out.println(Config.MAX_SIZE);
+      System.out.println(Config.doubleValue(5));
+      // 결과: 100 / 10
+    typing: |-
+      class Config {
+          static final int MAX_SIZE = 100;
+
+          static int doubleValue(int num) {
+              return num * 2;
+          }
+      }
+
+      System.out.println(Config.MAX_SIZE);
+      System.out.println(Config.doubleValue(5));
+  - id: language-java-p02-part-4
+    title: 상속[extends]
+    display: |-
+      // 상속[extends]
+      class Animal {
+          String name;
+
+          Animal(String name) {
+              this.name = name;
+          }
+      }
+
+      class Dog extends Animal {
+          Dog(String name) {
+              super(name);
+          }
+      }
+
+      Dog dog = new Dog("happy");
+      System.out.println(dog.name);
+      // 결과: happy
+    typing: |-
+      class Animal {
+          String name;
+
+          Animal(String name) {
+              this.name = name;
+          }
+      }
+
+      class Dog extends Animal {
+          Dog(String name) {
+              super(name);
+          }
+      }
+
+      Dog dog = new Dog("happy");
+      System.out.println(dog.name);
+  - id: language-java-p02-part-5
+    title: 인터페이스[interface / implements]
+    display: |-
+      // 인터페이스[interface / implements]
+      interface Printer {
+          void print(String text);
+      }
+
+      class ConsolePrinter implements Printer {
+          public void print(String text) {
+              System.out.println(text);
+          }
+      }
+
+      Printer printer = new ConsolePrinter();
+      printer.print("hello");
+      // 결과: hello
+    typing: |-
+      interface Printer {
+          void print(String text);
+      }
+
+      class ConsolePrinter implements Printer {
+          public void print(String text) {
+              System.out.println(text);
+          }
+      }
+
+      Printer printer = new ConsolePrinter();
+      printer.print("hello");
+  - id: language-java-p02-part-6
+    title: 재정의[override]
+    display: |-
+      // 재정의[override]
+      class Animal {
+          String speak() {
+              return "...";
+          }
+      }
+
+      class Dog extends Animal {
+          @Override
+          String speak() {
+              return "woof";
+          }
+      }
+
+      System.out.println(new Dog().speak());
+      // 결과: woof
+    typing: |-
+      class Animal {
+          String speak() {
+              return "...";
+          }
+      }
+
+      class Dog extends Animal {
+          @Override
+          String speak() {
+              return "woof";
+          }
+      }
+
+      System.out.println(new Dog().speak());
+  - id: language-java-p02-part-7
+    title: 추상 클래스[abstract]
+    display: |-
+      // 추상 클래스[abstract]
+      // 구현을 강제하고 싶을 때 짧게 쓴다
+      abstract class Shape {
+          abstract double area();
+      }
+
+      class Square extends Shape {
+          double side;
+
+          Square(double side) {
+              this.side = side;
+          }
+
+          double area() {
+              return side * side;
+          }
+      }
+
+      System.out.println(new Square(3).area());
+      // 결과: 9.0
+    typing: |-
+      abstract class Shape {
+          abstract double area();
+      }
+
+      class Square extends Shape {
+          double side;
+
+          Square(double side) {
+              this.side = side;
+          }
+
+          double area() {
+              return side * side;
+          }
+      }
+
+      System.out.println(new Square(3).area());
+  - id: language-java-p02-part-8
+    title: 예외 처리[try / catch / finally]
+    display: |-
+      // 예외 처리[try / catch / finally]
+      try {
+          int parsedValue = Integer.parseInt("123");
+          System.out.println(parsedValue);
+      } catch (NumberFormatException err) {
+          System.out.println("parse error");
+      } finally {
+          System.out.println("done");
+      }
+      // 결과: 123 / done
+    typing: |-
+      try {
+          int parsedValue = Integer.parseInt("123");
+          System.out.println(parsedValue);
+      } catch (NumberFormatException err) {
+          System.out.println("parse error");
+      } finally {
+          System.out.println("done");
+      }
+  - id: language-java-p02-part-9
+    title: 예외 던지기[throw / throws]
+    display: |-
+      // 예외 던지기[throw / throws]
+      // Checked: 호출부가 반드시 처리(또는 throws 선언)
+      // Unchecked(RuntimeException): 선언 없이도 던질 수 있음
+      class AgeGuard {
+          static void checkAge(int age) throws Exception {
+              if (age < 0) {
+                  throw new Exception("invalid age");
+              }
+          }
+
           public static void main(String[] args) {
+              try {
+                  checkAge(-1);
+              } catch (Exception err) {
+                  System.out.println(err.getMessage());
+              }
+          }
+      }
+      // 결과: invalid age
+    typing: |-
+      class AgeGuard {
+          static void checkAge(int age) throws Exception {
+              if (age < 0) {
+                  throw new Exception("invalid age");
+              }
+          }
+
+          public static void main(String[] args) {
+              try {
+                  checkAge(-1);
+              } catch (Exception err) {
+                  System.out.println(err.getMessage());
+              }
+          }
+      }
+  - id: language-java-p02-part-10
+    title: 제네릭[List of String]
+    display: |-
+      // 제네릭[List of String]
+      // 타입을 <>로 고정해 캐스팅을 줄인다
+      import java.util.ArrayList;
+      import java.util.List;
+
+      List<String> nameList = new ArrayList<>();
+      nameList.add("kim");
+      String firstName = nameList.get(0);
+      System.out.println(firstName);
+      // 결과: kim
     typing: |-
       import java.util.ArrayList;
-      import java.util.HashMap;
       import java.util.List;
-      import java.util.Map;
 
-      class P02PracticalPatterns {
-          public static void main(String[] args) {
-  - id: language-java-p02-part-2
-    title: 리스트[list]
-    display: |2-
-              // 리스트[list]
-              List<String> nameList = new ArrayList<>();
-              nameList.add("kim");
-              nameList.add("lee");
-              System.out.println(nameList);
-              // 결과: [kim, lee]
-    typing: |2-
-              List<String> nameList = new ArrayList<>();
-              nameList.add("kim");
-              nameList.add("lee");
-              System.out.println(nameList);
-  - id: language-java-p02-part-3
-    title: 맵[map]
-    display: |2-
-              // 맵[map]
-              Map<String, Integer> ageMap = new HashMap<>();
-              ageMap.put("kim", 30);
-              ageMap.put("lee", 25);
-              System.out.println(ageMap.get("kim"));
-              // 결과: 30
-    typing: |2-
-              Map<String, Integer> ageMap = new HashMap<>();
-              ageMap.put("kim", 30);
-              ageMap.put("lee", 25);
-              System.out.println(ageMap.get("kim"));
-  - id: language-java-p02-part-4
-    title: 람다[lambda]
-    display: |2-
-              // 람다[lambda]
-              nameList.forEach(item -> System.out.println(item.toUpperCase()));
-              // 결과:
-              // KIM
-              // LEE
-    typing: "        nameList.forEach(item -> System.out.println(item.toUpperCase()));"
-  - id: language-java-p02-part-5
-    title: 예외 처리[exception handling]
-    display: |2-
-              // 예외 처리[exception handling]
-              try {
-                  int parsedValue = Integer.parseInt("123");
-                  System.out.println(parsedValue);
-              } catch (NumberFormatException err) {
-                  System.out.println("parse error");
-              }
-              // 결과: 123
-    typing: |2-
-              try {
-                  int parsedValue = Integer.parseInt("123");
-                  System.out.println(parsedValue);
-              } catch (NumberFormatException err) {
-                  System.out.println("parse error");
-              }
-  - id: language-java-p02-part-6
-    title: 메서드 분리[method extraction]
-    display: |2-
-              // 메서드 분리[method extraction]
-              System.out.println(formatUser("park", 28));
-              // 결과: park(28)
-          }
+      List<String> nameList = new ArrayList<>();
+      nameList.add("kim");
+      String firstName = nameList.get(0);
+      System.out.println(firstName);
+  - id: language-java-p02-part-11
+    title: 람다[forEach]
+    display: |-
+      // 람다[forEach]
+      import java.util.Arrays;
+      import java.util.List;
 
-          static String formatUser(String nameValue, int ageValue) {
-              return nameValue + "(" + ageValue + ")";
-          }
+      List<String> nameList = Arrays.asList("kim", "lee");
+      nameList.forEach(item -> System.out.println(item.toUpperCase()));
+      // 결과: KIM / LEE
+    typing: |-
+      import java.util.Arrays;
+      import java.util.List;
+
+      List<String> nameList = Arrays.asList("kim", "lee");
+      nameList.forEach(item -> System.out.println(item.toUpperCase()));
+  - id: language-java-p02-part-12
+    title: 스트림[filter / map / collect]
+    display: |-
+      // 스트림[filter / map / collect]
+      import java.util.Arrays;
+      import java.util.List;
+      import java.util.stream.Collectors;
+
+      List<Integer> numList = Arrays.asList(1, 2, 3, 4);
+      List<Integer> resultList = numList.stream()
+              .filter(num -> num % 2 == 0)
+              .map(num -> num * 10)
+              .collect(Collectors.toList());
+      System.out.println(resultList);
+      // 결과: [20, 40]
+    typing: |-
+      import java.util.Arrays;
+      import java.util.List;
+      import java.util.stream.Collectors;
+
+      List<Integer> numList = Arrays.asList(1, 2, 3, 4);
+      List<Integer> resultList = numList.stream()
+              .filter(num -> num % 2 == 0)
+              .map(num -> num * 10)
+              .collect(Collectors.toList());
+      System.out.println(resultList);
+  - id: language-java-p02-part-13
+    title: 파일 읽기[BufferedReader]
+    display: |-
+      // 파일 읽기[BufferedReader]
+      import java.io.BufferedReader;
+      import java.io.FileReader;
+      import java.io.IOException;
+
+      try (BufferedReader reader = new BufferedReader(new FileReader("data.txt"))) {
+          String line = reader.readLine();
+          System.out.println(line);
+      } catch (IOException err) {
+          System.out.println("io error");
       }
-    typing: |2-
-              System.out.println(formatUser("park", 28));
-          }
+    typing: |-
+      import java.io.BufferedReader;
+      import java.io.FileReader;
+      import java.io.IOException;
 
-          static String formatUser(String nameValue, int ageValue) {
-              return nameValue + "(" + ageValue + ")";
-          }
+      try (BufferedReader reader = new BufferedReader(new FileReader("data.txt"))) {
+          String line = reader.readLine();
+          System.out.println(line);
+      } catch (IOException err) {
+          System.out.println("io error");
       }
+  - id: language-java-p02-part-14
+    title: 스레드[Thread / Runnable]
+    display: |-
+      // 스레드[Thread / Runnable]
+      // 작업을 별도 흐름으로 실행하는 개념만
+      Runnable task = () -> System.out.println("run");
+      Thread worker = new Thread(task);
+      worker.start();
+      // 결과: run
+    typing: |-
+      Runnable task = () -> System.out.println("run");
+      Thread worker = new Thread(task);
+      worker.start();

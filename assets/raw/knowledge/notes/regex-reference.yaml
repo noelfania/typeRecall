@@ -70,3 +70,13 @@ sections:
     notes: |
       캡처 그룹은 string.match, string.matchAll, string.replace(regexp, callback)에서 의미가 있다.
       \N은 N번째 캡처 그룹의 역참조[backreference]이고, 번호는 1부터 시작한다.
+
+practiceSites:
+  - { name: Regex Crossword, url: "https://regexcrossword.com", note: "정규식 퍼즐 — lookaround·앵커 감각" }
+  - { name: Codewars Regex, url: "https://www.codewars.com/kata/search?tags=regex", note: "JS/TS 8kyu~6kyu 위주" }
+  - { name: HackerRank Regex, url: "https://www.hackerrank.com/domains/regex", note: "기초 단계별" }
+
+dailyRoutine: |
+  평일 10~15분: Regex Crossword 1판 + Codewars regex 1문제
+  주말: VS Code Ctrl+Shift+F 로 실무 코드에서 함수 호출·로그·치환 미션
+  타이핑 연습: syntax/regex-for-javascript P01~P03

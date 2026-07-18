@@ -1,0 +1,37 @@
+id: language-excel-p02
+category: syntax
+kind: code-snippet
+language: shell
+track:
+  id: excel
+  label: Excel
+title: P02.조인-조회
+source:
+  origin: chat-raw Excel LEFT JOIN ≈ XLOOKUP/VLOOKUP 2026-07-18
+  note: SQL LEFT JOIN을 엑셀 조회 함수로. 주석은 #, 수식만 타이핑.
+parts:
+  - id: language-excel-p02-part-1
+    title: XLOOKUP - 부서명 붙이기[left join]
+    display: |-
+      # XLOOKUP - 부서명 붙이기[left join]
+      # =XLOOKUP(찾을값, 찾을범위, 반환범위, [없으면값])
+      # SQL LEFT JOIN처럼 없으면 빈칸(또는 지정값)
+      =XLOOKUP(B2, 부서목록[부서ID], 부서목록[부서명], "")
+    typing: |-
+      =XLOOKUP(B2, 부서목록[부서ID], 부서목록[부서명], "")
+  - id: language-excel-p02-part-2
+    title: IFERROR+VLOOKUP[left join]
+    display: |-
+      # IFERROR+VLOOKUP[left join]
+      # VLOOKUP 실패(N/A)를 빈칸으로 — LEFT JOIN과 같은 느낌
+      =IFERROR(VLOOKUP(B2, 부서목록!A:B, 2, FALSE), "")
+    typing: |-
+      =IFERROR(VLOOKUP(B2, 부서목록!A:B, 2, FALSE), "")
+  - id: language-excel-p02-part-3
+    title: 복합키 헬퍼[composite key]
+    display: |-
+      # 복합키 헬퍼[composite key]
+      # 두 열을 이어 하나의 키로 만든다 (조회 보조열)
+      =A2&B2
+    typing: |-
+      =A2&B2

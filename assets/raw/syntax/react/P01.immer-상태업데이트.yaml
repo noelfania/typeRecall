@@ -1,0 +1,262 @@
+id: language-react-p01
+category: syntax
+kind: code-snippet
+language: typescript
+track:
+  id: react
+  label: React
+title: P01.immer-상태업데이트
+source:
+  origin: chat-raw React useState+Immer+Lodash 실전 패턴 2026-07-18
+  note: setState+produce+lodash 고빈도만. useOrgActions 전체·과도한 path 추상화 제외.
+parts:
+  - id: language-react-p01-part-1
+    title: produce + find 토글[toggle]
+    display: |-
+      // produce + find 토글[toggle] — 깊은 노드를 찾아 done 반전
+      type Task = { id: number; title: string; done: boolean };
+      type Member = { id: number; name: string; tasks: Task[] };
+      type Org = { teams: { members: Member[] }[] };
+
+      const toggleTask = (taskId: number) => {
+        setOrg((prev) =>
+          produce(prev, (draft) => {
+            const task = _.find(
+              _.flatMap(draft.teams, (t) => _.flatMap(t.members, (m) => m.tasks)),
+              { id: taskId },
+            );
+            if (task) task.done = !task.done;
+          }),
+        );
+      };
+    typing: |-
+      type Task = { id: number; title: string; done: boolean };
+      type Member = { id: number; name: string; tasks: Task[] };
+      type Org = { teams: { members: Member[] }[] };
+
+      const toggleTask = (taskId: number) => {
+        setOrg((prev) =>
+          produce(prev, (draft) => {
+            const task = _.find(
+              _.flatMap(draft.teams, (t) => _.flatMap(t.members, (m) => m.tasks)),
+              { id: taskId },
+            );
+            if (task) task.done = !task.done;
+          }),
+        );
+      };
+  - id: language-react-p01-part-2
+    title: assign 부분 패치[Partial]
+    display: |-
+      // assign 부분 패치[Partial] — 찾은 객체에 필드만 덮어씀
+      type Task = { id: number; title: string; done: boolean };
+
+      const patchTask = (taskId: number, patch: Partial<Task>) => {
+        setOrg((prev) =>
+          produce(prev, (draft) => {
+            const task = _.find(
+              _.flatMap(draft.teams, (t) => _.flatMap(t.members, (m) => m.tasks)),
+              { id: taskId },
+            );
+            if (task) _.assign(task, patch);
+          }),
+        );
+      };
+    typing: |-
+      type Task = { id: number; title: string; done: boolean };
+
+      const patchTask = (taskId: number, patch: Partial<Task>) => {
+        setOrg((prev) =>
+          produce(prev, (draft) => {
+            const task = _.find(
+              _.flatMap(draft.teams, (t) => _.flatMap(t.members, (m) => m.tasks)),
+              { id: taskId },
+            );
+            if (task) _.assign(task, patch);
+          }),
+        );
+      };
+  - id: language-react-p01-part-3
+    title: findIndex + splice 삭제[remove]
+    display: |-
+      // findIndex + splice 삭제[remove]
+      type Task = { id: number; title: string; done: boolean };
+      type Member = { id: number; tasks: Task[] };
+
+      const removeTask = (memberId: number, taskId: number) => {
+        setOrg((prev) =>
+          produce(prev, (draft) => {
+            const member = _.find(
+              _.flatMap(draft.teams, (t) => t.members),
+              { id: memberId },
+            ) as Member | undefined;
+            if (!member) return;
+            const idx = _.findIndex(member.tasks, { id: taskId });
+            if (idx >= 0) member.tasks.splice(idx, 1);
+          }),
+        );
+      };
+    typing: |-
+      type Task = { id: number; title: string; done: boolean };
+      type Member = { id: number; tasks: Task[] };
+
+      const removeTask = (memberId: number, taskId: number) => {
+        setOrg((prev) =>
+          produce(prev, (draft) => {
+            const member = _.find(
+              _.flatMap(draft.teams, (t) => t.members),
+              { id: memberId },
+            ) as Member | undefined;
+            if (!member) return;
+            const idx = _.findIndex(member.tasks, { id: taskId });
+            if (idx >= 0) member.tasks.splice(idx, 1);
+          }),
+        );
+      };
+  - id: language-react-p01-part-4
+    title: 변경 없음[same reference]
+    display: |-
+      // 변경 없음[same reference]
+      // draft를 건드리지 않으면 Immer가 원본[original]을 그대로 반환 → React 리렌더[re-render] 없음
+      const noopUpdate = () => {
+        setOrg((prev) =>
+          produce(prev, (_draft) => {
+            // 의도적으로 수정하지 않음
+          }),
+        );
+      };
+      // 결과: prev === next (참조 동일)
+    typing: |-
+      const noopUpdate = () => {
+        setOrg((prev) =>
+          produce(prev, (_draft) => {
+          }),
+        );
+      };
+  - id: language-react-p01-part-5
+    title: 변경 있음[new reference]
+    display: |-
+      // 변경 있음[new reference]
+      // draft를 수정하면 Immer가 새 객체[new object]를 반환 → 리렌더[re-render] 발생
+      const bumpName = () => {
+        setOrg((prev) =>
+          produce(prev, (draft) => {
+            draft.name = draft.name + "!";
+          }),
+        );
+      };
+      // 결과: prev !== next (새 참조)
+    typing: |-
+      const bumpName = () => {
+        setOrg((prev) =>
+          produce(prev, (draft) => {
+            draft.name = draft.name + "!";
+          }),
+        );
+      };
+  - id: language-react-p01-part-6
+    title: 업데이터 팩토리[makeTaskUpdater]
+    display: |-
+      // 업데이터 팩토리[makeTaskUpdater] — 같은 produce 뼈대를 재사용
+      type Task = { id: number; title: string; done: boolean };
+
+      const makeTaskUpdater = (fn: (task: Task) => void) => (taskId: number) => {
+        setOrg((prev) =>
+          produce(prev, (draft) => {
+            const task = _.find(
+              _.flatMap(draft.teams, (t) => _.flatMap(t.members, (m) => m.tasks)),
+              { id: taskId },
+            );
+            if (task) fn(task);
+          }),
+        );
+      };
+
+      const markDone = makeTaskUpdater((task) => {
+        task.done = true;
+      });
+    typing: |-
+      type Task = { id: number; title: string; done: boolean };
+
+      const makeTaskUpdater = (fn: (task: Task) => void) => (taskId: number) => {
+        setOrg((prev) =>
+          produce(prev, (draft) => {
+            const task = _.find(
+              _.flatMap(draft.teams, (t) => _.flatMap(t.members, (m) => m.tasks)),
+              { id: taskId },
+            );
+            if (task) fn(task);
+          }),
+        );
+      };
+
+      const markDone = makeTaskUpdater((task) => {
+        task.done = true;
+      });
+  - id: language-react-p01-part-7
+    title: 배치 패치[batch assign]
+    display: |-
+      // 배치 패치[batch assign] — 한 번의 produce 안에서 여러 건 갱신
+      type Task = { id: number; title: string; done: boolean };
+
+      const patchMany = (items: { id: number; patch: Partial<Task> }[]) => {
+        setOrg((prev) =>
+          produce(prev, (draft) => {
+            const all = _.flatMap(draft.teams, (t) =>
+              _.flatMap(t.members, (m) => m.tasks),
+            );
+            for (const item of items) {
+              const task = _.find(all, { id: item.id });
+              if (task) _.assign(task, item.patch);
+            }
+          }),
+        );
+      };
+    typing: |-
+      type Task = { id: number; title: string; done: boolean };
+
+      const patchMany = (items: { id: number; patch: Partial<Task> }[]) => {
+        setOrg((prev) =>
+          produce(prev, (draft) => {
+            const all = _.flatMap(draft.teams, (t) =>
+              _.flatMap(t.members, (m) => m.tasks),
+            );
+            for (const item of items) {
+              const task = _.find(all, { id: item.id });
+              if (task) _.assign(task, item.patch);
+            }
+          }),
+        );
+      };
+  - id: language-react-p01-part-8
+    title: get + 키 재할당[path update]
+    display: |-
+      // get + 키 재할당[path update]
+      // _.get으로 부모를 찾고, 부모[key]에 새 값을 넣으면 Immer가 경로를 추적한다
+      type Member = { id: number; name: string };
+
+      const renameMember = (memberId: number, name: string) => {
+        setOrg((prev) =>
+          produce(prev, (draft) => {
+            const members = _.get(draft, "teams[0].members") as Member[] | undefined;
+            if (!members) return;
+            const idx = _.findIndex(members, { id: memberId });
+            if (idx < 0) return;
+            members[idx] = { ...members[idx], name };
+          }),
+        );
+      };
+    typing: |-
+      type Member = { id: number; name: string };
+
+      const renameMember = (memberId: number, name: string) => {
+        setOrg((prev) =>
+          produce(prev, (draft) => {
+            const members = _.get(draft, "teams[0].members") as Member[] | undefined;
+            if (!members) return;
+            const idx = _.findIndex(members, { id: memberId });
+            if (idx < 0) return;
+            members[idx] = { ...members[idx], name };
+          }),
+        );
+      };

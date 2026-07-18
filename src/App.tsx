@@ -10,10 +10,12 @@ import {
 
 import { languageTracks } from "./generated/languageLessons";
 import { lexiconTracks } from "./generated/lexiconLessons";
+import { noteTracks } from "./generated/noteLessons";
 import { visualTracks } from "./generated/visualLessons";
 import { buildHighlightChars } from "./lib/codeHighlight";
 import type { LanguagePart } from "./data/languageLessonTypes";
 import type { LexiconPart } from "./data/lexiconLessonTypes";
+import type { NoteBlock, NotePart } from "./data/noteLessonTypes";
 import type { VisualPart } from "./data/visualLessonTypes";
 
 const THEME_STORAGE_KEY = "gmtl-type-recall-theme";
@@ -34,7 +36,9 @@ function readSavedPosition(): SavedPosition | null {
     const parsed = JSON.parse(raw) as SavedPosition;
     if (
       parsed &&
-      typeof parsed.tab === "string" &&
+      (parsed.tab === "language" ||
+        parsed.tab === "lexicon" ||
+        parsed.tab === "notes") &&
       typeof parsed.trackId === "string" &&
       typeof parsed.lessonId === "string" &&
       typeof parsed.partId === "string"
@@ -56,8 +60,8 @@ function savePosition(pos: SavedPosition) {
 }
 
 type ThemeMode = "light" | "dark";
-type AppTab = "language" | "lexicon";
-type TrackKind = "language" | "visual" | "lexicon";
+type AppTab = "language" | "lexicon" | "notes";
+type TrackKind = "language" | "visual" | "lexicon" | "notes";
 
 type NavPart = { id: string; title: string };
 type NavLesson = {
@@ -153,6 +157,177 @@ function buildLexiconNavTracks(): NavTrack[] {
       parts: lesson.parts.map((part) => ({ id: part.id, title: part.title })),
     })),
   }));
+}
+
+function buildNotesNavTracks(): NavTrack[] {
+  return noteTracks.map((track) => ({
+    id: track.id,
+    label: track.label,
+    kind: "notes" as const,
+    lessons: track.lessons.map((lesson) => ({
+      id: lesson.id,
+      title: lesson.title,
+      kind: "notes" as const,
+      parts: lesson.parts.map((part) => ({ id: part.id, title: part.title })),
+    })),
+  }));
+}
+
+function navTracksForTab(tab: AppTab, tracks: {
+  language: NavTrack[];
+  lexicon: NavTrack[];
+  notes: NavTrack[];
+}): NavTrack[] {
+  if (tab === "lexicon") return tracks.lexicon;
+  if (tab === "notes") return tracks.notes;
+  return tracks.language;
+}
+
+function findNoteLessonParts(lessonId: string): NotePart[] {
+  for (const track of noteTracks) {
+    const lesson = track.lessons.find((item) => item.id === lessonId);
+    if (lesson) {
+      return lesson.parts;
+    }
+  }
+  return [];
+}
+
+function NoteBlockView(props: { block: NoteBlock }) {
+  const block = props.block;
+  if (block.type === "prose") {
+    return (
+      <div class="noteProse">
+        <For each={block.text.split(/\n+/).filter((line) => line.trim())}>
+          {(line) => <p>{line}</p>}
+        </For>
+      </div>
+    );
+  }
+  if (block.type === "pre") {
+    return <pre class="notePre">{block.text}</pre>;
+  }
+  if (block.type === "heading") {
+    return <h3 class="noteHeading">{block.text}</h3>;
+  }
+  if (block.type === "list") {
+    return (
+      <ul class="noteList">
+        <For each={block.items}>{(item) => <li>{item}</li>}</For>
+      </ul>
+    );
+  }
+  if (block.type === "kv") {
+    return (
+      <dl class="noteKv">
+        <For each={block.rows}>
+          {(row) => (
+            <div class="noteKvRow">
+              <dt>{row.key}</dt>
+              <dd>{row.value}</dd>
+            </div>
+          )}
+        </For>
+      </dl>
+    );
+  }
+  return (
+    <div class="noteTableWrap">
+      <table class="noteTable">
+        <thead>
+          <tr>
+            <For each={block.headers}>{(header) => <th>{header}</th>}</For>
+          </tr>
+        </thead>
+        <tbody>
+          <For each={block.rows}>
+            {(row) => (
+              <tr>
+                <For each={row}>{(cell) => <td>{cell}</td>}</For>
+              </tr>
+            )}
+          </For>
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+type NoteCardProps = {
+  part: NotePart;
+  trackLabel: string;
+  lessonTitle: string;
+  isActive: boolean;
+  setCardRef: (partId: string, el: HTMLElement | undefined) => void;
+  onActivate: (partId: string) => void;
+};
+
+function NoteCard(props: NoteCardProps) {
+  return (
+    <article
+      class={props.isActive ? "typingCard noteCard isActive" : "typingCard noteCard isInactive"}
+      data-part-id={props.part.id}
+      aria-current={props.isActive ? "true" : undefined}
+      ref={(el) => props.setCardRef(props.part.id, el)}
+      onClick={() => {
+        if (!props.isActive) {
+          props.onActivate(props.part.id);
+        }
+      }}
+    >
+      <div class="typingCardHeader">
+        <span class="typingCardTag">{props.trackLabel}</span>
+        <span class="typingCardTitle truncate">
+          {props.lessonTitle}
+          {" · "}
+          {props.part.title}
+        </span>
+      </div>
+      <div class="noteBody">
+        <For each={props.part.blocks}>
+          {(block) => <NoteBlockView block={block} />}
+        </For>
+      </div>
+    </article>
+  );
+}
+
+function AppTabButtons(props: {
+  appTab: AppTab;
+  onSelect: (tab: AppTab) => void;
+  class?: string;
+}) {
+  return (
+    <div class={props.class ?? "appTabBar"} role="tablist" aria-label="콘텐츠 종류">
+      <button
+        type="button"
+        role="tab"
+        class={props.appTab === "language" ? "appTab isActive" : "appTab"}
+        aria-selected={props.appTab === "language"}
+        onClick={() => props.onSelect("language")}
+      >
+        언어
+      </button>
+      <button
+        type="button"
+        role="tab"
+        class={props.appTab === "lexicon" ? "appTab isActive" : "appTab"}
+        aria-selected={props.appTab === "lexicon"}
+        onClick={() => props.onSelect("lexicon")}
+      >
+        용어
+      </button>
+      <button
+        type="button"
+        role="tab"
+        class={props.appTab === "notes" ? "appTab isActive" : "appTab"}
+        aria-selected={props.appTab === "notes"}
+        onClick={() => props.onSelect("notes")}
+      >
+        노트
+      </button>
+    </div>
+  );
 }
 
 function MenuIcon() {
@@ -572,6 +747,12 @@ function App() {
 
   const languageNavTracks = buildLanguageNavTracks();
   const lexiconNavTracks = buildLexiconNavTracks();
+  const notesNavTracks = buildNotesNavTracks();
+  const allNavTracks = {
+    language: languageNavTracks,
+    lexicon: lexiconNavTracks,
+    notes: notesNavTracks,
+  };
 
   const [inputValue, setInputValue] = createSignal("");
   const [draftValue, setDraftValue] = createSignal("");
@@ -583,7 +764,7 @@ function App() {
   // 저장된 위치로 초기값 결정
   const _savedPos = readSavedPosition();
   const _initTab: AppTab = _savedPos?.tab ?? "language";
-  const _initTracks = _initTab === "lexicon" ? lexiconNavTracks : languageNavTracks;
+  const _initTracks = navTracksForTab(_initTab, allNavTracks);
   const _initTrackId = _savedPos?.trackId && _initTracks.some((t) => t.id === _savedPos.trackId)
     ? _savedPos.trackId
     : (_initTracks[0]?.id ?? "");
@@ -603,9 +784,8 @@ function App() {
   // 스크롤 위치 기준으로 TOC가 따라가는 파트 (타이핑 선택과는 별개)
   const [spyPartId, setSpyPartId] = createSignal("");
 
-  const navTracks = createMemo(() =>
-    appTab() === "lexicon" ? lexiconNavTracks : languageNavTracks,
-  );
+  const navTracks = createMemo(() => navTracksForTab(appTab(), allNavTracks));
+  const isNotesTab = createMemo(() => appTab() === "notes");
 
   onMount(() => {
     const initial = readStoredTheme();
@@ -660,7 +840,7 @@ function App() {
       isFirstTabEffect = false;
       return;
     }
-    const tracks = tab === "lexicon" ? lexiconNavTracks : languageNavTracks;
+    const tracks = navTracksForTab(tab, allNavTracks);
     const firstTrack = tracks[0];
     const firstLesson = firstTrack?.lessons[0];
     setSelectedTrackId(firstTrack?.id ?? "");
@@ -770,14 +950,24 @@ function App() {
     return null;
   });
 
+  const selectedNoteLessonParts = createMemo((): NotePart[] => {
+    if (!isNotesTab()) {
+      return [];
+    }
+    return findNoteLessonParts(selectedLessonId());
+  });
+
   const stripSpaces = createMemo(() => {
-    if (appTab() === "lexicon") {
+    if (appTab() === "lexicon" || isNotesTab()) {
       return false;
     }
     return selectedLesson()?.kind === "language";
   });
 
   const practiceText = createMemo(() => {
+    if (isNotesTab()) {
+      return "";
+    }
     if (selectedLexiconPart()) {
       return selectedLexiconPart()?.answer ?? "";
     }
@@ -788,6 +978,9 @@ function App() {
   });
 
   const displayText = createMemo(() => {
+    if (isNotesTab()) {
+      return "";
+    }
     if (selectedLexiconPart()) {
       return selectedLexiconPart()?.answer ?? "";
     }
@@ -815,6 +1008,9 @@ function App() {
 
   createEffect(() => {
     selectedPartId();
+    if (isNotesTab()) {
+      return;
+    }
     queueMicrotask(() => {
       inputRef?.focus();
     });
@@ -966,20 +1162,33 @@ function App() {
     let nextAcceptedValue = "";
 
     for (let index = 0; index < normalizedInput.length; index += 1) {
-      if (normalizedInput[index] !== target[index]) {
+      if (index >= target.length) {
         break;
       }
       nextAcceptedValue += normalizedInput[index];
+      // 틀린 글자는 하나만 받고 멈춘다. 이어서 더 치지 못하게 하고 백스페이스로 고친다.
+      if (normalizedInput[index] !== target[index]) {
+        break;
+      }
     }
 
     setInputValue(nextAcceptedValue);
     setDraftValue(nextAcceptedValue);
+
+    // Solid는 signal 값이 같으면 DOM을 갱신하지 않는다.
+    // 거절된 입력이 textarea에 남으면 이후 올바른 타이핑도 계속 막힌다.
+    if (inputRef && !isComposing() && inputRef.value !== nextAcceptedValue) {
+      inputRef.value = nextAcceptedValue;
+    }
   };
 
   const resetTyping = () => {
     setInputValue("");
     setDraftValue("");
     setIsComposing(false);
+    if (inputRef) {
+      inputRef.value = "";
+    }
     inputRef?.focus();
   };
 
@@ -1091,22 +1300,33 @@ function App() {
     onSelectLesson: setSelectedLessonId,
     onSelectPart: setSelectedPartId,
     onNavigate: options?.onNavigate,
-    ariaLabel: appTab() === "lexicon" ? "용어·파일 선택" : "언어·파일 선택",
+    ariaLabel:
+      appTab() === "lexicon"
+        ? "용어·파일 선택"
+        : appTab() === "notes"
+          ? "노트·파일 선택"
+          : "언어·파일 선택",
   });
 
   const parts = createMemo(() => selectedLesson()?.parts ?? []);
   const totalParts = createMemo(() => parts().length);
 
   const pageHeading = createMemo(() =>
-    appTab() === "lexicon" ? "실무 용어 타이핑 연습" : "개발 예문 타이핑 연습",
+    appTab() === "lexicon"
+      ? "실무 용어 타이핑 연습"
+      : appTab() === "notes"
+        ? "참고 노트"
+        : "개발 예문 타이핑 연습",
   );
 
   const scrollLabel = createMemo(() =>
     appTab() === "lexicon"
       ? "용어 카드"
-      : selectedLesson()?.kind === "visual"
-        ? "시각 참고"
-        : "원문",
+      : appTab() === "notes"
+        ? "참고 노트"
+        : selectedLesson()?.kind === "visual"
+          ? "시각 참고"
+          : "원문",
   );
 
   return (
@@ -1114,6 +1334,9 @@ function App() {
       class="appShell"
       classList={{ hasRightToc: !isNarrowLayout() }}
       onClick={(event) => {
+        if (isNotesTab()) {
+          return;
+        }
         const target = event.target;
         if (
           target instanceof HTMLElement &&
@@ -1131,26 +1354,11 @@ function App() {
           <span class="sidebarBrandMark">T</span>
           <span class="sidebarBrandText">Type Recall</span>
         </div>
-        <div class="appTabBar sidebarTabBar" role="tablist" aria-label="콘텐츠 종류">
-          <button
-            type="button"
-            role="tab"
-            class={appTab() === "language" ? "appTab isActive" : "appTab"}
-            aria-selected={appTab() === "language"}
-            onClick={() => setAppTab("language")}
-          >
-            언어
-          </button>
-          <button
-            type="button"
-            role="tab"
-            class={appTab() === "lexicon" ? "appTab isActive" : "appTab"}
-            aria-selected={appTab() === "lexicon"}
-            onClick={() => setAppTab("lexicon")}
-          >
-            용어
-          </button>
-        </div>
+        <AppTabButtons
+          class="appTabBar sidebarTabBar"
+          appTab={appTab()}
+          onSelect={setAppTab}
+        />
         <LessonNavigation {...lessonNavProps()} />
       </aside>
 
@@ -1168,26 +1376,11 @@ function App() {
             </Show>
           </button>
           <span class="headerTitleMobile">Type Recall</span>
-          <div class="appTabBar headerTabBar" role="tablist" aria-label="콘텐츠 종류">
-            <button
-              type="button"
-              role="tab"
-              class={appTab() === "language" ? "appTab isActive" : "appTab"}
-              aria-selected={appTab() === "language"}
-              onClick={() => setAppTab("language")}
-            >
-              언어
-            </button>
-            <button
-              type="button"
-              role="tab"
-              class={appTab() === "lexicon" ? "appTab isActive" : "appTab"}
-              aria-selected={appTab() === "lexicon"}
-              onClick={() => setAppTab("lexicon")}
-            >
-              용어
-            </button>
-          </div>
+          <AppTabButtons
+            class="appTabBar headerTabBar"
+            appTab={appTab()}
+            onSelect={setAppTab}
+          />
           <p class="headerMeta">
             {selectedTrack()?.label ?? ""}
             <Show when={selectedLesson()}>
@@ -1197,11 +1390,16 @@ function App() {
           </p>
         </div>
         <div class="headerRight">
-          <span class="headerAccuracy" aria-label="정확도">
-            정확도 {accuracyValue()}%
-            <span class="headerAccuracySep">·</span>
-            {typedCount()}/{totalCount()}
-          </span>
+          <Show
+            when={!isNotesTab()}
+            fallback={<span class="headerAccuracy">읽기 전용</span>}
+          >
+            <span class="headerAccuracy" aria-label="정확도">
+              정확도 {accuracyValue()}%
+              <span class="headerAccuracySep">·</span>
+              {typedCount()}/{totalCount()}
+            </span>
+          </Show>
           <button
             type="button"
             class="iconButton themeToggle"
@@ -1223,26 +1421,11 @@ function App() {
           aria-hidden="true"
         />
         <div class="mobileDrawer" role="dialog" aria-label="탐색 메뉴">
-          <div class="appTabBar drawerTabBar" role="tablist" aria-label="콘텐츠 종류">
-            <button
-              type="button"
-              role="tab"
-              class={appTab() === "language" ? "appTab isActive" : "appTab"}
-              aria-selected={appTab() === "language"}
-              onClick={() => setAppTab("language")}
-            >
-              언어
-            </button>
-            <button
-              type="button"
-              role="tab"
-              class={appTab() === "lexicon" ? "appTab isActive" : "appTab"}
-              aria-selected={appTab() === "lexicon"}
-              onClick={() => setAppTab("lexicon")}
-            >
-              용어
-            </button>
-          </div>
+          <AppTabButtons
+            class="appTabBar drawerTabBar"
+            appTab={appTab()}
+            onSelect={setAppTab}
+          />
           <LessonNavigation
             {...lessonNavProps({
               onNavigate: () => setMobileNavOpen(false),
@@ -1268,33 +1451,52 @@ function App() {
 
           <section class="scrollStack" aria-label={scrollLabel()}>
             <Show
-              when={appTab() === "lexicon"}
+              when={appTab() === "notes"}
               fallback={
                 <Show
-                  when={selectedLesson()?.kind === "visual"}
+                  when={appTab() === "lexicon"}
                   fallback={
-                    <For each={languageTracks.find((t) => t.id === selectedTrackId())?.lessons.find((l) => l.id === selectedLessonId())?.parts ?? []}>
-                      {(part) => (
-                        <TypingCard
-                          part={part}
-                          trackLabel={selectedTrack()?.label ?? "연습"}
-                          lessonTitle={selectedLesson()?.title ?? "예문"}
-                          isActive={part.id === selectedPartId()}
-                          practiceChars={practiceChars()}
-                          language={practiceLanguage()}
-                          setCardRef={setCardRef}
-                          onActivate={setSelectedPartId}
-                        />
-                      )}
-                    </For>
+                    <Show
+                      when={selectedLesson()?.kind === "visual"}
+                      fallback={
+                        <For each={languageTracks.find((t) => t.id === selectedTrackId())?.lessons.find((l) => l.id === selectedLessonId())?.parts ?? []}>
+                          {(part) => (
+                            <TypingCard
+                              part={part}
+                              trackLabel={selectedTrack()?.label ?? "연습"}
+                              lessonTitle={selectedLesson()?.title ?? "예문"}
+                              isActive={part.id === selectedPartId()}
+                              practiceChars={practiceChars()}
+                              language={practiceLanguage()}
+                              setCardRef={setCardRef}
+                              onActivate={setSelectedPartId}
+                            />
+                          )}
+                        </For>
+                      }
+                    >
+                      <For each={selectedVisualLessonParts()}>
+                        {(part) => (
+                          <VisualCard
+                            part={part}
+                            trackLabel={selectedTrack()?.label ?? "시각"}
+                            lessonTitle={selectedLesson()?.title ?? "참고"}
+                            isActive={part.id === selectedPartId()}
+                            practiceChars={practiceChars()}
+                            setCardRef={setCardRef}
+                            onActivate={setSelectedPartId}
+                          />
+                        )}
+                      </For>
+                    </Show>
                   }
                 >
-                  <For each={selectedVisualLessonParts()}>
+                  <For each={lexiconTracks.find((t) => t.id === selectedTrackId())?.lessons.find((l) => l.id === selectedLessonId())?.parts ?? []}>
                     {(part) => (
-                      <VisualCard
+                      <LexiconCard
                         part={part}
-                        trackLabel={selectedTrack()?.label ?? "시각"}
-                        lessonTitle={selectedLesson()?.title ?? "참고"}
+                        trackLabel={selectedTrack()?.label ?? "용어"}
+                        lessonTitle={selectedLesson()?.title ?? "용어"}
                         isActive={part.id === selectedPartId()}
                         practiceChars={practiceChars()}
                         setCardRef={setCardRef}
@@ -1305,14 +1507,13 @@ function App() {
                 </Show>
               }
             >
-              <For each={lexiconTracks.find((t) => t.id === selectedTrackId())?.lessons.find((l) => l.id === selectedLessonId())?.parts ?? []}>
+              <For each={selectedNoteLessonParts()}>
                 {(part) => (
-                  <LexiconCard
+                  <NoteCard
                     part={part}
-                    trackLabel={selectedTrack()?.label ?? "용어"}
-                    lessonTitle={selectedLesson()?.title ?? "용어"}
+                    trackLabel={selectedTrack()?.label ?? "노트"}
+                    lessonTitle={selectedLesson()?.title ?? "노트"}
                     isActive={part.id === selectedPartId()}
-                    practiceChars={practiceChars()}
                     setCardRef={setCardRef}
                     onActivate={setSelectedPartId}
                   />
@@ -1320,92 +1521,96 @@ function App() {
               </For>
             </Show>
             <Show when={parts().length === 0}>
-              <p class="emptyParts">예문 데이터가 없습니다.</p>
+              <p class="emptyParts">
+                {isNotesTab() ? "노트 데이터가 없습니다." : "예문 데이터가 없습니다."}
+              </p>
             </Show>
           </section>
 
-          <textarea
-            ref={(element) => {
-              inputRef = element;
-            }}
-            class="hiddenInput"
-            value={isComposing() ? draftValue() : limitedValue()}
-            onKeyDown={(event) => {
-              if (event.key !== "Enter" || !event.ctrlKey) {
-                return;
-              }
-              event.preventDefault();
-              if (event.altKey) {
-                resetTyping();
-              } else if (event.shiftKey) {
-                moveToPrevPart();
-              } else {
-                moveToNextPart();
-              }
-            }}
-            onInput={(event) => {
-              const nextValue = event.currentTarget.value;
+          <Show when={!isNotesTab()}>
+            <textarea
+              ref={(element) => {
+                inputRef = element;
+              }}
+              class="hiddenInput"
+              value={isComposing() ? draftValue() : limitedValue()}
+              onKeyDown={(event) => {
+                if (event.key !== "Enter" || !event.ctrlKey) {
+                  return;
+                }
+                event.preventDefault();
+                if (event.altKey) {
+                  resetTyping();
+                } else if (event.shiftKey) {
+                  moveToPrevPart();
+                } else {
+                  moveToNextPart();
+                }
+              }}
+              onInput={(event) => {
+                const nextValue = event.currentTarget.value;
 
-              if (isComposing()) {
-                setDraftValue(nextValue);
-                return;
-              }
+                if (isComposing()) {
+                  setDraftValue(nextValue);
+                  return;
+                }
 
-              acceptInput(nextValue);
-            }}
-            onCompositionStart={() => {
-              if (!hasLessons()) {
-                return;
-              }
-              setIsComposing(true);
-              setDraftValue(limitedValue());
-            }}
-            onCompositionEnd={(event) => {
-              setIsComposing(false);
-              acceptInput(event.currentTarget.value);
-            }}
-            spellcheck={false}
-            autofocus
-            aria-hidden="true"
-            tabIndex={-1}
-          />
+                acceptInput(nextValue);
+              }}
+              onCompositionStart={() => {
+                if (!hasLessons()) {
+                  return;
+                }
+                setIsComposing(true);
+                setDraftValue(limitedValue());
+              }}
+              onCompositionEnd={(event) => {
+                setIsComposing(false);
+                acceptInput(event.currentTarget.value);
+              }}
+              spellcheck={false}
+              autofocus
+              aria-hidden="true"
+              tabIndex={-1}
+            />
 
-          <div class="controlBar" role="toolbar" aria-label="파트 조작">
-            <div class="controlBarInner">
-              <div class="controlItem">
-                <button
-                  type="button"
-                  class="btn btnGhost"
-                  onClick={moveToPrevPart}
-                  disabled={!selectedPartId() || isFirstPartOverall()}
-                >
-                  이전 파트
-                </button>
-                <span class="controlHint">Ctrl+Shift+Enter</span>
-              </div>
-              <div class="controlItem">
-                <button
-                  type="button"
-                  class="btn btnPrimary"
-                  onClick={resetTyping}
-                >
-                  다시 시작
-                </button>
-                <span class="controlHint">Ctrl+Alt+Enter</span>
-              </div>
-              <div class="controlItem">
-                <button
-                  type="button"
-                  class="btn btnGhost"
-                  onClick={moveToNextPart}
-                  disabled={!selectedPartId()}
-                >
-                  {isLastPart() ? "처음으로" : "다음 파트"}
-                </button>
-                <span class="controlHint">Ctrl+Enter</span>
+            <div class="controlBar" role="toolbar" aria-label="파트 조작">
+              <div class="controlBarInner">
+                <div class="controlItem">
+                  <button
+                    type="button"
+                    class="btn btnGhost"
+                    onClick={moveToPrevPart}
+                    disabled={!selectedPartId() || isFirstPartOverall()}
+                  >
+                    이전 파트
+                  </button>
+                  <span class="controlHint">Ctrl+Shift+Enter</span>
+                </div>
+                <div class="controlItem">
+                  <button
+                    type="button"
+                    class="btn btnPrimary"
+                    onClick={resetTyping}
+                  >
+                    다시 시작
+                  </button>
+                  <span class="controlHint">Ctrl+Alt+Enter</span>
+                </div>
+                <div class="controlItem">
+                  <button
+                    type="button"
+                    class="btn btnGhost"
+                    onClick={moveToNextPart}
+                    disabled={!selectedPartId()}
+                  >
+                    {isLastPart() ? "처음으로" : "다음 파트"}
+                  </button>
+                  <span class="controlHint">Ctrl+Enter</span>
+                </div>
               </div>
             </div>
-          </div>
+          </Show>
         </div>
       </div>
 

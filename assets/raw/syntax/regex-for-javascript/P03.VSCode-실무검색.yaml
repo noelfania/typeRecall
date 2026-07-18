@@ -1,0 +1,118 @@
+id: language-regex-for-javascript-p03
+category: syntax
+kind: code-snippet
+language: javascript
+track:
+  id: regex-for-javascript
+  label: RegEx for JavaScript
+title: P03.VSCode-실무검색
+source:
+  origin: chat-raw VS Code 참조찾기·정규식 미션 2026-07-18
+  note: Ctrl+Shift+F 용 패턴과 매일 연습용 추출. lookbehind는 VS Code/JS에서 지원.
+parts:
+  - id: language-regex-for-javascript-p03-part-1
+    title: 함수 호출만[\\bAAA\\s*\\(]
+    display: |-
+      // 함수 호출만[\bAAA\s*\(]
+      // VS Code: Ctrl+Shift+F → Regex ON
+      // 정의·주석도 같이 잡힐 수 있음
+      var code = "AAA(); const x = AAA(1);";
+      code.match(/\bAAA\s*\(/g);
+      // 결과: ['AAA(', 'AAA(']
+    typing: |-
+      var code = "AAA(); const x = AAA(1);";
+      code.match(/\bAAA\s*\(/g);
+  - id: language-regex-for-javascript-p03-part-2
+    title: 정의부 제외 호출[lookbehind]
+    display: |-
+      // 정의부 제외 호출[lookbehind]
+      // function AAA( 는 빼고 호출만 (JS/TS용)
+      var src = "function AAA() {}\nAAA();";
+      src.match(/(?<!function\s)\bAAA\s*\(/g);
+      // 결과: ['AAA(']
+    typing: |-
+      var src = "function AAA() {}\nAAA();";
+      src.match(/(?<!function\s)\bAAA\s*\(/g);
+  - id: language-regex-for-javascript-p03-part-3
+    title: 주석 줄 제외[negative lookahead]
+    display: |-
+      // 주석 줄 제외[negative lookahead]
+      var code = "// AAA()\nAAA()";
+      code.match(/^(?!\s*\/\/).*?\bAAA\s*\(/m);
+      // 결과: 두 번째 줄의 AAA(
+    typing: |-
+      var code = "// AAA()\nAAA()";
+      code.match(/^(?!\s*\/\/).*?\bAAA\s*\(/m);
+  - id: language-regex-for-javascript-p03-part-4
+    title: Day1 - 확장자 앞 글자[lookaround]
+    display: |-
+      // Day1 - 확장자 앞 글자[lookaround]
+      // 123abc.mp4 → abc
+      "123abc.mp4".match(/(?<=\d+)[A-Za-z]+(?=\.)/)[0];
+      // 결과: abc
+    typing: '"123abc.mp4".match(/(?<=\\d+)[A-Za-z]+(?=\\.)/)[0];'
+  - id: language-regex-for-javascript-p03-part-5
+    title: Day2 - 여러 줄 함수[\\s\\S]
+    display: |-
+      // Day2 - 여러 줄 함수[\s\S]
+      var fn = `func(
+        a,
+        b,
+        c
+      )`;
+      fn.match(/func\([\s\S]*?\)/)[0];
+    typing: |-
+      var fn = `func(
+        a,
+        b,
+        c
+      )`;
+      fn.match(/func\([\s\S]*?\)/)[0];
+  - id: language-regex-for-javascript-p03-part-6
+    title: Day3 - error 줄만
+    display: |-
+      // Day3 - error 줄만
+      var log = "error: xxx\ninfo: yyy\nerror: zzz";
+      log.match(/^error:.*$/gm);
+      // 결과: ['error: xxx', 'error: zzz']
+    typing: |-
+      var log = "error: xxx\ninfo: yyy\nerror: zzz";
+      log.match(/^error:.*$/gm);
+  - id: language-regex-for-javascript-p03-part-7
+    title: Day5 - 파일명 숫자만
+    display: |-
+      // Day5 - 파일명 숫자만
+      "img_001.png".match(/\d+/)[0];
+      "img_002.png".match(/\d+/)[0];
+      // 결과: 001 / 002
+    typing: |-
+      "img_001.png".match(/\d+/)[0];
+      "img_002.png".match(/\d+/)[0];
+  - id: language-regex-for-javascript-p03-part-8
+    title: Day6 - 실무용 이메일
+    display: |-
+      // Day6 - 실무용 이메일 (완벽 검증 X, 실무용 O)
+      var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      emailRe.test("user@email.com");
+      // 결과: true
+    typing: |-
+      var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      emailRe.test("user@email.com");
+  - id: language-regex-for-javascript-p03-part-9
+    title: Day7 - 문자열 안 호출 제외
+    display: |-
+      // Day7 - 문자열 안 호출 제외 (단순 버전)
+      // 따옴표 안 AAA()는 빼고, 코드의 AAA()만
+      var src = 'const a = "AAA()";\nAAA();';
+      src.match(/(?<!["'`])\bAAA\s*\(/g);
+      // 결과: ['AAA(']  (문자열 쪽은 제외 시도)
+    typing: |-
+      var src = 'const a = "AAA()";\nAAA();';
+      src.match(/(?<!["'`])\bAAA\s*\(/g);
+  - id: language-regex-for-javascript-p03-part-10
+    title: 치환 - 날짜 포맷[replace]
+    display: |-
+      // 치환 - 날짜 포맷[replace]
+      "2026-03-18".replace(/(\d{4})-(\d{2})-(\d{2})/, "$3/$2/$1");
+      // 결과: 18/03/2026
+    typing: '"2026-03-18".replace(/(\\d{4})-(\\d{2})-(\\d{2})/, "$3/$2/$1");'

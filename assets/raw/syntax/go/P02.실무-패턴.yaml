@@ -7,116 +7,310 @@ track:
   label: Go
 title: P02.실무-패턴
 source:
-  origin: assets/typingSource/Language-go/P02.실무-패턴.go
+  origin: chat-raw Go 필수·고빈도 커리큘럼 2026-07-18
+  note: struct/method·error·pointer·interface·goroutine/channel·stdlib. 희귀 동시성·reflection 제외.
 parts:
   - id: language-go-p02-part-1
-    title: 패키지와 임포트[package / import]
+    title: 구조체[struct]
     display: |-
-      // 패키지와 임포트[package / import]
-      package main
+      // 구조체[struct]
+      type User struct {
+      	Name  string
+      	Age   int
+      	Admin bool
+      }
 
-      import (
-      	"encoding/json"
-      	"fmt"
-      )
+      userItem := User{Name: "park", Age: 25, Admin: true}
+      fmt.Println(userItem.Name, userItem.Admin)
+      // 결과: park true
     typing: |-
-      package main
+      type User struct {
+      	Name  string
+      	Age   int
+      	Admin bool
+      }
 
-      import (
-      	"encoding/json"
-      	"fmt"
-      )
+      userItem := User{Name: "park", Age: 25, Admin: true}
+      fmt.Println(userItem.Name, userItem.Admin)
   - id: language-go-p02-part-2
-    title: JSON 태그 구조체[struct tag]
+    title: 메서드[pointer receiver]
     display: |-
-      // JSON 태그 구조체[struct tag] - 직렬화 필드명 지정
-      type Product struct {
-      	Name  string `json:"name"`
-      	Price int    `json:"price"`
+      // 메서드[pointer receiver] — 필드를 바꿀 때 포인터 리시버가 흔하다
+      type Counter struct {
+      	Value int
       }
+
+      func (c *Counter) Inc() {
+      	c.Value++
+      }
+
+      counter := &Counter{Value: 1}
+      counter.Inc()
+      fmt.Println(counter.Value)
+      // 결과: 2
     typing: |-
-      type Product struct {
-      	Name  string `json:"name"`
-      	Price int    `json:"price"`
+      type Counter struct {
+      	Value int
       }
-  - id: language-go-p02-part-2b
-    title: 슬라이스 변환 함수[slice transform]
-    display: |-
-      // 슬라이스 변환 함수[slice transform] - make로 용량 미리 확보
-      func makeDoubles(input []int) []int {
-      	result := make([]int, 0, len(input))
-      	for _, item := range input {
-      		result = append(result, item*2)
-      	}
-      	return result
+
+      func (c *Counter) Inc() {
+      	c.Value++
       }
-    typing: |-
-      func makeDoubles(input []int) []int {
-      	result := make([]int, 0, len(input))
-      	for _, item := range input {
-      		result = append(result, item*2)
-      	}
-      	return result
-      }
+
+      counter := &Counter{Value: 1}
+      counter.Inc()
+      fmt.Println(counter.Value)
   - id: language-go-p02-part-3
-    title: 슬라이스 추가[append]
+    title: 에러 생성[errors.New / fmt.Errorf]
     display: |-
-      	// 슬라이스 추가[append]
-      	valueList := []int{1, 2}
-      	valueList = append(valueList, 3, 4)
-      	fmt.Println(valueList)
-      	// 결과: [1 2 3 4]
+      // 에러 생성[errors.New / fmt.Errorf]
+      import (
+      	"errors"
+      	"fmt"
+      )
+
+      errA := errors.New("not found")
+      errB := fmt.Errorf("user %d missing", 7)
+      fmt.Println(errA, errB)
+      // 결과: not found user 7 missing
     typing: |-
-      	valueList := []int{1, 2}
-      	valueList = append(valueList, 3, 4)
-      	fmt.Println(valueList)
+      import (
+      	"errors"
+      	"fmt"
+      )
+
+      errA := errors.New("not found")
+      errB := fmt.Errorf("user %d missing", 7)
+      fmt.Println(errA, errB)
   - id: language-go-p02-part-4
-    title: 맵 존재 확인[comma ok]
+    title: 에러 반환[error return]
     display: |-
-      	// 맵 존재 확인[comma ok]
-      	roleMap := map[string]string{"kim": "admin"}
-      	roleValue, ok := roleMap["kim"]
-      	fmt.Println(roleValue, ok)
-      	// 결과: admin true
+      // 에러 반환[error return] — (값, error) 가 Go 관례
+      func divide(numA int, numB int) (int, error) {
+      	if numB == 0 {
+      		return 0, fmt.Errorf("0으로 나눌 수 없음")
+      	}
+      	return numA / numB, nil
+      }
+
+      quotient, err := divide(10, 2)
+      fmt.Println(quotient, err)
+      // 결과: 5 <nil>
     typing: |-
-      	roleMap := map[string]string{"kim": "admin"}
-      	roleValue, ok := roleMap["kim"]
-      	fmt.Println(roleValue, ok)
+      func divide(numA int, numB int) (int, error) {
+      	if numB == 0 {
+      		return 0, fmt.Errorf("0으로 나눌 수 없음")
+      	}
+      	return numA / numB, nil
+      }
+
+      quotient, err := divide(10, 2)
+      fmt.Println(quotient, err)
   - id: language-go-p02-part-5
-    title: 구조체 + JSON
+    title: 에러 검사[if err != nil]
     display: |-
-      	// 구조체 + JSON
-      	productItem := Product{Name: "keyboard", Price: 50000}
-      	jsonBytes, _ := json.Marshal(productItem)
-      	fmt.Println(string(jsonBytes))
-      	// 결과: {"name":"keyboard","price":50000}
+      // 에러 검사[if err != nil]
+      err := fmt.Errorf("0으로 나눌 수 없음")
+      if err != nil {
+      	fmt.Println(err)
+      	return
+      }
+      // 결과: 0으로 나눌 수 없음
     typing: |-
-      	productItem := Product{Name: "keyboard", Price: 50000}
-      	jsonBytes, _ := json.Marshal(productItem)
-      	fmt.Println(string(jsonBytes))
+      err := fmt.Errorf("0으로 나눌 수 없음")
+      if err != nil {
+      	fmt.Println(err)
+      	return
+      }
   - id: language-go-p02-part-6
-    title: 인터페이스 대신 에러 우선 처리[error first]
+    title: 포인터[pointer & *]
     display: |-
-      	// 인터페이스 대신 에러 우선 처리[error first]
-      	_, err := json.Marshal(make(chan int))
-      	if err != nil {
-      		fmt.Println("marshal error")
-      	}
-      	// 결과: marshal error
+      // 포인터[pointer & *] — 주소로 값을 공유·변경한다
+      countValue := 1
+      countPtr := &countValue
+      *countPtr = 2
+      fmt.Println(countValue)
+      // 결과: 2
     typing: |-
-      	_, err := json.Marshal(make(chan int))
-      	if err != nil {
-      		fmt.Println("marshal error")
-      	}
+      countValue := 1
+      countPtr := &countValue
+      *countPtr = 2
+      fmt.Println(countValue)
   - id: language-go-p02-part-7
-    title: 슬라이스 변환 패턴[transform pattern]
+    title: 구조체 포인터[struct pointer]
     display: |-
-      	// 슬라이스 변환 패턴[transform pattern]
-      	doubleList := makeDoubles([]int{1, 2, 3})
-      	fmt.Println(doubleList)
-      	// 결과: [2 4 6]
+      // 구조체 포인터[struct pointer]
+      type User struct {
+      	Name string
+      }
+
+      userItem := &User{Name: "kim"}
+      userItem.Name = "lee"
+      fmt.Println(userItem.Name)
+      // 결과: lee
+    typing: |-
+      type User struct {
+      	Name string
+      }
+
+      userItem := &User{Name: "kim"}
+      userItem.Name = "lee"
+      fmt.Println(userItem.Name)
+  - id: language-go-p02-part-8
+    title: 인터페이스[interface / Stringer]
+    display: |-
+      // 인터페이스[interface / Stringer] — 메서드 집합만 맞으면 구현
+      type Labeler interface {
+      	Label() string
+      }
+
+      type Product struct {
+      	Name string
+      }
+
+      func (p Product) Label() string {
+      	return p.Name
+      }
+
+      var item Labeler = Product{Name: "keyboard"}
+      fmt.Println(item.Label())
+      // 결과: keyboard
+    typing: |-
+      type Labeler interface {
+      	Label() string
+      }
+
+      type Product struct {
+      	Name string
+      }
+
+      func (p Product) Label() string {
+      	return p.Name
+      }
+
+      var item Labeler = Product{Name: "keyboard"}
+      fmt.Println(item.Label())
+  - id: language-go-p02-part-9
+    title: 고루틴[go func]
+    display: |-
+      // 고루틴[go func] — 가벼운 동시 실행
+      done := make(chan bool)
+      go func() {
+      	fmt.Println("worker")
+      	done <- true
+      }()
+      <-done
+      // 결과: worker
+    typing: |-
+      done := make(chan bool)
+      go func() {
+      	fmt.Println("worker")
+      	done <- true
+      }()
+      <-done
+  - id: language-go-p02-part-10
+    title: 채널[chan]
+    display: |-
+      // 채널[chan]
+      messages := make(chan string, 1)
+      messages <- "ping"
+      fmt.Println(<-messages)
+      // 결과: ping
+    typing: |-
+      messages := make(chan string, 1)
+      messages <- "ping"
+      fmt.Println(<-messages)
+  - id: language-go-p02-part-11
+    title: 셀렉트[select]
+    display: |-
+      // 셀렉트[select] — 준비된 채널 하나와 통신한다
+      chA := make(chan string, 1)
+      chA <- "a"
+      select {
+      case msg := <-chA:
+      	fmt.Println(msg)
+      default:
+      	fmt.Println("none")
+      }
+      // 결과: a
+    typing: |-
+      chA := make(chan string, 1)
+      chA <- "a"
+      select {
+      case msg := <-chA:
+      	fmt.Println(msg)
+      default:
+      	fmt.Println("none")
+      }
+  - id: language-go-p02-part-12
+    title: 문자열 처리[strings]
+    display: |-
+      // 문자열 처리[strings]
+      import (
+      	"fmt"
+      	"strings"
+      )
+
+      tagText := "go,api,server"
+      tagList := strings.Split(tagText, ",")
+      fmt.Println(tagList)
+      // 결과: [go api server]
+    typing: |-
+      import (
+      	"fmt"
+      	"strings"
+      )
+
+      tagText := "go,api,server"
+      tagList := strings.Split(tagText, ",")
+      fmt.Println(tagList)
+  - id: language-go-p02-part-13
+    title: 시간[time]
+    display: |-
+      // 시간[time]
+      import (
+      	"fmt"
+      	"time"
+      )
+
+      now := time.Now()
+      fmt.Println(now.Format("2006-01-02"))
+    typing: |-
+      import (
+      	"fmt"
+      	"time"
+      )
+
+      now := time.Now()
+      fmt.Println(now.Format("2006-01-02"))
+  - id: language-go-p02-part-14
+    title: HTTP 서버[net/http]
+    display: |-
+      // HTTP 서버[net/http] — Hello 응답 최소 예
+      package main
+
+      import (
+      	"fmt"
+      	"net/http"
+      )
+
+      func main() {
+      	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+      		fmt.Fprint(w, "Hello")
+      	})
+      	http.ListenAndServe(":8080", nil)
       }
     typing: |-
-      	doubleList := makeDoubles([]int{1, 2, 3})
-      	fmt.Println(doubleList)
+      package main
+
+      import (
+      	"fmt"
+      	"net/http"
+      )
+
+      func main() {
+      	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+      		fmt.Fprint(w, "Hello")
+      	})
+      	http.ListenAndServe(":8080", nil)
       }

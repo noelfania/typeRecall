@@ -1,0 +1,116 @@
+id: language-bash-shell-p02
+category: syntax
+kind: command
+language: shell
+track:
+  id: bash-shell
+  label: Bash / Shell
+title: P02.권한-프로세스-네트워크
+source:
+  origin: chat-raw Shell 실무 TOP10 2026-07-18
+  note: 권한·프로세스·네트워크·압축·환경변수·히스토리. awk/sed 심화는 제외.
+parts:
+  - id: language-bash-shell-p02-part-1
+    title: 권한[chmod]
+    display: |-
+      # 권한[chmod]
+      chmod +x script.sh
+      chmod 755 script.sh
+    typing: |-
+      chmod +x script.sh
+      chmod 755 script.sh
+  - id: language-bash-shell-p02-part-2
+    title: 소유권[chown]
+    display: |-
+      # 소유권[chown]
+      chown user:group file.txt
+      sudo chown -R www-data:www-data /var/www/app
+    typing: |-
+      chown user:group file.txt
+      sudo chown -R www-data:www-data /var/www/app
+  - id: language-bash-shell-p02-part-3
+    title: 프로세스[ps kill]
+    display: |-
+      # 프로세스[ps kill]
+      ps aux | grep nginx
+      kill 12345
+      kill -9 12345
+    typing: |-
+      ps aux | grep nginx
+      kill 12345
+      kill -9 12345
+  - id: language-bash-shell-p02-part-4
+    title: 백그라운드[jobs fg bg]
+    display: |-
+      # 백그라운드[jobs fg bg]
+      sleep 60 &
+      jobs
+      fg %1
+      bg %1
+    typing: |-
+      sleep 60 &
+      jobs
+      fg %1
+      bg %1
+  - id: language-bash-shell-p02-part-5
+    title: 네트워크[curl ping]
+    display: |-
+      # 네트워크[curl ping]
+      ping -c 3 example.com
+      curl -I https://example.com
+      curl -s https://example.com/api/health
+    typing: |-
+      ping -c 3 example.com
+      curl -I https://example.com
+      curl -s https://example.com/api/health
+  - id: language-bash-shell-p02-part-6
+    title: 포트 확인[ss]
+    display: |-
+      # 포트 확인[ss]
+      # netstat 대신 ss를 자주 쓴다
+      ss -tulpn
+      ss -tulpn | grep 80
+    typing: |-
+      ss -tulpn
+      ss -tulpn | grep 80
+  - id: language-bash-shell-p02-part-7
+    title: 압축[tar]
+    display: |-
+      # 압축[tar]
+      tar -czvf archive.tar.gz folder/
+      tar -xzvf archive.tar.gz
+    typing: |-
+      tar -czvf archive.tar.gz folder/
+      tar -xzvf archive.tar.gz
+  - id: language-bash-shell-p02-part-8
+    title: zip[unzip]
+    display: |-
+      # zip[unzip]
+      unzip archive.zip
+      unzip -l archive.zip
+    typing: |-
+      unzip archive.zip
+      unzip -l archive.zip
+  - id: language-bash-shell-p02-part-9
+    title: 환경 변수[export]
+    display: |-
+      # 환경 변수[export]
+      echo $PATH
+      export JAVA_HOME=/usr/lib/jvm/java-17
+      export PATH="$JAVA_HOME/bin:$PATH"
+    typing: |-
+      echo $PATH
+      export JAVA_HOME=/usr/lib/jvm/java-17
+      export PATH="$JAVA_HOME/bin:$PATH"
+  - id: language-bash-shell-p02-part-10
+    title: 히스토리[history]
+    display: |-
+      # 히스토리[history]
+      # Ctrl+R = 이전 명령 검색, Ctrl+C = 중단
+      history
+      history | grep curl
+      !!
+    typing: |-
+      history
+      history | grep curl
+      !!

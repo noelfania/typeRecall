@@ -4,33 +4,95 @@ kind: term
 topic: sql
 title: SQL·DB 실무 용어
 source:
-  origin: chat-raw 2026-07-04
-  note: 채팅으로 수집한 SQL 항목(inner join, commit, transaction, rollback, orm)을 카드로 정리했다.
+  origin: chat-raw 2026-07-04 / curated 2026-07-18
+  note: 명령어(INNER JOIN, COMMIT, ROLLBACK)는 syntax/sql로 옮기고, 여기는 DB 개념 용어만 둔다.
 terms:
-  - id: sql-inner-join
-    section: 조회
-    title: 내부 조인
-    prompt: 두 테이블에서 조인 조건이 일치하는 행만 골라 합치는 조인.
-    answer: INNER JOIN
-    example: 주문과 사용자를 INNER JOIN으로 붙여 구매자만 조회했다.
+  - id: sql-rdb
+    section: 데이터 모델
+    title: 관계형 데이터베이스
+    prompt: 데이터를 표(테이블)로 나누고, 키로 관계를 맺어 저장·조회하는 데이터베이스. MySQL, PostgreSQL, Oracle이 대표적이다.
+    answer: RDB
+    aliases:
+      - Relational Database
+      - RDBMS
+    example: 주문·회원처럼 관계가 분명한 도메인은 RDB가 잘 맞는다.
+  - id: sql-pk
+    section: 키 / 제약
+    title: 기본 키
+    prompt: 테이블에서 각 행을 유일하게 식별하는 컬럼(또는 컬럼 조합). null을 허용하지 않는다.
+    answer: PK
+    aliases:
+      - Primary Key
+    example: users 테이블의 user_id를 PK로 잡았다.
+  - id: sql-fk
+    section: 키 / 제약
+    title: 외래 키
+    prompt: 다른 테이블의 기본 키를 참조해 두 테이블의 관계를 강제하는 키.
+    answer: FK
+    aliases:
+      - Foreign Key
+    example: orders.user_id는 users.user_id를 가리키는 FK다.
+  - id: sql-uk
+    section: 키 / 제약
+    title: 유니크 키
+    prompt: 테이블 안에서 값이 중복되지 않도록 막는 제약. 기본 키가 아니어도 쓸 수 있다.
+    answer: UK
+    aliases:
+      - Unique Key
+      - Unique Constraint
+    example: 이메일은 로그인 식별자라서 UK로 걸었다.
+  - id: sql-ddl
+    section: SQL 분류
+    title: 데이터 정의 언어
+    prompt: 테이블·인덱스·제약 같은 구조(스키마)를 정의하거나 변경하는 SQL 분류. CREATE, ALTER, DROP이 여기에 속한다.
+    answer: DDL
+    aliases:
+      - Data Definition Language
+    example: 컬럼 추가는 DDL이라 배포 전에 마이그레이션으로 돌린다.
+  - id: sql-dml
+    section: SQL 분류
+    title: 데이터 조작 언어
+    prompt: 테이블의 실제 데이터를 조회·추가·수정·삭제하는 SQL 분류. SELECT, INSERT, UPDATE, DELETE가 여기에 속한다.
+    answer: DML
+    aliases:
+      - Data Manipulation Language
+    example: 주문 상태 변경은 DML이라 트랜잭션으로 묶는 편이 안전하다.
+  - id: sql-schema
+    section: 데이터 모델
+    title: 스키마
+    prompt: 테이블, 컬럼, 타입, 제약 등 데이터베이스 구조의 설계·정의.
+    answer: Schema
+    example: 스키마를 먼저 잡고 나서 애플리케이션 코드를 맞췄다.
+  - id: sql-index
+    section: 성능 / 구조
+    title: 인덱스
+    prompt: 특정 컬럼 조회를 빠르게 하기 위해 미리 만들어 두는 검색용 자료구조. 쓰기가 조금 느려질 수 있다.
+    answer: Index
+    example: WHERE email = ?가 잦아서 email에 index를 걸었다.
+  - id: sql-constraint
+    section: 키 / 제약
+    title: 제약 조건
+    prompt: PK, FK, UK, NOT NULL처럼 데이터가 지켜야 할 규칙을 데이터베이스가 강제하는 장치.
+    answer: Constraint
+    example: 음수 재고를 막으려면 check constraint를 검토한다.
+  - id: sql-normalization
+    section: 데이터 모델
+    title: 정규화
+    prompt: 중복을 줄이고 이상(anomaly)을 막기 위해 테이블을 논리적으로 나누는 설계 과정.
+    answer: Normalization
+    example: 주소가 여러 곳에 중복되어 정규화로 분리했다.
   - id: sql-transaction
     section: 트랜잭션
     title: 트랜잭션
     prompt: 여러 쿼리를 하나의 작업 단위로 묶어 전부 성공하거나 전부 취소되게 하는 개념.
     answer: Transaction
     example: 이체 로직은 transaction으로 묶어야 중간 실패를 막는다.
-  - id: sql-commit
+  - id: sql-acid
     section: 트랜잭션
-    title: 커밋
-    prompt: 트랜잭션의 변경 내용을 데이터베이스에 확정하는 명령.
-    answer: COMMIT
-    example: 모든 쿼리가 성공하면 마지막에 COMMIT을 실행한다.
-  - id: sql-rollback
-    section: 트랜잭션
-    title: 롤백
-    prompt: 트랜잭션 중 문제가 생겼을 때 변경 내용을 전부 취소하고 이전 상태로 되돌리는 명령.
-    answer: ROLLBACK
-    example: 예외가 발생하면 ROLLBACK으로 되돌린다.
+    title: ACID
+    prompt: 트랜잭션이 보장해야 할 네 성질. 원자성[Atomicity], 일관성[Consistency], 격리[Isolation], 지속성[Durability].
+    answer: ACID
+    example: 결제 DB는 ACID를 강하게 보장하는 쪽을 고른다.
   - id: sql-orm
     section: 도구
     title: 객체 관계 매핑

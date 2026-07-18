@@ -230,3 +230,110 @@ terms:
     answer: Idempotency
     answerDisplay: 멱등성[Idempotency]
     example: 같은 삭제 요청을 두 번 보내도 최종 상태는 같아야 한다.
+  - id: rest-content-type
+    section: 주요 헤더
+    title: Content-Type
+    prompt: 요청·응답 바디의 데이터 형식을 알려 주는 헤더. JSON이면 application/json을 쓴다.
+    answer: Content-Type
+    example: POST JSON을 보낼 때 Content-Type을 application/json으로 둔다.
+  - id: rest-authorization
+    section: 주요 헤더
+    title: Authorization
+    prompt: 로그인 토큰 등 인증 정보를 담는 요청 헤더. Bearer 토큰과 함께 자주 쓴다.
+    answer: Authorization
+    example: Authorization 헤더에 Bearer 토큰을 넣어 API를 호출한다.
+  - id: rest-accept
+    section: 주요 헤더
+    title: Accept
+    prompt: 클라이언트가 받고 싶은 응답 형식을 서버에 알리는 헤더.
+    answer: Accept
+    example: Accept에 application/json을 넣으면 JSON 응답을 기대한다는 뜻이다.
+  - id: rest-application-json
+    section: 바디 전송 방식
+    title: JSON 바디
+    prompt: 본문을 JSON으로 보내는 가장 흔한 REST 방식. Content-Type은 application/json.
+    answer: application/json
+    aliases:
+      - JSON Body
+    example: 로그인 API는 보통 application/json으로 id와 pw를 보낸다.
+  - id: rest-form-urlencoded
+    section: 바디 전송 방식
+    title: 폼 URL 인코딩
+    prompt: HTML form처럼 key=value&... 형태로 바디를 보내는 방식.
+    answer: application/x-www-form-urlencoded
+    aliases:
+      - Form URL Encoded
+    example: 전통적인 로그인 form은 application/x-www-form-urlencoded를 쓴다.
+  - id: rest-multipart
+    section: 바디 전송 방식
+    title: 멀티파트
+    prompt: 파일 업로드처럼 텍스트와 바이너리를 한 요청에 섞어 보낼 때 쓰는 바디 형식.
+    answer: multipart/form-data
+    aliases:
+      - Multipart
+    example: 프로필 이미지 업로드는 multipart/form-data로 보낸다.
+  - id: rest-local-storage
+    section: 브라우저 저장소
+    title: 로컬 스토리지
+    prompt: 브라우저에 장기 저장하는 키-값 저장소. 탭을 닫아도 남고, 요청에 자동으로 안 붙는다.
+    answer: localStorage
+    example: JWT를 localStorage에 두고 Authorization 헤더에 직접 넣는다.
+  - id: rest-session-storage
+    section: 브라우저 저장소
+    title: 세션 스토리지
+    prompt: 탭(세션)이 열려 있는 동안만 유지되는 브라우저 키-값 저장소.
+    answer: sessionStorage
+    example: 임시 입력값은 sessionStorage에 두면 탭을 닫을 때 사라진다.
+  - id: rest-httponly
+    section: 브라우저 저장소
+    title: HttpOnly 쿠키
+    prompt: JavaScript에서 읽지 못하게 막아 XSS로 토큰이 훔쳐지기 어렵게 하는 쿠키 옵션.
+    answer: HttpOnly
+    aliases:
+      - httpOnly
+    example: 세션 쿠키는 httpOnly로 심어 document.cookie로 못 읽게 한다.
+  - id: rest-options
+    section: HTTP 메서드
+    title: OPTIONS
+    prompt: CORS 프리플라이트처럼 본 요청 전에 허용 여부를 묻는 데 쓰는 메서드.
+    answer: OPTIONS
+    example: 브라우저가 먼저 OPTIONS로 서버 CORS 허용을 확인한다.
+  - id: rest-credentials
+    section: CORS / 브라우저 보안
+    title: credentials
+    prompt: 교차 출처 요청에 쿠키를 포함할지 정하는 옵션. 서버도 Allow-Credentials를 허용해야 한다.
+    answer: credentials
+    aliases:
+      - Access-Control-Allow-Credentials
+    example: fetch에 credentials include와 서버 CORS credentials true를 맞춘다.
+  - id: rest-req-body
+    section: 실무 패턴
+    title: 요청 바디 읽기
+    prompt: Express 등에서 클라이언트가 보낸 JSON 본문을 읽는 객체. req.body.
+    answer: req.body
+    example: 로그인 핸들러에서 const { id, pw } = req.body로 꺼낸다.
+  - id: rest-req-headers
+    section: 실무 패턴
+    title: 요청 헤더 읽기
+    prompt: Express 등에서 클라이언트가 보낸 헤더를 읽는 객체. req.headers.
+    answer: req.headers
+    example: Authorization은 req.headers.authorization으로 확인한다.
+  - id: rest-openapi
+    section: API 계약
+    title: OpenAPI
+    prompt: REST API의 경로·메서드·스키마·응답을 기계가 읽을 수 있게 기술하는 명세 표준. Swagger UI와 함께 쓴다.
+    answer: OpenAPI
+    answerDisplay: OpenAPI[OpenAPI / Swagger]
+    aliases:
+      - Swagger
+      - OpenAPI Spec
+    example: 프론트는 OpenAPI 스키마로 타입과 목을 맞춘다.
+  - id: rest-api-contract
+    section: API 계약
+    title: API 계약
+    prompt: 프론트와 백엔드가 합의한 요청·응답·에러 규칙. 명세가 바뀌면 양쪽이 같이 맞춘다.
+    answer: API Contract
+    answerDisplay: API 계약[API Contract]
+    aliases:
+      - Contract
+    example: 필드명을 바꾸기 전에 API Contract를 먼저 갱신한다.

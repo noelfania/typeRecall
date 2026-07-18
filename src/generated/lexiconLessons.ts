@@ -43,10 +43,10 @@ export const lexiconTracks: LexiconTrack[] = [
             "id": "rule-dev-terms-readme-terms-dev-term-4",
             "title": "스켈레톤 화면",
             "section": "프로젝트 시작 / 구조",
-            "prompt": "실제 콘텐츠가 오기 전에 자리만 먼저 보여주는 뼈대 화면.",
+            "prompt": "실제 콘텐츠 대신 회색 플레이스홀더로 레이아웃 뼈대를 먼저 보여 주는 로딩 UI. 스피너보다 최종 화면 구조를 미리 보여 준다.",
             "answer": "Skeleton",
-            "displayAnswer": "스켈레톤 화면[Skeleton / Skeleton Screen]",
-            "example": "예: API 응답을 기다리는 동안 skeleton screen을 보여주자."
+            "displayAnswer": "스켈레톤 화면[Skeleton / Loading Skeleton]",
+            "example": "예: API 응답을 기다리는 동안 loading skeleton으로 카드 자리를 먼저 잡자."
           },
           {
             "id": "rule-dev-terms-readme-terms-dev-term-5",
@@ -836,6 +836,546 @@ export const lexiconTracks: LexiconTrack[] = [
             "answer": "Modal Dialog",
             "displayAnswer": "Modal Dialog",
             "example": "예: 삭제 확인은 modal dialog로 한 번 더 물어보자."
+          },
+          {
+            "id": "web-convention",
+            "title": "컨벤션",
+            "section": "네이밍 컨벤션",
+            "prompt": "코드·문서·스타일에서 팀이나 업계가 공통으로 쓰는 이름 규칙과 약속된 표현.",
+            "answer": "Convention",
+            "displayAnswer": "Convention",
+            "example": "예: 클래스 이름을 마음대로 짓지 말고 팀 convention을 따르자."
+          },
+          {
+            "id": "web-semantic-html",
+            "title": "시맨틱 HTML",
+            "section": "네이밍 컨벤션",
+            "prompt": "header, nav, main, section, article, footer처럼 의미에 맞는 HTML 태그로 구조를 표현하는 방식.",
+            "answer": "Semantic HTML",
+            "displayAnswer": "Semantic HTML",
+            "example": "예: div만 쓰지 말고 semantic HTML로 구역을 나눠 보자."
+          },
+          {
+            "id": "web-bem",
+            "title": "BEM",
+            "section": "네이밍 컨벤션",
+            "prompt": "Block__Element--Modifier 형태로 CSS 클래스 이름을 짓는 네이밍 패턴.",
+            "answer": "BEM",
+            "displayAnswer": "BEM",
+            "example": "예: card__title--large처럼 BEM으로 상태를 표현한다."
+          },
+          {
+            "id": "web-container",
+            "title": "컨테이너",
+            "section": "네이밍 컨벤션",
+            "prompt": "콘텐츠 폭을 가운데로 제한하는 레이아웃용 래퍼. CSS 클래스명으로도 자주 쓴다.",
+            "answer": "Container",
+            "displayAnswer": "Container",
+            "example": "예: 본문은 max-width가 있는 container 안에 넣자."
+          },
+          {
+            "id": "web-wrapper",
+            "title": "래퍼",
+            "section": "네이밍 컨벤션",
+            "prompt": "여러 요소를 묶어 배치·스타일을 주기 위한 바깥 감싸개. container와 비슷하게 쓰이지만 더 일반적이다.",
+            "answer": "Wrapper",
+            "displayAnswer": "Wrapper",
+            "example": "예: 카드들을 한 덩어리로 묶을 때 wrapper를 둔다."
+          },
+          {
+            "id": "web-layout-classes",
+            "title": "레이아웃 클래스",
+            "section": "네이밍 컨벤션",
+            "prompt": "row, col, grid, flex, gap처럼 배치·반응형을 나타내는 흔한 클래스·유틸 이름.",
+            "answer": "Layout Classes",
+            "displayAnswer": "Layout Classes",
+            "example": "예: flex와 gap으로 카드 간격을 맞추는 layout classes를 쓴다."
+          },
+          {
+            "id": "web-state-class",
+            "title": "상태 클래스",
+            "section": "네이밍 컨벤션",
+            "prompt": "is-active, is-hidden, disabled, error, success처럼 UI 상태를 나타내는 클래스·속성 이름.",
+            "answer": "State Class",
+            "displayAnswer": "State Class",
+            "example": "예: 열린 탭에 is-active state class를 붙인다."
+          },
+          {
+            "id": "web-boolean-naming",
+            "title": "불리언 네이밍",
+            "section": "네이밍 컨벤션",
+            "prompt": "isOpen, hasError, canSubmit처럼 true/false 변수에 is·has·can 접두를 쓰는 이름 규칙.",
+            "answer": "Boolean Naming",
+            "displayAnswer": "Boolean Naming",
+            "example": "예: open 대신 isOpen처럼 boolean naming을 쓴다."
+          },
+          {
+            "id": "web-handler-naming",
+            "title": "핸들러 네이밍",
+            "section": "네이밍 컨벤션",
+            "prompt": "handleClick, onSubmit, fetchData, renderItem처럼 이벤트·데이터·렌더 함수에 쓰는 관례적 이름.",
+            "answer": "Handler Naming",
+            "displayAnswer": "Handler Naming",
+            "example": "예: 클릭 처리는 handleClick으로 handler naming을 맞춘다."
+          },
+          {
+            "id": "web-react-file-convention",
+            "title": "React 파일 컨벤션",
+            "section": "네이밍 컨벤션",
+            "prompt": "components/Button.tsx, hooks/useFetch.ts처럼 폴더·파일·훅 이름(use*)을 역할에 맞게 나누는 규칙.",
+            "answer": "React File Convention",
+            "displayAnswer": "React File Convention",
+            "example": "예: 커스텀 훅은 hooks/에 use로 시작하는 React file convention을 따른다."
+          },
+          {
+            "id": "web-sidebar",
+            "title": "사이드바",
+            "section": "컴포넌트 / UI 명칭",
+            "prompt": "화면 옆쪽에 두는 보조 네비게이션이나 패널 영역.",
+            "answer": "Sidebar",
+            "displayAnswer": "Sidebar",
+            "example": "예: 설정 메뉴는 sidebar에 모아 두자."
+          },
+          {
+            "id": "web-dashboard",
+            "title": "대시보드",
+            "section": "컴포넌트 / UI 명칭",
+            "prompt": "지표·목록·요약 카드를 한눈에 보는 관리·현황 화면.",
+            "answer": "Dashboard",
+            "displayAnswer": "Dashboard",
+            "example": "예: 관리자용 dashboard에 오늘 주문 수를 올렸다."
+          },
+          {
+            "id": "web-breadcrumb",
+            "title": "브레드크럼",
+            "section": "컴포넌트 / UI 명칭",
+            "prompt": "현재 위치가 어디인지 경로로 보여주는 탐색 보조 UI. 홈 > 카테고리 > 상품처럼 쓴다.",
+            "answer": "Breadcrumb",
+            "displayAnswer": "Breadcrumb",
+            "example": "예: 깊은 카테고리에는 breadcrumb이 필요하다."
+          },
+          {
+            "id": "web-tabs",
+            "title": "탭",
+            "section": "컴포넌트 / UI 명칭",
+            "prompt": "같은 영역 안에서 여러 패널을 전환해 보여주는 네비게이션 UI.",
+            "answer": "Tabs",
+            "displayAnswer": "Tabs",
+            "example": "예: 상세/리뷰/문의는 tabs로 나누자."
+          },
+          {
+            "id": "web-accordion",
+            "title": "아코디언",
+            "section": "컴포넌트 / UI 명칭",
+            "prompt": "클릭하면 펼쳐지고 접히는 FAQ형 콘텐츠 UI.",
+            "answer": "Accordion",
+            "displayAnswer": "Accordion",
+            "example": "예: FAQ는 accordion으로 구현하는 경우가 많다."
+          },
+          {
+            "id": "web-carousel",
+            "title": "캐러셀",
+            "section": "컴포넌트 / UI 명칭",
+            "prompt": "이미지·카드를 좌우로 넘겨 보는 슬라이드 UI.",
+            "answer": "Carousel",
+            "displayAnswer": "Carousel",
+            "example": "예: 메인 배너는 carousel로 돌린다."
+          },
+          {
+            "id": "web-navigation",
+            "title": "네비게이션",
+            "section": "컴포넌트 / UI 명칭",
+            "prompt": "메뉴 링크 묶음. 헤더·사이드바·탭 등에서 화면 이동을 담당한다.",
+            "answer": "Navigation",
+            "displayAnswer": "Navigation",
+            "example": "예: 주요 페이지 링크는 header navigation에 둔다."
+          },
+          {
+            "id": "web-badge",
+            "title": "뱃지",
+            "section": "컴포넌트 / UI 명칭",
+            "prompt": "상태·개수·라벨을 작게 표시하는 UI. New, 3, Sale 같은 표시에 쓴다.",
+            "answer": "Badge",
+            "displayAnswer": "Badge",
+            "example": "예: 읽지 않은 알림 개수는 badge로 보여 주자."
+          },
+          {
+            "id": "web-card",
+            "title": "카드",
+            "section": "컴포넌트 / UI 명칭",
+            "prompt": "관련 정보를 하나의 블록으로 묶은 UI 단위. 기능·상품·후기 목록에 자주 쓴다.",
+            "answer": "Card",
+            "displayAnswer": "Card",
+            "example": "예: Feature 목록은 card 그리드로 배치한다."
+          },
+          {
+            "id": "web-button",
+            "title": "버튼",
+            "section": "컴포넌트 / UI 명칭",
+            "prompt": "클릭으로 행동을 실행하는 기본 UI. CTA, 제출, 취소에 쓴다.",
+            "answer": "Button",
+            "displayAnswer": "Button",
+            "example": "예: 가입 CTA는 큰 primary button으로 둔다."
+          },
+          {
+            "id": "web-design-system",
+            "title": "디자인 시스템",
+            "section": "화면 설계 / 프론트 아키텍처",
+            "prompt": "재사용 UI 컴포넌트·토큰·사용 규칙을 묶어 제품 전반의 일관성을 유지하는 체계.",
+            "answer": "Design System",
+            "displayAnswer": "디자인 시스템[Design System]",
+            "example": "예: 새 화면은 Design System 버튼부터 쓰고 예외만 커스텀한다."
+          },
+          {
+            "id": "web-design-token",
+            "title": "디자인 토큰",
+            "section": "화면 설계 / 프론트 아키텍처",
+            "prompt": "색·간격·타이포·그림자 같은 디자인 값을 이름 있는 변수로 관리하는 단위.",
+            "answer": "Design Token",
+            "displayAnswer": "디자인 토큰[Design Token]",
+            "example": "예: primary 색은 hex 대신 Design Token으로 참조한다."
+          },
+          {
+            "id": "web-server-state",
+            "title": "서버 상태",
+            "section": "화면 설계 / 프론트 아키텍처",
+            "prompt": "API에서 가져와 캐시·동기화하는 원격 데이터 상태. 목록·상세·권한 정보가 해당한다.",
+            "answer": "Server State",
+            "displayAnswer": "서버 상태[Server State]",
+            "example": "예: 주문 목록은 Server State라서 캐시 무효화로 갱신한다."
+          },
+          {
+            "id": "web-client-state",
+            "title": "클라이언트 상태",
+            "section": "화면 설계 / 프론트 아키텍처",
+            "prompt": "모달 열림·탭 선택·입력 초안처럼 브라우저 UI에만 존재하는 로컬 상태.",
+            "answer": "Client State",
+            "displayAnswer": "클라이언트 상태[Client State]",
+            "example": "예: isOpen 같은 모달 플래그는 Client State로 둔다."
+          },
+          {
+            "id": "web-container-presentational",
+            "title": "컨테이너 프레젠테이셔널 패턴",
+            "section": "화면 설계 / 프론트 아키텍처",
+            "prompt": "데이터·로직은 Container, 표시만 Presentational로 나누는 컴포넌트 분리 패턴.",
+            "answer": "Container Presentational",
+            "displayAnswer": "컨테이너/프레젠테이셔널[Container Presentational]",
+            "example": "예: fetch는 Container에, 카드 마크업은 Presentational에 둔다."
+          },
+          {
+            "id": "web-empty-state",
+            "title": "빈 상태",
+            "section": "화면 설계 / 프론트 아키텍처",
+            "prompt": "데이터가 없을 때 보여주는 안내 UI. 목록이 비었을 때 행동 유도 문구·버튼을 둔다.",
+            "answer": "Empty State",
+            "displayAnswer": "빈 상태[Empty State]",
+            "example": "예: 검색 결과가 없으면 Empty State에 다시 검색 CTA를 넣는다."
+          },
+          {
+            "id": "web-loading-state",
+            "title": "로딩 상태",
+            "section": "화면 설계 / 프론트 아키텍처",
+            "prompt": "데이터를 기다리는 동안의 UI 상태. 스피너·스켈레톤·비활성 버튼으로 표현한다.",
+            "answer": "Loading State",
+            "displayAnswer": "로딩 상태[Loading State]",
+            "example": "예: 첫 진입은 Loading State로 스켈레톤을 보여 준다."
+          },
+          {
+            "id": "web-code-splitting",
+            "title": "코드 분할",
+            "section": "화면 설계 / 프론트 아키텍처",
+            "prompt": "번들을 여러 조각으로 나눠 필요한 시점에만 내려받게 하는 최적화 기법.",
+            "answer": "Code Splitting",
+            "displayAnswer": "코드 분할[Code Splitting]",
+            "example": "예: 관리자 라우트는 Code Splitting으로 첫 로드에서 뺀다."
+          },
+          {
+            "id": "web-lazy-loading",
+            "title": "지연 로딩",
+            "section": "화면 설계 / 프론트 아키텍처",
+            "prompt": "컴포넌트·이미지·라우트를 당장 쓰지 않을 때 나중에 불러오는 기법.",
+            "answer": "Lazy Loading",
+            "displayAnswer": "지연 로딩[Lazy Loading]",
+            "example": "예: 아래쪽 차트는 Lazy Loading으로 뷰포트 진입 시 로드한다."
+          },
+          {
+            "id": "web-virtualization",
+            "title": "가상화",
+            "section": "화면 설계 / 프론트 아키텍처",
+            "prompt": "긴 목록에서 보이는 행만 DOM에 그려 스크롤 성능을 유지하는 기법.",
+            "answer": "Virtualization",
+            "displayAnswer": "가상화[Virtualization]",
+            "example": "예: 수천 행 테이블은 Virtualization으로 렌더 비용을 줄인다."
+          },
+          {
+            "id": "web-error-state",
+            "title": "에러 상태",
+            "section": "화면 설계 / 프론트 아키텍처",
+            "prompt": "요청 실패·권한 오류 등 실패를 사용자에게 알리고 재시도를 유도하는 UI 상태.",
+            "answer": "Error State",
+            "displayAnswer": "에러 상태[Error State]",
+            "example": "예: 500이면 Error State에 재시도 버튼을 둔다."
+          },
+          {
+            "id": "web-ui-autocomplete",
+            "title": "오토컴플리트",
+            "section": "입력",
+            "prompt": "입력하며 후보 목록을 좁혀 고르는 검색형 입력 UI.",
+            "answer": "Autocomplete",
+            "displayAnswer": "Autocomplete",
+            "example": "예: 도시 검색은 autocomplete로 후보를 띄운다."
+          },
+          {
+            "id": "web-ui-button-group",
+            "title": "버튼 그룹",
+            "section": "입력",
+            "prompt": "관련 버튼을 한 묶음으로 붙여 배치하는 UI.",
+            "answer": "Button Group",
+            "displayAnswer": "Button Group",
+            "example": "예: 정렬 옵션은 button group으로 묶는다."
+          },
+          {
+            "id": "web-ui-rating",
+            "title": "평점",
+            "section": "입력",
+            "prompt": "별점처럼 점수를 고르거나 표시하는 입력·표시 UI.",
+            "answer": "Rating",
+            "displayAnswer": "Rating",
+            "example": "예: 리뷰 작성 시 rating으로 점수를 받는다."
+          },
+          {
+            "id": "web-ui-switch",
+            "title": "스위치",
+            "section": "입력",
+            "prompt": "켜짐/꺼짐 두 상태를 토글하는 스위치형 입력.",
+            "answer": "Switch",
+            "displayAnswer": "Switch",
+            "example": "예: 알림 수신 여부는 switch로 바꾼다."
+          },
+          {
+            "id": "web-ui-toggle-button",
+            "title": "토글 버튼",
+            "section": "입력",
+            "prompt": "눌린/안 눌린 상태를 유지하는 버튼. 정렬·필터처럼 선택 상태를 보여 줄 때 쓴다.",
+            "answer": "Toggle Button",
+            "displayAnswer": "Toggle Button",
+            "example": "예: 그리드/리스트 전환은 toggle button으로 둔다."
+          },
+          {
+            "id": "web-ui-avatar",
+            "title": "아바타",
+            "section": "데이터 표시",
+            "prompt": "사용자나 엔티티를 나타내는 원형·사각 프로필 이미지 UI.",
+            "answer": "Avatar",
+            "displayAnswer": "Avatar",
+            "example": "예: 댓글 작성자는 avatar와 닉네임을 함께 보여 준다."
+          },
+          {
+            "id": "web-ui-chip",
+            "title": "칩",
+            "section": "데이터 표시",
+            "prompt": "태그·필터·선택을 작은 알약 형태로 보여 주는 UI.",
+            "answer": "Chip",
+            "displayAnswer": "Chip",
+            "example": "예: 선택된 필터는 chip으로 표시하고 개별 삭제한다."
+          },
+          {
+            "id": "web-ui-divider",
+            "title": "디바이더",
+            "section": "데이터 표시",
+            "prompt": "구역을 가로·세로 선으로 나누는 구분선 UI.",
+            "answer": "Divider",
+            "displayAnswer": "Divider",
+            "example": "예: 메뉴 항목 그룹 사이에 divider를 넣는다."
+          },
+          {
+            "id": "web-ui-tooltip",
+            "title": "툴팁",
+            "section": "데이터 표시",
+            "prompt": "호버·포커스 시 짧게 떠서 부가 설명을 보여 주는 UI.",
+            "answer": "Tooltip",
+            "displayAnswer": "Tooltip",
+            "example": "예: 아이콘 버튼에는 tooltip으로 이름을 붙인다."
+          },
+          {
+            "id": "web-ui-typography",
+            "title": "타이포그래피",
+            "section": "데이터 표시",
+            "prompt": "제목·본문·캡션 등 텍스트 위계를 맞추는 타이포 컴포넌트·체계.",
+            "answer": "Typography",
+            "displayAnswer": "Typography",
+            "example": "예: 페이지 제목은 Typography의 h1 스타일로 통일한다."
+          },
+          {
+            "id": "web-ui-alert",
+            "title": "알림 배너",
+            "section": "피드백",
+            "prompt": "성공·경고·오류 메시지를 페이지 안에 고정해 보여 주는 피드백 UI.",
+            "answer": "Alert",
+            "displayAnswer": "Alert",
+            "example": "예: 저장 실패는 alert로 원인을 보여 준다."
+          },
+          {
+            "id": "web-ui-progress",
+            "title": "진행 표시",
+            "section": "피드백",
+            "prompt": "작업·로딩 진행률을 막대나 원형으로 보여 주는 UI.",
+            "answer": "Progress Bar",
+            "displayAnswer": "Progress Bar",
+            "example": "예: 파일 업로드는 progress bar로 진행률을 표시한다."
+          },
+          {
+            "id": "web-ui-app-bar",
+            "title": "앱 바",
+            "section": "서피스",
+            "prompt": "화면 상단에 고정되는 앱용 헤더 바. 로고·메뉴·액션을 담는다.",
+            "answer": "App Bar",
+            "displayAnswer": "App Bar",
+            "example": "예: 대시보드 상단은 app bar에 검색과 프로필을 둔다."
+          },
+          {
+            "id": "web-ui-paper",
+            "title": "페이퍼",
+            "section": "서피스",
+            "prompt": "배경 위에 살짝 떠 보이는 면 컨테이너. 카드·패널의 기본 표면으로 쓴다.",
+            "answer": "Paper",
+            "displayAnswer": "Paper",
+            "example": "예: 설정 패널은 paper 위에 폼을 올린다."
+          },
+          {
+            "id": "web-ui-bottom-nav",
+            "title": "하단 네비게이션",
+            "section": "네비게이션",
+            "prompt": "모바일 화면 하단에 주요 탭을 고정하는 네비게이션.",
+            "answer": "Bottom Navigation",
+            "displayAnswer": "Bottom Navigation",
+            "example": "예: 홈·검색·마이페이지는 bottom navigation으로 전환한다."
+          },
+          {
+            "id": "web-ui-link",
+            "title": "링크",
+            "section": "네비게이션",
+            "prompt": "다른 페이지·앵커로 이동하는 텍스트·인라인 내비게이션 요소.",
+            "answer": "Link",
+            "displayAnswer": "Link",
+            "example": "예: 약관 문구 안의 link로 상세 페이지를 연다."
+          },
+          {
+            "id": "web-ui-menu",
+            "title": "메뉴",
+            "section": "네비게이션",
+            "prompt": "클릭 시 항목 목록이 펼쳐지는 드롭다운형 선택 UI.",
+            "answer": "Menu",
+            "displayAnswer": "Menu",
+            "example": "예: 계정 설정은 아바타 옆 menu로 연다."
+          },
+          {
+            "id": "web-ui-stepper",
+            "title": "스테퍼",
+            "section": "네비게이션",
+            "prompt": "다단계 절차의 현재 단계를 순서대로 보여 주는 네비게이션.",
+            "answer": "Stepper",
+            "displayAnswer": "Stepper",
+            "example": "예: 가입 흐름은 stepper로 1·2·3단계를 표시한다."
+          },
+          {
+            "id": "web-ui-stack",
+            "title": "스택",
+            "section": "레이아웃",
+            "prompt": "자식 요소를 세로·가로로 일정한 간격 두고 쌓는 레이아웃 헬퍼.",
+            "answer": "Stack",
+            "displayAnswer": "Stack",
+            "example": "예: 폼 필드는 stack으로 세로 간격을 맞춘다."
+          },
+          {
+            "id": "web-ui-popover",
+            "title": "팝오버",
+            "section": "오버레이 / 알림",
+            "prompt": "앵커 요소 옆에 떠서 추가 내용·액션을 보여 주는 오버레이.",
+            "answer": "Popover",
+            "displayAnswer": "Popover",
+            "example": "예: 필터 상세는 버튼 옆 popover로 연다."
+          },
+          {
+            "id": "web-ui-data-grid",
+            "title": "데이터 그리드",
+            "section": "데이터 표시",
+            "prompt": "정렬·필터·페이징이 있는 표 형태의 대용량 데이터 UI.",
+            "answer": "Data Grid",
+            "displayAnswer": "Data Grid",
+            "example": "예: 주문 목록 관리는 data grid로 구현한다."
+          },
+          {
+            "id": "web-ui-date-picker",
+            "title": "날짜 선택",
+            "section": "입력",
+            "prompt": "달력 UI로 날짜·기간을 고르는 입력 컴포넌트.",
+            "answer": "Date Picker",
+            "displayAnswer": "Date Picker",
+            "example": "예: 예약일은 date picker로 고르게 한다."
+          },
+          {
+            "id": "web-ui-combobox",
+            "title": "콤보박스",
+            "section": "입력",
+            "prompt": "입력과 목록 선택을 합친 검색 가능 선택 UI. 헤드리스 UI에서 자주 쓴다.",
+            "answer": "Combobox",
+            "displayAnswer": "Combobox",
+            "example": "예: 담당자 지정은 combobox로 검색해 고른다."
+          },
+          {
+            "id": "web-ui-listbox",
+            "title": "리스트박스",
+            "section": "입력",
+            "prompt": "목록에서 하나 또는 여러 항목을 고르는 선택 UI.",
+            "answer": "Listbox",
+            "displayAnswer": "Listbox",
+            "example": "예: 권한 목록은 listbox로 다중 선택한다."
+          },
+          {
+            "id": "web-ui-fieldset",
+            "title": "필드셋",
+            "section": "입력",
+            "prompt": "관련 폼 컨트롤을 하나의 그룹으로 묶는 HTML·UI 단위.",
+            "answer": "Fieldset",
+            "displayAnswer": "Fieldset",
+            "example": "예: 배송 주소 입력은 fieldset으로 묶는다."
+          },
+          {
+            "id": "web-ui-primary-button",
+            "title": "프라이머리 버튼",
+            "section": "실무 패턴",
+            "prompt": "화면에서 가장 중요한 행동을 강조하는 기본(강조) 버튼.",
+            "answer": "Primary Button",
+            "displayAnswer": "Primary Button",
+            "example": "예: 저장은 primary button, 취소는 텍스트 버튼으로 둔다."
+          },
+          {
+            "id": "web-ui-signup-form",
+            "title": "회원가입 폼",
+            "section": "실무 패턴",
+            "prompt": "계정 생성을 위한 가입 입력 폼. 이메일·비밀번호·약관 동의가 흔하다.",
+            "answer": "Sign-up Form",
+            "displayAnswer": "Sign-up Form",
+            "example": "예: 랜딩 CTA는 sign-up form으로 연결한다."
+          },
+          {
+            "id": "web-ui-cta-button",
+            "title": "행동 유도 버튼",
+            "section": "실무 패턴",
+            "prompt": "가입·구매·문의처럼 전환을 유도하는 핵심 클릭 버튼.",
+            "answer": "Call-to-action Button",
+            "displayAnswer": "Call-to-action Button",
+            "example": "예: 히어로에는 call-to-action button을 하나만 둔다."
+          },
+          {
+            "id": "web-ui-card-layout",
+            "title": "카드 레이아웃",
+            "section": "실무 패턴",
+            "prompt": "카드 단위로 콘텐츠를 격자·목록 배치하는 화면 구성 방식.",
+            "answer": "Card Layout",
+            "displayAnswer": "Card Layout",
+            "example": "예: 기능 소개는 card layout으로 3열 배치한다."
           }
         ]
       }
@@ -1139,6 +1679,141 @@ export const lexiconTracks: LexiconTrack[] = [
             "answer": "Idempotency",
             "displayAnswer": "멱등성[Idempotency]",
             "example": "예: 같은 삭제 요청을 두 번 보내도 최종 상태는 같아야 한다."
+          },
+          {
+            "id": "rest-content-type",
+            "title": "Content-Type",
+            "section": "주요 헤더",
+            "prompt": "요청·응답 바디의 데이터 형식을 알려 주는 헤더. JSON이면 application/json을 쓴다.",
+            "answer": "Content-Type",
+            "displayAnswer": "Content-Type",
+            "example": "예: POST JSON을 보낼 때 Content-Type을 application/json으로 둔다."
+          },
+          {
+            "id": "rest-authorization",
+            "title": "Authorization",
+            "section": "주요 헤더",
+            "prompt": "로그인 토큰 등 인증 정보를 담는 요청 헤더. Bearer 토큰과 함께 자주 쓴다.",
+            "answer": "Authorization",
+            "displayAnswer": "Authorization",
+            "example": "예: Authorization 헤더에 Bearer 토큰을 넣어 API를 호출한다."
+          },
+          {
+            "id": "rest-accept",
+            "title": "Accept",
+            "section": "주요 헤더",
+            "prompt": "클라이언트가 받고 싶은 응답 형식을 서버에 알리는 헤더.",
+            "answer": "Accept",
+            "displayAnswer": "Accept",
+            "example": "예: Accept에 application/json을 넣으면 JSON 응답을 기대한다는 뜻이다."
+          },
+          {
+            "id": "rest-application-json",
+            "title": "JSON 바디",
+            "section": "바디 전송 방식",
+            "prompt": "본문을 JSON으로 보내는 가장 흔한 REST 방식. Content-Type은 application/json.",
+            "answer": "application/json",
+            "displayAnswer": "application/json",
+            "example": "예: 로그인 API는 보통 application/json으로 id와 pw를 보낸다."
+          },
+          {
+            "id": "rest-form-urlencoded",
+            "title": "폼 URL 인코딩",
+            "section": "바디 전송 방식",
+            "prompt": "HTML form처럼 key=value&... 형태로 바디를 보내는 방식.",
+            "answer": "application/x-www-form-urlencoded",
+            "displayAnswer": "application/x-www-form-urlencoded",
+            "example": "예: 전통적인 로그인 form은 application/x-www-form-urlencoded를 쓴다."
+          },
+          {
+            "id": "rest-multipart",
+            "title": "멀티파트",
+            "section": "바디 전송 방식",
+            "prompt": "파일 업로드처럼 텍스트와 바이너리를 한 요청에 섞어 보낼 때 쓰는 바디 형식.",
+            "answer": "multipart/form-data",
+            "displayAnswer": "multipart/form-data",
+            "example": "예: 프로필 이미지 업로드는 multipart/form-data로 보낸다."
+          },
+          {
+            "id": "rest-local-storage",
+            "title": "로컬 스토리지",
+            "section": "브라우저 저장소",
+            "prompt": "브라우저에 장기 저장하는 키-값 저장소. 탭을 닫아도 남고, 요청에 자동으로 안 붙는다.",
+            "answer": "localStorage",
+            "displayAnswer": "localStorage",
+            "example": "예: JWT를 localStorage에 두고 Authorization 헤더에 직접 넣는다."
+          },
+          {
+            "id": "rest-session-storage",
+            "title": "세션 스토리지",
+            "section": "브라우저 저장소",
+            "prompt": "탭(세션)이 열려 있는 동안만 유지되는 브라우저 키-값 저장소.",
+            "answer": "sessionStorage",
+            "displayAnswer": "sessionStorage",
+            "example": "예: 임시 입력값은 sessionStorage에 두면 탭을 닫을 때 사라진다."
+          },
+          {
+            "id": "rest-httponly",
+            "title": "HttpOnly 쿠키",
+            "section": "브라우저 저장소",
+            "prompt": "JavaScript에서 읽지 못하게 막아 XSS로 토큰이 훔쳐지기 어렵게 하는 쿠키 옵션.",
+            "answer": "HttpOnly",
+            "displayAnswer": "HttpOnly",
+            "example": "예: 세션 쿠키는 httpOnly로 심어 document.cookie로 못 읽게 한다."
+          },
+          {
+            "id": "rest-options",
+            "title": "OPTIONS",
+            "section": "HTTP 메서드",
+            "prompt": "CORS 프리플라이트처럼 본 요청 전에 허용 여부를 묻는 데 쓰는 메서드.",
+            "answer": "OPTIONS",
+            "displayAnswer": "OPTIONS",
+            "example": "예: 브라우저가 먼저 OPTIONS로 서버 CORS 허용을 확인한다."
+          },
+          {
+            "id": "rest-credentials",
+            "title": "credentials",
+            "section": "CORS / 브라우저 보안",
+            "prompt": "교차 출처 요청에 쿠키를 포함할지 정하는 옵션. 서버도 Allow-Credentials를 허용해야 한다.",
+            "answer": "credentials",
+            "displayAnswer": "credentials",
+            "example": "예: fetch에 credentials include와 서버 CORS credentials true를 맞춘다."
+          },
+          {
+            "id": "rest-req-body",
+            "title": "요청 바디 읽기",
+            "section": "실무 패턴",
+            "prompt": "Express 등에서 클라이언트가 보낸 JSON 본문을 읽는 객체. req.body.",
+            "answer": "req.body",
+            "displayAnswer": "req.body",
+            "example": "예: 로그인 핸들러에서 const { id, pw } = req.body로 꺼낸다."
+          },
+          {
+            "id": "rest-req-headers",
+            "title": "요청 헤더 읽기",
+            "section": "실무 패턴",
+            "prompt": "Express 등에서 클라이언트가 보낸 헤더를 읽는 객체. req.headers.",
+            "answer": "req.headers",
+            "displayAnswer": "req.headers",
+            "example": "예: Authorization은 req.headers.authorization으로 확인한다."
+          },
+          {
+            "id": "rest-openapi",
+            "title": "OpenAPI",
+            "section": "API 계약",
+            "prompt": "REST API의 경로·메서드·스키마·응답을 기계가 읽을 수 있게 기술하는 명세 표준. Swagger UI와 함께 쓴다.",
+            "answer": "OpenAPI",
+            "displayAnswer": "OpenAPI[OpenAPI / Swagger]",
+            "example": "예: 프론트는 OpenAPI 스키마로 타입과 목을 맞춘다."
+          },
+          {
+            "id": "rest-api-contract",
+            "title": "API 계약",
+            "section": "API 계약",
+            "prompt": "프론트와 백엔드가 합의한 요청·응답·에러 규칙. 명세가 바뀌면 양쪽이 같이 맞춘다.",
+            "answer": "API Contract",
+            "displayAnswer": "API 계약[API Contract]",
+            "example": "예: 필드명을 바꾸기 전에 API Contract를 먼저 갱신한다."
           }
         ]
       }
@@ -1156,13 +1831,94 @@ export const lexiconTracks: LexiconTrack[] = [
         "sourcePath": "assets/raw/knowledge/terms/sql-terms.yaml",
         "parts": [
           {
-            "id": "sql-inner-join",
-            "title": "내부 조인",
-            "section": "조회",
-            "prompt": "두 테이블에서 조인 조건이 일치하는 행만 골라 합치는 조인.",
-            "answer": "INNER JOIN",
-            "displayAnswer": "INNER JOIN",
-            "example": "예: 주문과 사용자를 INNER JOIN으로 붙여 구매자만 조회했다."
+            "id": "sql-rdb",
+            "title": "관계형 데이터베이스",
+            "section": "데이터 모델",
+            "prompt": "데이터를 표(테이블)로 나누고, 키로 관계를 맺어 저장·조회하는 데이터베이스. MySQL, PostgreSQL, Oracle이 대표적이다.",
+            "answer": "RDB",
+            "displayAnswer": "RDB",
+            "example": "예: 주문·회원처럼 관계가 분명한 도메인은 RDB가 잘 맞는다."
+          },
+          {
+            "id": "sql-pk",
+            "title": "기본 키",
+            "section": "키 / 제약",
+            "prompt": "테이블에서 각 행을 유일하게 식별하는 컬럼(또는 컬럼 조합). null을 허용하지 않는다.",
+            "answer": "PK",
+            "displayAnswer": "PK",
+            "example": "예: users 테이블의 user_id를 PK로 잡았다."
+          },
+          {
+            "id": "sql-fk",
+            "title": "외래 키",
+            "section": "키 / 제약",
+            "prompt": "다른 테이블의 기본 키를 참조해 두 테이블의 관계를 강제하는 키.",
+            "answer": "FK",
+            "displayAnswer": "FK",
+            "example": "예: orders.user_id는 users.user_id를 가리키는 FK다."
+          },
+          {
+            "id": "sql-uk",
+            "title": "유니크 키",
+            "section": "키 / 제약",
+            "prompt": "테이블 안에서 값이 중복되지 않도록 막는 제약. 기본 키가 아니어도 쓸 수 있다.",
+            "answer": "UK",
+            "displayAnswer": "UK",
+            "example": "예: 이메일은 로그인 식별자라서 UK로 걸었다."
+          },
+          {
+            "id": "sql-ddl",
+            "title": "데이터 정의 언어",
+            "section": "SQL 분류",
+            "prompt": "테이블·인덱스·제약 같은 구조(스키마)를 정의하거나 변경하는 SQL 분류. CREATE, ALTER, DROP이 여기에 속한다.",
+            "answer": "DDL",
+            "displayAnswer": "DDL",
+            "example": "예: 컬럼 추가는 DDL이라 배포 전에 마이그레이션으로 돌린다."
+          },
+          {
+            "id": "sql-dml",
+            "title": "데이터 조작 언어",
+            "section": "SQL 분류",
+            "prompt": "테이블의 실제 데이터를 조회·추가·수정·삭제하는 SQL 분류. SELECT, INSERT, UPDATE, DELETE가 여기에 속한다.",
+            "answer": "DML",
+            "displayAnswer": "DML",
+            "example": "예: 주문 상태 변경은 DML이라 트랜잭션으로 묶는 편이 안전하다."
+          },
+          {
+            "id": "sql-schema",
+            "title": "스키마",
+            "section": "데이터 모델",
+            "prompt": "테이블, 컬럼, 타입, 제약 등 데이터베이스 구조의 설계·정의.",
+            "answer": "Schema",
+            "displayAnswer": "Schema",
+            "example": "예: 스키마를 먼저 잡고 나서 애플리케이션 코드를 맞췄다."
+          },
+          {
+            "id": "sql-index",
+            "title": "인덱스",
+            "section": "성능 / 구조",
+            "prompt": "특정 컬럼 조회를 빠르게 하기 위해 미리 만들어 두는 검색용 자료구조. 쓰기가 조금 느려질 수 있다.",
+            "answer": "Index",
+            "displayAnswer": "Index",
+            "example": "예: WHERE email = ?가 잦아서 email에 index를 걸었다."
+          },
+          {
+            "id": "sql-constraint",
+            "title": "제약 조건",
+            "section": "키 / 제약",
+            "prompt": "PK, FK, UK, NOT NULL처럼 데이터가 지켜야 할 규칙을 데이터베이스가 강제하는 장치.",
+            "answer": "Constraint",
+            "displayAnswer": "Constraint",
+            "example": "예: 음수 재고를 막으려면 check constraint를 검토한다."
+          },
+          {
+            "id": "sql-normalization",
+            "title": "정규화",
+            "section": "데이터 모델",
+            "prompt": "중복을 줄이고 이상(anomaly)을 막기 위해 테이블을 논리적으로 나누는 설계 과정.",
+            "answer": "Normalization",
+            "displayAnswer": "Normalization",
+            "example": "예: 주소가 여러 곳에 중복되어 정규화로 분리했다."
           },
           {
             "id": "sql-transaction",
@@ -1174,22 +1930,13 @@ export const lexiconTracks: LexiconTrack[] = [
             "example": "예: 이체 로직은 transaction으로 묶어야 중간 실패를 막는다."
           },
           {
-            "id": "sql-commit",
-            "title": "커밋",
+            "id": "sql-acid",
+            "title": "ACID",
             "section": "트랜잭션",
-            "prompt": "트랜잭션의 변경 내용을 데이터베이스에 확정하는 명령.",
-            "answer": "COMMIT",
-            "displayAnswer": "COMMIT",
-            "example": "예: 모든 쿼리가 성공하면 마지막에 COMMIT을 실행한다."
-          },
-          {
-            "id": "sql-rollback",
-            "title": "롤백",
-            "section": "트랜잭션",
-            "prompt": "트랜잭션 중 문제가 생겼을 때 변경 내용을 전부 취소하고 이전 상태로 되돌리는 명령.",
-            "answer": "ROLLBACK",
-            "displayAnswer": "ROLLBACK",
-            "example": "예: 예외가 발생하면 ROLLBACK으로 되돌린다."
+            "prompt": "트랜잭션이 보장해야 할 네 성질. 원자성[Atomicity], 일관성[Consistency], 격리[Isolation], 지속성[Durability].",
+            "answer": "ACID",
+            "displayAnswer": "ACID",
+            "example": "예: 결제 DB는 ACID를 강하게 보장하는 쪽을 고른다."
           },
           {
             "id": "sql-orm",
@@ -1484,6 +2231,450 @@ export const lexiconTracks: LexiconTrack[] = [
             "answer": "parameter / argument",
             "displayAnswer": "parameter / argument",
             "example": "예: 정의에 있는 것은 parameter, 호출할 때 넘기는 것은 argument다."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "terms-architecture",
+    "label": "architecture",
+    "folderName": "architecture",
+    "lessons": [
+      {
+        "id": "knowledge-terms-architecture",
+        "title": "프로젝트 구조·계층 용어",
+        "fileName": "architecture-terms.yaml",
+        "sourcePath": "assets/raw/knowledge/terms/architecture-terms.yaml",
+        "parts": [
+          {
+            "id": "arch-layered",
+            "title": "계층형 아키텍처",
+            "section": "구조",
+            "prompt": "요청 처리·비즈니스·데이터 접근처럼 역할을 층으로 나누는 구조.",
+            "answer": "Layered architecture",
+            "displayAnswer": "Layered architecture",
+            "example": "예: 계층형 아키텍처[Layered architecture]에서 Controller는 Service만 호출한다."
+          },
+          {
+            "id": "arch-feature-based",
+            "title": "기능 단위 구조",
+            "section": "구조",
+            "prompt": "user·order처럼 도메인(기능)별로 폴더를 묶어 관련 코드를 한곳에 두는 방식.",
+            "answer": "Feature-based structure",
+            "displayAnswer": "Feature-based structure",
+            "example": "예: 기능 단위 구조[Feature-based structure]면 payment 관련 파일이 한 폴더에 모인다."
+          },
+          {
+            "id": "arch-controller",
+            "title": "컨트롤러",
+            "section": "백엔드 계층",
+            "prompt": "HTTP 요청을 받아 응답하는 진입점. 비즈니스 로직은 두지 않는다.",
+            "answer": "Controller",
+            "displayAnswer": "Controller",
+            "example": "예: 컨트롤러[Controller]는 입력 검증 후 Service를 호출한다."
+          },
+          {
+            "id": "arch-service",
+            "title": "서비스",
+            "section": "백엔드 계층",
+            "prompt": "비즈니스 규칙과 흐름을 담당하는 계층.",
+            "answer": "Service",
+            "displayAnswer": "Service",
+            "example": "예: 주문 취소 규칙은 서비스[Service]에 둔다."
+          },
+          {
+            "id": "arch-repository",
+            "title": "리포지토리",
+            "section": "백엔드 계층",
+            "prompt": "DB 조회·저장을 추상화하는 데이터 접근 계층.",
+            "answer": "Repository",
+            "displayAnswer": "Repository",
+            "example": "예: 리포지토리[Repository]에서만 SQL·ORM 호출을 한다."
+          },
+          {
+            "id": "arch-dto",
+            "title": "전송 객체",
+            "section": "백엔드 계층",
+            "prompt": "API·계층 간에 데이터를 전달하기 위한 전송용 객체. Entity와 분리한다.",
+            "answer": "DTO",
+            "displayAnswer": "DTO",
+            "example": "예: 로그인 요청 바디는 전송 객체[DTO]로 받고 Entity를 그대로 노출하지 않는다."
+          },
+          {
+            "id": "arch-entity",
+            "title": "엔티티",
+            "section": "백엔드 계층",
+            "prompt": "DB 테이블에 대응하는 영속·도메인 모델.",
+            "answer": "Entity",
+            "displayAnswer": "Entity",
+            "example": "예: User 엔티티[Entity]는 users 테이블과 매핑된다."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "terms-camera",
+    "label": "camera",
+    "folderName": "camera",
+    "lessons": [
+      {
+        "id": "knowledge-terms-camera",
+        "title": "촬영 실무 어휘",
+        "fileName": "camera-terms.yaml",
+        "sourcePath": "assets/raw/knowledge/terms/camera-terms.yaml",
+        "parts": [
+          {
+            "id": "camera-headspace",
+            "title": "헤드스페이스",
+            "section": "사진",
+            "prompt": "피사체가 바라보는 방향에 여백을 두어 시선의 흐름과 여유를 연출하는 구도.",
+            "answer": "Headspace",
+            "displayAnswer": "Headspace",
+            "example": "예: 인물이 오른쪽을 보면 오른쪽에 헤드스페이스[Headspace]를 남긴다."
+          },
+          {
+            "id": "camera-rule-of-thirds",
+            "title": "룰 오브 써드",
+            "section": "사진",
+            "prompt": "화면을 3×3으로 나누어 주요 피사체나 수평선을 교차점·선 위에 배치하는 구도.",
+            "answer": "Rule of Thirds",
+            "displayAnswer": "Rule of Thirds",
+            "example": "예: 수평선은 룰 오브 써드[Rule of Thirds] 위쪽 선에 맞춘다."
+          },
+          {
+            "id": "camera-leading-lines",
+            "title": "리딩 라인",
+            "section": "사진",
+            "prompt": "선이나 형태를 이용해 시선을 자연스럽게 피사체로 유도하는 기법.",
+            "answer": "Leading Lines",
+            "displayAnswer": "Leading Lines",
+            "example": "예: 도로의 리딩 라인[Leading Lines]으로 시선을 건물로 이끈다."
+          },
+          {
+            "id": "camera-symmetry",
+            "title": "대칭 구도",
+            "section": "사진",
+            "prompt": "좌우 대칭을 활용해 안정감·질서·강한 인상을 연출하는 구도.",
+            "answer": "Symmetry",
+            "displayAnswer": "Symmetry",
+            "example": "예: 반사된 호수로 대칭 구도[Symmetry]를 잡았다."
+          },
+          {
+            "id": "camera-framing",
+            "title": "프레이밍",
+            "section": "사진",
+            "prompt": "주변 요소를 액자처럼 활용해 피사체를 강조하고 집중도를 높이는 기법.",
+            "answer": "Framing",
+            "displayAnswer": "Framing",
+            "example": "예: 아치로 피사체를 프레이밍[Framing]했다."
+          },
+          {
+            "id": "camera-foreground",
+            "title": "전경 활용",
+            "section": "사진",
+            "prompt": "전경을 포함해 깊이감과 공간감을 표현하는 기법.",
+            "answer": "Foreground",
+            "displayAnswer": "Foreground",
+            "example": "예: 나뭇가지를 전경[Foreground]에 넣어 깊이감을 살렸다."
+          },
+          {
+            "id": "camera-shallow-dof",
+            "title": "얕은 심도",
+            "section": "사진",
+            "prompt": "조리개를 열어 배경을 흐리게 하여 피사체를 돋보이게 하는 심도 표현.",
+            "answer": "Shallow DOF",
+            "displayAnswer": "Shallow DOF",
+            "example": "예: 인물 촬영은 얕은 심도[Shallow DOF]로 배경을 날린다."
+          },
+          {
+            "id": "camera-deep-dof",
+            "title": "깊은 심도",
+            "section": "사진",
+            "prompt": "조리개를 조여 전경부터 배경까지 모두 선명하게 표현하는 심도.",
+            "answer": "Deep DOF",
+            "displayAnswer": "Deep DOF",
+            "example": "예: 풍경은 깊은 심도[Deep DOF]로 전경·배경을 함께 살린다."
+          },
+          {
+            "id": "camera-negative-space",
+            "title": "네거티브 스페이스",
+            "section": "사진",
+            "prompt": "여백을 적극 활용해 단순함과 메시지의 여운을 강조하는 구도.",
+            "answer": "Negative Space",
+            "displayAnswer": "Negative Space",
+            "example": "예: 하늘 여백으로 네거티브 스페이스[Negative Space]를 크게 잡았다."
+          },
+          {
+            "id": "camera-close-up",
+            "title": "클로즈업",
+            "section": "사진",
+            "prompt": "피사체를 가까이 촬영해 디테일·질감·감정을 강조하는 샷.",
+            "answer": "Close-up",
+            "displayAnswer": "Close-up",
+            "example": "예: 손의 질감은 클로즈업[Close-up]으로 보여 준다."
+          },
+          {
+            "id": "camera-long-shot",
+            "title": "롱 샷",
+            "section": "사진",
+            "prompt": "넓은 배경을 포함해 피사체와 환경의 관계를 강조하는 샷.",
+            "answer": "Long Shot",
+            "displayAnswer": "Long Shot",
+            "example": "예: 도시와 인물의 관계는 롱 샷[Long Shot]으로 잡는다."
+          },
+          {
+            "id": "camera-high-angle",
+            "title": "하이 앵글",
+            "section": "사진",
+            "prompt": "피사체를 위에서 내려다보는 구도. 작고 약한 느낌이나 전개를 표현한다.",
+            "answer": "High Angle",
+            "displayAnswer": "High Angle",
+            "example": "예: 하이 앵글[High Angle]로 피사체를 작게 보이게 했다."
+          },
+          {
+            "id": "camera-low-angle",
+            "title": "로우 앵글",
+            "section": "사진",
+            "prompt": "피사체를 아래에서 올려다보는 구도. 크고 강한 느낌·위엄을 표현한다.",
+            "answer": "Low Angle",
+            "displayAnswer": "Low Angle",
+            "example": "예: 로우 앵글[Low Angle]로 건물의 위엄을 살렸다."
+          },
+          {
+            "id": "camera-golden-ratio",
+            "title": "골든 비율",
+            "section": "사진",
+            "prompt": "황금비율(1:1.618)을 활용해 조화롭고 자연스러운 구도를 연출하는 기법.",
+            "answer": "Golden Ratio",
+            "displayAnswer": "Golden Ratio",
+            "example": "예: 주 피사체를 골든 비율[Golden Ratio] 곡선 위에 놓았다."
+          },
+          {
+            "id": "camera-pattern",
+            "title": "패턴",
+            "section": "사진",
+            "prompt": "반복되는 형태나 패턴을 활용해 리듬감과 통일감을 강조하는 구도.",
+            "answer": "Pattern",
+            "displayAnswer": "Pattern",
+            "example": "예: 창문의 반복 패턴[Pattern]으로 리듬을 만들었다."
+          },
+          {
+            "id": "camera-contrast",
+            "title": "대비",
+            "section": "사진",
+            "prompt": "명암·색상·크기 등의 대비로 강렬한 인상과 주목도를 높이는 기법.",
+            "answer": "Contrast",
+            "displayAnswer": "Contrast",
+            "example": "예: 밝은 피사체와 어두운 배경의 대비[Contrast]를 살렸다."
+          },
+          {
+            "id": "camera-silhouette",
+            "title": "실루엣",
+            "section": "사진",
+            "prompt": "역광을 활용해 실루엣으로 촬영해 형태와 분위기를 강조하는 기법.",
+            "answer": "Silhouette",
+            "displayAnswer": "Silhouette",
+            "example": "예: 석양 앞 인물을 실루엣[Silhouette]으로 담았다."
+          },
+          {
+            "id": "camera-backlight",
+            "title": "역광",
+            "section": "사진",
+            "prompt": "빛을 뒤에서 비춰 피사체에 빛의 윤곽과 분위기를 더하는 조명.",
+            "answer": "Backlight",
+            "displayAnswer": "Backlight",
+            "example": "예: 역광[Backlight]으로 머리카락에 윤곽광을 만들었다."
+          },
+          {
+            "id": "camera-motion-blur",
+            "title": "모션 블러",
+            "section": "사진",
+            "prompt": "느린 셔터속도로 움직임을 흐리게 표현해 속도감과 역동성을 연출하는 기법.",
+            "answer": "Motion Blur",
+            "displayAnswer": "Motion Blur",
+            "example": "예: 달리는 차를 모션 블러[Motion Blur]로 표현했다."
+          },
+          {
+            "id": "camera-panorama",
+            "title": "파노라마",
+            "section": "사진",
+            "prompt": "가로로 넓게 촬영해 광활한 풍경과 스케일을 표현하는 기법.",
+            "answer": "Panorama",
+            "displayAnswer": "Panorama",
+            "example": "예: 능선 전체를 파노라마[Panorama]로 이어 찍었다."
+          },
+          {
+            "id": "camera-crane-up",
+            "title": "크레인 업",
+            "section": "영상",
+            "prompt": "카메라가 위로 올라가며 넓은 시야를 보여주는 무브. 공간의 확장·웅장함을 준다.",
+            "answer": "Crane Up",
+            "displayAnswer": "Crane Up",
+            "example": "예: 엔딩은 크레인 업[Crane Up]으로 공간을 넓힌다."
+          },
+          {
+            "id": "camera-crane-down",
+            "title": "크레인 다운",
+            "section": "영상",
+            "prompt": "카메라가 아래로 내려오며 피사체를 점차 부각하는 무브. 긴장·집중을 만든다.",
+            "answer": "Crane Down",
+            "displayAnswer": "Crane Down",
+            "example": "예: 크레인 다운[Crane Down]으로 주인공에게 시선을 모은다."
+          },
+          {
+            "id": "camera-jib-up",
+            "title": "지브 업",
+            "section": "영상",
+            "prompt": "지브(긴 암)로 카메라를 위로 올리는 무브. 스케일과 입체감을 강조한다.",
+            "answer": "Jib Up",
+            "displayAnswer": "Jib Up",
+            "example": "예: 지브 업[Jib Up]으로 세트 전체 스케일을 보여 준다."
+          },
+          {
+            "id": "camera-jib-down",
+            "title": "지브 다운",
+            "section": "영상",
+            "prompt": "지브로 카메라를 아래로 내리는 무브. 압박감 있는 상황을 표현한다.",
+            "answer": "Jib Down",
+            "displayAnswer": "Jib Down",
+            "example": "예: 지브 다운[Jib Down]으로 압박감을 실었다."
+          },
+          {
+            "id": "camera-dolly-in",
+            "title": "달리 인",
+            "section": "영상",
+            "prompt": "카메라가 피사체를 향해 앞으로 다가가는 무브. 몰입·긴장·감정 고조를 만든다.",
+            "answer": "Dolly In",
+            "displayAnswer": "Dolly In",
+            "example": "예: 대화 클라이맥스는 달리 인[Dolly In]으로 다가간다."
+          },
+          {
+            "id": "camera-dolly-out",
+            "title": "달리 아웃",
+            "section": "영상",
+            "prompt": "카메라가 피사체에서 물러나는 무브. 상황 정리·감정의 거리를 표현한다.",
+            "answer": "Dolly Out",
+            "displayAnswer": "Dolly Out",
+            "example": "예: 장면 마무리는 달리 아웃[Dolly Out]으로 거리를 둔다."
+          },
+          {
+            "id": "camera-dolly-left",
+            "title": "달리 레프트",
+            "section": "영상",
+            "prompt": "카메라가 좌로 이동하는 무브. 시선 이동·관계 변화를 표현한다.",
+            "answer": "Dolly Left",
+            "displayAnswer": "Dolly Left",
+            "example": "예: 달리 레프트[Dolly Left]로 옆 인물에게 시선을 옮긴다."
+          },
+          {
+            "id": "camera-dolly-right",
+            "title": "달리 라이트",
+            "section": "영상",
+            "prompt": "카메라가 우로 이동하는 무브. 시선 이동·관계 변화를 표현한다.",
+            "answer": "Dolly Right",
+            "displayAnswer": "Dolly Right",
+            "example": "예: 달리 라이트[Dolly Right]로 관계의 전환을 보여 준다."
+          },
+          {
+            "id": "camera-zoom-in",
+            "title": "줌 인",
+            "section": "영상",
+            "prompt": "화각을 좁혀 피사체를 키우는 무브. 강조·집중·긴장을 만든다.",
+            "answer": "Zoom In",
+            "displayAnswer": "Zoom In",
+            "example": "예: 표정에 줌 인[Zoom In]해 감정을 강조한다."
+          },
+          {
+            "id": "camera-zoom-out",
+            "title": "줌 아웃",
+            "section": "영상",
+            "prompt": "화각을 넓혀 피사체를 작게 보이게 하는 무브. 상황 설명·여유·위축감을 준다.",
+            "answer": "Zoom Out",
+            "displayAnswer": "Zoom Out",
+            "example": "예: 줌 아웃[Zoom Out]으로 주변 상황을 드러낸다."
+          },
+          {
+            "id": "camera-crash-zoom-in",
+            "title": "크래시 줌 인",
+            "section": "영상",
+            "prompt": "줌과 전진을 빠르게 동시에 쓰는 무브. 충격·놀람·극적 강조를 만든다.",
+            "answer": "Crash Zoom In",
+            "displayAnswer": "Crash Zoom In",
+            "example": "예: 반전 순간은 크래시 줌 인[Crash Zoom In]으로 충격을 준다."
+          },
+          {
+            "id": "camera-crash-zoom-out",
+            "title": "크래시 줌 아웃",
+            "section": "영상",
+            "prompt": "줌과 후진을 빠르게 동시에 쓰는 무브. 충격·혼란·극적 전환을 만든다.",
+            "answer": "Crash Zoom Out",
+            "displayAnswer": "Crash Zoom Out",
+            "example": "예: 크래시 줌 아웃[Crash Zoom Out]으로 장면이 급전환된다."
+          },
+          {
+            "id": "camera-tilt-up",
+            "title": "틸트 업",
+            "section": "영상",
+            "prompt": "카메라 각도를 위로 기울이는 무브. 피사체의 키·웅장함을 강조한다.",
+            "answer": "Tilt Up",
+            "displayAnswer": "Tilt Up",
+            "example": "예: 틸트 업[Tilt Up]으로 건물 높이를 보여 준다."
+          },
+          {
+            "id": "camera-tilt-down",
+            "title": "틸트 다운",
+            "section": "영상",
+            "prompt": "카메라 각도를 아래로 기울이는 무브. 상황 파악·압박감을 표현한다.",
+            "answer": "Tilt Down",
+            "displayAnswer": "Tilt Down",
+            "example": "예: 틸트 다운[Tilt Down]으로 바닥에 놓인 소품을 드러낸다."
+          },
+          {
+            "id": "camera-overhead",
+            "title": "오버헤드",
+            "section": "영상",
+            "prompt": "피사체를 바로 위에서 내려다보며 촬영. 전체 상황 파악·관계 드러내기에 쓴다.",
+            "answer": "Overhead",
+            "displayAnswer": "Overhead",
+            "example": "예: 오버헤드[Overhead]로 테이블 위 배치를 한눈에 보여 준다."
+          },
+          {
+            "id": "camera-static",
+            "title": "스태틱",
+            "section": "영상",
+            "prompt": "카메라를 고정하고 촬영하는 방식. 안정감과 관찰자 시점의 시선이 된다.",
+            "answer": "Static",
+            "displayAnswer": "Static",
+            "example": "예: 대화 신은 스태틱[Static]으로 안정감을 유지한다."
+          },
+          {
+            "id": "camera-handheld",
+            "title": "핸드헬드",
+            "section": "영상",
+            "prompt": "손으로 카메라를 들고 촬영. 사실감·긴장·생동감을 만든다.",
+            "answer": "Handheld",
+            "displayAnswer": "Handheld",
+            "example": "예: 추격 신은 핸드헬드[Handheld]로 긴장감을 살린다."
+          },
+          {
+            "id": "camera-car-chasing",
+            "title": "카 체이싱",
+            "section": "영상",
+            "prompt": "차량을 이용해 추격 장면을 촬영. 속도·긴박·액션을 강조한다.",
+            "answer": "Car Chasing",
+            "displayAnswer": "Car Chasing",
+            "example": "예: 고속도로 추격은 카 체이싱[Car Chasing]으로 찍는다."
+          },
+          {
+            "id": "camera-lazy-susan",
+            "title": "레이지 수잔",
+            "section": "영상",
+            "prompt": "카메라(또는 피사체)를 수평으로 회전시키는 무브. 관계 변화·긴장·탐색을 표현한다.",
+            "answer": "Lazy Susan",
+            "displayAnswer": "Lazy Susan",
+            "example": "예: 레이지 수잔[Lazy Susan]으로 인물 관계를 천천히 드러낸다."
           }
         ]
       }
