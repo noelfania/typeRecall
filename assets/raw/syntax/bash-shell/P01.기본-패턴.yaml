@@ -1,0 +1,204 @@
+id: language-bash-shell-p01
+category: syntax
+kind: command
+language: shell
+track:
+  id: bash-shell
+  label: Bash / Shell
+title: P01.기본-패턴
+source:
+  origin: assets/typingSource/Language-bash-Shell/P01.기본-패턴.sh
+parts:
+  - id: language-bash-shell-p01-part-1
+    title: 현재 작업 디렉터리[current working directory]
+    display: |-
+      # 현재 작업 디렉터리[current working directory]
+      pwd
+      # 결과: /home/user/project
+    typing: pwd
+  - id: language-bash-shell-p01-part-2
+    title: 파일 / 디렉터리 목록 나열[list]
+    display: |-
+      # 파일 / 디렉터리 목록 나열[list]
+      ls
+      ls -al
+      # 결과: 숨김 파일까지 자세히 출력
+    typing: |-
+      ls
+      ls -al
+  - id: language-bash-shell-p01-part-3
+    title: 디렉터리 이동[change directory]
+    display: |-
+      # 디렉터리 이동[change directory]
+      cd /tmp
+      cd -
+      # 결과: 이전 디렉터리로 복귀
+    typing: |-
+      cd /tmp
+      cd -
+  - id: language-bash-shell-p01-part-4
+    title: 디렉터리 생성[make directory]
+    display: |-
+      # 디렉터리 생성[make directory]
+      mkdir logs
+      mkdir -p app/cache/images
+      # 결과: 중간 경로까지 한 번에 생성
+    typing: |-
+      mkdir logs
+      mkdir -p app/cache/images
+  - id: language-bash-shell-p01-part-5
+    title: 빈 파일 생성[create file]
+    display: |-
+      # 빈 파일 생성[create file]
+      touch app.log
+      # 결과: app.log 생성
+    typing: touch app.log
+  - id: language-bash-shell-p01-part-6
+    title: 표준 출력[stdout] 쓰기
+    display: |-
+      # 표준 출력[stdout] 쓰기
+      echo "hello shell"
+      # 결과: hello shell
+    typing: echo "hello shell"
+  - id: language-bash-shell-p01-part-7
+    title: 리다이렉션[redirection]
+    display: |-
+      # 리다이렉션[redirection]
+      echo "first line" > app.log
+      echo "second line" >> app.log
+      # 결과: app.log에 줄 단위 추가
+    typing: |-
+      echo "first line" > app.log
+      echo "second line" >> app.log
+  - id: language-bash-shell-p01-part-8
+    title: 파일 내용 확인[read file]
+    display: |-
+      # 파일 내용 확인[read file]
+      cat app.log
+      head -n 1 app.log
+      tail -n 1 app.log
+      # 결과: 앞 / 뒤 줄 확인
+    typing: |-
+      cat app.log
+      head -n 1 app.log
+      tail -n 1 app.log
+  - id: language-bash-shell-p01-part-9
+    title: 검색[search]
+    display: |-
+      # 검색[search]
+      grep "second" app.log
+      # 결과: second line
+    typing: grep "second" app.log
+  - id: language-bash-shell-p01-part-10
+    title: 파이프[pipeline]
+    display: |-
+      # 파이프[pipeline]
+      ls -al | grep ".log"
+      # 결과: .log 파일만 필터링
+    typing: ls -al | grep ".log"
+  - id: language-bash-shell-p01-part-11
+    title: 파일 복사[copy] / 이동[move]
+    display: |-
+      # 파일 복사[copy] / 이동[move]
+      cp app.log backup.log
+      mv backup.log archive.log
+      # 결과: 복사 후 이름 변경
+    typing: |-
+      cp app.log backup.log
+      mv backup.log archive.log
+  - id: language-bash-shell-p01-part-12
+    title: 파일 삭제[remove]
+    display: |-
+      # 파일 삭제[remove]
+      rm archive.log
+      # 결과: 파일 삭제
+    typing: rm archive.log
+  - id: language-bash-shell-p01-part-13
+    title: 변수[variable]
+    display: |-
+      # 변수[variable]
+      user_name="kim"
+      echo "$user_name"
+      # 결과: kim
+    typing: |-
+      user_name="kim"
+      echo "$user_name"
+  - id: language-bash-shell-p01-part-14
+    title: 환경 변수[environment variable]
+    display: |-
+      # 환경 변수[environment variable]
+      echo "$HOME"
+      echo "$SHELL"
+      # 결과: 홈 디렉터리 / 현재 셸
+    typing: |-
+      echo "$HOME"
+      echo "$SHELL"
+  - id: language-bash-shell-p01-part-15
+    title: 조건문[condition]
+    display: |-
+      # 조건문[condition]
+      file_name="app.log"
+      if [ -f "$file_name" ]; then
+        echo "file exists"
+      else
+        echo "file missing"
+      fi
+      # 결과: file exists
+    typing: |-
+      file_name="app.log"
+      if [ -f "$file_name" ]; then
+        echo "file exists"
+      else
+        echo "file missing"
+      fi
+  - id: language-bash-shell-p01-part-16
+    title: 반복문[loop]
+    display: |-
+      # 반복문[loop]
+      for item in apple banana cherry; do
+        echo "$item"
+      done
+      # 결과:
+      # apple
+      # banana
+      # cherry
+    typing: |-
+      for item in apple banana cherry; do
+        echo "$item"
+      done
+  - id: language-bash-shell-p01-part-17
+    title: 명령 치환[command substitution]
+    display: |-
+      # 명령 치환[command substitution]
+      today_value=$(date +%Y-%m-%d)
+      echo "$today_value"
+      # 결과: 2026-03-18
+    typing: |-
+      today_value=$(date +%Y-%m-%d)
+      echo "$today_value"
+  - id: language-bash-shell-p01-part-18
+    title: 함수[function]
+    display: |-
+      # 함수[function]
+      print_user() {
+        local input_name="$1"
+        echo "user=$input_name"
+      }
+      print_user "park"
+      # 결과: user=park
+    typing: |-
+      print_user() {
+        local input_name="$1"
+        echo "user=$input_name"
+      }
+      print_user "park"
+  - id: language-bash-shell-p01-part-19
+    title: 종료 코드[exit code]
+    display: |-
+      # 종료 코드[exit code]
+      grep "missing" app.log
+      echo $?
+      # 결과: 1 (검색 실패)
+    typing: |-
+      grep "missing" app.log
+      echo $?

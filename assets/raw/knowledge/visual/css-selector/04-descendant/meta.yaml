@@ -1,0 +1,47 @@
+# 자손 셀렉터 — 공백
+# HTM 대조 보강 — enrich-visual-metas.mjs
+
+id: css-selector-04-descendant
+slug: 04-descendant
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSSセレクタのチートシート.htm  # 원본 HTM 삭제됨
+  sectionTitle:
+    ja: "子孫要素"
+    ko: "자손 셀렉터 — 공백"
+
+title:
+  ko: "자손 셀렉터 — 공백"
+
+caption:
+  ko: "지정 요소 안의 모든 하위(손자 포함) 요소가 대상입니다."
+
+explanation:
+  ko: |
+    공백으로 연결하면 깊이에 상관없이 자손을 모두 선택합니다.
+    
+    `div p` → div 안의 모든 p (손자 p 포함)
+    직계 자식만 필요할 때는 다음 섹션의 `>`를 씁니다.
+
+images:
+  - id: css-selector-002
+    path: assets/raw/knowledge/visual/css-selector/images/002.webp
+    role: demo
+    sectionHintJa: "子孫要素"
+    altJa: "CSSセレクタの〇〇の中の子要素のサンプル"
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: "공백( )으로 자손 요소를 선택합니다. 손자도 포함됩니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: "div p"
+    content: |
+      div p {
+        color: #999;
+      }

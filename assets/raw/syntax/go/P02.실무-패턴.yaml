@@ -1,0 +1,122 @@
+id: language-go-p02
+category: syntax
+kind: code-snippet
+language: go
+track:
+  id: go
+  label: Go
+title: P02.실무-패턴
+source:
+  origin: assets/typingSource/Language-go/P02.실무-패턴.go
+parts:
+  - id: language-go-p02-part-1
+    title: 패키지와 임포트[package / import]
+    display: |-
+      // 패키지와 임포트[package / import]
+      package main
+
+      import (
+      	"encoding/json"
+      	"fmt"
+      )
+    typing: |-
+      package main
+
+      import (
+      	"encoding/json"
+      	"fmt"
+      )
+  - id: language-go-p02-part-2
+    title: JSON 태그 구조체[struct tag]
+    display: |-
+      // JSON 태그 구조체[struct tag] - 직렬화 필드명 지정
+      type Product struct {
+      	Name  string `json:"name"`
+      	Price int    `json:"price"`
+      }
+    typing: |-
+      type Product struct {
+      	Name  string `json:"name"`
+      	Price int    `json:"price"`
+      }
+  - id: language-go-p02-part-2b
+    title: 슬라이스 변환 함수[slice transform]
+    display: |-
+      // 슬라이스 변환 함수[slice transform] - make로 용량 미리 확보
+      func makeDoubles(input []int) []int {
+      	result := make([]int, 0, len(input))
+      	for _, item := range input {
+      		result = append(result, item*2)
+      	}
+      	return result
+      }
+    typing: |-
+      func makeDoubles(input []int) []int {
+      	result := make([]int, 0, len(input))
+      	for _, item := range input {
+      		result = append(result, item*2)
+      	}
+      	return result
+      }
+  - id: language-go-p02-part-3
+    title: 슬라이스 추가[append]
+    display: |-
+      	// 슬라이스 추가[append]
+      	valueList := []int{1, 2}
+      	valueList = append(valueList, 3, 4)
+      	fmt.Println(valueList)
+      	// 결과: [1 2 3 4]
+    typing: |-
+      	valueList := []int{1, 2}
+      	valueList = append(valueList, 3, 4)
+      	fmt.Println(valueList)
+  - id: language-go-p02-part-4
+    title: 맵 존재 확인[comma ok]
+    display: |-
+      	// 맵 존재 확인[comma ok]
+      	roleMap := map[string]string{"kim": "admin"}
+      	roleValue, ok := roleMap["kim"]
+      	fmt.Println(roleValue, ok)
+      	// 결과: admin true
+    typing: |-
+      	roleMap := map[string]string{"kim": "admin"}
+      	roleValue, ok := roleMap["kim"]
+      	fmt.Println(roleValue, ok)
+  - id: language-go-p02-part-5
+    title: 구조체 + JSON
+    display: |-
+      	// 구조체 + JSON
+      	productItem := Product{Name: "keyboard", Price: 50000}
+      	jsonBytes, _ := json.Marshal(productItem)
+      	fmt.Println(string(jsonBytes))
+      	// 결과: {"name":"keyboard","price":50000}
+    typing: |-
+      	productItem := Product{Name: "keyboard", Price: 50000}
+      	jsonBytes, _ := json.Marshal(productItem)
+      	fmt.Println(string(jsonBytes))
+  - id: language-go-p02-part-6
+    title: 인터페이스 대신 에러 우선 처리[error first]
+    display: |-
+      	// 인터페이스 대신 에러 우선 처리[error first]
+      	_, err := json.Marshal(make(chan int))
+      	if err != nil {
+      		fmt.Println("marshal error")
+      	}
+      	// 결과: marshal error
+    typing: |-
+      	_, err := json.Marshal(make(chan int))
+      	if err != nil {
+      		fmt.Println("marshal error")
+      	}
+  - id: language-go-p02-part-7
+    title: 슬라이스 변환 패턴[transform pattern]
+    display: |-
+      	// 슬라이스 변환 패턴[transform pattern]
+      	doubleList := makeDoubles([]int{1, 2, 3})
+      	fmt.Println(doubleList)
+      	// 결과: [2 4 6]
+      }
+    typing: |-
+      	doubleList := makeDoubles([]int{1, 2, 3})
+      	fmt.Println(doubleList)
+      }

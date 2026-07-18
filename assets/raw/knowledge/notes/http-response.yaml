@@ -1,0 +1,30 @@
+id: knowledge-notes-http-response
+category: knowledge
+kind: note
+topic: http
+title: HTTP 응답 헤더 읽기 (curl -I)
+source:
+  origin: chat-raw 2026-07-04
+body: |
+  curl -I 로 헤더만 요청하면 상태 코드와 응답 메타데이터를 빠르게 확인할 수 있다.
+
+  ```sh
+  curl -I http://localhost:3000/uploads/sample.mp3
+  ```
+
+  ```text
+  HTTP/1.1 404 Not Found
+  access-control-allow-origin: *
+  access-control-expose-headers: Retry-After,X-RateLimit-Limit,X-RateLimit-Remaining,X-RateLimit-Reset
+  content-type: application/json
+  Date: Tue, 30 Jun 2026 14:18:37 GMT
+  Connection: keep-alive
+  Keep-Alive: timeout=5
+  ```
+
+  읽는 법:
+  - 첫 줄 `HTTP/1.1 404 Not Found` — 프로토콜 버전과 상태 코드[status code]
+  - `access-control-allow-origin: *` — CORS 허용 범위
+  - `access-control-expose-headers` — 브라우저 JS에서 읽을 수 있게 노출한 헤더 목록 (레이트 리밋 정보 등)
+  - `content-type: application/json` — 본문 형식 (404여도 에러 본문이 JSON이라는 뜻)
+  - `Connection: keep-alive` / `Keep-Alive: timeout=5` — 연결을 5초까지 재사용

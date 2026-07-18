@@ -1,0 +1,46 @@
+# 배수 번째 — :nth-of-type(3n)
+# HTM 대조 보강 — enrich-visual-metas.mjs
+
+id: css-selector-18-multiple-n
+slug: 18-multiple-n
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSSセレクタのチートシート.htm  # 원본 HTM 삭제됨
+  sectionTitle:
+    ja: "倍数の子要素"
+    ko: "배수 번째 — :nth-of-type(3n)"
+
+title:
+  ko: "배수 번째 — :nth-of-type(3n)"
+
+caption:
+  ko: "3, 6, 9…처럼 n배수 위치를 선택합니다."
+
+explanation:
+  ko: |
+    `3n`은 3의 배수 위치입니다.
+    
+    `2n+1`(홀수), `3n-1`(3열 가운데)처럼 An+B 패턴으로 확장합니다.
+
+images:
+  - id: css-selector-016
+    path: assets/raw/knowledge/visual/css-selector/images/016.webp
+    role: demo
+    sectionHintJa: "倍数の子要素"
+    altJa: "CSSセレクタの特定の倍数番号の子要素のサンプル"
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: "3n처럼 배수 패턴으로 요소를 선택합니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: "p:nth-of-type(3n)"
+    content: |
+      p:nth-of-type(3n) {
+        color: #999;
+      }

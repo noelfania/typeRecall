@@ -1,0 +1,129 @@
+id: language-typescript-p02
+category: syntax
+kind: code-snippet
+language: typescript
+track:
+  id: typescript
+  label: TypeScript
+title: P02.실무-패턴
+source:
+  origin: assets/typingSource/Language-TypeScript/P02.실무-패턴.ts
+parts:
+  - id: language-typescript-p02-part-1
+    title: 도메인 타입[domain type]
+    display: |-
+      // 도메인 타입[domain type]
+      type Product = {
+        id: number;
+        name: string;
+        price: number;
+      };
+    typing: |-
+      type Product = {
+        id: number;
+        name: string;
+        price: number;
+      };
+  - id: language-typescript-p02-part-1b
+    title: 판별 유니온[discriminated union]
+    display: |-
+      // 판별 유니온[discriminated union] - status로 상태별 데이터 구분
+      type FetchState<T> =
+        | { status: 'idle' }
+        | { status: 'loading' }
+        | { status: 'success'; data: T }
+        | { status: 'error'; message: string };
+    typing: |-
+      type FetchState<T> =
+        | { status: 'idle' }
+        | { status: 'loading' }
+        | { status: 'success'; data: T }
+        | { status: 'error'; message: string };
+  - id: language-typescript-p02-part-2
+    title: 리터럴 유니온[literal union]
+    display: |-
+      // 리터럴 유니온[literal union]
+      let sortOrder: 'asc' | 'desc' = 'asc';
+      console.log(sortOrder);
+      // 결과: asc
+    typing: |-
+      let sortOrder: 'asc' | 'desc' = 'asc';
+      console.log(sortOrder);
+  - id: language-typescript-p02-part-3
+    title: 타입 별칭[type alias]
+    display: |-
+      // 타입 별칭[type alias]
+      const productItem: Product = {
+        id: 1,
+        name: 'keyboard',
+        price: 50000,
+      };
+      console.log(productItem.name);
+      // 결과: keyboard
+    typing: |-
+      const productItem: Product = {
+        id: 1,
+        name: 'keyboard',
+        price: 50000,
+      };
+      console.log(productItem.name);
+  - id: language-typescript-p02-part-4
+    title: 읽기 전용[readonly]
+    display: |-
+      // 읽기 전용[readonly]
+      type UserProfile = {
+        readonly id: number;
+        nickname: string;
+      };
+
+      const profileItem: UserProfile = {
+        id: 1,
+        nickname: 'neo',
+      };
+      console.log(profileItem.id);
+      // 결과: 1
+    typing: |-
+      type UserProfile = {
+        readonly id: number;
+        nickname: string;
+      };
+
+      const profileItem: UserProfile = {
+        id: 1,
+        nickname: 'neo',
+      };
+      console.log(profileItem.id);
+  - id: language-typescript-p02-part-5
+    title: 상태 분기[discriminated union]
+    display: |-
+      // 상태 분기[discriminated union]
+      const fetchState: FetchState<Product> = {
+        status: 'success',
+        data: productItem,
+      };
+
+      if (fetchState.status === 'success') {
+        console.log(fetchState.data.price);
+      }
+      // 결과: 50000
+    typing: |-
+      const fetchState: FetchState<Product> = {
+        status: 'success',
+        data: productItem,
+      };
+
+      if (fetchState.status === 'success') {
+        console.log(fetchState.data.price);
+      }
+  - id: language-typescript-p02-part-6
+    title: 배열 패턴[array pattern]
+    display: |-
+      // 배열 패턴[array pattern]
+      const productList: Product[] = [productItem];
+      const productNameList = productList.map(item => item.name);
+      console.log(productNameList);
+      // 결과: ['keyboard']
+    typing: |-
+      const productList: Product[] = [productItem];
+      const productNameList = productList.map(item => item.name);
+      console.log(productNameList);

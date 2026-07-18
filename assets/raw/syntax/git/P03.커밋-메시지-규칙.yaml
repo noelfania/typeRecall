@@ -1,0 +1,164 @@
+id: language-git-temp
+category: syntax
+kind: command
+language: shell
+track:
+  id: git
+  label: Git
+title: P03.커밋-메시지-규칙
+source:
+  origin: assets/typingSource/Language-git/temp.md
+  note: 마크다운 표를 타이핑 가능한 커밋 명령 예문으로 재구성. 기본 공식은 [type]:[Verb] [Target] ([Context]) (2026-07-09)
+parts:
+  - id: language-git-temp-part-1
+    title: 기본 공식[commit formula]
+    display: |-
+      # 기본 공식[commit formula] — type: Verb Target (Context)
+      git commit -m "feat: Add pagination (to search results)"
+      # 결과: 타입 + 동사 + 대상 + 맥락이 한 줄에 드러남
+    typing: |-
+      git commit -m "feat: Add pagination (to search results)"
+  - id: language-git-temp-part-2
+    title: feat - 기능 추가[Add / Implement]
+    display: |-
+      # feat - 기능 추가[Add / Implement]
+      git commit -m "feat: Add login validation logic"
+      git commit -m "feat: Implement dark mode toggle"
+      # Add=추가, Implement=구현
+    typing: |-
+      git commit -m "feat: Add login validation logic"
+      git commit -m "feat: Implement dark mode toggle"
+  - id: language-git-temp-part-3
+    title: feat - 지원·연동[Support / Integrate]
+    display: |-
+      # feat - 지원·연동[Support / Integrate]
+      git commit -m "feat: Support CSV export for transaction history"
+      git commit -m "feat: Integrate Kakao Maps API for store locations"
+      # Support=지원, Integrate=외부 연동
+    typing: |-
+      git commit -m "feat: Support CSV export for transaction history"
+      git commit -m "feat: Integrate Kakao Maps API for store locations"
+  - id: language-git-temp-part-4
+    title: feat - 허용·활성화[Allow / Enable]
+    display: |-
+      # feat - 허용·활성화[Allow / Enable]
+      git commit -m "feat: Allow users to upload multiple photos"
+      git commit -m "feat: Enable auto-save on post editor"
+      # Allow=사용자 행동 허용, Enable=기능 켜기
+    typing: |-
+      git commit -m "feat: Allow users to upload multiple photos"
+      git commit -m "feat: Enable auto-save on post editor"
+  - id: language-git-temp-part-5
+    title: fix - 수정·해결[Fix / Resolve]
+    display: |-
+      # fix - 수정·해결[Fix / Resolve]
+      git commit -m "fix: Fix crash on image upload"
+      git commit -m "fix: Resolve race condition in login flow"
+      # Fix=단순 수정, Resolve=원인 있는 문제 해결
+    typing: |-
+      git commit -m "fix: Fix crash on image upload"
+      git commit -m "fix: Resolve race condition in login flow"
+  - id: language-git-temp-part-6
+    title: fix - 방지·보장[Prevent / Ensure]
+    display: |-
+      # fix - 방지·보장[Prevent / Ensure]
+      git commit -m "fix: Prevent double-click on checkout button"
+      git commit -m "fix: Ensure auth token is refreshed before expiry"
+      # Prevent=문제가 안 생기게, Ensure=항상 되도록
+    typing: |-
+      git commit -m "fix: Prevent double-click on checkout button"
+      git commit -m "fix: Ensure auth token is refreshed before expiry"
+  - id: language-git-temp-part-7
+    title: fix - 예외 처리[Handle]
+    display: |-
+      # fix - 예외 처리[Handle]
+      git commit -m "fix: Handle network timeout during file upload"
+      git commit -m "fix: Handle edge case for empty search results"
+      # Handle=상황·예외를 받아서 처리
+    typing: |-
+      git commit -m "fix: Handle network timeout during file upload"
+      git commit -m "fix: Handle edge case for empty search results"
+  - id: language-git-temp-part-8
+    title: refactor - 분리·단순화[Extract / Simplify]
+    display: |-
+      # refactor - 분리·단순화[Extract / Simplify]
+      git commit -m "refactor: Extract validation logic to a separate helper"
+      git commit -m "refactor: Simplify nested ternary operators"
+      # Extract=빼내기, Simplify=단순화
+    typing: |-
+      git commit -m "refactor: Extract validation logic to a separate helper"
+      git commit -m "refactor: Simplify nested ternary operators"
+  - id: language-git-temp-part-9
+    title: refactor - 교체·이름 변경[Replace / Rename]
+    display: |-
+      # refactor - 교체·이름 변경[Replace / Rename]
+      git commit -m "refactor: Replace hardcoded strings with constants"
+      git commit -m "refactor: Rename confusing variables in payment service"
+      # Replace=다른 것으로 교체, Rename=이름 변경
+    typing: |-
+      git commit -m "refactor: Replace hardcoded strings with constants"
+      git commit -m "refactor: Rename confusing variables in payment service"
+  - id: language-git-temp-part-10
+    title: refactor - 이전·최적화[Migrate / Optimize]
+    display: |-
+      # refactor - 이전·최적화[Migrate / Optimize]
+      git commit -m "refactor: Migrate from class components to functional"
+      git commit -m "refactor: Optimize heavy loop performance"
+      # Migrate=구조 이전, Optimize=성능 개선
+    typing: |-
+      git commit -m "refactor: Migrate from class components to functional"
+      git commit -m "refactor: Optimize heavy loop performance"
+  - id: language-git-temp-part-11
+    title: chore - 버전·설정[Bump / Configure]
+    display: |-
+      # chore - 버전·설정[Bump / Configure]
+      git commit -m "chore: Bump Next.js version to 15.x"
+      git commit -m "chore: Configure CORS policy for development"
+      git commit -m "chore: Set up ESLint and Husky"
+      # Bump=버전 올림, Configure=설정, Set up=구성
+    typing: |-
+      git commit -m "chore: Bump Next.js version to 15.x"
+      git commit -m "chore: Configure CORS policy for development"
+      git commit -m "chore: Set up ESLint and Husky"
+  - id: language-git-temp-part-12
+    title: style - 정리·포맷[Clean up / Format]
+    display: |-
+      # style - 정리·포맷[Clean up / Format]
+      git commit -m "style: Clean up console logs and commented-out code"
+      git commit -m "style: Format code with Prettier"
+      # 동작 변화 없는 코드 정리
+    typing: |-
+      git commit -m "style: Clean up console logs and commented-out code"
+      git commit -m "style: Format code with Prettier"
+  - id: language-git-temp-part-13
+    title: test - 테스트[Add / Increase]
+    display: |-
+      # test - 테스트[Add / Increase]
+      git commit -m "test: Add unit tests for password encryption"
+      git commit -m "test: Increase test coverage for billing logic"
+    typing: |-
+      git commit -m "test: Add unit tests for password encryption"
+      git commit -m "test: Increase test coverage for billing logic"
+  - id: language-git-temp-part-14
+    title: docs - 문서[Update / Clarify]
+    display: |-
+      # docs - 문서[Update / Clarify]
+      git commit -m "docs: Update README.md with API guide"
+      git commit -m "docs: Clarify usage of auth parameters"
+      # Update=갱신, Clarify=설명 보강
+    typing: |-
+      git commit -m "docs: Update README.md with API guide"
+      git commit -m "docs: Clarify usage of auth parameters"
+  - id: language-git-temp-part-15
+    title: 상황별 동사 정리[verb by situation]
+    display: |-
+      # 상황별 동사 정리[verb by situation]
+      git commit -m "feat: Improve search relevance"      # 더 좋게
+      git commit -m "chore: Remove unused imports"        # 없앰
+      git commit -m "feat: Complete user profile page"    # 부족한 부분 채움
+      git commit -m "chore: Adjust cache TTL to 60s"      # 설정 변경
+    typing: |-
+      git commit -m "feat: Improve search relevance"
+      git commit -m "chore: Remove unused imports"
+      git commit -m "feat: Complete user profile page"
+      git commit -m "chore: Adjust cache TTL to 60s"

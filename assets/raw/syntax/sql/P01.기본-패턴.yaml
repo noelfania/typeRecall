@@ -1,0 +1,213 @@
+id: language-sql-p01
+category: syntax
+kind: code-snippet
+language: sql
+track:
+  id: sql
+  label: SQL
+title: P01.기본-패턴
+source:
+  origin: assets/typingSource/Language-SQL/P01.기본-패턴.sql
+parts:
+  - id: language-sql-p01-part-1
+    title: 테이블 생성[create table]
+    display: |-
+      -- 테이블 생성[create table]
+      CREATE TABLE users (
+          user_id      INTEGER PRIMARY KEY,
+          user_name    VARCHAR(50),
+          user_age     INTEGER,
+          created_at   DATE
+      );
+    typing: |-
+      CREATE TABLE users (
+          user_id      INTEGER PRIMARY KEY,
+          user_name    VARCHAR(50),
+          user_age     INTEGER,
+          created_at   DATE
+      );
+  - id: language-sql-p01-part-2
+    title: 데이터 추가[insert]
+    display: |-
+      -- 데이터 추가[insert]
+      INSERT INTO users (user_id, user_name, user_age, created_at)
+      VALUES (1, 'kim', 30, DATE '2026-03-18');
+
+      INSERT INTO users (user_id, user_name, user_age, created_at)
+      VALUES (2, 'lee', 25, DATE '2026-03-18');
+    typing: |-
+      INSERT INTO users (user_id, user_name, user_age, created_at)
+      VALUES (1, 'kim', 30, DATE '2026-03-18');
+
+      INSERT INTO users (user_id, user_name, user_age, created_at)
+      VALUES (2, 'lee', 25, DATE '2026-03-18');
+  - id: language-sql-p01-part-3
+    title: 조회[select]
+    display: |-
+      -- 조회[select]
+      SELECT *
+      FROM users;
+      -- 결과:
+      -- 1, kim, 30, 2026-03-18
+      -- 2, lee, 25, 2026-03-18
+    typing: |-
+      SELECT *
+      FROM users;
+  - id: language-sql-p01-part-4
+    title: 조건 조회[where]
+    display: |-
+      -- 조건 조회[where]
+      SELECT user_name, user_age
+      FROM users
+      WHERE user_age >= 30;
+      -- 결과:
+      -- kim, 30
+    typing: |-
+      SELECT user_name, user_age
+      FROM users
+      WHERE user_age >= 30;
+  - id: language-sql-p01-part-5
+    title: 정렬[order by]
+    display: |-
+      -- 정렬[order by]
+      SELECT user_name, user_age
+      FROM users
+      ORDER BY user_age DESC;
+      -- 결과: 나이 내림차순
+    typing: |-
+      SELECT user_name, user_age
+      FROM users
+      ORDER BY user_age DESC;
+  - id: language-sql-p01-part-6
+    title: 개수 제한[limit]
+    display: |-
+      -- 개수 제한[limit]
+      SELECT *
+      FROM users
+      ORDER BY user_id
+      FETCH FIRST 1 ROWS ONLY;
+      -- 결과: 첫 행 1개
+    typing: |-
+      SELECT *
+      FROM users
+      ORDER BY user_id
+      FETCH FIRST 1 ROWS ONLY;
+  - id: language-sql-p01-part-7
+    title: 수정[update]
+    display: |-
+      -- 수정[update]
+      UPDATE users
+      SET user_age = 31
+      WHERE user_id = 1;
+    typing: |-
+      UPDATE users
+      SET user_age = 31
+      WHERE user_id = 1;
+  - id: language-sql-p01-part-8
+    title: 삭제[delete]
+    display: |-
+      -- 삭제[delete]
+      DELETE FROM users
+      WHERE user_id = 2;
+    typing: |-
+      DELETE FROM users
+      WHERE user_id = 2;
+  - id: language-sql-p01-part-9
+    title: 집계[aggregate]
+    display: |-
+      -- 집계[aggregate]
+      SELECT COUNT(*) AS user_count,
+             AVG(user_age) AS avg_age
+      FROM users;
+      -- 결과: 1, 31
+    typing: |-
+      SELECT COUNT(*) AS user_count,
+             AVG(user_age) AS avg_age
+      FROM users;
+  - id: language-sql-p01-part-10
+    title: 그룹화[group by]
+    display: |-
+      -- 그룹화[group by]
+      SELECT created_at, COUNT(*) AS row_count
+      FROM users
+      GROUP BY created_at;
+    typing: |-
+      SELECT created_at, COUNT(*) AS row_count
+      FROM users
+      GROUP BY created_at;
+  - id: language-sql-p01-part-11
+    title: 조인[join]
+    display: |-
+      -- 조인[join]
+      CREATE TABLE orders (
+          order_id    INTEGER PRIMARY KEY,
+          user_id     INTEGER,
+          total_price INTEGER
+      );
+
+      INSERT INTO orders (order_id, user_id, total_price)
+      VALUES (100, 1, 5000);
+
+      SELECT u.user_name, o.total_price
+      FROM users u
+      JOIN orders o
+        ON u.user_id = o.user_id;
+      -- 결과:
+      -- kim, 5000
+    typing: |-
+      CREATE TABLE orders (
+          order_id    INTEGER PRIMARY KEY,
+          user_id     INTEGER,
+          total_price INTEGER
+      );
+
+      INSERT INTO orders (order_id, user_id, total_price)
+      VALUES (100, 1, 5000);
+
+      SELECT u.user_name, o.total_price
+      FROM users u
+      JOIN orders o
+        ON u.user_id = o.user_id;
+  - id: language-sql-p01-part-12
+    title: 서브쿼리[subquery]
+    display: |-
+      -- 서브쿼리[subquery]
+      SELECT user_name
+      FROM users
+      WHERE user_id IN (
+          SELECT user_id
+          FROM orders
+          WHERE total_price >= 5000
+      );
+      -- 결과: kim
+    typing: |-
+      SELECT user_name
+      FROM users
+      WHERE user_id IN (
+          SELECT user_id
+          FROM orders
+          WHERE total_price >= 5000
+      );
+  - id: language-sql-p01-part-13
+    title: 공통 테이블 식[CTE]
+    display: |-
+      -- 공통 테이블 식[CTE]
+      WITH order_sum AS (
+          SELECT user_id, SUM(total_price) AS total_amount
+          FROM orders
+          GROUP BY user_id
+      )
+      SELECT u.user_name, o.total_amount
+      FROM users u
+      JOIN order_sum o
+        ON u.user_id = o.user_id;
+    typing: |-
+      WITH order_sum AS (
+          SELECT user_id, SUM(total_price) AS total_amount
+          FROM orders
+          GROUP BY user_id
+      )
+      SELECT u.user_name, o.total_amount
+      FROM users u
+      JOIN order_sum o
+        ON u.user_id = o.user_id;

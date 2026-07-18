@@ -2,15 +2,15 @@ import type { LanguageTrack } from '../data/languageLessonTypes';
 
 export const languageTracks: LanguageTrack[] = [
   {
-    "id": "language-bash-shell",
+    "id": "bash-shell",
     "label": "Bash / Shell",
-    "folderName": "Language-bash-Shell",
+    "folderName": "bash-shell",
     "lessons": [
       {
         "id": "language-bash-shell-p01",
         "title": "P01.기본-패턴",
-        "fileName": "P01.기본-패턴.sh",
-        "sourcePath": "assets/typingSource/Language-bash-Shell/P01.기본-패턴.sh",
+        "fileName": "P01.기본-패턴.yaml",
+        "sourcePath": "assets/raw/syntax/bash-shell/P01.기본-패턴.yaml",
         "language": "shell",
         "parts": [
           {
@@ -132,8 +132,8 @@ export const languageTracks: LanguageTrack[] = [
       {
         "id": "language-bash-shell-p02",
         "title": "P02.실무-패턴",
-        "fileName": "P02.실무-패턴.sh",
-        "sourcePath": "assets/typingSource/Language-bash-Shell/P02.실무-패턴.sh",
+        "fileName": "P02.실무-패턴.yaml",
+        "sourcePath": "assets/raw/syntax/bash-shell/P02.실무-패턴.yaml",
         "language": "shell",
         "parts": [
           {
@@ -215,104 +215,311 @@ export const languageTracks: LanguageTrack[] = [
             "displayContent": "# 환경 변수 내보내기[export]\nexport APP_ENV=local\necho \"$APP_ENV\"\n# 결과: local"
           }
         ]
+      },
+      {
+        "id": "language-bash-shell-linux",
+        "title": "P03.리눅스-실무",
+        "fileName": "P03.리눅스-실무.yaml",
+        "sourcePath": "assets/raw/syntax/bash-shell/P03.리눅스-실무.yaml",
+        "language": "shell",
+        "parts": [
+          {
+            "id": "language-bash-shell-linux-part-1",
+            "title": "주요 경로[filesystem layout]",
+            "content": "/etc\n/var/log\n/tmp\n/usr/local/bin\n/home/user\n/proc",
+            "displayContent": "# 주요 경로[filesystem layout]\n/etc              # 설정 파일 (nginx.conf, hosts)\n/var/log          # 시스템·앱 로그\n/tmp              # 임시 파일 (재부팅 시 삭제)\n/usr/local/bin    # 직접 설치한 툴\n/home/user        # 일반 사용자 홈 (~)\n/proc             # 실행 중 프로세스 정보 (가상)"
+          },
+          {
+            "id": "language-bash-shell-linux-part-2",
+            "title": "탐색[navigation]",
+            "content": "pwd\nls -al\ncd ~/project\ncd -",
+            "displayContent": "# 탐색[navigation]\npwd               # 현재 경로 출력\nls -al            # 숨김파일 포함 상세 목록\ncd ~/project      # 디렉토리 이동\ncd -              # 이전 디렉토리로 이동"
+          },
+          {
+            "id": "language-bash-shell-linux-part-3",
+            "title": "파일 조작[file operation]",
+            "content": "touch file.txt\nmkdir -p a/b/c\ncp -r dir1 dir2\nmv file.txt docs/\nrm -rf folder",
+            "displayContent": "# 파일 조작[file operation]\ntouch file.txt          # 파일 생성\nmkdir -p a/b/c          # 중첩 폴더 한번에 생성\ncp -r dir1 dir2         # 폴더 복사 (-r 필수)\nmv file.txt docs/       # 이동 / 이름 변경\nrm -rf folder           # 폴더 강제 삭제 (주의!)"
+          },
+          {
+            "id": "language-bash-shell-linux-part-4",
+            "title": "파일 내용 보기[view file]",
+            "content": "cat file.txt\nless file.txt\nhead -n 20 file.txt\ntail -n 50 app.log\ntail -f app.log",
+            "displayContent": "# 파일 내용 보기[view file]\ncat file.txt            # 전체 출력\nless file.txt           # 페이지 단위로 보기 (q로 종료)\nhead -n 20 file.txt     # 앞 20줄\ntail -n 50 app.log      # 마지막 50줄\ntail -f app.log         # 실시간 로그 스트리밍 (서버 필수)"
+          },
+          {
+            "id": "language-bash-shell-linux-part-5",
+            "title": "검색[grep / find]",
+            "content": "grep -rn \"keyword\" src\nfind . -name \"*.ts\"\nfind . -type d -name \"node_modules\"\nfind . -name \"*.ts\" | xargs grep \"api\"",
+            "displayContent": "# 검색[grep / find]\ngrep -rn \"keyword\" src               # 재귀 + 줄번호 검색\nfind . -name \"*.ts\"                  # 확장자로 파일 찾기\nfind . -type d -name \"node_modules\"  # 폴더 타입으로 찾기\nfind . -name \"*.ts\" | xargs grep \"api\"   # 찾은 파일에서 검색"
+          },
+          {
+            "id": "language-bash-shell-linux-part-6",
+            "title": "권한[permission]",
+            "content": "ls -l\nchmod +x script.sh\nchmod 755 file.sh\nchown user:group file",
+            "displayContent": "# 권한[permission]\nls -l                   # 권한 확인\nchmod +x script.sh      # 실행 권한 추가 (심볼 방식)\nchmod 755 file.sh       # rwxr-xr-x (숫자 방식)\nchown user:group file   # 소유자 변경"
+          },
+          {
+            "id": "language-bash-shell-linux-part-7",
+            "title": "사용자[user]",
+            "content": "whoami\nid\nsudo command\nsu - username",
+            "displayContent": "# 사용자[user]\nwhoami          # 현재 사용자 확인\nid              # UID, GID 확인\nsudo command    # root 권한으로 실행\nsu - username   # 다른 사용자로 전환"
+          },
+          {
+            "id": "language-bash-shell-linux-part-8",
+            "title": "프로세스[process]",
+            "content": "ps aux | grep node\ntop\nkill 1234\nkill -9 1234",
+            "displayContent": "# 프로세스[process]\nps aux | grep node  # 특정 프로세스 검색\ntop                 # 실시간 모니터링\nkill 1234           # PID로 종료\nkill -9 1234        # 강제 종료 (SIGKILL)"
+          },
+          {
+            "id": "language-bash-shell-linux-part-9",
+            "title": "디스크 용량[disk usage]",
+            "content": "df -h\ndu -sh *",
+            "displayContent": "# 디스크 용량[disk usage]\ndf -h           # 전체 디스크 사용량 (human-readable)\ndu -sh *        # 현재 폴더 항목별 용량"
+          },
+          {
+            "id": "language-bash-shell-linux-part-10",
+            "title": "압축[tar / zip]",
+            "content": "tar -czvf backup.tar.gz folder\ntar -xzvf backup.tar.gz\nzip -r archive.zip folder\nunzip archive.zip",
+            "displayContent": "# 압축[tar / zip]\ntar -czvf backup.tar.gz folder    # 압축 생성\ntar -xzvf backup.tar.gz           # 압축 해제\nzip -r archive.zip folder         # zip 압축\nunzip archive.zip                 # zip 해제"
+          },
+          {
+            "id": "language-bash-shell-linux-part-11",
+            "title": "네트워크[network]",
+            "content": "curl -I https://google.com\ncurl -X POST -d '{}' url\nssh -p 2222 user@server\nscp file.txt user@server:~/",
+            "displayContent": "# 네트워크[network]\ncurl -I https://google.com       # 헤더만 확인\ncurl -X POST -d '{}' url         # POST 요청\nssh -p 2222 user@server          # 포트 지정 접속\nscp file.txt user@server:~/      # 서버로 파일 전송"
+          },
+          {
+            "id": "language-bash-shell-linux-part-12",
+            "title": "패키지 관리[apt]",
+            "content": "sudo apt update\nsudo apt install nodejs\nsudo apt remove nginx\napt list --installed",
+            "displayContent": "# 패키지 관리[apt] (Ubuntu / Debian)\nsudo apt update                  # 목록 갱신 (설치 전 필수)\nsudo apt install nodejs          # 설치\nsudo apt remove nginx            # 제거\napt list --installed             # 설치된 패키지 목록"
+          },
+          {
+            "id": "language-bash-shell-linux-part-13",
+            "title": "서비스 관리[systemd]",
+            "content": "sudo systemctl status nginx\nsudo systemctl restart nginx\nsudo systemctl enable nginx\njournalctl -u nginx -f",
+            "displayContent": "# 서비스 관리[systemd]\nsudo systemctl status nginx       # 상태 확인\nsudo systemctl restart nginx      # 재시작\nsudo systemctl enable nginx       # 부팅 시 자동 시작\njournalctl -u nginx -f            # 서비스 로그 실시간"
+          },
+          {
+            "id": "language-bash-shell-linux-part-14",
+            "title": "셸 설정[shell config]",
+            "content": "source ~/.bashrc\nalias gs=\"git status\"\nalias ll=\"ls -al\"",
+            "displayContent": "# 셸 설정[shell config]\n# ~/.bashrc: bash 실행 시마다 / ~/.bash_profile: 로그인 시 1회\nsource ~/.bashrc                # 설정 다시 읽기\nalias gs=\"git status\"           # 자주 쓰는 명령 단축\nalias ll=\"ls -al\""
+          },
+          {
+            "id": "language-bash-shell-linux-part-15",
+            "title": "환경 변수[environment variable]",
+            "content": "export PATH=$PATH:/usr/local/bin\nexport NODE_ENV=production\necho $PATH\nenv",
+            "displayContent": "# 환경 변수[environment variable]\nexport PATH=$PATH:/usr/local/bin   # PATH에 경로 추가\nexport NODE_ENV=production         # 변수 설정\necho $PATH                         # 변수 확인\nenv                                # 전체 출력"
+          },
+          {
+            "id": "language-bash-shell-linux-part-16",
+            "title": "스크립트 변수[script variable]",
+            "content": "NAME=\"linux\"\necho \"hello $NAME\"",
+            "displayContent": "#!/bin/bash\n# 스크립트 변수[script variable] — = 양옆 공백 금지\nNAME=\"linux\"\necho \"hello $NAME\""
+          },
+          {
+            "id": "language-bash-shell-linux-part-17",
+            "title": "조건문[if]",
+            "content": "if [ -f \"file.txt\" ]; then\n  echo \"파일 있음\"\nfi",
+            "displayContent": "# 조건문[if] — -f 는 파일 존재 검사\nif [ -f \"file.txt\" ]; then\n  echo \"파일 있음\"\nfi"
+          },
+          {
+            "id": "language-bash-shell-linux-part-18",
+            "title": "반복문[for]",
+            "content": "for file in *.ts; do\n  echo $file\ndone",
+            "displayContent": "# 반복문[for] — 글롭 패턴 순회\nfor file in *.ts; do\n  echo $file\ndone"
+          },
+          {
+            "id": "language-bash-shell-linux-part-19",
+            "title": "스크립트 실행[run script]",
+            "content": "chmod +x script.sh\n./script.sh",
+            "displayContent": "# 스크립트 실행[run script]\nchmod +x script.sh   # 실행 권한 부여\n./script.sh          # 실행"
+          },
+          {
+            "id": "language-bash-shell-linux-part-20",
+            "title": "도커 기본[docker]",
+            "content": "docker ps -a\ndocker run -d -p 80:80 nginx\ndocker exec -it container_id bash\ndocker logs container_id\ndocker compose up -d",
+            "displayContent": "# 도커 기본[docker]\ndocker ps -a                       # 전체 컨테이너\ndocker run -d -p 80:80 nginx       # 백그라운드 + 포트 매핑\ndocker exec -it container_id bash  # 내부 접속\ndocker logs container_id           # 로그\ndocker compose up -d               # compose 실행"
+          },
+          {
+            "id": "language-bash-shell-linux-part-21",
+            "title": "파이프와 리다이렉션[pipe / redirection]",
+            "content": "cat log.txt | grep \"error\" | tail -20\necho \"hello\" > file.txt\necho \"world\" >> file.txt\ncat file.txt 2>/dev/null",
+            "displayContent": "# 파이프와 리다이렉션[pipe / redirection]\ncat log.txt | grep \"error\" | tail -20   # 명령 연결\necho \"hello\" > file.txt     # 덮어쓰기\necho \"world\" >> file.txt    # 이어쓰기\ncat file.txt 2>/dev/null    # 에러 출력 버리기"
+          },
+          {
+            "id": "language-bash-shell-linux-part-22",
+            "title": "히스토리[history]",
+            "content": "history | grep git\n!!",
+            "displayContent": "# 히스토리[history]\nhistory | grep git  # 기록에서 검색\n!!                  # 직전 명령어 재실행\n# Ctrl+R: 히스토리 검색 / Ctrl+C: 중단 / Ctrl+L: 화면 지우기"
+          },
+          {
+            "id": "language-bash-shell-linux-part-23",
+            "title": "tmux 기본[tmux]",
+            "content": "tmux new\ntmux ls\ntmux attach -t 0",
+            "displayContent": "# tmux 기본[tmux] — 세션 유지 다중 터미널\ntmux new                # 새 세션\ntmux ls                 # 세션 목록\ntmux attach -t 0        # 세션 재접속\n# Ctrl+B, D: 세션 분리 / Ctrl+B, C: 새 창"
+          },
+          {
+            "id": "language-bash-shell-linux-part-24",
+            "title": "서버 디버깅 루틴[debug routine]",
+            "content": "ps aux | grep node\ngrep -r \"ERROR\" /var/log/\ndf -h\ncurl http://localhost:3000",
+            "displayContent": "# 서버 디버깅 루틴[debug routine]\nps aux | grep node          # 프로세스 확인\ngrep -r \"ERROR\" /var/log/   # 에러 로그 검색\ndf -h                       # 디스크 여유 확인\ncurl http://localhost:3000  # API 직접 확인"
+          },
+          {
+            "id": "language-bash-shell-linux-part-25",
+            "title": "배포 루틴[deploy routine]",
+            "content": "git pull\nnpm run build\nsudo systemctl restart app\ntail -f /var/log/app.log",
+            "displayContent": "# 배포 루틴[deploy routine]\ngit pull\nnpm run build\nsudo systemctl restart app\ntail -f /var/log/app.log    # 배포 후 로그 확인"
+          }
+        ]
       }
     ]
   },
   {
-    "id": "language-css",
+    "id": "css",
     "label": "CSS",
-    "folderName": "Language-CSS",
+    "folderName": "css",
     "lessons": [
       {
         "id": "language-css-p01",
         "title": "P01.핵심-패턴",
-        "fileName": "P01.핵심-패턴.html",
-        "sourcePath": "assets/typingSource/Language-CSS/P01.핵심-패턴.html",
-        "language": "html",
+        "fileName": "P01.핵심-패턴.yaml",
+        "sourcePath": "assets/raw/syntax/css/P01.핵심-패턴.yaml",
+        "language": "css",
         "parts": [
           {
             "id": "language-css-p01-part-1",
-            "title": "P01.핵심-패턴",
-            "content": "<!DOCTYPE html>\n<html lang=\"ko\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <title>CSS Practice</title>\n    <style>",
-            "displayContent": "<!DOCTYPE html>\n<html lang=\"ko\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <title>CSS Practice</title>\n    <style>"
+            "title": "박스 크기 기준[box-sizing] 통일",
+            "content": "*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}",
+            "displayContent": "/* 박스 크기 기준[box-sizing] 통일 — 패딩·보더 포함 계산 */\n*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}"
           },
           {
             "id": "language-css-p01-part-2",
-            "title": "박스 크기 기준[box sizing] 통일",
-            "content": "      *,\n      *::before,\n      *::after {\n        box-sizing: border-box;\n      }\n\n      :root {",
-            "displayContent": "      /* 박스 크기 기준[box sizing] 통일 */\n      *,\n      *::before,\n      *::after {\n        box-sizing: border-box;\n      }\n\n      :root {"
+            "title": "전역 변수[custom property] 정의",
+            "content": ":root {\n  --bg-color: #f5f7fb;\n  --accent-color: #2563eb;\n  --gap-size: 16px;\n}",
+            "displayContent": "/* 전역 변수[custom property] 정의 */\n:root {\n  --bg-color: #f5f7fb;\n  --accent-color: #2563eb;\n  --gap-size: 16px;\n}"
           },
           {
             "id": "language-css-p01-part-3",
-            "title": "전역 변수[custom property]",
-            "content": "        --bg-color: #f5f7fb;\n        --card-color: #ffffff;\n        --accent-color: #2563eb;\n        --text-color: #1f2937;\n        --gap-size: 16px;\n      }",
-            "displayContent": "        /* 전역 변수[custom property] */\n        --bg-color: #f5f7fb;\n        --card-color: #ffffff;\n        --accent-color: #2563eb;\n        --text-color: #1f2937;\n        --gap-size: 16px;\n      }"
+            "title": "전역 변수 사용[var()]",
+            "content": "body {\n  background: var(--bg-color);\n  color: var(--text-color, #1f2937);\n}",
+            "displayContent": "/* 전역 변수 사용[var()] — 두 번째 인자는 기본값 */\nbody {\n  background: var(--bg-color);\n  color: var(--text-color, #1f2937);\n}"
           },
           {
             "id": "language-css-p01-part-4",
-            "title": "전역 변수[custom property]",
-            "content": "        --bg-color: #f5f7fb;\n        --card-color: #ffffff;\n        --accent-color: #2563eb;\n        --text-color: #1f2937;\n        --gap-size: 16px;\n      }\n\n      body {\n        margin: 0;\n        font-family: sans-serif;\n        background: var(--bg-color);\n        color: var(--text-color);\n      }\n\n      .page-wrapper {\n        min-height: 100vh;\n        display: grid;\n        place-items: center;\n        padding: 24px;\n      }\n\n      .card-grid {\n        width: min(900px, 100%);\n        display: grid;\n        grid-template-columns: repeat(3, 1fr);\n        gap: var(--gap-size);\n      }\n\n      .card-item {\n        background: var(--card-color);\n        border: 1px solid #dbe3f0;\n        border-radius: 16px;\n        padding: 20px;\n        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);\n      }\n\n      .card-item.is-active {\n        border-color: var(--accent-color);\n        transform: translateY(-4px);\n      }\n\n      .title-text {\n        margin: 0 0 8px;\n        font-size: 20px;\n      }\n\n      .button-row {\n        display: flex;\n        justify-content: space-between;\n        align-items: center;\n        gap: 12px;\n        margin-top: 16px;\n      }\n\n      .primary-button {\n        padding: 10px 14px;\n        border: none;\n        border-radius: 10px;\n        background: var(--accent-color);\n        color: white;\n        cursor: pointer;\n      }\n\n      .primary-button:hover {\n        opacity: 0.9;\n      }\n\n      .primary-button:disabled {\n        opacity: 0.5;\n        cursor: not-allowed;\n      }\n\n      .badge-text::before {",
-            "displayContent": "        /* 전역 변수[custom property] */\n        --bg-color: #f5f7fb;\n        --card-color: #ffffff;\n        --accent-color: #2563eb;\n        --text-color: #1f2937;\n        --gap-size: 16px;\n      }\n\n      body {\n        margin: 0;\n        font-family: sans-serif;\n        background: var(--bg-color);\n        color: var(--text-color);\n      }\n\n      .page-wrapper {\n        min-height: 100vh;\n        display: grid;\n        place-items: center;\n        padding: 24px;\n      }\n\n      .card-grid {\n        width: min(900px, 100%);\n        display: grid;\n        grid-template-columns: repeat(3, 1fr);\n        gap: var(--gap-size);\n      }\n\n      .card-item {\n        background: var(--card-color);\n        border: 1px solid #dbe3f0;\n        border-radius: 16px;\n        padding: 20px;\n        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);\n      }\n\n      .card-item.is-active {\n        border-color: var(--accent-color);\n        transform: translateY(-4px);\n      }\n\n      .title-text {\n        margin: 0 0 8px;\n        font-size: 20px;\n      }\n\n      .button-row {\n        display: flex;\n        justify-content: space-between;\n        align-items: center;\n        gap: 12px;\n        margin-top: 16px;\n      }\n\n      .primary-button {\n        padding: 10px 14px;\n        border: none;\n        border-radius: 10px;\n        background: var(--accent-color);\n        color: white;\n        cursor: pointer;\n      }\n\n      .primary-button:hover {\n        opacity: 0.9;\n      }\n\n      .primary-button:disabled {\n        opacity: 0.5;\n        cursor: not-allowed;\n      }\n\n      .badge-text::before {"
+            "title": "화면 중앙 배치[place-items]",
+            "content": ".page-wrapper {\n  min-height: 100vh;\n  display: grid;\n  place-items: center;\n}",
+            "displayContent": "/* 화면 중앙 배치[place-items] — grid 한 줄 중앙 정렬 */\n.page-wrapper {\n  min-height: 100vh;\n  display: grid;\n  place-items: center;\n}"
           },
           {
             "id": "language-css-p01-part-5",
-            "title": "의사 요소[pseudo element]",
-            "content": "        content: \"#\";\n        margin-right: 4px;\n        color: var(--accent-color);\n      }\n\n      @media (max-width: 768px) {",
-            "displayContent": "        /* 의사 요소[pseudo element] */\n        content: \"#\";\n        margin-right: 4px;\n        color: var(--accent-color);\n      }\n\n      @media (max-width: 768px) {"
+            "title": "카드 그리드[card grid]",
+            "content": ".card-grid {\n  width: min(900px, 100%);\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: var(--gap-size);\n}",
+            "displayContent": "/* 카드 그리드[card grid] — min()으로 최대폭 제한 */\n.card-grid {\n  width: min(900px, 100%);\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: var(--gap-size);\n}"
           },
           {
             "id": "language-css-p01-part-6",
-            "title": "반응형[responsive]",
-            "content": "        .card-grid {\n          grid-template-columns: 1fr;\n        }\n      }\n    </style>\n  </head>\n  <body>\n    <main class=\"page-wrapper\">\n      <section class=\"card-grid\">\n        <article class=\"card-item is-active\">\n          <h1 class=\"title-text\">카드 1</h1>\n          <p class=\"badge-text\">active</p>\n          <div class=\"button-row\">\n            <button class=\"primary-button\">확인</button>\n            <button class=\"primary-button\" disabled>대기</button>\n          </div>\n        </article>\n\n        <article class=\"card-item\">\n          <h2 class=\"title-text\">카드 2</h2>\n          <p>grid + flex 조합 예문</p>\n        </article>\n\n        <article class=\"card-item\">\n          <h2 class=\"title-text\">카드 3</h2>\n          <p>모바일에서는 1열로 바뀜</p>\n        </article>\n      </section>\n    </main>\n  </body>\n</html>",
-            "displayContent": "        /* 반응형[responsive] */\n        .card-grid {\n          grid-template-columns: 1fr;\n        }\n      }\n    </style>\n  </head>\n  <body>\n    <main class=\"page-wrapper\">\n      <section class=\"card-grid\">\n        <article class=\"card-item is-active\">\n          <h1 class=\"title-text\">카드 1</h1>\n          <p class=\"badge-text\">active</p>\n          <div class=\"button-row\">\n            <button class=\"primary-button\">확인</button>\n            <button class=\"primary-button\" disabled>대기</button>\n          </div>\n        </article>\n\n        <article class=\"card-item\">\n          <h2 class=\"title-text\">카드 2</h2>\n          <p>grid + flex 조합 예문</p>\n        </article>\n\n        <article class=\"card-item\">\n          <h2 class=\"title-text\">카드 3</h2>\n          <p>모바일에서는 1열로 바뀜</p>\n        </article>\n      </section>\n    </main>\n  </body>\n</html>"
+            "title": "카드 스타일[card surface]",
+            "content": ".card-item {\n  background: #ffffff;\n  border: 1px solid #dbe3f0;\n  border-radius: 16px;\n  padding: 20px;\n  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);\n}",
+            "displayContent": "/* 카드 스타일[card surface] — 면·테두리·그림자 */\n.card-item {\n  background: #ffffff;\n  border: 1px solid #dbe3f0;\n  border-radius: 16px;\n  padding: 20px;\n  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);\n}"
+          },
+          {
+            "id": "language-css-p01-part-7",
+            "title": "상태 변형[state modifier]",
+            "content": ".card-item.is-active {\n  border-color: var(--accent-color);\n  transform: translateY(-4px);\n}",
+            "displayContent": "/* 상태 변형[state modifier] — is-active 클래스로 강조 */\n.card-item.is-active {\n  border-color: var(--accent-color);\n  transform: translateY(-4px);\n}"
+          },
+          {
+            "id": "language-css-p01-part-8",
+            "title": "버튼 상태[hover / disabled]",
+            "content": ".primary-button:hover {\n  opacity: 0.9;\n}\n\n.primary-button:disabled {\n  opacity: 0.5;\n  cursor: not-allowed;\n}",
+            "displayContent": "/* 버튼 상태[hover / disabled] */\n.primary-button:hover {\n  opacity: 0.9;\n}\n\n.primary-button:disabled {\n  opacity: 0.5;\n  cursor: not-allowed;\n}"
+          },
+          {
+            "id": "language-css-p01-part-9",
+            "title": "의사 요소[pseudo element]",
+            "content": ".badge-text::before {\n  content: \"#\";\n  margin-right: 4px;\n  color: var(--accent-color);\n}",
+            "displayContent": "/* 의사 요소[pseudo element] — 콘텐츠 앞에 장식 삽입 */\n.badge-text::before {\n  content: \"#\";\n  margin-right: 4px;\n  color: var(--accent-color);\n}"
+          },
+          {
+            "id": "language-css-p01-part-10",
+            "title": "반응형[media query]",
+            "content": "@media (max-width: 768px) {\n  .card-grid {\n    grid-template-columns: 1fr;\n  }\n}",
+            "displayContent": "/* 반응형[media query] — 모바일에서 1열로 */\n@media (max-width: 768px) {\n  .card-grid {\n    grid-template-columns: 1fr;\n  }\n}"
+          },
+          {
+            "id": "language-css-p01-part-11",
+            "title": "카드 마크업[card markup]",
+            "content": "<article class=\"card-item is-active\">\n  <h1 class=\"title-text\">카드 1</h1>\n  <p class=\"badge-text\">active</p>\n  <button class=\"primary-button\">확인</button>\n  <button class=\"primary-button\" disabled>대기</button>\n</article>",
+            "displayContent": "/* 카드 마크업[card markup] — 위 스타일이 걸리는 구조 */\n<article class=\"card-item is-active\">\n  <h1 class=\"title-text\">카드 1</h1>\n  <p class=\"badge-text\">active</p>\n  <button class=\"primary-button\">확인</button>\n  <button class=\"primary-button\" disabled>대기</button>\n</article>"
           }
         ]
       },
       {
         "id": "language-css-p02",
         "title": "P02.부모-자식-배치",
-        "fileName": "P02.부모-자식-배치.html",
-        "sourcePath": "assets/typingSource/Language-CSS/P02.부모-자식-배치.html",
-        "language": "html",
+        "fileName": "P02.부모-자식-배치.yaml",
+        "sourcePath": "assets/raw/syntax/css/P02.부모-자식-배치.yaml",
+        "language": "css",
         "parts": [
           {
             "id": "language-css-p02-part-1",
-            "title": "P02.부모-자식-배치",
-            "content": "<!DOCTYPE html>\n<html lang=\"ko\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <title>CSS Layout Practice</title>\n    <style>\n      * {\n        box-sizing: border-box;\n      }\n\n      body {\n        margin: 0;\n        font-family: sans-serif;\n        background: #f8fafc;\n      }\n\n      .page {\n        padding: 24px;\n      }\n\n      .section {\n        max-width: 860px;\n        margin: 0 auto 24px;\n        padding: 20px;\n        background: white;\n        border: 1px solid #dbe3f0;\n        border-radius: 16px;\n      }\n\n      .box {\n        width: 80px;\n        height: 80px;\n        background: #2563eb;\n        color: white;\n        display: grid;\n        place-items: center;\n        border-radius: 12px;\n      }",
-            "displayContent": "<!DOCTYPE html>\n<html lang=\"ko\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <title>CSS Layout Practice</title>\n    <style>\n      * {\n        box-sizing: border-box;\n      }\n\n      body {\n        margin: 0;\n        font-family: sans-serif;\n        background: #f8fafc;\n      }\n\n      .page {\n        padding: 24px;\n      }\n\n      .section {\n        max-width: 860px;\n        margin: 0 auto 24px;\n        padding: 20px;\n        background: white;\n        border: 1px solid #dbe3f0;\n        border-radius: 16px;\n      }\n\n      .box {\n        width: 80px;\n        height: 80px;\n        background: #2563eb;\n        color: white;\n        display: grid;\n        place-items: center;\n        border-radius: 12px;\n      }"
+            "title": "글자 정렬[text-align]",
+            "content": ".text-left   { text-align: left; }\n.text-center { text-align: center; }\n.text-right  { text-align: right; }",
+            "displayContent": "/* 글자 정렬[text-align] — 인라인 내용에만 적용 */\n.text-left   { text-align: left; }\n.text-center { text-align: center; }\n.text-right  { text-align: right; }"
           },
           {
             "id": "language-css-p02-part-2",
-            "title": "글자 정렬[text align] - 글자 같은 인라인 내용",
-            "content": "      .text-left {\n        text-align: left;\n      }\n\n      .text-center {\n        text-align: center;\n      }\n\n      .text-right {\n        text-align: right;\n      }",
-            "displayContent": "      /* 글자 정렬[text align] - 글자 같은 인라인 내용 */\n      .text-left {\n        text-align: left;\n      }\n\n      .text-center {\n        text-align: center;\n      }\n\n      .text-right {\n        text-align: right;\n      }"
+            "title": "flex 가로 배치[row layout]",
+            "content": ".row-parent {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  gap: 12px;\n}",
+            "displayContent": "/* flex 가로 배치[row layout] — 부모가 자식 위치를 잡는다 */\n.row-parent {\n  display: flex;\n  justify-content: space-between; /* 가로축[main axis] */\n  align-items: center;            /* 세로축[cross axis] */\n  gap: 12px;\n}"
           },
           {
             "id": "language-css-p02-part-3",
-            "title": "flex - 부모가 자식 위치를 잡음",
-            "content": "      .row-parent {\n        display: flex;\n        justify-content: space-between;\n        align-items: center;\n        gap: 12px;\n        min-height: 120px;\n        padding: 12px;\n        background: #eff6ff;\n      }\n\n      .center-parent {\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        min-height: 160px;\n        background: #ecfeff;\n      }\n\n      .column-parent {\n        display: flex;\n        flex-direction: column;\n        justify-content: center;\n        align-items: flex-start;\n        gap: 12px;\n        min-height: 200px;\n        background: #fef3c7;\n        padding: 12px;\n      }",
-            "displayContent": "      /* flex - 부모가 자식 위치를 잡음 */\n      .row-parent {\n        display: flex;\n        justify-content: space-between; /* 가로축[main axis] */\n        align-items: center;            /* 세로축[cross axis] */\n        gap: 12px;\n        min-height: 120px;\n        padding: 12px;\n        background: #eff6ff;\n      }\n\n      .center-parent {\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        min-height: 160px;\n        background: #ecfeff;\n      }\n\n      .column-parent {\n        display: flex;\n        flex-direction: column;\n        justify-content: center;\n        align-items: flex-start;\n        gap: 12px;\n        min-height: 200px;\n        background: #fef3c7;\n        padding: 12px;\n      }"
+            "title": "flex 중앙 정렬[center]",
+            "content": ".center-parent {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  min-height: 160px;\n}",
+            "displayContent": "/* flex 중앙 정렬[center] — 자식 하나를 정중앙에 */\n.center-parent {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  min-height: 160px;\n}"
           },
           {
             "id": "language-css-p02-part-4",
-            "title": "grid - 부모가 칸을 만들고 자식을 배치",
-            "content": "      .grid-parent {\n        display: grid;\n        grid-template-columns: repeat(3, 1fr);\n        gap: 12px;\n        background: #f3e8ff;\n        padding: 12px;\n      }\n\n      .grid-center {\n        display: grid;\n        place-items: center;\n        min-height: 180px;\n        background: #dcfce7;\n      }\n    </style>\n  </head>\n  <body>\n    <main class=\"page\">\n      <section class=\"section\">\n        <h2>글자 정렬[text align]</h2>\n        <p class=\"text-left\">왼쪽 정렬[left]</p>\n        <p class=\"text-center\">가운데 정렬[center]</p>\n        <p class=\"text-right\">오른쪽 정렬[right]</p>\n      </section>\n\n      <section class=\"section\">\n        <h2>가로 배치[row layout]</h2>\n        <div class=\"row-parent\">\n          <div class=\"box\">A</div>\n          <div class=\"box\">B</div>\n          <div class=\"box\">C</div>\n        </div>\n      </section>\n\n      <section class=\"section\">\n        <h2>부모 중앙 정렬[parent center]</h2>\n        <div class=\"center-parent\">\n          <div class=\"box\">CENTER</div>\n        </div>\n      </section>\n\n      <section class=\"section\">\n        <h2>세로 배치[column layout]</h2>\n        <div class=\"column-parent\">\n          <div class=\"box\">1</div>\n          <div class=\"box\">2</div>\n          <div class=\"box\">3</div>\n        </div>\n      </section>\n\n      <section class=\"section\">\n        <h2>그리드 배치[grid layout]</h2>\n        <div class=\"grid-parent\">\n          <div class=\"box\">A</div>\n          <div class=\"box\">B</div>\n          <div class=\"box\">C</div>\n        </div>\n      </section>\n\n      <section class=\"section\">\n        <h2>그리드 중앙 정렬[place-items]</h2>\n        <div class=\"grid-center\">\n          <div class=\"box\">BOX</div>\n        </div>\n      </section>\n    </main>\n  </body>\n</html>",
-            "displayContent": "      /* grid - 부모가 칸을 만들고 자식을 배치 */\n      .grid-parent {\n        display: grid;\n        grid-template-columns: repeat(3, 1fr);\n        gap: 12px;\n        background: #f3e8ff;\n        padding: 12px;\n      }\n\n      .grid-center {\n        display: grid;\n        place-items: center; /* 가로 + 세로 한 번에 중앙 정렬 */\n        min-height: 180px;\n        background: #dcfce7;\n      }\n    </style>\n  </head>\n  <body>\n    <main class=\"page\">\n      <section class=\"section\">\n        <h2>글자 정렬[text align]</h2>\n        <p class=\"text-left\">왼쪽 정렬[left]</p>\n        <p class=\"text-center\">가운데 정렬[center]</p>\n        <p class=\"text-right\">오른쪽 정렬[right]</p>\n      </section>\n\n      <section class=\"section\">\n        <h2>가로 배치[row layout]</h2>\n        <div class=\"row-parent\">\n          <div class=\"box\">A</div>\n          <div class=\"box\">B</div>\n          <div class=\"box\">C</div>\n        </div>\n      </section>\n\n      <section class=\"section\">\n        <h2>부모 중앙 정렬[parent center]</h2>\n        <div class=\"center-parent\">\n          <div class=\"box\">CENTER</div>\n        </div>\n      </section>\n\n      <section class=\"section\">\n        <h2>세로 배치[column layout]</h2>\n        <div class=\"column-parent\">\n          <div class=\"box\">1</div>\n          <div class=\"box\">2</div>\n          <div class=\"box\">3</div>\n        </div>\n      </section>\n\n      <section class=\"section\">\n        <h2>그리드 배치[grid layout]</h2>\n        <div class=\"grid-parent\">\n          <div class=\"box\">A</div>\n          <div class=\"box\">B</div>\n          <div class=\"box\">C</div>\n        </div>\n      </section>\n\n      <section class=\"section\">\n        <h2>그리드 중앙 정렬[place-items]</h2>\n        <div class=\"grid-center\">\n          <div class=\"box\">BOX</div>\n        </div>\n      </section>\n    </main>\n  </body>\n</html>"
+            "title": "flex 세로 배치[column layout]",
+            "content": ".column-parent {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: flex-start;\n  gap: 12px;\n}",
+            "displayContent": "/* flex 세로 배치[column layout] — 축이 바뀌면 justify/align 역할도 바뀜 */\n.column-parent {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: flex-start;\n  gap: 12px;\n}"
+          },
+          {
+            "id": "language-css-p02-part-5",
+            "title": "grid 칸 나누기[grid layout]",
+            "content": ".grid-parent {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 12px;\n}",
+            "displayContent": "/* grid 칸 나누기[grid layout] — 부모가 칸을 만들고 자식을 배치 */\n.grid-parent {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 12px;\n}"
+          },
+          {
+            "id": "language-css-p02-part-6",
+            "title": "grid 중앙 정렬[place-items]",
+            "content": ".grid-center {\n  display: grid;\n  place-items: center;\n  min-height: 180px;\n}",
+            "displayContent": "/* grid 중앙 정렬[place-items] — 가로+세로 한 번에 */\n.grid-center {\n  display: grid;\n  place-items: center;\n  min-height: 180px;\n}"
+          },
+          {
+            "id": "language-css-p02-part-7",
+            "title": "배치 마크업[layout markup]",
+            "content": "<div class=\"row-parent\">\n  <div class=\"box\">A</div>\n  <div class=\"box\">B</div>\n  <div class=\"box\">C</div>\n</div>",
+            "displayContent": "/* 배치 마크업[layout markup] — 부모 클래스 아래 자식 박스 */\n<div class=\"row-parent\">\n  <div class=\"box\">A</div>\n  <div class=\"box\">B</div>\n  <div class=\"box\">C</div>\n</div>"
           }
         ]
       }
     ]
   },
   {
-    "id": "language-git",
+    "id": "git",
     "label": "Git",
-    "folderName": "Language-git",
+    "folderName": "git",
     "lessons": [
       {
         "id": "language-git-p01",
         "title": "P01.기본-흐름",
-        "fileName": "P01.기본-흐름.sh",
-        "sourcePath": "assets/typingSource/Language-git/P01.기본-흐름.sh",
+        "fileName": "P01.기본-흐름.yaml",
+        "sourcePath": "assets/raw/syntax/git/P01.기본-흐름.yaml",
         "language": "shell",
         "parts": [
           {
@@ -434,8 +641,8 @@ export const languageTracks: LanguageTrack[] = [
       {
         "id": "language-git-p02",
         "title": "P02.실무-패턴",
-        "fileName": "P02.실무-패턴.sh",
-        "sourcePath": "assets/typingSource/Language-git/P02.실무-패턴.sh",
+        "fileName": "P02.실무-패턴.yaml",
+        "sourcePath": "assets/raw/syntax/git/P02.실무-패턴.yaml",
         "language": "shell",
         "parts": [
           {
@@ -553,32 +760,224 @@ export const languageTracks: LanguageTrack[] = [
             "displayContent": "# 스태시 복원[git stash pop]\ngit stash pop\n# 결과: 마지막 스태시를 복원하고 목록에서 제거"
           }
         ]
+      },
+      {
+        "id": "language-git-temp",
+        "title": "P03.커밋-메시지-규칙",
+        "fileName": "P03.커밋-메시지-규칙.yaml",
+        "sourcePath": "assets/raw/syntax/git/P03.커밋-메시지-규칙.yaml",
+        "language": "shell",
+        "parts": [
+          {
+            "id": "language-git-temp-part-1",
+            "title": "기본 공식[commit formula]",
+            "content": "git commit -m \"feat: Add pagination (to search results)\"",
+            "displayContent": "# 기본 공식[commit formula] — type: Verb Target (Context)\ngit commit -m \"feat: Add pagination (to search results)\"\n# 결과: 타입 + 동사 + 대상 + 맥락이 한 줄에 드러남"
+          },
+          {
+            "id": "language-git-temp-part-2",
+            "title": "feat - 기능 추가[Add / Implement]",
+            "content": "git commit -m \"feat: Add login validation logic\"\ngit commit -m \"feat: Implement dark mode toggle\"",
+            "displayContent": "# feat - 기능 추가[Add / Implement]\ngit commit -m \"feat: Add login validation logic\"\ngit commit -m \"feat: Implement dark mode toggle\"\n# Add=추가, Implement=구현"
+          },
+          {
+            "id": "language-git-temp-part-3",
+            "title": "feat - 지원·연동[Support / Integrate]",
+            "content": "git commit -m \"feat: Support CSV export for transaction history\"\ngit commit -m \"feat: Integrate Kakao Maps API for store locations\"",
+            "displayContent": "# feat - 지원·연동[Support / Integrate]\ngit commit -m \"feat: Support CSV export for transaction history\"\ngit commit -m \"feat: Integrate Kakao Maps API for store locations\"\n# Support=지원, Integrate=외부 연동"
+          },
+          {
+            "id": "language-git-temp-part-4",
+            "title": "feat - 허용·활성화[Allow / Enable]",
+            "content": "git commit -m \"feat: Allow users to upload multiple photos\"\ngit commit -m \"feat: Enable auto-save on post editor\"",
+            "displayContent": "# feat - 허용·활성화[Allow / Enable]\ngit commit -m \"feat: Allow users to upload multiple photos\"\ngit commit -m \"feat: Enable auto-save on post editor\"\n# Allow=사용자 행동 허용, Enable=기능 켜기"
+          },
+          {
+            "id": "language-git-temp-part-5",
+            "title": "fix - 수정·해결[Fix / Resolve]",
+            "content": "git commit -m \"fix: Fix crash on image upload\"\ngit commit -m \"fix: Resolve race condition in login flow\"",
+            "displayContent": "# fix - 수정·해결[Fix / Resolve]\ngit commit -m \"fix: Fix crash on image upload\"\ngit commit -m \"fix: Resolve race condition in login flow\"\n# Fix=단순 수정, Resolve=원인 있는 문제 해결"
+          },
+          {
+            "id": "language-git-temp-part-6",
+            "title": "fix - 방지·보장[Prevent / Ensure]",
+            "content": "git commit -m \"fix: Prevent double-click on checkout button\"\ngit commit -m \"fix: Ensure auth token is refreshed before expiry\"",
+            "displayContent": "# fix - 방지·보장[Prevent / Ensure]\ngit commit -m \"fix: Prevent double-click on checkout button\"\ngit commit -m \"fix: Ensure auth token is refreshed before expiry\"\n# Prevent=문제가 안 생기게, Ensure=항상 되도록"
+          },
+          {
+            "id": "language-git-temp-part-7",
+            "title": "fix - 예외 처리[Handle]",
+            "content": "git commit -m \"fix: Handle network timeout during file upload\"\ngit commit -m \"fix: Handle edge case for empty search results\"",
+            "displayContent": "# fix - 예외 처리[Handle]\ngit commit -m \"fix: Handle network timeout during file upload\"\ngit commit -m \"fix: Handle edge case for empty search results\"\n# Handle=상황·예외를 받아서 처리"
+          },
+          {
+            "id": "language-git-temp-part-8",
+            "title": "refactor - 분리·단순화[Extract / Simplify]",
+            "content": "git commit -m \"refactor: Extract validation logic to a separate helper\"\ngit commit -m \"refactor: Simplify nested ternary operators\"",
+            "displayContent": "# refactor - 분리·단순화[Extract / Simplify]\ngit commit -m \"refactor: Extract validation logic to a separate helper\"\ngit commit -m \"refactor: Simplify nested ternary operators\"\n# Extract=빼내기, Simplify=단순화"
+          },
+          {
+            "id": "language-git-temp-part-9",
+            "title": "refactor - 교체·이름 변경[Replace / Rename]",
+            "content": "git commit -m \"refactor: Replace hardcoded strings with constants\"\ngit commit -m \"refactor: Rename confusing variables in payment service\"",
+            "displayContent": "# refactor - 교체·이름 변경[Replace / Rename]\ngit commit -m \"refactor: Replace hardcoded strings with constants\"\ngit commit -m \"refactor: Rename confusing variables in payment service\"\n# Replace=다른 것으로 교체, Rename=이름 변경"
+          },
+          {
+            "id": "language-git-temp-part-10",
+            "title": "refactor - 이전·최적화[Migrate / Optimize]",
+            "content": "git commit -m \"refactor: Migrate from class components to functional\"\ngit commit -m \"refactor: Optimize heavy loop performance\"",
+            "displayContent": "# refactor - 이전·최적화[Migrate / Optimize]\ngit commit -m \"refactor: Migrate from class components to functional\"\ngit commit -m \"refactor: Optimize heavy loop performance\"\n# Migrate=구조 이전, Optimize=성능 개선"
+          },
+          {
+            "id": "language-git-temp-part-11",
+            "title": "chore - 버전·설정[Bump / Configure]",
+            "content": "git commit -m \"chore: Bump Next.js version to 15.x\"\ngit commit -m \"chore: Configure CORS policy for development\"\ngit commit -m \"chore: Set up ESLint and Husky\"",
+            "displayContent": "# chore - 버전·설정[Bump / Configure]\ngit commit -m \"chore: Bump Next.js version to 15.x\"\ngit commit -m \"chore: Configure CORS policy for development\"\ngit commit -m \"chore: Set up ESLint and Husky\"\n# Bump=버전 올림, Configure=설정, Set up=구성"
+          },
+          {
+            "id": "language-git-temp-part-12",
+            "title": "style - 정리·포맷[Clean up / Format]",
+            "content": "git commit -m \"style: Clean up console logs and commented-out code\"\ngit commit -m \"style: Format code with Prettier\"",
+            "displayContent": "# style - 정리·포맷[Clean up / Format]\ngit commit -m \"style: Clean up console logs and commented-out code\"\ngit commit -m \"style: Format code with Prettier\"\n# 동작 변화 없는 코드 정리"
+          },
+          {
+            "id": "language-git-temp-part-13",
+            "title": "test - 테스트[Add / Increase]",
+            "content": "git commit -m \"test: Add unit tests for password encryption\"\ngit commit -m \"test: Increase test coverage for billing logic\"",
+            "displayContent": "# test - 테스트[Add / Increase]\ngit commit -m \"test: Add unit tests for password encryption\"\ngit commit -m \"test: Increase test coverage for billing logic\""
+          },
+          {
+            "id": "language-git-temp-part-14",
+            "title": "docs - 문서[Update / Clarify]",
+            "content": "git commit -m \"docs: Update README.md with API guide\"\ngit commit -m \"docs: Clarify usage of auth parameters\"",
+            "displayContent": "# docs - 문서[Update / Clarify]\ngit commit -m \"docs: Update README.md with API guide\"\ngit commit -m \"docs: Clarify usage of auth parameters\"\n# Update=갱신, Clarify=설명 보강"
+          },
+          {
+            "id": "language-git-temp-part-15",
+            "title": "상황별 동사 정리[verb by situation]",
+            "content": "git commit -m \"feat: Improve search relevance\"\ngit commit -m \"chore: Remove unused imports\"\ngit commit -m \"feat: Complete user profile page\"\ngit commit -m \"chore: Adjust cache TTL to 60s\"",
+            "displayContent": "# 상황별 동사 정리[verb by situation]\ngit commit -m \"feat: Improve search relevance\"      # 더 좋게\ngit commit -m \"chore: Remove unused imports\"        # 없앰\ngit commit -m \"feat: Complete user profile page\"    # 부족한 부분 채움\ngit commit -m \"chore: Adjust cache TTL to 60s\"      # 설정 변경"
+          }
+        ]
+      },
+      {
+        "id": "language-git-p04",
+        "title": "P04.복구-정리",
+        "fileName": "P04.복구-정리.yaml",
+        "sourcePath": "assets/raw/syntax/git/P04.복구-정리.yaml",
+        "language": "shell",
+        "parts": [
+          {
+            "id": "language-git-p04-part-1",
+            "title": "전역 설정[git config --global]",
+            "content": "git config --global user.name \"kim\"\ngit config --global user.email \"kim@example.com\"",
+            "displayContent": "# 전역 설정[git config --global]\ngit config --global user.name \"kim\"\ngit config --global user.email \"kim@example.com\"\n# 결과: 커밋에 기록될 이름과 이메일 설정"
+          },
+          {
+            "id": "language-git-p04-part-2",
+            "title": "저장소 시작[git init / clone]",
+            "content": "git init\ngit clone https://github.com/user/repo.git",
+            "displayContent": "# 저장소 시작[git init / clone]\ngit init\ngit clone https://github.com/user/repo.git\n# 결과: 새 저장소 생성 또는 원격 저장소 복제"
+          },
+          {
+            "id": "language-git-p04-part-3",
+            "title": "마지막 커밋에 덧붙이기[git commit --amend]",
+            "content": "git commit --amend --no-edit\n\ngit commit --amend",
+            "displayContent": "# 마지막 커밋에 덧붙이기[git commit --amend]\ngit commit --amend --no-edit\n# 결과: 메시지 수정 없이 방금 변경분을 마지막 커밋에 합침\n\ngit commit --amend\n# 결과: 마지막 커밋 메시지를 수정"
+          },
+          {
+            "id": "language-git-p04-part-4",
+            "title": "커밋 취소 - 변경 유지[git reset HEAD~1]",
+            "content": "git reset HEAD~1\n\ngit reset HEAD~3",
+            "displayContent": "# 커밋 취소 - 변경 유지[git reset HEAD~1]\ngit reset HEAD~1\n# 결과: 최근 커밋 1개를 취소하고 변경 내용은 남김\n\ngit reset HEAD~3\n# 결과: 최근 커밋 3개를 취소하고 변경 내용은 남김"
+          },
+          {
+            "id": "language-git-p04-part-5",
+            "title": "커밋 취소 - 변경 폐기[git reset --hard]",
+            "content": "git reset HEAD~1 --hard",
+            "displayContent": "# 커밋 취소 - 변경 폐기[git reset --hard]\ngit reset HEAD~1 --hard\n# 결과: 최근 커밋과 변경 내용을 모두 버림 (복구 어려움, 주의)"
+          },
+          {
+            "id": "language-git-p04-part-6",
+            "title": "원격 상태로 초기화[reset --hard origin]",
+            "content": "git fetch origin\ngit reset --hard origin/main",
+            "displayContent": "# 원격 상태로 초기화[reset --hard origin]\ngit fetch origin\ngit reset --hard origin/main\n# 결과: 로컬 브랜치를 원격 main과 완전히 동일하게 맞춤"
+          },
+          {
+            "id": "language-git-p04-part-7",
+            "title": "브랜치 이름 변경[git branch -m]",
+            "content": "git branch -m master main",
+            "displayContent": "# 브랜치 이름 변경[git branch -m]\ngit branch -m master main\n# 결과: 로컬 master 브랜치를 main으로 이름 변경"
+          },
+          {
+            "id": "language-git-p04-part-8",
+            "title": "로컬 브랜치 강제 삭제[git branch -D]",
+            "content": "git branch -D feature/login",
+            "displayContent": "# 로컬 브랜치 강제 삭제[git branch -D]\ngit branch -D feature/login\n# 결과: 병합 여부와 상관없이 로컬 브랜치 삭제"
+          },
+          {
+            "id": "language-git-p04-part-9",
+            "title": "병합된 브랜치 일괄 삭제[branch --merged]",
+            "content": "git branch --merged | grep -v \"\\*\" | xargs -n 1 git branch -d",
+            "displayContent": "# 병합된 브랜치 일괄 삭제[branch --merged]\ngit branch --merged | grep -v \"\\*\" | xargs -n 1 git branch -d\n# 결과: 현재 브랜치에 이미 병합된 로컬 브랜치를 한 번에 정리"
+          },
+          {
+            "id": "language-git-p04-part-10",
+            "title": "원격 브랜치 삭제[git push -d]",
+            "content": "git push origin -d feature/login",
+            "displayContent": "# 원격 브랜치 삭제[git push -d]\ngit push origin -d feature/login\n# 결과: 원격 저장소의 feature/login 브랜치 삭제"
+          },
+          {
+            "id": "language-git-p04-part-11",
+            "title": "대소문자 구분[core.ignorecase]",
+            "content": "git config core.ignorecase false",
+            "displayContent": "# 대소문자 구분[core.ignorecase]\ngit config core.ignorecase false\n# 결과: 파일명 대소문자 변경을 git이 추적하도록 설정"
+          },
+          {
+            "id": "language-git-p04-part-12",
+            "title": "커밋 스코프 예시[commit scope]",
+            "content": "git commit -m \"fix(typo): enought -> enough\"\ngit commit -m \"docs(readme): added demo image\"\ngit commit -m \"feat(i18n): add Indonesian translations\"\ngit commit -m \"chore(deps): update dependency typescript to v5.8.2\"",
+            "displayContent": "# 커밋 스코프 예시[commit scope]\n# type(scope): subject 형태로 변경 범위를 명시한다\ngit commit -m \"fix(typo): enought -> enough\"\ngit commit -m \"docs(readme): added demo image\"\ngit commit -m \"feat(i18n): add Indonesian translations\"\ngit commit -m \"chore(deps): update dependency typescript to v5.8.2\"\n# 결과: 스코프로 변경 위치가 한눈에 드러나는 커밋 이력"
+          }
+        ]
       }
     ]
   },
   {
-    "id": "language-go",
+    "id": "go",
     "label": "Go",
-    "folderName": "Language-go",
+    "folderName": "go",
     "lessons": [
       {
         "id": "language-go-p01",
         "title": "P01.기본-패턴",
-        "fileName": "P01.기본-패턴.go",
-        "sourcePath": "assets/typingSource/Language-go/P01.기본-패턴.go",
+        "fileName": "P01.기본-패턴.yaml",
+        "sourcePath": "assets/raw/syntax/go/P01.기본-패턴.yaml",
         "language": "go",
         "parts": [
           {
             "id": "language-go-p01-part-1",
-            "title": "P01.기본-패턴",
+            "title": "패키지와 임포트[package / import]",
             "content": "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n)",
-            "displayContent": "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n)\n\n// ============================================================"
+            "displayContent": "// 패키지와 임포트[package / import]\npackage main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n)"
           },
           {
             "id": "language-go-p01-part-2",
-            "title": "P01. Go 기본 패턴",
-            "content": "type User struct {\n\tName  string\n\tAge   int\n\tAdmin bool\n}\n\nfunc add(numA int, numB int) int {\n\treturn numA + numB\n}\n\nfunc divide(numA int, numB int) (int, error) {\n\tif numB == 0 {\n\t\treturn 0, fmt.Errorf(\"0으로 나눌 수 없음\")\n\t}\n\treturn numA / numB, nil\n}\n\nfunc main() {",
-            "displayContent": "// P01. Go 기본 패턴\n// ============================================================\n\ntype User struct {\n\tName  string\n\tAge   int\n\tAdmin bool\n}\n\nfunc add(numA int, numB int) int {\n\treturn numA + numB\n}\n\nfunc divide(numA int, numB int) (int, error) {\n\tif numB == 0 {\n\t\treturn 0, fmt.Errorf(\"0으로 나눌 수 없음\")\n\t}\n\treturn numA / numB, nil\n}\n\nfunc main() {"
+            "title": "구조체 정의[struct]",
+            "content": "type User struct {\n\tName  string\n\tAge   int\n\tAdmin bool\n}",
+            "displayContent": "// 구조체 정의[struct]\ntype User struct {\n\tName  string\n\tAge   int\n\tAdmin bool\n}"
+          },
+          {
+            "id": "language-go-p01-part-2b",
+            "title": "함수 정의[function]",
+            "content": "func add(numA int, numB int) int {\n\treturn numA + numB\n}",
+            "displayContent": "// 함수 정의[function] - 매개변수와 반환 타입을 뒤에 쓴다\nfunc add(numA int, numB int) int {\n\treturn numA + numB\n}"
+          },
+          {
+            "id": "language-go-p01-part-2c",
+            "title": "에러 반환[error return]",
+            "content": "func divide(numA int, numB int) (int, error) {\n\tif numB == 0 {\n\t\treturn 0, fmt.Errorf(\"0으로 나눌 수 없음\")\n\t}\n\treturn numA / numB, nil\n}",
+            "displayContent": "// 에러 반환[error return] - (값, error) 복수 반환이 Go 관례\nfunc divide(numA int, numB int) (int, error) {\n\tif numB == 0 {\n\t\treturn 0, fmt.Errorf(\"0으로 나눌 수 없음\")\n\t}\n\treturn numA / numB, nil\n}"
           },
           {
             "id": "language-go-p01-part-3",
@@ -639,21 +1038,27 @@ export const languageTracks: LanguageTrack[] = [
       {
         "id": "language-go-p02",
         "title": "P02.실무-패턴",
-        "fileName": "P02.실무-패턴.go",
-        "sourcePath": "assets/typingSource/Language-go/P02.실무-패턴.go",
+        "fileName": "P02.실무-패턴.yaml",
+        "sourcePath": "assets/raw/syntax/go/P02.실무-패턴.yaml",
         "language": "go",
         "parts": [
           {
             "id": "language-go-p02-part-1",
-            "title": "P02.실무-패턴",
+            "title": "패키지와 임포트[package / import]",
             "content": "package main\n\nimport (\n\t\"encoding/json\"\n\t\"fmt\"\n)",
-            "displayContent": "package main\n\nimport (\n\t\"encoding/json\"\n\t\"fmt\"\n)\n\n// ============================================================"
+            "displayContent": "// 패키지와 임포트[package / import]\npackage main\n\nimport (\n\t\"encoding/json\"\n\t\"fmt\"\n)"
           },
           {
             "id": "language-go-p02-part-2",
-            "title": "P02. Go 실무 패턴",
-            "content": "type Product struct {\n\tName  string `json:\"name\"`\n\tPrice int    `json:\"price\"`\n}\n\nfunc makeDoubles(input []int) []int {\n\tresult := make([]int, 0, len(input))\n\tfor _, item := range input {\n\t\tresult = append(result, item*2)\n\t}\n\treturn result\n}\n\nfunc main() {",
-            "displayContent": "// P02. Go 실무 패턴\n// ============================================================\n\ntype Product struct {\n\tName  string `json:\"name\"`\n\tPrice int    `json:\"price\"`\n}\n\nfunc makeDoubles(input []int) []int {\n\tresult := make([]int, 0, len(input))\n\tfor _, item := range input {\n\t\tresult = append(result, item*2)\n\t}\n\treturn result\n}\n\nfunc main() {"
+            "title": "JSON 태그 구조체[struct tag]",
+            "content": "type Product struct {\n\tName  string `json:\"name\"`\n\tPrice int    `json:\"price\"`\n}",
+            "displayContent": "// JSON 태그 구조체[struct tag] - 직렬화 필드명 지정\ntype Product struct {\n\tName  string `json:\"name\"`\n\tPrice int    `json:\"price\"`\n}"
+          },
+          {
+            "id": "language-go-p02-part-2b",
+            "title": "슬라이스 변환 함수[slice transform]",
+            "content": "func makeDoubles(input []int) []int {\n\tresult := make([]int, 0, len(input))\n\tfor _, item := range input {\n\t\tresult = append(result, item*2)\n\t}\n\treturn result\n}",
+            "displayContent": "// 슬라이스 변환 함수[slice transform] - make로 용량 미리 확보\nfunc makeDoubles(input []int) []int {\n\tresult := make([]int, 0, len(input))\n\tfor _, item := range input {\n\t\tresult = append(result, item*2)\n\t}\n\treturn result\n}"
           },
           {
             "id": "language-go-p02-part-3",
@@ -690,22 +1095,22 @@ export const languageTracks: LanguageTrack[] = [
     ]
   },
   {
-    "id": "language-java",
+    "id": "java",
     "label": "Java",
-    "folderName": "Language-Java",
+    "folderName": "java",
     "lessons": [
       {
         "id": "language-java-p01",
         "title": "P01.기본-패턴",
-        "fileName": "P01.기본-패턴.java",
-        "sourcePath": "assets/typingSource/Language-Java/P01.기본-패턴.java",
+        "fileName": "P01.기본-패턴.yaml",
+        "sourcePath": "assets/raw/syntax/java/P01.기본-패턴.yaml",
         "language": "java",
         "parts": [
           {
             "id": "language-java-p01-part-1",
-            "title": "P01.기본-패턴",
+            "title": "클래스 골격[class / enum / static method]",
             "content": "class P01BasicPatterns {\n\n    enum UserRole {\n        USER, ADMIN\n    }\n\n    static int add(int numA, int numB) {\n        return numA + numB;\n    }\n\n    public static void main(String[] args) {",
-            "displayContent": "class P01BasicPatterns {\n\n    enum UserRole {\n        USER, ADMIN\n    }\n\n    static int add(int numA, int numB) {\n        return numA + numB;\n    }\n\n    public static void main(String[] args) {"
+            "displayContent": "// 클래스 골격[class / enum / static method]\nclass P01BasicPatterns {\n\n    enum UserRole {\n        USER, ADMIN\n    }\n\n    static int add(int numA, int numB) {\n        return numA + numB;\n    }\n\n    public static void main(String[] args) {"
           },
           {
             "id": "language-java-p01-part-2",
@@ -760,13 +1165,13 @@ export const languageTracks: LanguageTrack[] = [
       {
         "id": "language-java-p02",
         "title": "P02.실무-패턴",
-        "fileName": "P02.실무-패턴.java",
-        "sourcePath": "assets/typingSource/Language-Java/P02.실무-패턴.java",
+        "fileName": "P02.실무-패턴.yaml",
+        "sourcePath": "assets/raw/syntax/java/P02.실무-패턴.yaml",
         "language": "java",
         "parts": [
           {
             "id": "language-java-p02-part-1",
-            "title": "P02.실무-패턴",
+            "title": "임포트와 클래스 골격[import / class]",
             "content": "import java.util.ArrayList;\nimport java.util.HashMap;\nimport java.util.List;\nimport java.util.Map;\n\nclass P02PracticalPatterns {\n    public static void main(String[] args) {",
             "displayContent": "import java.util.ArrayList;\nimport java.util.HashMap;\nimport java.util.List;\nimport java.util.Map;\n\nclass P02PracticalPatterns {\n    public static void main(String[] args) {"
           },
@@ -805,52 +1210,52 @@ export const languageTracks: LanguageTrack[] = [
     ]
   },
   {
-    "id": "language-javascript",
+    "id": "javascript",
     "label": "JavaScript",
-    "folderName": "Language-JavaScript",
+    "folderName": "javascript",
     "lessons": [
       {
         "id": "language-javascript-p01",
         "title": "P01.변수-구조분해",
-        "fileName": "P01.변수-구조분해.js",
-        "sourcePath": "assets/typingSource/Language-JavaScript/P01.변수-구조분해.js",
+        "fileName": "P01.변수-구조분해.yaml",
+        "sourcePath": "assets/raw/syntax/javascript/P01.변수-구조분해.yaml",
         "language": "javascript",
         "parts": [
           {
             "id": "language-javascript-p01-part-1",
             "title": "변수 스코프[variable scope]",
             "content": "var varA = 'function-scoped';\nlet letA = 'block-scoped';\n\nvar userObj = { name: 'kim' };\nuserObj.name = 'lee';",
-            "displayContent": "/*** 변수 스코프[variable scope] ***/\nvar varA = 'function-scoped';      // 함수 스코프[function scope], undefined 호이스팅[hoisting]\nlet letA = 'block-scoped';         // 블록 스코프[block scope], TDZ (선언 전 접근 → ReferenceError)\n// const constA = 'read-only';     // 재할당 불가[immutable binding] (속성은 변경 가능)\n\nvar userObj = { name: 'kim' };\nuserObj.name = 'lee';   // ✅ 속성 변경[property mutation] 가능\n// userObj = {};        // ❌ 재할당[reassignment] 불가 (const일 경우)"
+            "displayContent": "/* 변수 스코프[variable scope] */\nvar varA = 'function-scoped';      // 함수 스코프[function scope], undefined 호이스팅[hoisting]\nlet letA = 'block-scoped';         // 블록 스코프[block scope], TDZ (선언 전 접근 → ReferenceError)\n// const constA = 'read-only';     // 재할당 불가[immutable binding] (속성은 변경 가능)\n\nvar userObj = { name: 'kim' };\nuserObj.name = 'lee';   // ✅ 속성 변경[property mutation] 가능\n// userObj = {};        // ❌ 재할당[reassignment] 불가 (const일 경우)"
           },
           {
             "id": "language-javascript-p01-part-2",
             "title": "지수[exponentiation] / 논리 할당 연산자[logical assignment operator]",
             "content": "2 ** 10\n2 ** 3 ** 2\n\nvar laA = 1;\nlaA &&= 99;\n\nvar laB = 0;\nlaB ||= 99;\n\nvar laC = null;\nlaC ??= 99;",
-            "displayContent": "/*** 지수[exponentiation] / 논리 할당 연산자[logical assignment operator] ***/\n2 ** 10          // 1024\n2 ** 3 ** 2      // 512 (우→좌: 3**2=9, 2**9=512)\n\nvar laA = 1;\nlaA &&= 99;      // truthy → 재할당[assignment]: 99\n\nvar laB = 0;\nlaB ||= 99;      // falsy → 재할당[assignment]: 99\n\nvar laC = null;\nlaC ??= 99;      // null|undefined → 재할당[assignment]: 99"
+            "displayContent": "/* 지수[exponentiation] / 논리 할당 연산자[logical assignment operator] */\n2 ** 10          // 1024\n2 ** 3 ** 2      // 512 (우→좌: 3**2=9, 2**9=512)\n\nvar laA = 1;\nlaA &&= 99;      // truthy → 재할당[assignment]: 99\n\nvar laB = 0;\nlaB ||= 99;      // falsy → 재할당[assignment]: 99\n\nvar laC = null;\nlaC ??= 99;      // null|undefined → 재할당[assignment]: 99"
           },
           {
             "id": "language-javascript-p01-part-3",
             "title": "Nullish 병합[nullish coalescing] (??)",
             "content": "null      ?? 'default'\nundefined ?? 'default'\n0         ?? 'default'\n''        ?? 'default'",
-            "displayContent": "/*** Nullish 병합[nullish coalescing] (??) ***/\nnull      ?? 'default'   // 'default'\nundefined ?? 'default'   // 'default'\n0         ?? 'default'   // 0   (falsy지만 null이 아님)\n''        ?? 'default'   // ''  (falsy지만 null이 아님)"
+            "displayContent": "/* Nullish 병합[nullish coalescing] (??) */\nnull      ?? 'default'   // 'default'\nundefined ?? 'default'   // 'default'\n0         ?? 'default'   // 0   (falsy지만 null이 아님)\n''        ?? 'default'   // ''  (falsy지만 null이 아님)"
           },
           {
             "id": "language-javascript-p01-part-4",
             "title": "옵셔널 체이닝[optional chaining] (?.)",
             "content": "var safeObj = { inner: { val: 42 } };\nsafeObj?.inner?.val\nsafeObj?.missing?.val\nsafeObj?.method?.()",
-            "displayContent": "/*** 옵셔널 체이닝[optional chaining] (?.) ***/\nvar safeObj = { inner: { val: 42 } };\nsafeObj?.inner?.val       // 42\nsafeObj?.missing?.val     // undefined (단락 평가[short-circuit evaluation], 에러 없음)\nsafeObj?.method?.()       // undefined (메서드 부재 시 안전 호출)"
+            "displayContent": "/* 옵셔널 체이닝[optional chaining] (?.) */\nvar safeObj = { inner: { val: 42 } };\nsafeObj?.inner?.val       // 42\nsafeObj?.missing?.val     // undefined (단락 평가[short-circuit evaluation], 에러 없음)\nsafeObj?.method?.()       // undefined (메서드 부재 시 안전 호출)"
           },
           {
             "id": "language-javascript-p01-part-5",
             "title": "스프레드 연산자[spread operator]",
             "content": "var mergedObj = { x: 1, ...{ y: 2, z: 3 } };\nvar mergedArr = [1, ...[2, 3]];",
-            "displayContent": "/*** 스프레드 연산자[spread operator] ***/\nvar mergedObj = { x: 1, ...{ y: 2, z: 3 } };   // { x: 1, y: 2, z: 3 }\nvar mergedArr = [1, ...[2, 3]];                 // [1, 2, 3]"
+            "displayContent": "/* 스프레드 연산자[spread operator] */\nvar mergedObj = { x: 1, ...{ y: 2, z: 3 } };   // { x: 1, y: 2, z: 3 }\nvar mergedArr = [1, ...[2, 3]];                 // [1, 2, 3]"
           },
           {
             "id": "language-javascript-p01-part-6",
             "title": "배열 구조분해[array destructuring]",
             "content": "var [adA, adB] = [10, 20];\nvar [adC, , adD] = [1, 2, 3];\nvar [adE, ...adRest] = [1, 2, 3];",
-            "displayContent": "/*** 배열 구조분해[array destructuring] ***/\nvar [adA, adB] = [10, 20];           // adA=10, adB=20\nvar [adC, , adD] = [1, 2, 3];        // adC=1, adD=3 (두 번째 건너뜀)\nvar [adE, ...adRest] = [1, 2, 3];    // adE=1, adRest=[2, 3]"
+            "displayContent": "/* 배열 구조분해[array destructuring] */\nvar [adA, adB] = [10, 20];           // adA=10, adB=20\nvar [adC, , adD] = [1, 2, 3];        // adC=1, adD=3 (두 번째 건너뜀)\nvar [adE, ...adRest] = [1, 2, 3];    // adE=1, adRest=[2, 3]"
           },
           {
             "id": "language-javascript-p01-part-7",
@@ -862,118 +1267,118 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-javascript-p01-part-8",
             "title": "객체 구조분해[object destructuring]",
             "content": "var { name: odName, age: odAge = 30 } = { name: 'kim' };\n\nvar { a: odA, b: odB } = { a: 1, b: 2 };\n\nvar { p: odP, ...odRest } = { p: 1, q: 2, r: 3 };",
-            "displayContent": "/*** 객체 구조분해[object destructuring] ***/\nvar { name: odName, age: odAge = 30 } = { name: 'kim' };\n// odName='kim', odAge=30 (기본값[default value] 적용)\n\nvar { a: odA, b: odB } = { a: 1, b: 2 };\n// odA=1, odB=2 (키→변수 이름 변경[aliasing])\n\nvar { p: odP, ...odRest } = { p: 1, q: 2, r: 3 };\n// odP=1, odRest={ q:2, r:3 } (나머지 수집[rest collection])"
+            "displayContent": "/* 객체 구조분해[object destructuring] */\nvar { name: odName, age: odAge = 30 } = { name: 'kim' };\n// odName='kim', odAge=30 (기본값[default value] 적용)\n\nvar { a: odA, b: odB } = { a: 1, b: 2 };\n// odA=1, odB=2 (키→변수 이름 변경[aliasing])\n\nvar { p: odP, ...odRest } = { p: 1, q: 2, r: 3 };\n// odP=1, odRest={ q:2, r:3 } (나머지 수집[rest collection])"
           },
           {
             "id": "language-javascript-p01-part-9",
             "title": "중첩 구조분해[nested destructuring]",
             "content": "var nestedSrc = { id: 7, addr: { city: 'Seoul', zip: '12345' } };\nvar { id: nestedId, addr: { city: nestedCity } } = nestedSrc;",
-            "displayContent": "/*** 중첩 구조분해[nested destructuring] ***/\nvar nestedSrc = { id: 7, addr: { city: 'Seoul', zip: '12345' } };\nvar { id: nestedId, addr: { city: nestedCity } } = nestedSrc;\n// nestedId=7, nestedCity='Seoul'"
+            "displayContent": "/* 중첩 구조분해[nested destructuring] */\nvar nestedSrc = { id: 7, addr: { city: 'Seoul', zip: '12345' } };\nvar { id: nestedId, addr: { city: nestedCity } } = nestedSrc;\n// nestedId=7, nestedCity='Seoul'"
           },
           {
             "id": "language-javascript-p01-part-10",
             "title": "파라미터 구조분해[parameter destructuring]",
             "content": "function showUser({ name, role = 'user' }) {\n  return `${name}(${role})`;\n}\nshowUser({ name: 'kim' });\nshowUser({ name: 'lee', role: 'admin' });",
-            "displayContent": "/*** 파라미터 구조분해[parameter destructuring] ***/\nfunction showUser({ name, role = 'user' }) {\n  return `${name}(${role})`;\n}\nshowUser({ name: 'kim' });                // 'kim(user)'\nshowUser({ name: 'lee', role: 'admin' }); // 'lee(admin)'"
+            "displayContent": "/* 파라미터 구조분해[parameter destructuring] */\nfunction showUser({ name, role = 'user' }) {\n  return `${name}(${role})`;\n}\nshowUser({ name: 'kim' });                // 'kim(user)'\nshowUser({ name: 'lee', role: 'admin' }); // 'lee(admin)'"
           },
           {
             "id": "language-javascript-p01-part-11",
             "title": "for...of + 구조분해[destructuring]",
             "content": "var teamList = [\n  { name: 'kim', score: 90 },\n  { name: 'lee', score: 80 },\n];\nfor (var { name: tName, score: tScore } of teamList) {\n  console.log(tName, tScore);\n}",
-            "displayContent": "/*** for...of + 구조분해[destructuring] ***/\nvar teamList = [\n  { name: 'kim', score: 90 },\n  { name: 'lee', score: 80 },\n];\nfor (var { name: tName, score: tScore } of teamList) {\n  console.log(tName, tScore);\n}\n// kim 90\n// lee 80"
+            "displayContent": "/* for...of + 구조분해[destructuring] */\nvar teamList = [\n  { name: 'kim', score: 90 },\n  { name: 'lee', score: 80 },\n];\nfor (var { name: tName, score: tScore } of teamList) {\n  console.log(tName, tScore);\n}\n// kim 90\n// lee 80"
           },
           {
             "id": "language-javascript-p01-part-12",
             "title": "동적 키 구조분해[computed property destructuring]",
             "content": "var dynKey = 'color';\nvar { [dynKey]: dynVal } = { color: 'blue' };",
-            "displayContent": "/*** 동적 키 구조분해[computed property destructuring] ***/\nvar dynKey = 'color';\nvar { [dynKey]: dynVal } = { color: 'blue' };\n// dynVal='blue'"
+            "displayContent": "/* 동적 키 구조분해[computed property destructuring] */\nvar dynKey = 'color';\nvar { [dynKey]: dynVal } = { color: 'blue' };\n// dynVal='blue'"
           },
           {
             "id": "language-javascript-p01-part-13",
             "title": "삼항 연산자 중첩[nested ternary operator]",
             "content": "function grade(score) {\n  return score >= 90 ? 'A'\n       : score >= 80 ? 'B'\n       : score >= 70 ? 'C'\n       :               'F';\n}\ngrade(85)\ngrade(65)",
-            "displayContent": "/*** 삼항 연산자 중첩[nested ternary operator] ***/\nfunction grade(score) {\n  return score >= 90 ? 'A'\n       : score >= 80 ? 'B'\n       : score >= 70 ? 'C'\n       :               'F';\n}\ngrade(85)  // 'B'\ngrade(65)  // 'F'"
+            "displayContent": "/* 삼항 연산자 중첩[nested ternary operator] */\nfunction grade(score) {\n  return score >= 90 ? 'A'\n       : score >= 80 ? 'B'\n       : score >= 70 ? 'C'\n       :               'F';\n}\ngrade(85)  // 'B'\ngrade(65)  // 'F'"
           }
         ]
       },
       {
         "id": "language-javascript-p02",
         "title": "P02.배열",
-        "fileName": "P02.배열.js",
-        "sourcePath": "assets/typingSource/Language-JavaScript/P02.배열.js",
+        "fileName": "P02.배열.yaml",
+        "sourcePath": "assets/raw/syntax/javascript/P02.배열.yaml",
         "language": "javascript",
         "parts": [
           {
             "id": "language-javascript-p02-part-1",
             "title": "배열 생성[array creation]",
             "content": "Array.of(1, 2, 3)\nArray.from('ABC')\nArray.from({ length: 3 }, (_, i) => i)\nArray.from(new Set([1, 2, 2, 3]))\nArray.isArray([1, 2])",
-            "displayContent": "/*** 배열 생성[array creation] ***/\nArray.of(1, 2, 3)                        // [1, 2, 3]\nArray.from('ABC')                        // ['A', 'B', 'C']\nArray.from({ length: 3 }, (_, i) => i)  // [0, 1, 2]\nArray.from(new Set([1, 2, 2, 3]))        // [1, 2, 3] (중복 제거[deduplication])\nArray.isArray([1, 2])                    // true"
+            "displayContent": "/* 배열 생성[array creation] */\nArray.of(1, 2, 3)                        // [1, 2, 3]\nArray.from('ABC')                        // ['A', 'B', 'C']\nArray.from({ length: 3 }, (_, i) => i)  // [0, 1, 2]\nArray.from(new Set([1, 2, 2, 3]))        // [1, 2, 3] (중복 제거[deduplication])\nArray.isArray([1, 2])                    // true"
           },
           {
             "id": "language-javascript-p02-part-2",
             "title": "기본 접근[access] / 변환[conversion]",
             "content": "[9, 8, 7].at(0)\n[9, 8, 7].at(-1)\n[1, 2, 'a'].toString()\n['A', 'B', 'C'].join(' - ')",
-            "displayContent": "/*** 기본 접근[access] / 변환[conversion] ***/\n[9, 8, 7].at(0)     // 9\n[9, 8, 7].at(-1)    // 7 (음수 인덱스[negative index])\n[1, 2, 'a'].toString()       // '1,2,a'\n['A', 'B', 'C'].join(' - ')  // 'A - B - C'"
+            "displayContent": "/* 기본 접근[access] / 변환[conversion] */\n[9, 8, 7].at(0)     // 9\n[9, 8, 7].at(-1)    // 7 (음수 인덱스[negative index])\n[1, 2, 'a'].toString()       // '1,2,a'\n['A', 'B', 'C'].join(' - ')  // 'A - B - C'"
           },
           {
             "id": "language-javascript-p02-part-3",
             "title": "평탄화[flatten]",
             "content": "[1, [2, [3]]].flat()\n[1, [2, [3]]].flat(Infinity)\n['A B', 'C D'].flatMap(e => e.split(' '))",
-            "displayContent": "/*** 평탄화[flatten] ***/\n[1, [2, [3]]].flat()           // [1, 2, [3]]  (기본 깊이[depth] 1)\n[1, [2, [3]]].flat(Infinity)   // [1, 2, 3]    (전체 깊이[full depth])\n['A B', 'C D'].flatMap(e => e.split(' '))  // ['A', 'B', 'C', 'D']"
+            "displayContent": "/* 평탄화[flatten] */\n[1, [2, [3]]].flat()           // [1, 2, [3]]  (기본 깊이[depth] 1)\n[1, [2, [3]]].flat(Infinity)   // [1, 2, 3]    (전체 깊이[full depth])\n['A B', 'C D'].flatMap(e => e.split(' '))  // ['A', 'B', 'C', 'D']"
           },
           {
             "id": "language-javascript-p02-part-4",
             "title": "원본 변경[mutation] - 추가/제거",
             "content": "var mutPush = [1, 2];\nmutPush.push(3, 4);\n\nvar mutPop = [1, 2, 3];\nmutPop.pop();\n\nvar mutUnshift = [3, 4];\nmutUnshift.unshift(1, 2);\n\nvar mutShift = [1, 2, 3];\nmutShift.shift();",
-            "displayContent": "/*** 원본 변경[mutation] - 추가/제거 ***/\nvar mutPush = [1, 2];\nmutPush.push(3, 4);   // 반환: 4 (길이[length]), mutPush=[1,2,3,4]\n\nvar mutPop = [1, 2, 3];\nmutPop.pop();          // 반환: 3, mutPop=[1,2]\n\nvar mutUnshift = [3, 4];\nmutUnshift.unshift(1, 2);  // 반환: 4, mutUnshift=[1,2,3,4]\n\nvar mutShift = [1, 2, 3];\nmutShift.shift();           // 반환: 1, mutShift=[2,3]"
+            "displayContent": "/* 원본 변경[mutation] - 추가/제거 */\nvar mutPush = [1, 2];\nmutPush.push(3, 4);   // 반환: 4 (길이[length]), mutPush=[1,2,3,4]\n\nvar mutPop = [1, 2, 3];\nmutPop.pop();          // 반환: 3, mutPop=[1,2]\n\nvar mutUnshift = [3, 4];\nmutUnshift.unshift(1, 2);  // 반환: 4, mutUnshift=[1,2,3,4]\n\nvar mutShift = [1, 2, 3];\nmutShift.shift();           // 반환: 1, mutShift=[2,3]"
           },
           {
             "id": "language-javascript-p02-part-5",
             "title": "원본 변경[mutation] - 정렬[sort]",
             "content": "var mutSort = [10, 1, 21, 2];\nmutSort.sort((a, b) => a - b);\nmutSort.reverse();",
-            "displayContent": "/*** 원본 변경[mutation] - 정렬[sort] ***/\nvar mutSort = [10, 1, 21, 2];\nmutSort.sort((a, b) => a - b);  // [1, 2, 10, 21] 오름차순[ascending]\nmutSort.reverse();               // [21, 10, 2, 1]"
+            "displayContent": "/* 원본 변경[mutation] - 정렬[sort] */\nvar mutSort = [10, 1, 21, 2];\nmutSort.sort((a, b) => a - b);  // [1, 2, 10, 21] 오름차순[ascending]\nmutSort.reverse();               // [21, 10, 2, 1]"
           },
           {
             "id": "language-javascript-p02-part-6",
             "title": "원본 유지[immutable] (ES2023 - toSorted / toReversed / with)",
             "content": "var immArr = [3, 1, 2];\nimmArr.toSorted((a, b) => a - b)\nimmArr.toReversed()\nimmArr.with(1, 99)\nimmArr",
-            "displayContent": "/*** 원본 유지[immutable] (ES2023 - toSorted / toReversed / with) ***/\nvar immArr = [3, 1, 2];\nimmArr.toSorted((a, b) => a - b)  // [1, 2, 3] (원본 유지[non-mutating])\nimmArr.toReversed()               // [2, 1, 3] (원본 유지[non-mutating])\nimmArr.with(1, 99)                // [3, 99, 2] (인덱스1 값 교체[replace], 원본 유지)\nimmArr                            // [3, 1, 2]"
+            "displayContent": "/* 원본 유지[immutable] (ES2023 - toSorted / toReversed / with) */\nvar immArr = [3, 1, 2];\nimmArr.toSorted((a, b) => a - b)  // [1, 2, 3] (원본 유지[non-mutating])\nimmArr.toReversed()               // [2, 1, 3] (원본 유지[non-mutating])\nimmArr.with(1, 99)                // [3, 99, 2] (인덱스1 값 교체[replace], 원본 유지)\nimmArr                            // [3, 1, 2]"
           },
           {
             "id": "language-javascript-p02-part-7",
             "title": "splice vs slice",
             "content": "var spliceArr = ['A', 'B', 'C', 'D', 'E'];\nspliceArr.splice(1, 2);\nspliceArr.splice(1, 0, 'X');\n\n['A', 'B', 'C', 'D'].slice(1, 3)\n['A', 'B', 'C', 'D'].slice(-2)",
-            "displayContent": "/*** splice vs slice ***/\nvar spliceArr = ['A', 'B', 'C', 'D', 'E'];\nspliceArr.splice(1, 2);       // 반환[return]: ['B','C'], spliceArr=['A','D','E']\nspliceArr.splice(1, 0, 'X');  // 삽입[insert]: spliceArr=['A','X','D','E']\n\n['A', 'B', 'C', 'D'].slice(1, 3)   // ['B', 'C'] (원본 유지[non-mutating])\n['A', 'B', 'C', 'D'].slice(-2)     // ['C', 'D']"
+            "displayContent": "/* splice vs slice */\nvar spliceArr = ['A', 'B', 'C', 'D', 'E'];\nspliceArr.splice(1, 2);       // 반환[return]: ['B','C'], spliceArr=['A','D','E']\nspliceArr.splice(1, 0, 'X');  // 삽입[insert]: spliceArr=['A','X','D','E']\n\n['A', 'B', 'C', 'D'].slice(1, 3)   // ['B', 'C'] (원본 유지[non-mutating])\n['A', 'B', 'C', 'D'].slice(-2)     // ['C', 'D']"
           },
           {
             "id": "language-javascript-p02-part-8",
             "title": "fill / copyWithin",
             "content": "[0, 0, 0].fill(7)\n[1, 2, 3, 4].fill(0, 1, 3)\n[1, 2, 3, 4, 5].copyWithin(0, 3)",
-            "displayContent": "/*** fill / copyWithin ***/\n[0, 0, 0].fill(7)            // [7, 7, 7]\n[1, 2, 3, 4].fill(0, 1, 3)  // [1, 0, 0, 4]\n[1, 2, 3, 4, 5].copyWithin(0, 3)  // [4, 5, 3, 4, 5] (index3부터 index0에 덮어씀[overwrite])"
+            "displayContent": "/* fill / copyWithin */\n[0, 0, 0].fill(7)            // [7, 7, 7]\n[1, 2, 3, 4].fill(0, 1, 3)  // [1, 0, 0, 4]\n[1, 2, 3, 4, 5].copyWithin(0, 3)  // [4, 5, 3, 4, 5] (index3부터 index0에 덮어씀[overwrite])"
           },
           {
             "id": "language-javascript-p02-part-9",
             "title": "검색[search]",
             "content": "[10, 20, 30].indexOf(20)\n[10, 20, 30].includes(20)\n[1, 2, 3, 4].find(e => e > 2)\n[1, 2, 3, 4].findIndex(e => e > 2)\n[1, 2, 3, 4].findLast(e => e > 2)\n[1, 2, 3, 4].findLastIndex(e => e > 2)",
-            "displayContent": "/*** 검색[search] ***/\n[10, 20, 30].indexOf(20)               // 1\n[10, 20, 30].includes(20)              // true\n[1, 2, 3, 4].find(e => e > 2)         // 3 (첫 번째 일치[match] 요소)\n[1, 2, 3, 4].findIndex(e => e > 2)    // 2 (첫 번째 일치[match] 인덱스)\n[1, 2, 3, 4].findLast(e => e > 2)     // 4 (마지막 일치[match] 요소)\n[1, 2, 3, 4].findLastIndex(e => e > 2) // 3"
+            "displayContent": "/* 검색[search] */\n[10, 20, 30].indexOf(20)               // 1\n[10, 20, 30].includes(20)              // true\n[1, 2, 3, 4].find(e => e > 2)         // 3 (첫 번째 일치[match] 요소)\n[1, 2, 3, 4].findIndex(e => e > 2)    // 2 (첫 번째 일치[match] 인덱스)\n[1, 2, 3, 4].findLast(e => e > 2)     // 4 (마지막 일치[match] 요소)\n[1, 2, 3, 4].findLastIndex(e => e > 2) // 3"
           },
           {
             "id": "language-javascript-p02-part-10",
             "title": "조건 검사[predicate]",
             "content": "[2, 4, 6].every(e => e % 2 === 0)\n[1, 2, 3].some(e => e > 2)\n[1, 2, 3].some(e => e > 10)",
-            "displayContent": "/*** 조건 검사[predicate] ***/\n[2, 4, 6].every(e => e % 2 === 0)   // true  (모두 충족[all pass])\n[1, 2, 3].some(e => e > 2)          // true  (하나라도 충족[any pass])\n[1, 2, 3].some(e => e > 10)         // false"
+            "displayContent": "/* 조건 검사[predicate] */\n[2, 4, 6].every(e => e % 2 === 0)   // true  (모두 충족[all pass])\n[1, 2, 3].some(e => e > 2)          // true  (하나라도 충족[any pass])\n[1, 2, 3].some(e => e > 10)         // false"
           },
           {
             "id": "language-javascript-p02-part-11",
             "title": "변환[transformation]",
             "content": "[1, 2, 3].map(e => e * 2)\n[1, 2, 3, 4].filter(e => e % 2 === 0)\n[1, 2, 3].map(e => e ** 2)",
-            "displayContent": "/*** 변환[transformation] ***/\n[1, 2, 3].map(e => e * 2)              // [2, 4, 6]\n[1, 2, 3, 4].filter(e => e % 2 === 0) // [2, 4]\n[1, 2, 3].map(e => e ** 2)            // [1, 4, 9]"
+            "displayContent": "/* 변환[transformation] */\n[1, 2, 3].map(e => e * 2)              // [2, 4, 6]\n[1, 2, 3, 4].filter(e => e % 2 === 0) // [2, 4]\n[1, 2, 3].map(e => e ** 2)            // [1, 4, 9]"
           },
           {
             "id": "language-javascript-p02-part-12",
             "title": "누산[accumulation] (reduce)",
             "content": "[1, 2, 3, 4].reduce((acc, cur) => acc + cur, 0)\n[5, 10, 8].reduce((acc, cur) => Math.max(acc, cur), 0)",
-            "displayContent": "/*** 누산[accumulation] (reduce) ***/\n[1, 2, 3, 4].reduce((acc, cur) => acc + cur, 0)  // 10 (합계[sum])\n[5, 10, 8].reduce((acc, cur) => Math.max(acc, cur), 0)  // 10 (최대값[max])"
+            "displayContent": "/* 누산[accumulation] (reduce) */\n[1, 2, 3, 4].reduce((acc, cur) => acc + cur, 0)  // 10 (합계[sum])\n[5, 10, 8].reduce((acc, cur) => Math.max(acc, cur), 0)  // 10 (최대값[max])"
           },
           {
             "id": "language-javascript-p02-part-13",
@@ -991,28 +1396,28 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-javascript-p02-part-15",
             "title": "이터레이터[iterator] (entries / keys / values)",
             "content": "var iterSrc = ['X', 'Y', 'Z'];\nfor (var [idx, val] of iterSrc.entries()) {\n  console.log(idx, val);\n}\n\n[...iterSrc.keys()];\n[...iterSrc.values()];",
-            "displayContent": "/*** 이터레이터[iterator] (entries / keys / values) ***/\nvar iterSrc = ['X', 'Y', 'Z'];\nfor (var [idx, val] of iterSrc.entries()) {\n  console.log(idx, val);\n}\n// 0 'X'\n// 1 'Y'\n// 2 'Z'\n\n[...iterSrc.keys()];    // [0, 1, 2]\n[...iterSrc.values()];  // ['X', 'Y', 'Z']"
+            "displayContent": "/* 이터레이터[iterator] (entries / keys / values) */\nvar iterSrc = ['X', 'Y', 'Z'];\nfor (var [idx, val] of iterSrc.entries()) {\n  console.log(idx, val);\n}\n// 0 'X'\n// 1 'Y'\n// 2 'Z'\n\n[...iterSrc.keys()];    // [0, 1, 2]\n[...iterSrc.values()];  // ['X', 'Y', 'Z']"
           },
           {
             "id": "language-javascript-p02-part-16",
             "title": "concat / 스프레드[spread] 비교",
             "content": "[1, 2].concat([3, 4], 5);\n[...[1, 2], ...[3, 4], 5];",
-            "displayContent": "/*** concat / 스프레드[spread] 비교 ***/\n[1, 2].concat([3, 4], 5);   // [1, 2, 3, 4, 5]\n[...[1, 2], ...[3, 4], 5];  // [1, 2, 3, 4, 5]"
+            "displayContent": "/* concat / 스프레드[spread] 비교 */\n[1, 2].concat([3, 4], 5);   // [1, 2, 3, 4, 5]\n[...[1, 2], ...[3, 4], 5];  // [1, 2, 3, 4, 5]"
           }
         ]
       },
       {
         "id": "language-javascript-p03",
         "title": "P03.객체",
-        "fileName": "P03.객체.js",
-        "sourcePath": "assets/typingSource/Language-JavaScript/P03.객체.js",
+        "fileName": "P03.객체.yaml",
+        "sourcePath": "assets/raw/syntax/javascript/P03.객체.yaml",
         "language": "javascript",
         "parts": [
           {
             "id": "language-javascript-p03-part-1",
             "title": "기본 생성[creation] / 접근[access]",
             "content": "var baseObj = { name: 'kim', age: 20 };\nbaseObj.name\nbaseObj['age']",
-            "displayContent": "/*** 기본 생성[creation] / 접근[access] ***/\nvar baseObj = { name: 'kim', age: 20 };\nbaseObj.name     // 'kim'\nbaseObj['age']   // 20"
+            "displayContent": "/* 기본 생성[creation] / 접근[access] */\nvar baseObj = { name: 'kim', age: 20 };\nbaseObj.name     // 'kim'\nbaseObj['age']   // 20"
           },
           {
             "id": "language-javascript-p03-part-2",
@@ -1024,25 +1429,25 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-javascript-p03-part-3",
             "title": "Object.assign - 얕은 병합[shallow merge]",
             "content": "var assignTarget = { a: 1 };\nObject.assign(assignTarget, { b: 2 }, { c: 3 });\n\nvar cloneObj = Object.assign({}, assignTarget);",
-            "displayContent": "/*** Object.assign - 얕은 병합[shallow merge] ***/\nvar assignTarget = { a: 1 };\nObject.assign(assignTarget, { b: 2 }, { c: 3 });\n// assignTarget = { a:1, b:2, c:3 } (원본 변경[mutation])\n\nvar cloneObj = Object.assign({}, assignTarget);  // 얕은 복사[shallow copy]"
+            "displayContent": "/* Object.assign - 얕은 병합[shallow merge] */\nvar assignTarget = { a: 1 };\nObject.assign(assignTarget, { b: 2 }, { c: 3 });\n// assignTarget = { a:1, b:2, c:3 } (원본 변경[mutation])\n\nvar cloneObj = Object.assign({}, assignTarget);  // 얕은 복사[shallow copy]"
           },
           {
             "id": "language-javascript-p03-part-4",
             "title": "스프레드[spread]로 병합[merge] / 복사[copy]",
             "content": "var src1 = { a: 1, b: 2 };\nvar src2 = { b: 9, c: 3 };\nvar spreadMerge = { ...src1, ...src2 };\nvar spreadClone = { ...src1 };",
-            "displayContent": "/*** 스프레드[spread]로 병합[merge] / 복사[copy] ***/\nvar src1 = { a: 1, b: 2 };\nvar src2 = { b: 9, c: 3 };\nvar spreadMerge = { ...src1, ...src2 };  // { a:1, b:9, c:3 } (나중이 우선[last-wins])\nvar spreadClone = { ...src1 };           // { a:1, b:2 } (얕은 복사[shallow copy])"
+            "displayContent": "/* 스프레드[spread]로 병합[merge] / 복사[copy] */\nvar src1 = { a: 1, b: 2 };\nvar src2 = { b: 9, c: 3 };\nvar spreadMerge = { ...src1, ...src2 };  // { a:1, b:9, c:3 } (나중이 우선[last-wins])\nvar spreadClone = { ...src1 };           // { a:1, b:2 } (얕은 복사[shallow copy])"
           },
           {
             "id": "language-javascript-p03-part-5",
             "title": "Object.entries / keys / values",
             "content": "var sampleObj = { a: 1, b: 2, c: 3 };\nObject.keys(sampleObj)\nObject.values(sampleObj)\nObject.entries(sampleObj)",
-            "displayContent": "/*** Object.entries / keys / values ***/\nvar sampleObj = { a: 1, b: 2, c: 3 };\nObject.keys(sampleObj)    // ['a', 'b', 'c']\nObject.values(sampleObj)  // [1, 2, 3]\nObject.entries(sampleObj) // [['a',1], ['b',2], ['c',3]]"
+            "displayContent": "/* Object.entries / keys / values */\nvar sampleObj = { a: 1, b: 2, c: 3 };\nObject.keys(sampleObj)    // ['a', 'b', 'c']\nObject.values(sampleObj)  // [1, 2, 3]\nObject.entries(sampleObj) // [['a',1], ['b',2], ['c',3]]"
           },
           {
             "id": "language-javascript-p03-part-6",
             "title": "Object.fromEntries - 배열[array]→객체[object] / Map→객체[object]",
             "content": "Object.fromEntries([['x', 10], ['y', 20]])",
-            "displayContent": "/*** Object.fromEntries - 배열[array]→객체[object] / Map→객체[object] ***/\nObject.fromEntries([['x', 10], ['y', 20]])  // { x:10, y:20 }"
+            "displayContent": "/* Object.fromEntries - 배열[array]→객체[object] / Map→객체[object] */\nObject.fromEntries([['x', 10], ['y', 20]])  // { x:10, y:20 }"
           },
           {
             "id": "language-javascript-p03-part-7",
@@ -1054,94 +1459,94 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-javascript-p03-part-8",
             "title": "Object.hasOwn - 직접 소유 속성[own property] 확인",
             "content": "var hasObj = { x: 1 };\nObject.hasOwn(hasObj, 'x')\nObject.hasOwn(hasObj, 'toString')\n'x'        in hasObj\n'toString' in hasObj",
-            "displayContent": "/*** Object.hasOwn - 직접 소유 속성[own property] 확인 ***/\nvar hasObj = { x: 1 };\nObject.hasOwn(hasObj, 'x')        // true  (직접 소유[own])\nObject.hasOwn(hasObj, 'toString') // false (프로토타입 상속[prototype inheritance])\n'x'        in hasObj              // true\n'toString' in hasObj              // true  (상속[inherited] 포함)"
+            "displayContent": "/* Object.hasOwn - 직접 소유 속성[own property] 확인 */\nvar hasObj = { x: 1 };\nObject.hasOwn(hasObj, 'x')        // true  (직접 소유[own])\nObject.hasOwn(hasObj, 'toString') // false (프로토타입 상속[prototype inheritance])\n'x'        in hasObj              // true\n'toString' in hasObj              // true  (상속[inherited] 포함)"
           },
           {
             "id": "language-javascript-p03-part-9",
             "title": "Object.create - 프로토타입[prototype] 지정",
             "content": "var protoBase = { greet() { return `Hi, ${this.name}`; } };\nvar protoChild = Object.create(protoBase);\nprotoChild.name = 'kim';\nprotoChild.greet()\n\nObject.create(null)",
-            "displayContent": "/*** Object.create - 프로토타입[prototype] 지정 ***/\nvar protoBase = { greet() { return `Hi, ${this.name}`; } };\nvar protoChild = Object.create(protoBase);\nprotoChild.name = 'kim';\nprotoChild.greet()  // 'Hi, kim'\n\nObject.create(null)  // 프로토타입[prototype] 없는 순수 딕셔너리[plain dictionary]"
+            "displayContent": "/* Object.create - 프로토타입[prototype] 지정 */\nvar protoBase = { greet() { return `Hi, ${this.name}`; } };\nvar protoChild = Object.create(protoBase);\nprotoChild.name = 'kim';\nprotoChild.greet()  // 'Hi, kim'\n\nObject.create(null)  // 프로토타입[prototype] 없는 순수 딕셔너리[plain dictionary]"
           },
           {
             "id": "language-javascript-p03-part-10",
             "title": "Object.freeze / seal",
             "content": "var frozenObj = Object.freeze({ val: 1, inner: { n: 0 } });\nfrozenObj.val = 99;\nfrozenObj.val\nfrozenObj.inner.n = 99;\nfrozenObj.inner.n\n\nvar sealedObj = Object.seal({ val: 1 });\nsealedObj.val = 99;\ndelete sealedObj.val;\nsealedObj.val",
-            "displayContent": "/*** Object.freeze / seal ***/\nvar frozenObj = Object.freeze({ val: 1, inner: { n: 0 } });\nfrozenObj.val = 99;     // 무시됨 (strict 모드: TypeError)\nfrozenObj.val           // 1\nfrozenObj.inner.n = 99; // 얕은 동결[shallow freeze] → 중첩 객체는 변경 가능\nfrozenObj.inner.n       // 99\n\nvar sealedObj = Object.seal({ val: 1 });\nsealedObj.val = 99;     // ✅ 값 변경[value mutation] 가능\ndelete sealedObj.val;   // ❌ 삭제[deletion] 불가\nsealedObj.val           // 99"
+            "displayContent": "/* Object.freeze / seal */\nvar frozenObj = Object.freeze({ val: 1, inner: { n: 0 } });\nfrozenObj.val = 99;     // 무시됨 (strict 모드: TypeError)\nfrozenObj.val           // 1\nfrozenObj.inner.n = 99; // 얕은 동결[shallow freeze] → 중첩 객체는 변경 가능\nfrozenObj.inner.n       // 99\n\nvar sealedObj = Object.seal({ val: 1 });\nsealedObj.val = 99;     // ✅ 값 변경[value mutation] 가능\ndelete sealedObj.val;   // ❌ 삭제[deletion] 불가\nsealedObj.val           // 99"
           },
           {
             "id": "language-javascript-p03-part-11",
             "title": "Object.is - 동일성 비교[identity comparison] (=== 보완)",
             "content": "Object.is(NaN, NaN)\nObject.is(0, -0)\nObject.is({ a: 1 }, { a: 1 })\n\nvar refSame = { a: 1 };\nObject.is(refSame, refSame)",
-            "displayContent": "/*** Object.is - 동일성 비교[identity comparison] (=== 보완) ***/\nObject.is(NaN, NaN)    // true  (=== 는 false)\nObject.is(0, -0)       // false (=== 는 true)\nObject.is({ a: 1 }, { a: 1 })  // false (다른 참조[reference])\n\nvar refSame = { a: 1 };\nObject.is(refSame, refSame)     // true"
+            "displayContent": "/* Object.is - 동일성 비교[identity comparison] (=== 보완) */\nObject.is(NaN, NaN)    // true  (=== 는 false)\nObject.is(0, -0)       // false (=== 는 true)\nObject.is({ a: 1 }, { a: 1 })  // false (다른 참조[reference])\n\nvar refSame = { a: 1 };\nObject.is(refSame, refSame)     // true"
           },
           {
             "id": "language-javascript-p03-part-12",
             "title": "Computed property - 동적 키[dynamic key]",
             "content": "var prefix = 'item';\nvar dynKeyObj = {\n  [prefix + 1]: 'a',\n  [prefix + 2]: 'b',\n};",
-            "displayContent": "/*** Computed property - 동적 키[dynamic key] ***/\nvar prefix = 'item';\nvar dynKeyObj = {\n  [prefix + 1]: 'a',\n  [prefix + 2]: 'b',\n};\n// { item1:'a', item2:'b' }"
+            "displayContent": "/* Computed property - 동적 키[dynamic key] */\nvar prefix = 'item';\nvar dynKeyObj = {\n  [prefix + 1]: 'a',\n  [prefix + 2]: 'b',\n};\n// { item1:'a', item2:'b' }"
           },
           {
             "id": "language-javascript-p03-part-13",
             "title": "Getter / Setter - 접근자 프로퍼티[accessor property]",
             "content": "var tempConv = {\n  _celsius: 0,\n  get fahrenheit() { return this._celsius * 9 / 5 + 32; },\n  set fahrenheit(f) { this._celsius = (f - 32) * 5 / 9; },\n};\ntempConv.fahrenheit = 212;\ntempConv._celsius\ntempConv.fahrenheit",
-            "displayContent": "/*** Getter / Setter - 접근자 프로퍼티[accessor property] ***/\nvar tempConv = {\n  _celsius: 0,\n  get fahrenheit() { return this._celsius * 9 / 5 + 32; },\n  set fahrenheit(f) { this._celsius = (f - 32) * 5 / 9; },\n};\ntempConv.fahrenheit = 212;\ntempConv._celsius   // 100\ntempConv.fahrenheit // 212"
+            "displayContent": "/* Getter / Setter - 접근자 프로퍼티[accessor property] */\nvar tempConv = {\n  _celsius: 0,\n  get fahrenheit() { return this._celsius * 9 / 5 + 32; },\n  set fahrenheit(f) { this._celsius = (f - 32) * 5 / 9; },\n};\ntempConv.fahrenheit = 212;\ntempConv._celsius   // 100\ntempConv.fahrenheit // 212"
           },
           {
             "id": "language-javascript-p03-part-14",
             "title": "이터러블 객체[iterable object] (Symbol.iterator 구현)",
             "content": "var iterableRange = {\n  from: 1,\n  to: 3,\n  [Symbol.iterator]() {\n    var cur = this.from;\n    var last = this.to;\n    return {\n      next() {\n        return cur <= last\n          ? { value: cur++, done: false }\n          : { value: undefined, done: true };\n      }\n    };\n  }\n};\n[...iterableRange]",
-            "displayContent": "/*** 이터러블 객체[iterable object] (Symbol.iterator 구현) ***/\nvar iterableRange = {\n  from: 1,\n  to: 3,\n  [Symbol.iterator]() {\n    var cur = this.from;\n    var last = this.to;\n    return {\n      next() {\n        return cur <= last\n          ? { value: cur++, done: false }\n          : { value: undefined, done: true };\n      }\n    };\n  }\n};\n[...iterableRange]  // [1, 2, 3]"
+            "displayContent": "/* 이터러블 객체[iterable object] (Symbol.iterator 구현) */\nvar iterableRange = {\n  from: 1,\n  to: 3,\n  [Symbol.iterator]() {\n    var cur = this.from;\n    var last = this.to;\n    return {\n      next() {\n        return cur <= last\n          ? { value: cur++, done: false }\n          : { value: undefined, done: true };\n      }\n    };\n  }\n};\n[...iterableRange]  // [1, 2, 3]"
           },
           {
             "id": "language-javascript-p03-part-15",
             "title": "in 연산자[in operator] / delete",
             "content": "'name' in baseObj\ndelete baseObj.age;\n'age' in baseObj",
-            "displayContent": "/*** in 연산자[in operator] / delete ***/\n'name' in baseObj    // true\ndelete baseObj.age;\n'age' in baseObj     // false"
+            "displayContent": "/* in 연산자[in operator] / delete */\n'name' in baseObj    // true\ndelete baseObj.age;\n'age' in baseObj     // false"
           },
           {
             "id": "language-javascript-p03-part-16",
             "title": "속성 열거[property enumeration] (for...in)",
             "content": "var enumObj = { a: 1, b: 2, c: 3 };\nfor (var key in enumObj) {\n  console.log(key, enumObj[key]);\n}",
-            "displayContent": "/*** 속성 열거[property enumeration] (for...in) ***/\nvar enumObj = { a: 1, b: 2, c: 3 };\nfor (var key in enumObj) {\n  console.log(key, enumObj[key]);\n}\n// a 1\n// b 2\n// c 3"
+            "displayContent": "/* 속성 열거[property enumeration] (for...in) */\nvar enumObj = { a: 1, b: 2, c: 3 };\nfor (var key in enumObj) {\n  console.log(key, enumObj[key]);\n}\n// a 1\n// b 2\n// c 3"
           }
         ]
       },
       {
         "id": "language-javascript-p04",
         "title": "P04.함수",
-        "fileName": "P04.함수.js",
-        "sourcePath": "assets/typingSource/Language-JavaScript/P04.함수.js",
+        "fileName": "P04.함수.yaml",
+        "sourcePath": "assets/raw/syntax/javascript/P04.함수.yaml",
         "language": "javascript",
         "parts": [
           {
             "id": "language-javascript-p04-part-1",
             "title": "함수 선언[function declaration] / 표현식[expression] / 화살표[arrow function]",
             "content": "function declFn(x) { return x * 2; }\nvar exprFn = function (x) { return x * 2; };\nvar arrowFn = x => x * 2;\nvar arrowBlock = x => { return x * 2; };\n\ndeclFn(5)\narrowFn(5)",
-            "displayContent": "/*** 함수 선언[function declaration] / 표현식[expression] / 화살표[arrow function] ***/\nfunction declFn(x) { return x * 2; }        // 호이스팅[hoisting] O\nvar exprFn = function (x) { return x * 2; }; // 호이스팅[hoisting] X\nvar arrowFn = x => x * 2;                    // this 없음, 암묵적 반환[implicit return]\nvar arrowBlock = x => { return x * 2; };     // 블록 바디[block body]\n\ndeclFn(5)   // 10\narrowFn(5)  // 10"
+            "displayContent": "/* 함수 선언[function declaration] / 표현식[expression] / 화살표[arrow function] */\nfunction declFn(x) { return x * 2; }        // 호이스팅[hoisting] O\nvar exprFn = function (x) { return x * 2; }; // 호이스팅[hoisting] X\nvar arrowFn = x => x * 2;                    // this 없음, 암묵적 반환[implicit return]\nvar arrowBlock = x => { return x * 2; };     // 블록 바디[block body]\n\ndeclFn(5)   // 10\narrowFn(5)  // 10"
           },
           {
             "id": "language-javascript-p04-part-2",
             "title": "기본값 매개변수[default parameter]",
             "content": "function greetFn(name, msg = 'Hello') {\n  return `${msg}, ${name}!`;\n}\ngreetFn('kim')\ngreetFn('lee', 'Hi')",
-            "displayContent": "/*** 기본값 매개변수[default parameter] ***/\nfunction greetFn(name, msg = 'Hello') {\n  return `${msg}, ${name}!`;\n}\ngreetFn('kim')           // 'Hello, kim!'\ngreetFn('lee', 'Hi')     // 'Hi, lee!'"
+            "displayContent": "/* 기본값 매개변수[default parameter] */\nfunction greetFn(name, msg = 'Hello') {\n  return `${msg}, ${name}!`;\n}\ngreetFn('kim')           // 'Hello, kim!'\ngreetFn('lee', 'Hi')     // 'Hi, lee!'"
           },
           {
             "id": "language-javascript-p04-part-3",
             "title": "Rest 파라미터[rest parameter]",
             "content": "function sumFn(first, ...rest) {\n  return rest.reduce((acc, n) => acc + n, first);\n}\nsumFn(1, 2, 3, 4)",
-            "displayContent": "/*** Rest 파라미터[rest parameter] ***/\nfunction sumFn(first, ...rest) {\n  return rest.reduce((acc, n) => acc + n, first);\n}\nsumFn(1, 2, 3, 4)  // 10"
+            "displayContent": "/* Rest 파라미터[rest parameter] */\nfunction sumFn(first, ...rest) {\n  return rest.reduce((acc, n) => acc + n, first);\n}\nsumFn(1, 2, 3, 4)  // 10"
           },
           {
             "id": "language-javascript-p04-part-4",
             "title": "Function 메타 정보[metadata]",
             "content": "declFn.name\n((a, b) => {}).length\n((a, b, c = 0) => {}).length\n((...args) => {}).length",
-            "displayContent": "/*** Function 메타 정보[metadata] ***/\ndeclFn.name                    // 'declFn'\n((a, b) => {}).length          // 2\n((a, b, c = 0) => {}).length   // 2 (기본값[default] 이후는 카운트 안됨)\n((...args) => {}).length       // 0 (rest는 카운트 안됨)"
+            "displayContent": "/* Function 메타 정보[metadata] */\ndeclFn.name                    // 'declFn'\n((a, b) => {}).length          // 2\n((a, b, c = 0) => {}).length   // 2 (기본값[default] 이후는 카운트 안됨)\n((...args) => {}).length       // 0 (rest는 카운트 안됨)"
           },
           {
             "id": "language-javascript-p04-part-5",
             "title": "call / apply / bind - 명시적 this 바인딩[explicit this binding]",
             "content": "function greetCtx(greeting) {\n  return `${greeting}, ${this.name}!`;\n}\nvar ctx = { name: 'park' };\ngreetCtx.call(ctx, 'Hello')\ngreetCtx.apply(ctx, ['Hi'])\nvar boundGreet = greetCtx.bind(ctx);\nboundGreet('Hey')",
-            "displayContent": "/*** call / apply / bind - 명시적 this 바인딩[explicit this binding] ***/\nfunction greetCtx(greeting) {\n  return `${greeting}, ${this.name}!`;\n}\nvar ctx = { name: 'park' };\ngreetCtx.call(ctx, 'Hello')            // 'Hello, park!'\ngreetCtx.apply(ctx, ['Hi'])            // 'Hi, park!'\nvar boundGreet = greetCtx.bind(ctx);\nboundGreet('Hey')                      // 'Hey, park!'"
+            "displayContent": "/* call / apply / bind - 명시적 this 바인딩[explicit this binding] */\nfunction greetCtx(greeting) {\n  return `${greeting}, ${this.name}!`;\n}\nvar ctx = { name: 'park' };\ngreetCtx.call(ctx, 'Hello')            // 'Hello, park!'\ngreetCtx.apply(ctx, ['Hi'])            // 'Hi, park!'\nvar boundGreet = greetCtx.bind(ctx);\nboundGreet('Hey')                      // 'Hey, park!'"
           },
           {
             "id": "language-javascript-p04-part-6",
@@ -1153,61 +1558,61 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-javascript-p04-part-7",
             "title": "IIFE - 즉시 실행 함수[immediately invoked function expression]",
             "content": "var iifeResult = (function (x) { return x * x; })(5);",
-            "displayContent": "/*** IIFE - 즉시 실행 함수[immediately invoked function expression] ***/\nvar iifeResult = (function (x) { return x * x; })(5);  // 25"
+            "displayContent": "/* IIFE - 즉시 실행 함수[immediately invoked function expression] */\nvar iifeResult = (function (x) { return x * x; })(5);  // 25"
           },
           {
             "id": "language-javascript-p04-part-8",
             "title": "클로저[closure] - 상태 은닉[encapsulation]",
             "content": "function makeCounter(start) {\n  var count = start ?? 0;\n  return {\n    increment() { return ++count; },\n    decrement() { return --count; },\n    get value()  { return count; },\n  };\n}\nvar counterA = makeCounter(10);\ncounterA.increment()\ncounterA.increment()\ncounterA.value",
-            "displayContent": "/*** 클로저[closure] - 상태 은닉[encapsulation] ***/\nfunction makeCounter(start) {\n  var count = start ?? 0;\n  return {\n    increment() { return ++count; },\n    decrement() { return --count; },\n    get value()  { return count; },\n  };\n}\nvar counterA = makeCounter(10);\ncounterA.increment()  // 11\ncounterA.increment()  // 12\ncounterA.value        // 12"
+            "displayContent": "/* 클로저[closure] - 상태 은닉[encapsulation] */\nfunction makeCounter(start) {\n  var count = start ?? 0;\n  return {\n    increment() { return ++count; },\n    decrement() { return --count; },\n    get value()  { return count; },\n  };\n}\nvar counterA = makeCounter(10);\ncounterA.increment()  // 11\ncounterA.increment()  // 12\ncounterA.value        // 12"
           },
           {
             "id": "language-javascript-p04-part-9",
             "title": "커링[currying]",
             "content": "var add = a => b => a + b;\nadd(3)(4)\n\nvar add5 = add(5);\nadd5(10)\nadd5(20)",
-            "displayContent": "/*** 커링[currying] ***/\nvar add = a => b => a + b;\nadd(3)(4)    // 7\n\nvar add5 = add(5);\nadd5(10)     // 15\nadd5(20)     // 25"
+            "displayContent": "/* 커링[currying] */\nvar add = a => b => a + b;\nadd(3)(4)    // 7\n\nvar add5 = add(5);\nadd5(10)     // 15\nadd5(20)     // 25"
           },
           {
             "id": "language-javascript-p04-part-10",
             "title": "클로저 스코프 체인[closure scope chain]",
             "content": "var closureD = 4;\nvar closureFn = a => b => c => a + b + c + closureD;\nclosureFn(1)(2)(3)",
-            "displayContent": "/*** 클로저 스코프 체인[closure scope chain] ***/\nvar closureD = 4;\nvar closureFn = a => b => c => a + b + c + closureD;\nclosureFn(1)(2)(3)  // 10"
+            "displayContent": "/* 클로저 스코프 체인[closure scope chain] */\nvar closureD = 4;\nvar closureFn = a => b => c => a + b + c + closureD;\nclosureFn(1)(2)(3)  // 10"
           },
           {
             "id": "language-javascript-p04-part-11",
             "title": "재귀[recursion]",
             "content": "function factorial(n) {\n  return n <= 1 ? 1 : n * factorial(n - 1);\n}\nfactorial(5)\n\nfunction fibonacci(n) {\n  if (n <= 1) return n;\n  return fibonacci(n - 1) + fibonacci(n - 2);\n}\nfibonacci(7)",
-            "displayContent": "/*** 재귀[recursion] ***/\nfunction factorial(n) {\n  return n <= 1 ? 1 : n * factorial(n - 1);\n}\nfactorial(5)  // 120\n\nfunction fibonacci(n) {\n  if (n <= 1) return n;\n  return fibonacci(n - 1) + fibonacci(n - 2);\n}\nfibonacci(7)  // 13"
+            "displayContent": "/* 재귀[recursion] */\nfunction factorial(n) {\n  return n <= 1 ? 1 : n * factorial(n - 1);\n}\nfactorial(5)  // 120\n\nfunction fibonacci(n) {\n  if (n <= 1) return n;\n  return fibonacci(n - 1) + fibonacci(n - 2);\n}\nfibonacci(7)  // 13"
           },
           {
             "id": "language-javascript-p04-part-12",
             "title": "제너레이터[generator]",
             "content": "function* rangeGen(start, end, step = 1) {\n  for (var i = start; i <= end; i += step) yield i;\n}\nvar genIter = rangeGen(1, 5);\ngenIter.next()\ngenIter.next()\n\n[...rangeGen(1, 5)]\n[...rangeGen(0, 10, 2)]",
-            "displayContent": "/*** 제너레이터[generator] ***/\nfunction* rangeGen(start, end, step = 1) {\n  for (var i = start; i <= end; i += step) yield i;\n}\nvar genIter = rangeGen(1, 5);\ngenIter.next()  // { value:1, done:false }\ngenIter.next()  // { value:2, done:false }\n\n[...rangeGen(1, 5)]        // [1, 2, 3, 4, 5]\n[...rangeGen(0, 10, 2)]    // [0, 2, 4, 6, 8, 10]"
+            "displayContent": "/* 제너레이터[generator] */\nfunction* rangeGen(start, end, step = 1) {\n  for (var i = start; i <= end; i += step) yield i;\n}\nvar genIter = rangeGen(1, 5);\ngenIter.next()  // { value:1, done:false }\ngenIter.next()  // { value:2, done:false }\n\n[...rangeGen(1, 5)]        // [1, 2, 3, 4, 5]\n[...rangeGen(0, 10, 2)]    // [0, 2, 4, 6, 8, 10]"
           },
           {
             "id": "language-javascript-p04-part-13",
             "title": "yield* 위임[delegation]",
             "content": "function* innerGen() { yield 'a'; yield 'b'; }\nfunction* outerGen() {\n  yield 1;\n  yield* innerGen();\n  yield 2;\n}\n[...outerGen()]",
-            "displayContent": "/*** yield* 위임[delegation] ***/\nfunction* innerGen() { yield 'a'; yield 'b'; }\nfunction* outerGen() {\n  yield 1;\n  yield* innerGen();  // 다른 제너레이터에 위임[delegate]\n  yield 2;\n}\n[...outerGen()]  // [1, 'a', 'b', 2]"
+            "displayContent": "/* yield* 위임[delegation] */\nfunction* innerGen() { yield 'a'; yield 'b'; }\nfunction* outerGen() {\n  yield 1;\n  yield* innerGen();  // 다른 제너레이터에 위임[delegate]\n  yield 2;\n}\n[...outerGen()]  // [1, 'a', 'b', 2]"
           },
           {
             "id": "language-javascript-p04-part-14",
             "title": "팩토리 함수 패턴[factory function pattern]",
             "content": "function createUser(name, role) {\n  return {\n    name,\n    role,\n    toString() { return `${this.role}:${this.name}`; },\n  };\n}\nvar adminUser = createUser('kim', 'admin');\nadminUser.toString()",
-            "displayContent": "/*** 팩토리 함수 패턴[factory function pattern] ***/\nfunction createUser(name, role) {\n  return {\n    name,\n    role,\n    toString() { return `${this.role}:${this.name}`; },\n  };\n}\nvar adminUser = createUser('kim', 'admin');\nadminUser.toString()  // 'admin:kim'"
+            "displayContent": "/* 팩토리 함수 패턴[factory function pattern] */\nfunction createUser(name, role) {\n  return {\n    name,\n    role,\n    toString() { return `${this.role}:${this.name}`; },\n  };\n}\nvar adminUser = createUser('kim', 'admin');\nadminUser.toString()  // 'admin:kim'"
           },
           {
             "id": "language-javascript-p04-part-15",
             "title": "프로토타입 메서드[prototype method] 추가",
             "content": "function Animal(name, sound) {\n  this.name = name;\n  this.sound = sound;\n}\nAnimal.prototype.speak = function () {\n  return `${this.name} says ${this.sound}`;\n};\nvar dogA = new Animal('Rex', 'Woof');\ndogA.speak()\ndogA instanceof Animal",
-            "displayContent": "/*** 프로토타입 메서드[prototype method] 추가 ***/\nfunction Animal(name, sound) {\n  this.name = name;\n  this.sound = sound;\n}\nAnimal.prototype.speak = function () {\n  return `${this.name} says ${this.sound}`;\n};\nvar dogA = new Animal('Rex', 'Woof');\ndogA.speak()  // 'Rex says Woof'\ndogA instanceof Animal  // true"
+            "displayContent": "/* 프로토타입 메서드[prototype method] 추가 */\nfunction Animal(name, sound) {\n  this.name = name;\n  this.sound = sound;\n}\nAnimal.prototype.speak = function () {\n  return `${this.name} says ${this.sound}`;\n};\nvar dogA = new Animal('Rex', 'Woof');\ndogA.speak()  // 'Rex says Woof'\ndogA instanceof Animal  // true"
           },
           {
             "id": "language-javascript-p04-part-16",
             "title": "객체 내부 메서드 패턴[method definition pattern]",
             "content": "var methodObj = {\n  value: 10,",
-            "displayContent": "/*** 객체 내부 메서드 패턴[method definition pattern] ***/\nvar methodObj = {\n  value: 10,"
+            "displayContent": "/* 객체 내부 메서드 패턴[method definition pattern] */\nvar methodObj = {\n  value: 10,"
           },
           {
             "id": "language-javascript-p04-part-17",
@@ -1220,51 +1625,51 @@ export const languageTracks: LanguageTrack[] = [
       {
         "id": "language-javascript-p05",
         "title": "P05.문자열",
-        "fileName": "P05.문자열.js",
-        "sourcePath": "assets/typingSource/Language-JavaScript/P05.문자열.js",
+        "fileName": "P05.문자열.yaml",
+        "sourcePath": "assets/raw/syntax/javascript/P05.문자열.yaml",
         "language": "javascript",
         "parts": [
           {
             "id": "language-javascript-p05-part-1",
             "title": "기본 접근[basic access]",
             "content": "var str1 = 'Hello, World!';\nstr1.length\nstr1[0]\nstr1.at(0)\nstr1.at(-1)\nstr1.charAt(7)\nstr1.charCodeAt(0)",
-            "displayContent": "/*** 기본 접근[basic access] ***/\nvar str1 = 'Hello, World!';\nstr1.length        // 13\nstr1[0]            // 'H'\nstr1.at(0)         // 'H'\nstr1.at(-1)        // '!'  (음수 인덱스[negative index])\nstr1.charAt(7)     // 'W'\nstr1.charCodeAt(0) // 72"
+            "displayContent": "/* 기본 접근[basic access] */\nvar str1 = 'Hello, World!';\nstr1.length        // 13\nstr1[0]            // 'H'\nstr1.at(0)         // 'H'\nstr1.at(-1)        // '!'  (음수 인덱스[negative index])\nstr1.charAt(7)     // 'W'\nstr1.charCodeAt(0) // 72"
           },
           {
             "id": "language-javascript-p05-part-2",
             "title": "대소문자 변환[case conversion]",
             "content": "'hello'.toUpperCase()\n'WORLD'.toLowerCase()",
-            "displayContent": "/*** 대소문자 변환[case conversion] ***/\n'hello'.toUpperCase()  // 'HELLO'\n'WORLD'.toLowerCase()  // 'world'"
+            "displayContent": "/* 대소문자 변환[case conversion] */\n'hello'.toUpperCase()  // 'HELLO'\n'WORLD'.toLowerCase()  // 'world'"
           },
           {
             "id": "language-javascript-p05-part-3",
             "title": "검색[search]",
             "content": "str1.indexOf('o')\nstr1.lastIndexOf('o')\nstr1.indexOf('xyz')\nstr1.includes('World')\nstr1.startsWith('Hello')\nstr1.endsWith('!')\nstr1.search(/[A-Z]/)",
-            "displayContent": "/*** 검색[search] ***/\nstr1.indexOf('o')         // 4  (첫 번째 위치)\nstr1.lastIndexOf('o')     // 8  (마지막 위치)\nstr1.indexOf('xyz')       // -1 (없으면 -1)\nstr1.includes('World')    // true\nstr1.startsWith('Hello')  // true\nstr1.endsWith('!')        // true\nstr1.search(/[A-Z]/)      // 0  (정규식[regex], 첫 번째 매치 인덱스)"
+            "displayContent": "/* 검색[search] */\nstr1.indexOf('o')         // 4  (첫 번째 위치)\nstr1.lastIndexOf('o')     // 8  (마지막 위치)\nstr1.indexOf('xyz')       // -1 (없으면 -1)\nstr1.includes('World')    // true\nstr1.startsWith('Hello')  // true\nstr1.endsWith('!')        // true\nstr1.search(/[A-Z]/)      // 0  (정규식[regex], 첫 번째 매치 인덱스)"
           },
           {
             "id": "language-javascript-p05-part-4",
             "title": "추출[extraction]",
             "content": "'Mozilla'.substring(2, 5)\n'Mozilla'.slice(2, 5)\n'Mozilla'.slice(-5)\n'Mozilla'.slice(-5, -2)",
-            "displayContent": "/*** 추출[extraction] ***/\n'Mozilla'.substring(2, 5)  // 'zil' (startIndex, endIndex)\n'Mozilla'.slice(2, 5)      // 'zil'\n'Mozilla'.slice(-5)        // 'ozilla' (음수 인덱스[negative index])\n'Mozilla'.slice(-5, -2)    // 'ozil'"
+            "displayContent": "/* 추출[extraction] */\n'Mozilla'.substring(2, 5)  // 'zil' (startIndex, endIndex)\n'Mozilla'.slice(2, 5)      // 'zil'\n'Mozilla'.slice(-5)        // 'ozilla' (음수 인덱스[negative index])\n'Mozilla'.slice(-5, -2)    // 'ozil'"
           },
           {
             "id": "language-javascript-p05-part-5",
             "title": "분리[split]",
             "content": "'a,b,c'.split(',')\n'a,b,c'.split(',', 2)\n'hello'.split('')",
-            "displayContent": "/*** 분리[split] ***/\n'a,b,c'.split(',')       // ['a', 'b', 'c']\n'a,b,c'.split(',', 2)    // ['a', 'b'] (limit)\n'hello'.split('')         // ['h', 'e', 'l', 'l', 'o']"
+            "displayContent": "/* 분리[split] */\n'a,b,c'.split(',')       // ['a', 'b', 'c']\n'a,b,c'.split(',', 2)    // ['a', 'b'] (limit)\n'hello'.split('')         // ['h', 'e', 'l', 'l', 'o']"
           },
           {
             "id": "language-javascript-p05-part-6",
             "title": "반복[repeat] / 패딩[padding] / 공백 제거[trim]",
             "content": "'ab'.repeat(3)\n'5'.padStart(4, '0')\n'5'.padEnd(4, '0')\n'  trim me  '.trim()\n'  trim me  '.trimStart()\n'  trim me  '.trimEnd()",
-            "displayContent": "/*** 반복[repeat] / 패딩[padding] / 공백 제거[trim] ***/\n'ab'.repeat(3)              // 'ababab'\n'5'.padStart(4, '0')        // '0005'\n'5'.padEnd(4, '0')          // '5000'\n'  trim me  '.trim()        // 'trim me'\n'  trim me  '.trimStart()   // 'trim me  '\n'  trim me  '.trimEnd()     // '  trim me'"
+            "displayContent": "/* 반복[repeat] / 패딩[padding] / 공백 제거[trim] */\n'ab'.repeat(3)              // 'ababab'\n'5'.padStart(4, '0')        // '0005'\n'5'.padEnd(4, '0')          // '5000'\n'  trim me  '.trim()        // 'trim me'\n'  trim me  '.trimStart()   // 'trim me  '\n'  trim me  '.trimEnd()     // '  trim me'"
           },
           {
             "id": "language-javascript-p05-part-7",
             "title": "치환[replace]",
             "content": "'aabbcc'.replace('b', 'X')\n'aabbcc'.replaceAll('b', 'X')\n'aabbcc'.replace(/b/g, 'X')",
-            "displayContent": "/*** 치환[replace] ***/\n'aabbcc'.replace('b', 'X')      // 'aXbcc'  (첫 번째만)\n'aabbcc'.replaceAll('b', 'X')   // 'aaXXcc' (전체)\n'aabbcc'.replace(/b/g, 'X')     // 'aaXXcc' (정규식[regex] 플래그 g)"
+            "displayContent": "/* 치환[replace] */\n'aabbcc'.replace('b', 'X')      // 'aXbcc'  (첫 번째만)\n'aabbcc'.replaceAll('b', 'X')   // 'aaXXcc' (전체)\n'aabbcc'.replace(/b/g, 'X')     // 'aaXXcc' (정규식[regex] 플래그 g)"
           },
           {
             "id": "language-javascript-p05-part-8",
@@ -1276,7 +1681,7 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-javascript-p05-part-9",
             "title": "정규식 매치[regex match]",
             "content": "var str2 = 'cat bat sat';\nstr2.match(/[bcs]at/g)\nstr2.replace(/[bcs]at/g, 'hat')",
-            "displayContent": "/*** 정규식 매치[regex match] ***/\nvar str2 = 'cat bat sat';\nstr2.match(/[bcs]at/g)           // ['cat', 'bat', 'sat']\nstr2.replace(/[bcs]at/g, 'hat')  // 'hat hat hat'"
+            "displayContent": "/* 정규식 매치[regex match] */\nvar str2 = 'cat bat sat';\nstr2.match(/[bcs]at/g)           // ['cat', 'bat', 'sat']\nstr2.replace(/[bcs]at/g, 'hat')  // 'hat hat hat'"
           },
           {
             "id": "language-javascript-p05-part-10",
@@ -1288,13 +1693,13 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-javascript-p05-part-11",
             "title": "연결[concatenation]",
             "content": "'Hello'.concat(', ', 'World', '!')",
-            "displayContent": "/*** 연결[concatenation] ***/\n'Hello'.concat(', ', 'World', '!')  // 'Hello, World!'"
+            "displayContent": "/* 연결[concatenation] */\n'Hello'.concat(', ', 'World', '!')  // 'Hello, World!'"
           },
           {
             "id": "language-javascript-p05-part-12",
             "title": "템플릿 리터럴[template literal]",
             "content": "var tplName = 'kim';\nvar tplScore = 95;\n`이름: ${tplName}, 점수: ${tplScore}점`\n`${tplScore >= 90 ? '우수' : '보통'}`",
-            "displayContent": "/*** 템플릿 리터럴[template literal] ***/\nvar tplName = 'kim';\nvar tplScore = 95;\n`이름: ${tplName}, 점수: ${tplScore}점`  // '이름: kim, 점수: 95점'\n`${tplScore >= 90 ? '우수' : '보통'}`   // '우수'"
+            "displayContent": "/* 템플릿 리터럴[template literal] */\nvar tplName = 'kim';\nvar tplScore = 95;\n`이름: ${tplName}, 점수: ${tplScore}점`  // '이름: kim, 점수: 95점'\n`${tplScore >= 90 ? '우수' : '보통'}`   // '우수'"
           },
           {
             "id": "language-javascript-p05-part-13",
@@ -1306,115 +1711,139 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-javascript-p05-part-14",
             "title": "String.raw - 이스케이프 비처리[raw string]",
             "content": "String.raw`C:\\Users\\name`\nString.raw`\\n \\t \\r`",
-            "displayContent": "/*** String.raw - 이스케이프 비처리[raw string] ***/\nString.raw`C:\\Users\\name`     // 'C:\\\\Users\\\\name'\nString.raw`\\n \\t \\r`          // '\\\\n \\\\t \\\\r'"
+            "displayContent": "/* String.raw - 이스케이프 비처리[raw string] */\nString.raw`C:\\Users\\name`     // 'C:\\\\Users\\\\name'\nString.raw`\\n \\t \\r`          // '\\\\n \\\\t \\\\r'"
           },
           {
             "id": "language-javascript-p05-part-15",
             "title": "문자 코드[character code] 변환",
             "content": "String.fromCharCode(65, 66, 67)\n'A'.charCodeAt(0)",
-            "displayContent": "/*** 문자 코드[character code] 변환 ***/\nString.fromCharCode(65, 66, 67)  // 'ABC'\n'A'.charCodeAt(0)                // 65"
+            "displayContent": "/* 문자 코드[character code] 변환 */\nString.fromCharCode(65, 66, 67)  // 'ABC'\n'A'.charCodeAt(0)                // 65"
           },
           {
             "id": "language-javascript-p05-part-16",
             "title": "이터러블[iterable] - 스프레드[spread] / for...of",
             "content": "[...'ABC']\nfor (var ch of 'hi') { console.log(ch); }",
-            "displayContent": "/*** 이터러블[iterable] - 스프레드[spread] / for...of ***/\n[...'ABC']  // ['A', 'B', 'C']\nfor (var ch of 'hi') { console.log(ch); }\n// h\n// i"
+            "displayContent": "/* 이터러블[iterable] - 스프레드[spread] / for...of */\n[...'ABC']  // ['A', 'B', 'C']\nfor (var ch of 'hi') { console.log(ch); }\n// h\n// i"
           },
           {
             "id": "language-javascript-p05-part-17",
             "title": "숫자→문자열 변환[number-to-string conversion]",
             "content": "(255).toString(16)\n(255).toString(2)\n(3.14159).toFixed(2)",
-            "displayContent": "/*** 숫자→문자열 변환[number-to-string conversion] ***/\n(255).toString(16)   // 'ff'  (16진수[hexadecimal])\n(255).toString(2)    // '11111111' (2진수[binary])\n(3.14159).toFixed(2) // '3.14'"
+            "displayContent": "/* 숫자→문자열 변환[number-to-string conversion] */\n(255).toString(16)   // 'ff'  (16진수[hexadecimal])\n(255).toString(2)    // '11111111' (2진수[binary])\n(3.14159).toFixed(2) // '3.14'"
           }
         ]
       },
       {
         "id": "language-javascript-p06",
         "title": "P06.클래스",
-        "fileName": "P06.클래스.js",
-        "sourcePath": "assets/typingSource/Language-JavaScript/P06.클래스.js",
+        "fileName": "P06.클래스.yaml",
+        "sourcePath": "assets/raw/syntax/javascript/P06.클래스.yaml",
         "language": "javascript",
         "parts": [
           {
             "id": "language-javascript-p06-part-1",
-            "title": "기본 클래스[basic class]",
-            "content": "class Vehicle {\n  static count = 0;\n  #fuel;\n\n  constructor(type, fuel) {\n    this.type = type;\n    this.#fuel = fuel;\n    Vehicle.count++;\n  }\n\n  getFuel()  { return this.#fuel; }\n  describe() { return `${this.type} (${this.#fuel})`; }\n\n  static getCount() { return Vehicle.count; }\n}\n\nvar car1 = new Vehicle('car', 'gasoline');\nvar car2 = new Vehicle('bike', 'none');\ncar1.describe()\ncar1.getFuel()\nVehicle.count\nVehicle.getCount()",
-            "displayContent": "/*** 기본 클래스[basic class] ***/\nclass Vehicle {\n  static count = 0;          // 정적 속성[static field] (인스턴스 공유 안됨)\n  #fuel;                     // 프라이빗 필드[private field] (클래스 외부 접근 불가)\n\n  constructor(type, fuel) {\n    this.type = type;\n    this.#fuel = fuel;\n    Vehicle.count++;\n  }\n\n  getFuel()  { return this.#fuel; }                    // 프라이빗 접근자[private accessor]\n  describe() { return `${this.type} (${this.#fuel})`; }\n\n  static getCount() { return Vehicle.count; }          // 정적 메서드[static method]\n}\n\nvar car1 = new Vehicle('car', 'gasoline');\nvar car2 = new Vehicle('bike', 'none');\ncar1.describe()         // 'car (gasoline)'\ncar1.getFuel()          // 'gasoline'\nVehicle.count           // 2\nVehicle.getCount()      // 2"
+            "title": "기본 클래스[basic class] 정의",
+            "content": "class Vehicle {\n  static count = 0;\n  #fuel;\n\n  constructor(type, fuel) {\n    this.type = type;\n    this.#fuel = fuel;\n    Vehicle.count++;\n  }\n\n  getFuel() { return this.#fuel; }\n  static getCount() { return Vehicle.count; }\n}",
+            "displayContent": "/* 기본 클래스[basic class] 정의 */\nclass Vehicle {\n  static count = 0;          // 정적 속성[static field] (인스턴스 공유 안됨)\n  #fuel;                     // 프라이빗 필드[private field] (클래스 외부 접근 불가)\n\n  constructor(type, fuel) {\n    this.type = type;\n    this.#fuel = fuel;\n    Vehicle.count++;\n  }\n\n  getFuel() { return this.#fuel; }   // 프라이빗 접근자[private accessor]\n  static getCount() { return Vehicle.count; }   // 정적 메서드[static method]\n}"
           },
           {
             "id": "language-javascript-p06-part-2",
-            "title": "Getter / Setter - 접근자 프로퍼티[accessor property]",
-            "content": "class Circle {\n  constructor(radius) {\n    this.radius = radius;\n  }\n  get area()          { return Math.PI * this.radius ** 2; }\n  get circumference() { return 2 * Math.PI * this.radius; }\n  set diameter(d)     { this.radius = d / 2; }\n}\n\nvar circle1 = new Circle(5);\ncircle1.area.toFixed(2)\ncircle1.circumference.toFixed(2)\ncircle1.diameter = 20;\ncircle1.radius",
-            "displayContent": "/*** Getter / Setter - 접근자 프로퍼티[accessor property] ***/\nclass Circle {\n  constructor(radius) {\n    this.radius = radius;\n  }\n  get area()          { return Math.PI * this.radius ** 2; }\n  get circumference() { return 2 * Math.PI * this.radius; }\n  set diameter(d)     { this.radius = d / 2; }\n}\n\nvar circle1 = new Circle(5);\ncircle1.area.toFixed(2)           // '78.54'\ncircle1.circumference.toFixed(2)  // '31.42'\ncircle1.diameter = 20;\ncircle1.radius                    // 10"
+            "title": "기본 클래스[basic class] 사용",
+            "content": "var car1 = new Vehicle('car', 'gasoline');\nvar car2 = new Vehicle('bike', 'none');\ncar1.getFuel()\nVehicle.count\nVehicle.getCount()",
+            "displayContent": "/* 기본 클래스[basic class] 사용 */\nvar car1 = new Vehicle('car', 'gasoline');\nvar car2 = new Vehicle('bike', 'none');\ncar1.getFuel()          // 'gasoline'\nVehicle.count           // 2 (정적 속성은 클래스에서 접근)\nVehicle.getCount()      // 2"
           },
           {
             "id": "language-javascript-p06-part-3",
-            "title": "상속[inheritance] (extends / super)",
-            "content": "class Animal {\n  constructor(name) {\n    this.name = name;\n  }\n  speak() { return `${this.name} makes a noise.`; }\n  toString() { return `Animal(${this.name})`; }\n}\n\nclass Dog extends Animal {\n  constructor(name, breed) {\n    super(name);\n    this.breed = breed;\n  }\n  speak() {\n    return `${this.name} barks.`;\n  }\n  parentSpeak() {\n    return super.speak();\n  }\n}\n\nvar dog1 = new Dog('Rex', 'Labrador');\ndog1.speak()\ndog1.parentSpeak()\ndog1.toString()\ndog1 instanceof Dog\ndog1 instanceof Animal",
-            "displayContent": "/*** 상속[inheritance] (extends / super) ***/\nclass Animal {\n  constructor(name) {\n    this.name = name;\n  }\n  speak() { return `${this.name} makes a noise.`; }\n  toString() { return `Animal(${this.name})`; }\n}\n\nclass Dog extends Animal {\n  constructor(name, breed) {\n    super(name);          // 부모[parent] constructor 호출 필수 (this 사용 전)\n    this.breed = breed;\n  }\n  speak() {               // 오버라이드[override]\n    return `${this.name} barks.`;\n  }\n  parentSpeak() {\n    return super.speak(); // 부모 메서드[parent method] 호출\n  }\n}\n\nvar dog1 = new Dog('Rex', 'Labrador');\ndog1.speak()         // 'Rex barks.'\ndog1.parentSpeak()   // 'Rex makes a noise.'\ndog1.toString()      // 'Animal(Rex)'  (상속[inheritance])\ndog1 instanceof Dog      // true\ndog1 instanceof Animal   // true"
+            "title": "Getter / Setter - 접근자 프로퍼티[accessor property]",
+            "content": "class Circle {\n  constructor(radius) {\n    this.radius = radius;\n  }\n  get area()      { return Math.PI * this.radius ** 2; }\n  set diameter(d) { this.radius = d / 2; }\n}\n\nvar circle1 = new Circle(5);\ncircle1.area.toFixed(2)\ncircle1.diameter = 20;\ncircle1.radius",
+            "displayContent": "/* Getter / Setter - 접근자 프로퍼티[accessor property] */\nclass Circle {\n  constructor(radius) {\n    this.radius = radius;\n  }\n  get area()      { return Math.PI * this.radius ** 2; }\n  set diameter(d) { this.radius = d / 2; }\n}\n\nvar circle1 = new Circle(5);\ncircle1.area.toFixed(2)   // '78.54' (호출 아님, 속성처럼 읽음)\ncircle1.diameter = 20;    // setter 실행\ncircle1.radius            // 10"
           },
           {
             "id": "language-javascript-p06-part-4",
-            "title": "정적 초기화 블록[static initialization block]",
-            "content": "class Config {\n  static host;\n  static port;\n  static {\n    Config.host = 'localhost';\n    Config.port = 3000;\n  }\n}\nConfig.host\nConfig.port",
-            "displayContent": "/*** 정적 초기화 블록[static initialization block] ***/\nclass Config {\n  static host;\n  static port;\n  static {\n    Config.host = 'localhost';\n    Config.port = 3000;\n  }\n}\nConfig.host  // 'localhost'\nConfig.port  // 3000"
+            "title": "상속[inheritance] - 부모 클래스",
+            "content": "class Animal {\n  constructor(name) {\n    this.name = name;\n  }\n  speak() { return `${this.name} makes a noise.`; }\n}",
+            "displayContent": "/* 상속[inheritance] - 부모 클래스 */\nclass Animal {\n  constructor(name) {\n    this.name = name;\n  }\n  speak() { return `${this.name} makes a noise.`; }\n}"
           },
           {
             "id": "language-javascript-p06-part-5",
-            "title": "클래스 표현식[class expression]",
-            "content": "var Rectangle = class {\n  constructor(w, h) {\n    this.w = w;\n    this.h = h;\n  }\n  get area() { return this.w * this.h; }\n};\nnew Rectangle(4, 5).area",
-            "displayContent": "/*** 클래스 표현식[class expression] ***/\nvar Rectangle = class {\n  constructor(w, h) {\n    this.w = w;\n    this.h = h;\n  }\n  get area() { return this.w * this.h; }\n};\nnew Rectangle(4, 5).area  // 20"
+            "title": "상속[inheritance] - extends / super / override",
+            "content": "class Dog extends Animal {\n  constructor(name, breed) {\n    super(name);\n    this.breed = breed;\n  }\n  speak() {\n    return `${this.name} barks.`;\n  }\n  parentSpeak() {\n    return super.speak();\n  }\n}",
+            "displayContent": "/* 상속[inheritance] - extends / super / override */\nclass Dog extends Animal {\n  constructor(name, breed) {\n    super(name);          // 부모[parent] constructor 호출 필수 (this 사용 전)\n    this.breed = breed;\n  }\n  speak() {               // 오버라이드[override]\n    return `${this.name} barks.`;\n  }\n  parentSpeak() {\n    return super.speak(); // 부모 메서드[parent method] 호출\n  }\n}"
           },
           {
             "id": "language-javascript-p06-part-6",
-            "title": "믹스인 패턴[mixin pattern]",
-            "content": "var Serializable = Base => class extends Base {\n  serialize() { return JSON.stringify(this); }\n};\n\nvar Timestamped = Base => class extends Base {\n  constructor(...args) {\n    super(...args);\n    this.createdAt = new Date().toISOString().slice(0, 10);\n  }\n};\n\nclass BaseEntity {\n  constructor(data) { Object.assign(this, data); }\n}\n\nclass UserEntity extends Serializable(Timestamped(BaseEntity)) {}\n\nvar userEntity = new UserEntity({ id: 1, name: 'kim' });\nuserEntity.serialize()",
-            "displayContent": "/*** 믹스인 패턴[mixin pattern] ***/\nvar Serializable = Base => class extends Base {\n  serialize() { return JSON.stringify(this); }\n};\n\nvar Timestamped = Base => class extends Base {\n  constructor(...args) {\n    super(...args);\n    this.createdAt = new Date().toISOString().slice(0, 10);\n  }\n};\n\nclass BaseEntity {\n  constructor(data) { Object.assign(this, data); }\n}\n\nclass UserEntity extends Serializable(Timestamped(BaseEntity)) {}\n\nvar userEntity = new UserEntity({ id: 1, name: 'kim' });\nuserEntity.serialize()   // '{\"id\":1,\"name\":\"kim\",\"createdAt\":\"2026-03-18\"}'"
+            "title": "상속[inheritance] - 인스턴스 확인",
+            "content": "var dog1 = new Dog('Rex', 'Labrador');\ndog1.speak()\ndog1.parentSpeak()\ndog1 instanceof Dog\ndog1 instanceof Animal",
+            "displayContent": "/* 상속[inheritance] - 인스턴스 확인 */\nvar dog1 = new Dog('Rex', 'Labrador');\ndog1.speak()             // 'Rex barks.' (오버라이드 적용)\ndog1.parentSpeak()       // 'Rex makes a noise.'\ndog1 instanceof Dog      // true\ndog1 instanceof Animal   // true (부모 타입으로도 판정)"
           },
           {
             "id": "language-javascript-p06-part-7",
-            "title": "내장 클래스 상속[built-in class inheritance]",
-            "content": "class TypedArray extends Array {\n  sum() { return this.reduce((acc, n) => acc + n, 0); }\n  avg() { return this.sum() / this.length; }\n}\n\nvar nums = new TypedArray(10, 20, 30);\nnums.sum()\nnums.avg()\nnums.map(n => n * 2)",
-            "displayContent": "/*** 내장 클래스 상속[built-in class inheritance] ***/\nclass TypedArray extends Array {\n  sum() { return this.reduce((acc, n) => acc + n, 0); }\n  avg() { return this.sum() / this.length; }\n}\n\nvar nums = new TypedArray(10, 20, 30);\nnums.sum()           // 60\nnums.avg()           // 20\nnums.map(n => n * 2) // TypedArray [20, 40, 60]"
+            "title": "정적 초기화 블록[static initialization block]",
+            "content": "class Config {\n  static host;\n  static port;\n  static {\n    Config.host = 'localhost';\n    Config.port = 3000;\n  }\n}\nConfig.host\nConfig.port",
+            "displayContent": "/* 정적 초기화 블록[static initialization block] */\nclass Config {\n  static host;\n  static port;\n  static {\n    Config.host = 'localhost';\n    Config.port = 3000;\n  }\n}\nConfig.host  // 'localhost'\nConfig.port  // 3000"
           },
           {
             "id": "language-javascript-p06-part-8",
+            "title": "클래스 표현식[class expression]",
+            "content": "var Rectangle = class {\n  constructor(w, h) {\n    this.w = w;\n    this.h = h;\n  }\n  get area() { return this.w * this.h; }\n};\nnew Rectangle(4, 5).area",
+            "displayContent": "/* 클래스 표현식[class expression] */\nvar Rectangle = class {\n  constructor(w, h) {\n    this.w = w;\n    this.h = h;\n  }\n  get area() { return this.w * this.h; }\n};\nnew Rectangle(4, 5).area  // 20"
+          },
+          {
+            "id": "language-javascript-p06-part-9",
+            "title": "믹스인[mixin] 정의",
+            "content": "var Serializable = Base => class extends Base {\n  serialize() { return JSON.stringify(this); }\n};\n\nvar Timestamped = Base => class extends Base {\n  constructor(...args) {\n    super(...args);\n    this.createdAt = new Date().toISOString().slice(0, 10);\n  }\n};",
+            "displayContent": "/* 믹스인[mixin] 정의 - 클래스를 반환하는 함수 */\nvar Serializable = Base => class extends Base {\n  serialize() { return JSON.stringify(this); }\n};\n\nvar Timestamped = Base => class extends Base {\n  constructor(...args) {\n    super(...args);\n    this.createdAt = new Date().toISOString().slice(0, 10);\n  }\n};"
+          },
+          {
+            "id": "language-javascript-p06-part-10",
+            "title": "믹스인[mixin] 적용",
+            "content": "class BaseEntity {\n  constructor(data) { Object.assign(this, data); }\n}\n\nclass UserEntity extends Serializable(Timestamped(BaseEntity)) {}\n\nvar userEntity = new UserEntity({ id: 1, name: 'kim' });\nuserEntity.serialize()",
+            "displayContent": "/* 믹스인[mixin] 적용 - 상속 체인에 끼워 넣기 */\nclass BaseEntity {\n  constructor(data) { Object.assign(this, data); }\n}\n\nclass UserEntity extends Serializable(Timestamped(BaseEntity)) {}\n\nvar userEntity = new UserEntity({ id: 1, name: 'kim' });\nuserEntity.serialize()   // '{\"id\":1,\"name\":\"kim\",\"createdAt\":\"2026-03-18\"}'"
+          },
+          {
+            "id": "language-javascript-p06-part-11",
+            "title": "내장 클래스 상속[built-in class inheritance]",
+            "content": "class TypedArray extends Array {\n  sum() { return this.reduce((acc, n) => acc + n, 0); }\n  avg() { return this.sum() / this.length; }\n}\n\nvar nums = new TypedArray(10, 20, 30);\nnums.sum()\nnums.map(n => n * 2)",
+            "displayContent": "/* 내장 클래스 상속[built-in class inheritance] */\nclass TypedArray extends Array {\n  sum() { return this.reduce((acc, n) => acc + n, 0); }\n  avg() { return this.sum() / this.length; }\n}\n\nvar nums = new TypedArray(10, 20, 30);\nnums.sum()           // 60\nnums.map(n => n * 2) // TypedArray [20, 40, 60] (반환도 TypedArray)"
+          },
+          {
+            "id": "language-javascript-p06-part-12",
             "title": "instanceof / constructor 확인[inspection]",
             "content": "dog1.constructor === Dog\ndog1.constructor.name\nObject.getPrototypeOf(dog1) === Dog.prototype",
-            "displayContent": "/*** instanceof / constructor 확인[inspection] ***/\ndog1.constructor === Dog                        // true\ndog1.constructor.name                           // 'Dog'\nObject.getPrototypeOf(dog1) === Dog.prototype   // true"
+            "displayContent": "/* instanceof / constructor 확인[inspection] */\ndog1.constructor === Dog                        // true\ndog1.constructor.name                           // 'Dog'\nObject.getPrototypeOf(dog1) === Dog.prototype   // true"
           }
         ]
       },
       {
         "id": "language-javascript-p07",
         "title": "P07.비동기",
-        "fileName": "P07.비동기.js",
-        "sourcePath": "assets/typingSource/Language-JavaScript/P07.비동기.js",
+        "fileName": "P07.비동기.yaml",
+        "sourcePath": "assets/raw/syntax/javascript/P07.비동기.yaml",
         "language": "javascript",
         "parts": [
           {
             "id": "language-javascript-p07-part-1",
             "title": "Promise 기본 생성[basic construction]",
             "content": "var pBasic = new Promise((resolve, reject) => {\n  setTimeout(() => resolve('완료'), 100);\n});\npBasic.then(v => console.log(v));",
-            "displayContent": "/*** Promise 기본 생성[basic construction] ***/\nvar pBasic = new Promise((resolve, reject) => {\n  setTimeout(() => resolve('완료'), 100);\n});\npBasic.then(v => console.log(v));   // '완료'"
+            "displayContent": "/* Promise 기본 생성[basic construction] */\nvar pBasic = new Promise((resolve, reject) => {\n  setTimeout(() => resolve('완료'), 100);\n});\npBasic.then(v => console.log(v));   // '완료'"
           },
           {
             "id": "language-javascript-p07-part-2",
             "title": "Promise.resolve / reject 단축[shorthand]",
             "content": "Promise.resolve(42).then(v => console.log(v));\nPromise.reject(new Error('실패')).catch(e => console.error(e.message));",
-            "displayContent": "/*** Promise.resolve / reject 단축[shorthand] ***/\nPromise.resolve(42).then(v => console.log(v));                          // 42\nPromise.reject(new Error('실패')).catch(e => console.error(e.message)); // '실패'"
+            "displayContent": "/* Promise.resolve / reject 단축[shorthand] */\nPromise.resolve(42).then(v => console.log(v));                          // 42\nPromise.reject(new Error('실패')).catch(e => console.error(e.message)); // '실패'"
           },
           {
             "id": "language-javascript-p07-part-3",
             "title": "then / catch / finally 체인[chain]",
             "content": "Promise.resolve(1)\n  .then(v => v + 1)\n  .then(v => { if (v > 1) throw new Error('too big'); return v; })\n  .catch(e => { console.error(e.message); return 0; })\n  .finally(() => console.log('정리 완료'));",
-            "displayContent": "/*** then / catch / finally 체인[chain] ***/\nPromise.resolve(1)\n  .then(v => v + 1)           // 2\n  .then(v => { if (v > 1) throw new Error('too big'); return v; })\n  .catch(e => { console.error(e.message); return 0; })  // 'too big' → 0\n  .finally(() => console.log('정리 완료'));              // 항상 실행[always runs]"
+            "displayContent": "/* then / catch / finally 체인[chain] */\nPromise.resolve(1)\n  .then(v => v + 1)           // 2\n  .then(v => { if (v > 1) throw new Error('too big'); return v; })\n  .catch(e => { console.error(e.message); return 0; })  // 'too big' → 0\n  .finally(() => console.log('정리 완료'));              // 항상 실행[always runs]"
           },
           {
             "id": "language-javascript-p07-part-4",
             "title": "Promise.all - 전체 성공 대기[wait for all] (병렬[parallel])",
             "content": "Promise.all([\n  Promise.resolve(1),\n  Promise.resolve(2),\n  new Promise(r => setTimeout(() => r(3), 50)),\n]).then(values => console.log(values));",
-            "displayContent": "/*** Promise.all - 전체 성공 대기[wait for all] (병렬[parallel]) ***/\nPromise.all([\n  Promise.resolve(1),\n  Promise.resolve(2),\n  new Promise(r => setTimeout(() => r(3), 50)),\n]).then(values => console.log(values));\n// [1, 2, 3]"
+            "displayContent": "/* Promise.all - 전체 성공 대기[wait for all] (병렬[parallel]) */\nPromise.all([\n  Promise.resolve(1),\n  Promise.resolve(2),\n  new Promise(r => setTimeout(() => r(3), 50)),\n]).then(values => console.log(values));\n// [1, 2, 3]"
           },
           {
             "id": "language-javascript-p07-part-5",
@@ -1426,13 +1855,13 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-javascript-p07-part-6",
             "title": "Promise.allSettled - 전부 완료 후 결과 수집[settle all]",
             "content": "Promise.allSettled([\n  Promise.resolve(1),\n  Promise.reject(new Error('oops')),\n]).then(results => console.log(results));",
-            "displayContent": "/*** Promise.allSettled - 전부 완료 후 결과 수집[settle all] ***/\nPromise.allSettled([\n  Promise.resolve(1),\n  Promise.reject(new Error('oops')),\n]).then(results => console.log(results));\n// [\n//   { status:'fulfilled', value: 1 },\n//   { status:'rejected',  reason: Error: oops },\n// ]"
+            "displayContent": "/* Promise.allSettled - 전부 완료 후 결과 수집[settle all] */\nPromise.allSettled([\n  Promise.resolve(1),\n  Promise.reject(new Error('oops')),\n]).then(results => console.log(results));\n// [\n//   { status:'fulfilled', value: 1 },\n//   { status:'rejected',  reason: Error: oops },\n// ]"
           },
           {
             "id": "language-javascript-p07-part-7",
             "title": "Promise.any - 가장 먼저 이행[first fulfilled]",
             "content": "Promise.any([\n  Promise.reject('a'),\n  new Promise(r => setTimeout(() => r('b'), 100)),\n  new Promise(r => setTimeout(() => r('c'), 50)),\n]).then(v => console.log(v));",
-            "displayContent": "/*** Promise.any - 가장 먼저 이행[first fulfilled] ***/\nPromise.any([\n  Promise.reject('a'),\n  new Promise(r => setTimeout(() => r('b'), 100)),\n  new Promise(r => setTimeout(() => r('c'), 50)),\n]).then(v => console.log(v));  // 'c'"
+            "displayContent": "/* Promise.any - 가장 먼저 이행[first fulfilled] */\nPromise.any([\n  Promise.reject('a'),\n  new Promise(r => setTimeout(() => r('b'), 100)),\n  new Promise(r => setTimeout(() => r('c'), 50)),\n]).then(v => console.log(v));  // 'c'"
           },
           {
             "id": "language-javascript-p07-part-8",
@@ -1444,157 +1873,157 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-javascript-p07-part-9",
             "title": "Promise.race - 가장 먼저 정산[first settled] (resolve or reject)",
             "content": "Promise.race([\n  new Promise(r => setTimeout(() => r('slow'), 200)),\n  new Promise(r => setTimeout(() => r('fast'), 50)),\n]).then(v => console.log(v));",
-            "displayContent": "/*** Promise.race - 가장 먼저 정산[first settled] (resolve or reject) ***/\nPromise.race([\n  new Promise(r => setTimeout(() => r('slow'), 200)),\n  new Promise(r => setTimeout(() => r('fast'), 50)),\n]).then(v => console.log(v));  // 'fast'"
+            "displayContent": "/* Promise.race - 가장 먼저 정산[first settled] (resolve or reject) */\nPromise.race([\n  new Promise(r => setTimeout(() => r('slow'), 200)),\n  new Promise(r => setTimeout(() => r('fast'), 50)),\n]).then(v => console.log(v));  // 'fast'"
           },
           {
             "id": "language-javascript-p07-part-10",
             "title": "async / await 기본",
             "content": "async function fetchData(id) {\n  var data = await Promise.resolve({ id, name: 'kim' });\n  return data;\n}\nfetchData(1).then(d => console.log(d));",
-            "displayContent": "/*** async / await 기본 ***/\nasync function fetchData(id) {\n  var data = await Promise.resolve({ id, name: 'kim' });  // 비동기 대기[async await]\n  return data;\n}\nfetchData(1).then(d => console.log(d));  // { id:1, name:'kim' }"
+            "displayContent": "/* async / await 기본 */\nasync function fetchData(id) {\n  var data = await Promise.resolve({ id, name: 'kim' });  // 비동기 대기[async await]\n  return data;\n}\nfetchData(1).then(d => console.log(d));  // { id:1, name:'kim' }"
           },
           {
             "id": "language-javascript-p07-part-11",
             "title": "async / await - try/catch 에러 처리[error handling]",
             "content": "async function safeFetch(url) {\n  try {\n    var res = await Promise.reject(new Error('네트워크 오류'));\n    return res;\n  } catch (err) {\n    console.error('에러:', err.message);\n    return null;\n  } finally {\n    console.log('요청 종료');\n  }\n}\nsafeFetch('/api/data');",
-            "displayContent": "/*** async / await - try/catch 에러 처리[error handling] ***/\nasync function safeFetch(url) {\n  try {\n    var res = await Promise.reject(new Error('네트워크 오류'));\n    return res;\n  } catch (err) {\n    console.error('에러:', err.message);  // '에러: 네트워크 오류'\n    return null;\n  } finally {\n    console.log('요청 종료');  // 항상 실행[always runs]\n  }\n}\nsafeFetch('/api/data');"
+            "displayContent": "/* async / await - try/catch 에러 처리[error handling] */\nasync function safeFetch(url) {\n  try {\n    var res = await Promise.reject(new Error('네트워크 오류'));\n    return res;\n  } catch (err) {\n    console.error('에러:', err.message);  // '에러: 네트워크 오류'\n    return null;\n  } finally {\n    console.log('요청 종료');  // 항상 실행[always runs]\n  }\n}\nsafeFetch('/api/data');"
           },
           {
             "id": "language-javascript-p07-part-12",
             "title": "순차 실행[sequential execution]",
             "content": "async function sequential() {\n  var a = await Promise.resolve(1);\n  var b = await Promise.resolve(2);\n  var c = await Promise.resolve(3);\n  return a + b + c;\n}\nsequential().then(v => console.log(v));",
-            "displayContent": "/*** 순차 실행[sequential execution] ***/\nasync function sequential() {\n  var a = await Promise.resolve(1);\n  var b = await Promise.resolve(2);  // a 완료 후 실행[after a resolves]\n  var c = await Promise.resolve(3);  // b 완료 후 실행[after b resolves]\n  return a + b + c;\n}\nsequential().then(v => console.log(v));  // 6"
+            "displayContent": "/* 순차 실행[sequential execution] */\nasync function sequential() {\n  var a = await Promise.resolve(1);\n  var b = await Promise.resolve(2);  // a 완료 후 실행[after a resolves]\n  var c = await Promise.resolve(3);  // b 완료 후 실행[after b resolves]\n  return a + b + c;\n}\nsequential().then(v => console.log(v));  // 6"
           },
           {
             "id": "language-javascript-p07-part-13",
             "title": "병렬 실행[parallel execution] - Promise.all + await",
             "content": "async function parallel() {\n  var [a, b, c] = await Promise.all([\n    Promise.resolve(10),\n    Promise.resolve(20),\n    Promise.resolve(30),\n  ]);\n  return a + b + c;\n}\nparallel().then(v => console.log(v));",
-            "displayContent": "/*** 병렬 실행[parallel execution] - Promise.all + await ***/\nasync function parallel() {\n  var [a, b, c] = await Promise.all([\n    Promise.resolve(10),\n    Promise.resolve(20),\n    Promise.resolve(30),\n  ]);\n  return a + b + c;\n}\nparallel().then(v => console.log(v));  // 60"
+            "displayContent": "/* 병렬 실행[parallel execution] - Promise.all + await */\nasync function parallel() {\n  var [a, b, c] = await Promise.all([\n    Promise.resolve(10),\n    Promise.resolve(20),\n    Promise.resolve(30),\n  ]);\n  return a + b + c;\n}\nparallel().then(v => console.log(v));  // 60"
           },
           {
             "id": "language-javascript-p07-part-14",
             "title": "비동기 이터레이터[async iterator] (for await...of)",
             "content": "async function* asyncCounter(start, end) {\n  for (var i = start; i <= end; i++) {\n    await new Promise(r => setTimeout(r, 10));\n    yield i;\n  }\n}\n\nasync function runCounter() {\n  for await (var num of asyncCounter(1, 3)) {\n    console.log(num);\n  }\n}\nrunCounter();",
-            "displayContent": "/*** 비동기 이터레이터[async iterator] (for await...of) ***/\nasync function* asyncCounter(start, end) {\n  for (var i = start; i <= end; i++) {\n    await new Promise(r => setTimeout(r, 10));  // 딜레이[delay] 10ms\n    yield i;\n  }\n}\n\nasync function runCounter() {\n  for await (var num of asyncCounter(1, 3)) {\n    console.log(num);\n  }\n}\nrunCounter();\n// 1\n// 2\n// 3"
+            "displayContent": "/* 비동기 이터레이터[async iterator] (for await...of) */\nasync function* asyncCounter(start, end) {\n  for (var i = start; i <= end; i++) {\n    await new Promise(r => setTimeout(r, 10));  // 딜레이[delay] 10ms\n    yield i;\n  }\n}\n\nasync function runCounter() {\n  for await (var num of asyncCounter(1, 3)) {\n    console.log(num);\n  }\n}\nrunCounter();\n// 1\n// 2\n// 3"
           },
           {
             "id": "language-javascript-p07-part-15",
             "title": "에러를 값으로 처리하는 패턴[error-as-value pattern]",
             "content": "async function safeAll() {\n  var results = await Promise.all([\n    Promise.resolve('ok').catch(e => e),\n    Promise.reject(new Error('fail')).catch(e => e),\n  ]);\n  console.log(results);\n}\nsafeAll();",
-            "displayContent": "/*** 에러를 값으로 처리하는 패턴[error-as-value pattern] ***/\nasync function safeAll() {\n  var results = await Promise.all([\n    Promise.resolve('ok').catch(e => e),\n    Promise.reject(new Error('fail')).catch(e => e),\n  ]);\n  console.log(results);\n}\nsafeAll();\n// ['ok', Error: fail]"
+            "displayContent": "/* 에러를 값으로 처리하는 패턴[error-as-value pattern] */\nasync function safeAll() {\n  var results = await Promise.all([\n    Promise.resolve('ok').catch(e => e),\n    Promise.reject(new Error('fail')).catch(e => e),\n  ]);\n  console.log(results);\n}\nsafeAll();\n// ['ok', Error: fail]"
           }
         ]
       },
       {
         "id": "language-javascript-p08",
         "title": "P08.컬렉션-심볼",
-        "fileName": "P08.컬렉션-심볼.js",
-        "sourcePath": "assets/typingSource/Language-JavaScript/P08.컬렉션-심볼.js",
+        "fileName": "P08.컬렉션-심볼.yaml",
+        "sourcePath": "assets/raw/syntax/javascript/P08.컬렉션-심볼.yaml",
         "language": "javascript",
         "parts": [
           {
             "id": "language-javascript-p08-part-1",
             "title": "Map - 키-값[key-value] 저장[storage] (키 타입[key type] 제한 없음)",
             "content": "var mapA = new Map();\nmapA.set('name', 'kim');\nmapA.set(42, 'forty-two');\nmapA.set({ id: 1 }, 'objKey');\nmapA.get('name')\nmapA.get(42)\nmapA.has('name')\nmapA.size\nmapA.delete('name');\nmapA.size",
-            "displayContent": "/*** Map - 키-값[key-value] 저장[storage] (키 타입[key type] 제한 없음) ***/\nvar mapA = new Map();\nmapA.set('name', 'kim');\nmapA.set(42, 'forty-two');\nmapA.set({ id: 1 }, 'objKey');  // 객체도 키[key] 가능\nmapA.get('name')    // 'kim'\nmapA.get(42)        // 'forty-two'\nmapA.has('name')    // true\nmapA.size           // 3\nmapA.delete('name');\nmapA.size           // 2"
+            "displayContent": "/* Map - 키-값[key-value] 저장[storage] (키 타입[key type] 제한 없음) */\nvar mapA = new Map();\nmapA.set('name', 'kim');\nmapA.set(42, 'forty-two');\nmapA.set({ id: 1 }, 'objKey');  // 객체도 키[key] 가능\nmapA.get('name')    // 'kim'\nmapA.get(42)        // 'forty-two'\nmapA.has('name')    // true\nmapA.size           // 3\nmapA.delete('name');\nmapA.size           // 2"
           },
           {
             "id": "language-javascript-p08-part-2",
             "title": "Map 생성 - 배열[array]로 초기화[initialize]",
             "content": "var mapB = new Map([['a', 1], ['b', 2], ['c', 3]]);\nmapB.get('b')",
-            "displayContent": "/*** Map 생성 - 배열[array]로 초기화[initialize] ***/\nvar mapB = new Map([['a', 1], ['b', 2], ['c', 3]]);\nmapB.get('b')   // 2"
+            "displayContent": "/* Map 생성 - 배열[array]로 초기화[initialize] */\nvar mapB = new Map([['a', 1], ['b', 2], ['c', 3]]);\nmapB.get('b')   // 2"
           },
           {
             "id": "language-javascript-p08-part-3",
             "title": "Map 순회[iteration]",
             "content": "for (var [k, v] of mapB) {\n  console.log(k, v);\n}\n\n[...mapB.keys()]\n[...mapB.values()]\n[...mapB.entries()]\n\nmapB.forEach((v, k) => console.log(k, v));",
-            "displayContent": "/*** Map 순회[iteration] ***/\nfor (var [k, v] of mapB) {\n  console.log(k, v);\n}\n// a 1\n// b 2\n// c 3\n\n[...mapB.keys()]    // ['a', 'b', 'c']\n[...mapB.values()]  // [1, 2, 3]\n[...mapB.entries()] // [['a',1], ['b',2], ['c',3]]\n\nmapB.forEach((v, k) => console.log(k, v));\n// a 1 / b 2 / c 3"
+            "displayContent": "/* Map 순회[iteration] */\nfor (var [k, v] of mapB) {\n  console.log(k, v);\n}\n// a 1\n// b 2\n// c 3\n\n[...mapB.keys()]    // ['a', 'b', 'c']\n[...mapB.values()]  // [1, 2, 3]\n[...mapB.entries()] // [['a',1], ['b',2], ['c',3]]\n\nmapB.forEach((v, k) => console.log(k, v));\n// a 1 / b 2 / c 3"
           },
           {
             "id": "language-javascript-p08-part-4",
             "title": "Map ↔ Object 변환[conversion]",
             "content": "var mapFromObj = new Map(Object.entries({ x: 10, y: 20 }));\n\nObject.fromEntries(mapFromObj)",
-            "displayContent": "/*** Map ↔ Object 변환[conversion] ***/\nvar mapFromObj = new Map(Object.entries({ x: 10, y: 20 }));\n// Map { 'x' => 10, 'y' => 20 }\n\nObject.fromEntries(mapFromObj)\n// { x: 10, y: 20 }"
+            "displayContent": "/* Map ↔ Object 변환[conversion] */\nvar mapFromObj = new Map(Object.entries({ x: 10, y: 20 }));\n// Map { 'x' => 10, 'y' => 20 }\n\nObject.fromEntries(mapFromObj)\n// { x: 10, y: 20 }"
           },
           {
             "id": "language-javascript-p08-part-5",
             "title": "WeakMap - 약한 참조[weak reference] (GC 대상[GC-eligible], 열거 불가[non-enumerable])",
             "content": "var weakMapA = new WeakMap();\nvar wmKey = {};\nweakMapA.set(wmKey, 'private-data');\nweakMapA.get(wmKey)\nweakMapA.has(wmKey)",
-            "displayContent": "/*** WeakMap - 약한 참조[weak reference] (GC 대상[GC-eligible], 열거 불가[non-enumerable]) ***/\nvar weakMapA = new WeakMap();\nvar wmKey = {};\nweakMapA.set(wmKey, 'private-data');\nweakMapA.get(wmKey)   // 'private-data'\nweakMapA.has(wmKey)   // true\n// wmKey = null; → GC 수거[garbage collection] 시 WeakMap에서도 자동 제거"
+            "displayContent": "/* WeakMap - 약한 참조[weak reference] (GC 대상[GC-eligible], 열거 불가[non-enumerable]) */\nvar weakMapA = new WeakMap();\nvar wmKey = {};\nweakMapA.set(wmKey, 'private-data');\nweakMapA.get(wmKey)   // 'private-data'\nweakMapA.has(wmKey)   // true\n// wmKey = null; → GC 수거[garbage collection] 시 WeakMap에서도 자동 제거"
           },
           {
             "id": "language-javascript-p08-part-6",
             "title": "Set - 중복 없는 값 컬렉션[unique value collection]",
             "content": "var setA = new Set([1, 2, 3, 2, 1]);\nsetA.size\nsetA.has(2)\nsetA.add(4);\nsetA.delete(1);\n[...setA]",
-            "displayContent": "/*** Set - 중복 없는 값 컬렉션[unique value collection] ***/\nvar setA = new Set([1, 2, 3, 2, 1]);  // 중복 자동 제거[automatic deduplication]\nsetA.size    // 3\nsetA.has(2)  // true\nsetA.add(4);\nsetA.delete(1);\n[...setA]    // [2, 3, 4]"
+            "displayContent": "/* Set - 중복 없는 값 컬렉션[unique value collection] */\nvar setA = new Set([1, 2, 3, 2, 1]);  // 중복 자동 제거[automatic deduplication]\nsetA.size    // 3\nsetA.has(2)  // true\nsetA.add(4);\nsetA.delete(1);\n[...setA]    // [2, 3, 4]"
           },
           {
             "id": "language-javascript-p08-part-7",
             "title": "Set 활용 - 배열 중복 제거[array deduplication]",
             "content": "var dupArr = [1, 2, 2, 3, 3, 3, 4];\nvar uniqArr = [...new Set(dupArr)];",
-            "displayContent": "/*** Set 활용 - 배열 중복 제거[array deduplication] ***/\nvar dupArr = [1, 2, 2, 3, 3, 3, 4];\nvar uniqArr = [...new Set(dupArr)];  // [1, 2, 3, 4]"
+            "displayContent": "/* Set 활용 - 배열 중복 제거[array deduplication] */\nvar dupArr = [1, 2, 2, 3, 3, 3, 4];\nvar uniqArr = [...new Set(dupArr)];  // [1, 2, 3, 4]"
           },
           {
             "id": "language-javascript-p08-part-8",
             "title": "Set 순회[iteration]",
             "content": "var setB = new Set(['X', 'Y', 'Z']);\nfor (var item of setB) { console.log(item); }",
-            "displayContent": "/*** Set 순회[iteration] ***/\nvar setB = new Set(['X', 'Y', 'Z']);\nfor (var item of setB) { console.log(item); }\n// X / Y / Z"
+            "displayContent": "/* Set 순회[iteration] */\nvar setB = new Set(['X', 'Y', 'Z']);\nfor (var item of setB) { console.log(item); }\n// X / Y / Z"
           },
           {
             "id": "language-javascript-p08-part-9",
             "title": "Set 집합 연산[set operation]",
             "content": "var setX = new Set([1, 2, 3, 4]);\nvar setY = new Set([3, 4, 5, 6]);\n\nvar union        = new Set([...setX, ...setY]);\nvar intersection = new Set([...setX].filter(v =>  setY.has(v)));\nvar difference   = new Set([...setX].filter(v => !setY.has(v)));\n\n[...union]\n[...intersection]\n[...difference]",
-            "displayContent": "/*** Set 집합 연산[set operation] ***/\nvar setX = new Set([1, 2, 3, 4]);\nvar setY = new Set([3, 4, 5, 6]);\n\nvar union        = new Set([...setX, ...setY]);                          // 합집합[union]: {1,2,3,4,5,6}\nvar intersection = new Set([...setX].filter(v =>  setY.has(v)));         // 교집합[intersection]: {3,4}\nvar difference   = new Set([...setX].filter(v => !setY.has(v)));         // 차집합[difference]: {1,2}\n\n[...union]        // [1, 2, 3, 4, 5, 6]\n[...intersection] // [3, 4]\n[...difference]   // [1, 2]"
+            "displayContent": "/* Set 집합 연산[set operation] */\nvar setX = new Set([1, 2, 3, 4]);\nvar setY = new Set([3, 4, 5, 6]);\n\nvar union        = new Set([...setX, ...setY]);                          // 합집합[union]: {1,2,3,4,5,6}\nvar intersection = new Set([...setX].filter(v =>  setY.has(v)));         // 교집합[intersection]: {3,4}\nvar difference   = new Set([...setX].filter(v => !setY.has(v)));         // 차집합[difference]: {1,2}\n\n[...union]        // [1, 2, 3, 4, 5, 6]\n[...intersection] // [3, 4]\n[...difference]   // [1, 2]"
           },
           {
             "id": "language-javascript-p08-part-10",
             "title": "WeakSet - 약한 참조[weak reference] 객체 집합",
             "content": "var weakSetA = new WeakSet();\nvar wsObj = { id: 1 };\nweakSetA.add(wsObj);\nweakSetA.has(wsObj)",
-            "displayContent": "/*** WeakSet - 약한 참조[weak reference] 객체 집합 ***/\nvar weakSetA = new WeakSet();\nvar wsObj = { id: 1 };\nweakSetA.add(wsObj);\nweakSetA.has(wsObj)   // true\n// wsObj = null; → GC 수거[garbage collection] 시 자동 제거"
+            "displayContent": "/* WeakSet - 약한 참조[weak reference] 객체 집합 */\nvar weakSetA = new WeakSet();\nvar wsObj = { id: 1 };\nweakSetA.add(wsObj);\nweakSetA.has(wsObj)   // true\n// wsObj = null; → GC 수거[garbage collection] 시 자동 제거"
           },
           {
             "id": "language-javascript-p08-part-11",
             "title": "Symbol - 고유 식별자[unique identifier]",
             "content": "var symA = Symbol('description');\nvar symB = Symbol('description');\nsymA === symB\nsymA.toString()\nsymA.description\ntypeof symA",
-            "displayContent": "/*** Symbol - 고유 식별자[unique identifier] ***/\nvar symA = Symbol('description');\nvar symB = Symbol('description');\nsymA === symB            // false (항상 고유[always unique])\nsymA.toString()          // 'Symbol(description)'\nsymA.description         // 'description'\ntypeof symA              // 'symbol'"
+            "displayContent": "/* Symbol - 고유 식별자[unique identifier] */\nvar symA = Symbol('description');\nvar symB = Symbol('description');\nsymA === symB            // false (항상 고유[always unique])\nsymA.toString()          // 'Symbol(description)'\nsymA.description         // 'description'\ntypeof symA              // 'symbol'"
           },
           {
             "id": "language-javascript-p08-part-12",
             "title": "Symbol을 객체 키[object key]로 사용",
             "content": "var symId = Symbol('id');\nvar symRole = Symbol('role');\nvar symObj = {\n  [symId]: 42,\n  [symRole]: 'admin',\n  name: 'kim',\n};\nsymObj[symId]\nsymObj[symRole]\nObject.keys(symObj)\nObject.getOwnPropertySymbols(symObj)",
-            "displayContent": "/*** Symbol을 객체 키[object key]로 사용 ***/\nvar symId = Symbol('id');\nvar symRole = Symbol('role');\nvar symObj = {\n  [symId]: 42,\n  [symRole]: 'admin',\n  name: 'kim',\n};\nsymObj[symId]           // 42\nsymObj[symRole]         // 'admin'\nObject.keys(symObj)     // ['name']  (Symbol은 열거[enumeration] 안됨)\nObject.getOwnPropertySymbols(symObj)  // [Symbol(id), Symbol(role)]"
+            "displayContent": "/* Symbol을 객체 키[object key]로 사용 */\nvar symId = Symbol('id');\nvar symRole = Symbol('role');\nvar symObj = {\n  [symId]: 42,\n  [symRole]: 'admin',\n  name: 'kim',\n};\nsymObj[symId]           // 42\nsymObj[symRole]         // 'admin'\nObject.keys(symObj)     // ['name']  (Symbol은 열거[enumeration] 안됨)\nObject.getOwnPropertySymbols(symObj)  // [Symbol(id), Symbol(role)]"
           },
           {
             "id": "language-javascript-p08-part-13",
             "title": "Symbol.for - 전역 레지스트리[global registry] (공유[shared] 가능)",
             "content": "var globalSym1 = Symbol.for('shared');\nvar globalSym2 = Symbol.for('shared');\nglobalSym1 === globalSym2\nSymbol.keyFor(globalSym1)",
-            "displayContent": "/*** Symbol.for - 전역 레지스트리[global registry] (공유[shared] 가능) ***/\nvar globalSym1 = Symbol.for('shared');\nvar globalSym2 = Symbol.for('shared');\nglobalSym1 === globalSym2  // true (같은 키면 동일 심볼)\nSymbol.keyFor(globalSym1)  // 'shared'"
+            "displayContent": "/* Symbol.for - 전역 레지스트리[global registry] (공유[shared] 가능) */\nvar globalSym1 = Symbol.for('shared');\nvar globalSym2 = Symbol.for('shared');\nglobalSym1 === globalSym2  // true (같은 키면 동일 심볼)\nSymbol.keyFor(globalSym1)  // 'shared'"
           },
           {
             "id": "language-javascript-p08-part-14",
             "title": "Well-known Symbol - Symbol.iterator (이터레이터 프로토콜[iterator protocol])",
             "content": "var rangeObj = {\n  from: 1, to: 3,\n  [Symbol.iterator]() {\n    var cur = this.from, last = this.to;\n    return {\n      next() {\n        return cur <= last\n          ? { value: cur++, done: false }\n          : { value: undefined, done: true };\n      }\n    };\n  }\n};\n[...rangeObj]",
-            "displayContent": "/*** Well-known Symbol - Symbol.iterator (이터레이터 프로토콜[iterator protocol]) ***/\nvar rangeObj = {\n  from: 1, to: 3,\n  [Symbol.iterator]() {\n    var cur = this.from, last = this.to;\n    return {\n      next() {\n        return cur <= last\n          ? { value: cur++, done: false }\n          : { value: undefined, done: true };\n      }\n    };\n  }\n};\n[...rangeObj]  // [1, 2, 3]"
+            "displayContent": "/* Well-known Symbol - Symbol.iterator (이터레이터 프로토콜[iterator protocol]) */\nvar rangeObj = {\n  from: 1, to: 3,\n  [Symbol.iterator]() {\n    var cur = this.from, last = this.to;\n    return {\n      next() {\n        return cur <= last\n          ? { value: cur++, done: false }\n          : { value: undefined, done: true };\n      }\n    };\n  }\n};\n[...rangeObj]  // [1, 2, 3]"
           },
           {
             "id": "language-javascript-p08-part-15",
             "title": "Well-known Symbol - Symbol.toPrimitive (타입 강제 변환[type coercion])",
             "content": "var customNum = {\n  [Symbol.toPrimitive](hint) {\n    if (hint === 'number') return 42;\n    if (hint === 'string') return 'forty-two';\n    return true;\n  }\n};\n+customNum\n`${customNum}`\ncustomNum + ''",
-            "displayContent": "/*** Well-known Symbol - Symbol.toPrimitive (타입 강제 변환[type coercion]) ***/\nvar customNum = {\n  [Symbol.toPrimitive](hint) {\n    if (hint === 'number') return 42;\n    if (hint === 'string') return 'forty-two';\n    return true;  // 기본값[default hint]\n  }\n};\n+customNum            // 42\n`${customNum}`        // 'forty-two'\ncustomNum + ''        // 'true'"
+            "displayContent": "/* Well-known Symbol - Symbol.toPrimitive (타입 강제 변환[type coercion]) */\nvar customNum = {\n  [Symbol.toPrimitive](hint) {\n    if (hint === 'number') return 42;\n    if (hint === 'string') return 'forty-two';\n    return true;  // 기본값[default hint]\n  }\n};\n+customNum            // 42\n`${customNum}`        // 'forty-two'\ncustomNum + ''        // 'true'"
           }
         ]
       },
       {
         "id": "language-javascript-p09",
         "title": "P09.정규식",
-        "fileName": "P09.정규식.js",
-        "sourcePath": "assets/typingSource/Language-JavaScript/P09.정규식.js",
+        "fileName": "P09.정규식.yaml",
+        "sourcePath": "assets/raw/syntax/javascript/P09.정규식.yaml",
         "language": "javascript",
         "parts": [
           {
             "id": "language-javascript-p09-part-1",
             "title": "생성[creation] - 리터럴[literal] vs 생성자[constructor]",
             "content": "var reLiteral = /hello/gi;\nvar reConstructor = new RegExp('hello', 'gi');\n\nreLiteral.test('Hello World')\nreConstructor.test('HELLO')",
-            "displayContent": "/*** 생성[creation] - 리터럴[literal] vs 생성자[constructor] ***/\nvar reLiteral = /hello/gi;                    // 리터럴[literal] 표기 (컴파일 타임)\nvar reConstructor = new RegExp('hello', 'gi'); // 생성자[constructor] (런타임, 동적 패턴)\n\nreLiteral.test('Hello World')   // true\nreConstructor.test('HELLO')     // true"
+            "displayContent": "/* 생성[creation] - 리터럴[literal] vs 생성자[constructor] */\nvar reLiteral = /hello/gi;                    // 리터럴[literal] 표기 (컴파일 타임)\nvar reConstructor = new RegExp('hello', 'gi'); // 생성자[constructor] (런타임, 동적 패턴)\n\nreLiteral.test('Hello World')   // true\nreConstructor.test('HELLO')     // true"
           },
           {
             "id": "language-javascript-p09-part-2",
@@ -1606,37 +2035,37 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-javascript-p09-part-3",
             "title": "앵커[anchor]",
             "content": "'Hello World'.match(/^Hello/)\n'Hello World'.match(/World$/)\n\n'cat cats'.match(/\\bcat\\b/g)\n'cat cats'.match(/cat\\B/g)",
-            "displayContent": "/*** 앵커[anchor] ***/\n'Hello World'.match(/^Hello/)   // ['Hello']  (^ 문자열 시작[start of string])\n'Hello World'.match(/World$/)   // ['World']  ($ 문자열 끝[end of string])\n\n'cat cats'.match(/\\bcat\\b/g)    // ['cat']     (\\b 단어 경계[word boundary])\n'cat cats'.match(/cat\\B/g)      // ['cat']     (\\B 단어 경계가 아님[non-word boundary])"
+            "displayContent": "/* 앵커[anchor] */\n'Hello World'.match(/^Hello/)   // ['Hello']  (^ 문자열 시작[start of string])\n'Hello World'.match(/World$/)   // ['World']  ($ 문자열 끝[end of string])\n\n'cat cats'.match(/\\bcat\\b/g)    // ['cat']     (\\b 단어 경계[word boundary])\n'cat cats'.match(/cat\\B/g)      // ['cat']     (\\B 단어 경계가 아님[non-word boundary])"
           },
           {
             "id": "language-javascript-p09-part-4",
             "title": "문자 클래스[character class]",
             "content": "'a1 b2'.match(/\\d/g)\n'a1 b2'.match(/\\D/g)\n'a1 b2'.match(/\\w/g)\n'a1 b2'.match(/\\W/g)\n'a1 b2'.match(/\\s/g)\n'a1 b2'.match(/\\S/g)\n'a1.b'.match(/./g)",
-            "displayContent": "/*** 문자 클래스[character class] ***/\n'a1 b2'.match(/\\d/g)   // ['1', '2']       (\\d 숫자[digit] 0-9)\n'a1 b2'.match(/\\D/g)   // ['a', ' ', 'b', ' '] (\\D 비숫자[non-digit])\n'a1 b2'.match(/\\w/g)   // ['a','1','b','2']    (\\w 단어 문자[word char]: [a-zA-Z0-9_])\n'a1 b2'.match(/\\W/g)   // [' ', ' ']           (\\W 비단어[non-word char])\n'a1 b2'.match(/\\s/g)   // [' ', ' ']           (\\s 공백[whitespace])\n'a1 b2'.match(/\\S/g)   // ['a','1','b','2']    (\\S 비공백[non-whitespace])\n'a1.b'.match(/./g)     // ['a','1','.','b']    (. 임의의 한 문자[any char except \\n])"
+            "displayContent": "/* 문자 클래스[character class] */\n'a1 b2'.match(/\\d/g)   // ['1', '2']       (\\d 숫자[digit] 0-9)\n'a1 b2'.match(/\\D/g)   // ['a', ' ', 'b', ' '] (\\D 비숫자[non-digit])\n'a1 b2'.match(/\\w/g)   // ['a','1','b','2']    (\\w 단어 문자[word char]: [a-zA-Z0-9_])\n'a1 b2'.match(/\\W/g)   // [' ', ' ']           (\\W 비단어[non-word char])\n'a1 b2'.match(/\\s/g)   // [' ', ' ']           (\\s 공백[whitespace])\n'a1 b2'.match(/\\S/g)   // ['a','1','b','2']    (\\S 비공백[non-whitespace])\n'a1.b'.match(/./g)     // ['a','1','.','b']    (. 임의의 한 문자[any char except \\n])"
           },
           {
             "id": "language-javascript-p09-part-5",
             "title": "문자셋[character set]",
             "content": "'grey gray'.match(/gr[ae]y/g)\n'hello123'.match(/[a-z]+/g)\n'hello123'.match(/[^a-z]+/g)\n'hello123'.match(/[a-zA-Z0-9]+/g)",
-            "displayContent": "/*** 문자셋[character set] ***/\n'grey gray'.match(/gr[ae]y/g)    // ['grey', 'gray']    ([ae] a 또는 e)\n'hello123'.match(/[a-z]+/g)      // ['hello']           ([a-z] 범위[range])\n'hello123'.match(/[^a-z]+/g)     // ['123']             ([^] 부정[negation])\n'hello123'.match(/[a-zA-Z0-9]+/g) // ['hello123']       (복수 범위)"
+            "displayContent": "/* 문자셋[character set] */\n'grey gray'.match(/gr[ae]y/g)    // ['grey', 'gray']    ([ae] a 또는 e)\n'hello123'.match(/[a-z]+/g)      // ['hello']           ([a-z] 범위[range])\n'hello123'.match(/[^a-z]+/g)     // ['123']             ([^] 부정[negation])\n'hello123'.match(/[a-zA-Z0-9]+/g) // ['hello123']       (복수 범위)"
           },
           {
             "id": "language-javascript-p09-part-6",
             "title": "수량자[quantifier]",
             "content": "'graaay'.match(/gra*y/)\n'gry'.match(/gra*y/)\n'gray'.match(/gra?y/)\n'gry'.match(/gra?y/)\n'gray'.match(/gra+y/)\n'gry'.match(/gra+y/)\n\n'graaay'.match(/gra{2}y/)\n'graay'.match(/gra{2}y/)\n'graaay'.match(/gra{2,}y/)\n'graaay'.match(/gra{2,3}y/)",
-            "displayContent": "/*** 수량자[quantifier] ***/\n'graaay'.match(/gra*y/)    // null   (a*: 0번 이상, y 바로 앞에 없어서 null)\n'gry'.match(/gra*y/)       // ['gry']   (a*: 0번 이상)\n'gray'.match(/gra?y/)      // ['gray']  (a?: 0 또는 1번)\n'gry'.match(/gra?y/)       // ['gry']   (a?: 0 또는 1번)\n'gray'.match(/gra+y/)      // ['gray']  (a+: 1번 이상)\n'gry'.match(/gra+y/)       // null      (a+: 1번 이상, 0번이라 null)\n\n'graaay'.match(/gra{2}y/)   // null     ({2}: 정확히 2번)\n'graay'.match(/gra{2}y/)    // ['graay'] ({2}: 정확히 2번)\n'graaay'.match(/gra{2,}y/)  // ['graaay'] ({2,}: 2번 이상)\n'graaay'.match(/gra{2,3}y/) // ['graaay'] ({2,3}: 2~3번)"
+            "displayContent": "/* 수량자[quantifier] */\n'graaay'.match(/gra*y/)    // null   (a*: 0번 이상, y 바로 앞에 없어서 null)\n'gry'.match(/gra*y/)       // ['gry']   (a*: 0번 이상)\n'gray'.match(/gra?y/)      // ['gray']  (a?: 0 또는 1번)\n'gry'.match(/gra?y/)       // ['gry']   (a?: 0 또는 1번)\n'gray'.match(/gra+y/)      // ['gray']  (a+: 1번 이상)\n'gry'.match(/gra+y/)       // null      (a+: 1번 이상, 0번이라 null)\n\n'graaay'.match(/gra{2}y/)   // null     ({2}: 정확히 2번)\n'graay'.match(/gra{2}y/)    // ['graay'] ({2}: 정확히 2번)\n'graaay'.match(/gra{2,}y/)  // ['graaay'] ({2,}: 2번 이상)\n'graaay'.match(/gra{2,3}y/) // ['graaay'] ({2,3}: 2~3번)"
           },
           {
             "id": "language-javascript-p09-part-7",
             "title": "탐욕적[greedy] vs 게으른[lazy] 수량자",
             "content": "'<a><b><c>'.match(/<.+>/)\n'<a><b><c>'.match(/<.+?>/)\n'<a><b><c>'.match(/<.*?>/)",
-            "displayContent": "/*** 탐욕적[greedy] vs 게으른[lazy] 수량자 ***/\n'<a><b><c>'.match(/<.+>/)    // ['<a><b><c>'] (greedy: 최대한 매치)\n'<a><b><c>'.match(/<.+?>/)   // ['<a>']       (lazy: 최소한 매치, ? 추가)\n'<a><b><c>'.match(/<.*?>/)   // ['<a>']       (lazy)"
+            "displayContent": "/* 탐욕적[greedy] vs 게으른[lazy] 수량자 */\n'<a><b><c>'.match(/<.+>/)    // ['<a><b><c>'] (greedy: 최대한 매치)\n'<a><b><c>'.match(/<.+?>/)   // ['<a>']       (lazy: 최소한 매치, ? 추가)\n'<a><b><c>'.match(/<.*?>/)   // ['<a>']       (lazy)"
           },
           {
             "id": "language-javascript-p09-part-8",
             "title": "그룹[group]",
             "content": "'2024-03-18'.match(/(\\d{4})-(\\d{2})-(\\d{2})/)\n\n'grey'.match(/gr(?:a|e)y/)\n'grey'.match(/gr(a|e)y/)",
-            "displayContent": "/*** 그룹[group] ***/\n// (x)    캡처 그룹[capturing group]     - 매치 + 기억\n// (?:x)  비캡처 그룹[non-capturing group] - 매치만, 기억 안함\n// (?<name>x) 네임드 캡처 그룹[named capturing group]\n\n'2024-03-18'.match(/(\\d{4})-(\\d{2})-(\\d{2})/)\n// ['2024-03-18', '2024', '03', '18', index:0, ...]\n// [0]=전체, [1]=year, [2]=month, [3]=day\n\n'grey'.match(/gr(?:a|e)y/)   // ['grey'] (비캡처: 그룹 인덱스 없음)\n'grey'.match(/gr(a|e)y/)     // ['grey', 'e'] (캡처: [1]='e')"
+            "displayContent": "/* 그룹[group] */\n// (x)    캡처 그룹[capturing group]     - 매치 + 기억\n// (?:x)  비캡처 그룹[non-capturing group] - 매치만, 기억 안함\n// (?<name>x) 네임드 캡처 그룹[named capturing group]\n\n'2024-03-18'.match(/(\\d{4})-(\\d{2})-(\\d{2})/)\n// ['2024-03-18', '2024', '03', '18', index:0, ...]\n// [0]=전체, [1]=year, [2]=month, [3]=day\n\n'grey'.match(/gr(?:a|e)y/)   // ['grey'] (비캡처: 그룹 인덱스 없음)\n'grey'.match(/gr(a|e)y/)     // ['grey', 'e'] (캡처: [1]='e')"
           },
           {
             "id": "language-javascript-p09-part-9",
@@ -1648,19 +2077,19 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-javascript-p09-part-10",
             "title": "역참조[backreference]",
             "content": "'aabbcc'.match(/(.)\\1/)\n'abab'.match(/(ab)\\1/)",
-            "displayContent": "/*** 역참조[backreference] ***/\n'aabbcc'.match(/(.)\\1/)   // ['aa', 'a']  (\\1 = 첫 번째 캡처 그룹 재참조)\n'abab'.match(/(ab)\\1/)    // ['abab', 'ab']"
+            "displayContent": "/* 역참조[backreference] */\n'aabbcc'.match(/(.)\\1/)   // ['aa', 'a']  (\\1 = 첫 번째 캡처 그룹 재참조)\n'abab'.match(/(ab)\\1/)    // ['abab', 'ab']"
           },
           {
             "id": "language-javascript-p09-part-11",
             "title": "전방탐색[lookahead] / 후방탐색[lookbehind]",
             "content": "'100px 200em 50px'.match(/\\d+(?=px)/g)\n'100px 200em 50px'.match(/\\d+(?!px)/g)\n\n'$100 £200 $50'.match(/(?<=\\$)\\d+/g)\n'$100 £200 $50'.match(/(?<!\\$)\\d+/g)",
-            "displayContent": "/*** 전방탐색[lookahead] / 후방탐색[lookbehind] ***/\n// (?=x)  긍정 전방탐색[positive lookahead]  - x 앞에 있는 것\n// (?!x)  부정 전방탐색[negative lookahead]  - x 앞에 없는 것\n// (?<=x) 긍정 후방탐색[positive lookbehind] - x 뒤에 있는 것\n// (?<!x) 부정 후방탐색[negative lookbehind] - x 뒤에 없는 것\n\n'100px 200em 50px'.match(/\\d+(?=px)/g)    // ['100', '50']   (px 앞의 숫자만)\n'100px 200em 50px'.match(/\\d+(?!px)/g)    // ['200', ...] (px 아닌 것 앞의 숫자)\n\n'$100 £200 $50'.match(/(?<=\\$)\\d+/g)      // ['100', '50']   ($ 뒤의 숫자만)\n'$100 £200 $50'.match(/(?<!\\$)\\d+/g)      // ['200']         ($ 아닌 것 뒤의 숫자)"
+            "displayContent": "/* 전방탐색[lookahead] / 후방탐색[lookbehind] */\n// (?=x)  긍정 전방탐색[positive lookahead]  - x 앞에 있는 것\n// (?!x)  부정 전방탐색[negative lookahead]  - x 앞에 없는 것\n// (?<=x) 긍정 후방탐색[positive lookbehind] - x 뒤에 있는 것\n// (?<!x) 부정 후방탐색[negative lookbehind] - x 뒤에 없는 것\n\n'100px 200em 50px'.match(/\\d+(?=px)/g)    // ['100', '50']   (px 앞의 숫자만)\n'100px 200em 50px'.match(/\\d+(?!px)/g)    // ['200', ...] (px 아닌 것 앞의 숫자)\n\n'$100 £200 $50'.match(/(?<=\\$)\\d+/g)      // ['100', '50']   ($ 뒤의 숫자만)\n'$100 £200 $50'.match(/(?<!\\$)\\d+/g)      // ['200']         ($ 아닌 것 뒤의 숫자)"
           },
           {
             "id": "language-javascript-p09-part-12",
             "title": "정규식 메서드[regex methods]",
             "content": "var re1 = /\\d+/g;\nvar str1 = 'abc 123 def 456';\n\nre1.test('abc 123')\nstr1.search(/\\d+/)\nstr1.match(/\\d+/g)\nstr1.replace(/\\d+/g, 'N')",
-            "displayContent": "/*** 정규식 메서드[regex methods] ***/\nvar re1 = /\\d+/g;\nvar str1 = 'abc 123 def 456';\n\nre1.test('abc 123')         // true  (패턴 존재 여부[existence])\nstr1.search(/\\d+/)          // 4     (첫 번째 매치 인덱스[index], 없으면 -1)\nstr1.match(/\\d+/g)          // ['123', '456']\nstr1.replace(/\\d+/g, 'N')   // 'abc N def N'"
+            "displayContent": "/* 정규식 메서드[regex methods] */\nvar re1 = /\\d+/g;\nvar str1 = 'abc 123 def 456';\n\nre1.test('abc 123')         // true  (패턴 존재 여부[existence])\nstr1.search(/\\d+/)          // 4     (첫 번째 매치 인덱스[index], 없으면 -1)\nstr1.match(/\\d+/g)          // ['123', '456']\nstr1.replace(/\\d+/g, 'N')   // 'abc N def N'"
           },
           {
             "id": "language-javascript-p09-part-13",
@@ -1672,7 +2101,7 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-javascript-p09-part-14",
             "title": "replace + 캡처 그룹 참조",
             "content": "'2024-03-18'.replace(/(\\d{4})-(\\d{2})-(\\d{2})/, '$3/$2/$1')\n'2024-03-18'.replace(/(?<y>\\d{4})-(?<m>\\d{2})-(?<d>\\d{2})/, '$<d>/$<m>/$<y>')\n\n'hello'.replace(/(\\w+)/, '[$&]')",
-            "displayContent": "/*** replace + 캡처 그룹 참조 ***/\n// $1 $2... = 캡처 그룹[capture group] 번호 참조\n// $<name>  = 네임드 그룹[named group] 참조\n// $&       = 매치 전체[entire match]\n// $`       = 매치 이전[before match]\n// $'       = 매치 이후[after match]\n\n'2024-03-18'.replace(/(\\d{4})-(\\d{2})-(\\d{2})/, '$3/$2/$1')  // '18/03/2024'\n'2024-03-18'.replace(/(?<y>\\d{4})-(?<m>\\d{2})-(?<d>\\d{2})/, '$<d>/$<m>/$<y>') // '18/03/2024'\n\n'hello'.replace(/(\\w+)/, '[$&]')  // '[hello]' ($&: 전체 매치)"
+            "displayContent": "/* replace + 캡처 그룹 참조 */\n// $1 $2... = 캡처 그룹[capture group] 번호 참조\n// $<name>  = 네임드 그룹[named group] 참조\n// $&       = 매치 전체[entire match]\n// $`       = 매치 이전[before match]\n// $'       = 매치 이후[after match]\n\n'2024-03-18'.replace(/(\\d{4})-(\\d{2})-(\\d{2})/, '$3/$2/$1')  // '18/03/2024'\n'2024-03-18'.replace(/(?<y>\\d{4})-(?<m>\\d{2})-(?<d>\\d{2})/, '$<d>/$<m>/$<y>') // '18/03/2024'\n\n'hello'.replace(/(\\w+)/, '[$&]')  // '[hello]' ($&: 전체 매치)"
           },
           {
             "id": "language-javascript-p09-part-15",
@@ -1709,8 +2138,8 @@ export const languageTracks: LanguageTrack[] = [
       {
         "id": "language-javascript-p10-proxy-reflect",
         "title": "P10.Proxy-Reflect",
-        "fileName": "P10.Proxy-Reflect.js",
-        "sourcePath": "assets/typingSource/Language-JavaScript/P10.Proxy-Reflect.js",
+        "fileName": "P10.Proxy-Reflect.yaml",
+        "sourcePath": "assets/raw/syntax/javascript/P10.Proxy-Reflect.yaml",
         "language": "javascript",
         "parts": [
           {
@@ -1723,7 +2152,7 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-javascript-p10-proxy-reflect-part-2",
             "title": "get 트랩[get trap] - 속성 읽기[property access] 가로채기",
             "content": "var getTarget = { name: 'kim', age: 30 };\nvar getProxy = new Proxy(getTarget, {\n  get(target, prop, receiver) {",
-            "displayContent": "/*** get 트랩[get trap] - 속성 읽기[property access] 가로채기 ***/\nvar getTarget = { name: 'kim', age: 30 };\nvar getProxy = new Proxy(getTarget, {\n  get(target, prop, receiver) {"
+            "displayContent": "/* get 트랩[get trap] - 속성 읽기[property access] 가로채기 */\nvar getTarget = { name: 'kim', age: 30 };\nvar getProxy = new Proxy(getTarget, {\n  get(target, prop, receiver) {"
           },
           {
             "id": "language-javascript-p10-proxy-reflect-part-3",
@@ -1735,7 +2164,7 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-javascript-p10-proxy-reflect-part-4",
             "title": "set 트랩[set trap] - 속성 쓰기[property assignment] 가로채기",
             "content": "var setProxy = new Proxy({}, {\n  set(target, prop, value, receiver) {",
-            "displayContent": "/*** set 트랩[set trap] - 속성 쓰기[property assignment] 가로채기 ***/\nvar setProxy = new Proxy({}, {\n  set(target, prop, value, receiver) {"
+            "displayContent": "/* set 트랩[set trap] - 속성 쓰기[property assignment] 가로채기 */\nvar setProxy = new Proxy({}, {\n  set(target, prop, value, receiver) {"
           },
           {
             "id": "language-javascript-p10-proxy-reflect-part-5",
@@ -1747,7 +2176,7 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-javascript-p10-proxy-reflect-part-6",
             "title": "has 트랩[has trap] - in 연산자[in operator] 가로채기",
             "content": "var rangeProxy = new Proxy({ min: 1, max: 100 }, {\n  has(target, prop) {",
-            "displayContent": "/*** has 트랩[has trap] - in 연산자[in operator] 가로채기 ***/\nvar rangeProxy = new Proxy({ min: 1, max: 100 }, {\n  has(target, prop) {"
+            "displayContent": "/* has 트랩[has trap] - in 연산자[in operator] 가로채기 */\nvar rangeProxy = new Proxy({ min: 1, max: 100 }, {\n  has(target, prop) {"
           },
           {
             "id": "language-javascript-p10-proxy-reflect-part-7",
@@ -1759,7 +2188,7 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-javascript-p10-proxy-reflect-part-8",
             "title": "deleteProperty 트랩 - delete 연산자[delete operator] 가로채기",
             "content": "var deleteProxy = new Proxy({ pub: 'public', _priv: 'private' }, {\n  deleteProperty(target, prop) {",
-            "displayContent": "/*** deleteProperty 트랩 - delete 연산자[delete operator] 가로채기 ***/\nvar deleteProxy = new Proxy({ pub: 'public', _priv: 'private' }, {\n  deleteProperty(target, prop) {"
+            "displayContent": "/* deleteProperty 트랩 - delete 연산자[delete operator] 가로채기 */\nvar deleteProxy = new Proxy({ pub: 'public', _priv: 'private' }, {\n  deleteProperty(target, prop) {"
           },
           {
             "id": "language-javascript-p10-proxy-reflect-part-9",
@@ -1771,19 +2200,19 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-javascript-p10-proxy-reflect-part-10",
             "title": "apply 트랩[apply trap] - 함수 호출[function call] 가로채기",
             "content": "function multiply(a, b) { return a * b; }\n\nvar applyProxy = new Proxy(multiply, {\n  apply(target, thisArg, args) {\n    console.log(`호출[call]: multiply(${args})`);\n    return Reflect.apply(target, thisArg, args);\n  }\n});\napplyProxy(3, 4)",
-            "displayContent": "/*** apply 트랩[apply trap] - 함수 호출[function call] 가로채기 ***/\nfunction multiply(a, b) { return a * b; }\n\nvar applyProxy = new Proxy(multiply, {\n  apply(target, thisArg, args) {\n    console.log(`호출[call]: multiply(${args})`);  // 로깅[logging]\n    return Reflect.apply(target, thisArg, args);\n  }\n});\napplyProxy(3, 4)   // 로그: '호출[call]: multiply(3,4)', 반환: 12"
+            "displayContent": "/* apply 트랩[apply trap] - 함수 호출[function call] 가로채기 */\nfunction multiply(a, b) { return a * b; }\n\nvar applyProxy = new Proxy(multiply, {\n  apply(target, thisArg, args) {\n    console.log(`호출[call]: multiply(${args})`);  // 로깅[logging]\n    return Reflect.apply(target, thisArg, args);\n  }\n});\napplyProxy(3, 4)   // 로그: '호출[call]: multiply(3,4)', 반환: 12"
           },
           {
             "id": "language-javascript-p10-proxy-reflect-part-11",
             "title": "construct 트랩[construct trap] - new 연산자[new operator] 가로채기",
             "content": "function Person(name) { this.name = name; }\n\nvar constructProxy = new Proxy(Person, {\n  construct(target, args, newTarget) {\n    console.log(`인스턴스 생성[instantiation]: ${args[0]}`);\n    var instance = Reflect.construct(target, args, newTarget);\n    instance.createdAt = new Date().toISOString().slice(0, 10);\n    return instance;\n  }\n});\nvar p1 = new constructProxy('kim');\np1.name\np1.createdAt",
-            "displayContent": "/*** construct 트랩[construct trap] - new 연산자[new operator] 가로채기 ***/\nfunction Person(name) { this.name = name; }\n\nvar constructProxy = new Proxy(Person, {\n  construct(target, args, newTarget) {\n    console.log(`인스턴스 생성[instantiation]: ${args[0]}`);\n    var instance = Reflect.construct(target, args, newTarget);\n    instance.createdAt = new Date().toISOString().slice(0, 10);\n    return instance;\n  }\n});\nvar p1 = new constructProxy('kim');\np1.name       // 'kim'\np1.createdAt  // '2026-03-18'"
+            "displayContent": "/* construct 트랩[construct trap] - new 연산자[new operator] 가로채기 */\nfunction Person(name) { this.name = name; }\n\nvar constructProxy = new Proxy(Person, {\n  construct(target, args, newTarget) {\n    console.log(`인스턴스 생성[instantiation]: ${args[0]}`);\n    var instance = Reflect.construct(target, args, newTarget);\n    instance.createdAt = new Date().toISOString().slice(0, 10);\n    return instance;\n  }\n});\nvar p1 = new constructProxy('kim');\np1.name       // 'kim'\np1.createdAt  // '2026-03-18'"
           },
           {
             "id": "language-javascript-p10-proxy-reflect-part-12",
             "title": "ownKeys 트랩 - Object.keys / for...in 가로채기",
             "content": "var ownKeysProxy = new Proxy({ pub: 1, _priv: 2, normal: 3 }, {\n  ownKeys(target) {",
-            "displayContent": "/*** ownKeys 트랩 - Object.keys / for...in 가로채기 ***/\nvar ownKeysProxy = new Proxy({ pub: 1, _priv: 2, normal: 3 }, {\n  ownKeys(target) {"
+            "displayContent": "/* ownKeys 트랩 - Object.keys / for...in 가로채기 */\nvar ownKeysProxy = new Proxy({ pub: 1, _priv: 2, normal: 3 }, {\n  ownKeys(target) {"
           },
           {
             "id": "language-javascript-p10-proxy-reflect-part-13",
@@ -1795,19 +2224,19 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-javascript-p10-proxy-reflect-part-14",
             "title": "활용 패턴 1 - 읽기 전용[read-only] 객체",
             "content": "function readOnly(obj) {\n  return new Proxy(obj, {\n    set(target, prop) {\n      throw new Error(`읽기 전용[read-only]: '${prop}' 수정 불가`);\n    },\n    deleteProperty(target, prop) {\n      throw new Error(`읽기 전용[read-only]: '${prop}' 삭제 불가`);\n    }\n  });\n}\nvar frozenConfig = readOnly({ host: 'localhost', port: 3000 });\nfrozenConfig.host",
-            "displayContent": "/*** 활용 패턴 1 - 읽기 전용[read-only] 객체 ***/\nfunction readOnly(obj) {\n  return new Proxy(obj, {\n    set(target, prop) {\n      throw new Error(`읽기 전용[read-only]: '${prop}' 수정 불가`);\n    },\n    deleteProperty(target, prop) {\n      throw new Error(`읽기 전용[read-only]: '${prop}' 삭제 불가`);\n    }\n  });\n}\nvar frozenConfig = readOnly({ host: 'localhost', port: 3000 });\nfrozenConfig.host        // 'localhost'\n// frozenConfig.host = 'x'; // ❌ Error 발생"
+            "displayContent": "/* 활용 패턴 1 - 읽기 전용[read-only] 객체 */\nfunction readOnly(obj) {\n  return new Proxy(obj, {\n    set(target, prop) {\n      throw new Error(`읽기 전용[read-only]: '${prop}' 수정 불가`);\n    },\n    deleteProperty(target, prop) {\n      throw new Error(`읽기 전용[read-only]: '${prop}' 삭제 불가`);\n    }\n  });\n}\nvar frozenConfig = readOnly({ host: 'localhost', port: 3000 });\nfrozenConfig.host        // 'localhost'\n// frozenConfig.host = 'x'; // ❌ Error 발생"
           },
           {
             "id": "language-javascript-p10-proxy-reflect-part-15",
             "title": "활용 패턴 2 - 기본값[default value] 제공",
             "content": "function withDefaults(target, defaults) {\n  return new Proxy(target, {\n    get(obj, prop) {\n      return prop in obj ? obj[prop] : defaults[prop];\n    }\n  });\n}\nvar settings = withDefaults({ theme: 'dark' }, { theme: 'light', lang: 'ko', fontSize: 14 });\nsettings.theme\nsettings.lang\nsettings.fontSize",
-            "displayContent": "/*** 활용 패턴 2 - 기본값[default value] 제공 ***/\nfunction withDefaults(target, defaults) {\n  return new Proxy(target, {\n    get(obj, prop) {\n      return prop in obj ? obj[prop] : defaults[prop];\n    }\n  });\n}\nvar settings = withDefaults({ theme: 'dark' }, { theme: 'light', lang: 'ko', fontSize: 14 });\nsettings.theme     // 'dark'  (직접 설정값 우선)\nsettings.lang      // 'ko'    (기본값[default])\nsettings.fontSize  // 14      (기본값[default])"
+            "displayContent": "/* 활용 패턴 2 - 기본값[default value] 제공 */\nfunction withDefaults(target, defaults) {\n  return new Proxy(target, {\n    get(obj, prop) {\n      return prop in obj ? obj[prop] : defaults[prop];\n    }\n  });\n}\nvar settings = withDefaults({ theme: 'dark' }, { theme: 'light', lang: 'ko', fontSize: 14 });\nsettings.theme     // 'dark'  (직접 설정값 우선)\nsettings.lang      // 'ko'    (기본값[default])\nsettings.fontSize  // 14      (기본값[default])"
           },
           {
             "id": "language-javascript-p10-proxy-reflect-part-16",
             "title": "활용 패턴 3 - 관찰자[observable] / 반응형[reactive]",
             "content": "function observable(obj, onChange) {\n  return new Proxy(obj, {\n    set(target, prop, value, receiver) {\n      var oldValue = target[prop];\n      var result = Reflect.set(target, prop, value, receiver);\n      if (oldValue !== value) onChange(prop, oldValue, value);\n      return result;\n    }\n  });\n}\nvar state = observable({ count: 0 }, (prop, oldVal, newVal) => {\n  console.log(`${prop}: ${oldVal} → ${newVal}`);\n});\nstate.count = 1;\nstate.count = 5;",
-            "displayContent": "/*** 활용 패턴 3 - 관찰자[observable] / 반응형[reactive] ***/\nfunction observable(obj, onChange) {\n  return new Proxy(obj, {\n    set(target, prop, value, receiver) {\n      var oldValue = target[prop];\n      var result = Reflect.set(target, prop, value, receiver);\n      if (oldValue !== value) onChange(prop, oldValue, value);  // 변경 알림[notify change]\n      return result;\n    }\n  });\n}\nvar state = observable({ count: 0 }, (prop, oldVal, newVal) => {\n  console.log(`${prop}: ${oldVal} → ${newVal}`);\n});\nstate.count = 1;   // 'count: 0 → 1'\nstate.count = 5;   // 'count: 1 → 5'"
+            "displayContent": "/* 활용 패턴 3 - 관찰자[observable] / 반응형[reactive] */\nfunction observable(obj, onChange) {\n  return new Proxy(obj, {\n    set(target, prop, value, receiver) {\n      var oldValue = target[prop];\n      var result = Reflect.set(target, prop, value, receiver);\n      if (oldValue !== value) onChange(prop, oldValue, value);  // 변경 알림[notify change]\n      return result;\n    }\n  });\n}\nvar state = observable({ count: 0 }, (prop, oldVal, newVal) => {\n  console.log(`${prop}: ${oldVal} → ${newVal}`);\n});\nstate.count = 1;   // 'count: 0 → 1'\nstate.count = 5;   // 'count: 1 → 5'"
           },
           {
             "id": "language-javascript-p10-proxy-reflect-part-17",
@@ -1831,22 +2260,22 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-javascript-p10-proxy-reflect-part-20",
             "title": "Proxy 취소[revocable proxy]",
             "content": "var revocable = Proxy.revocable({ data: 42 }, {\n  get(target, prop) { return Reflect.get(target, prop); }\n});\nvar revProxy = revocable.proxy;\nvar revoke = revocable.revoke;\n\nrevProxy.data\nrevoke();",
-            "displayContent": "/*** Proxy 취소[revocable proxy] ***/\nvar revocable = Proxy.revocable({ data: 42 }, {\n  get(target, prop) { return Reflect.get(target, prop); }\n});\nvar revProxy = revocable.proxy;\nvar revoke = revocable.revoke;\n\nrevProxy.data  // 42\nrevoke();      // 프록시 비활성화[deactivate]\n// revProxy.data  // ❌ TypeError: Cannot perform 'get' on a proxy that has been revoked"
+            "displayContent": "/* Proxy 취소[revocable proxy] */\nvar revocable = Proxy.revocable({ data: 42 }, {\n  get(target, prop) { return Reflect.get(target, prop); }\n});\nvar revProxy = revocable.proxy;\nvar revoke = revocable.revoke;\n\nrevProxy.data  // 42\nrevoke();      // 프록시 비활성화[deactivate]\n// revProxy.data  // ❌ TypeError: Cannot perform 'get' on a proxy that has been revoked"
           }
         ]
       }
     ]
   },
   {
-    "id": "language-python",
+    "id": "python",
     "label": "Python",
-    "folderName": "Language-Python",
+    "folderName": "python",
     "lessons": [
       {
         "id": "language-python-p01",
         "title": "P01.기본-패턴",
-        "fileName": "P01.기본-패턴.py",
-        "sourcePath": "assets/typingSource/Language-Python/P01.기본-패턴.py",
+        "fileName": "P01.기본-패턴.yaml",
+        "sourcePath": "assets/raw/syntax/python/P01.기본-패턴.yaml",
         "language": "python",
         "parts": [
           {
@@ -1908,15 +2337,15 @@ export const languageTracks: LanguageTrack[] = [
       {
         "id": "language-python-p02",
         "title": "P02.실무-패턴",
-        "fileName": "P02.실무-패턴.py",
-        "sourcePath": "assets/typingSource/Language-Python/P02.실무-패턴.py",
+        "fileName": "P02.실무-패턴.yaml",
+        "sourcePath": "assets/raw/syntax/python/P02.실무-패턴.yaml",
         "language": "python",
         "parts": [
           {
             "id": "language-python-p02-part-1",
-            "title": "P02. Python 실무 패턴",
+            "title": "예제 데이터[sample data] - 딕셔너리 리스트",
             "content": "user_list = [\n    {\"name\": \"kim\", \"age\": 30},\n    {\"name\": \"lee\", \"age\": 20},\n    {\"name\": \"park\", \"age\": 25},\n]",
-            "displayContent": "# P02. Python 실무 패턴\n# ============================================================\n\nuser_list = [\n    {\"name\": \"kim\", \"age\": 30},\n    {\"name\": \"lee\", \"age\": 20},\n    {\"name\": \"park\", \"age\": 25},\n]"
+            "displayContent": "# 예제 데이터[sample data] - 딕셔너리 리스트\nuser_list = [\n    {\"name\": \"kim\", \"age\": 30},\n    {\"name\": \"lee\", \"age\": 20},\n    {\"name\": \"park\", \"age\": 25},\n]"
           },
           {
             "id": "language-python-p02-part-2",
@@ -1953,15 +2382,15 @@ export const languageTracks: LanguageTrack[] = [
     ]
   },
   {
-    "id": "language-regex-for-javascript",
+    "id": "regex-for-javascript",
     "label": "RegEx for JavaScript",
-    "folderName": "Language-RegEx-for-Javascript",
+    "folderName": "regex-for-javascript",
     "lessons": [
       {
         "id": "language-regex-for-javascript-p01",
         "title": "P01.핵심-패턴",
-        "fileName": "P01.핵심-패턴.js",
-        "sourcePath": "assets/typingSource/Language-RegEx-for-Javascript/P01.핵심-패턴.js",
+        "fileName": "P01.핵심-패턴.yaml",
+        "sourcePath": "assets/raw/syntax/regex-for-javascript/P01.핵심-패턴.yaml",
         "language": "javascript",
         "parts": [
           {
@@ -2047,55 +2476,73 @@ export const languageTracks: LanguageTrack[] = [
       {
         "id": "language-regex-for-javascript-p02",
         "title": "P02.실무-추출",
-        "fileName": "P02.실무-추출.js",
-        "sourcePath": "assets/typingSource/Language-RegEx-for-Javascript/P02.실무-추출.js",
+        "fileName": "P02.실무-추출.yaml",
+        "sourcePath": "assets/raw/syntax/regex-for-javascript/P02.실무-추출.yaml",
         "language": "javascript",
         "parts": [
           {
             "id": "language-regex-for-javascript-p02-part-1",
             "title": "파일 확장자[extension] 앞까지",
             "content": "'abc/def/video.mp4'.match(/.*?(?=mp4)/)[0];",
-            "displayContent": "// 파일 확장자[extension] 앞까지\n'abc/def/video.mp4'.match(/.*?(?=mp4)/)[0];\n// 결과: abc/def/video."
+            "displayContent": "// 파일 확장자[extension] 앞까지 — 게으른 수량자 + 전방 탐색\n'abc/def/video.mp4'.match(/.*?(?=mp4)/)[0];\n// 결과: abc/def/video."
           },
           {
             "id": "language-regex-for-javascript-p02-part-2",
-            "title": "숫자와 mp4 사이 텍스트 추출",
+            "title": "숫자와 확장자 사이 텍스트[capture group]",
             "content": "'123테스트.mp4'.match(/\\d+(.*?)\\.mp4/)[1];",
-            "displayContent": "// 숫자와 mp4 사이 텍스트 추출\n'123테스트.mp4'.match(/\\d+(.*?)\\.mp4/)[1];\n// 결과: 테스트"
+            "displayContent": "// 숫자와 확장자 사이 텍스트[capture group]\n'123테스트.mp4'.match(/\\d+(.*?)\\.mp4/)[1];\n// 결과: 테스트"
           },
           {
             "id": "language-regex-for-javascript-p02-part-3",
-            "title": "여러 줄 함수 호출 찾기",
-            "content": "var fnSource = `functionAAAAA(a,\n  b,\n  c)`;\nfnSource.match(/functionAAAAA\\([\\s\\S]*?\\)/)[0];\n\nvar logText = 'A=111,B=222,C=333';\nArray.from(logText.matchAll(/(\\w+)=(\\d+)/g), item => ({\n  key: item[1],\n  value: item[2],\n}));",
-            "displayContent": "// 여러 줄 함수 호출 찾기\nvar fnSource = `functionAAAAA(a,\n  b,\n  c)`;\nfnSource.match(/functionAAAAA\\([\\s\\S]*?\\)/)[0];\n// 결과:\n// functionAAAAA(a,\n//   b,\n//   c)\n\n// key=value 추출\nvar logText = 'A=111,B=222,C=333';\nArray.from(logText.matchAll(/(\\w+)=(\\d+)/g), item => ({\n  key: item[1],\n  value: item[2],\n}));\n// 결과:\n// [{ key:'A', value:'111' }, { key:'B', value:'222' }, { key:'C', value:'333' }]"
+            "title": "여러 줄 함수 호출 찾기[multiline match]",
+            "content": "var fnSource = `functionAAAAA(a,\n  b,\n  c)`;\nfnSource.match(/functionAAAAA\\([\\s\\S]*?\\)/)[0];",
+            "displayContent": "// 여러 줄 함수 호출 찾기[multiline match] — [\\s\\S]는 줄바꿈 포함 아무 문자\nvar fnSource = `functionAAAAA(a,\n  b,\n  c)`;\nfnSource.match(/functionAAAAA\\([\\s\\S]*?\\)/)[0];\n// 결과: functionAAAAA(a, ... c) 전체"
           },
           {
             "id": "language-regex-for-javascript-p02-part-4",
-            "title": "태그 안 내용 추출",
+            "title": "key=value 반복 추출[matchAll]",
+            "content": "var logText = 'A=111,B=222,C=333';\nArray.from(logText.matchAll(/(\\w+)=(\\d+)/g), item => ({\n  key: item[1],\n  value: item[2],\n}));",
+            "displayContent": "// key=value 반복 추출[matchAll]\nvar logText = 'A=111,B=222,C=333';\nArray.from(logText.matchAll(/(\\w+)=(\\d+)/g), item => ({\n  key: item[1],\n  value: item[2],\n}));\n// 결과: [{ key:'A', value:'111' }, { key:'B', value:'222' }, { key:'C', value:'333' }]"
+          },
+          {
+            "id": "language-regex-for-javascript-p02-part-5",
+            "title": "태그 안 내용 추출[lookbehind + lookahead]",
             "content": "'<title>Hello</title>'.match(/(?<=<title>).*?(?=<\\/title>)/)[0];",
-            "displayContent": "// 태그 안 내용 추출\n'<title>Hello</title>'.match(/(?<=<title>).*?(?=<\\/title>)/)[0];\n// 결과: Hello"
+            "displayContent": "// 태그 안 내용 추출[lookbehind + lookahead]\n'<title>Hello</title>'.match(/(?<=<title>).*?(?=<\\/title>)/)[0];\n// 결과: Hello"
+          },
+          {
+            "id": "language-regex-for-javascript-p02-part-6",
+            "title": "주석 줄 제외하고 호출만[negative lookahead]",
+            "content": "var codeText = '// AAA()\\nAAA()';\ncodeText.match(/^(?!\\s*\\/\\/).*AAA\\(\\)/m)[0];",
+            "displayContent": "// 주석 줄 제외하고 호출만[negative lookahead] — m 플래그로 줄 단위 검사\nvar codeText = '// AAA()\\nAAA()';\ncodeText.match(/^(?!\\s*\\/\\/).*AAA\\(\\)/m)[0];\n// 결과: AAA()  (주석 처리된 첫 줄은 제외)"
           }
         ]
       }
     ]
   },
   {
-    "id": "language-rust",
+    "id": "rust",
     "label": "Rust",
-    "folderName": "Language-Rust",
+    "folderName": "rust",
     "lessons": [
       {
         "id": "language-rust-p01",
         "title": "P01.기본-패턴",
-        "fileName": "P01.기본-패턴.rs",
-        "sourcePath": "assets/typingSource/Language-Rust/P01.기본-패턴.rs",
+        "fileName": "P01.기본-패턴.yaml",
+        "sourcePath": "assets/raw/syntax/rust/P01.기본-패턴.yaml",
         "language": "rust",
         "parts": [
           {
             "id": "language-rust-p01-part-1",
-            "title": "P01. Rust 기본 패턴",
-            "content": "#[derive(Debug)]\nstruct User {\n    name: String,\n    age: u32,\n}\n\nfn add(num_a: i32, num_b: i32) -> i32 {\n    num_a + num_b\n}\n\nfn main() {",
-            "displayContent": "// P01. Rust 기본 패턴\n// ============================================================\n\n#[derive(Debug)]\nstruct User {\n    name: String,\n    age: u32,\n}\n\nfn add(num_a: i32, num_b: i32) -> i32 {\n    num_a + num_b\n}\n\nfn main() {"
+            "title": "구조체 정의[struct / derive]",
+            "content": "#[derive(Debug)]\nstruct User {\n    name: String,\n    age: u32,\n}",
+            "displayContent": "// 구조체 정의[struct / derive] - Debug 파생으로 {:?} 출력 가능\n#[derive(Debug)]\nstruct User {\n    name: String,\n    age: u32,\n}"
+          },
+          {
+            "id": "language-rust-p01-part-1b",
+            "title": "함수 정의[function]",
+            "content": "fn add(num_a: i32, num_b: i32) -> i32 {\n    num_a + num_b\n}\n\nfn main() {",
+            "displayContent": "// 함수 정의[function] - 마지막 표현식이 반환값 (세미콜론 없음)\nfn add(num_a: i32, num_b: i32) -> i32 {\n    num_a + num_b\n}\n\nfn main() {"
           },
           {
             "id": "language-rust-p01-part-2",
@@ -2150,21 +2597,15 @@ export const languageTracks: LanguageTrack[] = [
       {
         "id": "language-rust-p02",
         "title": "P02.실무-패턴",
-        "fileName": "P02.실무-패턴.rs",
-        "sourcePath": "assets/typingSource/Language-Rust/P02.실무-패턴.rs",
+        "fileName": "P02.실무-패턴.yaml",
+        "sourcePath": "assets/raw/syntax/rust/P02.실무-패턴.yaml",
         "language": "rust",
         "parts": [
           {
             "id": "language-rust-p02-part-1",
-            "title": "P02.실무-패턴",
-            "content": "use std::collections::HashMap;",
-            "displayContent": "use std::collections::HashMap;\n\n// ============================================================"
-          },
-          {
-            "id": "language-rust-p02-part-2",
-            "title": "P02. Rust 실무 패턴",
-            "content": "fn main() {",
-            "displayContent": "// P02. Rust 실무 패턴\n// ============================================================\n\nfn main() {"
+            "title": "임포트[use]",
+            "content": "use std::collections::HashMap;\n\nfn main() {",
+            "displayContent": "// 임포트[use] - 표준 라이브러리 컬렉션 가져오기\nuse std::collections::HashMap;\n\nfn main() {"
           },
           {
             "id": "language-rust-p02-part-3",
@@ -2195,15 +2636,15 @@ export const languageTracks: LanguageTrack[] = [
     ]
   },
   {
-    "id": "language-sql",
+    "id": "sql",
     "label": "SQL",
-    "folderName": "Language-SQL",
+    "folderName": "sql",
     "lessons": [
       {
         "id": "language-sql-p01",
         "title": "P01.기본-패턴",
-        "fileName": "P01.기본-패턴.sql",
-        "sourcePath": "assets/typingSource/Language-SQL/P01.기본-패턴.sql",
+        "fileName": "P01.기본-패턴.yaml",
+        "sourcePath": "assets/raw/syntax/sql/P01.기본-패턴.yaml",
         "language": "sql",
         "parts": [
           {
@@ -2289,8 +2730,8 @@ export const languageTracks: LanguageTrack[] = [
       {
         "id": "language-sql-p02",
         "title": "P02.실무-조회",
-        "fileName": "P02.실무-조회.sql",
-        "sourcePath": "assets/typingSource/Language-SQL/P02.실무-조회.sql",
+        "fileName": "P02.실무-조회.yaml",
+        "sourcePath": "assets/raw/syntax/sql/P02.실무-조회.yaml",
         "language": "sql",
         "parts": [
           {
@@ -2340,22 +2781,28 @@ export const languageTracks: LanguageTrack[] = [
     ]
   },
   {
-    "id": "language-typescript",
+    "id": "typescript",
     "label": "TypeScript",
-    "folderName": "Language-TypeScript",
+    "folderName": "typescript",
     "lessons": [
       {
         "id": "language-typescript-p01",
         "title": "P01.기본-패턴",
-        "fileName": "P01.기본-패턴.ts",
-        "sourcePath": "assets/typingSource/Language-TypeScript/P01.기본-패턴.ts",
+        "fileName": "P01.기본-패턴.yaml",
+        "sourcePath": "assets/raw/syntax/typescript/P01.기본-패턴.yaml",
         "language": "typescript",
         "parts": [
           {
             "id": "language-typescript-p01-part-1",
-            "title": "P01. TypeScript 기본 패턴",
-            "content": "type User = {\n  id: number;\n  name: string;\n  age?: number;\n  role: 'user' | 'admin';\n};\n\ntype ApiResponse<T> = {\n  ok: boolean;\n  data: T;\n};",
-            "displayContent": "// P01. TypeScript 기본 패턴\n// ============================================================\n\ntype User = {\n  id: number;\n  name: string;\n  age?: number;\n  role: 'user' | 'admin';\n};\n\ntype ApiResponse<T> = {\n  ok: boolean;\n  data: T;\n};"
+            "title": "객체 타입[object type] - 옵셔널·리터럴 유니온",
+            "content": "type User = {\n  id: number;\n  name: string;\n  age?: number;\n  role: 'user' | 'admin';\n};",
+            "displayContent": "// 객체 타입[object type] - age?는 옵셔널, role은 리터럴 유니온\ntype User = {\n  id: number;\n  name: string;\n  age?: number;\n  role: 'user' | 'admin';\n};"
+          },
+          {
+            "id": "language-typescript-p01-part-1b",
+            "title": "제네릭 타입[generic type]",
+            "content": "type ApiResponse<T> = {\n  ok: boolean;\n  data: T;\n};",
+            "displayContent": "// 제네릭 타입[generic type] - T 자리에 실제 타입이 들어감\ntype ApiResponse<T> = {\n  ok: boolean;\n  data: T;\n};"
           },
           {
             "id": "language-typescript-p01-part-2",
@@ -2410,15 +2857,21 @@ export const languageTracks: LanguageTrack[] = [
       {
         "id": "language-typescript-p02",
         "title": "P02.실무-패턴",
-        "fileName": "P02.실무-패턴.ts",
-        "sourcePath": "assets/typingSource/Language-TypeScript/P02.실무-패턴.ts",
+        "fileName": "P02.실무-패턴.yaml",
+        "sourcePath": "assets/raw/syntax/typescript/P02.실무-패턴.yaml",
         "language": "typescript",
         "parts": [
           {
             "id": "language-typescript-p02-part-1",
-            "title": "P02. TypeScript 실무 패턴",
-            "content": "type Product = {\n  id: number;\n  name: string;\n  price: number;\n};\n\ntype FetchState<T> =\n  | { status: 'idle' }\n  | { status: 'loading' }\n  | { status: 'success'; data: T }\n  | { status: 'error'; message: string };",
-            "displayContent": "// P02. TypeScript 실무 패턴\n// ============================================================\n\ntype Product = {\n  id: number;\n  name: string;\n  price: number;\n};\n\ntype FetchState<T> =\n  | { status: 'idle' }\n  | { status: 'loading' }\n  | { status: 'success'; data: T }\n  | { status: 'error'; message: string };"
+            "title": "도메인 타입[domain type]",
+            "content": "type Product = {\n  id: number;\n  name: string;\n  price: number;\n};",
+            "displayContent": "// 도메인 타입[domain type]\ntype Product = {\n  id: number;\n  name: string;\n  price: number;\n};"
+          },
+          {
+            "id": "language-typescript-p02-part-1b",
+            "title": "판별 유니온[discriminated union]",
+            "content": "type FetchState<T> =\n  | { status: 'idle' }\n  | { status: 'loading' }\n  | { status: 'success'; data: T }\n  | { status: 'error'; message: string };",
+            "displayContent": "// 판별 유니온[discriminated union] - status로 상태별 데이터 구분\ntype FetchState<T> =\n  | { status: 'idle' }\n  | { status: 'loading' }\n  | { status: 'success'; data: T }\n  | { status: 'error'; message: string };"
           },
           {
             "id": "language-typescript-p02-part-2",

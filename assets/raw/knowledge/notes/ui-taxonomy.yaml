@@ -1,0 +1,57 @@
+id: knowledge-notes-ui-taxonomy
+category: knowledge
+kind: note
+topic: web
+title: UI 부품 분류 트리 (Tailwind UI Blocks 기준)
+source:
+  origin: chat-raw 2026-07-04 (tailwindcss.com/plus/ui-blocks, /plus/ui-kit)
+  note: 화면 설명·설계 대화에서 통하는 컨벤셔널한 부품 명칭 전체 목록. 카드화된 용어는 terms/web-terms*.yaml 참고.
+taxonomy:
+  - group: Marketing
+    categories:
+      - name: Page Sections
+        items: [Hero Sections, Feature Sections, CTA Sections, Bento Grids, Pricing Sections, Header Sections, Newsletter Sections, Stats, Testimonials, Blog Sections, Contact Sections, Team Sections, Content Sections, Logo Clouds, FAQs, Footers]
+      - name: Elements
+        items: [Headers, Flyout Menus, Banners]
+      - name: Feedback
+        items: [404 Pages]
+      - name: Page Examples
+        items: [Landing Pages, Pricing Pages, About Pages]
+  - group: Application UI
+    categories:
+      - name: Application Shells
+        items: [Stacked Layouts, Sidebar Layouts, Multi-Column Layouts]
+      - name: Headings
+        items: [Page Headings, Card Headings, Section Headings]
+      - name: Data Display
+        items: [Description Lists, Stats, Calendars]
+      - name: Lists
+        items: [Stacked Lists, Tables, Grid Lists, Feeds]
+      - name: Forms
+        items: [Form Layouts, Input Groups, Select Menus, Sign-in and Registration, Textareas, Radio Groups, Checkboxes, Toggles, Action Panels, Comboboxes]
+      - name: Feedback
+        items: [Alerts, Empty States]
+      - name: Navigation
+        items: [Navbars, Pagination, Tabs, Vertical Navigation, Sidebar Navigation, Breadcrumbs, Progress Bars, Command Palettes]
+      - name: Overlays
+        items: [Modal Dialogs, Drawers, Notifications]
+      - name: Elements
+        items: [Avatars, Badges, Dropdowns, Buttons, Button Groups]
+      - name: Layout
+        items: [Containers, Cards, List containers, Media Objects, Dividers]
+      - name: Page Examples
+        items: [Home Screens, Detail Screens, Settings Screens]
+  - group: Ecommerce
+    categories:
+      - name: Components
+        items: [Product Overviews, Product Lists, Category Previews, Shopping Carts, Category Filters, Product Quickviews, Product Features, Store Navigation, Promo Sections, Checkout Forms, Reviews, Order Summaries, Order History, Incentives]
+      - name: Page Examples
+        items: [Storefront Pages, Product Pages, Category Pages, Shopping Cart Pages, Checkout Pages, Order Detail Pages, Order History Pages]
+  - group: Interactive Elements
+    categories:
+      - name: Elements
+        items: [Autocomplete, Command palette, Copy button, Dialog, Disclosure, Dropdown menu, Popover, Select, Tabs]
+  - group: UI Kit Components
+    categories:
+      - name: Components
+        items: [Button, Input, Table, Sidebar, Checkbox, Combobox, Radio groups, Switch, Description list, Badge, Listbox, Pagination, Dropdown, Alert, Navbar, Avatar, Divider, Textarea, Heading, Text, Fieldset, Dialog, Sidebar layout, Stacked layout, Auth layout]

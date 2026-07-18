@@ -1,0 +1,46 @@
+# 속성[attribute] 존재 — [attr]
+# HTM 대조 보강 — enrich-visual-metas.mjs
+
+id: css-selector-20-attribute-exists
+slug: 20-attribute-exists
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSSセレクタのチートシート.htm  # 원본 HTM 삭제됨
+  sectionTitle:
+    ja: "属性で指定"
+    ko: "속성[attribute] 존재 — [attr]"
+
+title:
+  ko: "속성[attribute] 존재 — [attr]"
+
+caption:
+  ko: "지정한 속성을 가진 요소를 선택합니다."
+
+explanation:
+  ko: |
+    `[class]`, `[href]`, `[src]`처럼 속성 유무만으로 선택할 수 있습니다.
+    
+    `p[class]`는 class 속성이 있는 p만 대상입니다. 값 일치가 필요하면 *= ^= $= 를 씁니다.
+
+images:
+  - id: css-selector-018
+    path: assets/raw/knowledge/visual/css-selector/images/018.webp
+    role: demo
+    sectionHintJa: "属性で指定"
+    altJa: "CSSセレクタの特定の属性を持つ要素のサンプル"
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: "[attr]로 특정 속성을 가진 요소를 선택합니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: "p[class]"
+    content: |
+      p[class] {
+        color: #999;
+      }

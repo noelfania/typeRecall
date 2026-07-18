@@ -1,0 +1,41 @@
+id: knowledge-terms-sql
+category: knowledge
+kind: term
+topic: sql
+title: SQL·DB 실무 용어
+source:
+  origin: chat-raw 2026-07-04
+  note: 채팅으로 수집한 SQL 항목(inner join, commit, transaction, rollback, orm)을 카드로 정리했다.
+terms:
+  - id: sql-inner-join
+    section: 조회
+    title: 내부 조인
+    prompt: 두 테이블에서 조인 조건이 일치하는 행만 골라 합치는 조인.
+    answer: INNER JOIN
+    example: 주문과 사용자를 INNER JOIN으로 붙여 구매자만 조회했다.
+  - id: sql-transaction
+    section: 트랜잭션
+    title: 트랜잭션
+    prompt: 여러 쿼리를 하나의 작업 단위로 묶어 전부 성공하거나 전부 취소되게 하는 개념.
+    answer: Transaction
+    example: 이체 로직은 transaction으로 묶어야 중간 실패를 막는다.
+  - id: sql-commit
+    section: 트랜잭션
+    title: 커밋
+    prompt: 트랜잭션의 변경 내용을 데이터베이스에 확정하는 명령.
+    answer: COMMIT
+    example: 모든 쿼리가 성공하면 마지막에 COMMIT을 실행한다.
+  - id: sql-rollback
+    section: 트랜잭션
+    title: 롤백
+    prompt: 트랜잭션 중 문제가 생겼을 때 변경 내용을 전부 취소하고 이전 상태로 되돌리는 명령.
+    answer: ROLLBACK
+    example: 예외가 발생하면 ROLLBACK으로 되돌린다.
+  - id: sql-orm
+    section: 도구
+    title: 객체 관계 매핑
+    prompt: Prisma, TypeORM처럼 테이블을 객체로 다루게 해 SQL을 직접 쓰지 않아도 되게 하는 기법.
+    answer: ORM
+    aliases:
+      - Object-Relational Mapping
+    example: Prisma 같은 ORM을 쓰면 쿼리를 코드로 작성할 수 있다.

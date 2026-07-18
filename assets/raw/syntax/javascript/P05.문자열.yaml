@@ -1,0 +1,208 @@
+id: language-javascript-p05
+category: syntax
+kind: code-snippet
+language: javascript
+track:
+  id: javascript
+  label: JavaScript
+title: P05.문자열
+source:
+  origin: assets/typingSource/Language-JavaScript/P05.문자열.js
+parts:
+  - id: language-javascript-p05-part-1
+    title: 기본 접근[basic access]
+    display: |-
+      /* 기본 접근[basic access] */
+      var str1 = 'Hello, World!';
+      str1.length        // 13
+      str1[0]            // 'H'
+      str1.at(0)         // 'H'
+      str1.at(-1)        // '!'  (음수 인덱스[negative index])
+      str1.charAt(7)     // 'W'
+      str1.charCodeAt(0) // 72
+    typing: |-
+      var str1 = 'Hello, World!';
+      str1.length
+      str1[0]
+      str1.at(0)
+      str1.at(-1)
+      str1.charAt(7)
+      str1.charCodeAt(0)
+  - id: language-javascript-p05-part-2
+    title: 대소문자 변환[case conversion]
+    display: |-
+      /* 대소문자 변환[case conversion] */
+      'hello'.toUpperCase()  // 'HELLO'
+      'WORLD'.toLowerCase()  // 'world'
+    typing: |-
+      'hello'.toUpperCase()
+      'WORLD'.toLowerCase()
+  - id: language-javascript-p05-part-3
+    title: 검색[search]
+    display: |-
+      /* 검색[search] */
+      str1.indexOf('o')         // 4  (첫 번째 위치)
+      str1.lastIndexOf('o')     // 8  (마지막 위치)
+      str1.indexOf('xyz')       // -1 (없으면 -1)
+      str1.includes('World')    // true
+      str1.startsWith('Hello')  // true
+      str1.endsWith('!')        // true
+      str1.search(/[A-Z]/)      // 0  (정규식[regex], 첫 번째 매치 인덱스)
+    typing: |-
+      str1.indexOf('o')
+      str1.lastIndexOf('o')
+      str1.indexOf('xyz')
+      str1.includes('World')
+      str1.startsWith('Hello')
+      str1.endsWith('!')
+      str1.search(/[A-Z]/)
+  - id: language-javascript-p05-part-4
+    title: 추출[extraction]
+    display: |-
+      /* 추출[extraction] */
+      'Mozilla'.substring(2, 5)  // 'zil' (startIndex, endIndex)
+      'Mozilla'.slice(2, 5)      // 'zil'
+      'Mozilla'.slice(-5)        // 'ozilla' (음수 인덱스[negative index])
+      'Mozilla'.slice(-5, -2)    // 'ozil'
+    typing: |-
+      'Mozilla'.substring(2, 5)
+      'Mozilla'.slice(2, 5)
+      'Mozilla'.slice(-5)
+      'Mozilla'.slice(-5, -2)
+  - id: language-javascript-p05-part-5
+    title: 분리[split]
+    display: |-
+      /* 분리[split] */
+      'a,b,c'.split(',')       // ['a', 'b', 'c']
+      'a,b,c'.split(',', 2)    // ['a', 'b'] (limit)
+      'hello'.split('')         // ['h', 'e', 'l', 'l', 'o']
+    typing: |-
+      'a,b,c'.split(',')
+      'a,b,c'.split(',', 2)
+      'hello'.split('')
+  - id: language-javascript-p05-part-6
+    title: 반복[repeat] / 패딩[padding] / 공백 제거[trim]
+    display: |-
+      /* 반복[repeat] / 패딩[padding] / 공백 제거[trim] */
+      'ab'.repeat(3)              // 'ababab'
+      '5'.padStart(4, '0')        // '0005'
+      '5'.padEnd(4, '0')          // '5000'
+      '  trim me  '.trim()        // 'trim me'
+      '  trim me  '.trimStart()   // 'trim me  '
+      '  trim me  '.trimEnd()     // '  trim me'
+    typing: |-
+      'ab'.repeat(3)
+      '5'.padStart(4, '0')
+      '5'.padEnd(4, '0')
+      '  trim me  '.trim()
+      '  trim me  '.trimStart()
+      '  trim me  '.trimEnd()
+  - id: language-javascript-p05-part-7
+    title: 치환[replace]
+    display: |-
+      /* 치환[replace] */
+      'aabbcc'.replace('b', 'X')      // 'aXbcc'  (첫 번째만)
+      'aabbcc'.replaceAll('b', 'X')   // 'aaXXcc' (전체)
+      'aabbcc'.replace(/b/g, 'X')     // 'aaXXcc' (정규식[regex] 플래그 g)
+    typing: |-
+      'aabbcc'.replace('b', 'X')
+      'aabbcc'.replaceAll('b', 'X')
+      'aabbcc'.replace(/b/g, 'X')
+  - id: language-javascript-p05-part-8
+    title: 캡처 그룹[capture group] 참조 ($1, $2, ...)
+    display: |-
+      // 캡처 그룹[capture group] 참조 ($1, $2, ...)
+      '2024-03-18'.replace(/(\d{4})-(\d{2})-(\d{2})/, '$3/$2/$1')  // '18/03/2024'
+    typing: "'2024-03-18'.replace(/(\\d{4})-(\\d{2})-(\\d{2})/, '$3/$2/$1')"
+  - id: language-javascript-p05-part-9
+    title: 정규식 매치[regex match]
+    display: |-
+      /* 정규식 매치[regex match] */
+      var str2 = 'cat bat sat';
+      str2.match(/[bcs]at/g)           // ['cat', 'bat', 'sat']
+      str2.replace(/[bcs]at/g, 'hat')  // 'hat hat hat'
+    typing: |-
+      var str2 = 'cat bat sat';
+      str2.match(/[bcs]at/g)
+      str2.replace(/[bcs]at/g, 'hat')
+  - id: language-javascript-p05-part-10
+    title: matchAll - 이터레이터[iterator] 반환
+    display: |-
+      // matchAll - 이터레이터[iterator] 반환
+      var regexAll = /(\d+)/g;
+      var str3 = 'abc 123 def 456';
+      [...str3.matchAll(regexAll)].map(m => m[0])  // ['123', '456']
+    typing: |-
+      var regexAll = /(\d+)/g;
+      var str3 = 'abc 123 def 456';
+      [...str3.matchAll(regexAll)].map(m => m[0])
+  - id: language-javascript-p05-part-11
+    title: 연결[concatenation]
+    display: |-
+      /* 연결[concatenation] */
+      'Hello'.concat(', ', 'World', '!')  // 'Hello, World!'
+    typing: "'Hello'.concat(', ', 'World', '!')"
+  - id: language-javascript-p05-part-12
+    title: 템플릿 리터럴[template literal]
+    display: |-
+      /* 템플릿 리터럴[template literal] */
+      var tplName = 'kim';
+      var tplScore = 95;
+      `이름: ${tplName}, 점수: ${tplScore}점`  // '이름: kim, 점수: 95점'
+      `${tplScore >= 90 ? '우수' : '보통'}`   // '우수'
+    typing: |-
+      var tplName = 'kim';
+      var tplScore = 95;
+      `이름: ${tplName}, 점수: ${tplScore}점`
+      `${tplScore >= 90 ? '우수' : '보통'}`
+  - id: language-javascript-p05-part-13
+    title: 멀티라인[multiline]
+    display: |-
+      // 멀티라인[multiline]
+      var multiLine = `첫 번째 줄
+      두 번째 줄`;
+      multiLine  // '첫 번째 줄\n두 번째 줄'
+    typing: |-
+      var multiLine = `첫 번째 줄
+      두 번째 줄`;
+      multiLine
+  - id: language-javascript-p05-part-14
+    title: String.raw - 이스케이프 비처리[raw string]
+    display: |-
+      /* String.raw - 이스케이프 비처리[raw string] */
+      String.raw`C:\Users\name`     // 'C:\\Users\\name'
+      String.raw`\n \t \r`          // '\\n \\t \\r'
+    typing: |-
+      String.raw`C:\Users\name`
+      String.raw`\n \t \r`
+  - id: language-javascript-p05-part-15
+    title: 문자 코드[character code] 변환
+    display: |-
+      /* 문자 코드[character code] 변환 */
+      String.fromCharCode(65, 66, 67)  // 'ABC'
+      'A'.charCodeAt(0)                // 65
+    typing: |-
+      String.fromCharCode(65, 66, 67)
+      'A'.charCodeAt(0)
+  - id: language-javascript-p05-part-16
+    title: 이터러블[iterable] - 스프레드[spread] / for...of
+    display: |-
+      /* 이터러블[iterable] - 스프레드[spread] / for...of */
+      [...'ABC']  // ['A', 'B', 'C']
+      for (var ch of 'hi') { console.log(ch); }
+      // h
+      // i
+    typing: |-
+      [...'ABC']
+      for (var ch of 'hi') { console.log(ch); }
+  - id: language-javascript-p05-part-17
+    title: 숫자→문자열 변환[number-to-string conversion]
+    display: |-
+      /* 숫자→문자열 변환[number-to-string conversion] */
+      (255).toString(16)   // 'ff'  (16진수[hexadecimal])
+      (255).toString(2)    // '11111111' (2진수[binary])
+      (3.14159).toFixed(2) // '3.14'
+    typing: |-
+      (255).toString(16)
+      (255).toString(2)
+      (3.14159).toFixed(2)

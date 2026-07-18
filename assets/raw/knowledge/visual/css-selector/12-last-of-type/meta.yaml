@@ -1,0 +1,50 @@
+# 타입 기준 마지막 요소 — :last-of-type
+# HTM 대조 보강 — enrich-visual-metas.mjs
+
+id: css-selector-12-last-of-type
+slug: 12-last-of-type
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSSセレクタのチートシート.htm  # 원본 HTM 삭제됨
+  sectionTitle:
+    ja: "最後の子要素"
+    ko: "타입 기준 마지막 요소 — :last-of-type"
+
+title:
+  ko: "타입 기준 마지막 요소 — :last-of-type"
+
+caption:
+  ko: "같은 태그 종류 중 마지막 요소를 선택합니다."
+
+explanation:
+  ko: |
+    `p:last-of-type`은 형제 중 마지막 p를 고릅니다.
+    
+    뒤에 다른 태그가 있어도 p 기준으로 마지막이면 선택됩니다.
+
+images:
+  - id: css-selector-010
+    path: assets/raw/knowledge/visual/css-selector/images/010.webp
+    role: demo
+    sectionHintJa: "最後の子要素"
+    altJa: "CSSセレクタ最後の子要素のサンプル"
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: ":last-of-type으로 해당 타입의 마지막 요소를 선택합니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: "p:last-of-type"
+    content: |
+      p:last-of-type {
+        color: #999;
+      }
+  - id: unit-caption-2
+    kind: caption
+    title: "보충 설명"
+    content: "태그 종류가 중요할 때 last-child보다 정확합니다."

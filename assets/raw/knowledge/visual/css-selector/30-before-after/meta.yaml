@@ -1,0 +1,58 @@
+# 가상 요소 — ::before / ::after
+# HTM 대조 보강 — enrich-visual-metas.mjs
+
+id: css-selector-30-before-after
+slug: 30-before-after
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSSセレクタのチートシート.htm  # 원본 HTM 삭제됨
+  sectionTitle:
+    ja: "before/afterで要素の前後に追加"
+    ko: "가상 요소 — ::before / ::after"
+
+title:
+  ko: "가상 요소 — ::before / ::after"
+
+caption:
+  ko: "요소 앞뒤에 장식·아이콘·말풍선 꼬리 등을 추가합니다."
+
+explanation:
+  ko: |
+    `::before` / `::after`는 HTML을 늘리지 않고 앞뒤 콘텐츠를 삽입합니다.
+    
+    `content`가 있어야 보이며, 아이콘·따옴표·말풍선 삼각형 등에 씁니다.
+
+images:
+  - id: css-selector-028
+    path: assets/raw/knowledge/visual/css-selector/images/028.webp
+    role: demo
+    sectionHintJa: "before/afterで要素の前後に追加"
+    altJa: "CSSセレクタの要素の前後に疑似要素を追加するサンプル"
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: "::before/::after로 요소 앞뒤에 콘텐츠를 삽입합니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: "h2::before"
+    content: |
+      h2::before {
+        content:'前に追加 > ';
+      }
+  - id: unit-code-2
+    kind: code-snippet
+    language: css
+    title: "h2::after"
+    content: |
+      h2::after {
+        content: ' < 뒤에 추가';
+      }
+  - id: unit-caption-2
+    kind: caption
+    title: "보충 설명"
+    content: "content 속성과 함께 써야 화면에 나타납니다."

@@ -1,0 +1,47 @@
+# 속성 값 포함 — [attr*="값"]
+# HTM 대조 보강 — enrich-visual-metas.mjs
+
+id: css-selector-21-attribute-contains
+slug: 21-attribute-contains
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSSセレクタのチートシート.htm  # 원본 HTM 삭제됨
+  sectionTitle:
+    ja: "属性内容の“一部”が一致する要素"
+    ko: "속성 값 포함 — [attr*=\"값\"]"
+
+title:
+  ko: "속성 값 포함 — [attr*=\"값\"]"
+
+caption:
+  ko: "속성 값 어딘가에 문자열이 포함되면 선택합니다."
+
+explanation:
+  ko: |
+    `*=`는 부분 일치입니다.
+    
+    `p[class*="ttl"]` → class에 ttl이 포함된 p
+    파일명·클래스 접두/접미가 섞인 경우에도 잡을 수 있습니다.
+
+images:
+  - id: css-selector-019
+    path: assets/raw/knowledge/visual/css-selector/images/019.webp
+    role: demo
+    sectionHintJa: "属性内容の“一部”が一致する要素"
+    altJa: "CSSセレクタの属性の一部が一致する要素のサンプル"
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: "[attr*=\"값\"]으로 속성 값 일부가 일치하는 요소를 선택합니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: "p[class*=\"ttl\"]"
+    content: |
+      p[class*="ttl"] {
+        color: #999;
+      }

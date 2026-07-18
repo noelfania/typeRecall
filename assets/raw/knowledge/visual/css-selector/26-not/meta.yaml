@@ -1,0 +1,46 @@
+# 제외 선택 — :not()
+# HTM 대조 보강 — enrich-visual-metas.mjs
+
+id: css-selector-26-not
+slug: 26-not
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSSセレクタのチートシート.htm  # 원본 HTM 삭제됨
+  sectionTitle:
+    ja: "〇〇以外の要素"
+    ko: "제외 선택 — :not()"
+
+title:
+  ko: "제외 선택 — :not()"
+
+caption:
+  ko: "조건에 맞지 않는 요소를 선택합니다."
+
+explanation:
+  ko: |
+    `p:not(.text)`는 class가 .text가 아닌 p를 선택합니다.
+    
+    `not(조건)`으로 예외를 빼면, 공통 스타일 후 일부만 다르게 주기 쉽습니다.
+
+images:
+  - id: css-selector-024
+    path: assets/raw/knowledge/visual/css-selector/images/024.webp
+    role: demo
+    sectionHintJa: "〇〇以外の要素"
+    altJa: "CSSセレクタの〇〇以外の要素のサンプル"
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: ":not()으로 특정 조건을 제외한 요소를 선택합니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: "p:not(.text)"
+    content: |
+      p:not(.text) {
+        color: #999;
+      }

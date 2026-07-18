@@ -1,0 +1,47 @@
+# 직계 자식 셀렉터 — >
+# HTM 대조 보강 — enrich-visual-metas.mjs
+
+id: css-selector-05-direct-child
+slug: 05-direct-child
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSSセレクタのチートシート.htm  # 원본 HTM 삭제됨
+  sectionTitle:
+    ja: "直下の子要素"
+    ko: "직계 자식 셀렉터 — >"
+
+title:
+  ko: "직계 자식 셀렉터 — >"
+
+caption:
+  ko: "바로 아래 한 단계 자식만 대상입니다. 손자는 제외됩니다."
+
+explanation:
+  ko: |
+    `>`는 직계 자식만 고릅니다.
+    
+    `div > p` → div의 바로 아래 p만 (더 깊은 p는 제외)
+    자손 공백 셀렉터보다 범위가 좁아 의도치 않은 스타일 확산을 줄입니다.
+
+images:
+  - id: css-selector-003
+    path: assets/raw/knowledge/visual/css-selector/images/003.webp
+    role: demo
+    sectionHintJa: "直下の子要素"
+    altJa: "CSSセレクタの直下の子要素のサンプル"
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: ">로 직계 자식만 선택합니다. 손자는 제외됩니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: "div > p"
+    content: |
+      div > p {
+        color: #999;
+      }

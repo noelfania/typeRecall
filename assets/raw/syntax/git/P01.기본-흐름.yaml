@@ -1,0 +1,176 @@
+id: language-git-p01
+category: syntax
+kind: command
+language: shell
+track:
+  id: git
+  label: Git
+title: P01.기본-흐름
+source:
+  origin: assets/typingSource/Language-git/P01.기본-흐름.sh
+parts:
+  - id: language-git-p01-part-1
+    title: 깃 상태 확인[git status]
+    display: |-
+      # 깃 상태 확인[git status]
+      git status
+      # 결과: 현재 브랜치와 변경 파일 목록 확인
+    typing: git status
+  - id: language-git-p01-part-2
+    title: 차이 확인[git diff]
+    display: |-
+      # 차이 확인[git diff]
+      git diff
+      git diff --staged
+      # 결과: 작업 트리와 스테이징 차이 확인
+    typing: |-
+      git diff
+      git diff --staged
+  - id: language-git-p01-part-3
+    title: 스테이징[git add]
+    display: |-
+      # 스테이징[git add]
+      git add src/app.ts
+      git add .
+      # 결과: 지정 파일 또는 전체 변경을 스테이징
+    typing: |-
+      git add src/app.ts
+      git add .
+  - id: language-git-p01-part-4
+    title: 커밋[git commit]
+    display: |-
+      # 커밋[git commit]
+      git commit -m "fix: handle null user response"
+      # 결과: 변경 이력을 메시지와 함께 저장
+    typing: 'git commit -m "fix: handle null user response"'
+  - id: language-git-p01-part-5
+    title: 푸시[git push]
+    display: |-
+      # 푸시[git push]
+      git push origin feature/login
+      # 결과: 현재 브랜치 변경을 원격 저장소에 반영
+    typing: git push origin feature/login
+  - id: language-git-p01-part-6
+    title: 풀[git pull]
+    display: |-
+      # 풀[git pull]
+      git pull origin main
+      # 결과: 원격 main 최신 이력을 가져와 현재 브랜치에 반영
+    typing: git pull origin main
+  - id: language-git-p01-part-7
+    title: 브랜치 생성[git branch]
+    display: |-
+      # 브랜치 생성[git branch]
+      git branch feature/profile-page
+      git branch
+      # 결과: 새 브랜치 생성 후 목록 확인
+    typing: |-
+      git branch feature/profile-page
+      git branch
+  - id: language-git-p01-part-8
+    title: 체크아웃[git checkout]
+    display: |-
+      # 체크아웃[git checkout]
+      git checkout main
+      # 결과: main 브랜치로 이동
+    typing: git checkout main
+  - id: language-git-p01-part-9
+    title: 스위치 생성[git checkout -b]
+    display: |-
+      # 스위치 생성[git checkout -b]
+      git checkout -b feature/cart
+      # 결과: 새 브랜치를 만들고 즉시 이동
+    typing: git checkout -b feature/cart
+  - id: language-git-p01-part-10
+    title: 스위치[git switch]
+    display: |-
+      # 스위치[git switch]
+      git switch main
+      git switch -c feature/search
+      # 결과: 브랜치 이동 또는 생성 후 이동
+    typing: |-
+      git switch main
+      git switch -c feature/search
+  - id: language-git-p01-part-11
+    title: 머지[git merge]
+    display: |-
+      # 머지[git merge]
+      git merge feature/cart
+      # 결과: feature/cart 내용을 현재 브랜치에 병합
+    typing: git merge feature/cart
+  - id: language-git-p01-part-12
+    title: 리베이스[git rebase]
+    display: |-
+      # 리베이스[git rebase]
+      git rebase main
+      # 결과: 현재 커밋을 최신 main 위로 다시 정렬
+    typing: git rebase main
+  - id: language-git-p01-part-13
+    title: 충돌 해결[merge conflict resolution]
+    display: |-
+      # 충돌 해결[merge conflict resolution]
+      git status
+      git add src/app.ts
+      git commit -m "fix: resolve merge conflict"
+      # 결과: 충돌 파일 수정 후 병합 마무리
+    typing: |-
+      git status
+      git add src/app.ts
+      git commit -m "fix: resolve merge conflict"
+  - id: language-git-p01-part-14
+    title: 리셋[git reset]
+    display: |-
+      # 리셋[git reset]
+      git reset --soft HEAD~1
+      # 결과: 마지막 커밋만 취소하고 변경 내용은 유지
+    typing: git reset --soft HEAD~1
+  - id: language-git-p01-part-15
+    title: 리버트[git revert]
+    display: |-
+      # 리버트[git revert]
+      git revert abc1234
+      # 결과: 특정 커밋을 되돌리는 새 커밋 생성
+    typing: git revert abc1234
+  - id: language-git-p01-part-16
+    title: 체리픽[git cherry-pick]
+    display: |-
+      # 체리픽[git cherry-pick]
+      git cherry-pick abc1234
+      # 결과: 필요한 커밋 하나만 현재 브랜치에 가져옴
+    typing: git cherry-pick abc1234
+  - id: language-git-p01-part-17
+    title: 작업 시작 흐름[status -> pull -> switch]
+    display: |-
+      # 작업 시작 흐름[status -> pull -> switch]
+      git status
+      git pull origin main
+      git switch -c feature/x
+      # 결과: 작업 시작 전에 최신 상태를 맞추고 새 브랜치로 이동
+    typing: |-
+      git status
+      git pull origin main
+      git switch -c feature/x
+  - id: language-git-p01-part-18
+    title: 작업 저장 흐름[diff -> add -> commit]
+    display: |-
+      # 작업 저장 흐름[diff -> add -> commit]
+      git diff
+      git add .
+      git commit -m "feat: update dashboard widgets"
+      # 결과: 변경 검토 후 저장
+    typing: |-
+      git diff
+      git add .
+      git commit -m "feat: update dashboard widgets"
+  - id: language-git-p01-part-19
+    title: 반영 흐름[switch -> pull -> merge]
+    display: |-
+      # 반영 흐름[switch -> pull -> merge]
+      git switch main
+      git pull origin main
+      git merge feature/x
+      # 결과: 메인 브랜치에 기능 브랜치 내용을 반영
+    typing: |-
+      git switch main
+      git pull origin main
+      git merge feature/x

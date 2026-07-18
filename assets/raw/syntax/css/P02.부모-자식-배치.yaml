@@ -1,0 +1,121 @@
+id: language-css-p02
+category: syntax
+kind: code-snippet
+language: css
+track:
+  id: css
+  label: CSS
+title: P02.부모-자식-배치
+source:
+  origin: assets/typingSource/Language-CSS/P02.부모-자식-배치.html
+  note: HTML 문서 통짜 예문을 배치 패턴 단위 스니펫으로 재구성 (2026-07-09)
+parts:
+  - id: language-css-p02-part-1
+    title: 글자 정렬[text-align]
+    display: |-
+      /* 글자 정렬[text-align] — 인라인 내용에만 적용 */
+      .text-left   { text-align: left; }
+      .text-center { text-align: center; }
+      .text-right  { text-align: right; }
+    typing: |-
+      .text-left   { text-align: left; }
+      .text-center { text-align: center; }
+      .text-right  { text-align: right; }
+  - id: language-css-p02-part-2
+    title: flex 가로 배치[row layout]
+    display: |-
+      /* flex 가로 배치[row layout] — 부모가 자식 위치를 잡는다 */
+      .row-parent {
+        display: flex;
+        justify-content: space-between; /* 가로축[main axis] */
+        align-items: center;            /* 세로축[cross axis] */
+        gap: 12px;
+      }
+    typing: |-
+      .row-parent {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+      }
+  - id: language-css-p02-part-3
+    title: flex 중앙 정렬[center]
+    display: |-
+      /* flex 중앙 정렬[center] — 자식 하나를 정중앙에 */
+      .center-parent {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 160px;
+      }
+    typing: |-
+      .center-parent {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 160px;
+      }
+  - id: language-css-p02-part-4
+    title: flex 세로 배치[column layout]
+    display: |-
+      /* flex 세로 배치[column layout] — 축이 바뀌면 justify/align 역할도 바뀜 */
+      .column-parent {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 12px;
+      }
+    typing: |-
+      .column-parent {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 12px;
+      }
+  - id: language-css-p02-part-5
+    title: grid 칸 나누기[grid layout]
+    display: |-
+      /* grid 칸 나누기[grid layout] — 부모가 칸을 만들고 자식을 배치 */
+      .grid-parent {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+    typing: |-
+      .grid-parent {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+  - id: language-css-p02-part-6
+    title: grid 중앙 정렬[place-items]
+    display: |-
+      /* grid 중앙 정렬[place-items] — 가로+세로 한 번에 */
+      .grid-center {
+        display: grid;
+        place-items: center;
+        min-height: 180px;
+      }
+    typing: |-
+      .grid-center {
+        display: grid;
+        place-items: center;
+        min-height: 180px;
+      }
+  - id: language-css-p02-part-7
+    title: 배치 마크업[layout markup]
+    display: |-
+      /* 배치 마크업[layout markup] — 부모 클래스 아래 자식 박스 */
+      <div class="row-parent">
+        <div class="box">A</div>
+        <div class="box">B</div>
+        <div class="box">C</div>
+      </div>
+    typing: |-
+      <div class="row-parent">
+        <div class="box">A</div>
+        <div class="box">B</div>
+        <div class="box">C</div>
+      </div>

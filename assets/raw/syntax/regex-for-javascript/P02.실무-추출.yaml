@@ -1,0 +1,73 @@
+id: language-regex-for-javascript-p02
+category: syntax
+kind: code-snippet
+language: javascript
+track:
+  id: regex-for-javascript
+  label: RegEx for JavaScript
+title: P02.실무-추출
+source:
+  origin: assets/typingSource/Language-RegEx-for-Javascript/P02.실무-추출.js
+  note: 원본에 섞여 있던 채팅 메모(Day 2/Day 4 등)를 제거하고 개념 단위 스니펫으로 재구성 (2026-07-09)
+parts:
+  - id: language-regex-for-javascript-p02-part-1
+    title: 파일 확장자[extension] 앞까지
+    display: |-
+      // 파일 확장자[extension] 앞까지 — 게으른 수량자 + 전방 탐색
+      'abc/def/video.mp4'.match(/.*?(?=mp4)/)[0];
+      // 결과: abc/def/video.
+    typing: "'abc/def/video.mp4'.match(/.*?(?=mp4)/)[0];"
+  - id: language-regex-for-javascript-p02-part-2
+    title: 숫자와 확장자 사이 텍스트[capture group]
+    display: |-
+      // 숫자와 확장자 사이 텍스트[capture group]
+      '123테스트.mp4'.match(/\d+(.*?)\.mp4/)[1];
+      // 결과: 테스트
+    typing: "'123테스트.mp4'.match(/\\d+(.*?)\\.mp4/)[1];"
+  - id: language-regex-for-javascript-p02-part-3
+    title: 여러 줄 함수 호출 찾기[multiline match]
+    display: |-
+      // 여러 줄 함수 호출 찾기[multiline match] — [\s\S]는 줄바꿈 포함 아무 문자
+      var fnSource = `functionAAAAA(a,
+        b,
+        c)`;
+      fnSource.match(/functionAAAAA\([\s\S]*?\)/)[0];
+      // 결과: functionAAAAA(a, ... c) 전체
+    typing: |-
+      var fnSource = `functionAAAAA(a,
+        b,
+        c)`;
+      fnSource.match(/functionAAAAA\([\s\S]*?\)/)[0];
+  - id: language-regex-for-javascript-p02-part-4
+    title: key=value 반복 추출[matchAll]
+    display: |-
+      // key=value 반복 추출[matchAll]
+      var logText = 'A=111,B=222,C=333';
+      Array.from(logText.matchAll(/(\w+)=(\d+)/g), item => ({
+        key: item[1],
+        value: item[2],
+      }));
+      // 결과: [{ key:'A', value:'111' }, { key:'B', value:'222' }, { key:'C', value:'333' }]
+    typing: |-
+      var logText = 'A=111,B=222,C=333';
+      Array.from(logText.matchAll(/(\w+)=(\d+)/g), item => ({
+        key: item[1],
+        value: item[2],
+      }));
+  - id: language-regex-for-javascript-p02-part-5
+    title: 태그 안 내용 추출[lookbehind + lookahead]
+    display: |-
+      // 태그 안 내용 추출[lookbehind + lookahead]
+      '<title>Hello</title>'.match(/(?<=<title>).*?(?=<\/title>)/)[0];
+      // 결과: Hello
+    typing: "'<title>Hello</title>'.match(/(?<=<title>).*?(?=<\\/title>)/)[0];"
+  - id: language-regex-for-javascript-p02-part-6
+    title: 주석 줄 제외하고 호출만[negative lookahead]
+    display: |-
+      // 주석 줄 제외하고 호출만[negative lookahead] — m 플래그로 줄 단위 검사
+      var codeText = '// AAA()\nAAA()';
+      codeText.match(/^(?!\s*\/\/).*AAA\(\)/m)[0];
+      // 결과: AAA()  (주석 처리된 첫 줄은 제외)
+    typing: |-
+      var codeText = '// AAA()\nAAA()';
+      codeText.match(/^(?!\s*\/\/).*AAA\(\)/m)[0];

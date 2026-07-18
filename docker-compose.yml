@@ -1,7 +1,0 @@
-services:
-  gmtl-type-recall:
-    image: gmtl-type-recall:latest
-    container_name: gmtl-type-recall
-    restart: unless-stopped
-    ports:
-      - "9995:80"

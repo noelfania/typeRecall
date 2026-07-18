@@ -1,0 +1,220 @@
+id: rule-dev-terms-readme-terms-web
+category: knowledge
+kind: term
+topic: web
+title: 웹 실무 어휘
+source:
+  origin: assets/typingSource/Rule-dev-terms/README-terms-WEB.md
+terms:
+  - id: rule-dev-terms-readme-terms-web-term-1
+    section: 페이지 / 섹션 명칭
+    title: 페이지 섹션
+    prompt: 웹페이지를 구성하는 여러 구역을 통틀어 부르는 일반 명칭.
+    answer: Page Sections
+    answerDisplay: 페이지 섹션[Page Sections]
+    example: 이 랜딩 페이지는 5개의 페이지 섹션[Page Sections]으로 나뉜다.
+  - id: rule-dev-terms-readme-terms-web-term-2
+    section: 페이지 / 섹션 명칭
+    title: 히어로 섹션
+    prompt: 페이지 최상단에 크게 배치되는 대표 소개 영역.
+    answer: Hero Sections
+    answerDisplay: 히어로 섹션[Hero Sections]
+    example: 첫 화면은 히어로 섹션[Hero Sections]에서 메시지를 강하게 보여줘야 한다.
+  - id: rule-dev-terms-readme-terms-web-term-3
+    section: 페이지 / 섹션 명칭
+    title: 기능 섹션
+    prompt: 제품이나 서비스의 핵심 기능[feature]을 나열하는 섹션.
+    answer: Feature Sections
+    answerDisplay: 기능 섹션[Feature Sections]
+    example: 제품의 장점은 기능 섹션[Feature Sections]에서 카드 형태로 정리한다.
+  - id: rule-dev-terms-readme-terms-web-term-4
+    section: 페이지 / 섹션 명칭
+    title: 행동 유도 섹션
+    prompt: 사용자에게 가입, 구매, 다운로드 같은 행동[action]을 유도하는 섹션.
+    answer: CTA Sections
+    answerDisplay: 행동 유도 섹션[CTA Sections]
+    example: 가격표 아래에 행동 유도 섹션[CTA Sections]을 한 번 더 넣자.
+  - id: rule-dev-terms-readme-terms-web-term-5
+    section: 페이지 / 섹션 명칭
+    title: 벤토 그리드
+    prompt: 카드 크기를 다르게 섞어 배치하는 격자형 레이아웃.
+    answer: Bento Grids
+    answerDisplay: 벤토 그리드[Bento Grids]
+    example: 대시보드 소개는 벤토 그리드[Bento Grids]가 잘 어울린다.
+  - id: rule-dev-terms-readme-terms-web-term-6
+    section: 페이지 / 섹션 명칭
+    title: 가격 섹션
+    prompt: 요금제나 플랜을 비교해서 보여주는 섹션.
+    answer: Pricing Sections
+    answerDisplay: 가격 섹션[Pricing Sections]
+    example: SaaS 사이트에서는 가격 섹션[Pricing Sections]이 전환율에 큰 영향을 준다.
+  - id: rule-dev-terms-readme-terms-web-term-7
+    section: 페이지 / 섹션 명칭
+    title: 헤더 섹션
+    prompt: 페이지 상단에 로고, 메뉴, 버튼 등이 들어가는 머리 영역.
+    answer: Header Sections
+    answerDisplay: 헤더 섹션[Header Sections]
+    example: 헤더 섹션[Header Sections]에는 로고와 네비게이션을 넣는다.
+  - id: rule-dev-terms-readme-terms-web-term-8
+    section: 페이지 / 섹션 명칭
+    title: 뉴스레터 섹션
+    prompt: 이메일 구독을 유도하는 뉴스레터 신청 영역.
+    answer: Newsletter Sections
+    answerDisplay: 뉴스레터 섹션[Newsletter Sections]
+    example: 푸터 위에 뉴스레터 섹션[Newsletter Sections]을 배치해 보자.
+  - id: rule-dev-terms-readme-terms-web-term-9
+    section: 페이지 / 섹션 명칭
+    title: 통계 섹션
+    prompt: 숫자 지표로 성과나 규모를 강조하는 섹션.
+    answer: Stats
+    answerDisplay: 통계 섹션[Stats]
+    example: 사용자 수와 전환율은 통계 섹션[Stats]에서 강조한다.
+  - id: rule-dev-terms-readme-terms-web-term-10
+    section: 페이지 / 섹션 명칭
+    title: 후기 섹션
+    prompt: 사용자 후기나 고객 리뷰를 보여주는 신뢰 확보 섹션.
+    answer: Testimonials
+    answerDisplay: 후기 섹션[Testimonials]
+    example: B2B 서비스는 후기 섹션[Testimonials]이 신뢰 형성에 중요하다.
+  - id: rule-dev-terms-readme-terms-web-term-11
+    section: 페이지 / 섹션 명칭
+    title: 블로그 섹션
+    prompt: 최신 글이나 추천 글 목록을 보여주는 블로그 영역.
+    answer: Blog Sections
+    answerDisplay: 블로그 섹션[Blog Sections]
+    example: 메인 하단에 블로그 섹션[Blog Sections]을 두면 SEO에 도움 된다.
+  - id: rule-dev-terms-readme-terms-web-term-12
+    section: 페이지 / 섹션 명칭
+    title: 문의 섹션
+    prompt: 문의 폼, 이메일, 전화번호 같은 연락 수단을 모아둔 섹션.
+    answer: Contact Sections
+    answerDisplay: 문의 섹션[Contact Sections]
+    example: 마지막 구역은 문의 섹션[Contact Sections]으로 마무리하자.
+  - id: rule-dev-terms-readme-terms-web-term-13
+    section: 페이지 / 섹션 명칭
+    title: 팀 섹션
+    prompt: 팀원 소개를 위한 구성원 안내 섹션.
+    answer: Team Sections
+    answerDisplay: 팀 섹션[Team Sections]
+    example: 회사 소개 페이지에는 팀 섹션[Team Sections]이 자주 들어간다.
+  - id: rule-dev-terms-readme-terms-web-term-14
+    section: 페이지 / 섹션 명칭
+    title: 콘텐츠 섹션
+    prompt: 설명문, 가이드, 문서성 텍스트를 담는 일반 콘텐츠 영역.
+    answer: Content Sections
+    answerDisplay: 콘텐츠 섹션[Content Sections]
+    example: 긴 설명은 콘텐츠 섹션[Content Sections]으로 따로 빼는 편이 좋다.
+  - id: rule-dev-terms-readme-terms-web-term-15
+    section: 페이지 / 섹션 명칭
+    title: 로고 클라우드
+    prompt: 고객사, 파트너사, 협업사 로고를 모아 보여주는 영역.
+    answer: Logo Clouds
+    answerDisplay: 로고 클라우드[Logo Clouds]
+    example: 협업사를 보여줄 때는 로고 클라우드[Logo Clouds]를 많이 쓴다.
+  - id: rule-dev-terms-readme-terms-web-term-16
+    section: 페이지 / 섹션 명칭
+    title: 자주 묻는 질문 섹션
+    prompt: 자주 묻는 질문과 답변을 모아 둔 섹션.
+    answer: FAQs
+    answerDisplay: 자주 묻는 질문 섹션[FAQs]
+    example: 문의가 많은 서비스라면 자주 묻는 질문 섹션[FAQs]이 꼭 필요하다.
+  - id: rule-dev-terms-readme-terms-web-term-17
+    section: 페이지 / 섹션 명칭
+    title: 푸터
+    prompt: 페이지 맨 아래에 회사 정보, 링크, 저작권 등을 넣는 하단 영역.
+    answer: Footers
+    answerDisplay: 푸터[Footers]
+    example: 푸터[Footers]에는 개인정보처리방침 링크를 넣어야 한다.
+  - id: rule-dev-terms-readme-terms-web-term-18
+    section: 컴포넌트 / UI 명칭
+    title: 요소
+    prompt: 버튼, 카드, 입력창처럼 페이지를 구성하는 작은 단위 요소.
+    answer: Elements
+    answerDisplay: 요소[Elements]
+    example: 버튼과 입력창은 가장 기본적인 요소[Elements]다.
+  - id: rule-dev-terms-readme-terms-web-term-19
+    section: 컴포넌트 / UI 명칭
+    title: 헤더
+    prompt: 상단 네비게이션 컴포넌트 자체를 가리키는 이름.
+    answer: Headers
+    answerDisplay: 헤더[Headers]
+    example: 모바일에서는 헤더[Headers]를 더 단순하게 만드는 편이다.
+  - id: rule-dev-terms-readme-terms-web-term-20
+    section: 컴포넌트 / UI 명칭
+    title: 플라이아웃 메뉴
+    prompt: 호버나 클릭 시 옆이나 아래로 펼쳐지는 확장 메뉴.
+    answer: Flyout Menus
+    answerDisplay: 플라이아웃 메뉴[Flyout Menus]
+    example: 카테고리 목록은 플라이아웃 메뉴[Flyout Menus]로 처리할 수 있다.
+  - id: rule-dev-terms-readme-terms-web-term-21
+    section: 컴포넌트 / UI 명칭
+    title: 배너
+    prompt: 공지, 할인, 이벤트 같은 메시지를 띠 형태로 보여주는 UI.
+    answer: Banners
+    answerDisplay: 배너[Banners]
+    example: 이벤트 안내는 상단 배너[Banners] 한 줄로 처리하자.
+  - id: rule-dev-terms-readme-terms-web-term-22
+    section: 컴포넌트 / UI 명칭
+    title: 피드백
+    prompt: 사용자 의견을 받기 위한 별점, 설문, 의견 입력 UI.
+    answer: Feedback
+    answerDisplay: 피드백[Feedback]
+    example: 결제 완료 후 피드백[Feedback] 팝업을 띄울 수 있다.
+  - id: rule-dev-terms-readme-terms-web-term-23
+    section: 전체 페이지 명칭
+    title: 404 페이지
+    prompt: 페이지를 찾지 못했을 때 보여주는 오류 안내 페이지.
+    answer: 404 Pages
+    answerDisplay: 404 페이지[404 Pages]
+    example: 잘 만든 404 페이지[404 Pages]는 이탈을 줄이는 데 도움이 된다.
+  - id: rule-dev-terms-readme-terms-web-term-24
+    section: 전체 페이지 명칭
+    title: 페이지 예시
+    prompt: 완성된 페이지 템플릿이나 샘플 화면을 모아 둔 카테고리.
+    answer: Page Examples
+    answerDisplay: 페이지 예시[Page Examples]
+    example: 디자인 방향을 잡을 때 페이지 예시[Page Examples]를 먼저 본다.
+  - id: rule-dev-terms-readme-terms-web-term-25
+    section: 전체 페이지 명칭
+    title: 랜딩 페이지
+    prompt: 제품 소개와 전환[conversion] 유도에 집중한 단일 목적 페이지.
+    answer: Landing Pages
+    answerDisplay: 랜딩 페이지[Landing Pages]
+    example: 광고 유입은 보통 전용 랜딩 페이지[Landing Pages]로 받는다.
+  - id: rule-dev-terms-readme-terms-web-term-26
+    section: 전체 페이지 명칭
+    title: 가격 페이지
+    prompt: 가격 정책과 플랜 비교를 중심으로 구성한 전용 페이지.
+    answer: Pricing Pages
+    answerDisplay: 가격 페이지[Pricing Pages]
+    example: 가격 정책이 복잡하면 가격 페이지[Pricing Pages]를 따로 만드는 편이 낫다.
+  - id: rule-dev-terms-readme-terms-web-term-27
+    section: 전체 페이지 명칭
+    title: 소개 페이지
+    prompt: 회사, 팀, 미션, 연혁을 소개하는 페이지.
+    answer: About Pages
+    answerDisplay: 소개 페이지[About Pages]
+    example: 회사 철학은 소개 페이지[About Pages]에서 자연스럽게 풀어낸다.
+  - id: web-extra-toast
+    section: 오버레이 / 알림
+    title: 토스트
+    prompt: 화면 상단이나 하단에서 잠깐 나타났다 사라지는 가벼운 알림창. "저장되었습니다" 같은 상태 변화를 알린다.
+    answer: Toast
+    aliases:
+      - Snackbar
+    example: 장바구니에 담기면 toast로 짧게 알려주자.
+  - id: web-extra-drawer
+    section: 오버레이 / 알림
+    title: 드로어
+    prompt: 화면 옆에서 서랍처럼 밀려 나오는 패널. 모바일 메뉴나 상세 설정에 자주 쓴다.
+    answer: Drawer
+    example: 모바일에서는 네비게이션을 drawer로 접어 두자.
+  - id: web-extra-modal
+    section: 오버레이 / 알림
+    title: 모달
+    prompt: 화면 위에 떠서 사용자의 응답을 요구하는 대화 상자. 닫기 전에는 뒤 화면을 조작할 수 없다.
+    answer: Modal Dialog
+    aliases:
+      - Modal
+      - Dialog
+    example: 삭제 확인은 modal dialog로 한 번 더 물어보자.

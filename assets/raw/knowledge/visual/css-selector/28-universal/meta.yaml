@@ -1,0 +1,46 @@
+# 전체 선택 — *
+# HTM 대조 보강 — enrich-visual-metas.mjs
+
+id: css-selector-28-universal
+slug: 28-universal
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSSセレクタのチートシート.htm  # 원본 HTM 삭제됨
+  sectionTitle:
+    ja: "全ての要素"
+    ko: "전체 선택 — *"
+
+title:
+  ko: "전체 선택 — *"
+
+caption:
+  ko: "문서의 모든 요소를 선택합니다."
+
+explanation:
+  ko: |
+    `*`는 HTML에 적힌 모든 요소를 대상으로 합니다.
+    
+    리셋 CSS나 전역 `box-sizing` 지정에 쓰이지만, 남용하면 성능·특이도에 불리합니다.
+
+images:
+  - id: css-selector-026
+    path: assets/raw/knowledge/visual/css-selector/images/026.webp
+    role: demo
+    sectionHintJa: "全ての要素"
+    altJa: "CSSセレクタの全ての要素のサンプル"
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: "*로 모든 요소를 선택합니다. 리셋·전역 설정에 자주 씁니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: "*"
+    content: |
+      * {
+        color: #999;
+      }

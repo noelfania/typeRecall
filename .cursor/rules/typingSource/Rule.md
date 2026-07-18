@@ -3,8 +3,8 @@
 주어진 용어에 설명에 대한 답을 쓰면서 손에 익히고 까먹지 않도록 유지하기 위해서 어휘집을 만들자.
 
 
-## 실문용어어 예문
-- C:\work\gmtl-type-to-remember\assets\typingSource\Rule*
+## 실무용어 예문 (정본)
+- `assets/raw/knowledge/terms/*.yaml` (kind: term)
 
 ## 형식
 개발 현장에서 자주 쓰이는 설명형 문제 카드처럼 정리(컨벤셜한 용어는 한글[영어] 형식으로 쓴다. )

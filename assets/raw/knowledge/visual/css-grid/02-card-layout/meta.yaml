@@ -1,0 +1,74 @@
+# Grid HTM 02-card-layout — HTM 대조 보강
+
+id: css-grid-02-card-layout
+slug: 02-card-layout
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSS Grid 実務編.htm  # 원본 HTM 삭제됨
+  tocId: webliker-toc-8
+  sectionTitle:
+    ja: "02｜カードレイアウト"
+    ko: "02｜카드 레이아웃"
+
+title:
+  ko: "카드 레이아웃 — repeat(auto-fill, minmax())"
+
+caption:
+  ko: "미디어 쿼리 없이 브라우저 너비에 맞춰 카드가 1~3열로 유연하게 배치됩니다."
+
+explanation:
+  ko: |
+    핵심 한 줄: `grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));`
+    
+    세 개념이 겹칩니다.
+    - `minmax(250px, 1fr)` — 칸은 최소 250px, 최대는 남는 공간을 균등 분배(1fr)
+    - `auto-fill` — 컨테이너에 들어갈 수 있는 만큼 칸을 채움. 남는 좁은 폭은 다음 줄로
+    - `repeat()` — 위 패턴을 반복
+    
+    미디어 쿼리로 768px·992px마다 열 수를 지정하는 방식보다 짧지만,
+    브레이크포인트별 “정확히 N열” 제어는 어렵다는 트레이드오프가 있습니다.
+
+images:
+  - id: css-grid-014
+    path: assets/raw/knowledge/visual/css-grid/images/014.webp
+    width: 1400
+    height: 775
+    role: demo
+  - id: css-grid-015
+    path: assets/raw/knowledge/visual/css-grid/images/015.webp
+    width: 1400
+    height: 392
+    role: demo
+    sectionHintJa: "auto-fill"
+  - id: css-grid-016
+    path: assets/raw/knowledge/visual/css-grid/images/016.webp
+    width: 1400
+    height: 392
+    role: demo
+    sectionHintJa: "repeat(auto-fill,minmax(250px,1fr))を訳すと…"
+  - id: css-grid-018
+    path: assets/raw/knowledge/visual/css-grid/images/018.webp
+    width: 1000
+    height: 822
+    role: demo
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: "미디어 쿼리 없이 카드 열 수가 너비에 맞춰 1~3열로 변합니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: "그리드 열 정의"
+    content: "grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));"
+  - id: unit-caption-2
+    kind: caption
+    title: "minmax"
+    content: "최소 250px까지 줄고, 남는 폭은 1fr로 균등 확대됩니다."
+  - id: unit-caption-3
+    kind: caption
+    title: "auto-fill"
+    content: "컨테이너에 깔 수 있는 만큼 칸을 채우고, 모자라면 다음 줄로 넘깁니다."

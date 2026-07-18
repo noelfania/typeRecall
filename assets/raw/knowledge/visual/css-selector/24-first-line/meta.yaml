@@ -1,0 +1,46 @@
+# 첫 줄 — ::first-line
+# HTM 대조 보강 — enrich-visual-metas.mjs
+
+id: css-selector-24-first-line
+slug: 24-first-line
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSSセレクタのチートシート.htm  # 원본 HTM 삭제됨
+  sectionTitle:
+    ja: "文章の一行目"
+    ko: "첫 줄 — ::first-line"
+
+title:
+  ko: "첫 줄 — ::first-line"
+
+caption:
+  ko: "블록 요소의 첫 줄에만 스타일을 적용합니다."
+
+explanation:
+  ko: |
+    `::first-line`은 가상 요소[pseudo-element]로 문단 첫 줄만 꾸밉니다.
+    
+    줄바꿈 위치에 따라 적용 범위가 달라지며, 블록 요소에서 의미가 있습니다.
+
+images:
+  - id: css-selector-022
+    path: assets/raw/knowledge/visual/css-selector/images/022.webp
+    role: demo
+    sectionHintJa: "文章の一行目"
+    altJa: "CSSセレクタの文章の一行目のサンプル"
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: "::first-line으로 문단 첫 줄만 스타일링합니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: "p::first-line"
+    content: |
+      p::first-line {
+        color: #999;
+      }

@@ -1,0 +1,159 @@
+id: language-typescript-p01
+category: syntax
+kind: code-snippet
+language: typescript
+track:
+  id: typescript
+  label: TypeScript
+title: P01.기본-패턴
+source:
+  origin: assets/typingSource/Language-TypeScript/P01.기본-패턴.ts
+parts:
+  - id: language-typescript-p01-part-1
+    title: 객체 타입[object type] - 옵셔널·리터럴 유니온
+    display: |-
+      // 객체 타입[object type] - age?는 옵셔널, role은 리터럴 유니온
+      type User = {
+        id: number;
+        name: string;
+        age?: number;
+        role: 'user' | 'admin';
+      };
+    typing: |-
+      type User = {
+        id: number;
+        name: string;
+        age?: number;
+        role: 'user' | 'admin';
+      };
+  - id: language-typescript-p01-part-1b
+    title: 제네릭 타입[generic type]
+    display: |-
+      // 제네릭 타입[generic type] - T 자리에 실제 타입이 들어감
+      type ApiResponse<T> = {
+        ok: boolean;
+        data: T;
+      };
+    typing: |-
+      type ApiResponse<T> = {
+        ok: boolean;
+        data: T;
+      };
+  - id: language-typescript-p01-part-2
+    title: 기본 타입[basic type]
+    display: |-
+      // 기본 타입[basic type]
+      let userName: string = 'kim';
+      let userAge: number | null = 30;
+      let isOpen: boolean = false;
+
+      console.log(userName, userAge, isOpen);
+      // 결과: kim 30 false
+    typing: |-
+      let userName: string = 'kim';
+      let userAge: number | null = 30;
+      let isOpen: boolean = false;
+
+      console.log(userName, userAge, isOpen);
+  - id: language-typescript-p01-part-3
+    title: 배열[array]
+    display: |-
+      // 배열[array]
+      const numberList: number[] = [1, 2, 3];
+      const nameList: Array<string> = ['lee', 'park'];
+      console.log(numberList, nameList);
+      // 결과: [1, 2, 3] ['lee', 'park']
+    typing: |-
+      const numberList: number[] = [1, 2, 3];
+      const nameList: Array<string> = ['lee', 'park'];
+      console.log(numberList, nameList);
+  - id: language-typescript-p01-part-4
+    title: 객체 타입[object type]
+    display: |-
+      // 객체 타입[object type]
+      const userItem: User = {
+        id: 1,
+        name: 'lee',
+        role: 'admin',
+      };
+      console.log(userItem.name);
+      // 결과: lee
+    typing: |-
+      const userItem: User = {
+        id: 1,
+        name: 'lee',
+        role: 'admin',
+      };
+      console.log(userItem.name);
+  - id: language-typescript-p01-part-5
+    title: 함수[function]
+    display: |-
+      // 함수[function]
+      function add(numA: number, numB: number): number {
+        return numA + numB;
+      }
+      console.log(add(3, 4));
+      // 결과: 7
+    typing: |-
+      function add(numA: number, numB: number): number {
+        return numA + numB;
+      }
+      console.log(add(3, 4));
+  - id: language-typescript-p01-part-6
+    title: 유니온 타입[union type]
+    display: |-
+      // 유니온 타입[union type]
+      function formatValue(input: string | number): string {
+        return typeof input === 'number' ? input.toFixed(2) : input.toUpperCase();
+      }
+      console.log(formatValue(3.14));
+      console.log(formatValue('ts'));
+      // 결과:
+      // 3.14
+      // TS
+    typing: |-
+      function formatValue(input: string | number): string {
+        return typeof input === 'number' ? input.toFixed(2) : input.toUpperCase();
+      }
+      console.log(formatValue(3.14));
+      console.log(formatValue('ts'));
+  - id: language-typescript-p01-part-7
+    title: 인터페이스 대체 패턴[object response pattern]
+    display: |-
+      // 인터페이스 대체 패턴[object response pattern]
+      const userResponse: ApiResponse<User> = {
+        ok: true,
+        data: userItem,
+      };
+      console.log(userResponse.data.role);
+      // 결과: admin
+    typing: |-
+      const userResponse: ApiResponse<User> = {
+        ok: true,
+        data: userItem,
+      };
+      console.log(userResponse.data.role);
+  - id: language-typescript-p01-part-8
+    title: 옵셔널 체이닝[optional chaining] / null 병합[nullish coalescing]
+    display: |-
+      // 옵셔널 체이닝[optional chaining] / null 병합[nullish coalescing]
+      const maybeAge = userItem.age ?? 0;
+      console.log(maybeAge);
+      // 결과: 0
+    typing: |-
+      const maybeAge = userItem.age ?? 0;
+      console.log(maybeAge);
+  - id: language-typescript-p01-part-9
+    title: 제네릭[generic]
+    display: |-
+      // 제네릭[generic]
+      function firstItem<T>(items: T[]): T | undefined {
+        return items[0];
+      }
+      console.log(firstItem<number>([10, 20, 30]));
+      // 결과: 10
+    typing: |-
+      function firstItem<T>(items: T[]): T | undefined {
+        return items[0];
+      }
+      console.log(firstItem<number>([10, 20, 30]));

@@ -1,0 +1,106 @@
+# 폼 셀렉터 — input·textarea·select
+# HTM 대조 보강 — enrich-visual-metas.mjs
+
+id: css-selector-31-form-selectors
+slug: 31-form-selectors
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSSセレクタのチートシート.htm  # 원본 HTM 삭제됨
+  sectionTitle:
+    ja: "フォーム関連のセレクタ"
+    ko: "폼 셀렉터 — input·textarea·select"
+
+title:
+  ko: "폼 셀렉터 — input·textarea·select"
+
+caption:
+  ko: "입력 필드·체크박스·라디오·제출 버튼 등 폼 요소를 타입별로 지정합니다."
+
+explanation:
+  ko: |
+    폼 UI는 type과 상태로 세밀하게 고릅니다.
+    
+    - `input[type="text"]`, `textarea`, `select`
+    - `input[type="checkbox"]`, `input[type="radio"]`
+    - `:checked` — 체크/선택된 상태
+    - `input[type="submit"]` — 전송 버튼
+    
+    타입 속성 셀렉터와 상태 가상 클래스를 조합하는 것이 핵심입니다.
+
+images:
+  - id: css-selector-029
+    path: assets/raw/knowledge/visual/css-selector/images/029.webp
+    role: demo
+    sectionHintJa: "送信ボタン"
+    altJa: "CSSセレクタのform関連のサンプル"
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: "폼 요소 종류·상태별로 셀렉터를 지정합니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: "input[type=\"text\"]"
+    content: |
+      input[type="text"] {
+        border:1px;
+      }
+  - id: unit-code-2
+    kind: code-snippet
+    language: css
+    title: "textarea"
+    content: |
+      textarea {
+        border:1px;
+      }
+  - id: unit-code-3
+    kind: code-snippet
+    language: css
+    title: "select"
+    content: |
+      select {
+        border:1px;
+      }
+  - id: unit-code-4
+    kind: code-snippet
+    language: css
+    title: "input[type=\"checkbox\"]"
+    content: |
+      input[type="checkbox"] {
+      }
+  - id: unit-code-5
+    kind: code-snippet
+    language: css
+    title: "input[type=\"radio\"]"
+    content: |
+      input[type="radio"] {
+      }
+  - id: unit-code-6
+    kind: code-snippet
+    language: css
+    title: "input[type=\"checkbox\"]:checked"
+    content: |
+      input[type="checkbox"]:checked {
+      }
+  - id: unit-code-7
+    kind: code-snippet
+    language: css
+    title: "input[type=\"radio\"]:checked"
+    content: |
+      input[type="radio"]:checked {
+      }
+  - id: unit-code-8
+    kind: code-snippet
+    language: css
+    title: "input[type=\"submit\"]"
+    content: |
+      input[type="submit"] {
+      }
+  - id: unit-caption-2
+    kind: caption
+    title: "보충 설명"
+    content: ":checked로 체크된 체크박스·라디오를 구분합니다."

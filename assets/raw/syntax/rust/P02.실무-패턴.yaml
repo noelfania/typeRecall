@@ -1,0 +1,88 @@
+id: language-rust-p02
+category: syntax
+kind: code-snippet
+language: rust
+track:
+  id: rust
+  label: Rust
+title: P02.실무-패턴
+source:
+  origin: assets/typingSource/Language-Rust/P02.실무-패턴.rs
+parts:
+  - id: language-rust-p02-part-1
+    title: 임포트[use]
+    display: |-
+      // 임포트[use] - 표준 라이브러리 컬렉션 가져오기
+      use std::collections::HashMap;
+
+      fn main() {
+    typing: |-
+      use std::collections::HashMap;
+
+      fn main() {
+  - id: language-rust-p02-part-3
+    title: 문자열[string]
+    display: |2-
+          // 문자열[string]
+          let text_value = String::from("hello rust");
+          println!("{}", text_value.to_uppercase());
+          // 결과: HELLO RUST
+    typing: |2-
+          let text_value = String::from("hello rust");
+          println!("{}", text_value.to_uppercase());
+  - id: language-rust-p02-part-4
+    title: 해시맵[hash map]
+    display: |2-
+          // 해시맵[hash map]
+          let mut age_map = HashMap::new();
+          age_map.insert("kim", 30);
+          age_map.insert("lee", 25);
+          println!("{:?}", age_map.get("kim"));
+          // 결과: Some(30)
+    typing: |2-
+          let mut age_map = HashMap::new();
+          age_map.insert("kim", 30);
+          age_map.insert("lee", 25);
+          println!("{:?}", age_map.get("kim"));
+  - id: language-rust-p02-part-5
+    title: 패턴 매칭[pattern matching]
+    display: |2-
+          // 패턴 매칭[pattern matching]
+          let maybe_score = Some(100);
+          if let Some(score) = maybe_score {
+              println!("{}", score);
+          }
+          // 결과: 100
+
+          // 결과 타입[result]
+          let parsed_value = "42".parse::<i32>();
+          match parsed_value {
+              Ok(value) => println!("{}", value),
+              Err(_) => println!("parse error"),
+          }
+          // 결과: 42
+    typing: |2-
+          let maybe_score = Some(100);
+          if let Some(score) = maybe_score {
+              println!("{}", score);
+          }
+
+          let parsed_value = "42".parse::<i32>();
+          match parsed_value {
+              Ok(value) => println!("{}", value),
+              Err(_) => println!("parse error"),
+          }
+  - id: language-rust-p02-part-6
+    title: 반복자[iterator]
+    display: |2-
+          // 반복자[iterator]
+          let nums = vec![1, 2, 3];
+          let doubled: Vec<i32> = nums.iter().map(|item| item * 2).collect();
+          println!("{:?}", doubled);
+          // 결과: [2, 4, 6]
+      }
+    typing: |2-
+          let nums = vec![1, 2, 3];
+          let doubled: Vec<i32> = nums.iter().map(|item| item * 2).collect();
+          println!("{:?}", doubled);
+      }

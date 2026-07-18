@@ -1,0 +1,84 @@
+id: language-python-p02
+category: syntax
+kind: code-snippet
+language: python
+track:
+  id: python
+  label: Python
+title: P02.실무-패턴
+source:
+  origin: assets/typingSource/Language-Python/P02.실무-패턴.py
+parts:
+  - id: language-python-p02-part-1
+    title: 예제 데이터[sample data] - 딕셔너리 리스트
+    display: |-
+      # 예제 데이터[sample data] - 딕셔너리 리스트
+      user_list = [
+          {"name": "kim", "age": 30},
+          {"name": "lee", "age": 20},
+          {"name": "park", "age": 25},
+      ]
+    typing: |-
+      user_list = [
+          {"name": "kim", "age": 30},
+          {"name": "lee", "age": 20},
+          {"name": "park", "age": 25},
+      ]
+  - id: language-python-p02-part-2
+    title: 필터링[filtering]
+    display: |-
+      # 필터링[filtering]
+      adult_list = [user for user in user_list if user["age"] >= 25]
+      print(adult_list)
+      # 결과: [{'name': 'kim', 'age': 30}, {'name': 'park', 'age': 25}]
+    typing: |-
+      adult_list = [user for user in user_list if user["age"] >= 25]
+      print(adult_list)
+  - id: language-python-p02-part-3
+    title: 변환[mapping]
+    display: |-
+      # 변환[mapping]
+      name_list = [user["name"] for user in user_list]
+      print(name_list)
+      # 결과: ['kim', 'lee', 'park']
+    typing: |-
+      name_list = [user["name"] for user in user_list]
+      print(name_list)
+  - id: language-python-p02-part-4
+    title: 정렬[sorting]
+    display: |-
+      # 정렬[sorting]
+      sorted_list = sorted(user_list, key=lambda user: user["age"], reverse=True)
+      print(sorted_list[0]["name"])
+      # 결과: kim
+    typing: |-
+      sorted_list = sorted(user_list, key=lambda user: user["age"], reverse=True)
+      print(sorted_list[0]["name"])
+  - id: language-python-p02-part-5
+    title: 기본값 처리[default handling]
+    display: |-
+      # 기본값 처리[default handling]
+      config = {"timeout": 3}
+      retry_count = config.get("retry", 0)
+      print(retry_count)
+      # 결과: 0
+    typing: |-
+      config = {"timeout": 3}
+      retry_count = config.get("retry", 0)
+      print(retry_count)
+  - id: language-python-p02-part-6
+    title: 함수 조합[function composition]
+    display: |-
+      # 함수 조합[function composition]
+      def format_user(user):
+          return f'{user["name"]}:{user["age"]}'
+
+      formatted_list = list(map(format_user, user_list))
+      print(formatted_list)
+      # 결과: ['kim:30', 'lee:20', 'park:25']
+    typing: |-
+      def format_user(user):
+          return f'{user["name"]}:{user["age"]}'
+
+      formatted_list = list(map(format_user, user_list))
+      print(formatted_list)

@@ -1,0 +1,47 @@
+# 형제 중 마지막 자식 — :last-child
+# HTM 대조 보강 — enrich-visual-metas.mjs
+
+id: css-selector-09-last-child
+slug: 09-last-child
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSSセレクタのチートシート.htm  # 원본 HTM 삭제됨
+  sectionTitle:
+    ja: "兄弟要素の最後の要素"
+    ko: "형제 중 마지막 자식 — :last-child"
+
+title:
+  ko: "형제 중 마지막 자식 — :last-child"
+
+caption:
+  ko: "부모의 마지막 자식인 요소를 선택합니다."
+
+explanation:
+  ko: |
+    `p:last-child`는 부모의 마지막 자식이면서 p일 때 적용됩니다.
+    
+    목록 마지막 항목의 구분선 제거 등에 자주 씁니다.
+    타입 기준이면 `:last-of-type`을 검토하세요.
+
+images:
+  - id: css-selector-007
+    path: assets/raw/knowledge/visual/css-selector/images/007.webp
+    role: demo
+    sectionHintJa: "兄弟要素の最後の要素"
+    altJa: "CSSセレクタの兄弟要素の最後の子要素のサンプル"
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: ":last-child로 부모의 마지막 자식을 선택합니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: ".box p:last-child"
+    content: |
+      .box p:last-child {
+        color: #999;
+      }

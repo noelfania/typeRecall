@@ -1,0 +1,73 @@
+# 기본 셀렉터 — 태그·class·id
+# HTM 대조 보강 — enrich-visual-metas.mjs
+
+id: css-selector-02-basic-selectors
+slug: 02-basic-selectors
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSSセレクタのチートシート.htm  # 원본 HTM 삭제됨
+  sectionTitle:
+    ja: "よく使う超基本のセレクタ"
+    ko: "기본 셀렉터 — 태그·class·id"
+
+title:
+  ko: "기본 셀렉터 — 태그·class·id"
+
+caption:
+  ko: "태그명, class, id, 복수 요소 지정 등 가장 자주 쓰는 셀렉터입니다."
+
+explanation:
+  ko: |
+    실무에서 가장 먼저 익히는 네 가지입니다.
+    
+    - 태그명 `p` — 해당 HTML 태그 전부
+    - class `.className` — class 속성이 일치하는 요소
+    - id `#idName` — 문서에서 유일한 id
+    - 쉼표 `p, div, .class` — 여러 대상에 같은 스타일
+    
+    id는 한 페이지에 하나, class는 여러 요소에 재사용하는 것이 일반적입니다.
+
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: "태그·class·id·복수 지정으로 대상 요소를 고릅니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: "태그명으로 지정"
+    content: |
+      p {
+        color: inherit;
+      }
+  - id: unit-code-2
+    kind: code-snippet
+    language: css
+    title: "class명으로 지정"
+    content: |
+      .className {
+        color: inherit;
+      }
+  - id: unit-code-3
+    kind: code-snippet
+    language: css
+    title: "id명으로 지정"
+    content: |
+      #idName {
+        color: inherit;
+      }
+  - id: unit-code-4
+    kind: code-snippet
+    language: css
+    title: "여러 요소에 동일 지정"
+    content: |
+      p, div, .class {
+        color: inherit;
+      }
+  - id: unit-caption-2
+    kind: caption
+    title: "보충 설명"
+    content: "쉼표로 나열하면 여러 셀렉터에 같은 선언을 한 번에 적용합니다."

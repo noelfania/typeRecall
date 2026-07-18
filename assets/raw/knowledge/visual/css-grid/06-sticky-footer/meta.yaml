@@ -1,0 +1,69 @@
+# Grid HTM 06-sticky-footer — HTM 대조 보강
+
+id: css-grid-06-sticky-footer
+slug: 06-sticky-footer
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSS Grid 実務編.htm  # 원본 HTM 삭제됨
+  tocId: webliker-toc-24
+  sectionTitle:
+    ja: "06｜コンテンツが少なくてもページの高さを保持"
+    ko: "06｜콘텐츠가 적어도 페이지 높이 유지"
+
+title:
+  ko: "스티키 푸터 — auto 1fr auto"
+
+caption:
+  ko: "본문이 짧아도 푸터가 화면 아래에 붙도록 행 높이를 분배합니다."
+
+explanation:
+  ko: |
+    문의 완료 페이지처럼 콘텐츠가 적으면 푸터가 중간에 떠 보기 흉합니다.
+    
+    `grid-template-rows: auto 1fr auto` + 컨테이너 `min-height: 100vh`로
+    헤더·본문·푸터를 나누면, 가운데 `1fr`이 남는 세로 공간을 채웁니다.
+    
+    - `auto` — 콘텐츠 높이만큼만
+    - `1fr` — 남은 공간을 흡수
+    
+    figcaption: 「콘텐츠가 부족하면 어색한 모습…」→「Grid로 화면 높이를 최소한 유지」
+
+images:
+  - id: css-grid-035
+    path: assets/raw/knowledge/visual/css-grid/images/035.webp
+    width: 684
+    height: 353
+    role: demo
+    sectionHintJa: "06｜コンテンツが少なくてもページの高さを保持"
+  - id: css-grid-036
+    path: assets/raw/knowledge/visual/css-grid/images/036.webp
+    width: 1400
+    height: 700
+    role: demo
+  - id: css-grid-037
+    path: assets/raw/knowledge/visual/css-grid/images/037.webp
+    width: 1440
+    height: 720
+    role: demo
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: "auto 1fr auto 행 구성으로 짧은 페이지에서도 푸터를 하단에 둡니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: "행 높이 분배"
+    content: |
+      .l-wrapper {
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        min-height: 100vh;
+      }
+  - id: unit-caption-2
+    kind: caption
+    title: "auto vs 1fr"
+    content: "auto는 콘텐츠만큼, 1fr은 남은 세로 공간을 채웁니다."

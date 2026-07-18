@@ -1,0 +1,78 @@
+# Grid HTM 03-edge-align — HTM 대조 보강
+
+id: css-grid-03-edge-align
+slug: 03-edge-align
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSS Grid 実務編.htm  # 원본 HTM 삭제됨
+  tocId: webliker-toc-14
+  sectionTitle:
+    ja: "03｜グリッドの端にそれぞれの要素を配置"
+    ko: "03｜그리드 끝에 요소 배치"
+
+title:
+  ko: "그리드 끝 정렬 — align-self / auto-fill 버튼"
+
+caption:
+  ko: "이미지 열은 고정, 텍스트·버튼은 가변. 버튼은 셀 오른쪽 아래·반응형 2열→1열."
+
+explanation:
+  ko: |
+    `grid-template-columns: 336px 1fr`로 이미지(고정)와 본문(가변)을 나눕니다.
+    
+    버튼이 셀 전체를 늘어나지 않게 `align-self: flex-start`(또는 하단이면 flex-end)를 씁니다.
+    Grid에서도 Flex에서 쓰던 정렬 속성을 쓸 수 있습니다.
+    
+    버튼 줄에는 `repeat(auto-fill, minmax(250px, 1fr))`를 재사용해
+    250px 이하가 되면 2열→1열로 접히게 합니다. `gap`은 아이템 사이에만 여백을 만듭니다
+    (figcaption: gap은 아이템 사이에만 여백을 만든다).
+
+images:
+  - id: css-grid-020
+    path: assets/raw/knowledge/visual/css-grid/images/020.gif
+    width: 1200
+    height: 602
+    role: demo
+  - id: css-grid-019
+    path: assets/raw/knowledge/visual/css-grid/images/019.webp
+    width: 1132
+    height: 628
+    role: demo
+  - id: css-grid-021
+    path: assets/raw/knowledge/visual/css-grid/images/021.webp
+    width: 1200
+    height: 662
+    role: demo
+    sectionHintJa: "解説｜ボタンをセルの右下に配置する"
+  - id: css-grid-022
+    path: assets/raw/knowledge/visual/css-grid/images/022.webp
+    width: 878
+    height: 398
+    role: demo
+    sectionHintJa: "解説｜ボタンの2列→1列をスマートに実装する"
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: "고정 이미지 열 + 가변 본문, 버튼은 셀 끝에 붙이고 좁아지면 1열로 접습니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: "2열 그리드"
+    content: |
+      .c-product {
+        grid-template-columns: 336px 1fr;
+      }
+  - id: unit-code-2
+    kind: code-snippet
+    language: css
+    title: "셀 안 정렬"
+    content: "align-self: flex-end;"
+  - id: unit-code-3
+    kind: code-snippet
+    language: css
+    title: "반응형 버튼 열"
+    content: "grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));"

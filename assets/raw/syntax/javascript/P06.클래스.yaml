@@ -1,0 +1,272 @@
+id: language-javascript-p06
+category: syntax
+kind: code-snippet
+language: javascript
+track:
+  id: javascript
+  label: JavaScript
+title: P06.클래스
+source:
+  origin: assets/typingSource/Language-JavaScript/P06.클래스.js
+  note: 긴 파트(기본 클래스·상속·믹스인)를 정의/사용 단위로 분할 (2026-07-09)
+parts:
+  - id: language-javascript-p06-part-1
+    title: 기본 클래스[basic class] 정의
+    display: |-
+      /* 기본 클래스[basic class] 정의 */
+      class Vehicle {
+        static count = 0;          // 정적 속성[static field] (인스턴스 공유 안됨)
+        #fuel;                     // 프라이빗 필드[private field] (클래스 외부 접근 불가)
+
+        constructor(type, fuel) {
+          this.type = type;
+          this.#fuel = fuel;
+          Vehicle.count++;
+        }
+
+        getFuel() { return this.#fuel; }   // 프라이빗 접근자[private accessor]
+        static getCount() { return Vehicle.count; }   // 정적 메서드[static method]
+      }
+    typing: |-
+      class Vehicle {
+        static count = 0;
+        #fuel;
+
+        constructor(type, fuel) {
+          this.type = type;
+          this.#fuel = fuel;
+          Vehicle.count++;
+        }
+
+        getFuel() { return this.#fuel; }
+        static getCount() { return Vehicle.count; }
+      }
+  - id: language-javascript-p06-part-2
+    title: 기본 클래스[basic class] 사용
+    display: |-
+      /* 기본 클래스[basic class] 사용 */
+      var car1 = new Vehicle('car', 'gasoline');
+      var car2 = new Vehicle('bike', 'none');
+      car1.getFuel()          // 'gasoline'
+      Vehicle.count           // 2 (정적 속성은 클래스에서 접근)
+      Vehicle.getCount()      // 2
+    typing: |-
+      var car1 = new Vehicle('car', 'gasoline');
+      var car2 = new Vehicle('bike', 'none');
+      car1.getFuel()
+      Vehicle.count
+      Vehicle.getCount()
+  - id: language-javascript-p06-part-3
+    title: Getter / Setter - 접근자 프로퍼티[accessor property]
+    display: |-
+      /* Getter / Setter - 접근자 프로퍼티[accessor property] */
+      class Circle {
+        constructor(radius) {
+          this.radius = radius;
+        }
+        get area()      { return Math.PI * this.radius ** 2; }
+        set diameter(d) { this.radius = d / 2; }
+      }
+
+      var circle1 = new Circle(5);
+      circle1.area.toFixed(2)   // '78.54' (호출 아님, 속성처럼 읽음)
+      circle1.diameter = 20;    // setter 실행
+      circle1.radius            // 10
+    typing: |-
+      class Circle {
+        constructor(radius) {
+          this.radius = radius;
+        }
+        get area()      { return Math.PI * this.radius ** 2; }
+        set diameter(d) { this.radius = d / 2; }
+      }
+
+      var circle1 = new Circle(5);
+      circle1.area.toFixed(2)
+      circle1.diameter = 20;
+      circle1.radius
+  - id: language-javascript-p06-part-4
+    title: 상속[inheritance] - 부모 클래스
+    display: |-
+      /* 상속[inheritance] - 부모 클래스 */
+      class Animal {
+        constructor(name) {
+          this.name = name;
+        }
+        speak() { return `${this.name} makes a noise.`; }
+      }
+    typing: |-
+      class Animal {
+        constructor(name) {
+          this.name = name;
+        }
+        speak() { return `${this.name} makes a noise.`; }
+      }
+  - id: language-javascript-p06-part-5
+    title: 상속[inheritance] - extends / super / override
+    display: |-
+      /* 상속[inheritance] - extends / super / override */
+      class Dog extends Animal {
+        constructor(name, breed) {
+          super(name);          // 부모[parent] constructor 호출 필수 (this 사용 전)
+          this.breed = breed;
+        }
+        speak() {               // 오버라이드[override]
+          return `${this.name} barks.`;
+        }
+        parentSpeak() {
+          return super.speak(); // 부모 메서드[parent method] 호출
+        }
+      }
+    typing: |-
+      class Dog extends Animal {
+        constructor(name, breed) {
+          super(name);
+          this.breed = breed;
+        }
+        speak() {
+          return `${this.name} barks.`;
+        }
+        parentSpeak() {
+          return super.speak();
+        }
+      }
+  - id: language-javascript-p06-part-6
+    title: 상속[inheritance] - 인스턴스 확인
+    display: |-
+      /* 상속[inheritance] - 인스턴스 확인 */
+      var dog1 = new Dog('Rex', 'Labrador');
+      dog1.speak()             // 'Rex barks.' (오버라이드 적용)
+      dog1.parentSpeak()       // 'Rex makes a noise.'
+      dog1 instanceof Dog      // true
+      dog1 instanceof Animal   // true (부모 타입으로도 판정)
+    typing: |-
+      var dog1 = new Dog('Rex', 'Labrador');
+      dog1.speak()
+      dog1.parentSpeak()
+      dog1 instanceof Dog
+      dog1 instanceof Animal
+  - id: language-javascript-p06-part-7
+    title: 정적 초기화 블록[static initialization block]
+    display: |-
+      /* 정적 초기화 블록[static initialization block] */
+      class Config {
+        static host;
+        static port;
+        static {
+          Config.host = 'localhost';
+          Config.port = 3000;
+        }
+      }
+      Config.host  // 'localhost'
+      Config.port  // 3000
+    typing: |-
+      class Config {
+        static host;
+        static port;
+        static {
+          Config.host = 'localhost';
+          Config.port = 3000;
+        }
+      }
+      Config.host
+      Config.port
+  - id: language-javascript-p06-part-8
+    title: 클래스 표현식[class expression]
+    display: |-
+      /* 클래스 표현식[class expression] */
+      var Rectangle = class {
+        constructor(w, h) {
+          this.w = w;
+          this.h = h;
+        }
+        get area() { return this.w * this.h; }
+      };
+      new Rectangle(4, 5).area  // 20
+    typing: |-
+      var Rectangle = class {
+        constructor(w, h) {
+          this.w = w;
+          this.h = h;
+        }
+        get area() { return this.w * this.h; }
+      };
+      new Rectangle(4, 5).area
+  - id: language-javascript-p06-part-9
+    title: 믹스인[mixin] 정의
+    display: |-
+      /* 믹스인[mixin] 정의 - 클래스를 반환하는 함수 */
+      var Serializable = Base => class extends Base {
+        serialize() { return JSON.stringify(this); }
+      };
+
+      var Timestamped = Base => class extends Base {
+        constructor(...args) {
+          super(...args);
+          this.createdAt = new Date().toISOString().slice(0, 10);
+        }
+      };
+    typing: |-
+      var Serializable = Base => class extends Base {
+        serialize() { return JSON.stringify(this); }
+      };
+
+      var Timestamped = Base => class extends Base {
+        constructor(...args) {
+          super(...args);
+          this.createdAt = new Date().toISOString().slice(0, 10);
+        }
+      };
+  - id: language-javascript-p06-part-10
+    title: 믹스인[mixin] 적용
+    display: |-
+      /* 믹스인[mixin] 적용 - 상속 체인에 끼워 넣기 */
+      class BaseEntity {
+        constructor(data) { Object.assign(this, data); }
+      }
+
+      class UserEntity extends Serializable(Timestamped(BaseEntity)) {}
+
+      var userEntity = new UserEntity({ id: 1, name: 'kim' });
+      userEntity.serialize()   // '{"id":1,"name":"kim","createdAt":"2026-03-18"}'
+    typing: |-
+      class BaseEntity {
+        constructor(data) { Object.assign(this, data); }
+      }
+
+      class UserEntity extends Serializable(Timestamped(BaseEntity)) {}
+
+      var userEntity = new UserEntity({ id: 1, name: 'kim' });
+      userEntity.serialize()
+  - id: language-javascript-p06-part-11
+    title: 내장 클래스 상속[built-in class inheritance]
+    display: |-
+      /* 내장 클래스 상속[built-in class inheritance] */
+      class TypedArray extends Array {
+        sum() { return this.reduce((acc, n) => acc + n, 0); }
+        avg() { return this.sum() / this.length; }
+      }
+
+      var nums = new TypedArray(10, 20, 30);
+      nums.sum()           // 60
+      nums.map(n => n * 2) // TypedArray [20, 40, 60] (반환도 TypedArray)
+    typing: |-
+      class TypedArray extends Array {
+        sum() { return this.reduce((acc, n) => acc + n, 0); }
+        avg() { return this.sum() / this.length; }
+      }
+
+      var nums = new TypedArray(10, 20, 30);
+      nums.sum()
+      nums.map(n => n * 2)
+  - id: language-javascript-p06-part-12
+    title: instanceof / constructor 확인[inspection]
+    display: |-
+      /* instanceof / constructor 확인[inspection] */
+      dog1.constructor === Dog                        // true
+      dog1.constructor.name                           // 'Dog'
+      Object.getPrototypeOf(dog1) === Dog.prototype   // true
+    typing: |-
+      dog1.constructor === Dog
+      dog1.constructor.name
+      Object.getPrototypeOf(dog1) === Dog.prototype

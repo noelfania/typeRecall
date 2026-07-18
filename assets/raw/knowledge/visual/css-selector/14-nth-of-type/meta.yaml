@@ -1,0 +1,46 @@
+# n번째 자식 — :nth-of-type(n)
+# HTM 대조 보강 — enrich-visual-metas.mjs
+
+id: css-selector-14-nth-of-type
+slug: 14-nth-of-type
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSSセレクタのチートシート.htm  # 원본 HTM 삭제됨
+  sectionTitle:
+    ja: "〇〇番目の子要素"
+    ko: "n번째 자식 — :nth-of-type(n)"
+
+title:
+  ko: "n번째 자식 — :nth-of-type(n)"
+
+caption:
+  ko: "타입 기준 n번째 요소를 선택합니다. (1)이면 첫 번째입니다."
+
+explanation:
+  ko: |
+    `p:nth-of-type(2)`는 형제 중 두 번째 p를 선택합니다.
+    
+    괄호에는 1부터의 반각 숫자를 넣습니다. `(1)`이면 첫 요소입니다.
+
+images:
+  - id: css-selector-012
+    path: assets/raw/knowledge/visual/css-selector/images/012.webp
+    role: demo
+    sectionHintJa: "〇〇番目の子要素"
+    altJa: "CSSセレクタのn番目の子要素のサンプル"
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: ":nth-of-type(n)으로 n번째 타입 요소를 선택합니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: "p:nth-of-type(2)"
+    content: |
+      p:nth-of-type(2) {
+        color: #999;
+      }

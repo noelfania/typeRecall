@@ -1,0 +1,47 @@
+# 속성 값 끝 — [attr$="값"]
+# HTM 대조 보강 — enrich-visual-metas.mjs
+
+id: css-selector-23-attribute-ends
+slug: 23-attribute-ends
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSSセレクタのチートシート.htm  # 원본 HTM 삭제됨
+  sectionTitle:
+    ja: "属性内容の“最後”が一致する要素"
+    ko: "속성 값 끝 — [attr$=\"값\"]"
+
+title:
+  ko: "속성 값 끝 — [attr$=\"값\"]"
+
+caption:
+  ko: "속성 값이 지정 문자열로 끝나면 선택합니다."
+
+explanation:
+  ko: |
+    `$=`는 접미사[suffix] 일치입니다.
+    
+    `p[class$="one"]` → class가 one으로 끝나는 p
+    확장자(`.pdf`, `.png`) 링크 스타일에 자주 씁니다.
+
+images:
+  - id: css-selector-021
+    path: assets/raw/knowledge/visual/css-selector/images/021.webp
+    role: demo
+    sectionHintJa: "属性内容の“最後”が一致する要素"
+    altJa: "CSSセレクタの属性の最後が一致する要素のサンプル"
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: "[attr$=\"값\"]으로 속성 값이 특정 문자로 끝나는 요소를 선택합니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: "p[class$=\"one\"]"
+    content: |
+      p[class$="one"] {
+        color: #999;
+      }

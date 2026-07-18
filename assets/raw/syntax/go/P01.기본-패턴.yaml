@@ -1,0 +1,200 @@
+id: language-go-p01
+category: syntax
+kind: code-snippet
+language: go
+track:
+  id: go
+  label: Go
+title: P01.기본-패턴
+source:
+  origin: assets/typingSource/Language-go/P01.기본-패턴.go
+parts:
+  - id: language-go-p01-part-1
+    title: 패키지와 임포트[package / import]
+    display: |-
+      // 패키지와 임포트[package / import]
+      package main
+
+      import (
+      	"fmt"
+      	"strings"
+      )
+    typing: |-
+      package main
+
+      import (
+      	"fmt"
+      	"strings"
+      )
+  - id: language-go-p01-part-2
+    title: 구조체 정의[struct]
+    display: |-
+      // 구조체 정의[struct]
+      type User struct {
+      	Name  string
+      	Age   int
+      	Admin bool
+      }
+    typing: |-
+      type User struct {
+      	Name  string
+      	Age   int
+      	Admin bool
+      }
+  - id: language-go-p01-part-2b
+    title: 함수 정의[function]
+    display: |-
+      // 함수 정의[function] - 매개변수와 반환 타입을 뒤에 쓴다
+      func add(numA int, numB int) int {
+      	return numA + numB
+      }
+    typing: |-
+      func add(numA int, numB int) int {
+      	return numA + numB
+      }
+  - id: language-go-p01-part-2c
+    title: 에러 반환[error return]
+    display: |-
+      // 에러 반환[error return] - (값, error) 복수 반환이 Go 관례
+      func divide(numA int, numB int) (int, error) {
+      	if numB == 0 {
+      		return 0, fmt.Errorf("0으로 나눌 수 없음")
+      	}
+      	return numA / numB, nil
+      }
+    typing: |-
+      func divide(numA int, numB int) (int, error) {
+      	if numB == 0 {
+      		return 0, fmt.Errorf("0으로 나눌 수 없음")
+      	}
+      	return numA / numB, nil
+      }
+  - id: language-go-p01-part-3
+    title: 변수 선언[variable declaration]
+    display: |-
+      	// 변수 선언[variable declaration]
+      	var userName string = "kim"
+      	userAge := 30
+      	const serviceName = "gmtl"
+      	fmt.Println(userName, userAge, serviceName)
+      	// 결과: kim 30 gmtl
+    typing: |-
+      	var userName string = "kim"
+      	userAge := 30
+      	const serviceName = "gmtl"
+      	fmt.Println(userName, userAge, serviceName)
+  - id: language-go-p01-part-4
+    title: 조건문[condition]
+    display: |-
+      	// 조건문[condition]
+      	if userAge >= 20 {
+      		fmt.Println("adult")
+      	} else {
+      		fmt.Println("minor")
+      	}
+      	// 결과: adult
+    typing: |-
+      	if userAge >= 20 {
+      		fmt.Println("adult")
+      	} else {
+      		fmt.Println("minor")
+      	}
+  - id: language-go-p01-part-5
+    title: 반복문[loop]
+    display: |-
+      	// 반복문[loop]
+      	scoreList := []int{10, 20, 30}
+      	for index, score := range scoreList {
+      		fmt.Println(index, score)
+      	}
+      	// 결과:
+      	// 0 10
+      	// 1 20
+      	// 2 30
+    typing: |-
+      	scoreList := []int{10, 20, 30}
+      	for index, score := range scoreList {
+      		fmt.Println(index, score)
+      	}
+  - id: language-go-p01-part-6
+    title: 맵[map]
+    display: |-
+      	// 맵[map]
+      	userMap := map[string]string{
+      		"name": "lee",
+      		"role": "admin",
+      	}
+      	fmt.Println(userMap["name"])
+      	// 결과: lee
+    typing: |-
+      	userMap := map[string]string{
+      		"name": "lee",
+      		"role": "admin",
+      	}
+      	fmt.Println(userMap["name"])
+  - id: language-go-p01-part-7
+    title: 구조체[struct]
+    display: |-
+      	// 구조체[struct]
+      	userItem := User{Name: "park", Age: 25, Admin: true}
+      	fmt.Println(userItem.Name, userItem.Admin)
+      	// 결과: park true
+    typing: |-
+      	userItem := User{Name: "park", Age: 25, Admin: true}
+      	fmt.Println(userItem.Name, userItem.Admin)
+  - id: language-go-p01-part-8
+    title: 함수[function]
+    display: |-
+      	// 함수[function]
+      	sumValue := add(3, 4)
+      	fmt.Println(sumValue)
+      	// 결과: 7
+    typing: |-
+      	sumValue := add(3, 4)
+      	fmt.Println(sumValue)
+  - id: language-go-p01-part-9
+    title: 다중 반환값[multiple return values] + 에러 처리[error handling]
+    display: |-
+      	// 다중 반환값[multiple return values] + 에러 처리[error handling]
+      	quotientValue, err := divide(10, 2)
+      	if err != nil {
+      		fmt.Println(err)
+      		return
+      	}
+      	fmt.Println(quotientValue)
+      	// 결과: 5
+    typing: |-
+      	quotientValue, err := divide(10, 2)
+      	if err != nil {
+      		fmt.Println(err)
+      		return
+      	}
+      	fmt.Println(quotientValue)
+  - id: language-go-p01-part-10
+    title: 문자열 처리[string handling]
+    display: |-
+      	// 문자열 처리[string handling]
+      	tagText := "go,api,server"
+      	tagList := strings.Split(tagText, ",")
+      	fmt.Println(tagList)
+      	// 결과: [go api server]
+    typing: |-
+      	tagText := "go,api,server"
+      	tagList := strings.Split(tagText, ",")
+      	fmt.Println(tagList)
+  - id: language-go-p01-part-11
+    title: 포인터[pointer]
+    display: |-
+      	// 포인터[pointer]
+      	countValue := 1
+      	countPtr := &countValue
+      	*countPtr = 2
+      	fmt.Println(countValue)
+      	// 결과: 2
+      }
+    typing: |-
+      	countValue := 1
+      	countPtr := &countValue
+      	*countPtr = 2
+      	fmt.Println(countValue)
+      }

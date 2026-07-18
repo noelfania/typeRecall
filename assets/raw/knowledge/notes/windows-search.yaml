@@ -1,0 +1,53 @@
+id: knowledge-notes-windows-search
+category: knowledge
+kind: note
+topic: windows
+title: Windows 탐색기 검색 치트시트
+source:
+  origin: assets/windows-search-cheatsheet.md
+body: |
+  실사용 기준으로 아래 내용만 알아도 탐색기 검색의 90%는 해결된다.
+
+  ## 속성 검색
+
+  ```text
+  kind:          파일 종류 (docs, pics, videos, music, folders, spreadsheets, presentations)
+  ext:           확장자
+  filename:      파일명
+  author:        작성자
+  title:         제목
+  date:          날짜
+  datemodified:  수정일
+  size:          크기
+  ```
+
+  ## 검색 연산자
+
+  ```text
+  OR             또는
+  NOT            제외
+  "문구"         정확히 일치
+  (공백)         모두 포함(AND)
+  ```
+
+  ## 실전 예제
+
+  | 상황 | 검색어 |
+  |------|--------|
+  | 다운로드 폴더의 PDF 계약서 찾기 | `ext:.pdf 계약` |
+  | 오늘 받은 엑셀 찾기 | `kind:spreadsheets datemodified:today` |
+  | 500MB 이상 동영상 찾기 | `kind:videos size:>500MB` |
+  | 작년에 만든 PPT 찾기 | `kind:presentations date:last year` |
+  | 홍길동이 작성한 워드 문서 | `kind:docs author:홍길동` |
+  | 이름에 backup이 들어간 zip 파일 | `filename:backup ext:.zip` |
+  | 특정 기간 파일 | `date:2026/01/01..2026/01/31` |
+
+  ## 가장 자주 쓰는 검색어 5개
+
+  ```text
+  ext:.pdf
+  kind:docs
+  datemodified:today
+  size:>100MB
+  "정확한 문구"
+  ```

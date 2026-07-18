@@ -1,0 +1,65 @@
+# Grid HTM 01-flip-layout — HTM 대조 보강
+
+id: css-grid-01-flip-layout
+slug: 01-flip-layout
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSS Grid 実務編.htm  # 원본 HTM 삭제됨
+  tocId: webliker-toc-5
+  sectionTitle:
+    ja: "01｜左右反転のレイアウト"
+    ko: "01｜좌우 반전 레이아웃"
+
+title:
+  ko: "좌우 반전 — grid-row / grid-column"
+
+caption:
+  ko: "짝수 행의 이미지·텍스트 열을 뒤집어 지그재그 레이아웃을 만듭니다."
+
+explanation:
+  ko: |
+    입문편에서는 `grid-column: 1 / 2`처럼 시작·끝 라인 번호를 모두 적었습니다.
+    이웃한 라인에 한 칸만 놓을 때는 끝 번호를 생략할 수 있습니다.
+    
+    `grid-row: 2; grid-column: 2;` → 행·열 모두 2~3번 라인 사이(한 칸)에 배치.
+    figcaption: 「이웃한 라인 번호는 생략할 수 있다」
+    
+    다만 이 예시는 생략 기법을 보여 주기 위한 것이고, 실제 좌우 반전은
+    `flex-direction: row-reverse` / `column-reverse`가 더 적합한 경우가 많습니다.
+    열 비가 1:1이 아니거나 행마다 열 폭이 달라지면 Grid 라인 배치가 불리하고,
+    자식 폭에 따라 열이 정해지는 레이아웃은 Flex가 유리합니다.
+
+images:
+  - id: css-grid-012
+    path: assets/raw/knowledge/visual/css-grid/images/012.webp
+    width: 1400
+    height: 739
+    role: demo
+    sectionHintJa: "01｜左右反転のレイアウト"
+  - id: css-grid-013
+    path: assets/raw/knowledge/visual/css-grid/images/013.webp
+    width: 684
+    height: 472
+    role: demo
+    sectionHintJa: "解説｜grid-rowとgrid-columnの省略記法"
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: "이웃 라인에 한 칸만 둘 때 끝 라인 번호를 생략할 수 있습니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: "반전 아이템 배치"
+    content: |
+      .grid__img._reverse {
+        grid-row: 2;
+        grid-column: 2;
+      }
+  - id: unit-caption-2
+    kind: caption
+    title: "실무 메모"
+    content: "진짜 좌우 반전은 flex의 row-reverse가 더 맞는 경우가 많습니다."

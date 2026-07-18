@@ -1,0 +1,46 @@
+# 짝수 번째 — :nth-of-type(even)
+# HTM 대조 보강 — enrich-visual-metas.mjs
+
+id: css-selector-17-even
+slug: 17-even
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSSセレクタのチートシート.htm  # 원본 HTM 삭제됨
+  sectionTitle:
+    ja: "偶数の子要素"
+    ko: "짝수 번째 — :nth-of-type(even)"
+
+title:
+  ko: "짝수 번째 — :nth-of-type(even)"
+
+caption:
+  ko: "2, 4, 6… 짝수 위치 요소를 선택합니다."
+
+explanation:
+  ko: |
+    숫자 자리에 `even`을 쓰면 짝수 번째입니다.
+    
+    `odd`와 짝을 이뤄 교차 스타일을 만듭니다. `2n`과 같습니다.
+
+images:
+  - id: css-selector-015
+    path: assets/raw/knowledge/visual/css-selector/images/015.webp
+    role: demo
+    sectionHintJa: "偶数の子要素"
+    altJa: "CSSセレクタの偶数番号の子要素のサンプル"
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: "even으로 짝수 번째 요소를 선택합니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: "p:nth-of-type(even)"
+    content: |
+      p:nth-of-type(even) {
+        color: #999;
+      }

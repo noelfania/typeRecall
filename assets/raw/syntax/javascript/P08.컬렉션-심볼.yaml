@@ -1,0 +1,291 @@
+id: language-javascript-p08
+category: syntax
+kind: code-snippet
+language: javascript
+track:
+  id: javascript
+  label: JavaScript
+title: P08.컬렉션-심볼
+source:
+  origin: assets/typingSource/Language-JavaScript/P08.컬렉션-심볼.js
+parts:
+  - id: language-javascript-p08-part-1
+    title: Map - 키-값[key-value] 저장[storage] (키 타입[key type] 제한 없음)
+    display: |-
+      /* Map - 키-값[key-value] 저장[storage] (키 타입[key type] 제한 없음) */
+      var mapA = new Map();
+      mapA.set('name', 'kim');
+      mapA.set(42, 'forty-two');
+      mapA.set({ id: 1 }, 'objKey');  // 객체도 키[key] 가능
+      mapA.get('name')    // 'kim'
+      mapA.get(42)        // 'forty-two'
+      mapA.has('name')    // true
+      mapA.size           // 3
+      mapA.delete('name');
+      mapA.size           // 2
+    typing: |-
+      var mapA = new Map();
+      mapA.set('name', 'kim');
+      mapA.set(42, 'forty-two');
+      mapA.set({ id: 1 }, 'objKey');
+      mapA.get('name')
+      mapA.get(42)
+      mapA.has('name')
+      mapA.size
+      mapA.delete('name');
+      mapA.size
+  - id: language-javascript-p08-part-2
+    title: Map 생성 - 배열[array]로 초기화[initialize]
+    display: |-
+      /* Map 생성 - 배열[array]로 초기화[initialize] */
+      var mapB = new Map([['a', 1], ['b', 2], ['c', 3]]);
+      mapB.get('b')   // 2
+    typing: |-
+      var mapB = new Map([['a', 1], ['b', 2], ['c', 3]]);
+      mapB.get('b')
+  - id: language-javascript-p08-part-3
+    title: Map 순회[iteration]
+    display: |-
+      /* Map 순회[iteration] */
+      for (var [k, v] of mapB) {
+        console.log(k, v);
+      }
+      // a 1
+      // b 2
+      // c 3
+
+      [...mapB.keys()]    // ['a', 'b', 'c']
+      [...mapB.values()]  // [1, 2, 3]
+      [...mapB.entries()] // [['a',1], ['b',2], ['c',3]]
+
+      mapB.forEach((v, k) => console.log(k, v));
+      // a 1 / b 2 / c 3
+    typing: |-
+      for (var [k, v] of mapB) {
+        console.log(k, v);
+      }
+
+      [...mapB.keys()]
+      [...mapB.values()]
+      [...mapB.entries()]
+
+      mapB.forEach((v, k) => console.log(k, v));
+  - id: language-javascript-p08-part-4
+    title: Map ↔ Object 변환[conversion]
+    display: |-
+      /* Map ↔ Object 변환[conversion] */
+      var mapFromObj = new Map(Object.entries({ x: 10, y: 20 }));
+      // Map { 'x' => 10, 'y' => 20 }
+
+      Object.fromEntries(mapFromObj)
+      // { x: 10, y: 20 }
+    typing: |-
+      var mapFromObj = new Map(Object.entries({ x: 10, y: 20 }));
+
+      Object.fromEntries(mapFromObj)
+  - id: language-javascript-p08-part-5
+    title: WeakMap - 약한 참조[weak reference] (GC 대상[GC-eligible], 열거 불가[non-enumerable])
+    display: |-
+      /* WeakMap - 약한 참조[weak reference] (GC 대상[GC-eligible], 열거 불가[non-enumerable]) */
+      var weakMapA = new WeakMap();
+      var wmKey = {};
+      weakMapA.set(wmKey, 'private-data');
+      weakMapA.get(wmKey)   // 'private-data'
+      weakMapA.has(wmKey)   // true
+      // wmKey = null; → GC 수거[garbage collection] 시 WeakMap에서도 자동 제거
+    typing: |-
+      var weakMapA = new WeakMap();
+      var wmKey = {};
+      weakMapA.set(wmKey, 'private-data');
+      weakMapA.get(wmKey)
+      weakMapA.has(wmKey)
+  - id: language-javascript-p08-part-6
+    title: Set - 중복 없는 값 컬렉션[unique value collection]
+    display: |-
+      /* Set - 중복 없는 값 컬렉션[unique value collection] */
+      var setA = new Set([1, 2, 3, 2, 1]);  // 중복 자동 제거[automatic deduplication]
+      setA.size    // 3
+      setA.has(2)  // true
+      setA.add(4);
+      setA.delete(1);
+      [...setA]    // [2, 3, 4]
+    typing: |-
+      var setA = new Set([1, 2, 3, 2, 1]);
+      setA.size
+      setA.has(2)
+      setA.add(4);
+      setA.delete(1);
+      [...setA]
+  - id: language-javascript-p08-part-7
+    title: Set 활용 - 배열 중복 제거[array deduplication]
+    display: |-
+      /* Set 활용 - 배열 중복 제거[array deduplication] */
+      var dupArr = [1, 2, 2, 3, 3, 3, 4];
+      var uniqArr = [...new Set(dupArr)];  // [1, 2, 3, 4]
+    typing: |-
+      var dupArr = [1, 2, 2, 3, 3, 3, 4];
+      var uniqArr = [...new Set(dupArr)];
+  - id: language-javascript-p08-part-8
+    title: Set 순회[iteration]
+    display: |-
+      /* Set 순회[iteration] */
+      var setB = new Set(['X', 'Y', 'Z']);
+      for (var item of setB) { console.log(item); }
+      // X / Y / Z
+    typing: |-
+      var setB = new Set(['X', 'Y', 'Z']);
+      for (var item of setB) { console.log(item); }
+  - id: language-javascript-p08-part-9
+    title: Set 집합 연산[set operation]
+    display: |-
+      /* Set 집합 연산[set operation] */
+      var setX = new Set([1, 2, 3, 4]);
+      var setY = new Set([3, 4, 5, 6]);
+
+      var union        = new Set([...setX, ...setY]);                          // 합집합[union]: {1,2,3,4,5,6}
+      var intersection = new Set([...setX].filter(v =>  setY.has(v)));         // 교집합[intersection]: {3,4}
+      var difference   = new Set([...setX].filter(v => !setY.has(v)));         // 차집합[difference]: {1,2}
+
+      [...union]        // [1, 2, 3, 4, 5, 6]
+      [...intersection] // [3, 4]
+      [...difference]   // [1, 2]
+    typing: |-
+      var setX = new Set([1, 2, 3, 4]);
+      var setY = new Set([3, 4, 5, 6]);
+
+      var union        = new Set([...setX, ...setY]);
+      var intersection = new Set([...setX].filter(v =>  setY.has(v)));
+      var difference   = new Set([...setX].filter(v => !setY.has(v)));
+
+      [...union]
+      [...intersection]
+      [...difference]
+  - id: language-javascript-p08-part-10
+    title: WeakSet - 약한 참조[weak reference] 객체 집합
+    display: |-
+      /* WeakSet - 약한 참조[weak reference] 객체 집합 */
+      var weakSetA = new WeakSet();
+      var wsObj = { id: 1 };
+      weakSetA.add(wsObj);
+      weakSetA.has(wsObj)   // true
+      // wsObj = null; → GC 수거[garbage collection] 시 자동 제거
+    typing: |-
+      var weakSetA = new WeakSet();
+      var wsObj = { id: 1 };
+      weakSetA.add(wsObj);
+      weakSetA.has(wsObj)
+  - id: language-javascript-p08-part-11
+    title: Symbol - 고유 식별자[unique identifier]
+    display: |-
+      /* Symbol - 고유 식별자[unique identifier] */
+      var symA = Symbol('description');
+      var symB = Symbol('description');
+      symA === symB            // false (항상 고유[always unique])
+      symA.toString()          // 'Symbol(description)'
+      symA.description         // 'description'
+      typeof symA              // 'symbol'
+    typing: |-
+      var symA = Symbol('description');
+      var symB = Symbol('description');
+      symA === symB
+      symA.toString()
+      symA.description
+      typeof symA
+  - id: language-javascript-p08-part-12
+    title: Symbol을 객체 키[object key]로 사용
+    display: |-
+      /* Symbol을 객체 키[object key]로 사용 */
+      var symId = Symbol('id');
+      var symRole = Symbol('role');
+      var symObj = {
+        [symId]: 42,
+        [symRole]: 'admin',
+        name: 'kim',
+      };
+      symObj[symId]           // 42
+      symObj[symRole]         // 'admin'
+      Object.keys(symObj)     // ['name']  (Symbol은 열거[enumeration] 안됨)
+      Object.getOwnPropertySymbols(symObj)  // [Symbol(id), Symbol(role)]
+    typing: |-
+      var symId = Symbol('id');
+      var symRole = Symbol('role');
+      var symObj = {
+        [symId]: 42,
+        [symRole]: 'admin',
+        name: 'kim',
+      };
+      symObj[symId]
+      symObj[symRole]
+      Object.keys(symObj)
+      Object.getOwnPropertySymbols(symObj)
+  - id: language-javascript-p08-part-13
+    title: Symbol.for - 전역 레지스트리[global registry] (공유[shared] 가능)
+    display: |-
+      /* Symbol.for - 전역 레지스트리[global registry] (공유[shared] 가능) */
+      var globalSym1 = Symbol.for('shared');
+      var globalSym2 = Symbol.for('shared');
+      globalSym1 === globalSym2  // true (같은 키면 동일 심볼)
+      Symbol.keyFor(globalSym1)  // 'shared'
+    typing: |-
+      var globalSym1 = Symbol.for('shared');
+      var globalSym2 = Symbol.for('shared');
+      globalSym1 === globalSym2
+      Symbol.keyFor(globalSym1)
+  - id: language-javascript-p08-part-14
+    title: Well-known Symbol - Symbol.iterator (이터레이터 프로토콜[iterator protocol])
+    display: |-
+      /* Well-known Symbol - Symbol.iterator (이터레이터 프로토콜[iterator protocol]) */
+      var rangeObj = {
+        from: 1, to: 3,
+        [Symbol.iterator]() {
+          var cur = this.from, last = this.to;
+          return {
+            next() {
+              return cur <= last
+                ? { value: cur++, done: false }
+                : { value: undefined, done: true };
+            }
+          };
+        }
+      };
+      [...rangeObj]  // [1, 2, 3]
+    typing: |-
+      var rangeObj = {
+        from: 1, to: 3,
+        [Symbol.iterator]() {
+          var cur = this.from, last = this.to;
+          return {
+            next() {
+              return cur <= last
+                ? { value: cur++, done: false }
+                : { value: undefined, done: true };
+            }
+          };
+        }
+      };
+      [...rangeObj]
+  - id: language-javascript-p08-part-15
+    title: Well-known Symbol - Symbol.toPrimitive (타입 강제 변환[type coercion])
+    display: |-
+      /* Well-known Symbol - Symbol.toPrimitive (타입 강제 변환[type coercion]) */
+      var customNum = {
+        [Symbol.toPrimitive](hint) {
+          if (hint === 'number') return 42;
+          if (hint === 'string') return 'forty-two';
+          return true;  // 기본값[default hint]
+        }
+      };
+      +customNum            // 42
+      `${customNum}`        // 'forty-two'
+      customNum + ''        // 'true'
+    typing: |-
+      var customNum = {
+        [Symbol.toPrimitive](hint) {
+          if (hint === 'number') return 42;
+          if (hint === 'string') return 'forty-two';
+          return true;
+        }
+      };
+      +customNum
+      `${customNum}`
+      customNum + ''

@@ -1,0 +1,61 @@
+# 페이지 내 링크 — :target
+# HTM 대조 보강 — enrich-visual-metas.mjs
+
+id: css-selector-32-target
+slug: 32-target
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSSセレクタのチートシート.htm  # 원본 HTM 삭제됨
+  sectionTitle:
+    ja: "「:target」でページ内リンク先をセレクタに"
+    ko: "페이지 내 링크 — :target"
+
+title:
+  ko: "페이지 내 링크 — :target"
+
+caption:
+  ko: "앵커[anchor]로 이동한 대상 요소에 스타일을 적용합니다."
+
+explanation:
+  ko: |
+    `#modal:target`은 URL 해시가 `#modal`일 때 그 요소를 선택합니다.
+    
+    클릭 전 `display: none`, 클릭 후 `:target`에서 `display: block`처럼
+    모달·탭을 JS 없이 제어하는 패턴에 쓰입니다.
+
+images:
+  - id: css-selector-030
+    path: assets/raw/knowledge/visual/css-selector/images/030.webp
+    role: demo
+    sectionHintJa: "「:target」でページ内リンク先をセレクタに"
+    altJa: "CSSセレクタのtarget属性のサンプル"
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: ":target으로 해시 링크가 가리키는 요소를 선택합니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: "#modal"
+    content: |
+      #modal {
+        display: none;
+        /*クリック前のcss*/;
+      }
+  - id: unit-code-2
+    kind: code-snippet
+    language: css
+    title: "#modal:target"
+    content: |
+      #modal:target {
+        display: block;
+        /*クリック後のcss*/;
+      }
+  - id: unit-caption-2
+    kind: caption
+    title: "보충 설명"
+    content: "모달 표시/숨김을 URL 해시로 제어할 수 있습니다."

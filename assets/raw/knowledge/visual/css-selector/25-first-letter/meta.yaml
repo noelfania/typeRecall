@@ -1,0 +1,46 @@
+# 첫 글자 — ::first-letter
+# HTM 대조 보강 — enrich-visual-metas.mjs
+
+id: css-selector-25-first-letter
+slug: 25-first-letter
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSSセレクタのチートシート.htm  # 원본 HTM 삭제됨
+  sectionTitle:
+    ja: "一文字目"
+    ko: "첫 글자 — ::first-letter"
+
+title:
+  ko: "첫 글자 — ::first-letter"
+
+caption:
+  ko: "블록 요소의 첫 글자에만 스타일을 적용합니다. (블록 전용)"
+
+explanation:
+  ko: |
+    `::first-letter`로 드롭 캡[drop cap]처럼 첫 글자만 강조합니다.
+    
+    ※ 블록 요소에만 적용됩니다. 인라인에는 기대와 다르게 동작할 수 있습니다.
+
+images:
+  - id: css-selector-023
+    path: assets/raw/knowledge/visual/css-selector/images/023.webp
+    role: demo
+    sectionHintJa: "一文字目"
+    altJa: "CSSセレクタの文章の一文字目のサンプル"
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: "::first-letter로 첫 글자만 강조합니다. 블록 요소 전용입니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: "p::first-letter"
+    content: |
+      p::first-letter {
+        color: #999;
+      }

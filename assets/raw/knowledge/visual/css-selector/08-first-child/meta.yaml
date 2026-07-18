@@ -1,0 +1,47 @@
+# 형제 중 첫 자식 — :first-child
+# HTM 대조 보강 — enrich-visual-metas.mjs
+
+id: css-selector-08-first-child
+slug: 08-first-child
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSSセレクタのチートシート.htm  # 원본 HTM 삭제됨
+  sectionTitle:
+    ja: "兄弟要素の最初の要素"
+    ko: "형제 중 첫 자식 — :first-child"
+
+title:
+  ko: "형제 중 첫 자식 — :first-child"
+
+caption:
+  ko: "부모의 첫 번째 자식인 요소를 선택합니다."
+
+explanation:
+  ko: |
+    `p:first-child`는 부모의 첫 자식이면서 p일 때만 맞습니다.
+    
+    앞에 다른 태그가 있으면 첫 자식이 아니므로 선택되지 않습니다.
+    태그 종류만 보면 `:first-of-type`이 더 정확할 수 있습니다.
+
+images:
+  - id: css-selector-006
+    path: assets/raw/knowledge/visual/css-selector/images/006.webp
+    role: demo
+    sectionHintJa: "兄弟要素の最初の要素"
+    altJa: "CSSセレクタの兄弟要素の最初の子要素のサンプル"
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: ":first-child로 부모의 첫 번째 자식을 선택합니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: ".box p:first-child"
+    content: |
+      .box p:first-child {
+        color: #999;
+      }

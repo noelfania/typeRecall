@@ -1,0 +1,73 @@
+# 링크 셀렉터 — :link / :visited / :hover / :active
+# HTM 대조 보강 — enrich-visual-metas.mjs
+
+id: css-selector-03-link-selectors
+slug: 03-link-selectors
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSSセレクタのチートシート.htm  # 원본 HTM 삭제됨
+  sectionTitle:
+    ja: "リンクで使用するセレクタ"
+    ko: "링크 셀렉터 — :link / :visited / :hover / :active"
+
+title:
+  ko: "링크 셀렉터 — :link / :visited / :hover / :active"
+
+caption:
+  ko: "링크 상태별로 다른 스타일을 줄 때 씁니다. LVHA 순서를 기억하세요."
+
+explanation:
+  ko: |
+    앵커 `a`의 상태에 따라 스타일을 나눕니다.
+    
+    - `:link` — 아직 방문하지 않은 링크
+    - `:visited` — 방문한 링크
+    - `:hover` — 마우스 올린 상태
+    - `:active` — 클릭하는 순간
+    
+    특이도[specificity] 때문에 보통 LVHA(`:link` → `:visited` → `:hover` → `:active`) 순으로 씁니다.
+
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: "링크 상태에 따라 색·밑줄 등을 다르게 지정합니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: "미방문 링크"
+    content: |
+      a:link {
+        color: inherit;
+      }
+  - id: unit-code-2
+    kind: code-snippet
+    language: css
+    title: "방문한 링크"
+    content: |
+      a:visited {
+        color: inherit;
+      }
+  - id: unit-code-3
+    kind: code-snippet
+    language: css
+    title: "호버 상태 링크"
+    content: |
+      a:hover {
+        color: inherit;
+      }
+  - id: unit-code-4
+    kind: code-snippet
+    language: css
+    title: "클릭 중 링크"
+    content: |
+      a:active {
+        color: inherit;
+      }
+  - id: unit-caption-2
+    kind: caption
+    title: "보충 설명"
+    content: "작성 순서는 link → visited → hover → active(LVHA)가 안전합니다."

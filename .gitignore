@@ -1,28 +1,25 @@
 # Configs
 .env*
 
-# Keys
-id_*
-
 # Compiled output
-packages/*/.types/
-root/public/assets/
-root/lib/
 dist/
+public/knowledge/
+*.tsbuildinfo
 
 # Other
 node_modules/
-build/
-out/
 tmp/
-sandbox/
 .vscode/
 .idea/
-*.tsbuildinfo
 *.log
 *.bak
 *~
 
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
 # Custom scripts
 deploy.sh
-

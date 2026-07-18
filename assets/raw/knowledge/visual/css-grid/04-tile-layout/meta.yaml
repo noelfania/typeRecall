@@ -1,0 +1,70 @@
+# Grid HTM 04-tile-layout — HTM 대조 보강
+
+id: css-grid-04-tile-layout
+slug: 04-tile-layout
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSS Grid 実務編.htm  # 원본 HTM 삭제됨
+  tocId: webliker-toc-17
+  sectionTitle:
+    ja: "04｜タイル風レイアウト"
+    ko: "04｜타일 레이아웃"
+
+title:
+  ko: "타일 레이아웃 — auto-fit vs auto-fill"
+
+caption:
+  ko: "박스를 타일처럼 깔고, 너비에 따라 4→3→2→1열로 자연스럽게 줄어듭니다."
+
+explanation:
+  ko: |
+    `repeat(auto-fit, minmax(160px, 1fr))`로 타일 열을 만듭니다.
+    
+    `auto-fill`은 빈 트랙을 남겨 최소폭 열이 여러 개처럼 보이고,
+    `auto-fit`은 빈 트랙을 접어 남은 칸을 아이템이 나눠 가집니다.
+    타일처럼 “남는 공간을 꽉 채울” 때는 `auto-fit`이 맞는 경우가 많습니다.
+    
+    중앙 배치는 `place-items: center`(또는 align-items + justify-items)로
+    한 줄에 상하좌우 가운데 정렬할 수 있습니다.
+
+images:
+  - id: css-grid-023
+    path: assets/raw/knowledge/visual/css-grid/images/023.gif
+    width: 1200
+    height: 602
+    role: demo
+    sectionHintJa: "04｜タイル風レイアウト"
+  - id: css-grid-024
+    path: assets/raw/knowledge/visual/css-grid/images/024.webp
+    width: 1200
+    height: 632
+    role: demo
+    sectionHintJa: "解説｜auto-fitとauto-fillの違い"
+  - id: css-grid-025
+    path: assets/raw/knowledge/visual/css-grid/images/025.webp
+    width: 1200
+    height: 604
+    role: demo
+  - id: css-grid-026
+    path: assets/raw/knowledge/visual/css-grid/images/026.webp
+    width: 1200
+    height: 601
+    role: demo
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: "auto-fit은 빈 열을 접어 채우고, auto-fill은 빈 열을 남깁니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: "타일 열 정의"
+    content: "grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));"
+  - id: unit-code-2
+    kind: code-snippet
+    language: css
+    title: "상하좌우 중앙"
+    content: "place-items: center;"

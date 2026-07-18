@@ -1,0 +1,46 @@
+# 3열 가운데 — :nth-of-type(3n-1)
+# HTM 대조 보강 — enrich-visual-metas.mjs
+
+id: css-selector-19-center-column
+slug: 19-center-column
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSSセレクタのチートシート.htm  # 원본 HTM 삭제됨
+  sectionTitle:
+    ja: "3列の真ん中"
+    ko: "3열 가운데 — :nth-of-type(3n-1)"
+
+title:
+  ko: "3열 가운데 — :nth-of-type(3n-1)"
+
+caption:
+  ko: "3열 그리드의 가운데 열(2, 5, 8…)만 선택합니다."
+
+explanation:
+  ko: |
+    `li:nth-of-type(3n-1)`은 2, 5, 8… 위치에 해당합니다.
+    
+    3열 레이아웃에서 가운데 열만 강조할 때 쓰는 패턴입니다.
+
+images:
+  - id: css-selector-017
+    path: assets/raw/knowledge/visual/css-selector/images/017.webp
+    role: demo
+    sectionHintJa: "3列の真ん中"
+    altJa: "CSSセレクタの3列の真ん中だけを指定するサンプル"
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: "3n-1로 3열 레이아웃의 가운데 열만 선택합니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: "li:nth-of-type(3n-1)"
+    content: |
+      li:nth-of-type(3n-1) {
+        color: #999;
+      }

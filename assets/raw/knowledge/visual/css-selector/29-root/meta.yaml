@@ -1,0 +1,61 @@
+# 루트 변수 — :root
+# HTM 대조 보강 — enrich-visual-metas.mjs
+
+id: css-selector-29-root
+slug: 29-root
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSSセレクタのチートシート.htm  # 원본 HTM 삭제됨
+  sectionTitle:
+    ja: "最上位の親要素"
+    ko: "루트 변수 — :root"
+
+title:
+  ko: "루트 변수 — :root"
+
+caption:
+  ko: "문서 최상위에 CSS 변수[custom property]를 선언합니다."
+
+explanation:
+  ko: |
+    `:root`에 `--color-text` 같은 변수를 두고 `var(--color-text)`로 참조합니다.
+    
+    테마 색·간격 토큰을 한곳에서 관리할 때 표준 패턴입니다.
+
+images:
+  - id: css-selector-027
+    path: assets/raw/knowledge/visual/css-selector/images/027.webp
+    role: demo
+    sectionHintJa: "最上位の親要素"
+    altJa: "CSSセレクタの:root要素のサンプル"
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: ":root에 전역 CSS 변수를 선언합니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: ":root"
+    content: |
+      :root {
+        --color-text: #333;
+        --mgn-text: 1.5em;
+      }
+  - id: unit-code-2
+    kind: code-snippet
+    language: css
+    title: "/*呼び出す時*/"
+    content: |
+      /*呼び出す時*/
+      .text {
+        color : var(--color-text);
+        margin : var(--mgn-text);
+      }
+  - id: unit-caption-2
+    kind: caption
+    title: "보충 설명"
+    content: "사용처에서는 var(--변수명)으로 참조합니다."

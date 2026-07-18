@@ -1,0 +1,369 @@
+id: language-javascript-p10-proxy-reflect
+category: syntax
+kind: code-snippet
+language: javascript
+track:
+  id: javascript
+  label: JavaScript
+title: P10.Proxy-Reflect
+source:
+  origin: assets/typingSource/Language-JavaScript/P10.Proxy-Reflect.js
+parts:
+  - id: language-javascript-p10-proxy-reflect-part-1
+    title: "handler : 트랩[trap]을 정의하는 객체 (트랩이 없으면 target에 그대로 전달)"
+    display: |-
+      // handler : 트랩[trap]을 정의하는 객체 (트랩이 없으면 target에 그대로 전달)
+
+      var emptyProxy = new Proxy({ a: 1 }, {});
+      emptyProxy.a   // 1  (트랩 없음 → target에 그대로 전달[passthrough])
+    typing: |-
+      var emptyProxy = new Proxy({ a: 1 }, {});
+      emptyProxy.a
+  - id: language-javascript-p10-proxy-reflect-part-2
+    title: get 트랩[get trap] - 속성 읽기[property access] 가로채기
+    display: |-
+      /* get 트랩[get trap] - 속성 읽기[property access] 가로채기 */
+      var getTarget = { name: 'kim', age: 30 };
+      var getProxy = new Proxy(getTarget, {
+        get(target, prop, receiver) {
+    typing: |-
+      var getTarget = { name: 'kim', age: 30 };
+      var getProxy = new Proxy(getTarget, {
+        get(target, prop, receiver) {
+  - id: language-javascript-p10-proxy-reflect-part-3
+    title: prop이 없으면 기본값[default value] 반환
+    display: |2-
+          // prop이 없으면 기본값[default value] 반환
+          return prop in target ? Reflect.get(target, prop, receiver) : `[${prop} 없음]`;
+        }
+      });
+      getProxy.name    // 'kim'
+      getProxy.job     // '[job 없음]'
+    typing: |2-
+          return prop in target ? Reflect.get(target, prop, receiver) : `[${prop} 없음]`;
+        }
+      });
+      getProxy.name
+      getProxy.job
+  - id: language-javascript-p10-proxy-reflect-part-4
+    title: set 트랩[set trap] - 속성 쓰기[property assignment] 가로채기
+    display: |-
+      /* set 트랩[set trap] - 속성 쓰기[property assignment] 가로채기 */
+      var setProxy = new Proxy({}, {
+        set(target, prop, value, receiver) {
+    typing: |-
+      var setProxy = new Proxy({}, {
+        set(target, prop, value, receiver) {
+  - id: language-javascript-p10-proxy-reflect-part-5
+    title: "유효성 검사[validation]: age는 양수 정수만 허용"
+    display: |2-
+          // 유효성 검사[validation]: age는 양수 정수만 허용
+          if (prop === 'age') {
+            if (typeof value !== 'number' || value <= 0 || !Number.isInteger(value)) {
+              throw new TypeError(`age는 양수 정수[positive integer]여야 합니다`);
+            }
+          }
+          return Reflect.set(target, prop, value, receiver);  // 기본 동작 수행
+        }
+      });
+      setProxy.name = 'lee';   // 'lee'
+      setProxy.age = 25;       // 25
+      // setProxy.age = -1;    // ❌ TypeError 발생
+    typing: |2-
+          if (prop === 'age') {
+            if (typeof value !== 'number' || value <= 0 || !Number.isInteger(value)) {
+              throw new TypeError(`age는 양수 정수[positive integer]여야 합니다`);
+            }
+          }
+          return Reflect.set(target, prop, value, receiver);
+        }
+      });
+      setProxy.name = 'lee';
+      setProxy.age = 25;
+  - id: language-javascript-p10-proxy-reflect-part-6
+    title: has 트랩[has trap] - in 연산자[in operator] 가로채기
+    display: |-
+      /* has 트랩[has trap] - in 연산자[in operator] 가로채기 */
+      var rangeProxy = new Proxy({ min: 1, max: 100 }, {
+        has(target, prop) {
+    typing: |-
+      var rangeProxy = new Proxy({ min: 1, max: 100 }, {
+        has(target, prop) {
+  - id: language-javascript-p10-proxy-reflect-part-7
+    title: 숫자면 범위 안에 있는지 확인[range check]
+    display: |2-
+          // 숫자면 범위 안에 있는지 확인[range check]
+          var num = Number(prop);
+          if (!isNaN(num)) return num >= target.min && num <= target.max;
+          return prop in target;
+        }
+      });
+      50  in rangeProxy   // true  (범위 내)
+      150 in rangeProxy   // false (범위 밖)
+      'min' in rangeProxy // true  (속성 존재)
+    typing: |2-
+          var num = Number(prop);
+          if (!isNaN(num)) return num >= target.min && num <= target.max;
+          return prop in target;
+        }
+      });
+      50  in rangeProxy
+      150 in rangeProxy
+      'min' in rangeProxy
+  - id: language-javascript-p10-proxy-reflect-part-8
+    title: deleteProperty 트랩 - delete 연산자[delete operator] 가로채기
+    display: |-
+      /* deleteProperty 트랩 - delete 연산자[delete operator] 가로채기 */
+      var deleteProxy = new Proxy({ pub: 'public', _priv: 'private' }, {
+        deleteProperty(target, prop) {
+    typing: |-
+      var deleteProxy = new Proxy({ pub: 'public', _priv: 'private' }, {
+        deleteProperty(target, prop) {
+  - id: language-javascript-p10-proxy-reflect-part-9
+    title: _ 로 시작하는 속성은 삭제 금지[deletion forbidden]
+    display: |2-
+          // _ 로 시작하는 속성은 삭제 금지[deletion forbidden]
+          if (prop.startsWith('_')) {
+            throw new Error(`프라이빗 속성[private property] '${prop}'은 삭제 불가`);
+          }
+          return Reflect.deleteProperty(target, prop);
+        }
+      });
+      delete deleteProxy.pub    // true
+    typing: |2-
+          if (prop.startsWith('_')) {
+            throw new Error(`프라이빗 속성[private property] '${prop}'은 삭제 불가`);
+          }
+          return Reflect.deleteProperty(target, prop);
+        }
+      });
+      delete deleteProxy.pub
+  - id: language-javascript-p10-proxy-reflect-part-10
+    title: apply 트랩[apply trap] - 함수 호출[function call] 가로채기
+    display: |-
+      /* apply 트랩[apply trap] - 함수 호출[function call] 가로채기 */
+      function multiply(a, b) { return a * b; }
+
+      var applyProxy = new Proxy(multiply, {
+        apply(target, thisArg, args) {
+          console.log(`호출[call]: multiply(${args})`);  // 로깅[logging]
+          return Reflect.apply(target, thisArg, args);
+        }
+      });
+      applyProxy(3, 4)   // 로그: '호출[call]: multiply(3,4)', 반환: 12
+    typing: |-
+      function multiply(a, b) { return a * b; }
+
+      var applyProxy = new Proxy(multiply, {
+        apply(target, thisArg, args) {
+          console.log(`호출[call]: multiply(${args})`);
+          return Reflect.apply(target, thisArg, args);
+        }
+      });
+      applyProxy(3, 4)
+  - id: language-javascript-p10-proxy-reflect-part-11
+    title: construct 트랩[construct trap] - new 연산자[new operator] 가로채기
+    display: |-
+      /* construct 트랩[construct trap] - new 연산자[new operator] 가로채기 */
+      function Person(name) { this.name = name; }
+
+      var constructProxy = new Proxy(Person, {
+        construct(target, args, newTarget) {
+          console.log(`인스턴스 생성[instantiation]: ${args[0]}`);
+          var instance = Reflect.construct(target, args, newTarget);
+          instance.createdAt = new Date().toISOString().slice(0, 10);
+          return instance;
+        }
+      });
+      var p1 = new constructProxy('kim');
+      p1.name       // 'kim'
+      p1.createdAt  // '2026-03-18'
+    typing: |-
+      function Person(name) { this.name = name; }
+
+      var constructProxy = new Proxy(Person, {
+        construct(target, args, newTarget) {
+          console.log(`인스턴스 생성[instantiation]: ${args[0]}`);
+          var instance = Reflect.construct(target, args, newTarget);
+          instance.createdAt = new Date().toISOString().slice(0, 10);
+          return instance;
+        }
+      });
+      var p1 = new constructProxy('kim');
+      p1.name
+      p1.createdAt
+  - id: language-javascript-p10-proxy-reflect-part-12
+    title: ownKeys 트랩 - Object.keys / for...in 가로채기
+    display: |-
+      /* ownKeys 트랩 - Object.keys / for...in 가로채기 */
+      var ownKeysProxy = new Proxy({ pub: 1, _priv: 2, normal: 3 }, {
+        ownKeys(target) {
+    typing: |-
+      var ownKeysProxy = new Proxy({ pub: 1, _priv: 2, normal: 3 }, {
+        ownKeys(target) {
+  - id: language-javascript-p10-proxy-reflect-part-13
+    title: _ 로 시작하는 키[key] 숨기기
+    display: |2-
+          // _ 로 시작하는 키[key] 숨기기
+          return Reflect.ownKeys(target).filter(k => !k.startsWith('_'));
+        }
+      });
+      Object.keys(ownKeysProxy)    // ['pub', 'normal']  (_priv 숨겨짐)
+    typing: |2-
+          return Reflect.ownKeys(target).filter(k => !k.startsWith('_'));
+        }
+      });
+      Object.keys(ownKeysProxy)
+  - id: language-javascript-p10-proxy-reflect-part-14
+    title: 활용 패턴 1 - 읽기 전용[read-only] 객체
+    display: |-
+      /* 활용 패턴 1 - 읽기 전용[read-only] 객체 */
+      function readOnly(obj) {
+        return new Proxy(obj, {
+          set(target, prop) {
+            throw new Error(`읽기 전용[read-only]: '${prop}' 수정 불가`);
+          },
+          deleteProperty(target, prop) {
+            throw new Error(`읽기 전용[read-only]: '${prop}' 삭제 불가`);
+          }
+        });
+      }
+      var frozenConfig = readOnly({ host: 'localhost', port: 3000 });
+      frozenConfig.host        // 'localhost'
+      // frozenConfig.host = 'x'; // ❌ Error 발생
+    typing: |-
+      function readOnly(obj) {
+        return new Proxy(obj, {
+          set(target, prop) {
+            throw new Error(`읽기 전용[read-only]: '${prop}' 수정 불가`);
+          },
+          deleteProperty(target, prop) {
+            throw new Error(`읽기 전용[read-only]: '${prop}' 삭제 불가`);
+          }
+        });
+      }
+      var frozenConfig = readOnly({ host: 'localhost', port: 3000 });
+      frozenConfig.host
+  - id: language-javascript-p10-proxy-reflect-part-15
+    title: 활용 패턴 2 - 기본값[default value] 제공
+    display: |-
+      /* 활용 패턴 2 - 기본값[default value] 제공 */
+      function withDefaults(target, defaults) {
+        return new Proxy(target, {
+          get(obj, prop) {
+            return prop in obj ? obj[prop] : defaults[prop];
+          }
+        });
+      }
+      var settings = withDefaults({ theme: 'dark' }, { theme: 'light', lang: 'ko', fontSize: 14 });
+      settings.theme     // 'dark'  (직접 설정값 우선)
+      settings.lang      // 'ko'    (기본값[default])
+      settings.fontSize  // 14      (기본값[default])
+    typing: |-
+      function withDefaults(target, defaults) {
+        return new Proxy(target, {
+          get(obj, prop) {
+            return prop in obj ? obj[prop] : defaults[prop];
+          }
+        });
+      }
+      var settings = withDefaults({ theme: 'dark' }, { theme: 'light', lang: 'ko', fontSize: 14 });
+      settings.theme
+      settings.lang
+      settings.fontSize
+  - id: language-javascript-p10-proxy-reflect-part-16
+    title: 활용 패턴 3 - 관찰자[observable] / 반응형[reactive]
+    display: |-
+      /* 활용 패턴 3 - 관찰자[observable] / 반응형[reactive] */
+      function observable(obj, onChange) {
+        return new Proxy(obj, {
+          set(target, prop, value, receiver) {
+            var oldValue = target[prop];
+            var result = Reflect.set(target, prop, value, receiver);
+            if (oldValue !== value) onChange(prop, oldValue, value);  // 변경 알림[notify change]
+            return result;
+          }
+        });
+      }
+      var state = observable({ count: 0 }, (prop, oldVal, newVal) => {
+        console.log(`${prop}: ${oldVal} → ${newVal}`);
+      });
+      state.count = 1;   // 'count: 0 → 1'
+      state.count = 5;   // 'count: 1 → 5'
+    typing: |-
+      function observable(obj, onChange) {
+        return new Proxy(obj, {
+          set(target, prop, value, receiver) {
+            var oldValue = target[prop];
+            var result = Reflect.set(target, prop, value, receiver);
+            if (oldValue !== value) onChange(prop, oldValue, value);
+            return result;
+          }
+        });
+      }
+      var state = observable({ count: 0 }, (prop, oldVal, newVal) => {
+        console.log(`${prop}: ${oldVal} → ${newVal}`);
+      });
+      state.count = 1;
+      state.count = 5;
+  - id: language-javascript-p10-proxy-reflect-part-17
+    title: Proxy 트랩 안에서 target에 대한 기본 동작을 안전하게 수행할 때 사용
+    display: |-
+      // Proxy 트랩 안에서 target에 대한 기본 동작을 안전하게 수행할 때 사용
+
+      var refObj = { x: 1 };
+
+      Reflect.get(refObj, 'x')             // 1     (refObj.x 와 동일)
+      Reflect.set(refObj, 'y', 2)          // true  (refObj.y = 2 와 동일)
+      Reflect.has(refObj, 'x')             // true  ('x' in refObj 와 동일)
+      Reflect.deleteProperty(refObj, 'x')  // true  (delete refObj.x 와 동일)
+      Reflect.ownKeys(refObj)              // ['y']
+    typing: |-
+      var refObj = { x: 1 };
+
+      Reflect.get(refObj, 'x')
+      Reflect.set(refObj, 'y', 2)
+      Reflect.has(refObj, 'x')
+      Reflect.deleteProperty(refObj, 'x')
+      Reflect.ownKeys(refObj)
+  - id: language-javascript-p10-proxy-reflect-part-18
+    title: Reflect.apply - 함수 호출[function invocation]
+    display: |-
+      // Reflect.apply - 함수 호출[function invocation]
+      Reflect.apply(Math.max, null, [1, 2, 3])  // 3
+    typing: Reflect.apply(Math.max, null, [1, 2, 3])
+  - id: language-javascript-p10-proxy-reflect-part-19
+    title: Reflect.construct - new 호출[constructor call]
+    display: |-
+      // Reflect.construct - new 호출[constructor call]
+      function Point(x, y) { this.x = x; this.y = y; }
+      var pt = Reflect.construct(Point, [3, 4]);
+      pt.x  // 3
+      pt.y  // 4
+    typing: |-
+      function Point(x, y) { this.x = x; this.y = y; }
+      var pt = Reflect.construct(Point, [3, 4]);
+      pt.x
+      pt.y
+  - id: language-javascript-p10-proxy-reflect-part-20
+    title: Proxy 취소[revocable proxy]
+    display: |-
+      /* Proxy 취소[revocable proxy] */
+      var revocable = Proxy.revocable({ data: 42 }, {
+        get(target, prop) { return Reflect.get(target, prop); }
+      });
+      var revProxy = revocable.proxy;
+      var revoke = revocable.revoke;
+
+      revProxy.data  // 42
+      revoke();      // 프록시 비활성화[deactivate]
+      // revProxy.data  // ❌ TypeError: Cannot perform 'get' on a proxy that has been revoked
+    typing: |-
+      var revocable = Proxy.revocable({ data: 42 }, {
+        get(target, prop) { return Reflect.get(target, prop); }
+      });
+      var revProxy = revocable.proxy;
+      var revoke = revocable.revoke;
+
+      revProxy.data
+      revoke();

@@ -1,11 +1,98 @@
+/* Protocol Docs Shell 톤: zinc + emerald, 라운드/필 */
+
 :root {
-  font-family: "Noto Sans KR", Arial, sans-serif;
+  color-scheme: light;
+  font-family: "Segoe UI", "Noto Sans KR", ui-sans-serif, system-ui, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color: #111827;
-  background: #f5f7fb;
-  --workspace-gap: 24px;
-  --side-menu-width: 680px;
+  color: #18181b;
+  background: #ffffff;
+
+  --sidebar-width: 16rem;
+  --sidebar-width-xl: 18rem;
+  --toc-width: 15rem;
+  --toc-width-xl: 16.5rem;
+  --header-height: 3.5rem;
+  --control-bar-space: 5.5rem;
+  --accent: #10b981;
+  --accent-soft: rgba(16, 185, 129, 0.12);
+  --border: rgba(24, 24, 27, 0.1);
+  --border-strong: rgba(24, 24, 27, 0.15);
+  --muted: #71717a;
+  --muted-strong: #52525b;
+  --surface: #ffffff;
+  --surface-soft: rgba(24, 24, 27, 0.025);
+  --surface-hover: rgba(24, 24, 27, 0.05);
+  --header-bg: rgba(255, 255, 255, 0.85);
+  --drawer-bg: #ffffff;
+  --drawer-ring: rgba(24, 24, 27, 0.075);
+  --backdrop: rgba(161, 161, 170, 0.2);
+  --code-bg: #18181b;
+  --code-border: rgba(255, 255, 255, 0.075);
+  --code-header: #27272a;
+  --card-inactive-bg: #ffffff;
+  --card-inactive-border: rgba(24, 24, 27, 0.1);
+  --card-inactive-fg: #71717a;
+  --card-inactive-header: rgba(24, 24, 27, 0.03);
+  --card-inactive-progress: #a1a1aa;
+  --btn-primary-bg: #18181b;
+  --btn-primary-fg: #ffffff;
+  --btn-primary-hover: #3f3f46;
+  --btn-ghost-fg: #3f3f46;
+  --btn-ghost-ring: rgba(24, 24, 27, 0.1);
+  --btn-ghost-hover: rgba(24, 24, 27, 0.025);
+  --nav-fg: #52525b;
+  --nav-fg-hover: #18181b;
+  --nav-fg-active: #18181b;
+  --nav-rail: rgba(24, 24, 27, 0.1);
+  --nav-highlight: rgba(24, 24, 27, 0.025);
+  --icon-stroke: #18181b;
+  --control-bar-bg: rgba(255, 255, 255, 0.92);
+  --control-bar-ring: rgba(24, 24, 27, 0.1);
+  --control-bar-shadow: 0 8px 30px rgba(24, 24, 27, 0.08);
+}
+
+html.dark {
+  color-scheme: dark;
+  color: #fafafa;
+  background: #18181b;
+
+  --border: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.15);
+  --muted: #a1a1aa;
+  --muted-strong: #d4d4d8;
+  --surface: #18181b;
+  --surface-soft: rgba(255, 255, 255, 0.025);
+  --surface-hover: rgba(255, 255, 255, 0.05);
+  --header-bg: rgba(24, 24, 27, 0.8);
+  --drawer-bg: #18181b;
+  --drawer-ring: #27272a;
+  --backdrop: rgba(0, 0, 0, 0.4);
+  --code-bg: #09090b;
+  --code-border: rgba(255, 255, 255, 0.08);
+  --code-header: #18181b;
+  --card-inactive-bg: rgba(255, 255, 255, 0.03);
+  --card-inactive-border: rgba(255, 255, 255, 0.08);
+  --card-inactive-fg: #71717a;
+  --card-inactive-header: rgba(255, 255, 255, 0.04);
+  --card-inactive-progress: #52525b;
+  --btn-primary-bg: rgba(52, 211, 153, 0.1);
+  --btn-primary-fg: #34d399;
+  --btn-primary-hover: rgba(52, 211, 153, 0.15);
+  --btn-ghost-fg: #a1a1aa;
+  --btn-ghost-ring: rgba(255, 255, 255, 0.1);
+  --btn-ghost-hover: rgba(255, 255, 255, 0.05);
+  --nav-fg: #a1a1aa;
+  --nav-fg-hover: #ffffff;
+  --nav-fg-active: #ffffff;
+  --nav-rail: rgba(255, 255, 255, 0.05);
+  --nav-highlight: rgba(255, 255, 255, 0.025);
+  --icon-stroke: #ffffff;
+  --accent: #34d399;
+  --accent-soft: rgba(52, 211, 153, 0.12);
+  --control-bar-bg: rgba(24, 24, 27, 0.92);
+  --control-bar-ring: rgba(255, 255, 255, 0.1);
+  --control-bar-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
 }
 
 * {
@@ -14,311 +101,1001 @@
 
 body {
   margin: 0;
+  min-height: 100vh;
+  background: var(--surface);
+  color: inherit;
 }
 
-button,
-textarea {
+button {
   font: inherit;
 }
 
-select {
-  font: inherit;
-}
-
-.page {
-  height: 100vh;
-  padding: 16px;
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
   overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-.panel {
-  width: min(1880px, 100%);
-  height: 100%;
-  margin: 0 auto;
-  padding: 24px;
-  border: 1px solid #dbe3f0;
-  border-radius: 20px;
-  background: #ffffff;
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
-  overflow: hidden;
+/* —— 셸 —— */
+
+.appShell {
+  min-height: 100vh;
 }
 
-.header h1 {
-  margin: 0 0 8px;
-  font-size: 32px;
+@media (min-width: 1024px) {
+  .appShell {
+    margin-left: var(--sidebar-width);
+  }
+
+  .appShell.hasRightToc {
+    margin-right: var(--toc-width);
+  }
 }
 
-.subtitle {
+@media (min-width: 1280px) {
+  .appShell {
+    margin-left: var(--sidebar-width-xl);
+  }
+
+  .appShell.hasRightToc {
+    margin-right: var(--toc-width-xl);
+  }
+}
+
+/* —— 좌측 사이드바 —— */
+
+.sidebar {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .sidebar {
+    display: block;
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 40;
+    width: var(--sidebar-width);
+    overflow-y: auto;
+    border-right: 1px solid var(--border);
+    padding: 1rem 1.25rem 2rem;
+    background: var(--surface);
+  }
+}
+
+@media (min-width: 1280px) {
+  .sidebar {
+    width: var(--sidebar-width-xl);
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+.sidebarBrand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+  color: inherit;
+}
+
+.sidebarBrandMark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 0.5rem;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.sidebarBrandText {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.sidebarNav {
+  margin-top: 2.5rem;
+}
+
+.navGroup {
+  position: relative;
+  margin-top: 1.5rem;
+}
+
+.navGroup:first-child {
+  margin-top: 0;
+}
+
+.navGroupTitle {
   margin: 0;
-  color: #4b5563;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: inherit;
 }
 
-.workspace {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) var(--side-menu-width);
-  height: 100%;
-  min-height: 0;
-  gap: var(--workspace-gap);
-  align-items: stretch;
+.navGroupBody {
+  position: relative;
+  margin-top: 0.75rem;
+  padding-left: 0.5rem;
 }
 
-.mainPanel {
-  min-width: 0;
-  min-height: 0;
+.navRail {
+  position: absolute;
+  inset: 0 auto 0 0.5rem;
+  width: 1px;
+  background: var(--nav-rail);
+}
+
+.navList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-left: 1px solid transparent;
+}
+
+.navItem {
+  position: relative;
+}
+
+.navLink {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem 0.25rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--nav-fg);
+  font-size: 0.875rem;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.navLink:hover {
+  color: var(--nav-fg-hover);
+  background: var(--surface-hover);
+}
+
+.navLink.isActive {
+  color: var(--nav-fg-active);
+  font-weight: 500;
+  background: var(--nav-highlight);
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.navRootList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navMarker {
+  position: absolute;
+  left: 0.5rem;
+  top: 0.35rem;
+  width: 1px;
+  height: 1.5rem;
+  background: var(--accent);
+  border-radius: 1px;
+  z-index: 1;
+}
+
+/* —— 우측 파트 목차 —— */
+
+.rightToc {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .appShell.hasRightToc .rightToc {
+    display: block;
+    position: fixed;
+    inset: 0 0 0 auto;
+    z-index: 40;
+    width: var(--toc-width);
+    overflow-y: auto;
+    border-left: 1px solid var(--border);
+    padding: calc(var(--header-height) + 1rem) 1rem 2rem;
+    background: var(--surface);
+  }
+}
+
+@media (min-width: 1280px) {
+  .appShell.hasRightToc .rightToc {
+    width: var(--toc-width-xl);
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}
+
+.partsTocTitle {
+  margin: 0 0 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.partsTocList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
+  gap: 0.125rem;
 }
 
-.trackBar {
-  display: grid;
-  gap: 12px;
-  margin-top: 24px;
-}
-
-.toolbar {
-  display: none;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-  margin-top: 24px;
-}
-
-.toolbarGroup {
-  display: grid;
-  gap: 10px;
-}
-
-.toolbarLabel {
-  color: #4b5563;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.trackList {
+.partsTocLink {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.trackButton,
-.lessonSelect,
-.nextButton,
-.menuButton {
-  border: 1px solid #cbd5e1;
-  border-radius: 12px;
-  background: #ffffff;
-}
-
-.trackButton {
-  padding: 8px 12px;
-  color: #334155;
-  cursor: pointer;
-}
-
-.trackButton.isActive {
-  border-color: #2563eb;
-  background: #dbeafe;
-  color: #1d4ed8;
-}
-
-.lessonSelect {
   width: 100%;
-  padding: 10px 12px;
-  color: #111827;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.375rem 0.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--nav-fg);
+  font-size: 0.8125rem;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease;
 }
 
-.stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin: 24px 0;
+.partsTocLink:hover {
+  color: var(--nav-fg-hover);
+  background: var(--surface-hover);
 }
 
-.statCard {
-  padding: 16px;
-  border-radius: 14px;
-  background: #eff6ff;
-}
-
-.statLabel {
-  display: block;
-  margin-bottom: 6px;
-  color: #4b5563;
-}
-
-.textPanel,
-.actions,
-.lessonMeta {
-  margin-top: 24px;
-}
-
-.textPanel {
-  flex: 1;
-  display: flex;
-  min-height: 0;
-}
-
-.sideMenu {
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
-  gap: 16px;
-  align-self: stretch;
-  height: 100%;
-  min-height: 0;
-}
-
-.sideSection {
-  height: 100%;
-  min-height: 0;
-  padding: 16px;
-  border: 1px solid #dbe3f0;
-  border-radius: 16px;
-  background: #f8fbff;
-  display: grid;
-  grid-template-rows: auto minmax(0, 1fr);
-  overflow: hidden;
-}
-
-.sideTitle {
-  margin: 0 0 12px;
-  font-size: 14px;
+.partsTocLink.isActive {
+  color: var(--accent);
   font-weight: 600;
-  color: #4b5563;
+  background: var(--accent-soft);
 }
 
-.menuList {
-  display: grid;
-  align-content: start;
-  gap: 8px;
-  height: 100%;
+.partsTocIndex {
+  flex: none;
+  min-width: 1.25rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.partsTocLink.isActive .partsTocIndex {
+  color: var(--accent);
+}
+
+.partsTocLabel {
+  flex: 1;
+  min-width: 0;
+  white-space: normal;
+  line-height: 1.35;
+}
+
+/* 좁은 화면: 선택된 레슨 바로 아래 붙는 인라인 파트 목록 */
+.partsToc.isInline {
+  margin: 0.25rem 0 0.5rem 1rem;
+  padding-left: 0.5rem;
+  border-left: 2px solid var(--accent-soft);
+  max-height: 16rem;
   overflow-y: auto;
 }
 
-.menuButton {
-  width: 100%;
-  height: auto;
-  min-height: unset;
-  padding: 10px 12px;
-  color: #334155;
-  text-align: left;
-  cursor: pointer;
-  align-self: start;
+.partsToc.isInline .partsTocLink {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.78rem;
 }
 
-.menuButton.isActive {
-  border-color: #2563eb;
-  background: #dbeafe;
-  color: #1d4ed8;
+/* —— 헤더 —— */
+
+.topHeader {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  display: flex;
+  height: var(--header-height);
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 1rem;
+  background: var(--header-bg);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+
+@media (min-width: 640px) {
+  .topHeader {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .topHeader {
+    left: var(--sidebar-width);
+    z-index: 30;
+    padding: 0 2rem;
+  }
+
+  .appShell.hasRightToc .topHeader {
+    right: var(--toc-width);
+  }
+}
+
+@media (min-width: 1280px) {
+  .topHeader {
+    left: var(--sidebar-width-xl);
+  }
+
+  .appShell.hasRightToc .topHeader {
+    right: var(--toc-width-xl);
+  }
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: none;
+}
+
+.headerAccuracy {
+  display: none;
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+@media (min-width: 640px) {
+  .headerAccuracy {
+    display: inline;
+  }
+}
+
+.headerAccuracySep {
+  margin: 0 0.35rem;
+  opacity: 0.6;
+}
+
+.headerTitleMobile {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (min-width: 1024px) {
+  .headerTitleMobile {
+    display: none;
+  }
+
+  .iconButton.menuToggle {
+    display: none;
+  }
+}
+
+.headerMeta {
+  display: none;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+@media (min-width: 768px) {
+  .headerMeta {
+    display: block;
+  }
+}
+
+.iconButton {
+  position: relative;
+  display: inline-flex;
+  width: 1.5rem;
+  height: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 0.375rem;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.iconButton:hover {
+  background: var(--surface-hover);
+}
+
+.iconButton svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  stroke: var(--icon-stroke);
+  fill: none;
+}
+
+.themeToggle .sunIcon {
+  display: block;
+}
+
+.themeToggle .moonIcon {
+  display: none;
+}
+
+html.dark .themeToggle .sunIcon {
+  display: none;
+}
+
+html.dark .themeToggle .moonIcon {
+  display: block;
+}
+
+/* —— 모바일 드로어 —— */
+
+.mobileBackdrop {
+  position: fixed;
+  inset: var(--header-height) 0 0;
+  z-index: 45;
+  background: var(--backdrop);
+  backdrop-filter: blur(4px);
+}
+
+@media (min-width: 1024px) {
+  .mobileBackdrop {
+    display: none;
+  }
+}
+
+.mobileDrawer {
+  position: fixed;
+  top: var(--header-height);
+  bottom: 0;
+  left: 0;
+  z-index: 46;
+  width: min(100%, 24rem);
+  overflow-y: auto;
+  padding: 1.5rem 1rem 2.5rem;
+  background: var(--drawer-bg);
+  box-shadow: 0 10px 25px rgba(24, 24, 27, 0.1);
+  border-right: 1px solid var(--drawer-ring);
+}
+
+@media (min-width: 640px) {
+  .mobileDrawer {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mobileDrawer {
+    display: none;
+  }
+}
+
+.mobileDrawer .sidebarNav {
+  margin-top: 0;
+}
+
+/* —— 메인 · 스크롤 스택 —— */
+
+.mainArea {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: calc(var(--header-height) + 1rem) 1rem var(--control-bar-space);
+}
+
+@media (min-width: 640px) {
+  .mainArea {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mainArea {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.mainInner {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+  min-height: 0;
+}
+
+.centerHeader {
+  flex: none;
+}
+
+.lessonBreadcrumb {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.pageHeading {
+  margin: 0;
+}
+
+.scrollStack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  /* 첫/마지막 카드도 세로 중앙 근처에 올 수 있도록 위아래 여백을 둔다 */
+  padding-top: 10vh;
+  padding-bottom: 40vh;
+}
+
+.emptyParts {
+  margin: 2rem 0;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* —— 앱 탭 (언어 / 용어) —— */
+
+.appTabBar {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  border-radius: 0.75rem;
+  background: var(--surface-soft);
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+
+.sidebarTabBar {
+  margin: 0 1rem 1rem;
+}
+
+.headerTabBar {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .sidebarTabBar {
+    display: none;
+  }
+
+  .headerTabBar {
+    display: flex;
+  }
+}
+
+.drawerTabBar {
+  margin: 0 1rem 1rem;
+}
+
+.appTab {
+  flex: 1;
+  border: 0;
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--nav-fg);
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.appTab:hover {
+  color: var(--nav-fg-hover);
+  background: var(--surface-hover);
+}
+
+.appTab.isActive {
+  color: var(--nav-fg-active);
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), inset 0 0 0 1px var(--border);
+}
+
+/* —— 용어 카드 —— */
+
+.lexiconPrompt {
+  margin: 0;
+  padding: 1rem 1.25rem 0.5rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--muted-strong);
+}
+
+.typingCard.isActive .lexiconPrompt {
+  color: #d4d4d8;
+}
+
+.lexiconAnswer {
+  margin-top: 0.25rem;
+}
+
+.lexiconAnswerGhost {
+  color: var(--card-inactive-fg);
   font-weight: 600;
 }
 
-.lessonMeta {
+.lexiconExample {
+  margin: 0;
+  padding: 0.75rem 1.25rem 1.25rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+}
+
+.typingCard.isActive .lexiconExample {
+  color: #a1a1aa;
+  border-top-color: var(--code-border);
+}
+
+/* —— 시각 참고 카드 —— */
+
+.visualFigure {
+  margin: 0;
+  padding: 1rem 1.25rem 0;
+}
+
+.visualImage {
+  display: block;
+  width: 100%;
+  max-height: 280px;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.visualCaption {
+  margin: 0;
+  padding: 0.75rem 1.25rem 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--muted-strong);
+}
+
+.typingCard.isActive .visualCaption {
+  color: #d4d4d8;
+}
+
+.visualExplanation {
+  margin: 0.45rem 0 0;
+  padding: 0.65rem 1.25rem;
   display: grid;
-  gap: 4px;
+  gap: 0.4rem;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.03);
+  border-top: 1px solid var(--code-border, rgba(255, 255, 255, 0.08));
+  border-bottom: 1px solid var(--code-border, rgba(255, 255, 255, 0.08));
 }
 
-.lessonTitle {
-  font-size: 20px;
+.visualExplanation p {
+  margin: 0;
 }
 
-.lessonFile {
-  color: #334155;
-  font-size: 15px;
+.typingCard.isActive .visualExplanation {
+  color: #c4c4cc;
 }
 
-.lessonPath {
-  color: #64748b;
-  font-size: 14px;
+.visualCaptionList {
+  margin: 0.5rem 0 0;
+  padding: 0 1.25rem 0.5rem 2rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--muted);
 }
 
-.textPanel h2 {
-  margin: 0 0 12px;
+.typingCard.isActive .visualCaptionList {
+  color: #a1a1aa;
 }
+
+.visualCode {
+  margin-top: 0.25rem;
+}
+
+/* —— 타이핑 카드 —— */
+
+.typingCard {
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.typingCard.isActive {
+  background: var(--code-bg);
+  box-shadow: 0 0 0 1px var(--code-border);
+}
+
+.typingCard.isInactive {
+  background: var(--card-inactive-bg);
+  box-shadow: 0 0 0 1px var(--card-inactive-border);
+  opacity: 0.72;
+  cursor: pointer;
+}
+
+.typingCard.isInactive:hover {
+  opacity: 0.9;
+}
+
+.typingCardHeader {
+  display: flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 1rem;
+}
+
+.typingCard.isActive .typingCardHeader {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.075);
+  background: var(--code-header);
+}
+
+.typingCard.isInactive .typingCardHeader {
+  border-bottom: 1px solid var(--card-inactive-border);
+  background: var(--card-inactive-header);
+}
+
+.typingCardTag {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  max-width: 9rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+  background: rgba(52, 211, 153, 0.12);
+  color: #34d399;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.typingCard.isInactive .typingCardTag {
+  background: var(--accent-soft);
+  color: var(--accent);
+  opacity: 0.75;
+}
+
+.typingCardTitle {
+  flex: 1;
+  min-width: 0;
+  font-family: ui-monospace, "Cascadia Code", "Consolas", monospace;
+  font-size: 0.75rem;
+}
+
+.typingCard.isActive .typingCardTitle {
+  color: #a1a1aa;
+}
+
+.typingCard.isInactive .typingCardTitle {
+  color: var(--card-inactive-fg);
+}
+
 
 .practiceText {
   margin: 0;
-  width: 100%;
-  min-height: 100%;
-  padding: 20px;
-  border-radius: 16px;
-  background: #0f172a;
+  padding: 1.25rem 1rem;
   white-space: pre-wrap;
   word-break: keep-all;
-  font-size: 22px;
-  line-height: 1.9;
-  overflow-y: auto;
+  font-family: ui-monospace, "Cascadia Code", "Consolas", "Noto Sans KR", monospace;
+  font-size: 1.0625rem;
+  line-height: 1.85;
 }
 
-.page.isCompactLayout {
-  height: auto;
-  min-height: 100vh;
-  overflow: auto;
+@media (min-width: 640px) {
+  .practiceText {
+    padding: 1.5rem;
+    font-size: 1.125rem;
+  }
 }
 
-.page.isCompactLayout .panel {
-  height: auto;
-  min-height: calc(100vh - 32px);
+.typingCard.isActive .practiceText {
+  color: #e4e4e7;
 }
 
-.page.isCompactLayout .workspace {
-  grid-template-columns: 1fr;
-  height: auto;
+.typingCard.isInactive .practiceText {
+  color: var(--card-inactive-fg);
+  pointer-events: none;
 }
 
-.page.isCompactLayout .mainPanel {
-  min-height: auto;
+.typingCard.isInactive .char {
+  color: var(--card-inactive-fg) !important;
 }
 
-.page.isCompactLayout .toolbar {
-  display: grid;
-  grid-template-columns: 1fr;
+/* —— 하단 컨트롤 바 —— */
+
+/* 타이핑 카드를 가리지 않도록 우하단에 컴팩트하게 붙인다 */
+.controlBar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 35;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem 1.25rem 1rem;
+  pointer-events: none;
 }
 
-.page.isCompactLayout .practiceText {
-  min-height: 0;
-  overflow-y: visible;
+@media (min-width: 1024px) {
+  .controlBar {
+    left: var(--sidebar-width);
+  }
+
+  .appShell.hasRightToc .controlBar {
+    right: var(--toc-width);
+  }
 }
 
-.page.isCompactLayout .sideMenu {
-  display: none;
+@media (min-width: 1280px) {
+  .controlBar {
+    left: var(--sidebar-width-xl);
+  }
+
+  .appShell.hasRightToc .controlBar {
+    right: var(--toc-width-xl);
+  }
 }
+
+.controlBarInner {
+  pointer-events: auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 9999px;
+  background: var(--control-bar-bg);
+  box-shadow:
+    var(--control-bar-shadow),
+    inset 0 0 0 1px var(--control-bar-ring);
+  backdrop-filter: blur(10px);
+}
+
+@media (min-width: 640px) {
+  .controlBarInner {
+    gap: 0.75rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+.controlItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.controlHint {
+  font-size: 0.625rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .controlHint {
+    display: none;
+  }
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.375rem 0.875rem;
+  border-radius: 9999px;
+  border: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btnPrimary {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-fg);
+  box-shadow: inset 0 0 0 1px transparent;
+  padding-left: 1.125rem;
+  padding-right: 1.125rem;
+}
+
+html.dark .btnPrimary {
+  box-shadow: inset 0 0 0 1px rgba(52, 211, 153, 0.2);
+}
+
+.btnPrimary:hover {
+  background: var(--btn-primary-hover);
+}
+
+.btnGhost {
+  background: transparent;
+  color: var(--btn-ghost-fg);
+  box-shadow: inset 0 0 0 1px var(--btn-ghost-ring);
+}
+
+.btnGhost:hover {
+  background: var(--btn-ghost-hover);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* —— 하이라이트 —— */
 
 .char {
-  color: var(--char-color, #cbd5e1);
+  color: var(--char-color, #d4d4d8);
 }
 
 .char.isCorrect {
-  color: var(--char-correct-color, #f8fafc);
+  color: var(--char-correct-color, #fafafa);
 }
 
 .char.isWrong {
   color: #fca5a5;
   background: rgba(239, 68, 68, 0.2);
+  border-radius: 0.125rem;
 }
 
 .char.isCurrent {
-  color: #111827;
+  color: #18181b;
   background: #fde68a;
+  border-radius: 0.125rem;
   position: relative;
 }
 
 .char.isGap {
-  color: #cbd5e1;
+  color: #a1a1aa;
 }
 
 .tone-plain {
-  --char-color: #cbd5e1;
-  --char-correct-color: #f8fafc;
+  --char-color: #d4d4d8;
+  --char-correct-color: #fafafa;
 }
 
 .tone-keyword,
 .tone-tag {
-  --char-color: #93c5fd;
-  --char-correct-color: #bfdbfe;
+  --char-color: #7dd3fc;
+  --char-correct-color: #bae6fd;
 }
 
 .tone-string {
-  --char-color: #86efac;
-  --char-correct-color: #bbf7d0;
+  --char-color: #6ee7b7;
+  --char-correct-color: #a7f3d0;
 }
 
 .tone-number {
@@ -344,8 +1121,8 @@ select {
 }
 
 .tone-comment {
-  --char-color: #94a3b8;
-  --char-correct-color: #94a3b8;
+  --char-color: #71717a;
+  --char-correct-color: #71717a;
   font-style: italic;
   opacity: 0.92;
 }
@@ -360,10 +1137,10 @@ select {
   bottom: calc(100% + 4px);
   transform: translateX(-50%);
   padding: 2px 6px;
-  border-radius: 8px;
-  background: #2563eb;
+  border-radius: 9999px;
+  background: var(--accent);
   color: #ffffff;
-  font-size: 14px;
+  font-size: 0.8125rem;
   line-height: 1.2;
   white-space: nowrap;
 }
@@ -376,55 +1153,16 @@ select {
   pointer-events: none;
 }
 
-.resetButton {
-  padding: 10px 16px;
-  border: none;
-  border-radius: 12px;
-  background: #2563eb;
-  color: #ffffff;
-  cursor: pointer;
-}
-
-.resetButton:hover {
-  opacity: 0.92;
-}
-
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.nextButton {
-  padding: 10px 16px;
-  color: #1f2937;
-  cursor: pointer;
-}
-
-.nextButton:disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
-}
-
-@media (max-width: 720px) {
-  .stats {
-    grid-template-columns: 1fr;
+@media (max-width: 640px) {
+  .typingCardHeader {
+    flex-wrap: wrap;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    min-height: auto;
   }
 
-  .panel {
-    padding: 18px;
-  }
 
   .practiceText {
-    font-size: 18px;
-  }
-
-  .charPreview {
-    font-size: 12px;
-  }
-
-  .trackList,
-  .actions {
-    flex-direction: column;
+    font-size: 1rem;
   }
 }

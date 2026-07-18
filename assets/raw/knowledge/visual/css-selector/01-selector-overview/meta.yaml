@@ -1,0 +1,47 @@
+# 셀렉터[selector] 개요
+# HTM 대조 보강 — enrich-visual-metas.mjs
+
+id: css-selector-01-selector-overview
+slug: 01-selector-overview
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSSセレクタのチートシート.htm  # 원본 HTM 삭제됨
+  sectionTitle:
+    ja: "セレクタの概要をおさらい"
+    ko: "셀렉터[selector] 개요"
+
+title:
+  ko: "셀렉터[selector] 개요"
+
+caption:
+  ko: "CSS 규칙은 셀렉터·프로퍼티[property]·값[value] 세 요소로 구성됩니다."
+
+explanation:
+  ko: |
+    CSS 한 줄은 세 부분으로 나뉩니다.
+    
+    ① 셀렉터[selector] — 어떤 요소에 적용할지
+    ② 프로퍼티[property] — 무엇을 바꿀지
+    ③ 값[value] — 어떻게 바꿀지
+    
+    예: `p { color: #999; }` 에서 `p`가 셀렉터, `color`가 프로퍼티, `#999`가 값입니다.
+    이후 섹션은 이 셀렉터 자리의 패턴을 하나씩 연습합니다.
+
+images:
+  - id: css-selector-001
+    path: assets/raw/knowledge/visual/css-selector/images/001.webp
+    role: demo
+    sectionHintJa: "セレクタの概要をおさらい"
+    altJa: "CSSの３つの要素"
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: "CSS 규칙은 셀렉터, 프로퍼티, 값의 세 부분으로 이루어집니다."
+  - id: unit-caption-2
+    kind: caption
+    title: "보충 설명"
+    content: "셀렉터로 대상을 고르고, 프로퍼티와 값으로 스타일을 지정합니다."

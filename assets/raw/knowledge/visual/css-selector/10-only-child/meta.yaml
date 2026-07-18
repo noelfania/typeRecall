@@ -1,0 +1,51 @@
+# 유일한 자식 — :only-child
+# HTM 대조 보강 — enrich-visual-metas.mjs
+
+id: css-selector-10-only-child
+slug: 10-only-child
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSSセレクタのチートシート.htm  # 원본 HTM 삭제됨
+  sectionTitle:
+    ja: "兄弟要素がない要素"
+    ko: "유일한 자식 — :only-child"
+
+title:
+  ko: "유일한 자식 — :only-child"
+
+caption:
+  ko: "형제가 없는 유일한 자식 요소를 선택합니다."
+
+explanation:
+  ko: |
+    지정한 요소에 형제 요소가 없을 때만 적용됩니다.
+    
+    `p:only-child`는 부모 아래 자식이 하나뿐일 때 그 요소가 p이면 선택됩니다.
+    형제가 하나라도 생기면 더 이상 매칭되지 않습니다.
+
+images:
+  - id: css-selector-008
+    path: assets/raw/knowledge/visual/css-selector/images/008.webp
+    role: demo
+    sectionHintJa: "兄弟要素がない要素"
+    altJa: "CSSセレクタ兄弟要素がない要素のサンプル"
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: ":only-child로 형제가 없는 유일한 자식을 선택합니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: "p:only-child"
+    content: |
+      p:only-child {
+        color: #999;
+      }
+  - id: unit-caption-2
+    kind: caption
+    title: "보충 설명"
+    content: "형제가 하나라도 있으면 적용되지 않습니다."

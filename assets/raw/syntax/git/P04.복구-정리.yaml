@@ -1,0 +1,131 @@
+id: language-git-p04
+category: syntax
+kind: command
+language: shell
+track:
+  id: git
+  label: Git
+title: P04.복구-정리
+source:
+  origin: chat-raw 2026-07-04 (it-tools.tech Git cheatsheet + 브랜치 정리 메모)
+  note: 기존 P01·P02와 겹치는 명령(fetch --prune 등)은 제외하고 차이분만 담았다.
+parts:
+  - id: language-git-p04-part-1
+    title: 전역 설정[git config --global]
+    display: |-
+      # 전역 설정[git config --global]
+      git config --global user.name "kim"
+      git config --global user.email "kim@example.com"
+      # 결과: 커밋에 기록될 이름과 이메일 설정
+    typing: |-
+      git config --global user.name "kim"
+      git config --global user.email "kim@example.com"
+  - id: language-git-p04-part-2
+    title: 저장소 시작[git init / clone]
+    display: |-
+      # 저장소 시작[git init / clone]
+      git init
+      git clone https://github.com/user/repo.git
+      # 결과: 새 저장소 생성 또는 원격 저장소 복제
+    typing: |-
+      git init
+      git clone https://github.com/user/repo.git
+  - id: language-git-p04-part-3
+    title: 마지막 커밋에 덧붙이기[git commit --amend]
+    display: |-
+      # 마지막 커밋에 덧붙이기[git commit --amend]
+      git commit --amend --no-edit
+      # 결과: 메시지 수정 없이 방금 변경분을 마지막 커밋에 합침
+
+      git commit --amend
+      # 결과: 마지막 커밋 메시지를 수정
+    typing: |-
+      git commit --amend --no-edit
+
+      git commit --amend
+  - id: language-git-p04-part-4
+    title: 커밋 취소 - 변경 유지[git reset HEAD~1]
+    display: |-
+      # 커밋 취소 - 변경 유지[git reset HEAD~1]
+      git reset HEAD~1
+      # 결과: 최근 커밋 1개를 취소하고 변경 내용은 남김
+
+      git reset HEAD~3
+      # 결과: 최근 커밋 3개를 취소하고 변경 내용은 남김
+    typing: |-
+      git reset HEAD~1
+
+      git reset HEAD~3
+  - id: language-git-p04-part-5
+    title: 커밋 취소 - 변경 폐기[git reset --hard]
+    display: |-
+      # 커밋 취소 - 변경 폐기[git reset --hard]
+      git reset HEAD~1 --hard
+      # 결과: 최근 커밋과 변경 내용을 모두 버림 (복구 어려움, 주의)
+    typing: |-
+      git reset HEAD~1 --hard
+  - id: language-git-p04-part-6
+    title: 원격 상태로 초기화[reset --hard origin]
+    display: |-
+      # 원격 상태로 초기화[reset --hard origin]
+      git fetch origin
+      git reset --hard origin/main
+      # 결과: 로컬 브랜치를 원격 main과 완전히 동일하게 맞춤
+    typing: |-
+      git fetch origin
+      git reset --hard origin/main
+  - id: language-git-p04-part-7
+    title: 브랜치 이름 변경[git branch -m]
+    display: |-
+      # 브랜치 이름 변경[git branch -m]
+      git branch -m master main
+      # 결과: 로컬 master 브랜치를 main으로 이름 변경
+    typing: |-
+      git branch -m master main
+  - id: language-git-p04-part-8
+    title: 로컬 브랜치 강제 삭제[git branch -D]
+    display: |-
+      # 로컬 브랜치 강제 삭제[git branch -D]
+      git branch -D feature/login
+      # 결과: 병합 여부와 상관없이 로컬 브랜치 삭제
+    typing: |-
+      git branch -D feature/login
+  - id: language-git-p04-part-9
+    title: 병합된 브랜치 일괄 삭제[branch --merged]
+    display: |-
+      # 병합된 브랜치 일괄 삭제[branch --merged]
+      git branch --merged | grep -v "\*" | xargs -n 1 git branch -d
+      # 결과: 현재 브랜치에 이미 병합된 로컬 브랜치를 한 번에 정리
+    typing: |-
+      git branch --merged | grep -v "\*" | xargs -n 1 git branch -d
+  - id: language-git-p04-part-10
+    title: 원격 브랜치 삭제[git push -d]
+    display: |-
+      # 원격 브랜치 삭제[git push -d]
+      git push origin -d feature/login
+      # 결과: 원격 저장소의 feature/login 브랜치 삭제
+    typing: |-
+      git push origin -d feature/login
+  - id: language-git-p04-part-11
+    title: 대소문자 구분[core.ignorecase]
+    display: |-
+      # 대소문자 구분[core.ignorecase]
+      git config core.ignorecase false
+      # 결과: 파일명 대소문자 변경을 git이 추적하도록 설정
+    typing: |-
+      git config core.ignorecase false
+  - id: language-git-p04-part-12
+    title: 커밋 스코프 예시[commit scope]
+    display: |-
+      # 커밋 스코프 예시[commit scope]
+      # type(scope): subject 형태로 변경 범위를 명시한다
+      git commit -m "fix(typo): enought -> enough"
+      git commit -m "docs(readme): added demo image"
+      git commit -m "feat(i18n): add Indonesian translations"
+      git commit -m "chore(deps): update dependency typescript to v5.8.2"
+      # 결과: 스코프로 변경 위치가 한눈에 드러나는 커밋 이력
+    typing: |-
+      git commit -m "fix(typo): enought -> enough"
+      git commit -m "docs(readme): added demo image"
+      git commit -m "feat(i18n): add Indonesian translations"
+      git commit -m "chore(deps): update dependency typescript to v5.8.2"

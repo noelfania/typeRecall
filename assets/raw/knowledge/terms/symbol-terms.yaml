@@ -1,0 +1,197 @@
+id: rule-dev-terms-symbol-english
+category: knowledge
+kind: term
+topic: symbol
+title: 기호·영문 명칭
+source:
+  origin: assets/typingSource/Rule-dev-terms/symbol-english.txt
+  note: 원본 txt의 오탈자(ampersade, greater then, didn`t 등)를 정규화하고 카드 형식으로 재구성했다.
+terms:
+  - id: symbol-parentheses
+    section: 괄호류
+    title: 소괄호
+    prompt: ( ) — 함수 인자[argument]를 감싸는 괄호.
+    answer: parentheses
+    example: 함수 호출은 parentheses 안에 인자를 넣는다.
+  - id: symbol-square-brackets
+    section: 괄호류
+    title: 대괄호
+    prompt: "[ ] — 배열 인덱스[index]에 쓰는 괄호."
+    answer: square brackets
+    example: 배열 접근은 square brackets로 한다.
+  - id: symbol-curly-brackets
+    section: 괄호류
+    title: 중괄호
+    prompt: "{ } — 코드 블록[code block]을 감싸는 괄호."
+    answer: curly brackets
+    example: 함수 본문은 curly brackets로 감싼다.
+  - id: symbol-angle-brackets
+    section: 괄호류
+    title: 꺾쇠괄호
+    prompt: < > — 태그[tag]나 제네릭에 쓰는 괄호. 단독으로는 less than / greater than.
+    answer: angle brackets
+    example: HTML 태그는 angle brackets로 쓴다.
+  - id: symbol-hash
+    section: 기호
+    title: 샵
+    prompt: "# — 번호나 해시태그, URL 조각[fragment]에 쓰는 기호."
+    answer: number sign
+    aliases: [pound, hash]
+    example: URL 뒤의 #section을 fragment라고 부른다.
+  - id: symbol-at
+    section: 기호
+    title: 골뱅이
+    prompt: "@ — 이메일 주소나 데코레이터에 쓰는 기호."
+    answer: at sign
+    example: 이메일 주소는 at sign으로 도메인을 구분한다.
+  - id: symbol-percent
+    section: 기호
+    title: 퍼센트
+    prompt: "% — 백분율이나 나머지 연산에 쓰는 기호."
+    answer: percent sign
+    example: 나머지 연산자도 percent sign을 쓴다.
+  - id: symbol-asterisk
+    section: 기호
+    title: 별표
+    prompt: "* — 곱셈이나 전체 선택[wildcard]에 쓰는 기호."
+    answer: asterisk
+    aliases: [star, wildcard]
+    example: 모든 파일을 뜻할 때 asterisk를 wildcard로 쓴다.
+  - id: symbol-caret
+    section: 기호
+    title: 캐럿
+    prompt: "^ — 문자열 시작이나 거듭제곱 표기에 쓰는 기호."
+    answer: caret
+    aliases: [circumflex]
+    example: 정규식에서 caret은 문자열 시작을 뜻한다.
+  - id: symbol-dollar
+    section: 기호
+    title: 달러
+    prompt: "$ — 문자열 끝(정규식)이나 변수 표기에 쓰는 기호."
+    answer: dollar sign
+    example: 정규식에서 dollar sign은 문자열 끝을 뜻한다.
+  - id: symbol-exclamation
+    section: 기호
+    title: 느낌표
+    prompt: "! — 부정[not]에 쓰는 기호."
+    answer: exclamation mark
+    example: 논리 부정은 exclamation mark로 쓴다.
+  - id: symbol-question
+    section: 기호
+    title: 물음표
+    prompt: "? — 삼항 연산자나 옵셔널에 쓰는 기호."
+    answer: question mark
+    example: 옵셔널 체이닝은 question mark와 dot을 붙여 쓴다.
+  - id: symbol-colon
+    section: 기호
+    title: 콜론
+    prompt: ": — 키와 값, 타입 표기를 구분하는 기호."
+    answer: colon
+    example: 객체의 키와 값은 colon으로 구분한다.
+  - id: symbol-semicolon
+    section: 기호
+    title: 세미콜론
+    prompt: "; — 문장 끝을 표시하는 기호."
+    answer: semicolon
+    example: 문장 끝에는 semicolon을 붙인다.
+  - id: symbol-comma
+    section: 기호
+    title: 쉼표
+    prompt: ", — 값이나 요소를 나누는 기호."
+    answer: comma
+    example: 배열 요소는 comma로 나눈다.
+  - id: symbol-period
+    section: 기호
+    title: 마침표
+    prompt: ". — 속성 접근이나 파일 확장자에 쓰는 기호."
+    answer: period
+    aliases: [dot]
+    example: 객체 속성은 dot으로 접근한다.
+  - id: symbol-hyphen
+    section: 기호
+    title: 하이픈
+    prompt: "- — 복합어[compound word]나 CLI 옵션에 쓰는 기호."
+    answer: hyphen
+    aliases: [dash]
+    example: CSS 속성 이름은 hyphen으로 잇는다.
+  - id: symbol-underscore
+    section: 기호
+    title: 밑줄
+    prompt: _ — 변수 이름 연결이나 private 관례에 쓰는 기호.
+    answer: underscore
+    example: _private처럼 underscore로 내부용을 표시하기도 한다.
+  - id: symbol-plus
+    section: 기호
+    title: 더하기
+    prompt: + — 덧셈이나 문자열 연결에 쓰는 기호.
+    answer: plus sign
+    example: 문자열 연결에도 plus sign을 쓴다.
+  - id: symbol-equal
+    section: 기호
+    title: 등호
+    prompt: = — 값 할당[assign]에 쓰는 기호.
+    answer: equal sign
+    example: 변수 할당은 equal sign으로 한다.
+  - id: symbol-backslash
+    section: 기호
+    title: 역슬래시
+    prompt: \ — 윈도우 파일 경로나 이스케이프에 쓰는 기호.
+    answer: backslash
+    example: 윈도우 경로 구분자는 backslash다.
+  - id: symbol-forward-slash
+    section: 기호
+    title: 슬래시
+    prompt: / — 유닉스 파일 경로나 나눗셈에 쓰는 기호.
+    answer: forward slash
+    example: URL 경로는 forward slash로 나눈다.
+  - id: symbol-backtick
+    section: 기호
+    title: 백틱
+    prompt: "` — 템플릿 문자열[template string]을 감싸는 기호."
+    answer: backtick
+    aliases: [grave accent]
+    example: 템플릿 문자열은 backtick으로 감싼다.
+  - id: symbol-double-quote
+    section: 기호
+    title: 큰따옴표
+    prompt: '" — 문자열을 감싸는 두 줄 따옴표.'
+    answer: double quotation marks
+    example: JSON 키는 double quotation marks만 허용한다.
+  - id: symbol-single-quote
+    section: 기호
+    title: 작은따옴표
+    prompt: "' — 문자열을 감싸는 한 줄 따옴표."
+    answer: single quotation marks
+    example: JS에서는 single quotation marks도 흔히 쓴다.
+  - id: symbol-pipe
+    section: 기호
+    title: 파이프
+    prompt: "| — 명령 출력을 다음 명령으로 넘기거나 OR에 쓰는 기호."
+    answer: pipe
+    aliases: [vertical bar]
+    example: 셸에서 pipe로 명령을 연결한다.
+  - id: symbol-ampersand
+    section: 기호
+    title: 앰퍼샌드
+    prompt: "& — AND 연산이나 백그라운드 실행에 쓰는 기호."
+    answer: ampersand
+    aliases: [and sign]
+    example: 논리 AND는 ampersand 두 개로 쓴다.
+  - id: symbol-tilde
+    section: 기호
+    title: 물결
+    prompt: "~ — 홈 디렉터리[home directory]를 뜻하는 기호."
+    answer: tilde
+    example: 셸에서 tilde는 홈 디렉터리를 가리킨다.
+  - id: symbol-delimiter
+    section: 개념
+    title: 구분자
+    prompt: 쉼표, 세미콜론, 탭, 공백, 파이프처럼 데이터를 나누는 문자를 통칭하는 말.
+    answer: delimiter
+    example: CSV의 delimiter는 comma다.
+  - id: symbol-parameter-argument
+    section: 개념
+    title: 매개변수와 인자
+    prompt: 함수 정의에 쓰는 변수 이름과, 호출할 때 실제로 넘기는 값을 구분하는 용어.
+    answer: parameter / argument
+    example: 정의에 있는 것은 parameter, 호출할 때 넘기는 것은 argument다.

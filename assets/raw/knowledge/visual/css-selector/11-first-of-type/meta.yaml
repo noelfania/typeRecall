@@ -1,0 +1,51 @@
+# 타입 기준 첫 요소 — :first-of-type
+# HTM 대조 보강 — enrich-visual-metas.mjs
+
+id: css-selector-11-first-of-type
+slug: 11-first-of-type
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSSセレクタのチートシート.htm  # 원본 HTM 삭제됨
+  sectionTitle:
+    ja: "最初の子要素"
+    ko: "타입 기준 첫 요소 — :first-of-type"
+
+title:
+  ko: "타입 기준 첫 요소 — :first-of-type"
+
+caption:
+  ko: "같은 태그 종류 중 첫 번째 요소를 선택합니다."
+
+explanation:
+  ko: |
+    `p:first-of-type`은 형제 중 첫 번째 p를 고릅니다.
+    
+    앞에 h2 등이 있어도 p만 보면 첫 번째이면 선택됩니다.
+    핀포인트로 특정 태그를 고를 때는 `:first-child`보다 이쪽이 추천됩니다.
+
+images:
+  - id: css-selector-009
+    path: assets/raw/knowledge/visual/css-selector/images/009.webp
+    role: demo
+    sectionHintJa: "最初の子要素"
+    altJa: "CSSセレクタ最初の子要素のサンプル"
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: ":first-of-type으로 해당 타입의 첫 요소를 선택합니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: "p:first-of-type"
+    content: |
+      p:first-of-type {
+        color: #999;
+      }
+  - id: unit-caption-2
+    kind: caption
+    title: "보충 설명"
+    content: "태그 종류가 중요할 때 first-child보다 정확합니다."

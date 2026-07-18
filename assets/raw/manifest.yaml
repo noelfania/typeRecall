@@ -1,0 +1,65 @@
+# 교육자료 raw 인덱스 — 정본은 이 폴더(assets/raw/) 전체
+# 검증: npm run validate:raw
+
+version: 2
+updated: 2026-07-09
+
+categories:
+  syntax:
+    label: 코딩언어문법
+    kinds: [code-snippet, command]
+  knowledge:
+    label: 설계및기술지식
+    kinds: [term, visual, note]
+
+syntax:
+  tracks:
+    - { id: bash-shell, label: Bash / Shell, kind: command, lessons: 3 }   # P01·P02·P03.리눅스-실무(구 리눅스 숙련 커리큘럼)
+    - { id: css, label: CSS, kind: code-snippet, lessons: 2 }              # P01·P02 (시각 자료는 knowledge/visual)
+    - { id: git, label: Git, kind: command, lessons: 4 }                   # P01~P04 (P03=구 temp.md, P04=chat-raw)
+    - { id: go, label: Go, kind: code-snippet, lessons: 2 }
+    - { id: java, label: Java, kind: code-snippet, lessons: 2 }
+    - { id: javascript, label: JavaScript, kind: code-snippet, lessons: 10 }
+    - { id: python, label: Python, kind: code-snippet, lessons: 2 }
+    - { id: regex-for-javascript, label: RegEx for JavaScript, kind: code-snippet, lessons: 2 }
+    - { id: rust, label: Rust, kind: code-snippet, lessons: 2 }
+    - { id: sql, label: SQL, kind: code-snippet, lessons: 2 }
+    - { id: typescript, label: TypeScript, kind: code-snippet, lessons: 2 }
+
+knowledge:
+  terms:
+    - { file: terms/dev-terms.yaml, topic: dev, title: 개발 실무 어휘 }
+    - { file: terms/web-terms.yaml, topic: web, title: 웹 실무 어휘 }
+    - { file: terms/rest-terms.yaml, topic: rest, title: REST 실무 용어 }
+    - { file: terms/sql-terms.yaml, topic: sql, title: SQL·DB 실무 용어 }
+    - { file: terms/symbol-terms.yaml, topic: symbol, title: 기호·영문 명칭 }
+  visual:
+    - { folder: visual/css-grid, title: CSS Grid 실무편, sections: 6 }
+    - { folder: visual/css-selector, title: CSS 셀렉터 치트시트, sections: 32 }
+  notes:
+    - { file: notes/regex-reference.yaml, topic: regex, title: 정규식 참고표 (JavaScript) }
+    - { file: notes/ui-taxonomy.yaml, topic: web, title: UI 부품 분류 트리 }
+    - { file: notes/typescript-maybe.yaml, topic: typescript, title: 중첩 Maybe 타입 다루기 }
+    - { file: notes/http-response.yaml, topic: http, title: HTTP 응답 헤더 읽기 }
+    - { file: notes/windows-search.yaml, topic: windows, title: Windows 탐색기 검색 치트시트 }
+
+inbox:
+  - { file: _inbox/Stitch Prompt Guide.txt, note: "Stitch 프롬프트 작성 가이드 — 교육자료로 볼지 보류" }
+
+# 삭제된 원본 → raw 매핑 기록
+migratedSources:
+  - from: assets/typingSource/Language-*   # 32파일
+    to: syntax/<track>/*.yaml
+    note: 파트 분할 결과 441파트 — 변환 전 생성 산출물과 동일함을 대조 확인 (2026-07-09)
+  - from: assets/typingSource/Language-git/temp.md
+    to: syntax/git/P03.커밋-메시지-규칙.yaml
+  - from: assets/typingSource/Rule-dev-terms, Rule-REST   # md 3파일 109카드
+    to: knowledge/terms/{dev,web,rest}-terms.yaml
+  - from: assets/typingSource/Rule-dev-terms/symbol-english.txt
+    to: knowledge/terms/symbol-terms.yaml
+    note: 오탈자 정규화 후 30카드로 수기 재작성
+  - from: assets/knowledge/reference/visual/
+    to: knowledge/visual/
+    note: meta.yaml 38개 + 이미지 67개 이동, kind를 visual로 통일
+  - from: assets/windows-search-cheatsheet.md
+    to: knowledge/notes/windows-search.yaml

@@ -1,0 +1,26 @@
+id: knowledge-notes-typescript-maybe
+category: knowledge
+kind: note
+topic: typescript
+title: 중첩 Maybe 타입 다루기
+source:
+  origin: chat-raw 2026-07-04
+body: |
+  Maybe<Maybe<Array>> 같은 타입은 "있을 수도 있고, 없을 수도 있고,
+  그 안에도 또 없을 수도 있는 배열"이다.
+  핵심은 null/undefined를 단계적으로 제거하면서 안전하게 접근하는 것.
+
+  TypeScript로 표현하면:
+
+  ```ts
+  type Maybe<T> = T | null | undefined;
+  type Data = Maybe<Maybe<string[]>>;
+  ```
+
+  접근할 때는 옵셔널 체이닝[optional chaining]과 널 병합[nullish coalescing]으로
+  단계마다 없음을 처리한다:
+
+  ```ts
+  const list = data ?? [];
+  const first = data?.[0] ?? 'default';
+  ```

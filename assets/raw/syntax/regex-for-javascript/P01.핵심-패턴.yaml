@@ -1,0 +1,144 @@
+id: language-regex-for-javascript-p01
+category: syntax
+kind: code-snippet
+language: javascript
+track:
+  id: regex-for-javascript
+  label: RegEx for JavaScript
+title: P01.핵심-패턴
+source:
+  origin: assets/typingSource/Language-RegEx-for-Javascript/P01.핵심-패턴.js
+parts:
+  - id: language-regex-for-javascript-p01-part-1
+    title: 리터럴[literal] / 생성자[constructor]
+    display: |-
+      // 리터럴[literal] / 생성자[constructor]
+      /hello/gi.test('Hello World');                 // true
+      new RegExp('hello', 'gi').test('HELLO');       // true
+    typing: |-
+      /hello/gi.test('Hello World');
+      new RegExp('hello', 'gi').test('HELLO');
+  - id: language-regex-for-javascript-p01-part-2
+    title: 플래그[flag]
+    display: |-
+      // 플래그[flag]
+      'aAa'.match(/a/g);   // ['a', 'a']
+      'aAa'.match(/a/gi);  // ['a', 'A', 'a']
+    typing: |-
+      'aAa'.match(/a/g);
+      'aAa'.match(/a/gi);
+  - id: language-regex-for-javascript-p01-part-3
+    title: 앵커[anchor]
+    display: |-
+      // 앵커[anchor]
+      'Hello World'.match(/^Hello/);  // ['Hello']
+      'Hello World'.match(/World$/);  // ['World']
+    typing: |-
+      'Hello World'.match(/^Hello/);
+      'Hello World'.match(/World$/);
+  - id: language-regex-for-javascript-p01-part-4
+    title: 문자 클래스[character class]
+    display: |-
+      // 문자 클래스[character class]
+      'ab12'.match(/\d/g);  // ['1', '2']
+      'ab12'.match(/\w/g);  // ['a', 'b', '1', '2']
+      'a b'.match(/\s/g);   // [' ']
+    typing: |-
+      'ab12'.match(/\d/g);
+      'ab12'.match(/\w/g);
+      'a b'.match(/\s/g);
+  - id: language-regex-for-javascript-p01-part-5
+    title: 문자셋[character set]
+    display: |-
+      // 문자셋[character set]
+      'grey gray'.match(/gr[ae]y/g);   // ['grey', 'gray']
+      'hello123'.match(/[^a-z]+/g);    // ['123']
+    typing: |-
+      'grey gray'.match(/gr[ae]y/g);
+      'hello123'.match(/[^a-z]+/g);
+  - id: language-regex-for-javascript-p01-part-6
+    title: 수량자[quantifier]
+    display: |-
+      // 수량자[quantifier]
+      'gry'.match(/gra*y/);        // ['gry']
+      'gray'.match(/gra?y/);       // ['gray']
+      'graaay'.match(/gra+y/);     // ['graaay']
+      'graay'.match(/gra{2}y/);    // ['graay']
+    typing: |-
+      'gry'.match(/gra*y/);
+      'gray'.match(/gra?y/);
+      'graaay'.match(/gra+y/);
+      'graay'.match(/gra{2}y/);
+  - id: language-regex-for-javascript-p01-part-7
+    title: 그룹[group]
+    display: |-
+      // 그룹[group]
+      '2026-03-18'.match(/(\d{4})-(\d{2})-(\d{2})/);
+      // ['2026-03-18', '2026', '03', '18']
+    typing: "'2026-03-18'.match(/(\\d{4})-(\\d{2})-(\\d{2})/);"
+  - id: language-regex-for-javascript-p01-part-8
+    title: 네임드 그룹[named group]
+    display: |-
+      // 네임드 그룹[named group]
+      var dateMatch = '2026-03-18'.match(/(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/);
+      dateMatch.groups.year;   // '2026'
+      dateMatch.groups.month;  // '03'
+      dateMatch.groups.day;    // '18'
+    typing: |-
+      var dateMatch = '2026-03-18'.match(/(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/);
+      dateMatch.groups.year;
+      dateMatch.groups.month;
+      dateMatch.groups.day;
+  - id: language-regex-for-javascript-p01-part-9
+    title: 전방탐색[lookahead]
+    display: |-
+      // 전방탐색[lookahead]
+      '100px 200em 50px'.match(/\d+(?=px)/g);  // ['100', '50']
+    typing: "'100px 200em 50px'.match(/\\d+(?=px)/g);"
+  - id: language-regex-for-javascript-p01-part-10
+    title: 후방탐색[lookbehind]
+    display: |-
+      // 후방탐색[lookbehind]
+      '$100 £200 $50'.match(/(?<=\$)\d+/g);    // ['100', '50']
+
+      // replace
+      '2026-03-18'.replace(/(\d{4})-(\d{2})-(\d{2})/, '$3/$2/$1');
+      // '18/03/2026'
+    typing: |-
+      '$100 £200 $50'.match(/(?<=\$)\d+/g);
+
+      '2026-03-18'.replace(/(\d{4})-(\d{2})-(\d{2})/, '$3/$2/$1');
+  - id: language-regex-for-javascript-p01-part-11
+    title: 실용 패턴[practical pattern] - 이메일[email]
+    display: |-
+      // 실용 패턴[practical pattern] - 이메일[email]
+      var emailRe = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/;
+      emailRe.test('user@example.com');  // true
+      emailRe.test('invalid@');          // false
+    typing: |-
+      var emailRe = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/;
+      emailRe.test('user@example.com');
+      emailRe.test('invalid@');
+  - id: language-regex-for-javascript-p01-part-12
+    title: 실용 패턴[practical pattern] - 전화번호[phone number]
+    display: |-
+      // 실용 패턴[practical pattern] - 전화번호[phone number]
+      var phoneRe = /\d{2,3}[-.\s]\d{3,4}[-.\s]\d{4}/;
+      phoneRe.test('010-1234-5678'); // true
+    typing: |-
+      var phoneRe = /\d{2,3}[-.\s]\d{3,4}[-.\s]\d{4}/;
+      phoneRe.test('010-1234-5678');
+  - id: language-regex-for-javascript-p01-part-13
+    title: 실용 패턴[practical pattern] - VS Code 여러 줄 함수 찾기
+    display: |-
+      // 실용 패턴[practical pattern] - VS Code 여러 줄 함수 찾기
+      var multiLineSource = `functionAAAAA(asdf,
+        qwer,
+        zxcv)`;
+      multiLineSource.match(/functionAAAAA\([\s\S]*?\)/);
+      // ['functionAAAAA(asdf,\n  qwer,\n  zxcv)']
+    typing: |-
+      var multiLineSource = `functionAAAAA(asdf,
+        qwer,
+        zxcv)`;
+      multiLineSource.match(/functionAAAAA\([\s\S]*?\)/);

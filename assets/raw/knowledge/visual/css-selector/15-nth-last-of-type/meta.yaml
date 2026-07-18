@@ -1,0 +1,46 @@
+# 뒤에서 n번째 — :nth-last-of-type(n)
+# HTM 대조 보강 — enrich-visual-metas.mjs
+
+id: css-selector-15-nth-last-of-type
+slug: 15-nth-last-of-type
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSSセレクタのチートシート.htm  # 원본 HTM 삭제됨
+  sectionTitle:
+    ja: "後ろから〇〇番目の子要素"
+    ko: "뒤에서 n번째 — :nth-last-of-type(n)"
+
+title:
+  ko: "뒤에서 n번째 — :nth-last-of-type(n)"
+
+caption:
+  ko: "끝에서 세어 n번째 요소를 선택합니다. (1)이면 마지막입니다."
+
+explanation:
+  ko: |
+    `p:nth-last-of-type(2)`는 끝에서 두 번째 p를 선택합니다.
+    
+    `(1)`이면 마지막 요소입니다. 앞에서 세는 `:nth-of-type`과 대칭입니다.
+
+images:
+  - id: css-selector-013
+    path: assets/raw/knowledge/visual/css-selector/images/013.webp
+    role: demo
+    sectionHintJa: "後ろから〇〇番目の子要素"
+    altJa: "CSSセレクタの後ろからn番目の子要素のサンプル"
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: ":nth-last-of-type(n)으로 뒤에서 n번째를 선택합니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: "p:nth-last-of-type(2)"
+    content: |
+      p:nth-last-of-type(2) {
+        color: #999;
+      }

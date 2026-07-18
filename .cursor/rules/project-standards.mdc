@@ -12,9 +12,11 @@ alwaysApply: true
 - 화면 상단에 어떤 개발언어나 어떤 실무용어 예문을 타이핑할찌 선택버튼이있다.
 - 선택된 개발언어나, 실무용어 에 대한 예문이 화면 나오고 타이핑 다 타이핑 하면 다음으로 넘어간다.
 
-## [타이핑할자료](typingSource)
-- Language 는 개발언어 예문을 만들기 위한 룰
-- Rule 는 실무용어 예문을 만들기 위한 룰
+## [교육자료](assets/raw)
+- 모든 교육자료의 정본은 `assets/raw/` (구조·스키마: `assets/raw/README.md`)
+- `syntax` 는 코딩언어문법 — 개발언어·명령 타이핑 예문
+- `knowledge` 는 설계및기술지식 — 용어 카드·시각 자료·참고 노트
+- 작성 규칙: `.cursor/rules/knowledge/authoring.md`
 
 디자인 철학
 “멀리서는 단순하게, 가까이서는 정교하게.”
@@ -57,8 +59,6 @@ alwaysApply: true
 
 
 ## [배포](deploy_nas)
-- 본 프로젝트는 DB가 없는 프론트엔드만 있는 프로젝트이기 때문에 nginx로 웹을 띄우고 도커로 실행하는 것을 전제로 한다.
-- 도커를 실행할 환경은 `linux/arm64` NAS이다.
-- 현재 저장소에는 Dockerfile, docker-compose, nginx 설정 파일이 아직 없다.
-- 현재 실제로 가능한 것은 `npm run build`로 `dist/` 정적 산출물을 만드는 단계까지이다.
-- NAS 배포 문서는 현재 가능한 절차와 이후 필요한 파일을 구분해서 관리한다.
+- 본 프로젝트는 DB가 없는 프론트엔드만 있는 프로젝트이며, `npm run build`로 만든 `dist/`를 NAS 정적 호스팅에 배치한다.
+- Docker, nginx 설정 파일은 저장소에 포함하지 않는다.
+- NAS 배포 절차는 `deploy_nas.md`를 따른다.

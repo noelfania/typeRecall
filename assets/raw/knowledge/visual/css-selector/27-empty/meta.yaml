@@ -1,0 +1,46 @@
+# 빈 요소 — :empty
+# HTM 대조 보강 — enrich-visual-metas.mjs
+
+id: css-selector-27-empty
+slug: 27-empty
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSSセレクタのチートシート.htm  # 원본 HTM 삭제됨
+  sectionTitle:
+    ja: "要素が空の時"
+    ko: "빈 요소 — :empty"
+
+title:
+  ko: "빈 요소 — :empty"
+
+caption:
+  ko: "자식·텍스트가 없는 요소를 선택합니다."
+
+explanation:
+  ko: |
+    `ul:empty { display: none; }`처럼 빈 목록을 숨길 때 유용합니다.
+    
+    공백만 있어도 비어 있지 않은 것으로 보는 브라우저가 있으니 주의합니다.
+
+images:
+  - id: css-selector-025
+    path: assets/raw/knowledge/visual/css-selector/images/025.webp
+    role: demo
+    sectionHintJa: "要素が空の時"
+    altJa: "CSSセレクタの中身が空の要素サンプル"
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: ":empty로 내용이 없는 요소를 선택합니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: "ul:empty"
+    content: |
+      ul:empty {
+        display:none;
+      }

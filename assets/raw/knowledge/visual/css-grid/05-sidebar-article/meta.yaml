@@ -1,0 +1,73 @@
+# Grid HTM 05-sidebar-article — HTM 대조 보강
+
+id: css-grid-05-sidebar-article
+slug: 05-sidebar-article
+category: knowledge
+kind: visual
+onScreen: false
+
+source:
+  archivedHtm: CSS Grid 実務編.htm  # 원본 HTM 삭제됨
+  tocId: webliker-toc-21
+  sectionTitle:
+    ja: "05｜サイドバー+記事レイアウト"
+    ko: "05｜사이드바 + 기사 레이아웃"
+
+title:
+  ko: "사이드바 레이아웃 — grid-template-areas"
+
+caption:
+  ko: "영역 이름을 붙여 side·main·sns를 배치하고, 그리드 안에서만 따라다니는 SNS를 만듭니다."
+
+explanation:
+  ko: |
+    `grid-template-areas`로 셀 묶음(영역)에 이름을 붙입니다.
+    
+    `grid-template-areas: "side main sns";`
+    자식에는 `grid-area: side;`처럼 이름만 지정하면 됩니다.
+    라인 번호(`grid-row`/`grid-column`)보다 읽기 쉽고,
+    미디어 쿼리에서 areas 문자열만 바꿔 재배치하기 좋습니다.
+    
+    스크롤 시 SNS만 따라가게 할 때도, 그리드 영역 안에서 sticky/고정 패턴을
+    조합하는 해설이 HTM에 이어집니다.
+
+images:
+  - id: css-grid-028
+    path: assets/raw/knowledge/visual/css-grid/images/028.gif
+    width: 1200
+    height: 602
+    role: demo
+    sectionHintJa: "05｜サイドバー+記事レイアウト"
+  - id: css-grid-031
+    path: assets/raw/knowledge/visual/css-grid/images/031.webp
+    width: 963
+    height: 484
+    role: demo
+  - id: css-grid-033
+    path: assets/raw/knowledge/visual/css-grid/images/033.gif
+    width: 1200
+    height: 602
+    role: demo
+    sectionHintJa: "解説｜グリッドレイアウトの中だけ追尾される要素"
+typingUnits:
+  - id: unit-caption-1
+    kind: caption
+    title: "핵심 요약"
+    content: "grid-template-areas로 레이아웃 영역에 이름을 붙여 배치합니다."
+  - id: unit-code-1
+    kind: code-snippet
+    language: css
+    title: "영역 이름 선언"
+    content: |
+      .post {
+        grid-template-areas: "side main sns";
+        grid-template-columns: 240px 1fr 80px;
+      }
+  - id: unit-code-2
+    kind: code-snippet
+    language: css
+    title: "영역에 아이템 배치"
+    content: |
+      .post__side {
+        grid-area: side;
+      }
