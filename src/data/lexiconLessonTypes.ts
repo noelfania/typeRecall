@@ -1,3 +1,11 @@
+export type ContentLink = {
+  kind: "note" | "lexicon";
+  trackId: string;
+  lessonId: string;
+  partId: string;
+  title: string;
+};
+
 export type LexiconPart = {
   id: string;
   title: string;
@@ -6,6 +14,8 @@ export type LexiconPart = {
   answer: string;
   displayAnswer: string;
   example: string;
+  /** 이 용어가 등장하는 판단 시나리오 */
+  relatedDrills?: ContentLink[];
 };
 
 export type LexiconLesson = {

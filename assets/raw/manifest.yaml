@@ -2,7 +2,7 @@
 # 검증: npm run validate:raw
 
 version: 2
-updated: 2026-07-18
+updated: 2026-09-12
 
 categories:
   syntax:
@@ -23,6 +23,7 @@ syntax:
     - { id: go, label: Go, kind: code-snippet, lessons: 2 }             # P01기본·P02실무 (필수·고빈도만)
     - { id: java, label: Java, kind: code-snippet, lessons: 2 }         # P01기본·P02실무 (필수 문법만)
     - { id: javascript, label: JavaScript, kind: code-snippet, lessons: 10 }
+    - { id: javascript-es6, label: JavaScript ES6, kind: code-snippet, lessons: 3 } # P01기본·P02모듈/클래스/컬렉션·P03심화 (고빈도 ES6만)
     - { id: lodash, label: Lodash, kind: code-snippet, lessons: 2 }         # P01핵심메서드·P02체인변환 (필수·고빈도만)
     - { id: python, label: Python, kind: code-snippet, lessons: 2 }         # P01기본·P02실무 (실무형 패턴만)
     - { id: react, label: React, kind: code-snippet, lessons: 1 }           # P01.immer-상태업데이트 (useState+produce+lodash)
@@ -38,12 +39,12 @@ syntax:
 knowledge:
   terms:
     - { file: terms/dev-terms.yaml, topic: dev, title: 개발 실무 어휘 }
-    - { file: terms/web-terms.yaml, topic: web, title: 웹 실무 어휘 }
+    - { file: terms/web-terms.yaml, topic: web, title: 웹 UX·UI 어휘 }
+    - { file: terms/frontend-terms.yaml, topic: frontend, title: 프론트엔드 개발 어휘 }
     - { file: terms/rest-terms.yaml, topic: rest, title: REST 실무 용어 }
     - { file: terms/sql-terms.yaml, topic: sql, title: SQL·DB 실무 용어 }
     - { file: terms/symbol-terms.yaml, topic: symbol, title: 기호·영문 명칭 }
-    - { file: terms/camera-terms.yaml, topic: camera, title: 촬영 실무 어휘 }
-    - { file: terms/architecture-terms.yaml, topic: architecture, title: 프로젝트 구조·계층 용어 }
+    - { file: terms/architecture-terms.yaml, topic: architecture, title: 아키텍처·구조 용어 }
   visual:
     - { folder: visual/css-grid, title: CSS Grid 실무편, sections: 6 }
     - { folder: visual/css-selector, title: CSS 셀렉터 치트시트, sections: 32 }
@@ -56,10 +57,14 @@ knowledge:
     - { file: notes/frontend-design-process.yaml, topic: frontend, title: 프론트엔드 화면 상세설계 방식 }
     - { file: notes/windows-search.yaml, topic: windows, title: Windows 탐색기 검색 치트시트 }
     - { file: notes/project-structure.yaml, topic: architecture, title: 백엔드·프론트엔드 프로젝트 폴더 구조 }
+    - { file: notes/architecture-boundary-map.yaml, topic: architecture, title: 연동 경계 한눈에 }
+    - { file: notes/architecture-scenarios.yaml, topic: architecture, title: 아키텍처 판단 시나리오 }
 
 inbox:
-  - { file: _inbox/Stitch Prompt Guide.txt, note: "Stitch 프롬프트 작성 가이드 — 교육자료로 볼지 보류" }
-  - { file: _inbox/excel.txt, note: "정본으로 이동 → syntax/excel/P01.조회-조건-함수.yaml" }
+  - { file: _inbox/camera-terms.yaml, note: "촬영 실무 어휘 39장 — FE→아키텍처 초점과 거리 있어 정본에서 보류" }
+  - { file: _inbox/term-dev.txt, note: "빈 파일 — 삭제 후보" }
+  - { file: "_inbox/대표적인 사진촬영기법 용어집.png", note: "camera-terms 원본 이미지" }
+  - { file: "_inbox/대표적인 영상촬영기법 용어집.png", note: "camera-terms 원본 이미지" }
 
 # 삭제된 원본 → raw 매핑 기록
 migratedSources:
@@ -75,7 +80,7 @@ migratedSources:
     note: 오탈자 정규화 후 30카드로 수기 재작성
   - from: chat-raw 사진·영상 촬영 기법 가이드 이미지 (2026-07-18)
     to: knowledge/terms/camera-terms.yaml
-    note: 사진 20 + 영상 19 용어 카드. _inbox에 term-camera 원본 없음.
+    note: 사진 20 + 영상 19 용어 카드. 2026-09-12 _inbox/camera-terms.yaml로 보류 이동.
   - from: assets/knowledge/reference/visual/
     to: knowledge/visual/
     note: meta.yaml 38개 + 이미지 67개 이동, kind를 visual로 통일

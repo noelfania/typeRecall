@@ -1,0 +1,146 @@
+id: language-javascript-es6-p03
+category: syntax
+kind: code-snippet
+language: javascript
+track:
+  id: javascript-es6
+  label: JavaScript ES6
+title: P03.심화-내장API
+source:
+  origin: chat-raw JavaScript ES6 features 2026-07-20
+  note: Symbol·for...of·generator·Object.assign·Array/String/Number 고빈도만. Proxy/Intl 등 스킵.
+parts:
+  - id: language-javascript-es6-p03-part-1
+    title: 심볼[Symbol]
+    display: |-
+      // 심볼[Symbol] — 고유 키[unique key]
+      const id = Symbol("id");
+      const user = { name: "kim", [id]: 7 };
+      console.log(user[id], Symbol("id") === id);
+      // 결과: 7 false
+    typing: |-
+      const id = Symbol("id");
+      const user = { name: "kim", [id]: 7 };
+      console.log(user[id], Symbol("id") === id);
+  - id: language-javascript-es6-p03-part-2
+    title: for...of
+    display: |-
+      // for...of — 이터러블[iterable] 순회
+      for (const ch of "hi") {
+        console.log(ch);
+      }
+      for (const n of [10, 20]) {
+        console.log(n);
+      }
+      // 결과: h i / 10 20
+    typing: |-
+      for (const ch of "hi") {
+        console.log(ch);
+      }
+      for (const n of [10, 20]) {
+        console.log(n);
+      }
+  - id: language-javascript-es6-p03-part-3
+    title: 제너레이터[generator]
+    display: |-
+      // 제너레이터[generator] — function* + yield
+      function* range(start, end) {
+        for (let i = start; i <= end; i++) yield i;
+      }
+      console.log([...range(1, 3)]);
+      // 결과: [1, 2, 3]
+    typing: |-
+      function* range(start, end) {
+        for (let i = start; i <= end; i++) yield i;
+      }
+      console.log([...range(1, 3)]);
+  - id: language-javascript-es6-p03-part-4
+    title: Object.assign
+    display: |-
+      // Object.assign — 얕은 병합[shallow merge]
+      const target = { a: 1 };
+      Object.assign(target, { b: 2 }, { c: 3 });
+      const clone = Object.assign({}, target);
+      console.log(target, clone);
+      // 결과: { a:1, b:2, c:3 } (둘 다 동일 형태)
+    typing: |-
+      const target = { a: 1 };
+      Object.assign(target, { b: 2 }, { c: 3 });
+      const clone = Object.assign({}, target);
+      console.log(target, clone);
+  - id: language-javascript-es6-p03-part-5
+    title: Array.from / find
+    display: |-
+      // Array.from / find
+      const chars = Array.from("ABC");
+      const found = [1, 2, 3, 4].find((n) => n > 2);
+      const idx = [1, 2, 3, 4].findIndex((n) => n > 2);
+      console.log(chars, found, idx);
+      // 결과: ["A","B","C"] 3 2
+    typing: |-
+      const chars = Array.from("ABC");
+      const found = [1, 2, 3, 4].find((n) => n > 2);
+      const idx = [1, 2, 3, 4].findIndex((n) => n > 2);
+      console.log(chars, found, idx);
+  - id: language-javascript-es6-p03-part-6
+    title: Array.includes / fill
+    display: |-
+      // Array.includes / fill
+      console.log([10, 20, 30].includes(20));
+      console.log([0, 0, 0].fill(7));
+      // 결과: true / [7, 7, 7]
+    typing: |-
+      console.log([10, 20, 30].includes(20));
+      console.log([0, 0, 0].fill(7));
+  - id: language-javascript-es6-p03-part-7
+    title: String.includes / startsWith
+    display: |-
+      // String.includes / startsWith / endsWith
+      const text = "Hello, World!";
+      console.log(text.includes("World"), text.startsWith("Hello"), text.endsWith("!"));
+      // 결과: true true true
+    typing: |-
+      const text = "Hello, World!";
+      console.log(text.includes("World"), text.startsWith("Hello"), text.endsWith("!"));
+  - id: language-javascript-es6-p03-part-8
+    title: String.repeat / String.raw
+    display: |-
+      // String.repeat / String.raw — 이스케이프 비처리[raw string]
+      console.log("ab".repeat(3));
+      console.log(String.raw`C:\Users\name`);
+      // 결과: ababab / C:\Users\name
+    typing: |-
+      console.log("ab".repeat(3));
+      console.log(String.raw`C:\Users\name`);
+  - id: language-javascript-es6-p03-part-9
+    title: Number.isNaN / isFinite
+    display: |-
+      // Number.isNaN / isFinite — 전역 isNaN보다 안전
+      console.log(Number.isNaN(NaN), Number.isNaN("NaN"));
+      console.log(Number.isFinite(10), Number.isFinite(Infinity));
+      // 결과: true false / true false
+    typing: |-
+      console.log(Number.isNaN(NaN), Number.isNaN("NaN"));
+      console.log(Number.isFinite(10), Number.isFinite(Infinity));
+  - id: language-javascript-es6-p03-part-10
+    title: 2진수·8진수 리터럴[binary octal]
+    display: |-
+      // 2진수·8진수 리터럴[binary / octal literal]
+      console.log(0b1010, 0o755);
+      // 결과: 10 493
+    typing: |-
+      console.log(0b1010, 0o755);
+  - id: language-javascript-es6-p03-part-11
+    title: Object.keys / entries
+    display: |-
+      // Object.keys / values / entries
+      const sample = { a: 1, b: 2 };
+      console.log(Object.keys(sample));
+      console.log(Object.values(sample));
+      console.log(Object.entries(sample));
+      // 결과: ["a","b"] / [1,2] / [["a",1],["b",2]]
+    typing: |-
+      const sample = { a: 1, b: 2 };
+      console.log(Object.keys(sample));
+      console.log(Object.values(sample));
+      console.log(Object.entries(sample));

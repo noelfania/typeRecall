@@ -1,0 +1,57 @@
+---
+description: knowledge(terms/notes/visual) 교육자료 작성·큐레이션 규칙
+globs: assets/raw/knowledge/**/*,assets/raw/manifest.yaml,assets/raw/README.md
+alwaysApply: false
+---
+
+# 지식 자료 작성 규칙
+
+정본: `assets/raw/`. 스키마·인덱스는 `assets/raw/README.md`, `assets/raw/manifest.yaml`.
+
+## 기본
+
+- category `knowledge` — kind: `term` | `visual` | `note`
+- 수정은 raw YAML만. 앱은 `npm run validate:raw` → `npm run generate:lessons`
+- 애매한 자료는 `assets/raw/_inbox/` + manifest `inbox:`
+- UX/UI 부품 명칭과 프론트 **개발** 용어는 파일을 섞지 않는다  
+  (`web-terms` vs `frontend-terms`)
+
+## 학습 3층
+
+1. **어휘** `terms/` — prompt + 짧은 영어 answer + example. 타이핑 대상.
+2. **맥락** `notes/` — 언제·어디에 쓰는지. 비교 표·폴더 구조·설계 프로세스.
+3. **판단** `notes` + `scenarios[]` — 증상 → 후보 → 기본안·탈락 조건.
+
+연결: `relatedTermIds` / `relatedScenarioIds` / `relatedNoteIds`는 **존재하는 id만**.  
+validate가 깨진 링크를 막는다. 생성기가 용어↔시나리오 역링크를 붙인다.
+
+## term 카드
+
+- 고빈도만. 주 1회 회의·설계에서 안 나오면 넣지 않는다.
+- 시나리오 options에 나온 용어를 우선하고, 회의 고빈도면 시나리오 없이도 보강 가능.
+- `한글[영어]` in example. answer는 타이핑할 영어(또는 관례 약어).
+- 이미 `dev`/`rest` 등에 있으면 architecture에 중복하지 않는다.
+
+## note · 시나리오
+
+시나리오 최소 필드: `id`, `title`, `context`, `symptom`, `options[{id,label,whenPreferred,whenAvoid}]`, `defaultPick`, `rationale`, `relatedTermIds[]`
+
+작성 규칙:
+
+- 정답 암기 금지. 기본안 + 탈락 조건.
+- `context`/`symptom`은 **화면 상세·OpenAPI·Figma Empty/Loading** 등 설계 산출물 톤.
+- 헷갈리는 패턴 묶음 → 비교 노트 한 장 우선 (예: `architecture-boundary-map.yaml`).
+- 모든 용어에 시나리오를 억지로 붙이지 않는다 (진단·기법성 용어는 카드만으로 충분할 수 있음).
+
+## 콘텐츠 루프
+
+1. 실무에서 막힌 판단을 한 문장으로 적는다.
+2. 시나리오 1장 추가 (후보 2~3).
+3. 없는 고빈도 용어만 terms에 추가.
+4. `validate:raw` → `generate:lessons`.
+5. 불필요 카드·시나리오는 삭제 또는 `_inbox/`.
+
+## 제품 UI와의 관계
+
+- 판단 드릴은 notes 탭에서 scenarios를 재사용한다. 스키마를 바꾸기 전에 UI를 키우지 않는다.
+- 자유 서술 채점보다 짧은 영어 용어 타이핑·옵션 고르기가 사이트 결에 맞다.

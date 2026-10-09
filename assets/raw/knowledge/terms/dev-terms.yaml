@@ -436,12 +436,6 @@ terms:
     aliases:
       - Stack
     example: 우리 tech stack은 React, Node, Postgres다.
-  - id: dev-extra-serverless
-    section: 배포 / 환경
-    title: 서버리스
-    prompt: 서버를 직접 관리하지 않고 함수나 서비스 단위로 실행 환경을 빌려 쓰는 방식.
-    answer: Serverless
-    example: 이 배치 작업은 serverless 함수로 옮기면 관리가 쉽다.
   - id: dev-extra-staging
     section: 배포 / 환경
     title: 스테이징 환경
@@ -462,15 +456,3 @@ terms:
     prompt: 빌드된 HTML·JS·CSS 파일만 올려 서비스하는 호스팅 방식. GitHub Pages가 대표적이다.
     answer: Static Hosting
     example: 프론트만 있는 앱이라 GitHub Pages 같은 static hosting이면 충분하다.
-  - id: dev-extra-headless-ui
-    section: 프론트엔드
-    title: 헤드리스 UI
-    prompt: 동작과 접근성 로직만 제공하고 스타일은 사용자가 입히는 UI 라이브러리 방식.
-    answer: Headless UI
-    example: 디자인 자유도가 필요해서 headless UI 컴포넌트를 골랐다.
-  - id: dev-extra-semantic
-    section: 프론트엔드
-    title: 시맨틱
-    prompt: 이름이나 태그가 겉모습이 아니라 의미를 드러내도록 작성하는 방식. 시맨틱 CSS, 시맨틱 태그처럼 쓴다.
-    answer: Semantic
-    example: 클래스 이름은 semantic하게 역할 기준으로 짓자.

@@ -1,0 +1,54 @@
+id: knowledge-notes-architecture-boundary-map
+category: knowledge
+kind: note
+topic: architecture
+title: 연동 경계 한눈에 (BFF·Gateway·조회)
+source:
+  origin: architecture training refinement 2026-07-24
+  note: |
+    헷갈리는 묶음만 표로 고정. 판단 연습은 architecture-scenarios.yaml.
+    용어 카드는 terms/architecture-terms.yaml.
+scope: |
+  ✅ BFF vs API Gateway vs Nested Query vs Schema Federation
+  ✅ 언제 쓰고 / 어디 두지 / 화면 설계와 어떻게 맞는지
+  ❌ CQRS·Saga·자격증 전 범위
+relatedScenarioIds:
+  - arch-sc-waterfall-bundle
+  - arch-sc-bff-vs-gateway
+  - arch-sc-federation
+relatedTermIds:
+  - arch-bff
+  - arch-api-gateway
+  - arch-nested-query
+  - arch-schema-federation
+relatedNoteIds:
+  - knowledge-notes-architecture-scenarios
+
+body: |
+  ## 한 줄 지도
+
+  화면 명세가 갈라지면 **BFF**, 횡단(인증·라우팅·제한)은 **API Gateway**,
+  한 백엔드 안에서 연관을 묶으면 **Nested Query**,
+  팀·스키마가 갈라진 그래프를 합치면 **Schema Federation**.
+
+  ## 비교표
+
+  | 패턴 | 한 줄 | 주로 두는 곳 | 화면 상세설계와 |
+  |------|-------|--------------|-----------------|
+  | BFF | 클라이언트별 응답 조립 | 웹/앱 전용 백엔드 | 화면 DTO·섹션 단위로 맞춤 |
+  | API Gateway | 공통 진입·횡단 관심사 | 서비스들 앞단 | 조립보다 라우팅·인증·제한 |
+  | Nested Query | 한 질의로 연관 데이터 | 단일 API/DB 경계 안 | OpenAPI 한 엔드포인트·중첩 필드 |
+  | Schema Federation | 분산 스키마 → 연합 그래프 | GraphQL 게이트웨이 | 섹션 소유 팀과 스키마가 갈라질 때 |
+
+  ## 고를 때 질문
+
+  1. 웹·앱 **화면 명세**가 다른가? → 다르면 BFF 후보
+  2. 하고 싶은 일이 **조립**인가 **통과·보안**인가? → 후자면 Gateway
+  3. 데이터가 **한 배포 단위** 안에 있는가? → Nested Query 가능
+  4. 스키마·팀이 **이미 갈라져** 한 그래프처럼 치고 싶은가? → Federation (아니면 REST+BFF가 싸움)
+
+  ## 같이 보면
+
+  - 판단 시나리오: `architecture-scenarios.yaml` (워터폴·BFF vs Gateway·Federation)
+  - 폴더·계층: `project-structure.yaml`
+  - 화면 설계 층: `frontend-design-process.yaml` (Figma·OpenAPI·상태)

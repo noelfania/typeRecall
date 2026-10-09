@@ -21,9 +21,7 @@ test.describe("데스크톱 레이아웃 시각 확인", () => {
     await expect(page.locator(".menuToggle")).toBeHidden();
     await expect(page.locator(".typingCard.isActive")).toBeVisible();
     await expect(page.locator(".navMarker")).toBeVisible();
-    await expect(
-      page.locator(".typingCard.isActive .typingCardProgress"),
-    ).toHaveText(/진행률:\s*\d+\/\d+/);
+    await expect(page.getByLabel("정확도")).toContainText(/\d+\/\d+/);
 
     const radii = await page.evaluate(() => {
       const selectors = [

@@ -1,0 +1,14 @@
+---
+description: GitHub Pages 배포 요약 규칙
+globs: .github/workflows/deploy-pages.yml,vite.config.ts,deploy_github_pages.md
+alwaysApply: false
+---
+
+# 배포
+
+상세: `.cursor/rules/deploy_github_pages.md`
+
+1. `npm run build` → `dist/`를 GitHub Pages로 올린다.
+2. `main` push 시 `.github/workflows/deploy-pages.yml`이 배포한다.
+3. Docker·nginx·NAS 절차는 쓰지 않는다. DB 없는 정적 `dist/`만 올린다.
+4. Pages 하위 경로: Vite `base` = `/typeRecall/` (로컬 `serve`는 `/`).

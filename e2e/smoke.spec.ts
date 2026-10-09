@@ -34,9 +34,7 @@ test.describe("개발 예문 타이핑 연습", () => {
     await expect(page.getByLabel("현재 레슨 파트")).toBeVisible();
     await expect(page.getByLabel("원문")).toBeVisible();
     await expect(page.locator(".typingCard.isActive")).toBeVisible();
-    await expect(
-      page.locator(".typingCard.isActive .typingCardProgress"),
-    ).toHaveText(/진행률:\s*1\/\d+/);
+    await expect(page.getByLabel("정확도")).toContainText(/\d+\/\d+/);
     await expect(page.getByRole("button", { name: "다시 시작" })).toBeVisible();
     await expect(page.getByRole("button", { name: "이전 파트" })).toBeVisible();
     await expect(
@@ -98,22 +96,18 @@ test.describe("개발 예문 타이핑 연습", () => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto("/");
 
-    const activeProgress = page.locator(
-      ".typingCard.isActive .typingCardProgress",
-    );
-    await expect(activeProgress).toHaveText(/진행률:\s*1\/\d+/);
+    const tocLinks = page.locator(".rightToc .partsTocLink");
+    await expect(tocLinks.first()).toHaveClass(/isActive/);
 
-    await page.locator(".rightToc .partsTocLink").nth(1).click();
-    await expect(activeProgress).toHaveText(/진행률:\s*2\/\d+/);
-    await expect(page.locator(".rightToc .partsTocLink.isActive")).toContainText(
-      /.+/,
-    );
+    await tocLinks.nth(1).click();
+    await expect(tocLinks.nth(1)).toHaveClass(/isActive/);
+    await expect(page.locator(".typingCard.isActive")).toBeVisible();
 
     await page.getByRole("button", { name: "다음 파트" }).click();
-    await expect(activeProgress).toHaveText(/진행률:\s*3\/\d+/);
+    await expect(tocLinks.nth(2)).toHaveClass(/isActive/);
 
     await page.getByRole("button", { name: "이전 파트" }).click();
-    await expect(activeProgress).toHaveText(/진행률:\s*2\/\d+/);
+    await expect(tocLinks.nth(1)).toHaveClass(/isActive/);
   });
 
   test("테마 토글로 다크 모드를 전환한다", async ({ page }) => {
@@ -174,7 +168,13 @@ test.describe("개발 예문 타이핑 연습", () => {
 
     await expect(page.getByLabel("시각 참고")).toBeVisible();
     await expect(page.locator(".visualCard.isActive")).toBeVisible();
-    await expect(page.locator(".visualCard.isActive .visualImage")).toBeVisible();
+
+    const visualImage = page.locator(".visualCard.isActive .visualImage");
+    await expect(visualImage).toBeVisible();
+    await expect
+      .poll(async () => visualImage.evaluate((img: HTMLImageElement) => img.naturalWidth))
+      .toBeGreaterThan(0);
+
     await expect(page.locator(".visualCard.isActive .visualCaption")).toBeVisible();
     await expect(page.locator(".visualCard.isActive .visualCode")).toBeVisible();
 

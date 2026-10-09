@@ -1,4 +1,4 @@
-// assets/raw 정합성 검증: 필수 필드, id 중복, 이미지 경로 존재 여부
+// assets/raw 정합성 검증: 필수 필드, id 중복, 이미지 경로, 시나리오→용어 링크
 import { readdir, readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
@@ -77,9 +77,62 @@ function validateTerms(file, doc) {
   stats.terms += doc.terms.length;
 }
 
+function validateNoteScenarios(file, doc, termIds) {
+  if (!Array.isArray(doc.scenarios)) return;
+  for (const scenario of doc.scenarios) {
+    checkId(file, scenario.id);
+    if (!scenario.title) fail(file, `scenario title 누락: ${scenario.id}`);
+    if (!scenario.context) fail(file, `scenario context 누락: ${scenario.id}`);
+    if (!scenario.symptom) fail(file, `scenario symptom 누락: ${scenario.id}`);
+    if (!scenario.defaultPick) fail(file, `scenario defaultPick 누락: ${scenario.id}`);
+    if (!scenario.rationale) fail(file, `scenario rationale 누락: ${scenario.id}`);
+    if (!Array.isArray(scenario.options) || scenario.options.length === 0) {
+      fail(file, `scenario options 비어 있음: ${scenario.id}`);
+      continue;
+    }
+    const optionIds = new Set();
+    for (const option of scenario.options) {
+      if (!option.id || !option.label) {
+        fail(file, `scenario option id/label 누락: ${scenario.id}`);
+      }
+      if (optionIds.has(option.id)) {
+        fail(file, `scenario option id 중복: ${scenario.id}/${option.id}`);
+      }
+      optionIds.add(option.id);
+      if (!option.whenPreferred) fail(file, `whenPreferred 누락: ${scenario.id}/${option.id}`);
+      if (!option.whenAvoid) fail(file, `whenAvoid 누락: ${scenario.id}/${option.id}`);
+    }
+    if (!optionIds.has(scenario.defaultPick)) {
+      fail(file, `defaultPick이 options에 없음: ${scenario.id}/${scenario.defaultPick}`);
+    }
+    for (const termId of scenario.relatedTermIds ?? []) {
+      if (!termIds.has(termId)) {
+        fail(file, `relatedTermIds 없음: ${scenario.id} → ${termId}`);
+      }
+    }
+  }
+}
+
+function validateNoteCrossRefs(file, doc, termIds, scenarioIds, noteIds) {
+  for (const termId of doc.relatedTermIds ?? []) {
+    if (!termIds.has(termId)) {
+      fail(file, `relatedTermIds 없음: ${doc.id} → ${termId}`);
+    }
+  }
+  for (const scenarioId of doc.relatedScenarioIds ?? []) {
+    if (!scenarioIds.has(scenarioId)) {
+      fail(file, `relatedScenarioIds 없음: ${doc.id} → ${scenarioId}`);
+    }
+  }
+  for (const noteId of doc.relatedNoteIds ?? []) {
+    if (!noteIds.has(noteId)) {
+      fail(file, `relatedNoteIds 없음: ${doc.id} → ${noteId}`);
+    }
+  }
+}
+
 function validateVisual(file, doc) {
   if (!doc.title?.ko) fail(file, 'title.ko 누락');
-  // 텍스트 전용 섹션도 있으므로 images는 선택 — 있으면 경로만 검증한다
   for (const image of doc.images ?? []) {
     const imagePath = path.join(rootDir, image.path ?? '');
     if (!image.path || !existsSync(imagePath)) {
@@ -91,6 +144,9 @@ function validateVisual(file, doc) {
 
 async function main() {
   const files = await collectYamlFiles(rawDir);
+  /** @type {{ file: string, doc: object }[]} */
+  const parsed = [];
+
   for (const file of files) {
     let doc;
     try {
@@ -103,9 +159,29 @@ async function main() {
       fail(file, '문서가 비어 있음');
       continue;
     }
+    parsed.push({ file, doc });
+  }
+
+  const termIds = new Set();
+  const scenarioIds = new Set();
+  const noteIds = new Set();
+  for (const { doc } of parsed) {
+    if (doc.kind === 'term') {
+      for (const term of doc.terms ?? []) {
+        if (term?.id) termIds.add(term.id);
+      }
+    }
+    if (doc.kind === 'note') {
+      if (doc.id) noteIds.add(doc.id);
+      for (const scenario of doc.scenarios ?? []) {
+        if (scenario?.id) scenarioIds.add(scenario.id);
+      }
+    }
+  }
+
+  for (const { file, doc } of parsed) {
     stats.files += 1;
 
-    // visual meta는 title이 { ko } 객체라 envelope 검증을 분리한다
     if (doc.kind === 'visual') {
       checkId(file, doc.id);
       validateVisual(file, doc);
@@ -115,7 +191,11 @@ async function main() {
     validateEnvelope(file, doc);
     if (doc.kind === 'code-snippet' || doc.kind === 'command') validateParts(file, doc);
     if (doc.kind === 'term') validateTerms(file, doc);
-    if (doc.kind === 'note') stats.notes += 1;
+    if (doc.kind === 'note') {
+      validateNoteScenarios(file, doc, termIds);
+      validateNoteCrossRefs(file, doc, termIds, scenarioIds, noteIds);
+      stats.notes += 1;
+    }
   }
 
   console.log(

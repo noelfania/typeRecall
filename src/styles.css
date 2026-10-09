@@ -957,6 +957,143 @@ html.dark .themeToggle .moonIcon {
   font-size: 0.8rem;
 }
 
+.scenarioBody {
+  gap: 0.75rem;
+}
+
+.scenarioOptions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.scenarioOption {
+  appearance: none;
+  margin: 0;
+  padding: 0.55rem 0.85rem;
+  border-radius: 0.45rem;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted-strong);
+  font: inherit;
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+.scenarioOption:hover {
+  border-color: var(--muted);
+}
+
+.scenarioOption.isSelected {
+  border-color: var(--fg, #18181b);
+  color: var(--fg, #18181b);
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.typingCard.isActive .scenarioOption.isSelected {
+  border-color: #e4e4e7;
+  color: #fafafa;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.scenarioOption.isDefault:not(.isSelected) {
+  box-shadow: inset 0 0 0 1px var(--muted);
+}
+
+.scenarioFeedback {
+  display: grid;
+  gap: 0.65rem;
+  padding-top: 0.25rem;
+}
+
+.scenarioVerdict {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 650;
+  color: var(--muted-strong);
+}
+
+.scenarioVerdict.isMatch {
+  color: #15803d;
+}
+
+.scenarioVerdict.isDiff {
+  color: #b45309;
+}
+
+.typingCard.isActive .scenarioVerdict.isMatch {
+  color: #4ade80;
+}
+
+.typingCard.isActive .scenarioVerdict.isDiff {
+  color: #fbbf24;
+}
+
+.scenarioTermLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.scenarioTermLink {
+  appearance: none;
+  margin: 0;
+  padding: 0.4rem 0.65rem;
+  border-radius: 0.4rem;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted-strong);
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
+.scenarioTermLink:hover {
+  border-color: var(--muted);
+}
+
+.scenarioTermAnswer {
+  color: var(--muted);
+  font-family: ui-monospace, "Cascadia Code", "Consolas", monospace;
+  font-size: 0.75rem;
+}
+
+.scenarioTermMissing {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-family: ui-monospace, "Cascadia Code", "Consolas", monospace;
+}
+
+.contentLinkRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.contentLinkButton {
+  appearance: none;
+  margin: 0;
+  padding: 0.4rem 0.7rem;
+  border-radius: 0.4rem;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted-strong);
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.contentLinkButton:hover {
+  border-color: var(--muted);
+}
+
+.lexiconLinks {
+  padding: 0 1.25rem 1rem;
+}
+
 .typingCard.isActive .noteTable th,
 .typingCard.isActive .noteTable td {
   border-bottom-color: var(--code-border);

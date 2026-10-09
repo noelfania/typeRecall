@@ -2,10 +2,16 @@ id: knowledge-terms-architecture
 category: knowledge
 kind: term
 topic: architecture
-title: 프로젝트 구조·계층 용어
+title: 아키텍처·구조 용어
 source:
   origin: chat-raw 프로젝트 폴더 구조 2026-07-18
-  note: feature 단위 + 계층 구조 고빈도만. 상세 트리는 notes/project-structure.yaml.
+  note: |
+    feature 단위 + 계층 구조 고빈도 + FE/BE 연동·배포 단위 + GraphQL 조회.
+    상세 트리는 notes/project-structure.yaml.
+    판단 시나리오(notes/architecture-scenarios.yaml)에 나온 용어를 우선하고,
+    회의·설계에서 자주 나오는 고빈도는 시나리오 없이도 보강한다.
+    Load Balancer는 terms/dev-terms.yaml.
+    Headless UI·SPA·SSR은 terms/frontend-terms.yaml — 여기 Headless(CMS)와 구분.
 terms:
   - id: arch-layered
     section: 구조
@@ -13,39 +19,322 @@ terms:
     prompt: 요청 처리·비즈니스·데이터 접근처럼 역할을 층으로 나누는 구조.
     answer: Layered architecture
     example: 계층형 아키텍처[Layered architecture]에서 Controller는 Service만 호출한다.
+
   - id: arch-feature-based
     section: 구조
     title: 기능 단위 구조
     prompt: user·order처럼 도메인(기능)별로 폴더를 묶어 관련 코드를 한곳에 두는 방식.
     answer: Feature-based structure
     example: 기능 단위 구조[Feature-based structure]면 payment 관련 파일이 한 폴더에 모인다.
+
+  - id: arch-monolith
+    section: 구조
+    title: 모놀리스
+    prompt: 한 배포 단위에 UI·API·비즈니스·DB 접근이 함께 묶인 단일 애플리케이션.
+    answer: Monolith
+    aliases:
+      - Monolithic architecture
+    example: 초기는 모놀리스[Monolith]로 빠르게 만들고, 필요하면 서비스를 나눈다.
+
+  - id: arch-modular-monolith
+    section: 구조
+    title: 모듈러 모놀리스
+    prompt: 배포는 하나지만 도메인 모듈 경계를 강하게 나눠 나중에 분리하기 쉽게 만든 구조.
+    answer: Modular monolith
+    example: 모듈러 모놀리스[Modular monolith]는 모듈 간 직접 DB 공유를 피한다.
+
+  - id: arch-microservice
+    section: 구조
+    title: 마이크로서비스
+    prompt: 기능을 독립 배포 가능한 작은 서비스로 나누고 API·메시지로 연동하는 구조.
+    answer: Microservice
+    aliases:
+      - Microservices
+      - MSA
+    example: 결제만 따로 배포하려면 마이크로서비스[Microservice]로 분리한다.
+
+  - id: arch-serverless
+    section: 구조
+    title: 서버리스
+    prompt: 서버를 직접 운영하지 않고, 함수·관리형 서비스가 요청·이벤트에 따라 실행되는 방식.
+    answer: Serverless
+    example: 야간 배치를 서버리스[Serverless] 함수로 두면 유휴 서버 비용이 없다.
+
+  - id: arch-headless
+    section: 구조
+    title: 헤드리스
+    prompt: 화면(프레젠테이션) 없이 API만 제공하는 백엔드·CMS. 프론트는 별도 클라이언트가 담당한다.
+    answer: Headless
+    aliases:
+      - Headless architecture
+      - Headless CMS
+    example: 헤드리스[Headless] CMS면 웹·앱이 같은 콘텐츠 API를 공유한다.
+
+  - id: arch-bff
+    section: 연동·경계
+    title: BFF
+    prompt: 웹·앱처럼 특정 클라이언트에 맞춰 API를 모아 주고 응답 형태를 맞추는 전용 백엔드.
+    answer: BFF
+    aliases:
+      - Backend For Frontend
+    example: 모바일 화면용 필드를 한 번에 받으려면 BFF[Backend For Frontend]에서 조합한다.
+
+  - id: arch-api-gateway
+    section: 연동·경계
+    title: API 게이트웨이
+    prompt: 여러 서비스 앞단의 공통 진입점. 라우팅·인증·제한 등을 한곳에서 처리한다.
+    answer: API Gateway
+    example: API 게이트웨이[API Gateway]가 `/users`는 user 서비스로 넘긴다.
+
+  - id: arch-reverse-proxy
+    section: 연동·경계
+    title: 리버스 프록시
+    prompt: 클라이언트 요청을 받아 뒤쪽 앱·정적 서버로 대신 전달하는 중계 서버.
+    answer: Reverse proxy
+    example: nginx 리버스 프록시[Reverse proxy]로 `/api`는 백엔드, 나머지는 SPA로 보낸다.
+
+  - id: arch-middleware
+    section: 연동·경계
+    title: 미들웨어
+    prompt: 요청·응답 파이프라인에서 인증·로깅처럼 공통 처리를 끼워 넣는 계층.
+    answer: Middleware
+    example: 인증 미들웨어[Middleware]를 컨트롤러보다 먼저 실행한다.
+
   - id: arch-controller
     section: 백엔드 계층
     title: 컨트롤러
     prompt: HTTP 요청을 받아 응답하는 진입점. 비즈니스 로직은 두지 않는다.
     answer: Controller
     example: 컨트롤러[Controller]는 입력 검증 후 Service를 호출한다.
+
   - id: arch-service
     section: 백엔드 계층
     title: 서비스
     prompt: 비즈니스 규칙과 흐름을 담당하는 계층.
     answer: Service
     example: 주문 취소 규칙은 서비스[Service]에 둔다.
+
   - id: arch-repository
     section: 백엔드 계층
     title: 리포지토리
     prompt: DB 조회·저장을 추상화하는 데이터 접근 계층.
     answer: Repository
     example: 리포지토리[Repository]에서만 SQL·ORM 호출을 한다.
+
   - id: arch-dto
     section: 백엔드 계층
     title: 전송 객체
     prompt: API·계층 간에 데이터를 전달하기 위한 전송용 객체. Entity와 분리한다.
     answer: DTO
     example: 로그인 요청 바디는 전송 객체[DTO]로 받고 Entity를 그대로 노출하지 않는다.
+
   - id: arch-entity
     section: 백엔드 계층
     title: 엔티티
     prompt: DB 테이블에 대응하는 영속·도메인 모델.
     answer: Entity
     example: User 엔티티[Entity]는 users 테이블과 매핑된다.
+
+  - id: arch-mapper
+    section: 백엔드 계층
+    title: 매퍼
+    prompt: Entity와 DTO처럼 서로 다른 모델 사이를 변환하는 계층·유틸.
+    answer: Mapper
+    example: 매퍼[Mapper]로 UserEntity를 UserResponse DTO로 바꾼다.
+
+  - id: arch-mvc
+    section: 표현 패턴
+    title: MVC
+    prompt: Model·View·Controller로 데이터·화면·입력을 나누는 고전 구조.
+    answer: MVC
+    aliases:
+      - Model-View-Controller
+    example: MVC[Model-View-Controller]에서 Controller는 View에 넣을 데이터를 준비한다.
+
+  - id: arch-hexagonal
+    section: 표현 패턴
+    title: 헥사고날 아키텍처
+    prompt: 핵심 도메인을 가운데 두고, 외부 I/O는 포트·어댑터로 연결하는 구조.
+    answer: Hexagonal architecture
+    aliases:
+      - Ports and Adapters
+    example: 헥사고날 아키텍처[Hexagonal architecture]면 DB를 바꿔도 도메인 코드는 그대로다.
+
+  - id: arch-event-driven
+    section: 표현 패턴
+    title: 이벤트 기반 아키텍처
+    prompt: 서비스가 직접 호출하기보다 이벤트 발행·구독으로 느슨하게 연동하는 방식.
+    answer: Event-driven architecture
+    aliases:
+      - EDA
+    example: 주문 완료 후 메일 발송은 이벤트 기반 아키텍처[Event-driven architecture]로 분리한다.
+
+  - id: arch-graphql
+    section: GraphQL·조회
+    title: GraphQL
+    prompt: 클라이언트가 필요한 필드를 쿼리로 골라, 한 요청에 맞춰 받는 API 쿼리 언어·런타임.
+    answer: GraphQL
+    example: REST 여러 번 대신 GraphQL[GraphQL] 한 번으로 화면 데이터를 받는다.
+
+  - id: arch-request-waterfall
+    section: 조회·연동
+    title: 요청 워터폴
+    prompt: 앞 응답에 의존한 다음 요청이 이어져, 대기 시간이 계단처럼 쌓이는 현상.
+    answer: Request Waterfall
+    aliases:
+      - Waterfall
+    example: user 후 posts를 또 부르면 요청 워터폴[Request Waterfall]이 생긴다.
+
+  - id: arch-nested-query
+    section: 조회·연동
+    title: 중첩 쿼리
+    prompt: 연관 데이터를 한 질의 안에서 깊게 이어 조회해, 연쇄 호출 없이 한 번에 묶어 받는 쿼리.
+    answer: Nested Query
+    aliases:
+      - Nested Queries
+      - Relational Query
+    example: 중첩 쿼리[Nested Query]로 주문과 주문상품·배송지를 한 번에 조회한다.
+
+  - id: arch-schema-federation
+    section: GraphQL·조회
+    title: 스키마 페더레이션
+    prompt: 서비스별 스키마는 독립 유지하되, 게이트웨이가 하나의 연합 스키마로 묶어 체이닝 조회를 가능하게 하는 구조.
+    answer: Schema Federation
+    aliases:
+      - Federation
+      - Apollo Federation
+    example: 스키마 페더레이션[Schema Federation]으로 user·order 서비스를 한 그래프에 묶는다.
+
+  - id: arch-resolver
+    section: GraphQL·조회
+    title: 리졸버
+    prompt: 스키마 필드 값을 실제로 조회·계산해 채우는 백엔드 함수.
+    answer: Resolver
+    example: User.email 리졸버[Resolver]가 DB에서 이메일을 읽는다.
+
+  - id: arch-nested-resolver
+    section: GraphQL·조회
+    title: 중첩 리졸버
+    prompt: 부모 결과를 이어받아 하위 필드의 연관 데이터를 조회·조합하는 리졸버.
+    answer: Nested Resolver
+    aliases:
+      - Field Resolver
+    example: Post.author 중첩 리졸버[Nested Resolver]가 user 서비스에 이어서 조회한다.
+
+  - id: arch-bounded-context
+    section: 도메인·경계
+    title: 바운디드 컨텍스트
+    prompt: 같은 용어라도 의미가 통하는 범위로 도메인 모델을 나누는 경계. 서비스·모듈 분할의 기준이 된다.
+    answer: Bounded Context
+    example: 주문과 재고의 '상품' 의미가 다르면 바운디드 컨텍스트[Bounded Context]를 나눈다.
+
+  - id: arch-strangler-fig
+    section: 도메인·경계
+    title: 교살무화과 패턴
+    prompt: 레거시를 한 번에 교체하지 않고, 새 시스템으로 기능을 조금씩 가로채며 갈아타는 마이그레이션 방식.
+    answer: Strangler Fig
+    aliases:
+      - Strangler Fig Pattern
+      - Strangler Pattern
+    example: 결제만 새 서비스로 빼며 교살무화과 패턴[Strangler Fig]으로 이관한다.
+
+  - id: arch-n-plus-one
+    section: 데이터·일관성
+    title: N+1 문제
+    prompt: 목록 1번 조회 뒤 각 행마다 연관 조회가 나가, 호출이 1+N번으로 폭증하는 성능 문제.
+    answer: N+1 Problem
+    aliases:
+      - N+1
+    example: 게시글 목록 후 작성자를 행마다 부르면 N+1 문제[N+1 Problem]다.
+
+  - id: arch-eventual-consistency
+    section: 데이터·일관성
+    title: 최종 일관성
+    prompt: 당장 모든 복제본이 같지 않아도, 시간이 지나면 같은 상태가 되는 일관성 모델.
+    answer: Eventual Consistency
+    example: 주문 후 재고 반영이 약간 늦어도 최종 일관성[Eventual Consistency]이면 허용한다.
+
+  - id: arch-cqrs
+    section: 데이터·일관성
+    title: CQRS
+    prompt: 명령을 쓰는 모델과 조회를 읽는 모델을 분리해, 쓰기·읽기 각각에 맞게 최적화하는 패턴.
+    answer: CQRS
+    aliases:
+      - Command Query Responsibility Segregation
+    example: 복잡한 대시보드 조회는 CQRS[CQRS]로 읽기 모델을 따로 둔다.
+
+  - id: arch-caching
+    section: 데이터·일관성
+    title: 캐싱
+    prompt: 자주 쓰는 데이터를 빠른 저장소에 잠시 두어 원본 조회를 줄이는 기법.
+    answer: Caching
+    aliases:
+      - Cache
+    example: 상품 상세는 캐싱[Caching]으로 DB 부하를 줄인다.
+
+  - id: arch-message-queue
+    section: 연동·신뢰성
+    title: 메시지 큐
+    prompt: 생산자가 메시지를 넣고 소비자가 나중에 꺼내 처리하는 비동기 전달 버퍼.
+    answer: Message Queue
+    aliases:
+      - MQ
+    example: 메일 발송은 메시지 큐[Message Queue]에 넣고 API는 바로 응답한다.
+
+  - id: arch-circuit-breaker
+    section: 연동·신뢰성
+    title: 서킷 브레이커
+    prompt: 장애 난 의존 호출을 잠시 끊어, 연쇄 실패와 대기 폭주를 막는 패턴.
+    answer: Circuit Breaker
+    example: 결제 연동이 죽으면 서킷 브레이커[Circuit Breaker]로 빠르게 실패한다.
+
+  - id: arch-webhook
+    section: 연동·신뢰성
+    title: 웹훅
+    prompt: 사건이 나면 상대 시스템이 등록해 둔 URL로 HTTP 콜백을 보내는 연동 방식.
+    answer: Webhook
+    example: 결제 완료 시 웹훅[Webhook]으로 주문 서비스에 알린다.
+
+  - id: arch-rate-limiting
+    section: 연동·신뢰성
+    title: 레이트 리미팅
+    prompt: 단위 시간당 요청 수를 제한해 남용·과부하로부터 API를 지키는 기법.
+    answer: Rate Limiting
+    aliases:
+      - Rate Limit
+    example: 로그인 API에 레이트 리미팅[Rate Limiting]을 건다.
+
+  - id: arch-async-communication
+    section: 연동·신뢰성
+    title: 비동기 통신
+    prompt: 호출자가 즉시 응답을 기다리지 않고, 큐·이벤트 등으로 나중에 결과를 이어받는 통신.
+    answer: Asynchronous communication
+    aliases:
+      - Async
+      - Asynchronous
+    example: 정산은 비동기 통신[Asynchronous communication]으로 배치에 맡긴다.
+
+  - id: arch-observability
+    section: 관측·배포
+    title: 관측 가능성
+    prompt: 로그·메트릭·트레이스로 시스템 상태를 밖에서 파악할 수 있게 하는 능력.
+    answer: Observability
+    example: 지연 원인을 보려면 관측 가능성[Observability]으로 트레이스를 본다.
+
+  - id: arch-canary-deployment
+    section: 관측·배포
+    title: 카나리 배포
+    prompt: 새 버전을 일부 트래픽에만 먼저 보내 위험을 줄인 뒤 전체를 전환하는 배포 방식.
+    answer: Canary Deployment
+    aliases:
+      - Canary Release
+    example: 결제 변경은 카나리 배포[Canary Deployment]로 1%만 먼저 본다.
+
+  - id: arch-feature-flag
+    section: 관측·배포
+    title: 피처 플래그
+    prompt: 코드 배포와 기능 노출을 분리해, 설정으로 기능을 켜고 끄는 스위치.
+    answer: Feature Flag
+    aliases:
+      - Feature Toggle
+    example: 새 결제 UI는 피처 플래그[Feature Flag]로 내부만 켠다.

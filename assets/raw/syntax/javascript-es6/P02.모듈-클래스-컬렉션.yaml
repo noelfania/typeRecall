@@ -1,0 +1,257 @@
+id: language-javascript-es6-p02
+category: syntax
+kind: code-snippet
+language: javascript
+track:
+  id: javascript-es6
+  label: JavaScript ES6
+title: P02.모듈-클래스-컬렉션
+source:
+  origin: chat-raw JavaScript ES6 features 2026-07-20
+  note: export/import·class·Map/Set·Promise. 기존 javascript 트랙에 없던 모듈 포함.
+parts:
+  - id: language-javascript-es6-p02-part-1
+    title: 이름 있는 내보내기[named export]
+    display: |-
+      // 이름 있는 내보내기[named export]
+      export const API_URL = "/api";
+      export function add(a, b) {
+        return a + b;
+      }
+      export class User {
+        constructor(name) {
+          this.name = name;
+        }
+      }
+    typing: |-
+      export const API_URL = "/api";
+      export function add(a, b) {
+        return a + b;
+      }
+      export class User {
+        constructor(name) {
+          this.name = name;
+        }
+      }
+  - id: language-javascript-es6-p02-part-2
+    title: 기본 내보내기[default export]
+    display: |-
+      // 기본 내보내기[default export] — 모듈당 하나
+      export default function fetchUser(id) {
+        return { id, name: "kim" };
+      }
+    typing: |-
+      export default function fetchUser(id) {
+        return { id, name: "kim" };
+      }
+  - id: language-javascript-es6-p02-part-3
+    title: 가져오기[import]
+    display: |-
+      // 가져오기[import] — 이름·기본·별칭[alias]
+      import fetchUser from "./user.js";
+      import { API_URL, add as sum } from "./math.js";
+      import * as math from "./math.js";
+      console.log(API_URL, sum(1, 2), math.add(3, 4));
+    typing: |-
+      import fetchUser from "./user.js";
+      import { API_URL, add as sum } from "./math.js";
+      import * as math from "./math.js";
+      console.log(API_URL, sum(1, 2), math.add(3, 4));
+  - id: language-javascript-es6-p02-part-4
+    title: 기본 클래스[class]
+    display: |-
+      // 기본 클래스[class]
+      class Circle {
+        constructor(radius) {
+          this.radius = radius;
+        }
+        area() {
+          return Math.PI * this.radius ** 2;
+        }
+      }
+      const c = new Circle(5);
+      console.log(c.area().toFixed(2));
+      // 결과: 78.54
+    typing: |-
+      class Circle {
+        constructor(radius) {
+          this.radius = radius;
+        }
+        area() {
+          return Math.PI * this.radius ** 2;
+        }
+      }
+      const c = new Circle(5);
+      console.log(c.area().toFixed(2));
+  - id: language-javascript-es6-p02-part-5
+    title: 상속[extends] / super
+    display: |-
+      // 상속[extends] / super
+      class Animal {
+        constructor(name) {
+          this.name = name;
+        }
+        speak() {
+          return `${this.name} makes a sound`;
+        }
+      }
+      class Dog extends Animal {
+        constructor(name, breed) {
+          super(name);
+          this.breed = breed;
+        }
+        speak() {
+          return `${super.speak()} — woof`;
+        }
+      }
+      console.log(new Dog("Rex", "beagle").speak());
+      // 결과: Rex makes a sound — woof
+    typing: |-
+      class Animal {
+        constructor(name) {
+          this.name = name;
+        }
+        speak() {
+          return `${this.name} makes a sound`;
+        }
+      }
+      class Dog extends Animal {
+        constructor(name, breed) {
+          super(name);
+          this.breed = breed;
+        }
+        speak() {
+          return `${super.speak()} — woof`;
+        }
+      }
+      console.log(new Dog("Rex", "beagle").speak());
+  - id: language-javascript-es6-p02-part-6
+    title: static / getter
+    display: |-
+      // static / getter
+      class Rect {
+        constructor(w, h) {
+          this.w = w;
+          this.h = h;
+        }
+        get area() {
+          return this.w * this.h;
+        }
+        static square(n) {
+          return new Rect(n, n);
+        }
+      }
+      const box = Rect.square(4);
+      console.log(box.area);
+      // 결과: 16
+    typing: |-
+      class Rect {
+        constructor(w, h) {
+          this.w = w;
+          this.h = h;
+        }
+        get area() {
+          return this.w * this.h;
+        }
+        static square(n) {
+          return new Rect(n, n);
+        }
+      }
+      const box = Rect.square(4);
+      console.log(box.area);
+  - id: language-javascript-es6-p02-part-7
+    title: Map
+    display: |-
+      // Map — 키 타입[key type] 제한 없음
+      const store = new Map();
+      store.set("name", "kim");
+      store.set(1, "one");
+      console.log(store.get("name"), store.has(1), store.size);
+      // 결과: kim true 2
+    typing: |-
+      const store = new Map();
+      store.set("name", "kim");
+      store.set(1, "one");
+      console.log(store.get("name"), store.has(1), store.size);
+  - id: language-javascript-es6-p02-part-8
+    title: Map 순회[iteration]
+    display: |-
+      // Map 순회[iteration]
+      const scores = new Map([
+        ["kim", 90],
+        ["lee", 80],
+      ]);
+      for (const [name, score] of scores) {
+        console.log(name, score);
+      }
+      // 결과: kim 90 / lee 80
+    typing: |-
+      const scores = new Map([
+        ["kim", 90],
+        ["lee", 80],
+      ]);
+      for (const [name, score] of scores) {
+        console.log(name, score);
+      }
+  - id: language-javascript-es6-p02-part-9
+    title: Set
+    display: |-
+      // Set — 중복 없는 값 집합[unique values]
+      const tags = new Set(["js", "ts", "js"]);
+      tags.add("go");
+      console.log(tags.has("js"), tags.size, [...tags]);
+      // 결과: true 3 ["js", "ts", "go"]
+    typing: |-
+      const tags = new Set(["js", "ts", "js"]);
+      tags.add("go");
+      console.log(tags.has("js"), tags.size, [...tags]);
+  - id: language-javascript-es6-p02-part-10
+    title: WeakMap / WeakSet
+    display: |-
+      // WeakMap / WeakSet — 객체 키만, GC에 방해 안 됨
+      const meta = new WeakMap();
+      const seen = new WeakSet();
+      const obj = { id: 1 };
+      meta.set(obj, "cached");
+      seen.add(obj);
+      console.log(meta.get(obj), seen.has(obj));
+      // 결과: cached true
+    typing: |-
+      const meta = new WeakMap();
+      const seen = new WeakSet();
+      const obj = { id: 1 };
+      meta.set(obj, "cached");
+      seen.add(obj);
+      console.log(meta.get(obj), seen.has(obj));
+  - id: language-javascript-es6-p02-part-11
+    title: Promise then / catch
+    display: |-
+      // Promise then / catch
+      Promise.resolve(1)
+        .then((v) => v + 1)
+        .then((v) => {
+          console.log(v);
+          return v;
+        })
+        .catch((e) => console.error(e.message));
+      // 결과: 2
+    typing: |-
+      Promise.resolve(1)
+        .then((v) => v + 1)
+        .then((v) => {
+          console.log(v);
+          return v;
+        })
+        .catch((e) => console.error(e.message));
+  - id: language-javascript-es6-p02-part-12
+    title: Promise.all
+    display: |-
+      // Promise.all — 전체 성공 대기[wait for all]
+      Promise.all([Promise.resolve(1), Promise.resolve(2)]).then((values) => {
+        console.log(values);
+      });
+      // 결과: [1, 2]
+    typing: |-
+      Promise.all([Promise.resolve(1), Promise.resolve(2)]).then((values) => {
+        console.log(values);
+      });

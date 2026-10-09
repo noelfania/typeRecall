@@ -72,14 +72,24 @@ async function buildLanguageTracks() {
 
 const TOPIC_LABEL_MAP = {
   dev: '개발 용어',
-  web: '웹 UI 용어',
+  web: '웹 UX·UI',
+  frontend: '프론트엔드',
   rest: 'REST',
   sql: 'SQL·DB',
   symbol: '기호·영문',
+  architecture: '아키텍처',
 };
-const TOPIC_ORDER = ['dev', 'web', 'rest', 'sql', 'symbol'];
+const TOPIC_ORDER = [
+  'architecture',
+  'dev',
+  'frontend',
+  'web',
+  'rest',
+  'sql',
+  'symbol',
+];
 
-async function buildLexiconTracks() {
+async function buildLexiconTracks(drillsByTerm = new Map()) {
   const files = await collectYamlFiles(path.join(rawDir, 'knowledge', 'terms'));
   const trackMap = new Map();
 
@@ -107,6 +117,7 @@ async function buildLexiconTracks() {
         answer: term.answer,
         displayAnswer: term.answerDisplay ?? term.answer,
         example: term.example ? `예: ${term.example}` : '',
+        relatedDrills: drillsByTerm.get(term.id) ?? [],
       })),
     });
   }
@@ -588,7 +599,77 @@ function convertFrontendDesign(doc) {
   return parts;
 }
 
+function convertArchitectureScenarios(doc) {
+  const parts = [];
+  {
+    const blocks = [];
+    pushProse(blocks, doc.scope);
+    pushProse(
+      blocks,
+      '정답 암기가 아니다. 후보를 고른 뒤 기본안·탈락 조건과 맞춰 본다.',
+    );
+    parts.push({
+      id: sectionId(doc.id, '개요', 0),
+      title: '개요',
+      blocks,
+    });
+  }
+  for (const [index, scenario] of (doc.scenarios ?? []).entries()) {
+    const blocks = [];
+    pushHeading(blocks, '상황');
+    pushProse(blocks, scenario.context);
+    pushHeading(blocks, '증상');
+    pushProse(blocks, scenario.symptom);
+    pushHeading(blocks, '후보');
+    pushTable(
+      blocks,
+      ['옵션', '이럴 때', '피할 때'],
+      (scenario.options ?? []).map((option) => [
+        option.label,
+        option.whenPreferred,
+        option.whenAvoid,
+      ]),
+    );
+    const defaultOption = (scenario.options ?? []).find(
+      (option) => option.id === scenario.defaultPick,
+    );
+    pushHeading(blocks, '기본안');
+    pushProse(
+      blocks,
+      `${defaultOption?.label ?? scenario.defaultPick} — ${scenario.rationale}`,
+    );
+    if (scenario.relatedTermIds?.length) {
+      pushHeading(blocks, '관련 용어');
+      pushList(blocks, scenario.relatedTermIds);
+    }
+    parts.push({
+      id: sectionId(doc.id, scenario.title, index + 1),
+      title: scenario.title,
+      blocks,
+      scenario: {
+        id: scenario.id,
+        title: scenario.title,
+        context: scenario.context,
+        symptom: scenario.symptom,
+        options: (scenario.options ?? []).map((option) => ({
+          id: option.id,
+          label: option.label,
+          whenPreferred: option.whenPreferred,
+          whenAvoid: option.whenAvoid,
+        })),
+        defaultPick: scenario.defaultPick,
+        rationale: scenario.rationale,
+        relatedTermIds: scenario.relatedTermIds ?? [],
+      },
+    });
+  }
+  return parts;
+}
+
 function convertNoteDoc(doc) {
+  if (doc.scenarios) {
+    return convertArchitectureScenarios(doc);
+  }
   if (doc.body) {
     return sectionsFromMarkdownBody(doc.id, doc.title, doc.body);
   }
@@ -624,6 +705,8 @@ function convertNoteDoc(doc) {
 async function buildNoteTracks() {
   const files = await collectYamlFiles(path.join(rawDir, 'knowledge', 'notes'));
   const trackMap = new Map();
+  /** @type {Map<string, object>} */
+  const docsByLessonId = new Map();
 
   for (const file of files) {
     const doc = await readYaml(file);
@@ -637,23 +720,154 @@ async function buildNoteTracks() {
         lessons: [],
       });
     }
-    trackMap.get(topic).lessons.push({
+    const lesson = {
       id: doc.id,
       title: doc.title,
       fileName: path.basename(file),
       sourcePath: relPath(file),
       parts: convertNoteDoc(doc),
-    });
+    };
+    trackMap.get(topic).lessons.push(lesson);
+    docsByLessonId.set(doc.id, doc);
   }
 
-  return [...trackMap.values()].sort((left, right) => {
+  const tracks = [...trackMap.values()].sort((left, right) => {
     const li = NOTE_TOPIC_ORDER.indexOf(left.folderName);
     const ri = NOTE_TOPIC_ORDER.indexOf(right.folderName);
     return (li === -1 ? 99 : li) - (ri === -1 ? 99 : ri);
   });
+
+  wireNoteCrossLinks(tracks, docsByLessonId);
+  return tracks;
 }
 
-// ---- 출력 ----
+/** @param {object[]} noteTracks */
+function buildDrillsByTerm(noteTracks) {
+  /** @type {Map<string, object[]>} */
+  const map = new Map();
+  for (const track of noteTracks) {
+    for (const lesson of track.lessons) {
+      for (const part of lesson.parts) {
+        if (!part.scenario?.relatedTermIds?.length) continue;
+        const link = {
+          kind: 'note',
+          trackId: track.id,
+          lessonId: lesson.id,
+          partId: part.id,
+          title: part.title,
+        };
+        for (const termId of part.scenario.relatedTermIds) {
+          if (!map.has(termId)) map.set(termId, []);
+          map.get(termId).push(link);
+        }
+      }
+    }
+  }
+  return map;
+}
+
+/**
+ * 비교 노트 ↔ 시나리오 ↔ (문서 related*) 양방향 링크
+ * @param {object[]} noteTracks
+ * @param {Map<string, object>} docsByLessonId
+ */
+function wireNoteCrossLinks(noteTracks, docsByLessonId) {
+  /** @type {Map<string, { trackId: string, lesson: object }>} */
+  const lessonIndex = new Map();
+  /** @type {Map<string, { trackId: string, lessonId: string, partId: string, title: string }>} */
+  const scenarioPartIndex = new Map();
+
+  for (const track of noteTracks) {
+    for (const lesson of track.lessons) {
+      lessonIndex.set(lesson.id, { trackId: track.id, lesson });
+      for (const part of lesson.parts) {
+        if (part.scenario?.id) {
+          scenarioPartIndex.set(part.scenario.id, {
+            trackId: track.id,
+            lessonId: lesson.id,
+            partId: part.id,
+            title: part.title,
+          });
+        }
+      }
+    }
+  }
+
+  for (const track of noteTracks) {
+    for (const lesson of track.lessons) {
+      const doc = docsByLessonId.get(lesson.id);
+      if (!doc) continue;
+
+      /** @type {object[]} */
+      const links = [];
+
+      for (const scenarioId of doc.relatedScenarioIds ?? []) {
+        const target = scenarioPartIndex.get(scenarioId);
+        if (target) {
+          links.push({
+            kind: 'note',
+            trackId: target.trackId,
+            lessonId: target.lessonId,
+            partId: target.partId,
+            title: `판단: ${target.title}`,
+          });
+        }
+      }
+
+      for (const noteId of doc.relatedNoteIds ?? []) {
+        const target = lessonIndex.get(noteId);
+        if (target?.lesson.parts[0]) {
+          links.push({
+            kind: 'note',
+            trackId: target.trackId,
+            lessonId: target.lesson.id,
+            partId: target.lesson.parts[0].id,
+            title: target.lesson.title,
+          });
+        }
+      }
+
+      for (const termId of doc.relatedTermIds ?? []) {
+        links.push({
+          kind: 'lexicon',
+          trackId: '',
+          lessonId: '',
+          partId: termId,
+          title: termId,
+        });
+      }
+
+      if (links.length === 0) continue;
+
+      // 개요(첫 파트)에 모아서 학습 경로로 노출
+      const anchor = lesson.parts[0];
+      if (anchor) {
+        anchor.relatedLinks = [...(anchor.relatedLinks ?? []), ...links];
+      }
+
+      // 시나리오 파트에는 비교 노트(relatedNoteIds)만 반복 노출
+      const noteLinks = [];
+      for (const noteId of doc.relatedNoteIds ?? []) {
+        const target = lessonIndex.get(noteId);
+        if (target?.lesson.parts[0]) {
+          noteLinks.push({
+            kind: 'note',
+            trackId: target.trackId,
+            lessonId: target.lesson.id,
+            partId: target.lesson.parts[0].id,
+            title: target.lesson.title,
+          });
+        }
+      }
+      if (noteLinks.length) {
+        for (const part of lesson.parts) {
+          if (!part.scenario) continue;
+          part.relatedLinks = [...(part.relatedLinks ?? []), ...noteLinks];
+        }
+      }
+    }
+  }
+}
 
 async function writeGenerated(fileName, typeName, importPath, varName, data) {
   const content = `import type { ${typeName} } from '../data/${importPath}';
@@ -666,12 +880,41 @@ export const ${varName}: ${typeName}[] = ${JSON.stringify(data, null, 2)} as ${t
 
 async function main() {
   await mkdir(outputDir, { recursive: true });
-  const [language, lexicon, visual, notes] = await Promise.all([
+  const [language, visual, notes] = await Promise.all([
     buildLanguageTracks(),
-    buildLexiconTracks(),
     buildVisualTracks(),
     buildNoteTracks(),
   ]);
+  const drillsByTerm = buildDrillsByTerm(notes);
+  const lexicon = await buildLexiconTracks(drillsByTerm);
+
+  // relatedTermIds on notes: fill track/lesson from lexicon
+  for (const track of notes) {
+    for (const lesson of track.lessons) {
+      for (const part of lesson.parts) {
+        if (!part.relatedLinks?.length) continue;
+        part.relatedLinks = part.relatedLinks.map((link) => {
+          if (link.kind !== 'lexicon' || link.trackId) return link;
+          for (const lexTrack of lexicon) {
+            for (const lexLesson of lexTrack.lessons) {
+              const term = lexLesson.parts.find((item) => item.id === link.partId);
+              if (term) {
+                return {
+                  kind: 'lexicon',
+                  trackId: lexTrack.id,
+                  lessonId: lexLesson.id,
+                  partId: term.id,
+                  title: term.title,
+                };
+              }
+            }
+          }
+          return link;
+        });
+      }
+    }
+  }
+
   await writeGenerated('languageLessons.ts', 'LanguageTrack', 'languageLessonTypes', 'languageTracks', language);
   await writeGenerated('lexiconLessons.ts', 'LexiconTrack', 'lexiconLessonTypes', 'lexiconTracks', lexicon);
   await writeGenerated('visualLessons.ts', 'VisualTrack', 'visualLessonTypes', 'visualTracks', visual);
@@ -680,8 +923,9 @@ async function main() {
   const partCount = language.reduce((acc, t) => acc + t.lessons.reduce((a, l) => a + l.parts.length, 0), 0);
   const termCount = lexicon.reduce((acc, t) => acc + t.lessons.reduce((a, l) => a + l.parts.length, 0), 0);
   const noteCount = notes.reduce((acc, t) => acc + t.lessons.length, 0);
+  const drillLinks = [...drillsByTerm.values()].reduce((acc, list) => acc + list.length, 0);
   console.log(
-    `syntax ${language.length}트랙 ${partCount}파트 / terms ${lexicon.length}트랙 ${termCount}카드 / visual ${visual[0].lessons.length}레슨 / notes ${notes.length}토픽 ${noteCount}노트`,
+    `syntax ${language.length}트랙 ${partCount}파트 / terms ${lexicon.length}트랙 ${termCount}카드 / visual ${visual[0].lessons.length}레슨 / notes ${notes.length}토픽 ${noteCount}노트 / term→drill ${drillLinks}`,
   );
 }
 

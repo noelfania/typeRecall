@@ -2645,6 +2645,268 @@ export const languageTracks: LanguageTrack[] = [
     ]
   },
   {
+    "id": "javascript-es6",
+    "label": "JavaScript ES6",
+    "folderName": "javascript-es6",
+    "lessons": [
+      {
+        "id": "language-javascript-es6-p01",
+        "title": "P01.기본-문법",
+        "fileName": "P01.기본-문법.yaml",
+        "sourcePath": "assets/raw/syntax/javascript-es6/P01.기본-문법.yaml",
+        "language": "javascript",
+        "parts": [
+          {
+            "id": "language-javascript-es6-p01-part-1",
+            "title": "상수[const]",
+            "content": "const PI = 3.141593;\nconst user = { name: \"kim\" };\nuser.name = \"lee\";\nconsole.log(PI > 3.0, user.name);",
+            "displayContent": "// 상수[const] — 재할당[reassignment] 불가, 객체 속성[property]은 변경 가능\nconst PI = 3.141593;\nconst user = { name: \"kim\" };\nuser.name = \"lee\";\nconsole.log(PI > 3.0, user.name);\n// 결과: true lee"
+          },
+          {
+            "id": "language-javascript-es6-p01-part-2",
+            "title": "블록 스코프[let]",
+            "content": "let total = 0;\nfor (let i = 0; i < 3; i++) {\n  total += i;\n}\nconsole.log(total);",
+            "displayContent": "// 블록 스코프[block scope] — let은 블록 밖 접근 불가\nlet total = 0;\nfor (let i = 0; i < 3; i++) {\n  total += i;\n}\nconsole.log(total);\n// 결과: 3"
+          },
+          {
+            "id": "language-javascript-es6-p01-part-3",
+            "title": "let 콜백 캡처[closure]",
+            "content": "const callbacks = [];\nfor (let i = 0; i <= 2; i++) {\n  callbacks[i] = () => i * 2;\n}\nconsole.log(callbacks[0](), callbacks[1](), callbacks[2]());",
+            "displayContent": "// let 콜백 캡처[closure] — 반복마다 새 바인딩[binding]\nconst callbacks = [];\nfor (let i = 0; i <= 2; i++) {\n  callbacks[i] = () => i * 2;\n}\nconsole.log(callbacks[0](), callbacks[1](), callbacks[2]());\n// 결과: 0 2 4"
+          },
+          {
+            "id": "language-javascript-es6-p01-part-4",
+            "title": "화살표 함수[arrow function]",
+            "content": "const odds = [1, 2, 3, 4].filter((n) => n % 2 === 1);\nconst doubled = odds.map((v) => v * 2);\nconsole.log(odds, doubled);",
+            "displayContent": "// 화살표 함수[arrow function] — 암묵적 반환[implicit return]\nconst odds = [1, 2, 3, 4].filter((n) => n % 2 === 1);\nconst doubled = odds.map((v) => v * 2);\nconsole.log(odds, doubled);\n// 결과: [1, 3] [2, 6]"
+          },
+          {
+            "id": "language-javascript-es6-p01-part-5",
+            "title": "화살표 this[lexical this]",
+            "content": "const counter = {\n  count: 0,\n  bump() {\n    const inc = () => {\n      this.count += 1;\n    };\n    inc();\n  },\n};\ncounter.bump();\nconsole.log(counter.count);",
+            "displayContent": "// 화살표 this[lexical this] — 바깥 this를 캡처한다\nconst counter = {\n  count: 0,\n  bump() {\n    const inc = () => {\n      this.count += 1;\n    };\n    inc();\n  },\n};\ncounter.bump();\nconsole.log(counter.count);\n// 결과: 1"
+          },
+          {
+            "id": "language-javascript-es6-p01-part-6",
+            "title": "기본 매개변수[default parameter]",
+            "content": "function greet(name = \"guest\", msg = \"hi\") {\n  return `${msg}, ${name}`;\n}\nconsole.log(greet(), greet(\"kim\", \"hello\"));",
+            "displayContent": "// 기본 매개변수[default parameter]\nfunction greet(name = \"guest\", msg = \"hi\") {\n  return `${msg}, ${name}`;\n}\nconsole.log(greet(), greet(\"kim\", \"hello\"));\n// 결과: hi, guest / hello, kim"
+          },
+          {
+            "id": "language-javascript-es6-p01-part-7",
+            "title": "Rest 매개변수[rest parameter]",
+            "content": "function sum(first, ...rest) {\n  return rest.reduce((acc, n) => acc + n, first);\n}\nconsole.log(sum(1, 2, 3, 4));",
+            "displayContent": "// Rest 매개변수[rest parameter] — 나머지 인자를 배열로 모은다\nfunction sum(first, ...rest) {\n  return rest.reduce((acc, n) => acc + n, first);\n}\nconsole.log(sum(1, 2, 3, 4));\n// 결과: 10"
+          },
+          {
+            "id": "language-javascript-es6-p01-part-8",
+            "title": "스프레드[spread] 배열",
+            "content": "const base = [1, 2];\nconst merged = [...base, 3, ...[4, 5]];\nconsole.log(merged);",
+            "displayContent": "// 스프레드[spread] 배열 — 펼쳐서 복사·병합\nconst base = [1, 2];\nconst merged = [...base, 3, ...[4, 5]];\nconsole.log(merged);\n// 결과: [1, 2, 3, 4, 5]"
+          },
+          {
+            "id": "language-javascript-es6-p01-part-9",
+            "title": "스프레드[spread] 객체",
+            "content": "const a = { x: 1, y: 2 };\nconst b = { y: 9, z: 3 };\nconst merged = { ...a, ...b };\nconsole.log(merged);",
+            "displayContent": "// 스프레드[spread] 객체 — 나중 키가 우선[last-wins]\nconst a = { x: 1, y: 2 };\nconst b = { y: 9, z: 3 };\nconst merged = { ...a, ...b };\nconsole.log(merged);\n// 결과: { x: 1, y: 9, z: 3 }"
+          },
+          {
+            "id": "language-javascript-es6-p01-part-10",
+            "title": "템플릿 리터럴[template literal]",
+            "content": "const name = \"kim\";\nconst score = 95;\nconst line = `이름: ${name}, 점수: ${score}`;\nconsole.log(line);",
+            "displayContent": "// 템플릿 리터럴[template literal] — 보간[interpolation] + 멀티라인\nconst name = \"kim\";\nconst score = 95;\nconst line = `이름: ${name}, 점수: ${score}`;\nconsole.log(line);\n// 결과: 이름: kim, 점수: 95"
+          },
+          {
+            "id": "language-javascript-es6-p01-part-11",
+            "title": "객체 단축[shorthand] / 메서드",
+            "content": "const name = \"lee\";\nconst age = 30;\nconst user = {\n  name,\n  age,\n  greet() {\n    return `hi ${this.name}`;\n  },\n};\nconsole.log(user.greet(), user.age);",
+            "displayContent": "// 객체 단축[shorthand property] / 메서드 정의[method definition]\nconst name = \"lee\";\nconst age = 30;\nconst user = {\n  name,\n  age,\n  greet() {\n    return `hi ${this.name}`;\n  },\n};\nconsole.log(user.greet(), user.age);\n// 결과: hi lee 30"
+          },
+          {
+            "id": "language-javascript-es6-p01-part-12",
+            "title": "계산된 속성명[computed property]",
+            "content": "const key = \"item\";\nconst bag = {\n  [key + \"1\"]: \"a\",\n  [key + \"2\"]: \"b\",\n};\nconsole.log(bag.item1, bag.item2);",
+            "displayContent": "// 계산된 속성명[computed property name]\nconst key = \"item\";\nconst bag = {\n  [key + \"1\"]: \"a\",\n  [key + \"2\"]: \"b\",\n};\nconsole.log(bag.item1, bag.item2);\n// 결과: a b"
+          },
+          {
+            "id": "language-javascript-es6-p01-part-13",
+            "title": "배열 구조분해[array destructuring]",
+            "content": "const [first, second] = [10, 20];\nconst [head, ...tail] = [1, 2, 3];\nconsole.log(first, second, head, tail);",
+            "displayContent": "// 배열 구조분해[array destructuring]\nconst [first, second] = [10, 20];\nconst [head, ...tail] = [1, 2, 3];\nconsole.log(first, second, head, tail);\n// 결과: 10 20 1 [2, 3]"
+          },
+          {
+            "id": "language-javascript-es6-p01-part-14",
+            "title": "객체 구조분해[object destructuring]",
+            "content": "const { name: userName, role = \"user\" } = { name: \"kim\" };\nconst { a, ...rest } = { a: 1, b: 2, c: 3 };\nconsole.log(userName, role, a, rest);",
+            "displayContent": "// 객체 구조분해[object destructuring] — 별칭[alias]·기본값[default]\nconst { name: userName, role = \"user\" } = { name: \"kim\" };\nconst { a, ...rest } = { a: 1, b: 2, c: 3 };\nconsole.log(userName, role, a, rest);\n// 결과: kim user 1 { b: 2, c: 3 }"
+          },
+          {
+            "id": "language-javascript-es6-p01-part-15",
+            "title": "파라미터 구조분해[parameter destructuring]",
+            "content": "function showUser({ name, role = \"user\" }) {\n  return `${name}(${role})`;\n}\nconsole.log(showUser({ name: \"kim\" }));",
+            "displayContent": "// 파라미터 구조분해[parameter destructuring]\nfunction showUser({ name, role = \"user\" }) {\n  return `${name}(${role})`;\n}\nconsole.log(showUser({ name: \"kim\" }));\n// 결과: kim(user)"
+          }
+        ]
+      },
+      {
+        "id": "language-javascript-es6-p02",
+        "title": "P02.모듈-클래스-컬렉션",
+        "fileName": "P02.모듈-클래스-컬렉션.yaml",
+        "sourcePath": "assets/raw/syntax/javascript-es6/P02.모듈-클래스-컬렉션.yaml",
+        "language": "javascript",
+        "parts": [
+          {
+            "id": "language-javascript-es6-p02-part-1",
+            "title": "이름 있는 내보내기[named export]",
+            "content": "export const API_URL = \"/api\";\nexport function add(a, b) {\n  return a + b;\n}\nexport class User {\n  constructor(name) {\n    this.name = name;\n  }\n}",
+            "displayContent": "// 이름 있는 내보내기[named export]\nexport const API_URL = \"/api\";\nexport function add(a, b) {\n  return a + b;\n}\nexport class User {\n  constructor(name) {\n    this.name = name;\n  }\n}"
+          },
+          {
+            "id": "language-javascript-es6-p02-part-2",
+            "title": "기본 내보내기[default export]",
+            "content": "export default function fetchUser(id) {\n  return { id, name: \"kim\" };\n}",
+            "displayContent": "// 기본 내보내기[default export] — 모듈당 하나\nexport default function fetchUser(id) {\n  return { id, name: \"kim\" };\n}"
+          },
+          {
+            "id": "language-javascript-es6-p02-part-3",
+            "title": "가져오기[import]",
+            "content": "import fetchUser from \"./user.js\";\nimport { API_URL, add as sum } from \"./math.js\";\nimport * as math from \"./math.js\";\nconsole.log(API_URL, sum(1, 2), math.add(3, 4));",
+            "displayContent": "// 가져오기[import] — 이름·기본·별칭[alias]\nimport fetchUser from \"./user.js\";\nimport { API_URL, add as sum } from \"./math.js\";\nimport * as math from \"./math.js\";\nconsole.log(API_URL, sum(1, 2), math.add(3, 4));"
+          },
+          {
+            "id": "language-javascript-es6-p02-part-4",
+            "title": "기본 클래스[class]",
+            "content": "class Circle {\n  constructor(radius) {\n    this.radius = radius;\n  }\n  area() {\n    return Math.PI * this.radius ** 2;\n  }\n}\nconst c = new Circle(5);\nconsole.log(c.area().toFixed(2));",
+            "displayContent": "// 기본 클래스[class]\nclass Circle {\n  constructor(radius) {\n    this.radius = radius;\n  }\n  area() {\n    return Math.PI * this.radius ** 2;\n  }\n}\nconst c = new Circle(5);\nconsole.log(c.area().toFixed(2));\n// 결과: 78.54"
+          },
+          {
+            "id": "language-javascript-es6-p02-part-5",
+            "title": "상속[extends] / super",
+            "content": "class Animal {\n  constructor(name) {\n    this.name = name;\n  }\n  speak() {\n    return `${this.name} makes a sound`;\n  }\n}\nclass Dog extends Animal {\n  constructor(name, breed) {\n    super(name);\n    this.breed = breed;\n  }\n  speak() {\n    return `${super.speak()} — woof`;\n  }\n}\nconsole.log(new Dog(\"Rex\", \"beagle\").speak());",
+            "displayContent": "// 상속[extends] / super\nclass Animal {\n  constructor(name) {\n    this.name = name;\n  }\n  speak() {\n    return `${this.name} makes a sound`;\n  }\n}\nclass Dog extends Animal {\n  constructor(name, breed) {\n    super(name);\n    this.breed = breed;\n  }\n  speak() {\n    return `${super.speak()} — woof`;\n  }\n}\nconsole.log(new Dog(\"Rex\", \"beagle\").speak());\n// 결과: Rex makes a sound — woof"
+          },
+          {
+            "id": "language-javascript-es6-p02-part-6",
+            "title": "static / getter",
+            "content": "class Rect {\n  constructor(w, h) {\n    this.w = w;\n    this.h = h;\n  }\n  get area() {\n    return this.w * this.h;\n  }\n  static square(n) {\n    return new Rect(n, n);\n  }\n}\nconst box = Rect.square(4);\nconsole.log(box.area);",
+            "displayContent": "// static / getter\nclass Rect {\n  constructor(w, h) {\n    this.w = w;\n    this.h = h;\n  }\n  get area() {\n    return this.w * this.h;\n  }\n  static square(n) {\n    return new Rect(n, n);\n  }\n}\nconst box = Rect.square(4);\nconsole.log(box.area);\n// 결과: 16"
+          },
+          {
+            "id": "language-javascript-es6-p02-part-7",
+            "title": "Map",
+            "content": "const store = new Map();\nstore.set(\"name\", \"kim\");\nstore.set(1, \"one\");\nconsole.log(store.get(\"name\"), store.has(1), store.size);",
+            "displayContent": "// Map — 키 타입[key type] 제한 없음\nconst store = new Map();\nstore.set(\"name\", \"kim\");\nstore.set(1, \"one\");\nconsole.log(store.get(\"name\"), store.has(1), store.size);\n// 결과: kim true 2"
+          },
+          {
+            "id": "language-javascript-es6-p02-part-8",
+            "title": "Map 순회[iteration]",
+            "content": "const scores = new Map([\n  [\"kim\", 90],\n  [\"lee\", 80],\n]);\nfor (const [name, score] of scores) {\n  console.log(name, score);\n}",
+            "displayContent": "// Map 순회[iteration]\nconst scores = new Map([\n  [\"kim\", 90],\n  [\"lee\", 80],\n]);\nfor (const [name, score] of scores) {\n  console.log(name, score);\n}\n// 결과: kim 90 / lee 80"
+          },
+          {
+            "id": "language-javascript-es6-p02-part-9",
+            "title": "Set",
+            "content": "const tags = new Set([\"js\", \"ts\", \"js\"]);\ntags.add(\"go\");\nconsole.log(tags.has(\"js\"), tags.size, [...tags]);",
+            "displayContent": "// Set — 중복 없는 값 집합[unique values]\nconst tags = new Set([\"js\", \"ts\", \"js\"]);\ntags.add(\"go\");\nconsole.log(tags.has(\"js\"), tags.size, [...tags]);\n// 결과: true 3 [\"js\", \"ts\", \"go\"]"
+          },
+          {
+            "id": "language-javascript-es6-p02-part-10",
+            "title": "WeakMap / WeakSet",
+            "content": "const meta = new WeakMap();\nconst seen = new WeakSet();\nconst obj = { id: 1 };\nmeta.set(obj, \"cached\");\nseen.add(obj);\nconsole.log(meta.get(obj), seen.has(obj));",
+            "displayContent": "// WeakMap / WeakSet — 객체 키만, GC에 방해 안 됨\nconst meta = new WeakMap();\nconst seen = new WeakSet();\nconst obj = { id: 1 };\nmeta.set(obj, \"cached\");\nseen.add(obj);\nconsole.log(meta.get(obj), seen.has(obj));\n// 결과: cached true"
+          },
+          {
+            "id": "language-javascript-es6-p02-part-11",
+            "title": "Promise then / catch",
+            "content": "Promise.resolve(1)\n  .then((v) => v + 1)\n  .then((v) => {\n    console.log(v);\n    return v;\n  })\n  .catch((e) => console.error(e.message));",
+            "displayContent": "// Promise then / catch\nPromise.resolve(1)\n  .then((v) => v + 1)\n  .then((v) => {\n    console.log(v);\n    return v;\n  })\n  .catch((e) => console.error(e.message));\n// 결과: 2"
+          },
+          {
+            "id": "language-javascript-es6-p02-part-12",
+            "title": "Promise.all",
+            "content": "Promise.all([Promise.resolve(1), Promise.resolve(2)]).then((values) => {\n  console.log(values);\n});",
+            "displayContent": "// Promise.all — 전체 성공 대기[wait for all]\nPromise.all([Promise.resolve(1), Promise.resolve(2)]).then((values) => {\n  console.log(values);\n});\n// 결과: [1, 2]"
+          }
+        ]
+      },
+      {
+        "id": "language-javascript-es6-p03",
+        "title": "P03.심화-내장API",
+        "fileName": "P03.심화-내장API.yaml",
+        "sourcePath": "assets/raw/syntax/javascript-es6/P03.심화-내장API.yaml",
+        "language": "javascript",
+        "parts": [
+          {
+            "id": "language-javascript-es6-p03-part-1",
+            "title": "심볼[Symbol]",
+            "content": "const id = Symbol(\"id\");\nconst user = { name: \"kim\", [id]: 7 };\nconsole.log(user[id], Symbol(\"id\") === id);",
+            "displayContent": "// 심볼[Symbol] — 고유 키[unique key]\nconst id = Symbol(\"id\");\nconst user = { name: \"kim\", [id]: 7 };\nconsole.log(user[id], Symbol(\"id\") === id);\n// 결과: 7 false"
+          },
+          {
+            "id": "language-javascript-es6-p03-part-2",
+            "title": "for...of",
+            "content": "for (const ch of \"hi\") {\n  console.log(ch);\n}\nfor (const n of [10, 20]) {\n  console.log(n);\n}",
+            "displayContent": "// for...of — 이터러블[iterable] 순회\nfor (const ch of \"hi\") {\n  console.log(ch);\n}\nfor (const n of [10, 20]) {\n  console.log(n);\n}\n// 결과: h i / 10 20"
+          },
+          {
+            "id": "language-javascript-es6-p03-part-3",
+            "title": "제너레이터[generator]",
+            "content": "function* range(start, end) {\n  for (let i = start; i <= end; i++) yield i;\n}\nconsole.log([...range(1, 3)]);",
+            "displayContent": "// 제너레이터[generator] — function* + yield\nfunction* range(start, end) {\n  for (let i = start; i <= end; i++) yield i;\n}\nconsole.log([...range(1, 3)]);\n// 결과: [1, 2, 3]"
+          },
+          {
+            "id": "language-javascript-es6-p03-part-4",
+            "title": "Object.assign",
+            "content": "const target = { a: 1 };\nObject.assign(target, { b: 2 }, { c: 3 });\nconst clone = Object.assign({}, target);\nconsole.log(target, clone);",
+            "displayContent": "// Object.assign — 얕은 병합[shallow merge]\nconst target = { a: 1 };\nObject.assign(target, { b: 2 }, { c: 3 });\nconst clone = Object.assign({}, target);\nconsole.log(target, clone);\n// 결과: { a:1, b:2, c:3 } (둘 다 동일 형태)"
+          },
+          {
+            "id": "language-javascript-es6-p03-part-5",
+            "title": "Array.from / find",
+            "content": "const chars = Array.from(\"ABC\");\nconst found = [1, 2, 3, 4].find((n) => n > 2);\nconst idx = [1, 2, 3, 4].findIndex((n) => n > 2);\nconsole.log(chars, found, idx);",
+            "displayContent": "// Array.from / find\nconst chars = Array.from(\"ABC\");\nconst found = [1, 2, 3, 4].find((n) => n > 2);\nconst idx = [1, 2, 3, 4].findIndex((n) => n > 2);\nconsole.log(chars, found, idx);\n// 결과: [\"A\",\"B\",\"C\"] 3 2"
+          },
+          {
+            "id": "language-javascript-es6-p03-part-6",
+            "title": "Array.includes / fill",
+            "content": "console.log([10, 20, 30].includes(20));\nconsole.log([0, 0, 0].fill(7));",
+            "displayContent": "// Array.includes / fill\nconsole.log([10, 20, 30].includes(20));\nconsole.log([0, 0, 0].fill(7));\n// 결과: true / [7, 7, 7]"
+          },
+          {
+            "id": "language-javascript-es6-p03-part-7",
+            "title": "String.includes / startsWith",
+            "content": "const text = \"Hello, World!\";\nconsole.log(text.includes(\"World\"), text.startsWith(\"Hello\"), text.endsWith(\"!\"));",
+            "displayContent": "// String.includes / startsWith / endsWith\nconst text = \"Hello, World!\";\nconsole.log(text.includes(\"World\"), text.startsWith(\"Hello\"), text.endsWith(\"!\"));\n// 결과: true true true"
+          },
+          {
+            "id": "language-javascript-es6-p03-part-8",
+            "title": "String.repeat / String.raw",
+            "content": "console.log(\"ab\".repeat(3));\nconsole.log(String.raw`C:\\Users\\name`);",
+            "displayContent": "// String.repeat / String.raw — 이스케이프 비처리[raw string]\nconsole.log(\"ab\".repeat(3));\nconsole.log(String.raw`C:\\Users\\name`);\n// 결과: ababab / C:\\Users\\name"
+          },
+          {
+            "id": "language-javascript-es6-p03-part-9",
+            "title": "Number.isNaN / isFinite",
+            "content": "console.log(Number.isNaN(NaN), Number.isNaN(\"NaN\"));\nconsole.log(Number.isFinite(10), Number.isFinite(Infinity));",
+            "displayContent": "// Number.isNaN / isFinite — 전역 isNaN보다 안전\nconsole.log(Number.isNaN(NaN), Number.isNaN(\"NaN\"));\nconsole.log(Number.isFinite(10), Number.isFinite(Infinity));\n// 결과: true false / true false"
+          },
+          {
+            "id": "language-javascript-es6-p03-part-10",
+            "title": "2진수·8진수 리터럴[binary octal]",
+            "content": "console.log(0b1010, 0o755);",
+            "displayContent": "// 2진수·8진수 리터럴[binary / octal literal]\nconsole.log(0b1010, 0o755);\n// 결과: 10 493"
+          },
+          {
+            "id": "language-javascript-es6-p03-part-11",
+            "title": "Object.keys / entries",
+            "content": "const sample = { a: 1, b: 2 };\nconsole.log(Object.keys(sample));\nconsole.log(Object.values(sample));\nconsole.log(Object.entries(sample));",
+            "displayContent": "// Object.keys / values / entries\nconst sample = { a: 1, b: 2 };\nconsole.log(Object.keys(sample));\nconsole.log(Object.values(sample));\nconsole.log(Object.entries(sample));\n// 결과: [\"a\",\"b\"] / [1,2] / [[\"a\",1],[\"b\",2]]"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "lodash",
     "label": "Lodash",
     "folderName": "lodash",

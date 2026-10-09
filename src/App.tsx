@@ -14,8 +14,8 @@ import { noteTracks } from "./generated/noteLessons";
 import { visualTracks } from "./generated/visualLessons";
 import { buildHighlightChars } from "./lib/codeHighlight";
 import type { LanguagePart } from "./data/languageLessonTypes";
-import type { LexiconPart } from "./data/lexiconLessonTypes";
-import type { NoteBlock, NotePart } from "./data/noteLessonTypes";
+import type { ContentLink, LexiconPart } from "./data/lexiconLessonTypes";
+import type { NoteBlock, NotePart, NoteScenario } from "./data/noteLessonTypes";
 import type { VisualPart } from "./data/visualLessonTypes";
 
 const THEME_STORAGE_KEY = "gmtl-type-recall-theme";
@@ -193,6 +193,60 @@ function findNoteLessonParts(lessonId: string): NotePart[] {
   return [];
 }
 
+type LexiconJumpTarget = {
+  trackId: string;
+  lessonId: string;
+  partId: string;
+  title: string;
+  answer: string;
+};
+
+function findLexiconTerm(termId: string): LexiconJumpTarget | null {
+  for (const track of lexiconTracks) {
+    for (const lesson of track.lessons) {
+      const part = lesson.parts.find((item) => item.id === termId);
+      if (part) {
+        return {
+          trackId: track.id,
+          lessonId: lesson.id,
+          partId: part.id,
+          title: part.title,
+          answer: part.answer,
+        };
+      }
+    }
+  }
+  return null;
+}
+
+function ContentLinkRow(props: {
+  heading: string;
+  links: ContentLink[];
+  onJump: (link: ContentLink) => void;
+}) {
+  return (
+    <Show when={props.links.length > 0}>
+      <h3 class="noteHeading">{props.heading}</h3>
+      <div class="contentLinkRow">
+        <For each={props.links}>
+          {(link) => (
+            <button
+              type="button"
+              class="contentLinkButton"
+              onClick={(event) => {
+                event.stopPropagation();
+                props.onJump(link);
+              }}
+            >
+              {link.title}
+            </button>
+          )}
+        </For>
+      </div>
+    </Show>
+  );
+}
+
 function NoteBlockView(props: { block: NoteBlock }) {
   const block = props.block;
   if (block.type === "prose") {
@@ -260,6 +314,7 @@ type NoteCardProps = {
   isActive: boolean;
   setCardRef: (partId: string, el: HTMLElement | undefined) => void;
   onActivate: (partId: string) => void;
+  onJump: (link: ContentLink) => void;
 };
 
 function NoteCard(props: NoteCardProps) {
@@ -287,6 +342,194 @@ function NoteCard(props: NoteCardProps) {
         <For each={props.part.blocks}>
           {(block) => <NoteBlockView block={block} />}
         </For>
+        <ContentLinkRow
+          heading="이어가기"
+          links={props.part.relatedLinks ?? []}
+          onJump={props.onJump}
+        />
+      </div>
+    </article>
+  );
+}
+
+type ScenarioDrillCardProps = {
+  part: NotePart;
+  trackLabel: string;
+  lessonTitle: string;
+  isActive: boolean;
+  setCardRef: (partId: string, el: HTMLElement | undefined) => void;
+  onActivate: (partId: string) => void;
+  onJump: (link: ContentLink) => void;
+  onJumpToTerm: (termId: string) => void;
+};
+
+function ScenarioDrillCard(props: ScenarioDrillCardProps) {
+  const scenario = (): NoteScenario => props.part.scenario!;
+  const [pickedId, setPickedId] = createSignal<string | null>(null);
+
+  const pickedOption = createMemo(() => {
+    const id = pickedId();
+    if (!id) return null;
+    return scenario().options.find((option) => option.id === id) ?? null;
+  });
+
+  const defaultOption = createMemo(() =>
+    scenario().options.find((option) => option.id === scenario().defaultPick) ??
+    null,
+  );
+
+  const matchesDefault = createMemo(() => {
+    const id = pickedId();
+    return id !== null && id === scenario().defaultPick;
+  });
+
+  return (
+    <article
+      class={
+        props.isActive
+          ? "typingCard noteCard scenarioCard isActive"
+          : "typingCard noteCard scenarioCard isInactive"
+      }
+      data-part-id={props.part.id}
+      aria-current={props.isActive ? "true" : undefined}
+      ref={(el) => props.setCardRef(props.part.id, el)}
+      onClick={() => {
+        if (!props.isActive) {
+          props.onActivate(props.part.id);
+        }
+      }}
+    >
+      <div class="typingCardHeader">
+        <span class="typingCardTag">판단 연습</span>
+        <span class="typingCardTitle truncate">
+          {props.lessonTitle}
+          {" · "}
+          {props.part.title}
+        </span>
+      </div>
+      <div class="noteBody scenarioBody">
+        <h3 class="noteHeading">상황</h3>
+        <div class="noteProse">
+          <p>{scenario().context}</p>
+        </div>
+        <h3 class="noteHeading">증상</h3>
+        <div class="noteProse">
+          <p>{scenario().symptom}</p>
+        </div>
+        <h3 class="noteHeading">후보를 고르세요</h3>
+        <div class="scenarioOptions" role="group" aria-label="아키텍처 후보">
+          <For each={scenario().options}>
+            {(option) => {
+              const isSelected = () => pickedId() === option.id;
+              const isDefault = () =>
+                pickedId() !== null && option.id === scenario().defaultPick;
+              return (
+                <button
+                  type="button"
+                  classList={{
+                    scenarioOption: true,
+                    isSelected: isSelected(),
+                    isDefault: isDefault(),
+                  }}
+                  aria-pressed={isSelected()}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    props.onActivate(props.part.id);
+                    setPickedId(option.id);
+                  }}
+                >
+                  <span class="scenarioOptionLabel">{option.label}</span>
+                </button>
+              );
+            }}
+          </For>
+        </div>
+        <Show when={pickedOption()}>
+          {(option) => (
+            <div class="scenarioFeedback">
+              <p
+                classList={{
+                  scenarioVerdict: true,
+                  isMatch: matchesDefault(),
+                  isDiff: !matchesDefault(),
+                }}
+              >
+                {matchesDefault()
+                  ? "기본안과 같습니다."
+                  : `기본안은 ${defaultOption()?.label ?? scenario().defaultPick}입니다.`}
+              </p>
+              <h3 class="noteHeading">고른 안</h3>
+              <dl class="noteKv">
+                <div class="noteKvRow">
+                  <dt>이럴 때</dt>
+                  <dd>{option().whenPreferred}</dd>
+                </div>
+                <div class="noteKvRow">
+                  <dt>피할 때</dt>
+                  <dd>{option().whenAvoid}</dd>
+                </div>
+              </dl>
+              <h3 class="noteHeading">기본안 근거</h3>
+              <div class="noteProse">
+                <p>{scenario().rationale}</p>
+              </div>
+              <Show when={!matchesDefault() && defaultOption()}>
+                {(def) => (
+                  <>
+                    <h3 class="noteHeading">기본안 조건</h3>
+                    <dl class="noteKv">
+                      <div class="noteKvRow">
+                        <dt>이럴 때</dt>
+                        <dd>{def().whenPreferred}</dd>
+                      </div>
+                      <div class="noteKvRow">
+                        <dt>피할 때</dt>
+                        <dd>{def().whenAvoid}</dd>
+                      </div>
+                    </dl>
+                  </>
+                )}
+              </Show>
+            </div>
+          )}
+        </Show>
+        <Show when={scenario().relatedTermIds.length > 0}>
+          <h3 class="noteHeading">관련 용어</h3>
+          <div class="scenarioTermLinks">
+            <For each={scenario().relatedTermIds}>
+              {(termId) => {
+                const target = () => findLexiconTerm(termId);
+                return (
+                  <Show
+                    when={target()}
+                    fallback={
+                      <span class="scenarioTermMissing">{termId}</span>
+                    }
+                  >
+                    {(item) => (
+                      <button
+                        type="button"
+                        class="scenarioTermLink"
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          props.onJumpToTerm(termId);
+                        }}
+                      >
+                        {item().title}
+                        <span class="scenarioTermAnswer">{item().answer}</span>
+                      </button>
+                    )}
+                  </Show>
+                );
+              }}
+            </For>
+          </div>
+        </Show>
+        <ContentLinkRow
+          heading="이어가기"
+          links={props.part.relatedLinks ?? []}
+          onJump={props.onJump}
+        />
       </div>
     </article>
   );
@@ -596,6 +839,7 @@ type LexiconCardProps = {
   practiceChars: CardChar[];
   setCardRef: (partId: string, el: HTMLElement | undefined) => void;
   onActivate: (partId: string) => void;
+  onJump: (link: ContentLink) => void;
 };
 
 function LexiconCard(props: LexiconCardProps) {
@@ -640,6 +884,13 @@ function LexiconCard(props: LexiconCardProps) {
       <Show when={props.part.example}>
         <p class="lexiconExample">{props.part.example}</p>
       </Show>
+      <div class="lexiconLinks">
+        <ContentLinkRow
+          heading="관련 판단 연습"
+          links={props.part.relatedDrills ?? []}
+          onJump={props.onJump}
+        />
+      </div>
     </article>
   );
 }
@@ -683,7 +934,7 @@ function VisualCard(props: VisualCardProps) {
         <figure class="visualFigure">
           <img
             class="visualImage"
-            src={props.part.imagePath}
+            src={`${import.meta.env.BASE_URL}${props.part.imagePath.replace(/^\//, "")}`}
             alt={props.part.caption || props.part.title}
             loading="lazy"
             decoding="async"
@@ -834,10 +1085,15 @@ function App() {
 
   // 탭이 사용자에 의해 바뀔 때만 첫 항목으로 리셋한다. 초기 렌더는 건드리지 않는다.
   let isFirstTabEffect = true;
+  let suppressTabReset = false;
   createEffect(() => {
     const tab = appTab();
     if (isFirstTabEffect) {
       isFirstTabEffect = false;
+      return;
+    }
+    if (suppressTabReset) {
+      suppressTabReset = false;
       return;
     }
     const tracks = navTracksForTab(tab, allNavTracks);
@@ -956,6 +1212,41 @@ function App() {
     }
     return findNoteLessonParts(selectedLessonId());
   });
+
+  const noteLessonHasScenarios = createMemo(() =>
+    selectedNoteLessonParts().some((part) => Boolean(part.scenario)),
+  );
+
+  const jumpToLexiconTerm = (termId: string) => {
+    const target = findLexiconTerm(termId);
+    if (!target) return;
+    suppressTabReset = true;
+    setAppTab("lexicon");
+    setSelectedTrackId(target.trackId);
+    setSelectedLessonId(target.lessonId);
+    setSelectedPartId(target.partId);
+    setInputValue("");
+    setDraftValue("");
+    setIsComposing(false);
+    setMobileNavOpen(false);
+  };
+
+  const jumpToContent = (link: ContentLink) => {
+    if (!link.trackId || !link.lessonId || !link.partId) return;
+    suppressTabReset = true;
+    if (link.kind === "lexicon") {
+      setAppTab("lexicon");
+    } else {
+      setAppTab("notes");
+    }
+    setSelectedTrackId(link.trackId);
+    setSelectedLessonId(link.lessonId);
+    setSelectedPartId(link.partId);
+    setInputValue("");
+    setDraftValue("");
+    setIsComposing(false);
+    setMobileNavOpen(false);
+  };
 
   const stripSpaces = createMemo(() => {
     if (appTab() === "lexicon" || isNotesTab()) {
@@ -1315,7 +1606,9 @@ function App() {
     appTab() === "lexicon"
       ? "실무 용어 타이핑 연습"
       : appTab() === "notes"
-        ? "참고 노트"
+        ? noteLessonHasScenarios()
+          ? "아키텍처 판단 연습"
+          : "참고 노트"
         : "개발 예문 타이핑 연습",
   );
 
@@ -1323,7 +1616,9 @@ function App() {
     appTab() === "lexicon"
       ? "용어 카드"
       : appTab() === "notes"
-        ? "참고 노트"
+        ? noteLessonHasScenarios()
+          ? "판단 시나리오"
+          : "참고 노트"
         : selectedLesson()?.kind === "visual"
           ? "시각 참고"
           : "원문",
@@ -1392,7 +1687,11 @@ function App() {
         <div class="headerRight">
           <Show
             when={!isNotesTab()}
-            fallback={<span class="headerAccuracy">읽기 전용</span>}
+            fallback={
+              <span class="headerAccuracy">
+                {noteLessonHasScenarios() ? "판단 연습" : "읽기 전용"}
+              </span>
+            }
           >
             <span class="headerAccuracy" aria-label="정확도">
               정확도 {accuracyValue()}%
@@ -1501,6 +1800,7 @@ function App() {
                         practiceChars={practiceChars()}
                         setCardRef={setCardRef}
                         onActivate={setSelectedPartId}
+                        onJump={jumpToContent}
                       />
                     )}
                   </For>
@@ -1509,14 +1809,31 @@ function App() {
             >
               <For each={selectedNoteLessonParts()}>
                 {(part) => (
-                  <NoteCard
-                    part={part}
-                    trackLabel={selectedTrack()?.label ?? "노트"}
-                    lessonTitle={selectedLesson()?.title ?? "노트"}
-                    isActive={part.id === selectedPartId()}
-                    setCardRef={setCardRef}
-                    onActivate={setSelectedPartId}
-                  />
+                  <Show
+                    when={part.scenario}
+                    fallback={
+                      <NoteCard
+                        part={part}
+                        trackLabel={selectedTrack()?.label ?? "노트"}
+                        lessonTitle={selectedLesson()?.title ?? "노트"}
+                        isActive={part.id === selectedPartId()}
+                        setCardRef={setCardRef}
+                        onActivate={setSelectedPartId}
+                        onJump={jumpToContent}
+                      />
+                    }
+                  >
+                    <ScenarioDrillCard
+                      part={part}
+                      trackLabel={selectedTrack()?.label ?? "노트"}
+                      lessonTitle={selectedLesson()?.title ?? "노트"}
+                      isActive={part.id === selectedPartId()}
+                      setCardRef={setCardRef}
+                      onActivate={setSelectedPartId}
+                      onJump={jumpToContent}
+                      onJumpToTerm={jumpToLexiconTerm}
+                    />
+                  </Show>
                 )}
               </For>
             </Show>

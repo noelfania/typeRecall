@@ -2,7 +2,25 @@
 
 이 폴더가 프로젝트 모든 교육자료의 **단일 정본[canonical source]** 이다.
 `assets/typingSource/` 등 원본 파일은 변환 후 삭제되었고, 이후 콘텐츠 수정·추가는 여기서만 한다.
-앱 화면 연동(생성기 → `src/generated/`)은 별도 단계로, 현재는 끊어 둔 상태다.
+앱 연동은 `npm run generate:lessons` → `src/generated/*.ts` 이다.
+
+## 학습 3층 (아키텍처 훈련)
+
+| 층 | 위치 | 훈련 목표 |
+|----|------|-----------|
+| A. 어휘 | `knowledge/terms/*` | 회의에서 바로 꺼내는 이름 |
+| B. 맥락 | `knowledge/notes/*` (일반 노트) | “언제 쓰는지” 한 장 |
+| C. 판단 | `knowledge/notes/*` + `scenarios[]` | 대안 비교·기본안·탈락 조건 |
+
+시나리오는 **정답 암기가 아니라 기본안(`defaultPick`) + 탈락 조건(`whenAvoid`)** 을 남긴다.
+실무에서 막힌 판단 1건 → 시나리오 1장을 추가하는 루프로 키운다.
+
+### 콘텐츠 루프
+1. 막힌 판단을 한 문장으로 적는다.
+2. `notes/architecture-scenarios.yaml`에 시나리오 1장 추가.
+3. 없는 고빈도 용어만 `terms/`에 추가.
+4. `npm run validate:raw` → `npm run generate:lessons`.
+5. 불필요 카드·시나리오는 삭제 또는 `_inbox/`.
 
 ## 두 카테고리
 
@@ -42,11 +60,13 @@ source:
 
 - **`code-snippet` / `command`** (`category: syntax`) — `language`, `track{id,label}`, `parts[]`
   - part: `id`, `title`, `display`(주석 포함 화면 표시용), `typing`(실제 타이핑 대상)
-  - 파트 분할 규칙은 `.cursor/rules/typingSource/Language-Part.md` 기준
+  - 파트 분할 규칙은 `.cursor/rules/syntax/authoring.mdc` 기준
 - **`term`** — `topic`, `terms[]`
   - term: `id`, `section`, `title`, `prompt`(설명), `answer`(타이핑할 영어), `aliases[]`(복수 답안), `example`
 - **`visual`** — 섹션 폴더마다 `meta.yaml` (`title.ko`, `caption.ko`, `explanation.ko`, `images[]`, `typingUnits[]`)
 - **`note`** — `topic` + 자유 본문(`body` 또는 구조화 필드). 타이핑 비대상 참고 자료.
+  - 판단 훈련: `scenarios[]` — `id`, `title`, `context`, `symptom`, `options[{id,label,whenPreferred,whenAvoid}]`, `defaultPick`, `rationale`, `relatedTermIds[]`
+  - 교차 링크(선택): `relatedScenarioIds`, `relatedNoteIds`, `relatedTermIds`
 
 ## 큐레이션 원칙
 
@@ -58,6 +78,6 @@ source:
 ## 변환 이력
 
 - 2026-07-09: `assets/typingSource/` 전체(Language-* 32레슨 441파트, Rule-* 109용어)를
-  `scripts/convert-to-raw.mjs`로 변환. symbol-english.txt는 오탈자 정규화 후 수기 재작성(30카드).
+  raw YAML로 일회 변환 후 원본·변환 스크립트 폐기. symbol-english.txt는 오탈자 정규화 후 수기 재작성(30카드).
   visual(css-grid 6·css-selector 32섹션)은 구 `assets/knowledge/reference/visual/`에서 이동.
   채팅 수집 raw(정규식 참고표, UI 분류, SQL·dev·web 용어 추가분, TS/HTTP 노트, Git 복구·정리)를 등록.
