@@ -463,16 +463,40 @@ button {
 }
 
 .headerAccuracy {
-  display: none;
   font-size: 0.75rem;
   color: var(--muted);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
 
+.headerWpm,
+.headerAccuracyLabel {
+  display: none;
+}
+
 @media (min-width: 640px) {
-  .headerAccuracy {
+  .headerWpm,
+  .headerAccuracyLabel {
     display: inline;
+  }
+}
+
+/* 좁은 화면에서는 탭과 진행률을 우선하고 제목을 뺀다 */
+@media (max-width: 639px) {
+  .headerTitleMobile {
+    display: none;
+  }
+
+  .headerTabBar .appTab {
+    white-space: nowrap;
+  }
+
+  .headerLeft {
+    gap: 0.375rem;
+  }
+
+  .iconButton {
+    flex: none;
   }
 }
 
@@ -514,8 +538,8 @@ button {
 .iconButton {
   position: relative;
   display: inline-flex;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 2.25rem;
+  height: 2.25rem;
   align-items: center;
   justify-content: center;
   border: none;
@@ -743,6 +767,20 @@ html.dark .themeToggle .moonIcon {
   font-weight: 600;
 }
 
+.lexiconForms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  margin: 0;
+  padding: 0 1.25rem 0.75rem;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+.typingCard.isActive .lexiconForms {
+  color: #a1a1aa;
+}
+
 .lexiconExample {
   margin: 0;
   padding: 0.75rem 1.25rem 1.25rem;
@@ -760,6 +798,8 @@ html.dark .themeToggle .moonIcon {
 /* —— 시각 참고 카드 —— */
 
 .visualFigure {
+  display: grid;
+  gap: 0.75rem;
   margin: 0;
   padding: 1rem 1.25rem 0;
 }
@@ -985,9 +1025,27 @@ html.dark .themeToggle .moonIcon {
 }
 
 .scenarioOption.isSelected {
-  border-color: var(--fg, #18181b);
-  color: var(--fg, #18181b);
-  background: rgba(0, 0, 0, 0.04);
+  border-color: var(--nav-fg-active);
+  color: var(--nav-fg-active);
+  background: var(--surface-hover);
+}
+
+/* 활성 카드는 테마와 무관하게 어두운 배경이다 */
+.typingCard.isActive .scenarioOption,
+.typingCard.isActive .scenarioTermLink,
+.typingCard.isActive .contentLinkButton {
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #e4e4e7;
+}
+
+.typingCard.isActive .scenarioOption:hover,
+.typingCard.isActive .scenarioTermLink:hover,
+.typingCard.isActive .contentLinkButton:hover {
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+.typingCard.isActive .scenarioTermAnswer {
+  color: #a1a1aa;
 }
 
 .typingCard.isActive .scenarioOption.isSelected {
@@ -1194,6 +1252,7 @@ html.dark .themeToggle .moonIcon {
   padding: 1.25rem 1rem;
   white-space: pre-wrap;
   word-break: keep-all;
+  overflow-wrap: anywhere;
   font-family: ui-monospace, "Cascadia Code", "Consolas", "Noto Sans KR", monospace;
   font-size: 1.0625rem;
   line-height: 1.85;
@@ -1210,9 +1269,53 @@ html.dark .themeToggle .moonIcon {
   color: #e4e4e7;
 }
 
+/* —— 코드 줄과 그림자 설명 —— */
+
+.annotatedCode {
+  white-space: normal;
+}
+
+.codeLine {
+  min-height: 1.85em;
+}
+
+.codeText {
+  /* 긴 줄이 줄바꿈되면 이어지는 줄을 그 줄의 들여쓰기보다 안쪽에서 시작한다 */
+  --code-hang: calc((var(--code-indent, 0) + 2) * 1ch);
+  display: block;
+  padding-left: var(--code-hang);
+  text-indent: calc(var(--code-hang) * -1);
+  white-space: pre-wrap;
+}
+
+.codeNote {
+  margin-top: -0.15em;
+  margin-bottom: 0.45em;
+  /* 고정폭 글꼴 한 칸(약 0.6em)만큼 코드 들여쓰기에 맞춘다 */
+  padding-left: calc(var(--note-indent, 0) * 0.6em * 1.3);
+  font-family: "Segoe UI", "Noto Sans KR", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--muted);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.typingCard.isActive .codeNote {
+  color: #a1a1aa;
+}
+
+.codeNote.isResult {
+  font-family: ui-monospace, "Cascadia Code", "Consolas", "Noto Sans KR", monospace;
+  color: var(--accent);
+}
+
+.typingCard.isActive .codeNote.isResult {
+  color: #6ee7b7;
+}
+
 .typingCard.isInactive .practiceText {
   color: var(--card-inactive-fg);
-  pointer-events: none;
 }
 
 .typingCard.isInactive .char {
@@ -1229,9 +1332,33 @@ html.dark .themeToggle .moonIcon {
   bottom: 0;
   z-index: 35;
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: flex-end;
-  padding: 0.5rem 1.25rem 1rem;
+  gap: 0.5rem 0.75rem;
+  padding: 0.5rem 1.25rem calc(1rem + env(safe-area-inset-bottom));
   pointer-events: none;
+}
+
+.completionNotice {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.75rem;
+  margin: 0;
+  padding: 0.45rem 0.9rem;
+  border-radius: 0.75rem;
+  background: var(--accent-soft);
+  color: var(--nav-fg-active);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  backdrop-filter: blur(10px);
+}
+
+.completionHint {
+  font-weight: 400;
+  color: var(--muted-strong);
 }
 
 @media (min-width: 1024px) {
@@ -1354,6 +1481,8 @@ html.dark .btnPrimary {
   color: #fca5a5;
   background: rgba(239, 68, 68, 0.2);
   border-radius: 0.125rem;
+  /* 색만으로 구분하지 않는다 */
+  text-decoration: underline wavy #fca5a5;
 }
 
 .char.isCurrent {
@@ -1436,6 +1565,47 @@ html.dark .btnPrimary {
   height: 1px;
   opacity: 0;
   pointer-events: none;
+  /* iOS Safari는 16px 미만 입력창에 포커스하면 화면을 확대한다 */
+  font-size: 16px;
+}
+
+.inlineCode {
+  padding: 0.05em 0.3em;
+  border-radius: 0.25rem;
+  background: var(--surface-hover);
+  font-family: ui-monospace, "Cascadia Code", "Consolas", monospace;
+  font-size: 0.92em;
+}
+
+.typingCard.isActive .inlineCode {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.noteBody a {
+  color: var(--accent);
+  overflow-wrap: anywhere;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.mobileDrawer:focus-visible {
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }
 
 @media (max-width: 640px) {

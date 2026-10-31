@@ -1,9 +1,5 @@
 import { expect, test } from "@playwright/test";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const screenshotDir = path.join(__dirname, "screenshots");
 
 async function readRadii(page: import("@playwright/test").Page, selectors: string[]) {
   return page.evaluate((list) => {
@@ -21,9 +17,7 @@ async function readRadii(page: import("@playwright/test").Page, selectors: strin
 }
 
 test.describe("개발 예문 타이핑 연습", () => {
-  test("3열 Docs Shell·스크롤 카드·진행률·라운드 모서리가 보인다", async ({
-    page,
-  }) => {
+  test("3열 Docs Shell·스크롤 카드·진행률·라운드 모서리가 보인다", async ({ page }, testInfo) => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto("/");
 
@@ -71,12 +65,12 @@ test.describe("개발 예문 타이핑 연습", () => {
     expect(markerColor).toMatch(/rgb\(\s*16,\s*185,\s*129\s*\)/);
 
     await page.screenshot({
-      path: path.join(screenshotDir, "home-scroll-stack-light.png"),
+      path: testInfo.outputPath("home-scroll-stack-light.png"),
       fullPage: true,
     });
   });
 
-  test("다시 시작 버튼으로 입력을 초기화할 수 있다", async ({ page }) => {
+  test("다시 시작 버튼으로 입력을 초기화할 수 있다", async ({ page }, testInfo) => {
     await page.goto("/");
 
     const practiceText = page.locator(".typingCard.isActive .practiceText");
@@ -87,7 +81,7 @@ test.describe("개발 예문 타이핑 연습", () => {
     await expect(page.getByLabel("정확도")).toContainText(/0\/\d+/);
 
     await page.screenshot({
-      path: path.join(screenshotDir, "reset-ready.png"),
+      path: testInfo.outputPath("reset-ready.png"),
       fullPage: true,
     });
   });
@@ -110,7 +104,7 @@ test.describe("개발 예문 타이핑 연습", () => {
     await expect(tocLinks.nth(1)).toHaveClass(/isActive/);
   });
 
-  test("테마 토글로 다크 모드를 전환한다", async ({ page }) => {
+  test("테마 토글로 다크 모드를 전환한다", async ({ page }, testInfo) => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto("/");
 
@@ -123,7 +117,7 @@ test.describe("개발 예문 타이핑 연습", () => {
     expect(stored).toBe("dark");
 
     await page.screenshot({
-      path: path.join(screenshotDir, "home-scroll-stack-dark.png"),
+      path: testInfo.outputPath("home-scroll-stack-dark.png"),
       fullPage: true,
     });
 
@@ -131,7 +125,7 @@ test.describe("개발 예문 타이핑 연습", () => {
     await expect(page.locator("html")).not.toHaveClass(/dark/);
   });
 
-  test("언어·용어 탭을 전환하고 용어 카드를 표시한다", async ({ page }) => {
+  test("언어·용어 탭을 전환하고 용어 카드를 표시한다", async ({ page }, testInfo) => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto("/");
 
@@ -149,14 +143,12 @@ test.describe("개발 예문 타이핑 연습", () => {
     await expect(page.locator(".lexiconCard.isActive .lexiconExample")).toBeVisible();
 
     await page.screenshot({
-      path: path.join(screenshotDir, "lexicon-tab-light.png"),
+      path: testInfo.outputPath("lexicon-tab-light.png"),
       fullPage: true,
     });
   });
 
-  test("CSS Grid 시각 레슨에서 이미지·캡션·코드 카드를 표시한다", async ({
-    page,
-  }) => {
+  test("CSS Grid 시각 레슨에서 이미지·캡션·코드 카드를 표시한다", async ({ page }, testInfo) => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto("/");
 
@@ -169,7 +161,10 @@ test.describe("개발 예문 타이핑 연습", () => {
     await expect(page.getByLabel("시각 참고")).toBeVisible();
     await expect(page.locator(".visualCard.isActive")).toBeVisible();
 
-    const visualImage = page.locator(".visualCard.isActive .visualImage");
+    // 섹션의 이미지를 첫 장만이 아니라 모두 보여 준다
+    const visualImages = page.locator(".visualCard.isActive .visualImage");
+    await expect(visualImages).toHaveCount(2);
+    const visualImage = visualImages.first();
     await expect(visualImage).toBeVisible();
     await expect
       .poll(async () => visualImage.evaluate((img: HTMLImageElement) => img.naturalWidth))
@@ -199,7 +194,7 @@ test.describe("개발 예문 타이핑 연습", () => {
     );
 
     await page.screenshot({
-      path: path.join(screenshotDir, "visual-card-light.png"),
+      path: testInfo.outputPath("visual-card-light.png"),
       fullPage: true,
     });
   });

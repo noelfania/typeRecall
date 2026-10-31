@@ -63,7 +63,7 @@ npm run test:e2e
 - 층 C 시나리오 ≈ **architecture 5건뿐**. REST/FE 쪽 시나리오를 추가하는 방향은 OK, 무관 주제 확장은 금지.
 - 용어 → 시나리오/노트 **발신 링크 거의 0**. 새 용어는 가능하면 `relatedNoteIds`/`relatedScenarioIds`를 채운다.
 - 노트 10개 중 교차링크 없는 것이 다수. 노트 추가 시 `relatedTermIds` 필수에 가깝게.
-- `javascript` + `javascript-es6` 주제 중복 — 새 ES6 예문 넣기 전에 기존 트랙 보강 우선.
+- JS 문법은 `javascript` 트랙 하나로 유지한다 (`javascript-es6`는 2026-10-31 통합). 정규식 상세는 `regex-for-javascript`에 둔다.
 - validate가 `_inbox` YAML도 집계함 — inbox를 정본처럼 키우지 말 것.
 
 상세 규칙: `.cursor/rules/project-standards.mdc`, `knowledge/authoring.mdc`, `syntax/authoring.mdc`.

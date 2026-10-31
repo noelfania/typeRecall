@@ -274,7 +274,7 @@ parts:
       )
 
       now := time.Now()
-      fmt.Println(now.Format("2006-01-02"))
+      fmt.Println(now.Format("2006-01-02")) // Go 포맷은 기준 시각 2006-01-02로 표기
     typing: |-
       import (
       	"fmt"

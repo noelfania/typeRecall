@@ -112,6 +112,13 @@ function tokenizeLine(line: string, language: string) {
   return tones;
 }
 
+const STRING_AWARE_LANGUAGES = new Set(['javascript', 'typescript', 'java', 'go', 'rust', 'csharp', 'python', 'shell', 'sql']);
+
+// 일반 키보드나 IME로 칠 수 없는 기호(●, →, — 등)는 입력 대상에서 뺀다
+function isKeyboardChar(char: string) {
+  return /[\x20-\x7eᄀ-ᇿ぀-ヿ㄰-㆏㐀-鿿가-힣]/.test(char);
+}
+
 function buildTypableMask(line: string, language: string, blockCommentState: { active: boolean }) {
   const mask = Array.from({ length: line.length }, () => true);
 
@@ -125,8 +132,24 @@ function buildTypableMask(line: string, language: string, blockCommentState: { a
     }
   };
 
+  // 문자열 안의 //, # 은 주석이 아니다
+  const tracksStrings = STRING_AWARE_LANGUAGES.has(language);
+  let stringQuote = '';
+
   let index = 0;
   while (index < line.length) {
+    if (stringQuote) {
+      if (line[index] === '\\') {
+        index += 2;
+        continue;
+      }
+      if (line[index] === stringQuote) {
+        stringQuote = '';
+      }
+      index += 1;
+      continue;
+    }
+
     if (blockCommentState.active) {
       const endIndex = line.indexOf('*/', index);
       if (endIndex === -1) {
@@ -153,7 +176,19 @@ function buildTypableMask(line: string, language: string, blockCommentState: { a
       }
     }
 
-    if (['javascript', 'typescript', 'java', 'go', 'rust', 'csharp', 'html'].includes(language) && line.startsWith('/*', index)) {
+    // 정규식의 \/\/ 처럼 이스케이프된 글자는 주석 시작이 아니다
+    if (tracksStrings && line[index] === '\\') {
+      index += 2;
+      continue;
+    }
+
+    if (tracksStrings && (line[index] === '"' || line[index] === "'" || line[index] === '`')) {
+      stringQuote = line[index];
+      index += 1;
+      continue;
+    }
+
+    if (['javascript', 'typescript', 'java', 'go', 'rust', 'csharp', 'html', 'css'].includes(language) && line.startsWith('/*', index)) {
       const endIndex = line.indexOf('*/', index + 2);
       if (endIndex === -1) {
         markCommentRange(index, line.length);
@@ -170,7 +205,7 @@ function buildTypableMask(line: string, language: string, blockCommentState: { a
       return mask;
     }
 
-    if (['python', 'shell'].includes(language) && line[index] === '#') {
+    if (['python', 'shell'].includes(language) && line[index] === '#' && (index === 0 || /\s/.test(line[index - 1])) && (index === line.length - 1 || /\s/.test(line[index + 1]))) {
       markCommentRange(index, line.length);
       return mask;
     }
@@ -208,7 +243,7 @@ export function buildHighlightChars(text: string, language: string) {
     for (let index = 0; index < line.length; index += 1) {
       const char = line[index];
       const isGap = /\s/.test(char);
-      const isTypable = typableMask[index] && !isGap;
+      const isTypable = typableMask[index] && !isGap && isKeyboardChar(char);
 
       chars.push({
         char,

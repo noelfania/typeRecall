@@ -93,7 +93,7 @@ parts:
         constructor(name) {
           this.name = name;
         }
-        speak() { return `${this.name} makes a noise.`; }
+        speak() { return `${this.name} makes a noise.`; } // 메서드는 prototype에 있어 인스턴스끼리 공유
       }
     typing: |-
       class Animal {
@@ -146,31 +146,6 @@ parts:
       dog1.parentSpeak()
       dog1 instanceof Dog
       dog1 instanceof Animal
-  - id: language-javascript-p06-part-7
-    title: 정적 초기화 블록[static initialization block]
-    display: |-
-      /* 정적 초기화 블록[static initialization block] */
-      class Config {
-        static host;
-        static port;
-        static {
-          Config.host = 'localhost';
-          Config.port = 3000;
-        }
-      }
-      Config.host  // 'localhost'
-      Config.port  // 3000
-    typing: |-
-      class Config {
-        static host;
-        static port;
-        static {
-          Config.host = 'localhost';
-          Config.port = 3000;
-        }
-      }
-      Config.host
-      Config.port
   - id: language-javascript-p06-part-8
     title: 클래스 표현식[class expression]
     display: |-
@@ -192,52 +167,6 @@ parts:
         get area() { return this.w * this.h; }
       };
       new Rectangle(4, 5).area
-  - id: language-javascript-p06-part-9
-    title: 믹스인[mixin] 정의
-    display: |-
-      /* 믹스인[mixin] 정의 - 클래스를 반환하는 함수 */
-      var Serializable = Base => class extends Base {
-        serialize() { return JSON.stringify(this); }
-      };
-
-      var Timestamped = Base => class extends Base {
-        constructor(...args) {
-          super(...args);
-          this.createdAt = new Date().toISOString().slice(0, 10);
-        }
-      };
-    typing: |-
-      var Serializable = Base => class extends Base {
-        serialize() { return JSON.stringify(this); }
-      };
-
-      var Timestamped = Base => class extends Base {
-        constructor(...args) {
-          super(...args);
-          this.createdAt = new Date().toISOString().slice(0, 10);
-        }
-      };
-  - id: language-javascript-p06-part-10
-    title: 믹스인[mixin] 적용
-    display: |-
-      /* 믹스인[mixin] 적용 - 상속 체인에 끼워 넣기 */
-      class BaseEntity {
-        constructor(data) { Object.assign(this, data); }
-      }
-
-      class UserEntity extends Serializable(Timestamped(BaseEntity)) {}
-
-      var userEntity = new UserEntity({ id: 1, name: 'kim' });
-      userEntity.serialize()   // '{"id":1,"name":"kim","createdAt":"2026-03-18"}'
-    typing: |-
-      class BaseEntity {
-        constructor(data) { Object.assign(this, data); }
-      }
-
-      class UserEntity extends Serializable(Timestamped(BaseEntity)) {}
-
-      var userEntity = new UserEntity({ id: 1, name: 'kim' });
-      userEntity.serialize()
   - id: language-javascript-p06-part-11
     title: 내장 클래스 상속[built-in class inheritance]
     display: |-

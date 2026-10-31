@@ -17,7 +17,7 @@ parts:
       user_name = "kim"
       user_age = 30
       score = 4.5
-      is_admin = True
+      is_admin = True # 참거짓은 대문자로 시작(True, False)
       print(user_name, user_age, score, is_admin)
     typing: |-
       user_name = "kim"
@@ -57,7 +57,7 @@ parts:
     title: None - 값 없음[None]
     display: |-
       # None - 값 없음[None]
-      email = None
+      email = None # 값 없음. 비교는 is None으로
       print(email)
     typing: |-
       email = None
@@ -66,7 +66,7 @@ parts:
     title: 조건문[if]
     display: |-
       # 조건문[if]
-      if user["age"] > 20:
+      if user["age"] > 20: # 중괄호 대신 콜론과 들여쓰기로 블록을 나눔
           print("성인")
     typing: |-
       if user["age"] > 20:
@@ -93,7 +93,7 @@ parts:
     title: 딕셔너리 순회[items]
     display: |-
       # 딕셔너리 순회[items]
-      for key, value in user.items():
+      for key, value in user.items(): # (키, 값) 쌍을 하나씩 꺼냄
           print(key, value)
     typing: |-
       for key, value in user.items():
@@ -103,7 +103,7 @@ parts:
     display: |-
       # 함수[def] - 한 역할
       def get_user_name(user):
-          return user["name"]
+          return user["name"] # return이 없으면 None 반환
 
       print(get_user_name(user))
     typing: |-

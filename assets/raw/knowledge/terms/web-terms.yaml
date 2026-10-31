@@ -7,13 +7,6 @@ source:
   origin: assets/typingSource/Rule-dev-terms/README-terms-WEB.md
   note: UI/UX·화면 부품만. 프론트 개발 용어는 terms/frontend-terms.yaml.
 terms:
-  - id: rule-dev-terms-readme-terms-web-term-1
-    section: 페이지 / 섹션 명칭
-    title: 페이지 섹션
-    prompt: 웹페이지를 구성하는 여러 구역을 통틀어 부르는 일반 명칭.
-    answer: Page Sections
-    answerDisplay: 페이지 섹션[Page Sections]
-    example: 이 랜딩 페이지는 5개의 페이지 섹션[Page Sections]으로 나뉜다.
   - id: rule-dev-terms-readme-terms-web-term-2
     section: 페이지 / 섹션 명칭
     title: 히어로 섹션
@@ -35,83 +28,6 @@ terms:
     answer: CTA Sections
     answerDisplay: 행동 유도 섹션[CTA Sections]
     example: 가격표 아래에 행동 유도 섹션[CTA Sections]을 한 번 더 넣자.
-  - id: rule-dev-terms-readme-terms-web-term-5
-    section: 페이지 / 섹션 명칭
-    title: 벤토 그리드
-    prompt: 카드 크기를 다르게 섞어 배치하는 격자형 레이아웃.
-    answer: Bento Grids
-    answerDisplay: 벤토 그리드[Bento Grids]
-    example: 대시보드 소개는 벤토 그리드[Bento Grids]가 잘 어울린다.
-  - id: rule-dev-terms-readme-terms-web-term-6
-    section: 페이지 / 섹션 명칭
-    title: 가격 섹션
-    prompt: 요금제나 플랜을 비교해서 보여주는 섹션.
-    answer: Pricing Sections
-    answerDisplay: 가격 섹션[Pricing Sections]
-    example: SaaS 사이트에서는 가격 섹션[Pricing Sections]이 전환율에 큰 영향을 준다.
-  - id: rule-dev-terms-readme-terms-web-term-7
-    section: 페이지 / 섹션 명칭
-    title: 헤더 섹션
-    prompt: 페이지 상단에 로고, 메뉴, 버튼 등이 들어가는 머리 영역.
-    answer: Header Sections
-    answerDisplay: 헤더 섹션[Header Sections]
-    example: 헤더 섹션[Header Sections]에는 로고와 네비게이션을 넣는다.
-  - id: rule-dev-terms-readme-terms-web-term-8
-    section: 페이지 / 섹션 명칭
-    title: 뉴스레터 섹션
-    prompt: 이메일 구독을 유도하는 뉴스레터 신청 영역.
-    answer: Newsletter Sections
-    answerDisplay: 뉴스레터 섹션[Newsletter Sections]
-    example: 푸터 위에 뉴스레터 섹션[Newsletter Sections]을 배치해 보자.
-  - id: rule-dev-terms-readme-terms-web-term-9
-    section: 페이지 / 섹션 명칭
-    title: 통계 섹션
-    prompt: 숫자 지표로 성과나 규모를 강조하는 섹션.
-    answer: Stats
-    answerDisplay: 통계 섹션[Stats]
-    example: 사용자 수와 전환율은 통계 섹션[Stats]에서 강조한다.
-  - id: rule-dev-terms-readme-terms-web-term-10
-    section: 페이지 / 섹션 명칭
-    title: 후기 섹션
-    prompt: 사용자 후기나 고객 리뷰를 보여주는 신뢰 확보 섹션.
-    answer: Testimonials
-    answerDisplay: 후기 섹션[Testimonials]
-    example: B2B 서비스는 후기 섹션[Testimonials]이 신뢰 형성에 중요하다.
-  - id: rule-dev-terms-readme-terms-web-term-11
-    section: 페이지 / 섹션 명칭
-    title: 블로그 섹션
-    prompt: 최신 글이나 추천 글 목록을 보여주는 블로그 영역.
-    answer: Blog Sections
-    answerDisplay: 블로그 섹션[Blog Sections]
-    example: 메인 하단에 블로그 섹션[Blog Sections]을 두면 SEO에 도움 된다.
-  - id: rule-dev-terms-readme-terms-web-term-12
-    section: 페이지 / 섹션 명칭
-    title: 문의 섹션
-    prompt: 문의 폼, 이메일, 전화번호 같은 연락 수단을 모아둔 섹션.
-    answer: Contact Sections
-    answerDisplay: 문의 섹션[Contact Sections]
-    example: 마지막 구역은 문의 섹션[Contact Sections]으로 마무리하자.
-  - id: rule-dev-terms-readme-terms-web-term-13
-    section: 페이지 / 섹션 명칭
-    title: 팀 섹션
-    prompt: 팀원 소개를 위한 구성원 안내 섹션.
-    answer: Team Sections
-    answerDisplay: 팀 섹션[Team Sections]
-    example: 회사 소개 페이지에는 팀 섹션[Team Sections]이 자주 들어간다.
-  - id: rule-dev-terms-readme-terms-web-term-14
-    section: 페이지 / 섹션 명칭
-    title: 콘텐츠 섹션
-    prompt: 설명문, 가이드, 문서성 텍스트를 담는 일반 콘텐츠 영역.
-    answer: Content Sections
-    answerDisplay: 콘텐츠 섹션[Content Sections]
-    example: 긴 설명은 콘텐츠 섹션[Content Sections]으로 따로 빼는 편이 좋다.
-  - id: rule-dev-terms-readme-terms-web-term-15
-    section: 페이지 / 섹션 명칭
-    title: 로고 클라우드
-    prompt: 고객사, 파트너사, 협업사 로고를 모아 보여주는 영역.
-    answer: Logo Clouds
-    answerDisplay: 로고 클라우드[Logo Clouds]
-    example: 협업사를 보여줄 때는 로고 클라우드[Logo Clouds]를 많이 쓴다.
   - id: rule-dev-terms-readme-terms-web-term-16
     section: 페이지 / 섹션 명칭
     title: 자주 묻는 질문 섹션
@@ -126,13 +42,6 @@ terms:
     answer: Footers
     answerDisplay: 푸터[Footers]
     example: 푸터[Footers]에는 개인정보처리방침 링크를 넣어야 한다.
-  - id: rule-dev-terms-readme-terms-web-term-18
-    section: 컴포넌트 / UI 명칭
-    title: 요소
-    prompt: 버튼, 카드, 입력창처럼 페이지를 구성하는 작은 단위 요소.
-    answer: Elements
-    answerDisplay: 요소[Elements]
-    example: 버튼과 입력창은 가장 기본적인 요소[Elements]다.
   - id: rule-dev-terms-readme-terms-web-term-19
     section: 컴포넌트 / UI 명칭
     title: 헤더
@@ -154,13 +63,6 @@ terms:
     answer: Banners
     answerDisplay: 배너[Banners]
     example: 이벤트 안내는 상단 배너[Banners] 한 줄로 처리하자.
-  - id: rule-dev-terms-readme-terms-web-term-22
-    section: 컴포넌트 / UI 명칭
-    title: 피드백
-    prompt: 사용자 의견을 받기 위한 별점, 설문, 의견 입력 UI.
-    answer: Feedback
-    answerDisplay: 피드백[Feedback]
-    example: 결제 완료 후 피드백[Feedback] 팝업을 띄울 수 있다.
   - id: rule-dev-terms-readme-terms-web-term-23
     section: 전체 페이지 명칭
     title: 404 페이지
@@ -168,13 +70,6 @@ terms:
     answer: 404 Pages
     answerDisplay: 404 페이지[404 Pages]
     example: 잘 만든 404 페이지[404 Pages]는 이탈을 줄이는 데 도움이 된다.
-  - id: rule-dev-terms-readme-terms-web-term-24
-    section: 전체 페이지 명칭
-    title: 페이지 예시
-    prompt: 완성된 페이지 템플릿이나 샘플 화면을 모아 둔 카테고리.
-    answer: Page Examples
-    answerDisplay: 페이지 예시[Page Examples]
-    example: 디자인 방향을 잡을 때 페이지 예시[Page Examples]를 먼저 본다.
   - id: rule-dev-terms-readme-terms-web-term-25
     section: 전체 페이지 명칭
     title: 랜딩 페이지
@@ -182,20 +77,6 @@ terms:
     answer: Landing Pages
     answerDisplay: 랜딩 페이지[Landing Pages]
     example: 광고 유입은 보통 전용 랜딩 페이지[Landing Pages]로 받는다.
-  - id: rule-dev-terms-readme-terms-web-term-26
-    section: 전체 페이지 명칭
-    title: 가격 페이지
-    prompt: 가격 정책과 플랜 비교를 중심으로 구성한 전용 페이지.
-    answer: Pricing Pages
-    answerDisplay: 가격 페이지[Pricing Pages]
-    example: 가격 정책이 복잡하면 가격 페이지[Pricing Pages]를 따로 만드는 편이 낫다.
-  - id: rule-dev-terms-readme-terms-web-term-27
-    section: 전체 페이지 명칭
-    title: 소개 페이지
-    prompt: 회사, 팀, 미션, 연혁을 소개하는 페이지.
-    answer: About Pages
-    answerDisplay: 소개 페이지[About Pages]
-    example: 회사 철학은 소개 페이지[About Pages]에서 자연스럽게 풀어낸다.
   - id: web-extra-toast
     section: 오버레이 / 알림
     title: 토스트
@@ -282,14 +163,6 @@ terms:
     prompt: 관련 정보를 하나의 블록으로 묶은 UI 단위. 기능·상품·후기 목록에 자주 쓴다.
     answer: Card
     example: Feature 목록은 card 그리드로 배치한다.
-  - id: web-button
-    section: 컴포넌트 / UI 명칭
-    title: 버튼
-    prompt: 클릭으로 행동을 실행하는 기본 UI. CTA, 제출, 취소에 쓴다.
-    answer: Button
-    aliases:
-      - btn
-    example: 가입 CTA는 큰 primary button으로 둔다.
   - id: web-design-system
     section: 화면 상태·디자인 체계
     title: 디자인 시스템
@@ -335,18 +208,6 @@ terms:
     prompt: 입력하며 후보 목록을 좁혀 고르는 검색형 입력 UI.
     answer: Autocomplete
     example: 도시 검색은 autocomplete로 후보를 띄운다.
-  - id: web-ui-button-group
-    section: 입력
-    title: 버튼 그룹
-    prompt: 관련 버튼을 한 묶음으로 붙여 배치하는 UI.
-    answer: Button Group
-    example: 정렬 옵션은 button group으로 묶는다.
-  - id: web-ui-rating
-    section: 입력
-    title: 평점
-    prompt: 별점처럼 점수를 고르거나 표시하는 입력·표시 UI.
-    answer: Rating
-    example: 리뷰 작성 시 rating으로 점수를 받는다.
   - id: web-ui-switch
     section: 입력
     title: 스위치
@@ -355,12 +216,6 @@ terms:
     aliases:
       - Toggle
     example: 알림 수신 여부는 switch로 바꾼다.
-  - id: web-ui-toggle-button
-    section: 입력
-    title: 토글 버튼
-    prompt: 눌린/안 눌린 상태를 유지하는 버튼. 정렬·필터처럼 선택 상태를 보여 줄 때 쓴다.
-    answer: Toggle Button
-    example: 그리드/리스트 전환은 toggle button으로 둔다.
   - id: web-ui-avatar
     section: 데이터 표시
     title: 아바타
@@ -416,24 +271,12 @@ terms:
     aliases:
       - AppBar
     example: 대시보드 상단은 app bar에 검색과 프로필을 둔다.
-  - id: web-ui-paper
-    section: 서피스
-    title: 페이퍼
-    prompt: 배경 위에 살짝 떠 보이는 면 컨테이너. 카드·패널의 기본 표면으로 쓴다.
-    answer: Paper
-    example: 설정 패널은 paper 위에 폼을 올린다.
   - id: web-ui-bottom-nav
     section: 네비게이션
     title: 하단 네비게이션
     prompt: 모바일 화면 하단에 주요 탭을 고정하는 네비게이션.
     answer: Bottom Navigation
     example: 홈·검색·마이페이지는 bottom navigation으로 전환한다.
-  - id: web-ui-link
-    section: 네비게이션
-    title: 링크
-    prompt: 다른 페이지·앵커로 이동하는 텍스트·인라인 내비게이션 요소.
-    answer: Link
-    example: 약관 문구 안의 link로 상세 페이지를 연다.
   - id: web-ui-menu
     section: 네비게이션
     title: 메뉴
@@ -448,12 +291,6 @@ terms:
     prompt: 다단계 절차의 현재 단계를 순서대로 보여 주는 네비게이션.
     answer: Stepper
     example: 가입 흐름은 stepper로 1·2·3단계를 표시한다.
-  - id: web-ui-stack
-    section: 레이아웃
-    title: 스택
-    prompt: 자식 요소를 세로·가로로 일정한 간격 두고 쌓는 레이아웃 헬퍼.
-    answer: Stack
-    example: 폼 필드는 stack으로 세로 간격을 맞춘다.
   - id: web-ui-popover
     section: 오버레이 / 알림
     title: 팝오버
@@ -480,44 +317,9 @@ terms:
     aliases:
       - Comboboxes
     example: 담당자 지정은 combobox로 검색해 고른다.
-  - id: web-ui-listbox
-    section: 입력
-    title: 리스트박스
-    prompt: 목록에서 하나 또는 여러 항목을 고르는 선택 UI.
-    answer: Listbox
-    example: 권한 목록은 listbox로 다중 선택한다.
-  - id: web-ui-fieldset
-    section: 입력
-    title: 필드셋
-    prompt: 관련 폼 컨트롤을 하나의 그룹으로 묶는 HTML·UI 단위.
-    answer: Fieldset
-    example: 배송 주소 입력은 fieldset으로 묶는다.
   - id: web-ui-primary-button
     section: 실무 패턴
     title: 프라이머리 버튼
     prompt: 화면에서 가장 중요한 행동을 강조하는 기본(강조) 버튼.
     answer: Primary Button
     example: 저장은 primary button, 취소는 텍스트 버튼으로 둔다.
-  - id: web-ui-signup-form
-    section: 실무 패턴
-    title: 회원가입 폼
-    prompt: 계정 생성을 위한 가입 입력 폼. 이메일·비밀번호·약관 동의가 흔하다.
-    answer: Sign-up Form
-    aliases:
-      - Signup Form
-      - Registration Form
-    example: 랜딩 CTA는 sign-up form으로 연결한다.
-  - id: web-ui-cta-button
-    section: 실무 패턴
-    title: 행동 유도 버튼
-    prompt: 가입·구매·문의처럼 전환을 유도하는 핵심 클릭 버튼.
-    answer: Call-to-action Button
-    aliases:
-      - CTA Button
-    example: 히어로에는 call-to-action button을 하나만 둔다.
-  - id: web-ui-card-layout
-    section: 실무 패턴
-    title: 카드 레이아웃
-    prompt: 카드 단위로 콘텐츠를 격자·목록 배치하는 화면 구성 방식.
-    answer: Card Layout
-    example: 기능 소개는 card layout으로 3열 배치한다.

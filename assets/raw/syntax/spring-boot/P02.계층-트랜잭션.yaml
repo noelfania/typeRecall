@@ -1,0 +1,124 @@
+id: language-spring-boot-p02
+category: syntax
+kind: code-snippet
+language: java
+track:
+  id: spring-boot
+  label: Spring Boot
+title: P02.계층-트랜잭션
+source:
+  origin: 필수 백엔드 보강 2026-10-31
+  note: 고빈도 핵심만.
+parts:
+  - id: language-spring-boot-p02-part-1
+    title: 생성자 주입[constructor injection]
+    display: |-
+      // 생성자 주입[constructor injection]
+      @Service // 업무 로직 계층. 스프링이 빈으로 등록
+      public class UserService {
+          private final UserRepository userRepository; // final이면 주입 누락을 컴파일 때 잡음
+
+          public UserService(UserRepository userRepository) { // 생성자가 하나면 @Autowired 생략 가능
+              this.userRepository = userRepository;
+          }
+      }
+    typing: |-
+      @Service
+      public class UserService {
+          private final UserRepository userRepository;
+
+          public UserService(UserRepository userRepository) {
+              this.userRepository = userRepository;
+          }
+      }
+  - id: language-spring-boot-p02-part-2
+    title: 쓰기 트랜잭션[@Transactional]
+    display: |-
+      // 쓰기 트랜잭션[@Transactional]
+      @Transactional // 메서드 전체를 한 트랜잭션으로. RuntimeException이면 롤백
+      public UserResponse create(CreateUserRequest request) {
+          User user = userRepository.save(new User(request.name(), request.email()));
+          return UserResponse.from(user);
+      }
+    typing: |-
+      @Transactional
+      public UserResponse create(CreateUserRequest request) {
+          User user = userRepository.save(new User(request.name(), request.email()));
+          return UserResponse.from(user);
+      }
+  - id: language-spring-boot-p02-part-3
+    title: 읽기 트랜잭션[readOnly]
+    display: |-
+      // 읽기 트랜잭션[readOnly]
+      @Transactional(readOnly = true) // 조회 전용 표시. 변경 감지를 줄여 부담을 낮춤
+      public UserResponse getUser(Long id) {
+          User user = userRepository.findById(id)
+                  .orElseThrow(() -> new UserNotFoundException(id)); // 없으면 예외. null을 넘기지 않음
+          return UserResponse.from(user);
+      }
+    typing: |-
+      @Transactional(readOnly = true)
+      public UserResponse getUser(Long id) {
+          User user = userRepository.findById(id)
+                  .orElseThrow(() -> new UserNotFoundException(id));
+          return UserResponse.from(user);
+      }
+  - id: language-spring-boot-p02-part-4
+    title: 입력 검증[@Valid]
+    display: |-
+      // 입력 검증[@Valid]
+      public record CreateUserRequest(
+              @NotBlank String name, // 빈 문자열, 공백만 있는 값, null을 거부
+              @Email String email,
+              @Min(0) int age) {}
+
+      @PostMapping
+      public UserResponse create(@Valid @RequestBody CreateUserRequest request) { // 이게 있어야 검증이 실행됨. 실패하면 400 계열 응답. spring-boot-starter-validation 필요
+          return userService.create(request);
+      }
+    typing: |-
+      public record CreateUserRequest(
+              @NotBlank String name,
+              @Email String email,
+              @Min(0) int age) {}
+
+      @PostMapping
+      public UserResponse create(@Valid @RequestBody CreateUserRequest request) {
+          return userService.create(request);
+      }
+  - id: language-spring-boot-p02-part-5
+    title: 전역 예외 처리[@RestControllerAdvice]
+    display: |-
+      // 전역 예외 처리[@RestControllerAdvice]
+      @RestControllerAdvice // 모든 컨트롤러의 예외를 한곳에서 응답으로 변환
+      public class ApiExceptionHandler {
+          @ExceptionHandler(UserNotFoundException.class) // 처리할 예외 타입 지정
+          public ResponseEntity<ErrorResponse> handleNotFound(UserNotFoundException e) {
+              return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                      .body(new ErrorResponse(e.getMessage()));
+          }
+      }
+    typing: |-
+      @RestControllerAdvice
+      public class ApiExceptionHandler {
+          @ExceptionHandler(UserNotFoundException.class)
+          public ResponseEntity<ErrorResponse> handleNotFound(UserNotFoundException e) {
+              return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                      .body(new ErrorResponse(e.getMessage()));
+          }
+      }
+  - id: language-spring-boot-p02-part-6
+    title: 업무 예외[custom exception]
+    display: |-
+      // 업무 예외[custom exception]
+      public class UserNotFoundException extends RuntimeException { // @Transactional은 기본으로 RuntimeException에 롤백
+          public UserNotFoundException(Long id) {
+              super("사용자를 찾을 수 없음: " + id);
+          }
+      }
+    typing: |-
+      public class UserNotFoundException extends RuntimeException {
+          public UserNotFoundException(Long id) {
+              super("사용자를 찾을 수 없음: " + id);
+          }
+      }

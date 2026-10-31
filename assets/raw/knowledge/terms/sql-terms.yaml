@@ -101,3 +101,59 @@ terms:
     aliases:
       - Object-Relational Mapping
     example: Prisma 같은 ORM을 쓰면 쿼리를 코드로 작성할 수 있다.
+  - id: sql-extra-join
+    section: 운영 / 확장
+    title: 조인
+    prompt: 여러 테이블의 행을 연결 조건으로 합쳐 조회하는 것.
+    answer: Join
+    answerDisplay: 조인[Join]
+    example: 주문과 사용자를 조인[Join]해서 내려 주자.
+  - id: sql-extra-migration
+    section: 운영 / 확장
+    title: 마이그레이션
+    prompt: 스키마 변경을 버전으로 관리해 적용하는 작업.
+    answer: Migration
+    answerDisplay: 마이그레이션[Migration]
+    example: 컬럼 추가는 마이그레이션[Migration] 파일로 남긴다.
+  - id: sql-extra-replication
+    section: 운영 / 확장
+    title: 복제
+    prompt: 데이터를 여러 DB 서버에 복사해 두는 구성.
+    answer: Replication
+    answerDisplay: 복제[Replication]
+    example: 읽기 부하는 복제[Replication] 서버로 분산한다.
+  - id: sql-extra-sharding
+    section: 운영 / 확장
+    title: 샤딩
+    prompt: 데이터를 기준값에 따라 여러 DB로 나눠 저장하는 방식.
+    answer: Sharding
+    answerDisplay: 샤딩[Sharding]
+    example: 테이블이 너무 커져 샤딩[Sharding]을 검토한다.
+  - id: sql-extra-nosql
+    section: 운영 / 확장
+    title: 비관계형 DB
+    prompt: 테이블 관계 대신 문서나 키-값 등으로 저장하는 DB.
+    answer: NoSQL
+    answerDisplay: 비관계형 DB[NoSQL]
+    example: 세션 저장은 비관계형 DB[NoSQL]가 어울린다.
+  - id: sql-extra-isolation-level
+    section: 운영 / 확장
+    title: 격리 수준
+    prompt: 동시에 도는 트랜잭션이 서로의 변경을 얼마나 보는지 정한 단계.
+    answer: Isolation Level
+    answerDisplay: 격리 수준[Isolation Level]
+    example: 격리 수준[Isolation Level]을 올리면 동시 처리량이 줄어든다.
+  - id: sql-extra-connection-pool
+    section: 운영 / 확장
+    title: 커넥션 풀
+    prompt: DB 연결을 미리 만들어 두고 재사용하는 묶음.
+    answer: Connection Pool
+    answerDisplay: 커넥션 풀[Connection Pool]
+    example: 커넥션 풀[Connection Pool]이 고갈돼 요청이 밀렸다.
+  - id: sql-extra-soft-delete
+    section: 운영 / 확장
+    title: 소프트 삭제
+    prompt: 행을 지우지 않고 삭제 표시만 남기는 방식.
+    answer: Soft Delete
+    answerDisplay: 소프트 삭제[Soft Delete]
+    example: 주문은 소프트 삭제[Soft Delete]로 이력을 남긴다.

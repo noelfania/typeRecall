@@ -13,6 +13,8 @@ export type LexiconPart = {
   prompt: string;
   answer: string;
   displayAnswer: string;
+  /** 참고용 다른 이름. 판정은 answer만 사용한다 */
+  aliases: string[];
   example: string;
   /** 이 용어가 등장하는 판단 시나리오 */
   relatedDrills?: ContentLink[];

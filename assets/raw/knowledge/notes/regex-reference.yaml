@@ -26,10 +26,10 @@ sections:
       - { expression: "\\s", description: 공백·탭·줄바꿈·캐리지 리턴 }
   - title: 문자 집합
     rows:
-      - { expression: "[xyz]", description: x, y, z 중 하나 }
-      - { expression: "[^xyz]", description: x, y, z가 아닌 문자 }
-      - { expression: "[1-3]", description: 1, 2, 3 중 하나 }
-      - { expression: "[^1-3]", description: 1, 2, 3이 아닌 문자 }
+      - { expression: "[xyz]", description: "x, y, z 중 하나" }
+      - { expression: "[^xyz]", description: "x, y, z가 아닌 문자" }
+      - { expression: "[1-3]", description: "1, 2, 3 중 하나" }
+      - { expression: "[^1-3]", description: "1, 2, 3이 아닌 문자" }
     notes: |
       문자 집합[character set]은 대괄호 안 문자들의 OR 연산이다.
       여는 [ 바로 뒤의 ^는 부정을 뜻한다. 집합 안의 .은 글자 그대로 마침표다.

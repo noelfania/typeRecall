@@ -1,0 +1,56 @@
+id: language-spring-boot-p04
+category: syntax
+kind: command
+language: shell
+track:
+  id: spring-boot
+  label: Spring Boot
+title: P04.설정파일
+source:
+  origin: 필수 백엔드 보강 2026-10-31
+  note: 고빈도 핵심만.
+parts:
+  - id: language-spring-boot-p04-part-1
+    title: 설정 파일[application.yml]
+    display: |-
+      # 설정 파일[application.yml]
+      server:
+        port: 8080
+      spring:
+        datasource:
+          url: jdbc:postgresql://localhost:5432/app
+          username: app
+          password: ${DB_PASSWORD} # ${...} 환경 변수에서 읽음. 비밀값을 파일에 적지 않는다
+        jpa:
+          hibernate:
+            ddl-auto: validate # 스키마를 고치지 않고 검사만. 운영에서 create·update는 피함
+    typing: |-
+      server:
+        port: 8080
+      spring:
+        datasource:
+          url: jdbc:postgresql://localhost:5432/app
+          username: app
+          password: ${DB_PASSWORD}
+        jpa:
+          hibernate:
+            ddl-auto: validate
+  - id: language-spring-boot-p04-part-2
+    title: 프로필[profile]
+    display: |-
+      # 프로필[profile]
+      spring:
+        config:
+          activate:
+            on-profile: local # local 프로필일 때만 적용. 실행 시 --spring.profiles.active=local
+      logging:
+        level:
+          org.hibernate.SQL: debug # 실행되는 SQL을 로그로 확인
+    typing: |-
+      spring:
+        config:
+          activate:
+            on-profile: local
+      logging:
+        level:
+          org.hibernate.SQL: debug

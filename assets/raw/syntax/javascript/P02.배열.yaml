@@ -118,17 +118,6 @@ parts:
 
       ['A', 'B', 'C', 'D'].slice(1, 3)
       ['A', 'B', 'C', 'D'].slice(-2)
-  - id: language-javascript-p02-part-8
-    title: fill / copyWithin
-    display: |-
-      /* fill / copyWithin */
-      [0, 0, 0].fill(7)            // [7, 7, 7]
-      [1, 2, 3, 4].fill(0, 1, 3)  // [1, 0, 0, 4]
-      [1, 2, 3, 4, 5].copyWithin(0, 3)  // [4, 5, 3, 4, 5] (index3부터 index0에 덮어씀[overwrite])
-    typing: |-
-      [0, 0, 0].fill(7)
-      [1, 2, 3, 4].fill(0, 1, 3)
-      [1, 2, 3, 4, 5].copyWithin(0, 3)
   - id: language-javascript-p02-part-9
     title: 검색[search]
     display: |-

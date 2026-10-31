@@ -27,6 +27,9 @@ jobs:
       - run: npm ci
       - run: npm run validate:raw
       - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      # e2e가 실패하면 배포하지 않는다
+      - run: npm run test:e2e
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

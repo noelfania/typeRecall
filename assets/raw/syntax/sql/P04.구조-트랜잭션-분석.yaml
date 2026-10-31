@@ -1,0 +1,110 @@
+id: language-sql-p04
+category: syntax
+kind: code-snippet
+language: sql
+track:
+  id: sql
+  label: SQL
+title: P04.구조-트랜잭션-분석
+source:
+  origin: 자료 부족·과잉 점검 2026-10-31
+  note: 고빈도 핵심 문법 보강.
+parts:
+  - id: language-sql-p04-part-1
+    title: 중복 제거[DISTINCT]
+    display: |-
+      -- 중복 제거[DISTINCT]
+      SELECT DISTINCT user_id -- 선택한 컬럼 조합의 중복 행 제거
+      FROM orders;
+    typing: |-
+      SELECT DISTINCT user_id
+      FROM orders;
+  - id: language-sql-p04-part-2
+    title: 결과 합치기[UNION]
+    display: |-
+      -- 결과 합치기[UNION]
+      SELECT email FROM users
+      UNION -- 중복을 제거해 합침. 그대로 합치려면 UNION ALL이 빠름
+      SELECT email FROM admins;
+    typing: |-
+      SELECT email FROM users
+      UNION
+      SELECT email FROM admins;
+  - id: language-sql-p04-part-3
+    title: 존재 확인[EXISTS]
+    display: |-
+      -- 존재 확인[EXISTS]
+      SELECT u.user_name
+      FROM users u
+      WHERE EXISTS ( -- 조건에 맞는 행이 하나라도 있으면 참
+        SELECT 1 FROM orders o WHERE o.user_id = u.user_id -- 값은 쓰지 않으므로 1이면 충분
+      );
+    typing: |-
+      SELECT u.user_name
+      FROM users u
+      WHERE EXISTS (
+        SELECT 1 FROM orders o WHERE o.user_id = u.user_id
+      );
+  - id: language-sql-p04-part-4
+    title: 윈도 함수[ROW_NUMBER OVER]
+    display: |-
+      -- 윈도 함수[ROW_NUMBER OVER]
+      SELECT user_id, total_price,
+        ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY total_price DESC) AS row_num -- PARTITION BY 사용자별로 나눠 ORDER BY 순으로 번호. 행 수는 줄지 않음
+      FROM orders;
+    typing: |-
+      SELECT user_id, total_price,
+        ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY total_price DESC) AS row_num
+      FROM orders;
+  - id: language-sql-p04-part-5
+    title: 인덱스 생성[CREATE INDEX]
+    display: |-
+      -- 인덱스 생성[CREATE INDEX]
+      CREATE INDEX idx_orders_user_id ON orders (user_id); -- 조회는 빨라지고 쓰기는 조금 느려짐
+    typing: CREATE INDEX idx_orders_user_id ON orders (user_id);
+  - id: language-sql-p04-part-6
+    title: 테이블 변경[ALTER TABLE]
+    display: |-
+      -- 테이블 변경[ALTER TABLE]
+      ALTER TABLE users ADD COLUMN phone VARCHAR(20);
+      ALTER TABLE users DROP COLUMN phone; -- 데이터까지 사라짐. 운영에서는 백업 후
+    typing: |-
+      ALTER TABLE users ADD COLUMN phone VARCHAR(20);
+      ALTER TABLE users DROP COLUMN phone;
+  - id: language-sql-p04-part-7
+    title: 외래 키[FOREIGN KEY]
+    display: |-
+      -- 외래 키[FOREIGN KEY]
+      CREATE TABLE orders (
+        order_id INT PRIMARY KEY,
+        user_id INT NOT NULL,
+        FOREIGN KEY (user_id) REFERENCES users (user_id) -- users에 없는 user_id는 넣을 수 없음
+      );
+    typing: |-
+      CREATE TABLE orders (
+        order_id INT PRIMARY KEY,
+        user_id INT NOT NULL,
+        FOREIGN KEY (user_id) REFERENCES users (user_id)
+      );
+  - id: language-sql-p04-part-8
+    title: 트랜잭션[BEGIN]
+    display: |-
+      -- 트랜잭션[BEGIN]
+      BEGIN; -- 여기부터 한 덩어리. 전부 성공하거나 전부 취소
+      UPDATE accounts SET balance = balance - 100 WHERE id = 1;
+      UPDATE accounts SET balance = balance + 100 WHERE id = 2;
+      COMMIT; -- 확정. 취소하려면 ROLLBACK
+    typing: |-
+      BEGIN;
+      UPDATE accounts SET balance = balance - 100 WHERE id = 1;
+      UPDATE accounts SET balance = balance + 100 WHERE id = 2;
+      COMMIT;
+  - id: language-sql-p04-part-9
+    title: 실행 계획[EXPLAIN]
+    display: |-
+      -- 실행 계획[EXPLAIN]
+      EXPLAIN -- 실행하지 않고 실행 계획만 봄. 인덱스 사용 여부 확인
+      SELECT * FROM orders WHERE user_id = 1;
+    typing: |-
+      EXPLAIN
+      SELECT * FROM orders WHERE user_id = 1;

@@ -1,0 +1,96 @@
+id: language-gradle-p01
+category: syntax
+kind: code-snippet
+language: java
+track:
+  id: gradle
+  label: Gradle
+title: P01.빌드설정-Kotlin-DSL
+source:
+  origin: 필수 백엔드 보강 2026-10-31
+  note: 고빈도 핵심만.
+parts:
+  - id: language-gradle-p01-part-1
+    title: 플러그인[plugins]
+    display: |-
+      // 플러그인[plugins]
+      plugins {
+          java // Java 컴파일·테스트 태스크 추가
+          id("org.springframework.boot") version "3.5.0" // bootRun, bootJar 태스크 추가
+          id("io.spring.dependency-management") version "1.1.7" // 스프링 라이브러리 버전을 맞춰 줌. 버전 번호는 예시
+      }
+    typing: |-
+      plugins {
+          java
+          id("org.springframework.boot") version "3.5.0"
+          id("io.spring.dependency-management") version "1.1.7"
+      }
+  - id: language-gradle-p01-part-2
+    title: 자바 버전[toolchain]
+    display: |-
+      // 자바 버전[toolchain]
+      java {
+          toolchain { // 설치된 JDK와 무관하게 빌드에 쓸 버전을 고정
+              languageVersion = JavaLanguageVersion.of(21)
+          }
+      }
+    typing: |-
+      java {
+          toolchain {
+              languageVersion = JavaLanguageVersion.of(21)
+          }
+      }
+  - id: language-gradle-p01-part-3
+    title: 저장소[repositories]
+    display: |-
+      // 저장소[repositories]
+      group = "com.example"
+      version = "0.0.1"
+
+      repositories {
+          mavenCentral() // 라이브러리를 내려받을 곳
+      }
+    typing: |-
+      group = "com.example"
+      version = "0.0.1"
+
+      repositories {
+          mavenCentral()
+      }
+  - id: language-gradle-p01-part-4
+    title: 의존성[dependencies]
+    display: |-
+      // 의존성[dependencies]
+      dependencies {
+          implementation("org.springframework.boot:spring-boot-starter-web") // 컴파일과 실행에 필요. 사용하는 쪽에 노출되지 않음
+          implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+          runtimeOnly("org.postgresql:postgresql") // 실행 때만 필요. JDBC 드라이버가 대표적
+          testImplementation("org.springframework.boot:spring-boot-starter-test") // 테스트에서만 사용
+      }
+    typing: |-
+      dependencies {
+          implementation("org.springframework.boot:spring-boot-starter-web")
+          implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+          runtimeOnly("org.postgresql:postgresql")
+          testImplementation("org.springframework.boot:spring-boot-starter-test")
+      }
+  - id: language-gradle-p01-part-5
+    title: 테스트 설정[useJUnitPlatform]
+    display: |-
+      // 테스트 설정[useJUnitPlatform]
+      tasks.test {
+          useJUnitPlatform() // JUnit 5 테스트를 실행하려면 필요
+      }
+    typing: |-
+      tasks.test {
+          useJUnitPlatform()
+      }
+  - id: language-gradle-p01-part-6
+    title: 프로젝트 구성[settings.gradle.kts]
+    display: |-
+      // 프로젝트 구성[settings.gradle.kts]
+      rootProject.name = "api"
+      include("user-service", "gateway") // 멀티 모듈 프로젝트의 하위 모듈 등록
+    typing: |-
+      rootProject.name = "api"
+      include("user-service", "gateway")

@@ -162,15 +162,3 @@ parts:
       git diff
       git add .
       git commit -m "feat: update dashboard widgets"
-  - id: language-git-p01-part-19
-    title: 반영 흐름[switch -> pull -> merge]
-    display: |-
-      # 반영 흐름[switch -> pull -> merge]
-      git switch main
-      git pull origin main
-      git merge feature/x
-      # 결과: 메인 브랜치에 기능 브랜치 내용을 반영
-    typing: |-
-      git switch main
-      git pull origin main
-      git merge feature/x

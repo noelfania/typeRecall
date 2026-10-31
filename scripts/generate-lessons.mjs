@@ -116,6 +116,7 @@ async function buildLexiconTracks(drillsByTerm = new Map()) {
         prompt: term.prompt,
         answer: term.answer,
         displayAnswer: term.answerDisplay ?? term.answer,
+        aliases: term.aliases ?? [],
         example: term.example ? `예: ${term.example}` : '',
         relatedDrills: drillsByTerm.get(term.id) ?? [],
       })),
@@ -174,7 +175,7 @@ async function buildVisualTracks() {
         content,
         displayContent: content,
         language: codeUnits[0]?.language ?? (codeContents.length > 0 ? 'css' : 'text'),
-        imagePath: meta.images?.[0] ? toVisualPublicPath(meta.images[0].path) : '',
+        imagePaths: (meta.images ?? []).map((image) => toVisualPublicPath(image.path)),
         caption,
         explanation: meta.explanation?.ko ?? '',
         displayCaptions: (meta.typingUnits ?? [])
@@ -615,37 +616,11 @@ function convertArchitectureScenarios(doc) {
     });
   }
   for (const [index, scenario] of (doc.scenarios ?? []).entries()) {
-    const blocks = [];
-    pushHeading(blocks, '상황');
-    pushProse(blocks, scenario.context);
-    pushHeading(blocks, '증상');
-    pushProse(blocks, scenario.symptom);
-    pushHeading(blocks, '후보');
-    pushTable(
-      blocks,
-      ['옵션', '이럴 때', '피할 때'],
-      (scenario.options ?? []).map((option) => [
-        option.label,
-        option.whenPreferred,
-        option.whenAvoid,
-      ]),
-    );
-    const defaultOption = (scenario.options ?? []).find(
-      (option) => option.id === scenario.defaultPick,
-    );
-    pushHeading(blocks, '기본안');
-    pushProse(
-      blocks,
-      `${defaultOption?.label ?? scenario.defaultPick} — ${scenario.rationale}`,
-    );
-    if (scenario.relatedTermIds?.length) {
-      pushHeading(blocks, '관련 용어');
-      pushList(blocks, scenario.relatedTermIds);
-    }
     parts.push({
       id: sectionId(doc.id, scenario.title, index + 1),
       title: scenario.title,
-      blocks,
+      // 시나리오 카드는 scenario 필드만으로 그린다
+      blocks: [],
       scenario: {
         id: scenario.id,
         title: scenario.title,
@@ -671,7 +646,12 @@ function convertNoteDoc(doc) {
     return convertArchitectureScenarios(doc);
   }
   if (doc.body) {
-    return sectionsFromMarkdownBody(doc.id, doc.title, doc.body);
+    const parts = sectionsFromMarkdownBody(doc.id, doc.title, doc.body);
+    if (doc.scope && parts[0]) {
+      pushProse(parts[0].blocks, doc.scope);
+      parts[0].blocks.unshift(parts[0].blocks.pop());
+    }
+    return parts;
   }
   if (doc.backend || doc.frontend) {
     return convertProjectStructure(doc);

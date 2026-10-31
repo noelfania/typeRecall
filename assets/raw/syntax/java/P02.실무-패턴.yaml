@@ -376,7 +376,7 @@ parts:
       import java.io.FileReader;
       import java.io.IOException;
 
-      try (BufferedReader reader = new BufferedReader(new FileReader("data.txt"))) {
+      try (BufferedReader reader = new BufferedReader(new FileReader("data.txt"))) { // try-with-resources. 끝나면 자동으로 close
           String line = reader.readLine();
           System.out.println(line);
       } catch (IOException err) {

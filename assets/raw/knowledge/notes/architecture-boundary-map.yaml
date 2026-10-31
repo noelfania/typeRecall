@@ -23,6 +23,8 @@ relatedTermIds:
   - arch-schema-federation
 relatedNoteIds:
   - knowledge-notes-architecture-scenarios
+  - knowledge-notes-project-structure
+  - knowledge-notes-frontend-design-process
 
 body: |
   ## 한 줄 지도
@@ -46,9 +48,3 @@ body: |
   2. 하고 싶은 일이 **조립**인가 **통과·보안**인가? → 후자면 Gateway
   3. 데이터가 **한 배포 단위** 안에 있는가? → Nested Query 가능
   4. 스키마·팀이 **이미 갈라져** 한 그래프처럼 치고 싶은가? → Federation (아니면 REST+BFF가 싸움)
-
-  ## 같이 보면
-
-  - 판단 시나리오: `architecture-scenarios.yaml` (워터폴·BFF vs Gateway·Federation)
-  - 폴더·계층: `project-structure.yaml`
-  - 화면 설계 층: `frontend-design-process.yaml` (Figma·OpenAPI·상태)

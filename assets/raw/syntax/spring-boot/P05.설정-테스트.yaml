@@ -1,0 +1,111 @@
+id: language-spring-boot-p05
+category: syntax
+kind: code-snippet
+language: java
+track:
+  id: spring-boot
+  label: Spring Boot
+title: P05.설정-테스트
+source:
+  origin: 필수 백엔드 보강 2026-10-31
+  note: 고빈도 핵심만.
+parts:
+  - id: language-spring-boot-p05-part-1
+    title: 설정값 읽기[@Value]
+    display: |-
+      // 설정값 읽기[@Value]
+      @Value("${app.base-url}") // 값 하나를 읽을 때. 없으면 시작 시 실패
+      private String baseUrl;
+    typing: |-
+      @Value("${app.base-url}")
+      private String baseUrl;
+  - id: language-spring-boot-p05-part-2
+    title: 설정 묶음[@ConfigurationProperties]
+    display: |-
+      // 설정 묶음[@ConfigurationProperties]
+      @ConfigurationProperties(prefix = "app") // 여러 값을 타입 있는 객체로. @ConfigurationPropertiesScan 등으로 등록 필요
+      public record AppProperties(String baseUrl, int timeoutSeconds) {}
+    typing: |-
+      @ConfigurationProperties(prefix = "app")
+      public record AppProperties(String baseUrl, int timeoutSeconds) {}
+  - id: language-spring-boot-p05-part-3
+    title: 빈 등록[@Bean]
+    display: |-
+      // 빈 등록[@Bean]
+      @Configuration
+      public class ClockConfig {
+          @Bean // 직접 만든 객체를 빈으로 등록. 외부 라이브러리 객체에 주로 사용
+          public Clock clock() {
+              return Clock.systemUTC();
+          }
+      }
+    typing: |-
+      @Configuration
+      public class ClockConfig {
+          @Bean
+          public Clock clock() {
+              return Clock.systemUTC();
+          }
+      }
+  - id: language-spring-boot-p05-part-4
+    title: 통합 테스트[@SpringBootTest]
+    display: |-
+      // 통합 테스트[@SpringBootTest]
+      @SpringBootTest // 전체 설정을 올림. 확실하지만 느리다
+      class UserServiceTest {
+          @Autowired
+          private UserService userService;
+
+          @Test
+          void createsUser() {
+              UserResponse user = userService.create(new CreateUserRequest("kim", "kim@example.com"));
+              assertThat(user.name()).isEqualTo("kim");
+          }
+      }
+    typing: |-
+      @SpringBootTest
+      class UserServiceTest {
+          @Autowired
+          private UserService userService;
+
+          @Test
+          void createsUser() {
+              UserResponse user = userService.create(new CreateUserRequest("kim", "kim@example.com"));
+              assertThat(user.name()).isEqualTo("kim");
+          }
+      }
+  - id: language-spring-boot-p05-part-5
+    title: 컨트롤러 테스트[@WebMvcTest]
+    display: |-
+      // 컨트롤러 테스트[@WebMvcTest]
+      @WebMvcTest(UserController.class) // 웹 계층만 올려 빠름
+      class UserControllerTest {
+          @Autowired
+          private MockMvc mockMvc;
+
+          @MockitoBean // 서비스를 가짜로 교체. 이전 버전에서는 @MockBean
+          private UserService userService;
+
+          @Test
+          void returnsNotFound() throws Exception {
+              when(userService.getUser(1L)).thenThrow(new UserNotFoundException(1L));
+              mockMvc.perform(get("/api/users/1")) // 서버 없이 요청을 흉내 냄
+                      .andExpect(status().isNotFound());
+          }
+      }
+    typing: |-
+      @WebMvcTest(UserController.class)
+      class UserControllerTest {
+          @Autowired
+          private MockMvc mockMvc;
+
+          @MockitoBean
+          private UserService userService;
+
+          @Test
+          void returnsNotFound() throws Exception {
+              when(userService.getUser(1L)).thenThrow(new UserNotFoundException(1L));
+              mockMvc.perform(get("/api/users/1"))
+                      .andExpect(status().isNotFound());
+          }
+      }

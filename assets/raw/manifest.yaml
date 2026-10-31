@@ -2,7 +2,7 @@
 # 검증: npm run validate:raw
 
 version: 2
-updated: 2026-09-12
+updated: 2026-10-31
 
 categories:
   syntax:
@@ -14,27 +14,29 @@ categories:
 
 syntax:
   tracks:
-    - { id: bash-shell, label: Bash / Shell, kind: command, lessons: 3 }   # P01파일탐색·P02권한/네트워크·P03스크립트
-    - { id: csharp-unity, label: C# for Unity, kind: code-snippet, lessons: 2 } # P01기본·P02실무 (Unity 고빈도만)
-    - { id: docker, label: Docker, kind: command, lessons: 2 }             # P01컨테이너/이미지·P02접속/볼륨/네트워크/compose
-    - { id: css, label: CSS, kind: code-snippet, lessons: 2 }              # P01·P02 (시각 자료는 knowledge/visual)
+    - { id: bash-shell, label: Bash / Shell, kind: command, lessons: 4 }   # P01파일탐색·P02권한/네트워크·P03스크립트·P04원격/텍스트
+    - { id: docker, label: Docker, kind: command, lessons: 3 }             # P01컨테이너/이미지·P02접속/볼륨/네트워크/compose·P03Dockerfile/Compose
+    - { id: html, label: HTML, kind: code-snippet, lessons: 1 }             # P01문서·시맨틱·폼
+    - { id: css, label: CSS, kind: code-snippet, lessons: 3 }              # P01·P02·P03 (시각 자료는 knowledge/visual)
     - { id: excel, label: Excel, kind: code-snippet, lessons: 2 }           # P01.조회-조건-함수 · P02.조인-조회 (XLOOKUP/VLOOKUP)
-    - { id: git, label: Git, kind: command, lessons: 5 }                   # P01~P05 (P03=Conventional Commits, P05=실무 시나리오)
-    - { id: go, label: Go, kind: code-snippet, lessons: 2 }             # P01기본·P02실무 (필수·고빈도만)
-    - { id: java, label: Java, kind: code-snippet, lessons: 2 }         # P01기본·P02실무 (필수 문법만)
-    - { id: javascript, label: JavaScript, kind: code-snippet, lessons: 10 }
-    - { id: javascript-es6, label: JavaScript ES6, kind: code-snippet, lessons: 3 } # P01기본·P02모듈/클래스/컬렉션·P03심화 (고빈도 ES6만)
+    - { id: git, label: Git, kind: command, lessons: 6 }                   # P01~P06 (P03=Conventional Commits, P05=실무 시나리오, P06=태그·복구)
+    - { id: go, label: Go, kind: code-snippet, lessons: 3 }             # P01기본·P02실무·P03동시성/에러/JSON (필수·고빈도만)
+    - { id: java, label: Java, kind: code-snippet, lessons: 3 }         # P01기본·P02실무·P03모던 (필수 문법만)
+    - { id: javascript, label: JavaScript, kind: code-snippet, lessons: 11 } # P11=모듈·브라우저 API (ES6 트랙 통합)
     - { id: lodash, label: Lodash, kind: code-snippet, lessons: 2 }         # P01핵심메서드·P02체인변환 (필수·고빈도만)
-    - { id: python, label: Python, kind: code-snippet, lessons: 2 }         # P01기본·P02실무 (실무형 패턴만)
-    - { id: react, label: React, kind: code-snippet, lessons: 1 }           # P01.immer-상태업데이트 (useState+produce+lodash)
+    - { id: python, label: Python, kind: code-snippet, lessons: 3 }         # P01기본·P02실무·P03문자열/파일/비동기 (실무형 패턴만)
+    - { id: react, label: React, kind: code-snippet, lessons: 2 }           # P01.immer-상태업데이트·P02.훅-컴포넌트
     - { id: regex-for-javascript, label: RegEx for JavaScript, kind: code-snippet, lessons: 3 } # P01핵심·P02추출·P03VSCode검색
     - { id: rust, label: Rust, kind: code-snippet, lessons: 3 }         # P01기본문법·P02소유권/구조체·P03컬렉션/모듈
     - { id: postgresql, label: PostgreSQL, kind: code-snippet, lessons: 2 } # P01기본·P02실무 (RETURNING/UPSERT/jsonb)
-    - { id: sql, label: SQL, kind: code-snippet, lessons: 3 }               # P01기본·P02실무조회·P03조인패턴
+    - { id: sql, label: SQL, kind: code-snippet, lessons: 4 }               # P01기본·P02실무조회·P03조인패턴·P04구조/트랜잭션/분석
 
-    - { id: typescript, label: TypeScript, kind: code-snippet, lessons: 3 } # P01기본·P02실무·P03유틸/API
+    - { id: typescript, label: TypeScript, kind: code-snippet, lessons: 4 } # P01기본·P02실무·P03유틸/API·P04타입심화
     - { id: vscode, label: VS Code, kind: command, lessons: 1 }             # P01.참조-검색 (Shift+F12 등)
     - { id: yup, label: Yup, kind: code-snippet, lessons: 1 }               # P01기본 (스키마 검증 필수·고빈도)
+    - { id: spring-boot, label: Spring Boot, kind: code-snippet, lessons: 7 } # P01요청·P02계층·P03JPA·P04설정파일·P05설정/테스트·P06/P07 Spring Cloud Gateway
+    - { id: gradle, label: Gradle, kind: code-snippet, lessons: 2 }         # P01 Kotlin DSL·P02 명령어
+    - { id: yaml, label: YAML, kind: command, lessons: 2 }                  # P01기본문법·P02실무패턴
 
 knowledge:
   terms:
@@ -62,7 +64,8 @@ knowledge:
 
 inbox:
   - { file: _inbox/camera-terms.yaml, note: "촬영 실무 어휘 39장 — FE→아키텍처 초점과 거리 있어 정본에서 보류" }
-  - { file: _inbox/term-dev.txt, note: "빈 파일 — 삭제 후보" }
+  - { file: _inbox/csharp-unity/, note: "Unity C# 16파트 — 게임 개발로 학습 궤적과 거리 있어 정본에서 보류" }
+  - { file: _inbox/web-catalog-terms.yaml, note: "Tailwind UI·MUI 카탈로그 이름 카드 29장 — 회의 빈도 낮아 정본에서 보류" }
   - { file: "_inbox/대표적인 사진촬영기법 용어집.png", note: "camera-terms 원본 이미지" }
   - { file: "_inbox/대표적인 영상촬영기법 용어집.png", note: "camera-terms 원본 이미지" }
 
@@ -79,7 +82,7 @@ migratedSources:
     to: knowledge/terms/symbol-terms.yaml
     note: 오탈자 정규화 후 30카드로 수기 재작성
   - from: chat-raw 사진·영상 촬영 기법 가이드 이미지 (2026-07-18)
-    to: knowledge/terms/camera-terms.yaml
+    to: _inbox/camera-terms.yaml
     note: 사진 20 + 영상 19 용어 카드. 2026-09-12 _inbox/camera-terms.yaml로 보류 이동.
   - from: assets/knowledge/reference/visual/
     to: knowledge/visual/

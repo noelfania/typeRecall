@@ -78,13 +78,6 @@ parts:
       git commit -m "chore(deps): bump react to v18.2.0"
     typing: |-
       git commit -m "chore(deps): bump react to v18.2.0"
-  - id: language-git-temp-part-10
-    title: build - 빌드[build]
-    display: |-
-      # build - 빌드[build]
-      git commit -m "build: update vite build script"
-    typing: |-
-      git commit -m "build: update vite build script"
   - id: language-git-temp-part-11
     title: ci - CI/CD[ci]
     display: |-
@@ -92,13 +85,6 @@ parts:
       git commit -m "ci: add build cache to github actions"
     typing: |-
       git commit -m "ci: add build cache to github actions"
-  - id: language-git-temp-part-12
-    title: revert - 되돌림[revert]
-    display: |-
-      # revert - 되돌림[revert]
-      git commit -m "revert: revert \"feat: dark mode support\""
-    typing: |-
-      git commit -m "revert: revert \"feat: dark mode support\""
   - id: language-git-temp-part-13
     title: body로 이유 적기[commit body]
     display: |-
@@ -134,11 +120,3 @@ parts:
       Closes #123
       EOF
       )"
-  - id: language-git-temp-part-15
-    title: 커밋 템플릿 설정[commit.template]
-    display: |-
-      # 커밋 템플릿 설정[commit.template]
-      # .gitmessage.txt를 기본 메시지로 쓴다
-      git config --global commit.template ~/.gitmessage.txt
-    typing: |-
-      git config --global commit.template ~/.gitmessage.txt

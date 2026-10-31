@@ -1,0 +1,97 @@
+id: language-css-p03
+category: syntax
+kind: code-snippet
+language: css
+track:
+  id: css
+  label: CSS
+title: P03.위치-전환-넘침
+source:
+  origin: 자료 부족·과잉 점검 2026-10-31
+  note: 고빈도 핵심 문법 보강.
+parts:
+  - id: language-css-p03-part-1
+    title: 상대·절대 위치[position]
+    display: |-
+      /* 상대·절대 위치[position] */
+      .card {
+        position: relative; /* 자리는 그대로, 자식 absolute의 기준이 됨 */
+      }
+
+      .card__badge {
+        position: absolute; /* 흐름에서 빠져 가장 가까운 position 조상 기준으로 배치 */
+        top: 8px;
+        right: 8px;
+      }
+    typing: |-
+      .card {
+        position: relative;
+      }
+
+      .card__badge {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+      }
+  - id: language-css-p03-part-2
+    title: 고정 위치와 쌓임[sticky / z-index]
+    display: |-
+      /* 고정 위치와 쌓임[sticky / z-index] */
+      .header {
+        position: sticky; /* 스크롤하다 top: 0에 닿으면 붙음. 부모 안에서만 유지 */
+        top: 0;
+        z-index: 10; /* 값이 클수록 위. position이 있어야 동작 */
+      }
+    typing: |-
+      .header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+  - id: language-css-p03-part-3
+    title: 전환 효과[transition]
+    display: |-
+      /* 전환 효과[transition] */
+      .button {
+        transition: background-color 0.2s ease; /* 속성 시간 곡선. 시작 상태에 두어야 나갈 때도 부드럽다 */
+      }
+
+      .button:hover {
+        background-color: #111827;
+      }
+    typing: |-
+      .button {
+        transition: background-color 0.2s ease;
+      }
+
+      .button:hover {
+        background-color: #111827;
+      }
+  - id: language-css-p03-part-4
+    title: 넘침 처리[overflow]
+    display: |-
+      /* 넘침 처리[overflow] */
+      .panel {
+        max-height: 320px;
+        overflow-y: auto; /* 넘칠 때만 세로 스크롤 표시 */
+      }
+    typing: |-
+      .panel {
+        max-height: 320px;
+        overflow-y: auto;
+      }
+  - id: language-css-p03-part-5
+    title: 말줄임[text-overflow]
+    display: |-
+      /* 말줄임[text-overflow] */
+      .title {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis; /* 세 줄이 함께 있어야 말줄임(…)이 나온다 */
+      }
+    typing: |-
+      .title {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }

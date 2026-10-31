@@ -17,35 +17,12 @@ parts:
       SELECT user_id, COUNT(*) AS order_count
       FROM orders
       GROUP BY user_id
-      HAVING COUNT(*) >= 2;
+      HAVING COUNT(*) >= 2; -- WHERE는 그룹 전, HAVING은 그룹 후 조건
     typing: |-
       SELECT user_id, COUNT(*) AS order_count
       FROM orders
       GROUP BY user_id
       HAVING COUNT(*) >= 2;
-  - id: language-postgresql-p02-part-2
-    title: 공통 테이블 식[with cte]
-    display: |-
-      -- 공통 테이블 식[with cte]
-      WITH order_sum AS (
-          SELECT user_id, SUM(total_price) AS total_amount
-          FROM orders
-          GROUP BY user_id
-      )
-      SELECT u.user_name, o.total_amount
-      FROM users u
-      JOIN order_sum o
-        ON u.user_id = o.user_id;
-    typing: |-
-      WITH order_sum AS (
-          SELECT user_id, SUM(total_price) AS total_amount
-          FROM orders
-          GROUP BY user_id
-      )
-      SELECT u.user_name, o.total_amount
-      FROM users u
-      JOIN order_sum o
-        ON u.user_id = o.user_id;
   - id: language-postgresql-p02-part-3
     title: 업서트[upsert]
     display: |-

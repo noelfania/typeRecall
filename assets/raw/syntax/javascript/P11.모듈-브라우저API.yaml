@@ -1,0 +1,139 @@
+id: language-javascript-p11
+category: syntax
+kind: code-snippet
+language: javascript
+track:
+  id: javascript
+  label: JavaScript
+title: P11.모듈-브라우저API
+source:
+  origin: 자료 부족·과잉 점검 2026-10-31
+  note: 고빈도 핵심 문법 보강.
+parts:
+  - id: language-javascript-p11-part-1
+    title: JSON 변환[JSON.parse]
+    display: |-
+      // JSON 변환[JSON.parse]
+      const text = JSON.stringify({ id: 1 }); // 결과: {"id":1}
+      const data = JSON.parse(text); // 잘못된 문자열이면 예외. 필요하면 try/catch
+    typing: |-
+      const text = JSON.stringify({ id: 1 });
+      const data = JSON.parse(text);
+  - id: language-javascript-p11-part-2
+    title: 요소 선택[querySelector]
+    display: |-
+      // 요소 선택[querySelector]
+      const button = document.querySelector("#save"); // 첫 요소 하나. 없으면 null
+      const items = document.querySelectorAll(".item"); // NodeList 반환. forEach 가능
+      button.classList.add("active");
+    typing: |-
+      const button = document.querySelector("#save");
+      const items = document.querySelectorAll(".item");
+      button.classList.add("active");
+  - id: language-javascript-p11-part-3
+    title: 이벤트 등록[addEventListener]
+    display: |-
+      // 이벤트 등록[addEventListener]
+      button.addEventListener("click", (event) => {
+        event.preventDefault(); // 링크 이동, 폼 제출 같은 기본 동작 막기
+        console.log(event.target);
+      });
+    typing: |-
+      button.addEventListener("click", (event) => {
+        event.preventDefault();
+        console.log(event.target);
+      });
+  - id: language-javascript-p11-part-4
+    title: 브라우저 저장소[localStorage]
+    display: |-
+      // 브라우저 저장소[localStorage]
+      localStorage.setItem("theme", "dark"); // 문자열만 저장. 객체는 JSON.stringify
+      const theme = localStorage.getItem("theme"); // 없으면 null
+      localStorage.removeItem("theme");
+    typing: |-
+      localStorage.setItem("theme", "dark");
+      const theme = localStorage.getItem("theme");
+      localStorage.removeItem("theme");
+  - id: language-javascript-p11-part-5
+    title: 요청 취소[AbortController]
+    display: |-
+      // 요청 취소[AbortController]
+      const controller = new AbortController();
+      fetch("/api/users", { signal: controller.signal }); // signal로 요청과 취소 신호를 연결
+      controller.abort(); // 진행 중인 fetch가 AbortError로 실패
+    typing: |-
+      const controller = new AbortController();
+      fetch("/api/users", { signal: controller.signal });
+      controller.abort();
+  - id: language-javascript-p11-part-6
+    title: 깊은 복사[structuredClone]
+    display: |-
+      // 깊은 복사[structuredClone]
+      const original = { user: { name: "kim" } };
+      const copy = structuredClone(original); // 중첩 객체까지 복사. 함수는 복사 불가
+    typing: |-
+      const original = { user: { name: "kim" } };
+      const copy = structuredClone(original);
+  - id: language-javascript-p11-part-7
+    title: 이름 있는 내보내기[named export]
+    display: |-
+      // 이름 있는 내보내기[named export]
+      export const API_URL = "/api"; // 이름 있는 내보내기. 가져올 때 같은 이름을 {}로
+      export function add(a, b) {
+        return a + b;
+      }
+      export class User {
+        constructor(name) {
+          this.name = name;
+        }
+      }
+    typing: |-
+      export const API_URL = "/api";
+      export function add(a, b) {
+        return a + b;
+      }
+      export class User {
+        constructor(name) {
+          this.name = name;
+        }
+      }
+  - id: language-javascript-p11-part-8
+    title: 기본 내보내기[default export]
+    display: |-
+      // 기본 내보내기[default export] — 모듈당 하나
+      export default function fetchUser(id) {
+        return { id, name: "kim" };
+      }
+    typing: |-
+      export default function fetchUser(id) {
+        return { id, name: "kim" };
+      }
+  - id: language-javascript-p11-part-9
+    title: 가져오기[import]
+    display: |-
+      // 가져오기[import] — 이름·기본·별칭[alias]
+      import fetchUser from "./user.js";
+      import { API_URL, add as sum } from "./math.js";
+      import * as math from "./math.js";
+      console.log(API_URL, sum(1, 2), math.add(3, 4));
+    typing: |-
+      import fetchUser from "./user.js";
+      import { API_URL, add as sum } from "./math.js";
+      import * as math from "./math.js";
+      console.log(API_URL, sum(1, 2), math.add(3, 4));
+  - id: language-javascript-p11-part-10
+    title: let 콜백 캡처[closure]
+    display: |-
+      // let 콜백 캡처[closure] — 반복마다 새 바인딩[binding]
+      const callbacks = [];
+      for (let i = 0; i <= 2; i++) {
+        callbacks[i] = () => i * 2;
+      }
+      console.log(callbacks[0](), callbacks[1](), callbacks[2]());
+      // 결과: 0 2 4
+    typing: |-
+      const callbacks = [];
+      for (let i = 0; i <= 2; i++) {
+        callbacks[i] = () => i * 2;
+      }
+      console.log(callbacks[0](), callbacks[1](), callbacks[2]());

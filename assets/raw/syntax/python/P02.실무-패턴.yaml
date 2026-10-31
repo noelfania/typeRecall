@@ -76,7 +76,7 @@ parts:
     title: 값 추가[dict assign]
     display: |-
       # 값 추가[dict assign]
-      user["email"] = "a@a.com"
+      user["email"] = "a@a.com" # 키가 없으면 추가, 있으면 덮어씀
       print(user["email"])
     typing: |-
       user["email"] = "a@a.com"
@@ -128,7 +128,7 @@ parts:
       # JSON 문자열화[json.dumps]
       import json
 
-      text = json.dumps({"name": "kim", "age": 30})
+      text = json.dumps({"name": "kim", "age": 30}) # 파이썬 값 → JSON 문자열
       print(text)
     typing: |-
       import json

@@ -1,0 +1,102 @@
+id: language-spring-boot-p07
+category: syntax
+kind: code-snippet
+language: java
+track:
+  id: spring-boot
+  label: Spring Boot
+title: P07.게이트웨이-코드
+source:
+  origin: 필수 백엔드 보강 2026-10-31
+  note: Spring Cloud Gateway 5.0 (Server WebFlux) 공식 문서 기준 2026-10-31
+parts:
+  - id: language-spring-boot-p07-part-1
+    title: 코드로 라우트 정의[RouteLocator]
+    display: |-
+      // 코드로 라우트 정의[RouteLocator]
+      @Bean
+      public RouteLocator routes(RouteLocatorBuilder builder) { // YAML과 같은 라우트를 코드로. 조건이 복잡할 때 사용
+          return builder.routes()
+                  .route("user-service", r -> r.path("/api/users/**")
+                          .filters(f -> f.stripPrefix(1))
+                          .uri("http://localhost:8081"))
+                  .build();
+      }
+    typing: |-
+      @Bean
+      public RouteLocator routes(RouteLocatorBuilder builder) {
+          return builder.routes()
+                  .route("user-service", r -> r.path("/api/users/**")
+                          .filters(f -> f.stripPrefix(1))
+                          .uri("http://localhost:8081"))
+                  .build();
+      }
+  - id: language-spring-boot-p07-part-2
+    title: 전역 필터[GlobalFilter]
+    display: |-
+      // 전역 필터[GlobalFilter]
+      @Component
+      public class LoggingFilter implements GlobalFilter, Ordered { // 모든 라우트에 적용되는 필터
+          @Override
+          public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) { // WebFlux의 비동기 결과. 값 없이 완료만 알림
+              log.info("request: {}", exchange.getRequest().getPath());
+              return chain.filter(exchange); // 다음 필터로 넘김. 반환하지 않으면 요청이 끝나지 않음
+          }
+
+          @Override
+          public int getOrder() {
+              return -1; // 작을수록 먼저 실행
+          }
+      }
+    typing: |-
+      @Component
+      public class LoggingFilter implements GlobalFilter, Ordered {
+          @Override
+          public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+              log.info("request: {}", exchange.getRequest().getPath());
+              return chain.filter(exchange);
+          }
+
+          @Override
+          public int getOrder() {
+              return -1;
+          }
+      }
+  - id: language-spring-boot-p07-part-3
+    title: 인증 헤더 검사[auth filter]
+    display: |-
+      // 인증 헤더 검사[auth filter]
+      @Override
+      public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+          String token = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+          if (token == null) { // 인증 같은 공통 관심사는 여기서, 업무 규칙은 서비스에서
+              exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+              return exchange.getResponse().setComplete(); // 내부 서비스로 넘기지 않고 응답을 끝냄
+          }
+          return chain.filter(exchange);
+      }
+    typing: |-
+      @Override
+      public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+          String token = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+          if (token == null) {
+              exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+              return exchange.getResponse().setComplete();
+          }
+          return chain.filter(exchange);
+      }
+  - id: language-spring-boot-p07-part-4
+    title: 제한 기준[KeyResolver]
+    display: |-
+      // 제한 기준[KeyResolver]
+      @Bean
+      public KeyResolver userKeyResolver() { // 요청 제한을 사용자별로 세는 기준. BFF와 달리 응답을 조립하지 않고 통과·보호만 담당
+          return exchange -> Mono.justOrEmpty(
+                  exchange.getRequest().getHeaders().getFirst("X-User-Id"));
+      }
+    typing: |-
+      @Bean
+      public KeyResolver userKeyResolver() {
+          return exchange -> Mono.justOrEmpty(
+                  exchange.getRequest().getHeaders().getFirst("X-User-Id"));
+      }

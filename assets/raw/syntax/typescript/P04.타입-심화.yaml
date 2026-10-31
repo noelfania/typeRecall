@@ -1,0 +1,111 @@
+id: language-typescript-p04
+category: syntax
+kind: code-snippet
+language: typescript
+track:
+  id: typescript
+  label: TypeScript
+title: P04.타입-심화
+source:
+  origin: 자료 부족·과잉 점검 2026-10-31
+  note: 고빈도 핵심 문법 보강.
+parts:
+  - id: language-typescript-p04-part-1
+    title: 도달 불가 검사[never]
+    display: |-
+      // 도달 불가 검사[never]
+      function assertNever(value: never): never { // 모든 case를 처리했는지 컴파일 때 확인. 빠지면 오류
+        throw new Error(String(value));
+      }
+    typing: |-
+      function assertNever(value: never): never {
+        throw new Error(String(value));
+      }
+  - id: language-typescript-p04-part-2
+    title: 타입 만족 검사[satisfies]
+    display: |-
+      // 타입 만족 검사[satisfies]
+      const routes = {
+        home: "/",
+        login: "/login",
+      } satisfies Record<string, string>; // 형식은 검사하되 home의 구체적 타입은 유지
+    typing: |-
+      const routes = {
+        home: "/",
+        login: "/login",
+      } satisfies Record<string, string>;
+  - id: language-typescript-p04-part-3
+    title: 반환 타입 추출[ReturnType]
+    display: |-
+      // 반환 타입 추출[ReturnType]
+      function createUser() {
+        return { id: 1, name: "kim" };
+      }
+
+      type User = ReturnType<typeof createUser>; // 함수의 반환 타입을 뽑음. typeof로 값을 타입으로 바꿈
+    typing: |-
+      function createUser() {
+        return { id: 1, name: "kim" };
+      }
+
+      type User = ReturnType<typeof createUser>;
+  - id: language-typescript-p04-part-4
+    title: 비동기 함수 타입[Promise]
+    display: |-
+      // 비동기 함수 타입[Promise]
+      async function fetchUser(id: number): Promise<User> { // async 함수는 항상 Promise를 반환
+        const res = await fetch(`/api/users/${id}`);
+        return res.json(); // json()은 any 계열이라 실제 형태는 런타임 검증 필요
+      }
+    typing: |-
+      async function fetchUser(id: number): Promise<User> {
+        const res = await fetch(`/api/users/${id}`);
+        return res.json();
+      }
+  - id: language-typescript-p04-part-5
+    title: 비동기 결과 추출[Awaited]
+    display: |-
+      // 비동기 결과 추출[Awaited]
+      type FetchedUser = Awaited<ReturnType<typeof fetchUser>>; // Promise를 벗긴 안쪽 타입
+    typing: type FetchedUser = Awaited<ReturnType<typeof fetchUser>>;
+  - id: language-typescript-p04-part-6
+    title: null 제거[NonNullable]
+    display: |-
+      // null 제거[NonNullable]
+      type MaybeName = string | null | undefined;
+      type Name = NonNullable<MaybeName>; // 결과: string
+    typing: |-
+      type MaybeName = string | null | undefined;
+      type Name = NonNullable<MaybeName>;
+  - id: language-typescript-p04-part-7
+    title: 인터페이스 구현[implements]
+    display: |-
+      // 인터페이스 구현[implements]
+      interface Logger {
+        log(message: string): void;
+      }
+
+      class ConsoleLogger implements Logger { // interface를 빠짐없이 구현했는지 검사. 실행 코드는 물려받지 않음
+        log(message: string) {
+          console.log(message);
+        }
+      }
+    typing: |-
+      interface Logger {
+        log(message: string): void;
+      }
+
+      class ConsoleLogger implements Logger {
+        log(message: string) {
+          console.log(message);
+        }
+      }
+  - id: language-typescript-p04-part-8
+    title: 타입만 가져오기[import type]
+    display: |-
+      // 타입만 가져오기[import type]
+      import type { User } from "./types"; // 컴파일 후 사라져 번들에 포함되지 않음
+      import { fetchUser, type UserId } from "./api"; // 일반 import 안에서 타입만 표시
+    typing: |-
+      import type { User } from "./types";
+      import { fetchUser, type UserId } from "./api";
