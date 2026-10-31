@@ -1,0 +1,155 @@
+id: language-html-p01
+category: syntax
+kind: code-snippet
+language: html
+track:
+  id: html
+  label: HTML
+title: P01.문서-시맨틱-폼
+source:
+  origin: 자료 부족·과잉 점검 2026-10-31
+  note: 고빈도 핵심 문법 보강.
+parts:
+  - id: language-html-p01-part-1
+    title: 문서 골격[document]
+    display: |-
+      <!-- 문서 골격[document] -->
+      <!doctype html> <!-- 표준 모드로 렌더링하게 함 -->
+      <html lang="ko"> <!-- lang 스크린 리더·번역에 쓰이는 언어 -->
+        <head>
+          <meta charset="UTF-8" /> <!-- <head> 앞쪽에 두어 한글 깨짐 방지 -->
+          <title>제목</title>
+        </head>
+        <body></body>
+      </html>
+    typing: |-
+      <!doctype html>
+      <html lang="ko">
+        <head>
+          <meta charset="UTF-8" />
+          <title>제목</title>
+        </head>
+        <body></body>
+      </html>
+  - id: language-html-p01-part-2
+    title: 메타 태그[meta]
+    display: |-
+      <!-- 메타 태그[meta] -->
+      <meta name="viewport" content="width=device-width, initial-scale=1" /> <!-- 모바일 화면 폭에 맞춤. 반응형의 전제 -->
+      <meta name="description" content="페이지 설명" /> <!-- 검색 결과 요약에 쓰일 수 있음 -->
+    typing: |-
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="description" content="페이지 설명" />
+  - id: language-html-p01-part-3
+    title: 자원 연결[link / script]
+    display: |-
+      <!-- 자원 연결[link / script] -->
+      <link rel="stylesheet" href="/styles.css" />
+      <script type="module" src="/main.js"></script> <!-- 모듈 스크립트는 HTML 파싱 후 실행(자동 defer) -->
+    typing: |-
+      <link rel="stylesheet" href="/styles.css" />
+      <script type="module" src="/main.js"></script>
+  - id: language-html-p01-part-4
+    title: 시맨틱 구조[semantic]
+    display: |-
+      <!-- 시맨틱 구조[semantic] -->
+      <header></header>
+      <nav></nav>
+      <main> <!-- 페이지의 핵심 내용. 한 문서에 하나 -->
+        <section></section> <!-- 주제로 묶은 구역 -->
+        <article></article> <!-- 따로 떼어도 뜻이 통하는 글 -->
+      </main>
+      <aside></aside> <!-- 본문과 관련된 보조 내용 -->
+      <footer></footer>
+    typing: |-
+      <header></header>
+      <nav></nav>
+      <main>
+        <section></section>
+        <article></article>
+      </main>
+      <aside></aside>
+      <footer></footer>
+  - id: language-html-p01-part-5
+    title: 링크와 이미지[a / img]
+    display: |-
+      <!-- 링크와 이미지[a / img] -->
+      <a href="https://example.com" target="_blank" rel="noopener">이동</a> <!-- 새 탭이 원래 페이지를 조작하지 못하게 함 -->
+      <img src="/logo.png" alt="회사 로고" loading="lazy" /> <!-- 이미지 대체 글. 접근성에 필수 -->
+    typing: |-
+      <a href="https://example.com" target="_blank" rel="noopener">이동</a>
+      <img src="/logo.png" alt="회사 로고" loading="lazy" />
+  - id: language-html-p01-part-6
+    title: 목록[ul / ol]
+    display: |-
+      <!-- 목록[ul / ol] -->
+      <ul> <!-- 순서 없는 목록 -->
+        <li>항목</li>
+      </ul>
+      <ol> <!-- 순서 있는 목록 -->
+        <li>순서</li>
+      </ol>
+    typing: |-
+      <ul>
+        <li>항목</li>
+      </ul>
+      <ol>
+        <li>순서</li>
+      </ol>
+  - id: language-html-p01-part-7
+    title: 표[table]
+    display: |-
+      <!-- 표[table] -->
+      <table>
+        <thead> <!-- 머리글 행 묶음. th는 제목 칸 -->
+          <tr><th>이름</th></tr>
+        </thead>
+        <tbody> <!-- 데이터 행 묶음. td는 내용 칸 -->
+          <tr><td>kim</td></tr>
+        </tbody>
+      </table>
+    typing: |-
+      <table>
+        <thead>
+          <tr><th>이름</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>kim</td></tr>
+        </tbody>
+      </table>
+  - id: language-html-p01-part-8
+    title: 폼[form]
+    display: |-
+      <!-- 폼[form] -->
+      <form action="/login" method="post">
+        <label for="email">이메일</label> <!-- for는 input의 id와 연결. 글자를 눌러도 포커스 -->
+        <input id="email" name="email" type="email" required /> <!-- name이 전송 데이터의 키. required는 빈 값 제출 차단 -->
+        <button type="submit">로그인</button> <!-- 폼 안 버튼의 기본값이지만 명시한다 -->
+      </form>
+    typing: |-
+      <form action="/login" method="post">
+        <label for="email">이메일</label>
+        <input id="email" name="email" type="email" required />
+        <button type="submit">로그인</button>
+      </form>
+  - id: language-html-p01-part-9
+    title: 선택 입력[select / textarea]
+    display: |-
+      <!-- 선택 입력[select / textarea] -->
+      <select name="role">
+        <option value="admin">관리자</option> <!-- value가 전송되고, 사이 글자는 화면 표시용 -->
+      </select>
+      <textarea name="memo" rows="3"></textarea>
+      <input type="checkbox" name="agree" /> <!-- 체크 안 하면 값이 전송되지 않음 -->
+    typing: |-
+      <select name="role">
+        <option value="admin">관리자</option>
+      </select>
+      <textarea name="memo" rows="3"></textarea>
+      <input type="checkbox" name="agree" />
+  - id: language-html-p01-part-10
+    title: 데이터·접근성 속성[data / aria]
+    display: |-
+      <!-- 데이터·접근성 속성[data / aria] -->
+      <button data-id="42" aria-label="닫기" aria-expanded="false">X</button> <!-- data-* 자유 데이터(JS의 dataset.id). aria-* 보조 기술용 정보 -->
+    typing: <button data-id="42" aria-label="닫기" aria-expanded="false">X</button>

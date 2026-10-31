@@ -1,0 +1,133 @@
+id: language-go-p03
+category: syntax
+kind: code-snippet
+language: go
+track:
+  id: go
+  label: Go
+title: P03.동시성-에러-JSON
+source:
+  origin: 자료 부족·과잉 점검 2026-10-31
+  note: 고빈도 핵심 문법 보강.
+parts:
+  - id: language-go-p03-part-1
+    title: 지연 실행[defer]
+    display: |-
+      // 지연 실행[defer]
+      file, err := os.Open("data.txt")
+      if err != nil {
+      	return err
+      }
+      defer file.Close() // 함수가 끝날 때 실행. 에러 확인 뒤에 둔다
+    typing: |-
+      file, err := os.Open("data.txt")
+      if err != nil {
+      	return err
+      }
+      defer file.Close()
+  - id: language-go-p03-part-2
+    title: 취소·시간 제한[context]
+    display: |-
+      // 취소·시간 제한[context]
+      ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second) // 3초 뒤 자동 취소되는 context
+      defer cancel() // 자원 해제를 위해 항상 호출
+
+      req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+    typing: |-
+      ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+      defer cancel()
+
+      req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+  - id: language-go-p03-part-3
+    title: 고루틴 대기[WaitGroup]
+    display: |-
+      // 고루틴 대기[WaitGroup]
+      var wg sync.WaitGroup
+      for _, url := range urls {
+      	wg.Add(1) // 고루틴 시작 전에 개수 추가
+      	go func(u string) {
+      		defer wg.Done() // 끝나면 개수 감소
+      		fetch(u)
+      	}(url)
+      }
+      wg.Wait() // 개수가 0이 될 때까지 대기
+    typing: |-
+      var wg sync.WaitGroup
+      for _, url := range urls {
+      	wg.Add(1)
+      	go func(u string) {
+      		defer wg.Done()
+      		fetch(u)
+      	}(url)
+      }
+      wg.Wait()
+  - id: language-go-p03-part-4
+    title: 상호 배제[Mutex]
+    display: |-
+      // 상호 배제[Mutex]
+      var mu sync.Mutex
+      mu.Lock() // 한 번에 한 고루틴만 통과. count++는 원자적이지 않다
+      count++
+      mu.Unlock()
+    typing: |-
+      var mu sync.Mutex
+      mu.Lock()
+      count++
+      mu.Unlock()
+  - id: language-go-p03-part-5
+    title: JSON 변환[encoding/json]
+    display: |-
+      // JSON 변환[encoding/json]
+      type User struct {
+      	Name string `json:"name"` // 구조체 태그로 JSON 키 지정. 필드는 대문자여야 공개됨
+      }
+
+      body, err := json.Marshal(User{Name: "kim"})
+      err = json.Unmarshal(body, &user) // 값을 채우려면 포인터(&)를 넘긴다
+    typing: |-
+      type User struct {
+      	Name string `json:"name"`
+      }
+
+      body, err := json.Marshal(User{Name: "kim"})
+      err = json.Unmarshal(body, &user)
+  - id: language-go-p03-part-6
+    title: 에러 비교[errors.Is / As]
+    display: |-
+      // 에러 비교[errors.Is / As]
+      if errors.Is(err, os.ErrNotExist) { // 감싼 에러까지 따라가며 같은 에러인지 비교
+      	return nil
+      }
+
+      var pathErr *os.PathError
+      if errors.As(err, &pathErr) { // 특정 타입 에러를 꺼내 필드를 읽음
+      	fmt.Println(pathErr.Path)
+      }
+    typing: |-
+      if errors.Is(err, os.ErrNotExist) {
+      	return nil
+      }
+
+      var pathErr *os.PathError
+      if errors.As(err, &pathErr) {
+      	fmt.Println(pathErr.Path)
+      }
+  - id: language-go-p03-part-7
+    title: 제네릭[generics]
+    display: |-
+      // 제네릭[generics]
+      func Map[T, U any](items []T, fn func(T) U) []U { // 타입 매개변수 T, U. any는 모든 타입
+      	result := make([]U, 0, len(items))
+      	for _, item := range items {
+      		result = append(result, fn(item))
+      	}
+      	return result
+      }
+    typing: |-
+      func Map[T, U any](items []T, fn func(T) U) []U {
+      	result := make([]U, 0, len(items))
+      	for _, item := range items {
+      		result = append(result, fn(item))
+      	}
+      	return result
+      }

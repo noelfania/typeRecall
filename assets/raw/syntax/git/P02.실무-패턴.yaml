@@ -9,48 +9,6 @@ title: P02.실무-패턴
 source:
   origin: assets/typingSource/Language-git/P02.실무-패턴.sh
 parts:
-  - id: language-git-p02-part-1
-    title: 기능 추가 커밋[feat]
-    display: |-
-      # 기능 추가 커밋[feat]
-      git commit -m "feat(auth): add social login"
-      # 결과: 새 기능 추가 이력을 남김
-    typing: 'git commit -m "feat(auth): add social login"'
-  - id: language-git-p02-part-2
-    title: 버그 수정 커밋[fix]
-    display: |-
-      # 버그 수정 커밋[fix]
-      git commit -m "fix(api): handle empty response"
-      # 결과: 버그 수정 이력을 남김
-    typing: 'git commit -m "fix(api): handle empty response"'
-  - id: language-git-p02-part-3
-    title: 문서 수정 커밋[docs]
-    display: |-
-      # 문서 수정 커밋[docs]
-      git commit -m "docs: update setup guide"
-      # 결과: 문서 변경 이력을 남김
-    typing: 'git commit -m "docs: update setup guide"'
-  - id: language-git-p02-part-4
-    title: 리팩터링 커밋[refactor]
-    display: |-
-      # 리팩터링 커밋[refactor]
-      git commit -m "refactor(ui): simplify modal props"
-      # 결과: 동작 변화 없는 구조 개선 이력을 남김
-    typing: 'git commit -m "refactor(ui): simplify modal props"'
-  - id: language-git-p02-part-5
-    title: 잡무 커밋[chore]
-    display: |-
-      # 잡무 커밋[chore]
-      git commit -m "chore: update eslint config"
-      # 결과: 설정 또는 의존성 변경 이력을 남김
-    typing: 'git commit -m "chore: update eslint config"'
-  - id: language-git-p02-part-6
-    title: 스타일 커밋[style]
-    display: |-
-      # 스타일 커밋[style]
-      git commit -m "style: lint code"
-      # 결과: 포맷 또는 스타일 정리 이력을 남김
-    typing: 'git commit -m "style: lint code"'
   - id: language-git-p02-part-7
     title: 기능 브랜치[feature branch]
     display: |-
@@ -65,13 +23,6 @@ parts:
       git switch -c hotfix/login-error
       # 결과: 긴급 수정용 브랜치 생성
     typing: git switch -c hotfix/login-error
-  - id: language-git-p02-part-9
-    title: 버그픽스 브랜치[bugfix branch]
-    display: |-
-      # 버그픽스 브랜치[bugfix branch]
-      git switch -c bugfix/cart-total
-      # 결과: 버그 수정용 브랜치 생성
-    typing: git switch -c bugfix/cart-total
   - id: language-git-p02-part-10
     title: 페치[git fetch]
     display: |-
@@ -79,13 +30,6 @@ parts:
       git fetch origin
       # 결과: 원격 저장소 최신 이력을 가져옴
     typing: git fetch origin
-  - id: language-git-p02-part-11
-    title: 프룬[git prune]
-    display: |-
-      # 프룬[git prune]
-      git prune --dry-run
-      # 결과: 어떤 loose object 가 정리 대상인지 미리 확인
-    typing: git prune --dry-run
   - id: language-git-p02-part-12
     title: 원격 삭제 브랜치 정리[git fetch --prune]
     display: |-
@@ -93,13 +37,6 @@ parts:
       git fetch --prune origin
       # 결과: 원격에서 이미 삭제된 origin/* 추적 브랜치를 정리
     typing: git fetch --prune origin
-  - id: language-git-p02-part-13
-    title: 원격 추적 브랜치 정리[git remote prune]
-    display: |-
-      # 원격 추적 브랜치 정리[git remote prune]
-      git remote prune origin
-      # 결과: 더 이상 없는 원격 브랜치 참조를 한 번에 정리
-    typing: git remote prune origin
   - id: language-git-p02-part-14
     title: 로그 비교[git log --oneline --graph]
     display: |-

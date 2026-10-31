@@ -1,0 +1,104 @@
+id: language-spring-boot-p06
+category: syntax
+kind: command
+language: shell
+track:
+  id: spring-boot
+  label: Spring Boot
+title: P06.게이트웨이-설정
+source:
+  origin: 필수 백엔드 보강 2026-10-31
+  note: Spring Cloud Gateway 5.0 (Server WebFlux) 공식 문서 기준 2026-10-31
+parts:
+  - id: language-spring-boot-p06-part-1
+    title: 라우트[route]
+    display: |-
+      # 라우트[route]
+      spring:
+        cloud:
+          gateway:
+            server:
+              webflux: # 버전 5.0 기준 경로. 예전 버전은 spring.cloud.gateway.routes
+                routes:
+                - id: user-service
+                  uri: http://localhost:8081 # 요청을 넘길 내부 서비스 주소
+                  predicates:
+                  - Path=/api/users/** # Predicate: 이 라우트를 탈 조건
+                  filters:
+                  - StripPrefix=1 # Filter: 앞 경로 하나를 떼고 전달. /api/users → /users
+    typing: |-
+      spring:
+        cloud:
+          gateway:
+            server:
+              webflux:
+                routes:
+                - id: user-service
+                  uri: http://localhost:8081
+                  predicates:
+                  - Path=/api/users/**
+                  filters:
+                  - StripPrefix=1
+  - id: language-spring-boot-p06-part-2
+    title: 요청 제한[RequestRateLimiter]
+    display: |-
+      # 요청 제한[RequestRateLimiter]
+      filters:
+      - name: RequestRateLimiter # 한도를 넘으면 429 응답. spring-boot-starter-data-redis-reactive 필요
+        args:
+          redis-rate-limiter.replenishRate: 10 # 초당 채워지는 토큰 수
+          redis-rate-limiter.burstCapacity: 20 # 순간적으로 허용하는 최대치
+          redis-rate-limiter.requestedTokens: 1
+          key-resolver: "#{@userKeyResolver}" # 누구 기준으로 셀지 정하는 빈 참조
+    typing: |-
+      filters:
+      - name: RequestRateLimiter
+        args:
+          redis-rate-limiter.replenishRate: 10
+          redis-rate-limiter.burstCapacity: 20
+          redis-rate-limiter.requestedTokens: 1
+          key-resolver: "#{@userKeyResolver}"
+  - id: language-spring-boot-p06-part-3
+    title: 서킷 브레이커[CircuitBreaker]
+    display: |-
+      # 서킷 브레이커[CircuitBreaker]
+      filters:
+      - name: CircuitBreaker # 장애 서비스 호출을 잠시 차단. spring-cloud-starter-circuitbreaker-reactor-resilience4j 필요
+        args:
+          name: userService
+          fallbackUri: forward:/fallback/users # 차단됐을 때 대신 응답할 곳. forward: 만 지원
+    typing: |-
+      filters:
+      - name: CircuitBreaker
+        args:
+          name: userService
+          fallbackUri: forward:/fallback/users
+  - id: language-spring-boot-p06-part-4
+    title: CORS[globalcors]
+    display: |-
+      # CORS[globalcors]
+      spring:
+        cloud:
+          gateway:
+            server:
+              webflux:
+                globalcors: # 게이트웨이에서 처리하면 서비스마다 설정하지 않아도 됨
+                  cors-configurations:
+                    '[/**]': # 모든 경로에 적용. 대괄호와 따옴표가 필요
+                      allowedOrigins: "https://app.example.com"
+                      allowedMethods:
+                      - GET
+                      - POST
+    typing: |-
+      spring:
+        cloud:
+          gateway:
+            server:
+              webflux:
+                globalcors:
+                  cors-configurations:
+                    '[/**]':
+                      allowedOrigins: "https://app.example.com"
+                      allowedMethods:
+                      - GET
+                      - POST

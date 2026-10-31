@@ -131,12 +131,6 @@ terms:
     prompt: 동작과 접근성 로직만 제공하고 스타일은 사용자가 입히는 UI 라이브러리 방식.
     answer: Headless UI
     example: 디자인 자유도가 필요해서 headless UI 컴포넌트를 골랐다.
-  - id: dev-extra-semantic
-    section: 네이밍 컨벤션
-    title: 시맨틱
-    prompt: 이름이나 태그가 겉모습이 아니라 의미를 드러내도록 작성하는 방식. 시맨틱 CSS, 시맨틱 태그처럼 쓴다.
-    answer: Semantic
-    example: 클래스 이름은 semantic하게 역할 기준으로 짓자.
   - id: fe-spa
     section: 렌더링
     title: SPA
@@ -153,3 +147,94 @@ terms:
     aliases:
       - Server-Side Rendering
     example: 마케팅 랜딩은 SSR[Server-Side Rendering]로 첫 페인트와 검색 노출을 챙긴다.
+  - id: fe-csr
+    section: 렌더링 / 컴포넌트
+    title: 클라이언트 사이드 렌더링
+    prompt: 브라우저가 자바스크립트를 실행해 화면을 그리는 방식.
+    answer: CSR
+    answerDisplay: 클라이언트 사이드 렌더링[CSR]
+    example: 관리자 화면은 클라이언트 사이드 렌더링[CSR]으로 충분하다.
+  - id: fe-ssg
+    section: 렌더링 / 컴포넌트
+    title: 정적 사이트 생성
+    prompt: 빌드할 때 페이지를 미리 HTML로 만들어 두는 방식.
+    answer: SSG
+    answerDisplay: 정적 사이트 생성[SSG]
+    example: 문서 사이트는 정적 사이트 생성[SSG]으로 배포한다.
+  - id: fe-hydration
+    section: 렌더링 / 컴포넌트
+    title: 하이드레이션
+    prompt: 서버가 보낸 HTML에 이벤트와 상태를 연결하는 과정.
+    answer: Hydration
+    answerDisplay: 하이드레이션[Hydration]
+    example: 서버와 값이 달라 하이드레이션[Hydration] 경고가 났다.
+  - id: fe-component
+    section: 렌더링 / 컴포넌트
+    title: 컴포넌트
+    prompt: 화면을 이루는 재사용 가능한 UI 단위.
+    answer: Component
+    answerDisplay: 컴포넌트[Component]
+    example: 버튼을 공통 컴포넌트[Component]로 뺐다.
+  - id: fe-props
+    section: 렌더링 / 컴포넌트
+    title: 프롭스
+    prompt: 부모 컴포넌트가 자식에게 넘기는 값.
+    answer: Props
+    answerDisplay: 프롭스[Props]
+    example: 프롭스[Props]가 너무 많으면 컴포넌트를 나누자.
+  - id: fe-hook
+    section: 렌더링 / 컴포넌트
+    title: 훅
+    prompt: 함수 컴포넌트에서 상태와 생명주기 기능을 쓰게 하는 함수.
+    answer: Hook
+    answerDisplay: 훅[Hook]
+    example: 조회 로직은 커스텀 훅[Hook]으로 뺐다.
+  - id: fe-prop-drilling
+    section: 렌더링 / 컴포넌트
+    title: 프롭 드릴링
+    prompt: 값을 쓰지 않는 중간 컴포넌트까지 거쳐 계속 넘기는 일.
+    answer: Prop Drilling
+    answerDisplay: 프롭 드릴링[Prop Drilling]
+    example: 프롭 드릴링[Prop Drilling]이 깊어 컨텍스트로 바꿨다.
+  - id: fe-memoization
+    section: 렌더링 / 컴포넌트
+    title: 메모이제이션
+    prompt: 계산 결과를 기억해 같은 입력에 다시 계산하지 않는 기법.
+    answer: Memoization
+    answerDisplay: 메모이제이션[Memoization]
+    example: 무거운 목록 계산은 메모이제이션[Memoization]을 쓰자.
+  - id: fe-optimistic-update
+    section: 렌더링 / 컴포넌트
+    title: 낙관적 업데이트
+    prompt: 서버 응답 전에 성공을 가정해 화면을 먼저 바꾸는 방식.
+    answer: Optimistic Update
+    answerDisplay: 낙관적 업데이트[Optimistic Update]
+    example: 좋아요는 낙관적 업데이트[Optimistic Update]로 처리한다.
+  - id: fe-tree-shaking
+    section: 렌더링 / 컴포넌트
+    title: 트리 셰이킹
+    prompt: 번들에서 쓰지 않는 코드를 제거하는 최적화.
+    answer: Tree Shaking
+    answerDisplay: 트리 셰이킹[Tree Shaking]
+    example: 트리 셰이킹[Tree Shaking]이 되도록 ESM으로 가져오자.
+  - id: fe-polyfill
+    section: 렌더링 / 컴포넌트
+    title: 폴리필
+    prompt: 구형 브라우저에 없는 기능을 코드로 채워 주는 것.
+    answer: Polyfill
+    answerDisplay: 폴리필[Polyfill]
+    example: 구형 브라우저용 폴리필[Polyfill]을 넣었다.
+  - id: fe-accessibility
+    section: 렌더링 / 컴포넌트
+    title: 접근성
+    prompt: 장애가 있어도 누구나 쓸 수 있게 만드는 품질.
+    answer: Accessibility
+    answerDisplay: 접근성[Accessibility]
+    example: 모달은 접근성[Accessibility]상 포커스 이동이 필요하다.
+  - id: fe-responsive
+    section: 렌더링 / 컴포넌트
+    title: 반응형
+    prompt: 화면 크기에 맞춰 레이아웃이 바뀌는 설계.
+    answer: Responsive
+    answerDisplay: 반응형[Responsive]
+    example: 표는 반응형[Responsive]에서 카드로 바뀐다.

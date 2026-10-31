@@ -1,0 +1,132 @@
+id: language-spring-boot-p03
+category: syntax
+kind: code-snippet
+language: java
+track:
+  id: spring-boot
+  label: Spring Boot
+title: P03.JPA
+source:
+  origin: 필수 백엔드 보강 2026-10-31
+  note: 고빈도 핵심만.
+parts:
+  - id: language-spring-boot-p03-part-1
+    title: 엔티티[@Entity]
+    display: |-
+      // 엔티티[@Entity]
+      @Entity // 테이블과 연결되는 객체
+      @Table(name = "users")
+      public class User {
+          @Id
+          @GeneratedValue(strategy = GenerationType.IDENTITY) // DB의 자동 증가 값을 id로 사용
+          private Long id;
+
+          @Column(nullable = false, length = 50)
+          private String name;
+
+          protected User() {} // JPA가 객체를 만들 때 쓰는 기본 생성자. 필수
+      }
+    typing: |-
+      @Entity
+      @Table(name = "users")
+      public class User {
+          @Id
+          @GeneratedValue(strategy = GenerationType.IDENTITY)
+          private Long id;
+
+          @Column(nullable = false, length = 50)
+          private String name;
+
+          protected User() {}
+      }
+  - id: language-spring-boot-p03-part-2
+    title: 연관 관계[@ManyToOne]
+    display: |-
+      // 연관 관계[@ManyToOne]
+      @Entity
+      public class Order {
+          @Id
+          @GeneratedValue(strategy = GenerationType.IDENTITY)
+          private Long id;
+
+          @ManyToOne(fetch = FetchType.LAZY) // 실제로 쓸 때 조회. @ManyToOne 기본은 EAGER라 명시
+          @JoinColumn(name = "user_id") // 외래 키 컬럼 지정
+          private User user;
+      }
+    typing: |-
+      @Entity
+      public class Order {
+          @Id
+          @GeneratedValue(strategy = GenerationType.IDENTITY)
+          private Long id;
+
+          @ManyToOne(fetch = FetchType.LAZY)
+          @JoinColumn(name = "user_id")
+          private User user;
+      }
+  - id: language-spring-boot-p03-part-3
+    title: 리포지토리[JpaRepository]
+    display: |-
+      // 리포지토리[JpaRepository]
+      public interface UserRepository extends JpaRepository<User, Long> { // <엔티티, id 타입>. save, findById, delete 등을 구현 없이 제공
+      }
+    typing: |-
+      public interface UserRepository extends JpaRepository<User, Long> {
+      }
+  - id: language-spring-boot-p03-part-4
+    title: 쿼리 메서드[query method]
+    display: |-
+      // 쿼리 메서드[query method]
+      Optional<User> findByEmail(String email); // 메서드 이름을 해석해 쿼리를 만듦. 없을 수 있으면 Optional
+      List<User> findByNameContaining(String keyword);
+      boolean existsByEmail(String email); // 존재 여부만 확인
+    typing: |-
+      Optional<User> findByEmail(String email);
+      List<User> findByNameContaining(String keyword);
+      boolean existsByEmail(String email);
+  - id: language-spring-boot-p03-part-5
+    title: 직접 쿼리[@Query]
+    display: |-
+      // 직접 쿼리[@Query]
+      @Query("select o from Order o join fetch o.user where o.id = :id") // 연관 객체를 한 번에 조회. N+1 문제의 대표 해결책
+      Optional<Order> findWithUser(@Param("id") Long id); // :id와 메서드 인자를 연결
+    typing: |-
+      @Query("select o from Order o join fetch o.user where o.id = :id")
+      Optional<Order> findWithUser(@Param("id") Long id);
+  - id: language-spring-boot-p03-part-6
+    title: 페이징[Pageable]
+    display: |-
+      // 페이징[Pageable]
+      Page<User> findByNameContaining(String keyword, Pageable pageable); // 목록과 전체 개수를 함께 반환. 개수 쿼리가 추가로 나감
+
+      Pageable pageable = PageRequest.of(0, 20, Sort.by("id").descending()); // 페이지 번호는 0부터
+    typing: |-
+      Page<User> findByNameContaining(String keyword, Pageable pageable);
+
+      Pageable pageable = PageRequest.of(0, 20, Sort.by("id").descending());
+  - id: language-spring-boot-p03-part-7
+    title: 저장과 조회[save / findById]
+    display: |-
+      // 저장과 조회[save / findById]
+      User saved = userRepository.save(new User("kim"));
+      Optional<User> found = userRepository.findById(saved.getId()); // 없을 수 있어 Optional로 반환
+      userRepository.deleteById(saved.getId());
+    typing: |-
+      User saved = userRepository.save(new User("kim"));
+      Optional<User> found = userRepository.findById(saved.getId());
+      userRepository.deleteById(saved.getId());
+  - id: language-spring-boot-p03-part-8
+    title: 변경 감지[dirty checking]
+    display: |-
+      // 변경 감지[dirty checking]
+      @Transactional
+      public void rename(Long id, String name) {
+          User user = userRepository.findById(id).orElseThrow();
+          user.rename(name); // save를 호출하지 않아도 트랜잭션이 끝날 때 UPDATE. 영속 상태일 때만 동작
+      }
+    typing: |-
+      @Transactional
+      public void rename(Long id, String name) {
+          User user = userRepository.findById(id).orElseThrow();
+          user.rename(name);
+      }

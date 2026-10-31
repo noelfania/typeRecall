@@ -85,14 +85,14 @@ parts:
 
       const removeTask = (memberId: number, taskId: number) => {
         setOrg((prev) =>
-          produce(prev, (draft) => {
+          produce(prev, (draft) => { // draft를 직접 고쳐도 원본은 그대로, 새 상태가 만들어짐
             const member = _.find(
               _.flatMap(draft.teams, (t) => t.members),
               { id: memberId },
             ) as Member | undefined;
             if (!member) return;
             const idx = _.findIndex(member.tasks, { id: taskId });
-            if (idx >= 0) member.tasks.splice(idx, 1);
+            if (idx >= 0) member.tasks.splice(idx, 1); // 못 찾으면 -1. splice(-1, 1)이 마지막 요소를 지우지 않게 막음
           }),
         );
       };

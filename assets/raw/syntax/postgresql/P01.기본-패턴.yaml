@@ -36,7 +36,7 @@ parts:
       -- 삽입과 반환[insert returning]
       INSERT INTO users (user_name, user_age)
       VALUES ('kim', 30)
-      RETURNING user_id, user_name;
+      RETURNING user_id, user_name; -- 삽입한 행을 다시 조회 없이 바로 받음. 자동 생성 id에 유용
     typing: |-
       INSERT INTO users (user_name, user_age)
       VALUES ('kim', 30)
@@ -57,7 +57,7 @@ parts:
       UPDATE users
       SET user_age = 31
       WHERE user_id = 1
-      RETURNING user_id, user_age;
+      RETURNING user_id, user_age; -- 수정 후 값을 반환
     typing: |-
       UPDATE users
       SET user_age = 31
@@ -69,7 +69,7 @@ parts:
       -- 삭제와 반환[delete returning]
       DELETE FROM users
       WHERE user_id = 2
-      RETURNING user_id;
+      RETURNING user_id; -- 삭제된 행의 값을 반환
     typing: |-
       DELETE FROM users
       WHERE user_id = 2
@@ -95,35 +95,9 @@ parts:
       SELECT user_name, user_age
       FROM users
       ORDER BY user_age DESC
-      LIMIT 10;
+      LIMIT 10; -- ORDER BY 없이 쓰면 어떤 행이 나올지 보장되지 않음
     typing: |-
       SELECT user_name, user_age
       FROM users
       ORDER BY user_age DESC
-      LIMIT 10;
-  - id: language-postgresql-p01-part-8
-    title: 내부 조인[inner join]
-    display: |-
-      -- 내부 조인[inner join]
-      SELECT u.user_name, o.total_price
-      FROM users u
-      INNER JOIN orders o
-        ON u.user_id = o.user_id;
-    typing: |-
-      SELECT u.user_name, o.total_price
-      FROM users u
-      INNER JOIN orders o
-        ON u.user_id = o.user_id;
-  - id: language-postgresql-p01-part-9
-    title: 왼쪽 조인[left join]
-    display: |-
-      -- 왼쪽 조인[left join]
-      SELECT u.user_name, o.total_price
-      FROM users u
-      LEFT JOIN orders o
-        ON u.user_id = o.user_id;
-    typing: |-
-      SELECT u.user_name, o.total_price
-      FROM users u
-      LEFT JOIN orders o
-        ON u.user_id = o.user_id;
+      LIMIT 10;

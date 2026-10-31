@@ -1,0 +1,115 @@
+id: language-docker-p03
+category: syntax
+kind: command
+language: shell
+track:
+  id: docker
+  label: Docker
+title: P03.Dockerfile-Compose
+source:
+  origin: 자료 부족·과잉 점검 2026-10-31
+  note: 고빈도 핵심 문법 보강.
+parts:
+  - id: language-docker-p03-part-1
+    title: Dockerfile 기본[Dockerfile]
+    display: |-
+      # Dockerfile 기본[Dockerfile]
+      FROM node:22-alpine # 기반 이미지. alpine은 크기가 작다
+      WORKDIR /app
+      COPY package*.json ./ # 의존성 파일 먼저 복사하면 코드만 바뀔 때 설치 캐시 재사용
+      RUN npm ci # RUN은 빌드 때 실행
+      COPY . .
+      EXPOSE 3000 # 문서용 표시. 실제 공개는 run -p
+      CMD ["node", "server.js"] # 컨테이너 시작 때 실행
+    typing: |-
+      FROM node:22-alpine
+      WORKDIR /app
+      COPY package*.json ./
+      RUN npm ci
+      COPY . .
+      EXPOSE 3000
+      CMD ["node", "server.js"]
+  - id: language-docker-p03-part-2
+    title: 멀티 스테이지 빌드[multi-stage]
+    display: |-
+      # 멀티 스테이지 빌드[multi-stage]
+      FROM node:22-alpine AS builder # AS 이 단계에 이름 붙이기
+      WORKDIR /app
+      COPY . .
+      RUN npm ci && npm run build
+
+      FROM nginx:alpine # 두 번째 단계만 최종 이미지가 됨
+      COPY --from=builder /app/dist /usr/share/nginx/html # 빌드 결과만 가져와 이미지 크기를 줄임
+    typing: |-
+      FROM node:22-alpine AS builder
+      WORKDIR /app
+      COPY . .
+      RUN npm ci && npm run build
+
+      FROM nginx:alpine
+      COPY --from=builder /app/dist /usr/share/nginx/html
+  - id: language-docker-p03-part-3
+    title: 빌드 제외[.dockerignore]
+    display: |-
+      # 빌드 제외[.dockerignore]
+      node_modules # 빌드 컨텍스트에서 제외해 빌드를 빠르게
+      dist
+      .git
+      .env # 비밀값이 이미지에 들어가지 않게
+    typing: |-
+      node_modules
+      dist
+      .git
+      .env
+  - id: language-docker-p03-part-4
+    title: Compose 파일[compose.yaml]
+    display: |-
+      # Compose 파일[compose.yaml]
+      services:
+        web:
+          build: .
+          ports:
+            - "3000:3000" # 호스트:컨테이너 포트
+          depends_on:
+            - db # 시작 순서만 보장. 준비 완료까지 기다리지는 않음
+        db:
+          image: postgres:16
+          environment:
+            POSTGRES_PASSWORD: example
+          volumes:
+            - db-data:/var/lib/postgresql/data # 이름 있는 볼륨으로 DB 데이터 보존
+
+      volumes:
+        db-data:
+    typing: |-
+      services:
+        web:
+          build: .
+          ports:
+            - "3000:3000"
+          depends_on:
+            - db
+        db:
+          image: postgres:16
+          environment:
+            POSTGRES_PASSWORD: example
+          volumes:
+            - db-data:/var/lib/postgresql/data
+
+      volumes:
+        db-data:
+  - id: language-docker-p03-part-5
+    title: 이미지 태그[docker tag]
+    display: |-
+      # 이미지 태그[docker tag]
+      docker tag my-app:latest registry.example.com/my-app:1.0.0 # 복사가 아니라 같은 이미지에 이름 추가
+    typing: docker tag my-app:latest registry.example.com/my-app:1.0.0
+  - id: language-docker-p03-part-6
+    title: 이미지 올리기[docker push]
+    display: |-
+      # 이미지 올리기[docker push]
+      docker login registry.example.com
+      docker push registry.example.com/my-app:1.0.0 # 레지스트리 주소가 든 태그여야 그곳으로 올라감
+    typing: |-
+      docker login registry.example.com
+      docker push registry.example.com/my-app:1.0.0

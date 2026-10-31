@@ -29,7 +29,7 @@ parts:
     title: 전역 변수[custom property] 정의
     display: |-
       /* 전역 변수[custom property] 정의 */
-      :root {
+      :root { /* :root 문서 전체에서 쓰는 변수 자리. --로 시작 */
         --bg-color: #f5f7fb;
         --accent-color: #2563eb;
         --gap-size: 16px;
@@ -121,11 +121,11 @@ parts:
     title: 버튼 상태[hover / disabled]
     display: |-
       /* 버튼 상태[hover / disabled] */
-      .primary-button:hover {
+      .primary-button:hover { /* 포인터를 올렸을 때 */
         opacity: 0.9;
       }
 
-      .primary-button:disabled {
+      .primary-button:disabled { /* disabled 속성이 있을 때 */
         opacity: 0.5;
         cursor: not-allowed;
       }

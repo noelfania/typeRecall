@@ -44,80 +44,6 @@ parts:
       'line1\nline2'.match(/^\w+/gm)
 
       'hello\nworld'.match(/hello.world/s)
-  - id: language-javascript-p09-part-3
-    title: 앵커[anchor]
-    display: |-
-      /* 앵커[anchor] */
-      'Hello World'.match(/^Hello/)   // ['Hello']  (^ 문자열 시작[start of string])
-      'Hello World'.match(/World$/)   // ['World']  ($ 문자열 끝[end of string])
-
-      'cat cats'.match(/\bcat\b/g)    // ['cat']     (\b 단어 경계[word boundary])
-      'cat cats'.match(/cat\B/g)      // ['cat']     (\B 단어 경계가 아님[non-word boundary])
-    typing: |-
-      'Hello World'.match(/^Hello/)
-      'Hello World'.match(/World$/)
-
-      'cat cats'.match(/\bcat\b/g)
-      'cat cats'.match(/cat\B/g)
-  - id: language-javascript-p09-part-4
-    title: 문자 클래스[character class]
-    display: |-
-      /* 문자 클래스[character class] */
-      'a1 b2'.match(/\d/g)   // ['1', '2']       (\d 숫자[digit] 0-9)
-      'a1 b2'.match(/\D/g)   // ['a', ' ', 'b', ' '] (\D 비숫자[non-digit])
-      'a1 b2'.match(/\w/g)   // ['a','1','b','2']    (\w 단어 문자[word char]: [a-zA-Z0-9_])
-      'a1 b2'.match(/\W/g)   // [' ', ' ']           (\W 비단어[non-word char])
-      'a1 b2'.match(/\s/g)   // [' ', ' ']           (\s 공백[whitespace])
-      'a1 b2'.match(/\S/g)   // ['a','1','b','2']    (\S 비공백[non-whitespace])
-      'a1.b'.match(/./g)     // ['a','1','.','b']    (. 임의의 한 문자[any char except \n])
-    typing: |-
-      'a1 b2'.match(/\d/g)
-      'a1 b2'.match(/\D/g)
-      'a1 b2'.match(/\w/g)
-      'a1 b2'.match(/\W/g)
-      'a1 b2'.match(/\s/g)
-      'a1 b2'.match(/\S/g)
-      'a1.b'.match(/./g)
-  - id: language-javascript-p09-part-5
-    title: 문자셋[character set]
-    display: |-
-      /* 문자셋[character set] */
-      'grey gray'.match(/gr[ae]y/g)    // ['grey', 'gray']    ([ae] a 또는 e)
-      'hello123'.match(/[a-z]+/g)      // ['hello']           ([a-z] 범위[range])
-      'hello123'.match(/[^a-z]+/g)     // ['123']             ([^] 부정[negation])
-      'hello123'.match(/[a-zA-Z0-9]+/g) // ['hello123']       (복수 범위)
-    typing: |-
-      'grey gray'.match(/gr[ae]y/g)
-      'hello123'.match(/[a-z]+/g)
-      'hello123'.match(/[^a-z]+/g)
-      'hello123'.match(/[a-zA-Z0-9]+/g)
-  - id: language-javascript-p09-part-6
-    title: 수량자[quantifier]
-    display: |-
-      /* 수량자[quantifier] */
-      'graaay'.match(/gra*y/)    // null   (a*: 0번 이상, y 바로 앞에 없어서 null)
-      'gry'.match(/gra*y/)       // ['gry']   (a*: 0번 이상)
-      'gray'.match(/gra?y/)      // ['gray']  (a?: 0 또는 1번)
-      'gry'.match(/gra?y/)       // ['gry']   (a?: 0 또는 1번)
-      'gray'.match(/gra+y/)      // ['gray']  (a+: 1번 이상)
-      'gry'.match(/gra+y/)       // null      (a+: 1번 이상, 0번이라 null)
-
-      'graaay'.match(/gra{2}y/)   // null     ({2}: 정확히 2번)
-      'graay'.match(/gra{2}y/)    // ['graay'] ({2}: 정확히 2번)
-      'graaay'.match(/gra{2,}y/)  // ['graaay'] ({2,}: 2번 이상)
-      'graaay'.match(/gra{2,3}y/) // ['graaay'] ({2,3}: 2~3번)
-    typing: |-
-      'graaay'.match(/gra*y/)
-      'gry'.match(/gra*y/)
-      'gray'.match(/gra?y/)
-      'gry'.match(/gra?y/)
-      'gray'.match(/gra+y/)
-      'gry'.match(/gra+y/)
-
-      'graaay'.match(/gra{2}y/)
-      'graay'.match(/gra{2}y/)
-      'graaay'.match(/gra{2,}y/)
-      'graaay'.match(/gra{2,3}y/)
   - id: language-javascript-p09-part-7
     title: 탐욕적[greedy] vs 게으른[lazy] 수량자
     display: |-
@@ -129,38 +55,6 @@ parts:
       '<a><b><c>'.match(/<.+>/)
       '<a><b><c>'.match(/<.+?>/)
       '<a><b><c>'.match(/<.*?>/)
-  - id: language-javascript-p09-part-8
-    title: 그룹[group]
-    display: |-
-      /* 그룹[group] */
-      // (x)    캡처 그룹[capturing group]     - 매치 + 기억
-      // (?:x)  비캡처 그룹[non-capturing group] - 매치만, 기억 안함
-      // (?<name>x) 네임드 캡처 그룹[named capturing group]
-
-      '2024-03-18'.match(/(\d{4})-(\d{2})-(\d{2})/)
-      // ['2024-03-18', '2024', '03', '18', index:0, ...]
-      // [0]=전체, [1]=year, [2]=month, [3]=day
-
-      'grey'.match(/gr(?:a|e)y/)   // ['grey'] (비캡처: 그룹 인덱스 없음)
-      'grey'.match(/gr(a|e)y/)     // ['grey', 'e'] (캡처: [1]='e')
-    typing: |-
-      '2024-03-18'.match(/(\d{4})-(\d{2})-(\d{2})/)
-
-      'grey'.match(/gr(?:a|e)y/)
-      'grey'.match(/gr(a|e)y/)
-  - id: language-javascript-p09-part-9
-    title: 네임드 캡처 그룹[named capturing group]
-    display: |-
-      // 네임드 캡처 그룹[named capturing group]
-      var dateMatch = '2024-03-18'.match(/(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/);
-      dateMatch.groups.year    // '2024'
-      dateMatch.groups.month   // '03'
-      dateMatch.groups.day     // '18'
-    typing: |-
-      var dateMatch = '2024-03-18'.match(/(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/);
-      dateMatch.groups.year
-      dateMatch.groups.month
-      dateMatch.groups.day
   - id: language-javascript-p09-part-10
     title: 역참조[backreference]
     display: |-
@@ -242,28 +136,6 @@ parts:
       '2024-03-18'.replace(/(?<y>\d{4})-(?<m>\d{2})-(?<d>\d{2})/, '$<d>/$<m>/$<y>')
 
       'hello'.replace(/(\w+)/, '[$&]')
-  - id: language-javascript-p09-part-15
-    title: 이메일[email] 검증
-    display: |-
-      // 이메일[email] 검증
-      var emailRe = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/;
-      emailRe.test('user@example.com')   // true
-      emailRe.test('invalid@')           // false
-    typing: |-
-      var emailRe = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/;
-      emailRe.test('user@example.com')
-      emailRe.test('invalid@')
-  - id: language-javascript-p09-part-16
-    title: 전화번호[phone number]
-    display: |-
-      // 전화번호[phone number]
-      var phoneRe = /\d{2,3}[-.\s]\d{3,4}[-.\s]\d{4}/;
-      phoneRe.test('010-1234-5678')  // true
-      phoneRe.test('02.123.4567')    // true
-    typing: |-
-      var phoneRe = /\d{2,3}[-.\s]\d{3,4}[-.\s]\d{4}/;
-      phoneRe.test('010-1234-5678')
-      phoneRe.test('02.123.4567')
   - id: language-javascript-p09-part-17
     title: 날짜[date] YYYY-MM-DD
     display: |-

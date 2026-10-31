@@ -107,7 +107,7 @@ parts:
         role: "admin" | "member";
       };
 
-      type UserVM = Pick<UserDTO, "id" | "name" | "role">;
+      type UserVM = Pick<UserDTO, "id" | "name" | "role">; // 필요한 필드만 골라 화면용 타입을 만듦
 
       function toUserVM(u: UserDTO): UserVM {
         return { id: u.id, name: u.name, role: u.role };
@@ -139,7 +139,7 @@ parts:
         email: string;
       };
 
-      type PublicUser = Omit<FullUser, "email">;
+      type PublicUser = Omit<FullUser, "email">; // 지정한 필드만 뺌. Pick의 반대
 
       const pub: PublicUser = { id: 1, name: "Kim" };
       console.log(pub);
@@ -159,7 +159,7 @@ parts:
     display: |-
       // Readonly[Readonly]
       type UserCard = { id: number; name: string };
-      type FrozenUser = Readonly<UserCard>;
+      type FrozenUser = Readonly<UserCard>; // 모든 속성을 읽기 전용으로. 얕게만 적용
 
       const fu: FrozenUser = { id: 1, name: "Kim" };
       console.log(fu.name);
@@ -173,7 +173,7 @@ parts:
     title: API 응답 껍데기[ApiEnvelope]
     display: |-
       // API 응답 껍데기[ApiEnvelope]
-      type ApiEnvelope<T> = {
+      type ApiEnvelope<T> = { // 공통 응답 껍데기. data 타입만 바꿔 재사용
         status: number;
         data: T;
         meta?: { requestId: string };
@@ -205,7 +205,7 @@ parts:
     display: |-
       // 목록 응답[ListResponse]
       type ApiEnvelope<T> = { status: number; data: T };
-      type ListResponse<T> = ApiEnvelope<{ items: T[]; total: number }>;
+      type ListResponse<T> = ApiEnvelope<{ items: T[]; total: number }>; // 제네릭 안에 제네릭을 넣어 목록 응답 표현
       type UserDTO = { id: number; name: string };
 
       const list: ListResponse<UserDTO> = {
@@ -232,10 +232,10 @@ parts:
         name: string;
         email: string;
       };
-      type PatchUser = Partial<Pick<UserDTO, "name" | "email">>;
+      type PatchUser = Partial<Pick<UserDTO, "name" | "email">>; // 고칠 수 있는 필드만 골라 전부 선택 사항으로
 
       function mergeUser(u: UserDTO, patch: PatchUser): UserDTO {
-        return { ...u, ...patch };
+        return { ...u, ...patch }; // 뒤쪽 값이 앞을 덮어씀
       }
 
       const merged = mergeUser(

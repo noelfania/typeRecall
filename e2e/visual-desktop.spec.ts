@@ -1,18 +1,12 @@
 import { expect, test } from "@playwright/test";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const screenshotDir = path.join(__dirname, "screenshots");
 
 test.describe("데스크톱 레이아웃 시각 확인", () => {
   test.use({
     viewport: { width: 1920, height: 1080 },
   });
 
-  test("넓은 화면에서 좌·중·우 3열과 라운드 카드를 확인한다", async ({
-    page,
-  }) => {
+  test("넓은 화면에서 좌·중·우 3열과 라운드 카드를 확인한다", async ({ page }, testInfo) => {
     await page.goto("/");
 
     await expect(page.getByLabel("문서 탐색")).toBeVisible();
@@ -50,20 +44,37 @@ test.describe("데스크톱 레이아웃 시각 확인", () => {
     }
 
     await page.screenshot({
-      path: path.join(screenshotDir, "desktop-three-column.png"),
+      path: testInfo.outputPath("desktop-three-column.png"),
       fullPage: true,
     });
   });
 
-  test("좁은 화면에서는 파트 목록이 좌측 드로어에 포함된다", async ({
-    page,
-  }) => {
+  test("좁은 화면에서는 파트 목록이 좌측 드로어에 포함된다", async ({ page }, testInfo) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/");
 
     await expect(page.locator(".sidebar")).toBeHidden();
     await expect(page.locator(".rightToc")).toBeHidden();
     await expect(page.getByRole("button", { name: "메뉴 열기" })).toBeVisible();
+
+    // 긴 코드 줄의 이어지는 줄은 왼쪽 끝으로 돌아가지 않는다
+    const codeText = page.locator(".typingCard.isActive .codeText").first();
+    expect(
+      await codeText.evaluate((element) => parseFloat(getComputedStyle(element).paddingLeft)),
+    ).toBeGreaterThan(0);
+
+    // 헤더에 진행률이 보이고, 탭 글자가 세로로 꺾이거나 화면이 가로로 넘치지 않는다
+    await expect(page.getByLabel("정확도")).toBeVisible();
+    const tab = page.locator(".headerTabBar .appTab").first();
+    const tabBox = await tab.boundingBox();
+    expect(tabBox!.width).toBeGreaterThan(tabBox!.height * 0.9);
+    const toggleBox = await page.getByRole("button", { name: "메뉴 열기" }).boundingBox();
+    expect(toggleBox!.width).toBeGreaterThanOrEqual(36);
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= window.innerWidth,
+      ),
+    ).toBe(true);
 
     await page.getByRole("button", { name: "메뉴 열기" }).click();
     await expect(page.getByLabel("탐색 메뉴")).toBeVisible();
@@ -76,7 +87,7 @@ test.describe("데스크톱 레이아웃 시각 확인", () => {
     ).toBeVisible();
 
     await page.screenshot({
-      path: path.join(screenshotDir, "narrow-parts-in-drawer.png"),
+      path: testInfo.outputPath("narrow-parts-in-drawer.png"),
       fullPage: true,
     });
   });

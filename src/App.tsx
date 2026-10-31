@@ -1,18 +1,22 @@
 import {
   For,
   Show,
+  batch,
   createEffect,
   createMemo,
   createSignal,
   onCleanup,
   onMount,
 } from "solid-js";
+import type { JSX } from "solid-js";
 
 import { languageTracks } from "./generated/languageLessons";
 import { lexiconTracks } from "./generated/lexiconLessons";
 import { noteTracks } from "./generated/noteLessons";
 import { visualTracks } from "./generated/visualLessons";
+import { annotateCode } from "./lib/codeAnnotations";
 import { buildHighlightChars } from "./lib/codeHighlight";
+import type { HighlightChar } from "./lib/codeHighlight";
 import type { LanguagePart } from "./data/languageLessonTypes";
 import type { ContentLink, LexiconPart } from "./data/lexiconLessonTypes";
 import type { NoteBlock, NotePart, NoteScenario } from "./data/noteLessonTypes";
@@ -219,6 +223,11 @@ function findLexiconTerm(termId: string): LexiconJumpTarget | null {
   return null;
 }
 
+function hasTextSelection() {
+  const selection = window.getSelection();
+  return Boolean(selection && !selection.isCollapsed);
+}
+
 function ContentLinkRow(props: {
   heading: string;
   links: ContentLink[];
@@ -247,13 +256,82 @@ function ContentLinkRow(props: {
   );
 }
 
+const INLINE_PATTERN = /\*\*(.+?)\*\*|`([^`]+)`|(https?:\/\/[^\s)\]]*[^\s)\].,])/g;
+
+function renderInline(text: string): JSX.Element[] {
+  const nodes: JSX.Element[] = [];
+  let cursor = 0;
+  for (const match of text.matchAll(INLINE_PATTERN)) {
+    const start = match.index ?? 0;
+    if (start > cursor) {
+      nodes.push(text.slice(cursor, start));
+    }
+    const [whole, bold, code, url] = match;
+    if (bold !== undefined) {
+      nodes.push(<strong>{bold}</strong>);
+    } else if (code !== undefined) {
+      nodes.push(<code class="inlineCode">{code}</code>);
+    } else {
+      nodes.push(
+        <a href={url} target="_blank" rel="noopener noreferrer">
+          {url}
+        </a>,
+      );
+    }
+    cursor = start + whole.length;
+  }
+  if (cursor < text.length) {
+    nodes.push(text.slice(cursor));
+  }
+  return nodes;
+}
+
+type ProseGroup =
+  | { kind: "p"; text: string }
+  | { kind: "ul" | "ol"; items: string[] };
+
+function groupProse(text: string): ProseGroup[] {
+  const groups: ProseGroup[] = [];
+  for (const line of text.split(/\n+/).filter((item) => item.trim())) {
+    const bullet = line.match(/^\s*[-*]\s+(.+)$/);
+    const ordered = line.match(/^\s*\d+[.)]\s+(.+)$/);
+    const kind = bullet ? "ul" : ordered ? "ol" : "p";
+    if (kind === "p") {
+      groups.push({ kind, text: line });
+      continue;
+    }
+    const item = (bullet ?? ordered)![1];
+    const last = groups[groups.length - 1];
+    if (last && last.kind === kind) {
+      last.items.push(item);
+    } else {
+      groups.push({ kind, items: [item] });
+    }
+  }
+  return groups;
+}
+
 function NoteBlockView(props: { block: NoteBlock }) {
   const block = props.block;
   if (block.type === "prose") {
     return (
       <div class="noteProse">
-        <For each={block.text.split(/\n+/).filter((line) => line.trim())}>
-          {(line) => <p>{line}</p>}
+        <For each={groupProse(block.text)}>
+          {(group) => {
+            if (group.kind === "p") {
+              return <p>{renderInline(group.text)}</p>;
+            }
+            const items = (
+              <For each={group.items}>
+                {(item) => <li>{renderInline(item)}</li>}
+              </For>
+            );
+            return group.kind === "ul" ? (
+              <ul class="noteList">{items}</ul>
+            ) : (
+              <ol class="noteList">{items}</ol>
+            );
+          }}
         </For>
       </div>
     );
@@ -267,7 +345,7 @@ function NoteBlockView(props: { block: NoteBlock }) {
   if (block.type === "list") {
     return (
       <ul class="noteList">
-        <For each={block.items}>{(item) => <li>{item}</li>}</For>
+        <For each={block.items}>{(item) => <li>{renderInline(item)}</li>}</For>
       </ul>
     );
   }
@@ -278,7 +356,7 @@ function NoteBlockView(props: { block: NoteBlock }) {
           {(row) => (
             <div class="noteKvRow">
               <dt>{row.key}</dt>
-              <dd>{row.value}</dd>
+              <dd>{renderInline(row.value)}</dd>
             </div>
           )}
         </For>
@@ -297,7 +375,7 @@ function NoteBlockView(props: { block: NoteBlock }) {
           <For each={block.rows}>
             {(row) => (
               <tr>
-                <For each={row}>{(cell) => <td>{cell}</td>}</For>
+                <For each={row}>{(cell) => <td>{renderInline(cell)}</td>}</For>
               </tr>
             )}
           </For>
@@ -325,7 +403,7 @@ function NoteCard(props: NoteCardProps) {
       aria-current={props.isActive ? "true" : undefined}
       ref={(el) => props.setCardRef(props.part.id, el)}
       onClick={() => {
-        if (!props.isActive) {
+        if (!props.isActive && !hasTextSelection()) {
           props.onActivate(props.part.id);
         }
       }}
@@ -394,7 +472,7 @@ function ScenarioDrillCard(props: ScenarioDrillCardProps) {
       aria-current={props.isActive ? "true" : undefined}
       ref={(el) => props.setCardRef(props.part.id, el)}
       onClick={() => {
-        if (!props.isActive) {
+        if (!props.isActive && !hasTextSelection()) {
           props.onActivate(props.part.id);
         }
       }}
@@ -535,40 +613,55 @@ function ScenarioDrillCard(props: ScenarioDrillCardProps) {
   );
 }
 
+const APP_TABS: { id: AppTab; label: string }[] = [
+  { id: "language", label: "언어" },
+  { id: "lexicon", label: "용어" },
+  { id: "notes", label: "노트" },
+];
+
 function AppTabButtons(props: {
   appTab: AppTab;
   onSelect: (tab: AppTab) => void;
   class?: string;
 }) {
+  const onKeyDown = (event: KeyboardEvent & { currentTarget: HTMLElement }) => {
+    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") {
+      return;
+    }
+    event.preventDefault();
+    const list = event.currentTarget;
+    const step = event.key === "ArrowRight" ? 1 : -1;
+    const current = APP_TABS.findIndex((tab) => tab.id === props.appTab);
+    const nextIndex = (current + step + APP_TABS.length) % APP_TABS.length;
+    props.onSelect(APP_TABS[nextIndex].id);
+    // 탭 전환이 입력창으로 옮긴 포커스를 키보드 사용자를 위해 탭으로 되돌린다
+    queueMicrotask(() => {
+      list.querySelectorAll<HTMLElement>('[role="tab"]')[nextIndex]?.focus();
+    });
+  };
+
   return (
-    <div class={props.class ?? "appTabBar"} role="tablist" aria-label="콘텐츠 종류">
-      <button
-        type="button"
-        role="tab"
-        class={props.appTab === "language" ? "appTab isActive" : "appTab"}
-        aria-selected={props.appTab === "language"}
-        onClick={() => props.onSelect("language")}
-      >
-        언어
-      </button>
-      <button
-        type="button"
-        role="tab"
-        class={props.appTab === "lexicon" ? "appTab isActive" : "appTab"}
-        aria-selected={props.appTab === "lexicon"}
-        onClick={() => props.onSelect("lexicon")}
-      >
-        용어
-      </button>
-      <button
-        type="button"
-        role="tab"
-        class={props.appTab === "notes" ? "appTab isActive" : "appTab"}
-        aria-selected={props.appTab === "notes"}
-        onClick={() => props.onSelect("notes")}
-      >
-        노트
-      </button>
+    <div
+      class={props.class ?? "appTabBar"}
+      role="tablist"
+      aria-label="콘텐츠 종류"
+      onKeyDown={onKeyDown}
+    >
+      <For each={APP_TABS}>
+        {(tab) => (
+          <button
+            type="button"
+            role="tab"
+            class={props.appTab === tab.id ? "appTab isActive" : "appTab"}
+            aria-selected={props.appTab === tab.id}
+            aria-controls="mainPanel"
+            tabIndex={props.appTab === tab.id ? 0 : -1}
+            onClick={() => props.onSelect(tab.id)}
+          >
+            {tab.label}
+          </button>
+        )}
+      </For>
     </div>
   );
 }
@@ -757,30 +850,63 @@ function PartsToc(props: PartsTocProps) {
   );
 }
 
-type CardChar = {
-  key: string;
-  char: string;
-  className: string;
-  showPreview: boolean;
+function charClass(item: HighlightChar, typed: string, preview: string) {
+  const base = `char tone-${item.tone}`;
+  const { logicalIndex } = item;
+  if (logicalIndex === null) {
+    return /\s/.test(item.char) ? `${base} isGap` : base;
+  }
+  if (logicalIndex < typed.length) {
+    return typed[logicalIndex] === item.char
+      ? `${base} isCorrect`
+      : "char isWrong";
+  }
+  if (logicalIndex === typed.length) {
+    return preview ? `${base} isCurrent hasPreview` : `${base} isCurrent`;
+  }
+  return base;
+}
+
+type ActiveCharsProps = {
+  chars: HighlightChar[];
+  typed: string;
   preview: string;
 };
+
+// 글자 목록은 파트가 바뀔 때만 새로 만들고, 입력 중에는 class만 갱신한다
+function ActiveChars(props: ActiveCharsProps) {
+  return (
+    <For each={props.chars}>
+      {(item) => (
+        <span class={charClass(item, props.typed, props.preview)}>
+          {item.char}
+          <Show when={item.logicalIndex === props.typed.length && props.preview}>
+            <span class="charPreview">{props.preview}</span>
+          </Show>
+        </span>
+      )}
+    </For>
+  );
+}
 
 type TypingCardProps = {
   part: LanguagePart;
   trackLabel: string;
   lessonTitle: string;
   isActive: boolean;
-  practiceChars: CardChar[];
+  typed: string;
+  preview: string;
   language: string;
   setCardRef: (partId: string, el: HTMLElement | undefined) => void;
   onActivate: (partId: string) => void;
 };
 
 function TypingCard(props: TypingCardProps) {
-  const inactiveChars = createMemo(() =>
-    buildHighlightChars(
+  const lines = createMemo(() =>
+    annotateCode(
       props.part.displayContent || props.part.content,
       props.language,
+      props.part.title,
     ),
   );
 
@@ -791,7 +917,7 @@ function TypingCard(props: TypingCardProps) {
       aria-current={props.isActive ? "true" : undefined}
       ref={(el) => props.setCardRef(props.part.id, el)}
       onClick={() => {
-        if (!props.isActive) {
+        if (!props.isActive && !hasTextSelection()) {
           props.onActivate(props.part.id);
         }
       }}
@@ -804,29 +930,48 @@ function TypingCard(props: TypingCardProps) {
           {props.part.title}
         </span>
       </div>
-      <p class="practiceText" aria-hidden={!props.isActive}>
-        <Show
-          when={props.isActive}
-          fallback={
-            <For each={inactiveChars()}>
-              {(item) => (
-                <span class={`char tone-${item.tone}`}>{item.char}</span>
-              )}
-            </For>
-          }
-        >
-          <For each={props.practiceChars}>
-            {(item) => (
-              <span class={item.className}>
-                {item.char}
-                <Show when={item.showPreview}>
-                  <span class="charPreview">{item.preview}</span>
+      <div class="practiceText annotatedCode">
+        <For each={lines()}>
+          {(line) => (
+            <div class="codeLine">
+              <span class="codeText" style={{ "--code-indent": line.indent }}>
+                <Show
+                  when={props.isActive}
+                  fallback={
+                    <For each={line.chars}>
+                      {(item) => (
+                        <span class={`char tone-${item.tone}`}>{item.char}</span>
+                      )}
+                    </For>
+                  }
+                >
+                  <ActiveChars
+                    chars={line.chars}
+                    typed={props.typed}
+                    preview={props.preview}
+                  />
                 </Show>
               </span>
-            )}
-          </For>
-        </Show>
-      </p>
+              <For each={line.notes}>
+                {(note) => (
+                  <div
+                    class={note.kind === "result" ? "codeNote isResult" : "codeNote"}
+                    style={{ "--note-indent": line.indent }}
+                  >
+                    <Show when={note.kind === "result"}>
+                      <span aria-hidden="true">→ </span>
+                    </Show>
+                    {/* 코드 주석의 ** 는 굵게가 아니라 연산자일 수 있다 */}
+                    {note.kind === "result" || note.text.includes("**")
+                      ? note.text
+                      : renderInline(note.text)}
+                  </div>
+                )}
+              </For>
+            </div>
+          )}
+        </For>
+      </div>
     </article>
   );
 }
@@ -836,7 +981,9 @@ type LexiconCardProps = {
   trackLabel: string;
   lessonTitle: string;
   isActive: boolean;
-  practiceChars: CardChar[];
+  chars: HighlightChar[];
+  typed: string;
+  preview: string;
   setCardRef: (partId: string, el: HTMLElement | undefined) => void;
   onActivate: (partId: string) => void;
   onJump: (link: ContentLink) => void;
@@ -850,7 +997,7 @@ function LexiconCard(props: LexiconCardProps) {
       aria-current={props.isActive ? "true" : undefined}
       ref={(el) => props.setCardRef(props.part.id, el)}
       onClick={() => {
-        if (!props.isActive) {
+        if (!props.isActive && !hasTextSelection()) {
           props.onActivate(props.part.id);
         }
       }}
@@ -863,26 +1010,27 @@ function LexiconCard(props: LexiconCardProps) {
           {props.part.title}
         </span>
       </div>
-      <p class="lexiconPrompt">{props.part.prompt}</p>
+      <p class="lexiconPrompt">{renderInline(props.part.prompt)}</p>
       <p class="practiceText lexiconAnswer" aria-hidden={!props.isActive}>
         <Show
           when={props.isActive}
           fallback={<span class="lexiconAnswerGhost">{props.part.answer}</span>}
         >
-          <For each={props.practiceChars}>
-            {(item) => (
-              <span class={item.className}>
-                {item.char}
-                <Show when={item.showPreview}>
-                  <span class="charPreview">{item.preview}</span>
-                </Show>
-              </span>
-            )}
-          </For>
+          <ActiveChars chars={props.chars} typed={props.typed} preview={props.preview} />
         </Show>
       </p>
+      <Show when={props.part.displayAnswer !== props.part.answer || props.part.aliases.length > 0}>
+        <p class="lexiconForms">
+          <Show when={props.part.displayAnswer !== props.part.answer}>
+            <span>표기: {props.part.displayAnswer}</span>
+          </Show>
+          <Show when={props.part.aliases.length > 0}>
+            <span>다른 이름: {props.part.aliases.join(", ")}</span>
+          </Show>
+        </p>
+      </Show>
       <Show when={props.part.example}>
-        <p class="lexiconExample">{props.part.example}</p>
+        <p class="lexiconExample">{renderInline(props.part.example)}</p>
       </Show>
       <div class="lexiconLinks">
         <ContentLinkRow
@@ -900,7 +1048,9 @@ type VisualCardProps = {
   trackLabel: string;
   lessonTitle: string;
   isActive: boolean;
-  practiceChars: CardChar[];
+  chars: HighlightChar[];
+  typed: string;
+  preview: string;
   setCardRef: (partId: string, el: HTMLElement | undefined) => void;
   onActivate: (partId: string) => void;
 };
@@ -917,7 +1067,7 @@ function VisualCard(props: VisualCardProps) {
       aria-current={props.isActive ? "true" : undefined}
       ref={(el) => props.setCardRef(props.part.id, el)}
       onClick={() => {
-        if (!props.isActive) {
+        if (!props.isActive && !hasTextSelection()) {
           props.onActivate(props.part.id);
         }
       }}
@@ -930,15 +1080,19 @@ function VisualCard(props: VisualCardProps) {
           {props.part.title}
         </span>
       </div>
-      <Show when={props.part.imagePath}>
+      <Show when={props.part.imagePaths.length > 0}>
         <figure class="visualFigure">
-          <img
-            class="visualImage"
-            src={`${import.meta.env.BASE_URL}${props.part.imagePath.replace(/^\//, "")}`}
-            alt={props.part.caption || props.part.title}
-            loading="lazy"
-            decoding="async"
-          />
+          <For each={props.part.imagePaths}>
+            {(imagePath) => (
+              <img
+                class="visualImage"
+                src={`${import.meta.env.BASE_URL}${imagePath.replace(/^\//, "")}`}
+                alt={props.part.caption || props.part.title}
+                loading="lazy"
+                decoding="async"
+              />
+            )}
+          </For>
         </figure>
       </Show>
       <Show when={props.part.caption}>
@@ -969,28 +1123,31 @@ function VisualCard(props: VisualCardProps) {
             </For>
           }
         >
-          <For each={props.practiceChars}>
-            {(item) => (
-              <span class={item.className}>
-                {item.char}
-                <Show when={item.showPreview}>
-                  <span class="charPreview">{item.preview}</span>
-                </Show>
-              </span>
-            )}
-          </For>
+          <ActiveChars chars={props.chars} typed={props.typed} preview={props.preview} />
         </Show>
       </p>
     </article>
   );
 }
 
-function normalizeInput(rawValue: string, stripSpaces: boolean) {
-  return stripSpaces ? rawValue.replace(/\s/g, "") : rawValue;
+// 공백·줄바꿈은 판정 대상이 아니므로 입력에서도 뺀다
+function normalizeInput(rawValue: string) {
+  return rawValue.replace(/\s/g, "");
 }
+
+const CARET_KEYS = new Set([
+  "ArrowLeft",
+  "ArrowRight",
+  "ArrowUp",
+  "ArrowDown",
+  "Home",
+  "End",
+]);
 
 function App() {
   let inputRef: HTMLTextAreaElement | undefined;
+  let menuToggleRef: HTMLButtonElement | undefined;
+  let drawerRef: HTMLDivElement | undefined;
   const cardEls = new Map<string, HTMLElement>();
   let spyObserver: IntersectionObserver | undefined;
   // 초기 로드·파트 선택에 의한 프로그램 스크롤 동안은 스크롤 연동을 잠시 멈춘다
@@ -1008,6 +1165,11 @@ function App() {
   const [inputValue, setInputValue] = createSignal("");
   const [draftValue, setDraftValue] = createSignal("");
   const [isComposing, setIsComposing] = createSignal(false);
+  // 백스페이스로 줄지 않는 입력 기록. 고친 오타도 정확도에 남긴다.
+  const [keystrokes, setKeystrokes] = createSignal(0);
+  const [errors, setErrors] = createSignal(0);
+  const [startedAt, setStartedAt] = createSignal(0);
+  const [lastInputAt, setLastInputAt] = createSignal(0);
   const [theme, setTheme] = createSignal<ThemeMode>("light");
   const [mobileNavOpen, setMobileNavOpen] = createSignal(false);
   const [isNarrowLayout, setIsNarrowLayout] = createSignal(false);
@@ -1075,6 +1237,15 @@ function App() {
       if (event.key === "Escape") {
         setMobileNavOpen(false);
       }
+      // 노트 탭에는 입력창이 없으므로 여기서 파트 이동 단축키를 받는다
+      if (isNotesTab() && event.key === "Enter" && event.ctrlKey && !event.altKey) {
+        event.preventDefault();
+        if (event.shiftKey) {
+          moveToPrevPart();
+        } else {
+          moveToNextPart();
+        }
+      }
     };
     window.addEventListener("keydown", onKeyDown);
     onCleanup(() => {
@@ -1083,29 +1254,47 @@ function App() {
     });
   });
 
-  // 탭이 사용자에 의해 바뀔 때만 첫 항목으로 리셋한다. 초기 렌더는 건드리지 않는다.
-  let isFirstTabEffect = true;
-  let suppressTabReset = false;
-  createEffect(() => {
-    const tab = appTab();
-    if (isFirstTabEffect) {
-      isFirstTabEffect = false;
+  const clearTyping = () => {
+    batch(() => {
+      setInputValue("");
+      setDraftValue("");
+      setIsComposing(false);
+      setKeystrokes(0);
+      setErrors(0);
+      setStartedAt(0);
+      setLastInputAt(0);
+    });
+  };
+
+  // 탭을 직접 바꿀 때만 첫 항목으로 리셋한다. 링크 이동은 jumpTo를 쓴다.
+  const selectTab = (tab: AppTab) => {
+    if (tab === appTab()) {
       return;
     }
-    if (suppressTabReset) {
-      suppressTabReset = false;
-      return;
-    }
-    const tracks = navTracksForTab(tab, allNavTracks);
-    const firstTrack = tracks[0];
+    const firstTrack = navTracksForTab(tab, allNavTracks)[0];
     const firstLesson = firstTrack?.lessons[0];
-    setSelectedTrackId(firstTrack?.id ?? "");
-    setSelectedLessonId(firstLesson?.id ?? "");
-    setSelectedPartId(firstLesson?.parts[0]?.id ?? "");
-    setInputValue("");
-    setDraftValue("");
-    setIsComposing(false);
-  });
+    batch(() => {
+      setAppTab(tab);
+      setSelectedTrackId(firstTrack?.id ?? "");
+      setSelectedLessonId(firstLesson?.id ?? "");
+      setSelectedPartId(firstLesson?.parts[0]?.id ?? "");
+      clearTyping();
+    });
+  };
+
+  const jumpTo = (
+    tab: AppTab,
+    target: { trackId: string; lessonId: string; partId: string },
+  ) => {
+    batch(() => {
+      setAppTab(tab);
+      setSelectedTrackId(target.trackId);
+      setSelectedLessonId(target.lessonId);
+      setSelectedPartId(target.partId);
+      clearTyping();
+      setMobileNavOpen(false);
+    });
+  };
 
   // 선택이 바뀔 때마다 위치를 저장한다
   createEffect(() => {
@@ -1220,40 +1409,13 @@ function App() {
   const jumpToLexiconTerm = (termId: string) => {
     const target = findLexiconTerm(termId);
     if (!target) return;
-    suppressTabReset = true;
-    setAppTab("lexicon");
-    setSelectedTrackId(target.trackId);
-    setSelectedLessonId(target.lessonId);
-    setSelectedPartId(target.partId);
-    setInputValue("");
-    setDraftValue("");
-    setIsComposing(false);
-    setMobileNavOpen(false);
+    jumpTo("lexicon", target);
   };
 
   const jumpToContent = (link: ContentLink) => {
     if (!link.trackId || !link.lessonId || !link.partId) return;
-    suppressTabReset = true;
-    if (link.kind === "lexicon") {
-      setAppTab("lexicon");
-    } else {
-      setAppTab("notes");
-    }
-    setSelectedTrackId(link.trackId);
-    setSelectedLessonId(link.lessonId);
-    setSelectedPartId(link.partId);
-    setInputValue("");
-    setDraftValue("");
-    setIsComposing(false);
-    setMobileNavOpen(false);
+    jumpTo(link.kind === "lexicon" ? "lexicon" : "notes", link);
   };
-
-  const stripSpaces = createMemo(() => {
-    if (appTab() === "lexicon" || isNotesTab()) {
-      return false;
-    }
-    return selectedLesson()?.kind === "language";
-  });
 
   const practiceText = createMemo(() => {
     if (isNotesTab()) {
@@ -1288,8 +1450,19 @@ function App() {
     return selectedLesson()?.language ?? "text";
   });
 
+  const displayChars = createMemo(() => {
+    if (selectedLexiconPart()) {
+      return buildHighlightChars(displayText(), "text");
+    }
+    return buildHighlightChars(displayText(), practiceLanguage());
+  });
+
+  // 화면에서 입력 대상으로 표시한 글자가 곧 정답이다
   const normalizedTarget = createMemo(() =>
-    normalizeInput(practiceText(), stripSpaces()),
+    displayChars()
+      .filter((item) => item.logicalIndex !== null)
+      .map((item) => item.char)
+      .join(""),
   );
   const limitedValue = createMemo(() =>
     inputValue().slice(0, normalizedTarget().length),
@@ -1309,9 +1482,7 @@ function App() {
 
   createEffect(() => {
     selectedPartId();
-    setInputValue("");
-    setDraftValue("");
-    setIsComposing(false);
+    clearTyping();
   });
 
   // 파트를 직접 선택하면 TOC 포커스도 그 파트로 맞춘다
@@ -1332,33 +1503,25 @@ function App() {
     });
   });
 
-  const displayChars = createMemo(() => {
-    if (selectedLexiconPart()) {
-      return buildHighlightChars(displayText(), "text");
-    }
-    return buildHighlightChars(displayText(), practiceLanguage());
-  });
-
-  const correctCount = createMemo(() => {
-    let count = 0;
-    const value = limitedValue();
-    const target = normalizedTarget();
-    for (let index = 0; index < value.length; index += 1) {
-      if (value[index] === target[index]) {
-        count += 1;
-      }
-    }
-    return count;
-  });
-
   const accuracyValue = createMemo(() => {
-    const typed = typedCount();
-    return typed === 0 ? 100 : Math.round((correctCount() / typed) * 100);
+    const typed = keystrokes();
+    return typed === 0 ? 100 : Math.round(((typed - errors()) / typed) * 100);
   });
 
-  const normalizedDraft = createMemo(() =>
-    normalizeInput(draftValue(), stripSpaces()),
+  const isComplete = createMemo(
+    () => totalCount() > 0 && limitedValue() === normalizedTarget(),
   );
+
+  // 통상의 WPM 정의대로 5글자를 한 단어로 센다. 첫 글자는 시간 측정의 기준점이라 뺀다.
+  const wpmValue = createMemo(() => {
+    const minutes = (lastInputAt() - startedAt()) / 60000;
+    return minutes > 0 ? Math.round((typedCount() - 1) / 5 / minutes) : 0;
+  });
+  const wpmLabel = createMemo(() =>
+    wpmValue() > 0 ? `${wpmValue()} WPM` : "WPM 측정 불가",
+  );
+
+  const normalizedDraft = createMemo(() => normalizeInput(draftValue()));
   const previewText = createMemo(() => {
     const draft = normalizedDraft();
     const limited = limitedValue();
@@ -1369,37 +1532,6 @@ function App() {
   const previewChar = createMemo(
     () => previewText()[previewText().length - 1] ?? "",
   );
-
-  const practiceChars = createMemo(() => {
-    const limited = limitedValue();
-    const preview = previewChar();
-
-    return displayChars().map(({ char, key, logicalIndex, tone }) => {
-      let className = `char tone-${tone}`;
-      const isWhitespace = /\s/.test(char);
-
-      if (logicalIndex === null && isWhitespace) {
-        className = `${className} isGap`;
-      } else if (logicalIndex !== null && logicalIndex < limited.length) {
-        className =
-          limited[logicalIndex] === char
-            ? `${className} isCorrect`
-            : "char isWrong";
-      } else if (logicalIndex !== null && logicalIndex === limited.length) {
-        className = preview
-          ? `${className} isCurrent hasPreview`
-          : `${className} isCurrent`;
-      }
-
-      return {
-        key,
-        char,
-        className,
-        showPreview: logicalIndex === limited.length && Boolean(preview),
-        preview,
-      };
-    });
-  });
 
   const trackIndex = createMemo(() => {
     const track = selectedTrack();
@@ -1448,8 +1580,9 @@ function App() {
   });
 
   const acceptInput = (rawValue: string) => {
-    const normalizedInput = normalizeInput(rawValue, stripSpaces());
+    const normalizedInput = normalizeInput(rawValue);
     const target = normalizedTarget();
+    const previousLength = limitedValue().length;
     let nextAcceptedValue = "";
 
     for (let index = 0; index < normalizedInput.length; index += 1) {
@@ -1463,8 +1596,24 @@ function App() {
       }
     }
 
-    setInputValue(nextAcceptedValue);
-    setDraftValue(nextAcceptedValue);
+    batch(() => {
+      setInputValue(nextAcceptedValue);
+      setDraftValue(nextAcceptedValue);
+
+      const added = nextAcceptedValue.length - previousLength;
+      if (added > 0) {
+        const lastIndex = nextAcceptedValue.length - 1;
+        const now = Date.now();
+        setKeystrokes((count) => count + added);
+        if (nextAcceptedValue[lastIndex] !== target[lastIndex]) {
+          setErrors((count) => count + 1);
+        }
+        if (startedAt() === 0) {
+          setStartedAt(now);
+        }
+        setLastInputAt(now);
+      }
+    });
 
     // Solid는 signal 값이 같으면 DOM을 갱신하지 않는다.
     // 거절된 입력이 textarea에 남으면 이후 올바른 타이핑도 계속 막힌다.
@@ -1474,9 +1623,7 @@ function App() {
   };
 
   const resetTyping = () => {
-    setInputValue("");
-    setDraftValue("");
-    setIsComposing(false);
+    clearTyping();
     if (inputRef) {
       inputRef.value = "";
     }
@@ -1599,6 +1746,46 @@ function App() {
           : "언어·파일 선택",
   });
 
+  createEffect(() => {
+    const lessonTitle = selectedLesson()?.title;
+    document.title = lessonTitle ? `${lessonTitle} · Type Recall` : "Type Recall";
+  });
+
+  // 드로어를 열면 안으로 포커스를 옮기고, 닫으면 메뉴 버튼으로 돌려준다
+  let wasDrawerOpen = false;
+  createEffect(() => {
+    const isOpen = mobileNavOpen();
+    if (isOpen) {
+      queueMicrotask(() => drawerRef?.focus());
+    } else if (wasDrawerOpen) {
+      queueMicrotask(() => {
+        if (document.activeElement === document.body) {
+          menuToggleRef?.focus();
+        }
+      });
+    }
+    wasDrawerOpen = isOpen;
+  });
+
+  const trapDrawerFocus = (event: KeyboardEvent) => {
+    if (event.key !== "Tab" || !drawerRef) {
+      return;
+    }
+    const focusable = drawerRef.querySelectorAll<HTMLElement>(
+      "button:not([tabindex='-1'])",
+    );
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    const active = document.activeElement;
+    if (event.shiftKey && (active === first || active === drawerRef)) {
+      event.preventDefault();
+      last?.focus();
+    } else if (!event.shiftKey && active === last) {
+      event.preventDefault();
+      first?.focus();
+    }
+  };
+
   const parts = createMemo(() => selectedLesson()?.parts ?? []);
   const totalParts = createMemo(() => parts().length);
 
@@ -1629,19 +1816,21 @@ function App() {
       class="appShell"
       classList={{ hasRightToc: !isNarrowLayout() }}
       onClick={(event) => {
-        if (isNotesTab()) {
+        if (isNotesTab() || mobileNavOpen()) {
           return;
         }
         const target = event.target;
-        if (
-          target instanceof HTMLElement &&
-          target.closest("button, a, label, textarea, input")
-        ) {
+        if (!(target instanceof Element)) {
           return;
         }
-        if (!mobileNavOpen()) {
-          inputRef?.focus();
+        if (target.closest("a, label, textarea, input") || hasTextSelection()) {
+          return;
         }
+        // 키보드로 누른 버튼(detail 0)은 탭 순서를 유지하고, 좁은 화면은 가상 키보드를 띄우지 않는다
+        if (target.closest("button") && (event.detail === 0 || isNarrowLayout())) {
+          return;
+        }
+        inputRef?.focus();
       }}
     >
       <aside class="sidebar" aria-label="문서 탐색">
@@ -1652,7 +1841,7 @@ function App() {
         <AppTabButtons
           class="appTabBar sidebarTabBar"
           appTab={appTab()}
-          onSelect={setAppTab}
+          onSelect={selectTab}
         />
         <LessonNavigation {...lessonNavProps()} />
       </aside>
@@ -1662,6 +1851,9 @@ function App() {
           <button
             type="button"
             class="iconButton menuToggle"
+            ref={(element) => {
+              menuToggleRef = element;
+            }}
             aria-label={mobileNavOpen() ? "메뉴 닫기" : "메뉴 열기"}
             aria-expanded={mobileNavOpen()}
             onClick={() => setMobileNavOpen((open) => !open)}
@@ -1674,7 +1866,7 @@ function App() {
           <AppTabButtons
             class="appTabBar headerTabBar"
             appTab={appTab()}
-            onSelect={setAppTab}
+            onSelect={selectTab}
           />
           <p class="headerMeta">
             {selectedTrack()?.label ?? ""}
@@ -1694,9 +1886,16 @@ function App() {
             }
           >
             <span class="headerAccuracy" aria-label="정확도">
-              정확도 {accuracyValue()}%
+              <span class="headerAccuracyLabel">정확도 </span>
+              {accuracyValue()}%
               <span class="headerAccuracySep">·</span>
               {typedCount()}/{totalCount()}
+              <Show when={wpmValue() > 0}>
+                <span class="headerWpm">
+                  <span class="headerAccuracySep">·</span>
+                  {wpmValue()} WPM
+                </span>
+              </Show>
             </span>
           </Show>
           <button
@@ -1719,11 +1918,21 @@ function App() {
           onClick={() => setMobileNavOpen(false)}
           aria-hidden="true"
         />
-        <div class="mobileDrawer" role="dialog" aria-label="탐색 메뉴">
+        <div
+          class="mobileDrawer"
+          role="dialog"
+          aria-modal="true"
+          aria-label="탐색 메뉴"
+          tabIndex={-1}
+          ref={(element) => {
+            drawerRef = element;
+          }}
+          onKeyDown={trapDrawerFocus}
+        >
           <AppTabButtons
             class="appTabBar drawerTabBar"
             appTab={appTab()}
-            onSelect={setAppTab}
+            onSelect={selectTab}
           />
           <LessonNavigation
             {...lessonNavProps({
@@ -1748,7 +1957,12 @@ function App() {
             <h1 class="pageHeading visuallyHidden">{pageHeading()}</h1>
           </header>
 
-          <section class="scrollStack" aria-label={scrollLabel()}>
+          <section
+            id="mainPanel"
+            class="scrollStack"
+            role="tabpanel"
+            aria-label={scrollLabel()}
+          >
             <Show
               when={appTab() === "notes"}
               fallback={
@@ -1765,7 +1979,8 @@ function App() {
                               trackLabel={selectedTrack()?.label ?? "연습"}
                               lessonTitle={selectedLesson()?.title ?? "예문"}
                               isActive={part.id === selectedPartId()}
-                              practiceChars={practiceChars()}
+                              typed={limitedValue()}
+                              preview={previewChar()}
                               language={practiceLanguage()}
                               setCardRef={setCardRef}
                               onActivate={setSelectedPartId}
@@ -1781,7 +1996,9 @@ function App() {
                             trackLabel={selectedTrack()?.label ?? "시각"}
                             lessonTitle={selectedLesson()?.title ?? "참고"}
                             isActive={part.id === selectedPartId()}
-                            practiceChars={practiceChars()}
+                            chars={displayChars()}
+                            typed={limitedValue()}
+                            preview={previewChar()}
                             setCardRef={setCardRef}
                             onActivate={setSelectedPartId}
                           />
@@ -1797,7 +2014,9 @@ function App() {
                         trackLabel={selectedTrack()?.label ?? "용어"}
                         lessonTitle={selectedLesson()?.title ?? "용어"}
                         isActive={part.id === selectedPartId()}
-                        practiceChars={practiceChars()}
+                        chars={displayChars()}
+                        typed={limitedValue()}
+                        preview={previewChar()}
                         setCardRef={setCardRef}
                         onActivate={setSelectedPartId}
                         onJump={jumpToContent}
@@ -1852,6 +2071,14 @@ function App() {
               class="hiddenInput"
               value={isComposing() ? draftValue() : limitedValue()}
               onKeyDown={(event) => {
+                if (event.isComposing) {
+                  return;
+                }
+                // 입력은 항상 끝에서만 받는다. 커서를 옮기면 판정이 어긋난다.
+                if (CARET_KEYS.has(event.key)) {
+                  event.preventDefault();
+                  return;
+                }
                 if (event.key !== "Enter" || !event.ctrlKey) {
                   return;
                 }
@@ -1864,6 +2091,14 @@ function App() {
                   moveToNextPart();
                 }
               }}
+              onBeforeInput={(event) => {
+                const element = event.currentTarget;
+                if (!event.isComposing) {
+                  element.setSelectionRange(element.value.length, element.value.length);
+                }
+              }}
+              onPaste={(event) => event.preventDefault()}
+              onDrop={(event) => event.preventDefault()}
               onInput={(event) => {
                 const nextValue = event.currentTarget.value;
 
@@ -1882,28 +2117,45 @@ function App() {
                 setDraftValue(limitedValue());
               }}
               onCompositionEnd={(event) => {
+                // setIsComposing이 textarea 값을 동기적으로 되돌리므로 먼저 읽어 둔다
+                const committedValue = event.currentTarget.value;
                 setIsComposing(false);
-                acceptInput(event.currentTarget.value);
+                acceptInput(committedValue);
               }}
               spellcheck={false}
+              autocapitalize="off"
+              autocomplete="off"
+              autocorrect="off"
               autofocus
-              aria-hidden="true"
-              tabIndex={-1}
+              aria-label="타이핑 입력"
             />
+            <div class="visuallyHidden" role="status">
+              {isComplete()
+                ? `완료. 정확도 ${accuracyValue()}%, ${wpmLabel()}`
+                : ""}
+            </div>
+          </Show>
 
-            <div class="controlBar" role="toolbar" aria-label="파트 조작">
-              <div class="controlBarInner">
-                <div class="controlItem">
-                  <button
-                    type="button"
-                    class="btn btnGhost"
-                    onClick={moveToPrevPart}
-                    disabled={!selectedPartId() || isFirstPartOverall()}
-                  >
-                    이전 파트
-                  </button>
-                  <span class="controlHint">Ctrl+Shift+Enter</span>
-                </div>
+          <div class="controlBar" role="toolbar" aria-label="파트 조작">
+            <Show when={!isNotesTab() && isComplete()}>
+              <p class="completionNotice" aria-hidden="true">
+                완료 · 정확도 {accuracyValue()}% · {wpmLabel()}
+                <span class="completionHint">Ctrl+Enter로 다음 파트</span>
+              </p>
+            </Show>
+            <div class="controlBarInner">
+              <div class="controlItem">
+                <button
+                  type="button"
+                  class="btn btnGhost"
+                  onClick={moveToPrevPart}
+                  disabled={!selectedPartId() || isFirstPartOverall()}
+                >
+                  이전 파트
+                </button>
+                <span class="controlHint">Ctrl+Shift+Enter</span>
+              </div>
+              <Show when={!isNotesTab()}>
                 <div class="controlItem">
                   <button
                     type="button"
@@ -1914,20 +2166,20 @@ function App() {
                   </button>
                   <span class="controlHint">Ctrl+Alt+Enter</span>
                 </div>
-                <div class="controlItem">
-                  <button
-                    type="button"
-                    class="btn btnGhost"
-                    onClick={moveToNextPart}
-                    disabled={!selectedPartId()}
-                  >
-                    {isLastPart() ? "처음으로" : "다음 파트"}
-                  </button>
-                  <span class="controlHint">Ctrl+Enter</span>
-                </div>
+              </Show>
+              <div class="controlItem">
+                <button
+                  type="button"
+                  class="btn btnGhost"
+                  onClick={moveToNextPart}
+                  disabled={!selectedPartId()}
+                >
+                  {isLastPart() ? "처음으로" : "다음 파트"}
+                </button>
+                <span class="controlHint">Ctrl+Enter</span>
               </div>
             </div>
-          </Show>
+          </div>
         </div>
       </div>
 

@@ -1,0 +1,134 @@
+id: language-spring-boot-p01
+category: syntax
+kind: code-snippet
+language: java
+track:
+  id: spring-boot
+  label: Spring Boot
+title: P01.요청-응답
+source:
+  origin: 필수 백엔드 보강 2026-10-31
+  note: 고빈도 핵심만.
+parts:
+  - id: language-spring-boot-p01-part-1
+    title: 앱 시작점[@SpringBootApplication]
+    display: |-
+      // 앱 시작점[@SpringBootApplication]
+      @SpringBootApplication // 자동 설정과 컴포넌트 스캔을 켠다. 이 클래스의 패키지 아래를 스캔
+      public class ApiApplication {
+          public static void main(String[] args) {
+              SpringApplication.run(ApiApplication.class, args); // 내장 서버를 띄우고 앱을 시작
+          }
+      }
+    typing: |-
+      @SpringBootApplication
+      public class ApiApplication {
+          public static void main(String[] args) {
+              SpringApplication.run(ApiApplication.class, args);
+          }
+      }
+  - id: language-spring-boot-p01-part-2
+    title: 컨트롤러[@RestController]
+    display: |-
+      // 컨트롤러[@RestController]
+      @RestController // 반환값을 뷰가 아니라 응답 본문(JSON)으로 보냄
+      @RequestMapping("/api/users") // 이 클래스 전체의 공통 경로
+      public class UserController {
+      }
+    typing: |-
+      @RestController
+      @RequestMapping("/api/users")
+      public class UserController {
+      }
+  - id: language-spring-boot-p01-part-3
+    title: 경로 변수[@PathVariable]
+    display: |-
+      // 경로 변수[@PathVariable]
+      @GetMapping("/{id}")
+      public UserResponse getUser(@PathVariable Long id) { // URL의 {id} 값을 받음. 특정 자원 하나를 가리킬 때
+          return userService.getUser(id);
+      }
+    typing: |-
+      @GetMapping("/{id}")
+      public UserResponse getUser(@PathVariable Long id) {
+          return userService.getUser(id);
+      }
+  - id: language-spring-boot-p01-part-4
+    title: 쿼리 파라미터[@RequestParam]
+    display: |-
+      // 쿼리 파라미터[@RequestParam]
+      @GetMapping
+      public List<UserResponse> search(
+              @RequestParam(defaultValue = "") String keyword) { // ?keyword=kim 값을 받음. 필터·정렬처럼 선택 조건에
+          return userService.search(keyword);
+      }
+    typing: |-
+      @GetMapping
+      public List<UserResponse> search(
+              @RequestParam(defaultValue = "") String keyword) {
+          return userService.search(keyword);
+      }
+  - id: language-spring-boot-p01-part-5
+    title: 요청 본문[@RequestBody]
+    display: |-
+      // 요청 본문[@RequestBody]
+      @PostMapping
+      public UserResponse create(@RequestBody CreateUserRequest request) { // JSON 본문을 객체로 변환
+          return userService.create(request);
+      }
+    typing: |-
+      @PostMapping
+      public UserResponse create(@RequestBody CreateUserRequest request) {
+          return userService.create(request);
+      }
+  - id: language-spring-boot-p01-part-6
+    title: 응답 제어[ResponseEntity]
+    display: |-
+      // 응답 제어[ResponseEntity]
+      @PostMapping
+      public ResponseEntity<UserResponse> create(@RequestBody CreateUserRequest request) { // 상태 코드와 헤더를 직접 정할 때
+          UserResponse user = userService.create(request);
+          URI location = URI.create("/api/users/" + user.id());
+          return ResponseEntity.created(location).body(user); // 상태 코드 201 Created와 Location 헤더
+      }
+    typing: |-
+      @PostMapping
+      public ResponseEntity<UserResponse> create(@RequestBody CreateUserRequest request) {
+          UserResponse user = userService.create(request);
+          URI location = URI.create("/api/users/" + user.id());
+          return ResponseEntity.created(location).body(user);
+      }
+  - id: language-spring-boot-p01-part-7
+    title: 삭제 응답[204 No Content]
+    display: |-
+      // 삭제 응답[204 No Content]
+      @DeleteMapping("/{id}")
+      public ResponseEntity<Void> delete(@PathVariable Long id) {
+          userService.delete(id);
+          return ResponseEntity.noContent().build(); // 성공했지만 돌려줄 본문이 없을 때
+      }
+    typing: |-
+      @DeleteMapping("/{id}")
+      public ResponseEntity<Void> delete(@PathVariable Long id) {
+          userService.delete(id);
+          return ResponseEntity.noContent().build();
+      }
+  - id: language-spring-boot-p01-part-8
+    title: DTO[record]
+    display: |-
+      // DTO[record]
+      public record CreateUserRequest(String name, String email) {} // 요청·응답 전용 불변 객체. Java 16 이상
+
+      public record UserResponse(Long id, String name) {
+          public static UserResponse from(User user) { // 엔티티를 그대로 내보내지 않고 필요한 필드만 옮김
+              return new UserResponse(user.getId(), user.getName());
+          }
+      }
+    typing: |-
+      public record CreateUserRequest(String name, String email) {}
+
+      public record UserResponse(Long id, String name) {
+          public static UserResponse from(User user) {
+              return new UserResponse(user.getId(), user.getName());
+          }
+      }

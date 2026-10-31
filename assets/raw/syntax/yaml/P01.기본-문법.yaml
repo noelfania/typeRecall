@@ -1,0 +1,88 @@
+id: language-yaml-p01
+category: syntax
+kind: command
+language: shell
+track:
+  id: yaml
+  label: YAML
+title: P01.기본-문법
+source:
+  origin: 필수 백엔드 보강 2026-10-31
+  note: 고빈도 핵심만.
+parts:
+  - id: language-yaml-p01-part-1
+    title: 키와 값[key-value]
+    display: |-
+      # 키와 값[key-value]
+      name: kim # 콜론 뒤 공백은 필수. 문자열은 따옴표 없이도 됨
+      age: 30 # 숫자로 해석
+      ratio: 0.5
+      active: true # 불리언으로 해석
+      memo: null # 값 없음. 비워 두어도 null
+    typing: |-
+      name: kim
+      age: 30
+      ratio: 0.5
+      active: true
+      memo: null
+  - id: language-yaml-p01-part-2
+    title: 중첩[nesting]
+    display: |-
+      # 중첩[nesting]
+      server:
+        port: 8080 # 들여쓰기로 계층을 나타냄. 탭은 금지, 공백만 허용
+        ssl:
+          enabled: false
+    typing: |-
+      server:
+        port: 8080
+        ssl:
+          enabled: false
+  - id: language-yaml-p01-part-3
+    title: 목록[list]
+    display: |-
+      # 목록[list]
+      ports:
+        - 80 # - 뒤 공백 필수. 순서가 있는 값
+        - 443
+    typing: |-
+      ports:
+        - 80
+        - 443
+  - id: language-yaml-p01-part-4
+    title: 객체 목록[list of objects]
+    display: |-
+      # 객체 목록[list of objects]
+      steps:
+        - name: build # -가 항목 시작. 같은 항목의 키는 들여쓰기를 맞춘다
+          run: npm run build
+        - name: test
+          run: npm test
+    typing: |-
+      steps:
+        - name: build
+          run: npm run build
+        - name: test
+          run: npm test
+  - id: language-yaml-p01-part-5
+    title: 한 줄 표기[flow style]
+    display: |-
+      # 한 줄 표기[flow style]
+      tags: [web, api] # JSON과 비슷한 표기. 짧을 때만 사용
+      limits: { cpu: 1, memory: 512 }
+    typing: |-
+      tags: [web, api]
+      limits: { cpu: 1, memory: 512 }
+  - id: language-yaml-p01-part-6
+    title: 따옴표가 필요한 값[quoting]
+    display: |-
+      # 따옴표가 필요한 값[quoting]
+      version: "1.10" # 따옴표가 없으면 숫자 1.1이 됨
+      answer: "yes" # yes는 YAML 1.1 파서(SnakeYAML 등)에서 true
+      port: "3000:3000" # 콜론이 든 값은 문자열로 고정
+      title: "API: 사용자" # 콜론과 공백이 있으면 따옴표 필수
+    typing: |-
+      version: "1.10"
+      answer: "yes"
+      port: "3000:3000"
+      title: "API: 사용자"

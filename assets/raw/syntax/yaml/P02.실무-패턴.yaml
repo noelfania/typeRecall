@@ -1,0 +1,71 @@
+id: language-yaml-p02
+category: syntax
+kind: command
+language: shell
+track:
+  id: yaml
+  label: YAML
+title: P02.실무-패턴
+source:
+  origin: 필수 백엔드 보강 2026-10-31
+  note: 고빈도 핵심만.
+parts:
+  - id: language-yaml-p02-part-1
+    title: 여러 줄 문자열[block scalar]
+    display: |-
+      # 여러 줄 문자열[block scalar]
+      run: | # | 줄바꿈 유지. 스크립트에 사용
+        npm ci
+        npm test
+      summary: > # > 줄바꿈을 공백으로 접음. 긴 문장에 사용
+        한 문단을
+        이어 씁니다
+    typing: |-
+      run: |
+        npm ci
+        npm test
+      summary: >
+        한 문단을
+        이어 씁니다
+  - id: language-yaml-p02-part-2
+    title: 앵커와 별칭[anchor / alias]
+    display: |-
+      # 앵커와 별칭[anchor / alias]
+      defaults: &defaults # & 재사용할 블록에 이름 붙이기
+        restart: always
+        logging: json
+
+      web:
+        <<: *defaults # * 불러오기, << 병합. 파서에 따라 지원 여부가 다름
+        image: nginx
+    typing: |-
+      defaults: &defaults
+        restart: always
+        logging: json
+
+      web:
+        <<: *defaults
+        image: nginx
+  - id: language-yaml-p02-part-3
+    title: 문서 구분[document separator]
+    display: |-
+      # 문서 구분[document separator]
+      spring:
+        config:
+          activate:
+            on-profile: local
+      --- # 한 파일에 여러 문서. 프로필별 설정이나 쿠버네티스 매니페스트에서 사용
+      spring:
+        config:
+          activate:
+            on-profile: prod
+    typing: |-
+      spring:
+        config:
+          activate:
+            on-profile: local
+      ---
+      spring:
+        config:
+          activate:
+            on-profile: prod

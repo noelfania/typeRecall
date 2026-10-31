@@ -18,6 +18,10 @@ export const noteTracks: NoteTrack[] = [
             "blocks": [
               {
                 "type": "prose",
+                "text": "✅ BFF vs API Gateway vs Nested Query vs Schema Federation\n✅ 언제 쓰고 / 어디 두지 / 화면 설계와 어떻게 맞는지\n❌ CQRS·Saga·자격증 전 범위"
+              },
+              {
+                "type": "prose",
                 "text": "화면 명세가 갈라지면 **BFF**, 횡단(인증·라우팅·제한)은 **API Gateway**,\n한 백엔드 안에서 연관을 묶으면 **Nested Query**,\n팀·스키마가 갈라진 그래프를 합치면 **Schema Federation**."
               }
             ],
@@ -49,6 +53,20 @@ export const noteTracks: NoteTrack[] = [
                 "lessonId": "knowledge-notes-architecture-scenarios",
                 "partId": "knowledge-notes-architecture-scenarios__개요",
                 "title": "아키텍처 판단 시나리오 (고빈도만)"
+              },
+              {
+                "kind": "note",
+                "trackId": "notes-architecture",
+                "lessonId": "knowledge-notes-project-structure",
+                "partId": "knowledge-notes-project-structure__개요",
+                "title": "백엔드·프론트엔드 프로젝트 폴더 구조 (고빈도만)"
+              },
+              {
+                "kind": "note",
+                "trackId": "notes-frontend",
+                "lessonId": "knowledge-notes-frontend-design-process",
+                "partId": "knowledge-notes-frontend-design-process__개요",
+                "title": "프론트엔드 화면 상세설계 방식 (고빈도만)"
               },
               {
                 "kind": "lexicon",
@@ -130,16 +148,6 @@ export const noteTracks: NoteTrack[] = [
                 "text": "1. 웹·앱 **화면 명세**가 다른가? → 다르면 BFF 후보\n2. 하고 싶은 일이 **조립**인가 **통과·보안**인가? → 후자면 Gateway\n3. 데이터가 **한 배포 단위** 안에 있는가? → Nested Query 가능\n4. 스키마·팀이 **이미 갈라져** 한 그래프처럼 치고 싶은가? → Federation (아니면 REST+BFF가 싸움)"
               }
             ]
-          },
-          {
-            "id": "knowledge-notes-architecture-boundary-map__같이-보면",
-            "title": "같이 보면",
-            "blocks": [
-              {
-                "type": "prose",
-                "text": "- 판단 시나리오: `architecture-scenarios.yaml` (워터폴·BFF vs Gateway·Federation)\n- 폴더·계층: `project-structure.yaml`\n- 화면 설계 층: `frontend-design-process.yaml` (Figma·OpenAPI·상태)"
-              }
-            ]
           }
         ]
       },
@@ -175,73 +183,7 @@ export const noteTracks: NoteTrack[] = [
           {
             "id": "knowledge-notes-architecture-scenarios__클라이언트-워터폴을-서버에서-묶기",
             "title": "클라이언트 워터폴을 서버에서 묶기",
-            "blocks": [
-              {
-                "type": "heading",
-                "text": "상황"
-              },
-              {
-                "type": "prose",
-                "text": "주문 상세 화면 설계서에 헤더(주문번호·상태)·상품 라인·배송지·결제수단이 한 뷰로 잡혀 있다.\nOpenAPI에는 GET /orders/{id}, /order-items, /shipments, /payments 가 각각 있고,\nFigma에는 Loading 스켈레톤 후 영역별 순차 채움으로 그려져 있다."
-              },
-              {
-                "type": "heading",
-                "text": "증상"
-              },
-              {
-                "type": "prose",
-                "text": "FE가 주문 응답의 id로 나머지를 이어 호출해 요청 워터폴[Request Waterfall]이 길다.\n첫 페인트는 빠르지만 하단 영역 Empty→Loading이 계단처럼 이어진다."
-              },
-              {
-                "type": "heading",
-                "text": "후보"
-              },
-              {
-                "type": "table",
-                "headers": [
-                  "옵션",
-                  "이럴 때",
-                  "피할 때"
-                ],
-                "rows": [
-                  [
-                    "Nested Query",
-                    "한 API(또는 한 쿼리)에서 연관 데이터를 깊게 묶어 줄 수 있을 때.",
-                    "도메인이 여러 배포 단위로 갈라져 단일 쿼리 경계가 없을 때."
-                  ],
-                  [
-                    "BFF",
-                    "웹·앱 화면 단위로 응답 형태를 맞추는 전용 백엔드가 필요할 때.",
-                    "모든 클라이언트·서비스에 동일한 공통 API만으로 충분할 때."
-                  ],
-                  [
-                    "클라이언트 병렬 호출 유지",
-                    "호출이 독립적이고 워터폴이 아닌 단순 병렬이며, 서버 합칠 이득이 작을 때.",
-                    "호출이 서로 의존해 대기 시간이 계단처럼 쌓일 때."
-                  ]
-                ]
-              },
-              {
-                "type": "heading",
-                "text": "기본안"
-              },
-              {
-                "type": "prose",
-                "text": "BFF — 화면 전용 DTO로 맞추면 BFF가 기본안. 백엔드가 하나면 Nested Query로 같은 효과를 낼 수 있다."
-              },
-              {
-                "type": "heading",
-                "text": "관련 용어"
-              },
-              {
-                "type": "list",
-                "items": [
-                  "arch-request-waterfall",
-                  "arch-nested-query",
-                  "arch-bff"
-                ]
-              }
-            ],
+            "blocks": [],
             "scenario": {
               "id": "arch-sc-waterfall-bundle",
               "title": "클라이언트 워터폴을 서버에서 묶기",
@@ -288,73 +230,7 @@ export const noteTracks: NoteTrack[] = [
           {
             "id": "knowledge-notes-architecture-scenarios__bff와-api-gateway-중-어디를-둘까",
             "title": "BFF와 API Gateway 중 어디를 둘까",
-            "blocks": [
-              {
-                "type": "heading",
-                "text": "상황"
-              },
-              {
-                "type": "prose",
-                "text": "웹 상세설계와 앱 상세설계의 필드·섹션이 다르다(웹은 리뷰 탭, 앱은 하단 시트).\nAPI 계약은 서비스별로 열려 있고, 공통으로는 인증·라우팅만 Gateway 초안이 있다."
-              },
-              {
-                "type": "heading",
-                "text": "증상"
-              },
-              {
-                "type": "prose",
-                "text": "화면별 조합·필드 rename이 FE에 남거나, Gateway에 “화면용 조립”까지 넣자는 의견이 섞인다.\nAPI Contract와 화면 명세가 한곳에서 안 만난다."
-              },
-              {
-                "type": "heading",
-                "text": "후보"
-              },
-              {
-                "type": "table",
-                "headers": [
-                  "옵션",
-                  "이럴 때",
-                  "피할 때"
-                ],
-                "rows": [
-                  [
-                    "BFF",
-                    "클라이언트(웹/앱)별로 응답을 모아 형태를 맞출 때.",
-                    "인증·라우팅만 공통화하면 되고 화면 조합이 거의 없을 때."
-                  ],
-                  [
-                    "API Gateway",
-                    "라우팅·인증·제한 등 횡단 관심사를 한곳에서 처리할 때.",
-                    "화면용 데이터 조립까지 Gateway에 넣으려 할 때(책임이 비대해짐)."
-                  ],
-                  [
-                    "Gateway + BFF",
-                    "공통 진입은 Gateway, 화면 조립은 클라이언트별 BFF로 나눌 때.",
-                    "팀·트래픽 규모가 작아 계층이 운영 부담만 키울 때."
-                  ]
-                ]
-              },
-              {
-                "type": "heading",
-                "text": "기본안"
-              },
-              {
-                "type": "prose",
-                "text": "Gateway + BFF — Gateway는 횡단, BFF는 화면 조립. 웹/앱 명세가 갈라지면 둘을 나누는 편이 경계가 맑다."
-              },
-              {
-                "type": "heading",
-                "text": "관련 용어"
-              },
-              {
-                "type": "list",
-                "items": [
-                  "arch-bff",
-                  "arch-api-gateway",
-                  "arch-microservice"
-                ]
-              }
-            ],
+            "blocks": [],
             "scenario": {
               "id": "arch-sc-bff-vs-gateway",
               "title": "BFF와 API Gateway 중 어디를 둘까",
@@ -401,74 +277,7 @@ export const noteTracks: NoteTrack[] = [
           {
             "id": "knowledge-notes-architecture-scenarios__초기-제품의-배포-단위",
             "title": "초기 제품의 배포 단위",
-            "blocks": [
-              {
-                "type": "heading",
-                "text": "상황"
-              },
-              {
-                "type": "prose",
-                "text": "신규 프로젝트 폴더 초안에 user·order·payment feature가 있고,\n화면 상세는 출시 MVP 10화면, API는 한 OpenAPI 문서로 관리할 예정이다.\n팀은 소수라 배포 파이프라인은 하나다."
-              },
-              {
-                "type": "heading",
-                "text": "증상"
-              },
-              {
-                "type": "prose",
-                "text": "“처음부터 서비스로 쪼개자”와 “한 배포로 먼저 내자”가 기본설계에서 충돌한다.\n경계는 그려져 있지만 독립 배포·관측 비용 근거는 아직 없다."
-              },
-              {
-                "type": "heading",
-                "text": "후보"
-              },
-              {
-                "type": "table",
-                "headers": [
-                  "옵션",
-                  "이럴 때",
-                  "피할 때"
-                ],
-                "rows": [
-                  [
-                    "Monolith",
-                    "출시 속도·운영 단순이 최우선이고 경계가 아직 흔들릴 때.",
-                    "팀·배포 주기가 이미 충돌하고 독립 스케일이 필요할 때."
-                  ],
-                  [
-                    "Modular monolith",
-                    "배포는 하나로 두되 모듈 경계를 강하게 나눠 나중에 분리할 여지를 남길 때.",
-                    "모듈 간 DB·트랜잭션을 마구 공유해 경계가 명목만 남을 때."
-                  ],
-                  [
-                    "Microservice",
-                    "독립 배포·스케일·팀 소유가 명확하고 운영 역량이 뒷받침될 때.",
-                    "초기 제품에서 네트워크·관측·배포 비용이 기능보다 클 때."
-                  ]
-                ]
-              },
-              {
-                "type": "heading",
-                "text": "기본안"
-              },
-              {
-                "type": "prose",
-                "text": "Modular monolith — MVP·단일 OpenAPI 단계에서는 Modular monolith로 경계를 연습하고, 증거가 쌓이면 뺀다."
-              },
-              {
-                "type": "heading",
-                "text": "관련 용어"
-              },
-              {
-                "type": "list",
-                "items": [
-                  "arch-monolith",
-                  "arch-modular-monolith",
-                  "arch-microservice",
-                  "arch-feature-based"
-                ]
-              }
-            ],
+            "blocks": [],
             "scenario": {
               "id": "arch-sc-deploy-unit",
               "title": "초기 제품의 배포 단위",
@@ -516,72 +325,7 @@ export const noteTracks: NoteTrack[] = [
           {
             "id": "knowledge-notes-architecture-scenarios__콘텐츠를-headless로-둘까",
             "title": "콘텐츠를 Headless로 둘까",
-            "blocks": [
-              {
-                "type": "heading",
-                "text": "상황"
-              },
-              {
-                "type": "prose",
-                "text": "마케팅 랜딩(Figma)·앱 홈·키오스크가 같은 배너·상품 문구를 쓴다.\n채널별 UI 컴포넌트·디자인 토큰은 팀마다 다르고, CMS 초안은 페이지 템플릿형이다."
-              },
-              {
-                "type": "heading",
-                "text": "증상"
-              },
-              {
-                "type": "prose",
-                "text": "CMS에 화면 레이아웃까지 묶이면 앱·키오스크는 콘텐츠만 빼 쓰기 어렵다.\n“Headless UI 라이브러리”와 “Headless CMS” 말이 회의에서 섞인다."
-              },
-              {
-                "type": "heading",
-                "text": "후보"
-              },
-              {
-                "type": "table",
-                "headers": [
-                  "옵션",
-                  "이럴 때",
-                  "피할 때"
-                ],
-                "rows": [
-                  [
-                    "Headless",
-                    "콘텐츠 API만 공유하고 각 클라이언트가 UI를 가질 때.",
-                    "단일 웹사이트만 있고 CMS 테마로 충분한 때."
-                  ],
-                  [
-                    "결합형 CMS",
-                    "한 사이트·한 템플릿으로 빠르게 운영할 때.",
-                    "앱·다중 채널이 같은 콘텐츠를 각자 렌더해야 할 때."
-                  ],
-                  [
-                    "Headless UI (컴포넌트)",
-                    "동작·접근성만 라이브러리에 맡기고 스타일은 디자인 시스템으로 칠할 때.",
-                    "CMS/콘텐츠 아키텍처 선택과 혼동할 때(다른 층의 문제)."
-                  ]
-                ]
-              },
-              {
-                "type": "heading",
-                "text": "기본안"
-              },
-              {
-                "type": "prose",
-                "text": "Headless — 다중 채널·다중 Figma면 Headless CMS가 기본안. Headless UI는 컴포넌트 층이라 별개다."
-              },
-              {
-                "type": "heading",
-                "text": "관련 용어"
-              },
-              {
-                "type": "list",
-                "items": [
-                  "arch-headless",
-                  "dev-extra-headless-ui"
-                ]
-              }
-            ],
+            "blocks": [],
             "scenario": {
               "id": "arch-sc-headless",
               "title": "콘텐츠를 Headless로 둘까",
@@ -627,74 +371,7 @@ export const noteTracks: NoteTrack[] = [
           {
             "id": "knowledge-notes-architecture-scenarios__schema-federation이-필요한가",
             "title": "Schema Federation이 필요한가",
-            "blocks": [
-              {
-                "type": "heading",
-                "text": "상황"
-              },
-              {
-                "type": "prose",
-                "text": "상품 상세 화면에 상품·재고·리뷰 섹션이 있고, 팀별로 GraphQL 스키마 초안이 생겼다.\nFE는 “한 번의 중첩 쿼리로 화면을 채우고 싶다”고 하고, BFF REST 조립안도 테이블에 있다."
-              },
-              {
-                "type": "heading",
-                "text": "증상"
-              },
-              {
-                "type": "prose",
-                "text": "클라이언트가 여러 그래프 결과를 이어 붙이거나, BFF에 조합이 몰린다.\n스키마 소유권·배포 단위는 갈라져 있는데 화면 명세는 하나다."
-              },
-              {
-                "type": "heading",
-                "text": "후보"
-              },
-              {
-                "type": "table",
-                "headers": [
-                  "옵션",
-                  "이럴 때",
-                  "피할 때"
-                ],
-                "rows": [
-                  [
-                    "Schema Federation",
-                    "서비스별 스키마 소유를 유지하면서 게이트웨이 연합 그래프로 중첩 조회할 때.",
-                    "스키마·팀이 하나이거나 GraphQL 자체가 과한 규모일 때."
-                  ],
-                  [
-                    "단일 GraphQL 스키마",
-                    "한 팀·한 배포가 그래프 전체를 소유할 수 있을 때.",
-                    "서비스 경계·팀 소유가 이미 갈라져 스키마 충돌이 잦을 때."
-                  ],
-                  [
-                    "REST + BFF",
-                    "GraphQL 없이도 화면 조립만으로 충분한 때.",
-                    "클라이언트가 필드 단위로 그래프를 깊게 골라야 할 때."
-                  ]
-                ]
-              },
-              {
-                "type": "heading",
-                "text": "기본안"
-              },
-              {
-                "type": "prose",
-                "text": "REST + BFF — 화면 조립이 목표면 REST+BFF가 싸다. Federation은 스키마·팀 분산이 이미 명확할 때."
-              },
-              {
-                "type": "heading",
-                "text": "관련 용어"
-              },
-              {
-                "type": "list",
-                "items": [
-                  "arch-schema-federation",
-                  "arch-graphql",
-                  "arch-nested-resolver",
-                  "arch-bff"
-                ]
-              }
-            ],
+            "blocks": [],
             "scenario": {
               "id": "arch-sc-federation",
               "title": "Schema Federation이 필요한가",
@@ -1939,19 +1616,19 @@ export const noteTracks: NoteTrack[] = [
                 "rows": [
                   {
                     "key": "[xyz]",
-                    "value": "x"
+                    "value": "x, y, z 중 하나"
                   },
                   {
                     "key": "[^xyz]",
-                    "value": "x"
+                    "value": "x, y, z가 아닌 문자"
                   },
                   {
                     "key": "[1-3]",
-                    "value": "1"
+                    "value": "1, 2, 3 중 하나"
                   },
                   {
                     "key": "[^1-3]",
-                    "value": "1"
+                    "value": "1, 2, 3이 아닌 문자"
                   }
                 ]
               },

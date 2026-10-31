@@ -21,7 +21,7 @@ parts:
     display: |-
       # 목록[ls]
       ls
-      ls -al
+      ls -al # -a 숨김 파일 포함, -l 권한·크기까지 자세히
     typing: |-
       ls
       ls -al
@@ -30,8 +30,8 @@ parts:
     display: |-
       # 이동[cd]
       cd ~/project
-      cd -
-      cd ..
+      cd - # 직전 위치로 돌아감
+      cd .. # 상위 폴더로 이동
     typing: |-
       cd ~/project
       cd -
@@ -41,8 +41,8 @@ parts:
     display: |-
       # 만들기[mkdir touch]
       mkdir logs
-      mkdir -p app/cache/images
-      touch app.log
+      mkdir -p app/cache/images # -p 중간 폴더까지 만들고, 이미 있어도 오류 없음
+      touch app.log # 빈 파일 생성. 있으면 수정 시각만 갱신
     typing: |-
       mkdir logs
       mkdir -p app/cache/images
@@ -51,9 +51,9 @@ parts:
     title: 복사·이동·삭제[cp mv rm]
     display: |-
       # 복사·이동·삭제[cp mv rm]
-      cp -r src/ dest/
+      cp -r src/ dest/ # -r 폴더를 통째로 복사[recursive]
       mv file.txt docs/
-      rm -rf folder/
+      rm -rf folder/ # 확인 없이 영구 삭제. 경로를 꼭 다시 확인
     typing: |-
       cp -r src/ dest/
       mv file.txt docs/
@@ -63,9 +63,9 @@ parts:
     display: |-
       # 내용 보기[cat head tail]
       cat app.log
-      head -n 20 app.log
-      tail -n 50 app.log
-      tail -f app.log
+      head -n 20 app.log # 앞에서 20줄
+      tail -n 50 app.log # 끝에서 50줄
+      tail -f app.log # -f 새 로그를 계속 따라가며 출력. Ctrl+C로 종료
     typing: |-
       cat app.log
       head -n 20 app.log
@@ -76,7 +76,7 @@ parts:
     display: |-
       # 검색[grep]
       grep "keyword" file.txt
-      grep -rn "keyword" src
+      grep -rn "keyword" src # -r 하위 폴더까지, -n 줄 번호 표시
     typing: |-
       grep "keyword" file.txt
       grep -rn "keyword" src
@@ -84,8 +84,8 @@ parts:
     title: 파일 찾기[find]
     display: |-
       # 파일 찾기[find]
-      find . -name "*.sh"
-      find . -type d -name "node_modules"
+      find . -name "*.sh" # .은 현재 폴더부터, 따옴표로 *를 셸 확장에서 보호
+      find . -type d -name "node_modules" # -type d 폴더만 찾음
     typing: |-
       find . -name "*.sh"
       find . -type d -name "node_modules"
@@ -103,7 +103,7 @@ parts:
     title: 파이프[|]
     display: |-
       # 파이프[|]
-      ls -al | grep ".sh"
+      ls -al | grep ".sh" # | 앞 명령의 출력을 뒤 명령의 입력으로 넘김
       ps aux | grep nginx
     typing: |-
       ls -al | grep ".sh"

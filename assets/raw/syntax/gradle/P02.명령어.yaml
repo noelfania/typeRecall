@@ -1,0 +1,52 @@
+id: language-gradle-p02
+category: syntax
+kind: command
+language: shell
+track:
+  id: gradle
+  label: Gradle
+title: P02.명령어
+source:
+  origin: 필수 백엔드 보강 2026-10-31
+  note: 고빈도 핵심만.
+parts:
+  - id: language-gradle-p02-part-1
+    title: 빌드[build]
+    display: |-
+      # 빌드[build]
+      ./gradlew build # gradlew는 프로젝트에 고정된 버전의 Gradle로 실행. 모두 같은 버전으로 빌드
+      ./gradlew clean build # 이전 결과를 지우고 처음부터
+      ./gradlew build -x test # 테스트 제외. 임시로만 사용
+    typing: |-
+      ./gradlew build
+      ./gradlew clean build
+      ./gradlew build -x test
+  - id: language-gradle-p02-part-2
+    title: 실행[bootRun]
+    display: |-
+      # 실행[bootRun]
+      ./gradlew bootRun
+      ./gradlew bootRun --args='--spring.profiles.active=local' # 앱에 인자 전달. 프로필 지정에 자주 사용
+      ./gradlew bootJar # 실행 가능한 jar 생성. build/libs 아래
+    typing: |-
+      ./gradlew bootRun
+      ./gradlew bootRun --args='--spring.profiles.active=local'
+      ./gradlew bootJar
+  - id: language-gradle-p02-part-3
+    title: 테스트[test]
+    display: |-
+      # 테스트[test]
+      ./gradlew test
+      ./gradlew test --tests "*UserServiceTest" # 일부 테스트만 실행. 결과 보고서는 build/reports/tests
+    typing: |-
+      ./gradlew test
+      ./gradlew test --tests "*UserServiceTest"
+  - id: language-gradle-p02-part-4
+    title: 의존성 확인[dependencies]
+    display: |-
+      # 의존성 확인[dependencies]
+      ./gradlew dependencies --configuration runtimeClasspath # 라이브러리 버전 충돌을 트리로 확인
+      ./gradlew tasks # 실행할 수 있는 태스크 목록
+    typing: |-
+      ./gradlew dependencies --configuration runtimeClasspath
+      ./gradlew tasks

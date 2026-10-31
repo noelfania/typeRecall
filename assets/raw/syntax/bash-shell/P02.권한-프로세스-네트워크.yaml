@@ -14,8 +14,8 @@ parts:
     title: 권한[chmod]
     display: |-
       # 권한[chmod]
-      chmod +x script.sh
-      chmod 755 script.sh
+      chmod +x script.sh # 실행 권한[execute] 추가
+      chmod 755 script.sh # 소유자 rwx, 그룹·기타 r-x (r=4, w=2, x=1)
     typing: |-
       chmod +x script.sh
       chmod 755 script.sh
@@ -24,7 +24,7 @@ parts:
     display: |-
       # 소유권[chown]
       chown user:group file.txt
-      sudo chown -R www-data:www-data /var/www/app
+      sudo chown -R www-data:www-data /var/www/app # -R 하위 파일까지 모두 변경
     typing: |-
       chown user:group file.txt
       sudo chown -R www-data:www-data /var/www/app
@@ -32,9 +32,9 @@ parts:
     title: 프로세스[ps kill]
     display: |-
       # 프로세스[ps kill]
-      ps aux | grep nginx
-      kill 12345
-      kill -9 12345
+      ps aux | grep nginx # 실행 중인 전체 프로세스 목록에서 찾기
+      kill 12345 # 정상 종료 요청
+      kill -9 12345 # 강제 종료. 정리 작업 없이 끝나므로 마지막 수단
     typing: |-
       ps aux | grep nginx
       kill 12345
@@ -43,10 +43,10 @@ parts:
     title: 백그라운드[jobs fg bg]
     display: |-
       # 백그라운드[jobs fg bg]
-      sleep 60 &
+      sleep 60 & # &를 붙이면 백그라운드 실행
       jobs
-      fg %1
-      bg %1
+      fg %1 # 1번 작업을 앞으로 가져옴
+      bg %1 # 멈춘 1번 작업을 백그라운드에서 재개
     typing: |-
       sleep 60 &
       jobs
@@ -56,9 +56,9 @@ parts:
     title: 네트워크[curl ping]
     display: |-
       # 네트워크[curl ping]
-      ping -c 3 example.com
-      curl -I https://example.com
-      curl -s https://example.com/api/health
+      ping -c 3 example.com # -c 3 세 번만 보내고 끝냄
+      curl -I https://example.com # -I 본문 없이 응답 헤더만
+      curl -s https://example.com/api/health # -s 진행 표시 없이 조용히
     typing: |-
       ping -c 3 example.com
       curl -I https://example.com
@@ -77,8 +77,8 @@ parts:
     title: 압축[tar]
     display: |-
       # 압축[tar]
-      tar -czvf archive.tar.gz folder/
-      tar -xzvf archive.tar.gz
+      tar -czvf archive.tar.gz folder/ # c 묶기, z gzip 압축, v 목록 출력, f 파일 이름
+      tar -xzvf archive.tar.gz # x 풀기. 나머지 옵션은 같다
     typing: |-
       tar -czvf archive.tar.gz folder/
       tar -xzvf archive.tar.gz
@@ -87,7 +87,7 @@ parts:
     display: |-
       # zip[unzip]
       unzip archive.zip
-      unzip -l archive.zip
+      unzip -l archive.zip # -l 풀지 않고 내용 목록만
     typing: |-
       unzip archive.zip
       unzip -l archive.zip
@@ -96,8 +96,8 @@ parts:
     display: |-
       # 환경 변수[export]
       echo $PATH
-      export JAVA_HOME=/usr/lib/jvm/java-17
-      export PATH="$JAVA_HOME/bin:$PATH"
+      export JAVA_HOME=/usr/lib/jvm/java-17 # export 자식 프로세스에도 전달. 터미널을 닫으면 사라짐
+      export PATH="$JAVA_HOME/bin:$PATH" # 기존 PATH 앞에 추가해 먼저 찾게 함
     typing: |-
       echo $PATH
       export JAVA_HOME=/usr/lib/jvm/java-17

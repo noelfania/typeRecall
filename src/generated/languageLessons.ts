@@ -23,43 +23,43 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-bash-shell-p01-part-2",
             "title": "목록[ls]",
             "content": "ls\nls -al",
-            "displayContent": "# 목록[ls]\nls\nls -al"
+            "displayContent": "# 목록[ls]\nls\nls -al # -a 숨김 파일 포함, -l 권한·크기까지 자세히"
           },
           {
             "id": "language-bash-shell-p01-part-3",
             "title": "이동[cd]",
             "content": "cd ~/project\ncd -\ncd ..",
-            "displayContent": "# 이동[cd]\ncd ~/project\ncd -\ncd .."
+            "displayContent": "# 이동[cd]\ncd ~/project\ncd - # 직전 위치로 돌아감\ncd .. # 상위 폴더로 이동"
           },
           {
             "id": "language-bash-shell-p01-part-4",
             "title": "만들기[mkdir touch]",
             "content": "mkdir logs\nmkdir -p app/cache/images\ntouch app.log",
-            "displayContent": "# 만들기[mkdir touch]\nmkdir logs\nmkdir -p app/cache/images\ntouch app.log"
+            "displayContent": "# 만들기[mkdir touch]\nmkdir logs\nmkdir -p app/cache/images # -p 중간 폴더까지 만들고, 이미 있어도 오류 없음\ntouch app.log # 빈 파일 생성. 있으면 수정 시각만 갱신"
           },
           {
             "id": "language-bash-shell-p01-part-5",
             "title": "복사·이동·삭제[cp mv rm]",
             "content": "cp -r src/ dest/\nmv file.txt docs/\nrm -rf folder/",
-            "displayContent": "# 복사·이동·삭제[cp mv rm]\ncp -r src/ dest/\nmv file.txt docs/\nrm -rf folder/"
+            "displayContent": "# 복사·이동·삭제[cp mv rm]\ncp -r src/ dest/ # -r 폴더를 통째로 복사[recursive]\nmv file.txt docs/\nrm -rf folder/ # 확인 없이 영구 삭제. 경로를 꼭 다시 확인"
           },
           {
             "id": "language-bash-shell-p01-part-6",
             "title": "내용 보기[cat head tail]",
             "content": "cat app.log\nhead -n 20 app.log\ntail -n 50 app.log\ntail -f app.log",
-            "displayContent": "# 내용 보기[cat head tail]\ncat app.log\nhead -n 20 app.log\ntail -n 50 app.log\ntail -f app.log"
+            "displayContent": "# 내용 보기[cat head tail]\ncat app.log\nhead -n 20 app.log # 앞에서 20줄\ntail -n 50 app.log # 끝에서 50줄\ntail -f app.log # -f 새 로그를 계속 따라가며 출력. Ctrl+C로 종료"
           },
           {
             "id": "language-bash-shell-p01-part-7",
             "title": "검색[grep]",
             "content": "grep \"keyword\" file.txt\ngrep -rn \"keyword\" src",
-            "displayContent": "# 검색[grep]\ngrep \"keyword\" file.txt\ngrep -rn \"keyword\" src"
+            "displayContent": "# 검색[grep]\ngrep \"keyword\" file.txt\ngrep -rn \"keyword\" src # -r 하위 폴더까지, -n 줄 번호 표시"
           },
           {
             "id": "language-bash-shell-p01-part-8",
             "title": "파일 찾기[find]",
             "content": "find . -name \"*.sh\"\nfind . -type d -name \"node_modules\"",
-            "displayContent": "# 파일 찾기[find]\nfind . -name \"*.sh\"\nfind . -type d -name \"node_modules\""
+            "displayContent": "# 파일 찾기[find]\nfind . -name \"*.sh\" # .은 현재 폴더부터, 따옴표로 *를 셸 확장에서 보호\nfind . -type d -name \"node_modules\" # -type d 폴더만 찾음"
           },
           {
             "id": "language-bash-shell-p01-part-9",
@@ -71,7 +71,7 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-bash-shell-p01-part-10",
             "title": "파이프[|]",
             "content": "ls -al | grep \".sh\"\nps aux | grep nginx",
-            "displayContent": "# 파이프[|]\nls -al | grep \".sh\"\nps aux | grep nginx"
+            "displayContent": "# 파이프[|]\nls -al | grep \".sh\" # | 앞 명령의 출력을 뒤 명령의 입력으로 넘김\nps aux | grep nginx"
           }
         ]
       },
@@ -86,31 +86,31 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-bash-shell-p02-part-1",
             "title": "권한[chmod]",
             "content": "chmod +x script.sh\nchmod 755 script.sh",
-            "displayContent": "# 권한[chmod]\nchmod +x script.sh\nchmod 755 script.sh"
+            "displayContent": "# 권한[chmod]\nchmod +x script.sh # 실행 권한[execute] 추가\nchmod 755 script.sh # 소유자 rwx, 그룹·기타 r-x (r=4, w=2, x=1)"
           },
           {
             "id": "language-bash-shell-p02-part-2",
             "title": "소유권[chown]",
             "content": "chown user:group file.txt\nsudo chown -R www-data:www-data /var/www/app",
-            "displayContent": "# 소유권[chown]\nchown user:group file.txt\nsudo chown -R www-data:www-data /var/www/app"
+            "displayContent": "# 소유권[chown]\nchown user:group file.txt\nsudo chown -R www-data:www-data /var/www/app # -R 하위 파일까지 모두 변경"
           },
           {
             "id": "language-bash-shell-p02-part-3",
             "title": "프로세스[ps kill]",
             "content": "ps aux | grep nginx\nkill 12345\nkill -9 12345",
-            "displayContent": "# 프로세스[ps kill]\nps aux | grep nginx\nkill 12345\nkill -9 12345"
+            "displayContent": "# 프로세스[ps kill]\nps aux | grep nginx # 실행 중인 전체 프로세스 목록에서 찾기\nkill 12345 # 정상 종료 요청\nkill -9 12345 # 강제 종료. 정리 작업 없이 끝나므로 마지막 수단"
           },
           {
             "id": "language-bash-shell-p02-part-4",
             "title": "백그라운드[jobs fg bg]",
             "content": "sleep 60 &\njobs\nfg %1\nbg %1",
-            "displayContent": "# 백그라운드[jobs fg bg]\nsleep 60 &\njobs\nfg %1\nbg %1"
+            "displayContent": "# 백그라운드[jobs fg bg]\nsleep 60 & # &를 붙이면 백그라운드 실행\njobs\nfg %1 # 1번 작업을 앞으로 가져옴\nbg %1 # 멈춘 1번 작업을 백그라운드에서 재개"
           },
           {
             "id": "language-bash-shell-p02-part-5",
             "title": "네트워크[curl ping]",
             "content": "ping -c 3 example.com\ncurl -I https://example.com\ncurl -s https://example.com/api/health",
-            "displayContent": "# 네트워크[curl ping]\nping -c 3 example.com\ncurl -I https://example.com\ncurl -s https://example.com/api/health"
+            "displayContent": "# 네트워크[curl ping]\nping -c 3 example.com # -c 3 세 번만 보내고 끝냄\ncurl -I https://example.com # -I 본문 없이 응답 헤더만\ncurl -s https://example.com/api/health # -s 진행 표시 없이 조용히"
           },
           {
             "id": "language-bash-shell-p02-part-6",
@@ -122,19 +122,19 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-bash-shell-p02-part-7",
             "title": "압축[tar]",
             "content": "tar -czvf archive.tar.gz folder/\ntar -xzvf archive.tar.gz",
-            "displayContent": "# 압축[tar]\ntar -czvf archive.tar.gz folder/\ntar -xzvf archive.tar.gz"
+            "displayContent": "# 압축[tar]\ntar -czvf archive.tar.gz folder/ # c 묶기, z gzip 압축, v 목록 출력, f 파일 이름\ntar -xzvf archive.tar.gz # x 풀기. 나머지 옵션은 같다"
           },
           {
             "id": "language-bash-shell-p02-part-8",
             "title": "zip[unzip]",
             "content": "unzip archive.zip\nunzip -l archive.zip",
-            "displayContent": "# zip[unzip]\nunzip archive.zip\nunzip -l archive.zip"
+            "displayContent": "# zip[unzip]\nunzip archive.zip\nunzip -l archive.zip # -l 풀지 않고 내용 목록만"
           },
           {
             "id": "language-bash-shell-p02-part-9",
             "title": "환경 변수[export]",
             "content": "echo $PATH\nexport JAVA_HOME=/usr/lib/jvm/java-17\nexport PATH=\"$JAVA_HOME/bin:$PATH\"",
-            "displayContent": "# 환경 변수[export]\necho $PATH\nexport JAVA_HOME=/usr/lib/jvm/java-17\nexport PATH=\"$JAVA_HOME/bin:$PATH\""
+            "displayContent": "# 환경 변수[export]\necho $PATH\nexport JAVA_HOME=/usr/lib/jvm/java-17 # export 자식 프로세스에도 전달. 터미널을 닫으면 사라짐\nexport PATH=\"$JAVA_HOME/bin:$PATH\" # 기존 PATH 앞에 추가해 먼저 찾게 함"
           },
           {
             "id": "language-bash-shell-p02-part-10",
@@ -161,19 +161,19 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-bash-shell-p03-part-2",
             "title": "변수[variable]",
             "content": "NAME=\"kim\"\necho \"hello $NAME\"\necho \"home=$HOME\"",
-            "displayContent": "# 변수[variable]\nNAME=\"kim\"\necho \"hello $NAME\"\necho \"home=$HOME\""
+            "displayContent": "# 변수[variable]\nNAME=\"kim\" # = 양옆에 공백을 넣으면 오류\necho \"hello $NAME\" # 결과: hello kim\necho \"home=$HOME\""
           },
           {
             "id": "language-bash-shell-p03-part-3",
             "title": "조건문[if]",
             "content": "if [ -f app.log ]; then\n  echo \"log exists\"\nelse\n  echo \"no log\"\nfi",
-            "displayContent": "# 조건문[if]\nif [ -f app.log ]; then\n  echo \"log exists\"\nelse\n  echo \"no log\"\nfi"
+            "displayContent": "# 조건문[if]\nif [ -f app.log ]; then # -f 파일이 있으면 참. [ ] 안쪽 공백은 필수\n  echo \"log exists\"\nelse\n  echo \"no log\"\nfi"
           },
           {
             "id": "language-bash-shell-p03-part-4",
             "title": "반복문[for]",
             "content": "for f in *.txt; do\n  echo \"File: $f\"\ndone",
-            "displayContent": "# 반복문[for]\nfor f in *.txt; do\n  echo \"File: $f\"\ndone"
+            "displayContent": "# 반복문[for]\nfor f in *.txt; do # *.txt가 파일 목록으로 펼쳐짐\n  echo \"File: $f\" # 변수는 따옴표로 감싸 공백이 든 이름도 안전하게\ndone"
           },
           {
             "id": "language-bash-shell-p03-part-5",
@@ -185,152 +185,64 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-bash-shell-p03-part-6",
             "title": "실행 권한 후 실행[chmod +x]",
             "content": "chmod +x deploy.sh\n./deploy.sh",
-            "displayContent": "# 실행 권한 후 실행[chmod +x]\nchmod +x deploy.sh\n./deploy.sh"
+            "displayContent": "# 실행 권한 후 실행[chmod +x]\nchmod +x deploy.sh\n./deploy.sh # ./ 현재 폴더의 파일을 지정. 없으면 PATH에서만 찾음"
           },
           {
             "id": "language-bash-shell-p03-part-7",
             "title": "로그 찾기 조합[find + grep]",
             "content": "find . -name \"*.log\" | xargs grep \"ERROR\"\ngrep -rn \"ERROR\" /var/log/app",
-            "displayContent": "# 로그 찾기 조합[find + grep]\nfind . -name \"*.log\" | xargs grep \"ERROR\"\ngrep -rn \"ERROR\" /var/log/app"
+            "displayContent": "# 로그 찾기 조합[find + grep]\nfind . -name \"*.log\" | xargs grep \"ERROR\" # xargs 앞 출력을 뒤 명령의 인자로 넘김\ngrep -rn \"ERROR\" /var/log/app"
           },
           {
             "id": "language-bash-shell-p03-part-8",
             "title": "wget 다운로드",
             "content": "wget https://example.com/file.tar.gz\nwget -O out.tar.gz https://example.com/file.tar.gz",
-            "displayContent": "# wget 다운로드\nwget https://example.com/file.tar.gz\nwget -O out.tar.gz https://example.com/file.tar.gz"
+            "displayContent": "# wget 다운로드\nwget https://example.com/file.tar.gz\nwget -O out.tar.gz https://example.com/file.tar.gz # -O 저장할 파일 이름 지정"
           },
           {
             "id": "language-bash-shell-p03-part-9",
             "title": "디스크·용량[df du]",
             "content": "df -h\ndu -sh *",
-            "displayContent": "# 디스크·용량[df du]\ndf -h\ndu -sh *"
+            "displayContent": "# 디스크·용량[df du]\ndf -h # 디스크 전체 사용량. -h 읽기 쉬운 단위\ndu -sh * # -s 항목별 합계. 큰 폴더 찾을 때"
           },
           {
             "id": "language-bash-shell-p03-part-10",
             "title": "배포 전 점검 루틴[check]",
             "content": "pwd\ngit status\ncurl -I https://example.com\nss -tulpn | grep 3000",
-            "displayContent": "# 배포 전 점검 루틴[check]\npwd\ngit status\ncurl -I https://example.com\nss -tulpn | grep 3000"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "csharp-unity",
-    "label": "C# for Unity",
-    "folderName": "csharp-unity",
-    "lessons": [
-      {
-        "id": "language-csharp-unity-p01",
-        "title": "P01.기본-패턴",
-        "fileName": "P01.기본-패턴.yaml",
-        "sourcePath": "assets/raw/syntax/csharp-unity/P01.기본-패턴.yaml",
-        "language": "csharp",
-        "parts": [
-          {
-            "id": "language-csharp-unity-p01-part-1",
-            "title": "MonoBehaviour 골격[MonoBehaviour]",
-            "content": "using UnityEngine;\n\npublic class Player : MonoBehaviour\n{\n    void Start()\n    {\n        Debug.Log(\"start\");\n    }\n\n    void Update()\n    {\n    }\n}",
-            "displayContent": "// MonoBehaviour 골격[MonoBehaviour]\nusing UnityEngine;\n\npublic class Player : MonoBehaviour\n{\n    void Start()\n    {\n        Debug.Log(\"start\");\n    }\n\n    void Update()\n    {\n    }\n}"
-          },
-          {
-            "id": "language-csharp-unity-p01-part-2",
-            "title": "SerializeField[인스펙터 노출]",
-            "content": "using UnityEngine;\n\npublic class Player : MonoBehaviour\n{\n    [SerializeField] private float moveSpeed = 5f;\n    [SerializeField] private int maxHp = 100;\n}",
-            "displayContent": "// SerializeField[인스펙터 노출]\n// private이지만 인스펙터에서 값을 넣을 수 있다\nusing UnityEngine;\n\npublic class Player : MonoBehaviour\n{\n    [SerializeField] private float moveSpeed = 5f;\n    [SerializeField] private int maxHp = 100;\n}"
-          },
-          {
-            "id": "language-csharp-unity-p01-part-3",
-            "title": "Transform 이동[transform]",
-            "content": "using UnityEngine;\n\npublic class Mover : MonoBehaviour\n{\n    [SerializeField] private float speed = 3f;\n\n    void Update()\n    {\n        transform.Translate(Vector3.forward * speed * Time.deltaTime);\n    }\n}",
-            "displayContent": "// Transform 이동[transform]\nusing UnityEngine;\n\npublic class Mover : MonoBehaviour\n{\n    [SerializeField] private float speed = 3f;\n\n    void Update()\n    {\n        transform.Translate(Vector3.forward * speed * Time.deltaTime);\n    }\n}"
-          },
-          {
-            "id": "language-csharp-unity-p01-part-4",
-            "title": "GetComponent[컴포넌트 가져오기]",
-            "content": "using UnityEngine;\n\npublic class HealthUI : MonoBehaviour\n{\n    private Rigidbody rb;\n\n    void Awake()\n    {\n        rb = GetComponent<Rigidbody>();\n    }\n}",
-            "displayContent": "// GetComponent[컴포넌트 가져오기]\nusing UnityEngine;\n\npublic class HealthUI : MonoBehaviour\n{\n    private Rigidbody rb;\n\n    void Awake()\n    {\n        rb = GetComponent<Rigidbody>();\n    }\n}"
-          },
-          {
-            "id": "language-csharp-unity-p01-part-5",
-            "title": "null 체크[null check]",
-            "content": "using UnityEngine;\n\npublic class TargetFinder : MonoBehaviour\n{\n    [SerializeField] private Transform target;\n\n    void Update()\n    {\n        if (target == null)\n        {\n            return;\n        }\n\n        transform.LookAt(target);\n    }\n}",
-            "displayContent": "// null 체크[null check]\nusing UnityEngine;\n\npublic class TargetFinder : MonoBehaviour\n{\n    [SerializeField] private Transform target;\n\n    void Update()\n    {\n        if (target == null)\n        {\n            return;\n        }\n\n        transform.LookAt(target);\n    }\n}"
-          },
-          {
-            "id": "language-csharp-unity-p01-part-6",
-            "title": "Input 입력[Input]",
-            "content": "using UnityEngine;\n\npublic class PlayerInput : MonoBehaviour\n{\n    void Update()\n    {\n        float h = Input.GetAxis(\"Horizontal\");\n        float v = Input.GetAxis(\"Vertical\");\n        transform.Translate(new Vector3(h, 0f, v) * Time.deltaTime);\n    }\n}",
-            "displayContent": "// Input 입력[Input]\nusing UnityEngine;\n\npublic class PlayerInput : MonoBehaviour\n{\n    void Update()\n    {\n        float h = Input.GetAxis(\"Horizontal\");\n        float v = Input.GetAxis(\"Vertical\");\n        transform.Translate(new Vector3(h, 0f, v) * Time.deltaTime);\n    }\n}"
-          },
-          {
-            "id": "language-csharp-unity-p01-part-7",
-            "title": "Instantiate / Destroy",
-            "content": "using UnityEngine;\n\npublic class Spawner : MonoBehaviour\n{\n    [SerializeField] private GameObject bulletPrefab;\n\n    void Fire()\n    {\n        GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);\n        Destroy(bullet, 2f);\n    }\n}",
-            "displayContent": "// Instantiate / Destroy\nusing UnityEngine;\n\npublic class Spawner : MonoBehaviour\n{\n    [SerializeField] private GameObject bulletPrefab;\n\n    void Fire()\n    {\n        GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);\n        Destroy(bullet, 2f);\n    }\n}"
-          },
-          {
-            "id": "language-csharp-unity-p01-part-8",
-            "title": "태그로 찾기[FindWithTag]",
-            "content": "using UnityEngine;\n\npublic class EnemyAI : MonoBehaviour\n{\n    private Transform player;\n\n    void Start()\n    {\n        GameObject go = GameObject.FindWithTag(\"Player\");\n        if (go != null)\n        {\n            player = go.transform;\n        }\n    }\n}",
-            "displayContent": "// 태그로 찾기[FindWithTag]\nusing UnityEngine;\n\npublic class EnemyAI : MonoBehaviour\n{\n    private Transform player;\n\n    void Start()\n    {\n        GameObject go = GameObject.FindWithTag(\"Player\");\n        if (go != null)\n        {\n            player = go.transform;\n        }\n    }\n}"
+            "displayContent": "# 배포 전 점검 루틴[check]\npwd\ngit status\ncurl -I https://example.com\nss -tulpn | grep 3000 # 포트를 쓰는 프로세스 확인. 3000번 점유 여부"
           }
         ]
       },
       {
-        "id": "language-csharp-unity-p02",
-        "title": "P02.실무-패턴",
-        "fileName": "P02.실무-패턴.yaml",
-        "sourcePath": "assets/raw/syntax/csharp-unity/P02.실무-패턴.yaml",
-        "language": "csharp",
+        "id": "language-bash-shell-p04",
+        "title": "P04.원격-텍스트처리",
+        "fileName": "P04.원격-텍스트처리.yaml",
+        "sourcePath": "assets/raw/syntax/bash-shell/P04.원격-텍스트처리.yaml",
+        "language": "shell",
         "parts": [
           {
-            "id": "language-csharp-unity-p02-part-1",
-            "title": "OnTriggerEnter[트리거]",
-            "content": "using UnityEngine;\n\npublic class Coin : MonoBehaviour\n{\n    void OnTriggerEnter(Collider other)\n    {\n        if (other.CompareTag(\"Player\"))\n        {\n            Destroy(gameObject);\n        }\n    }\n}",
-            "displayContent": "// OnTriggerEnter[트리거]\nusing UnityEngine;\n\npublic class Coin : MonoBehaviour\n{\n    void OnTriggerEnter(Collider other)\n    {\n        if (other.CompareTag(\"Player\"))\n        {\n            Destroy(gameObject);\n        }\n    }\n}"
+            "id": "language-bash-shell-p04-part-1",
+            "title": "원격 접속[ssh]",
+            "content": "ssh user@server.example.com\nssh -i ~/.ssh/deploy_key user@server.example.com",
+            "displayContent": "# 원격 접속[ssh]\nssh user@server.example.com\nssh -i ~/.ssh/deploy_key user@server.example.com # -i 접속에 쓸 개인 키 파일 지정"
           },
           {
-            "id": "language-csharp-unity-p02-part-2",
-            "title": "코루틴[IEnumerator]",
-            "content": "using System.Collections;\nusing UnityEngine;\n\npublic class DamageFlash : MonoBehaviour\n{\n    IEnumerator Flash()\n    {\n        yield return new WaitForSeconds(0.2f);\n        Debug.Log(\"flash done\");\n    }\n\n    void Start()\n    {\n        StartCoroutine(Flash());\n    }\n}",
-            "displayContent": "// 코루틴[IEnumerator]\nusing System.Collections;\nusing UnityEngine;\n\npublic class DamageFlash : MonoBehaviour\n{\n    IEnumerator Flash()\n    {\n        yield return new WaitForSeconds(0.2f);\n        Debug.Log(\"flash done\");\n    }\n\n    void Start()\n    {\n        StartCoroutine(Flash());\n    }\n}"
+            "id": "language-bash-shell-p04-part-2",
+            "title": "원격 복사[scp]",
+            "content": "scp ./app.tar.gz user@server.example.com:/srv/app/\nscp user@server.example.com:/var/log/app.log ./",
+            "displayContent": "# 원격 복사[scp]\nscp ./app.tar.gz user@server.example.com:/srv/app/ # 로컬 → 서버 복사\nscp user@server.example.com:/var/log/app.log ./ # 서버 → 로컬 복사. 순서는 항상 출발지 도착지"
           },
           {
-            "id": "language-csharp-unity-p02-part-3",
-            "title": "List 사용[List]",
-            "content": "using System.Collections.Generic;\nusing UnityEngine;\n\npublic class Inventory : MonoBehaviour\n{\n    private readonly List<string> items = new List<string>();\n\n    void AddItem(string name)\n    {\n        items.Add(name);\n        Debug.Log(items.Count);\n    }\n}",
-            "displayContent": "// List 사용[List]\nusing System.Collections.Generic;\nusing UnityEngine;\n\npublic class Inventory : MonoBehaviour\n{\n    private readonly List<string> items = new List<string>();\n\n    void AddItem(string name)\n    {\n        items.Add(name);\n        Debug.Log(items.Count);\n    }\n}"
+            "id": "language-bash-shell-p04-part-3",
+            "title": "문자열 치환[sed]",
+            "content": "sed -i 's/localhost/example.com/g' config.txt",
+            "displayContent": "# 문자열 치환[sed]\nsed -i 's/localhost/example.com/g' config.txt # -i 파일을 직접 수정, s/찾기/바꾸기/g 줄 안의 모두 치환"
           },
           {
-            "id": "language-csharp-unity-p02-part-4",
-            "title": "이벤트[Action]",
-            "content": "using System;\nusing UnityEngine;\n\npublic class Health : MonoBehaviour\n{\n    public event Action<int> OnHpChanged;\n\n    private int hp = 100;\n\n    public void TakeDamage(int amount)\n    {\n        hp -= amount;\n        OnHpChanged?.Invoke(hp);\n    }\n}",
-            "displayContent": "// 이벤트[Action]\nusing System;\nusing UnityEngine;\n\npublic class Health : MonoBehaviour\n{\n    public event Action<int> OnHpChanged;\n\n    private int hp = 100;\n\n    public void TakeDamage(int amount)\n    {\n        hp -= amount;\n        OnHpChanged?.Invoke(hp);\n    }\n}"
-          },
-          {
-            "id": "language-csharp-unity-p02-part-5",
-            "title": "싱글톤 최소[Instance]",
-            "content": "using UnityEngine;\n\npublic class GameManager : MonoBehaviour\n{\n    public static GameManager Instance { get; private set; }\n\n    void Awake()\n    {\n        if (Instance != null)\n        {\n            Destroy(gameObject);\n            return;\n        }\n\n        Instance = this;\n    }\n}",
-            "displayContent": "// 싱글톤 최소[Instance]\n// 남용하지 말고, 게임 매니저 정도에만\nusing UnityEngine;\n\npublic class GameManager : MonoBehaviour\n{\n    public static GameManager Instance { get; private set; }\n\n    void Awake()\n    {\n        if (Instance != null)\n        {\n            Destroy(gameObject);\n            return;\n        }\n\n        Instance = this;\n    }\n}"
-          },
-          {
-            "id": "language-csharp-unity-p02-part-6",
-            "title": "레이어 마스크[LayerMask]",
-            "content": "using UnityEngine;\n\npublic class GroundCheck : MonoBehaviour\n{\n    [SerializeField] private LayerMask groundMask;\n    [SerializeField] private float distance = 1f;\n\n    bool IsGrounded()\n    {\n        return Physics.Raycast(transform.position, Vector3.down, distance, groundMask);\n    }\n}",
-            "displayContent": "// 레이어 마스크[LayerMask]\nusing UnityEngine;\n\npublic class GroundCheck : MonoBehaviour\n{\n    [SerializeField] private LayerMask groundMask;\n    [SerializeField] private float distance = 1f;\n\n    bool IsGrounded()\n    {\n        return Physics.Raycast(transform.position, Vector3.down, distance, groundMask);\n    }\n}"
-          },
-          {
-            "id": "language-csharp-unity-p02-part-7",
-            "title": "ScriptableObject[데이터]",
-            "content": "using UnityEngine;\n\n[CreateAssetMenu(menuName = \"Game/EnemyData\")]\npublic class EnemyData : ScriptableObject\n{\n    public string enemyName;\n    public int maxHp = 50;\n    public float moveSpeed = 2f;\n}",
-            "displayContent": "// ScriptableObject[데이터]\n// 밸런스·설정을 에셋으로 분리할 때\nusing UnityEngine;\n\n[CreateAssetMenu(menuName = \"Game/EnemyData\")]\npublic class EnemyData : ScriptableObject\n{\n    public string enemyName;\n    public int maxHp = 50;\n    public float moveSpeed = 2f;\n}"
-          },
-          {
-            "id": "language-csharp-unity-p02-part-8",
-            "title": "RequireComponent[의존 강제]",
-            "content": "using UnityEngine;\n\n[RequireComponent(typeof(Rigidbody))]\npublic class Knockback : MonoBehaviour\n{\n    private Rigidbody rb;\n\n    void Awake()\n    {\n        rb = GetComponent<Rigidbody>();\n    }\n}",
-            "displayContent": "// RequireComponent[의존 강제]\nusing UnityEngine;\n\n[RequireComponent(typeof(Rigidbody))]\npublic class Knockback : MonoBehaviour\n{\n    private Rigidbody rb;\n\n    void Awake()\n    {\n        rb = GetComponent<Rigidbody>();\n    }\n}"
+            "id": "language-bash-shell-p04-part-4",
+            "title": "정렬·개수 세기[sort / wc]",
+            "content": "sort access.log | uniq -c | sort -rn | head -n 10\nwc -l access.log",
+            "displayContent": "# 정렬·개수 세기[sort / wc]\nsort access.log | uniq -c | sort -rn | head -n 10 # uniq -c는 붙어 있는 중복만 세므로 먼저 정렬. 많이 나온 순 10개\nwc -l access.log # -l 줄 수"
           }
         ]
       }
@@ -358,7 +270,7 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-css-p01-part-2",
             "title": "전역 변수[custom property] 정의",
             "content": ":root {\n  --bg-color: #f5f7fb;\n  --accent-color: #2563eb;\n  --gap-size: 16px;\n}",
-            "displayContent": "/* 전역 변수[custom property] 정의 */\n:root {\n  --bg-color: #f5f7fb;\n  --accent-color: #2563eb;\n  --gap-size: 16px;\n}"
+            "displayContent": "/* 전역 변수[custom property] 정의 */\n:root { /* :root 문서 전체에서 쓰는 변수 자리. --로 시작 */\n  --bg-color: #f5f7fb;\n  --accent-color: #2563eb;\n  --gap-size: 16px;\n}"
           },
           {
             "id": "language-css-p01-part-3",
@@ -394,7 +306,7 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-css-p01-part-8",
             "title": "버튼 상태[hover / disabled]",
             "content": ".primary-button:hover {\n  opacity: 0.9;\n}\n\n.primary-button:disabled {\n  opacity: 0.5;\n  cursor: not-allowed;\n}",
-            "displayContent": "/* 버튼 상태[hover / disabled] */\n.primary-button:hover {\n  opacity: 0.9;\n}\n\n.primary-button:disabled {\n  opacity: 0.5;\n  cursor: not-allowed;\n}"
+            "displayContent": "/* 버튼 상태[hover / disabled] */\n.primary-button:hover { /* 포인터를 올렸을 때 */\n  opacity: 0.9;\n}\n\n.primary-button:disabled { /* disabled 속성이 있을 때 */\n  opacity: 0.5;\n  cursor: not-allowed;\n}"
           },
           {
             "id": "language-css-p01-part-9",
@@ -466,6 +378,45 @@ export const languageTracks: LanguageTrack[] = [
             "displayContent": "/* 배치 마크업[layout markup] — 부모 클래스 아래 자식 박스 */\n<div class=\"row-parent\">\n  <div class=\"box\">A</div>\n  <div class=\"box\">B</div>\n  <div class=\"box\">C</div>\n</div>"
           }
         ]
+      },
+      {
+        "id": "language-css-p03",
+        "title": "P03.위치-전환-넘침",
+        "fileName": "P03.위치-전환-넘침.yaml",
+        "sourcePath": "assets/raw/syntax/css/P03.위치-전환-넘침.yaml",
+        "language": "css",
+        "parts": [
+          {
+            "id": "language-css-p03-part-1",
+            "title": "상대·절대 위치[position]",
+            "content": ".card {\n  position: relative;\n}\n\n.card__badge {\n  position: absolute;\n  top: 8px;\n  right: 8px;\n}",
+            "displayContent": "/* 상대·절대 위치[position] */\n.card {\n  position: relative; /* 자리는 그대로, 자식 absolute의 기준이 됨 */\n}\n\n.card__badge {\n  position: absolute; /* 흐름에서 빠져 가장 가까운 position 조상 기준으로 배치 */\n  top: 8px;\n  right: 8px;\n}"
+          },
+          {
+            "id": "language-css-p03-part-2",
+            "title": "고정 위치와 쌓임[sticky / z-index]",
+            "content": ".header {\n  position: sticky;\n  top: 0;\n  z-index: 10;\n}",
+            "displayContent": "/* 고정 위치와 쌓임[sticky / z-index] */\n.header {\n  position: sticky; /* 스크롤하다 top: 0에 닿으면 붙음. 부모 안에서만 유지 */\n  top: 0;\n  z-index: 10; /* 값이 클수록 위. position이 있어야 동작 */\n}"
+          },
+          {
+            "id": "language-css-p03-part-3",
+            "title": "전환 효과[transition]",
+            "content": ".button {\n  transition: background-color 0.2s ease;\n}\n\n.button:hover {\n  background-color: #111827;\n}",
+            "displayContent": "/* 전환 효과[transition] */\n.button {\n  transition: background-color 0.2s ease; /* 속성 시간 곡선. 시작 상태에 두어야 나갈 때도 부드럽다 */\n}\n\n.button:hover {\n  background-color: #111827;\n}"
+          },
+          {
+            "id": "language-css-p03-part-4",
+            "title": "넘침 처리[overflow]",
+            "content": ".panel {\n  max-height: 320px;\n  overflow-y: auto;\n}",
+            "displayContent": "/* 넘침 처리[overflow] */\n.panel {\n  max-height: 320px;\n  overflow-y: auto; /* 넘칠 때만 세로 스크롤 표시 */\n}"
+          },
+          {
+            "id": "language-css-p03-part-5",
+            "title": "말줄임[text-overflow]",
+            "content": ".title {\n  overflow: hidden;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n}",
+            "displayContent": "/* 말줄임[text-overflow] */\n.title {\n  overflow: hidden;\n  white-space: nowrap;\n  text-overflow: ellipsis; /* 세 줄이 함께 있어야 말줄임(…)이 나온다 */\n}"
+          }
+        ]
       }
     ]
   },
@@ -491,13 +442,13 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-docker-p01-part-2",
             "title": "목록[docker ps]",
             "content": "docker ps\ndocker ps -a",
-            "displayContent": "# 목록[docker ps]\ndocker ps\ndocker ps -a"
+            "displayContent": "# 목록[docker ps]\ndocker ps\ndocker ps -a # -a 멈춘 컨테이너까지"
           },
           {
             "id": "language-docker-p01-part-3",
             "title": "중지·시작·재시작[stop start restart]",
             "content": "docker stop web\ndocker start web\ndocker restart web",
-            "displayContent": "# 중지·시작·재시작[stop start restart]\ndocker stop web\ndocker start web\ndocker restart web"
+            "displayContent": "# 중지·시작·재시작[stop start restart]\ndocker stop web # 정상 종료 요청 후 대기\ndocker start web # 멈춘 컨테이너 재실행. 새로 만들지 않음\ndocker restart web"
           },
           {
             "id": "language-docker-p01-part-4",
@@ -509,7 +460,7 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-docker-p01-part-5",
             "title": "이미지 받기[docker pull]",
             "content": "docker pull nginx\ndocker pull nginx:1.27",
-            "displayContent": "# 이미지 받기[docker pull]\ndocker pull nginx\ndocker pull nginx:1.27"
+            "displayContent": "# 이미지 받기[docker pull]\ndocker pull nginx\ndocker pull nginx:1.27 # 태그로 버전 고정. 없으면 latest"
           },
           {
             "id": "language-docker-p01-part-6",
@@ -521,7 +472,7 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-docker-p01-part-7",
             "title": "이미지 삭제[docker rmi]",
             "content": "docker rmi nginx\ndocker rmi nginx:1.27",
-            "displayContent": "# 이미지 삭제[docker rmi]\ndocker rmi nginx\ndocker rmi nginx:1.27"
+            "displayContent": "# 이미지 삭제[docker rmi]\ndocker rmi nginx\ndocker rmi nginx:1.27 # 사용 중인 컨테이너가 있으면 먼저 지워야 함"
           },
           {
             "id": "language-docker-p01-part-8",
@@ -548,7 +499,7 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-docker-p02-part-2",
             "title": "로그 따라보기[docker logs]",
             "content": "docker logs -f web",
-            "displayContent": "# 로그 따라보기[docker logs]\ndocker logs -f web"
+            "displayContent": "# 로그 따라보기[docker logs]\ndocker logs -f web # -f 새 로그를 계속 출력"
           },
           {
             "id": "language-docker-p02-part-3",
@@ -560,49 +511,94 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-docker-p02-part-4",
             "title": "볼륨 관리[volume]",
             "content": "docker volume create app-data\ndocker volume ls",
-            "displayContent": "# 볼륨 관리[volume]\ndocker volume create app-data\ndocker volume ls"
+            "displayContent": "# 볼륨 관리[volume]\ndocker volume create app-data # 컨테이너를 지워도 남는 저장 공간\ndocker volume ls"
           },
           {
             "id": "language-docker-p02-part-5",
             "title": "네트워크[network]",
             "content": "docker network ls\ndocker network create app-net",
-            "displayContent": "# 네트워크[network]\ndocker network ls\ndocker network create app-net"
+            "displayContent": "# 네트워크[network]\ndocker network ls\ndocker network create app-net # 같은 네트워크 컨테이너끼리 이름으로 통신"
           },
           {
             "id": "language-docker-p02-part-6",
             "title": "네트워크 연결[--network]",
             "content": "docker run -d --network app-net --name web nginx",
-            "displayContent": "# 네트워크 연결[--network]\ndocker run -d --network app-net --name web nginx"
+            "displayContent": "# 네트워크 연결[--network]\ndocker run -d --network app-net --name web nginx # -d 백그라운드, --name 이름, --network 연결할 네트워크"
           },
           {
             "id": "language-docker-p02-part-7",
             "title": "Compose 기동[compose up]",
             "content": "docker compose up -d",
-            "displayContent": "# Compose 기동[compose up]\ndocker compose up -d"
+            "displayContent": "# Compose 기동[compose up]\ndocker compose up -d # -d 백그라운드. compose 파일의 서비스를 모두 띄움"
           },
           {
             "id": "language-docker-p02-part-8",
             "title": "Compose 종료·로그[compose down logs]",
             "content": "docker compose down\ndocker compose logs -f",
-            "displayContent": "# Compose 종료·로그[compose down logs]\ndocker compose down\ndocker compose logs -f"
+            "displayContent": "# Compose 종료·로그[compose down logs]\ndocker compose down # 컨테이너·네트워크 제거. 볼륨은 남음(-v면 삭제)\ndocker compose logs -f"
           },
           {
             "id": "language-docker-p02-part-9",
             "title": "상세 정보[docker inspect]",
             "content": "docker inspect web",
-            "displayContent": "# 상세 정보[docker inspect]\ndocker inspect web"
+            "displayContent": "# 상세 정보[docker inspect]\ndocker inspect web # IP, 마운트, 환경 변수 등 전체 설정을 JSON으로"
           },
           {
             "id": "language-docker-p02-part-10",
             "title": "자원 사용[docker stats]",
             "content": "docker stats",
-            "displayContent": "# 자원 사용[docker stats]\ndocker stats"
+            "displayContent": "# 자원 사용[docker stats]\ndocker stats # 컨테이너별 CPU·메모리 실시간 사용량"
           },
           {
             "id": "language-docker-p02-part-11",
             "title": "디스크·정리[system df prune]",
             "content": "docker system df\ndocker system prune",
-            "displayContent": "# 디스크·정리[system df prune]\ndocker system df\ndocker system prune"
+            "displayContent": "# 디스크·정리[system df prune]\ndocker system df # 이미지·컨테이너·볼륨이 쓰는 용량\ndocker system prune # 멈춘 컨테이너, 안 쓰는 네트워크·이미지 삭제"
+          }
+        ]
+      },
+      {
+        "id": "language-docker-p03",
+        "title": "P03.Dockerfile-Compose",
+        "fileName": "P03.Dockerfile-Compose.yaml",
+        "sourcePath": "assets/raw/syntax/docker/P03.Dockerfile-Compose.yaml",
+        "language": "shell",
+        "parts": [
+          {
+            "id": "language-docker-p03-part-1",
+            "title": "Dockerfile 기본[Dockerfile]",
+            "content": "FROM node:22-alpine\nWORKDIR /app\nCOPY package*.json ./\nRUN npm ci\nCOPY . .\nEXPOSE 3000\nCMD [\"node\", \"server.js\"]",
+            "displayContent": "# Dockerfile 기본[Dockerfile]\nFROM node:22-alpine # 기반 이미지. alpine은 크기가 작다\nWORKDIR /app\nCOPY package*.json ./ # 의존성 파일 먼저 복사하면 코드만 바뀔 때 설치 캐시 재사용\nRUN npm ci # RUN은 빌드 때 실행\nCOPY . .\nEXPOSE 3000 # 문서용 표시. 실제 공개는 run -p\nCMD [\"node\", \"server.js\"] # 컨테이너 시작 때 실행"
+          },
+          {
+            "id": "language-docker-p03-part-2",
+            "title": "멀티 스테이지 빌드[multi-stage]",
+            "content": "FROM node:22-alpine AS builder\nWORKDIR /app\nCOPY . .\nRUN npm ci && npm run build\n\nFROM nginx:alpine\nCOPY --from=builder /app/dist /usr/share/nginx/html",
+            "displayContent": "# 멀티 스테이지 빌드[multi-stage]\nFROM node:22-alpine AS builder # AS 이 단계에 이름 붙이기\nWORKDIR /app\nCOPY . .\nRUN npm ci && npm run build\n\nFROM nginx:alpine # 두 번째 단계만 최종 이미지가 됨\nCOPY --from=builder /app/dist /usr/share/nginx/html # 빌드 결과만 가져와 이미지 크기를 줄임"
+          },
+          {
+            "id": "language-docker-p03-part-3",
+            "title": "빌드 제외[.dockerignore]",
+            "content": "node_modules\ndist\n.git\n.env",
+            "displayContent": "# 빌드 제외[.dockerignore]\nnode_modules # 빌드 컨텍스트에서 제외해 빌드를 빠르게\ndist\n.git\n.env # 비밀값이 이미지에 들어가지 않게"
+          },
+          {
+            "id": "language-docker-p03-part-4",
+            "title": "Compose 파일[compose.yaml]",
+            "content": "services:\n  web:\n    build: .\n    ports:\n      - \"3000:3000\"\n    depends_on:\n      - db\n  db:\n    image: postgres:16\n    environment:\n      POSTGRES_PASSWORD: example\n    volumes:\n      - db-data:/var/lib/postgresql/data\n\nvolumes:\n  db-data:",
+            "displayContent": "# Compose 파일[compose.yaml]\nservices:\n  web:\n    build: .\n    ports:\n      - \"3000:3000\" # 호스트:컨테이너 포트\n    depends_on:\n      - db # 시작 순서만 보장. 준비 완료까지 기다리지는 않음\n  db:\n    image: postgres:16\n    environment:\n      POSTGRES_PASSWORD: example\n    volumes:\n      - db-data:/var/lib/postgresql/data # 이름 있는 볼륨으로 DB 데이터 보존\n\nvolumes:\n  db-data:"
+          },
+          {
+            "id": "language-docker-p03-part-5",
+            "title": "이미지 태그[docker tag]",
+            "content": "docker tag my-app:latest registry.example.com/my-app:1.0.0",
+            "displayContent": "# 이미지 태그[docker tag]\ndocker tag my-app:latest registry.example.com/my-app:1.0.0 # 복사가 아니라 같은 이미지에 이름 추가"
+          },
+          {
+            "id": "language-docker-p03-part-6",
+            "title": "이미지 올리기[docker push]",
+            "content": "docker login registry.example.com\ndocker push registry.example.com/my-app:1.0.0",
+            "displayContent": "# 이미지 올리기[docker push]\ndocker login registry.example.com\ndocker push registry.example.com/my-app:1.0.0 # 레지스트리 주소가 든 태그여야 그곳으로 올라감"
           }
         ]
       }
@@ -818,12 +814,6 @@ export const languageTracks: LanguageTrack[] = [
             "title": "작업 저장 흐름[diff -> add -> commit]",
             "content": "git diff\ngit add .\ngit commit -m \"feat: update dashboard widgets\"",
             "displayContent": "# 작업 저장 흐름[diff -> add -> commit]\ngit diff\ngit add .\ngit commit -m \"feat: update dashboard widgets\"\n# 결과: 변경 검토 후 저장"
-          },
-          {
-            "id": "language-git-p01-part-19",
-            "title": "반영 흐름[switch -> pull -> merge]",
-            "content": "git switch main\ngit pull origin main\ngit merge feature/x",
-            "displayContent": "# 반영 흐름[switch -> pull -> merge]\ngit switch main\ngit pull origin main\ngit merge feature/x\n# 결과: 메인 브랜치에 기능 브랜치 내용을 반영"
           }
         ]
       },
@@ -834,42 +824,6 @@ export const languageTracks: LanguageTrack[] = [
         "sourcePath": "assets/raw/syntax/git/P02.실무-패턴.yaml",
         "language": "shell",
         "parts": [
-          {
-            "id": "language-git-p02-part-1",
-            "title": "기능 추가 커밋[feat]",
-            "content": "git commit -m \"feat(auth): add social login\"",
-            "displayContent": "# 기능 추가 커밋[feat]\ngit commit -m \"feat(auth): add social login\"\n# 결과: 새 기능 추가 이력을 남김"
-          },
-          {
-            "id": "language-git-p02-part-2",
-            "title": "버그 수정 커밋[fix]",
-            "content": "git commit -m \"fix(api): handle empty response\"",
-            "displayContent": "# 버그 수정 커밋[fix]\ngit commit -m \"fix(api): handle empty response\"\n# 결과: 버그 수정 이력을 남김"
-          },
-          {
-            "id": "language-git-p02-part-3",
-            "title": "문서 수정 커밋[docs]",
-            "content": "git commit -m \"docs: update setup guide\"",
-            "displayContent": "# 문서 수정 커밋[docs]\ngit commit -m \"docs: update setup guide\"\n# 결과: 문서 변경 이력을 남김"
-          },
-          {
-            "id": "language-git-p02-part-4",
-            "title": "리팩터링 커밋[refactor]",
-            "content": "git commit -m \"refactor(ui): simplify modal props\"",
-            "displayContent": "# 리팩터링 커밋[refactor]\ngit commit -m \"refactor(ui): simplify modal props\"\n# 결과: 동작 변화 없는 구조 개선 이력을 남김"
-          },
-          {
-            "id": "language-git-p02-part-5",
-            "title": "잡무 커밋[chore]",
-            "content": "git commit -m \"chore: update eslint config\"",
-            "displayContent": "# 잡무 커밋[chore]\ngit commit -m \"chore: update eslint config\"\n# 결과: 설정 또는 의존성 변경 이력을 남김"
-          },
-          {
-            "id": "language-git-p02-part-6",
-            "title": "스타일 커밋[style]",
-            "content": "git commit -m \"style: lint code\"",
-            "displayContent": "# 스타일 커밋[style]\ngit commit -m \"style: lint code\"\n# 결과: 포맷 또는 스타일 정리 이력을 남김"
-          },
           {
             "id": "language-git-p02-part-7",
             "title": "기능 브랜치[feature branch]",
@@ -883,34 +837,16 @@ export const languageTracks: LanguageTrack[] = [
             "displayContent": "# 핫픽스 브랜치[hotfix branch]\ngit switch -c hotfix/login-error\n# 결과: 긴급 수정용 브랜치 생성"
           },
           {
-            "id": "language-git-p02-part-9",
-            "title": "버그픽스 브랜치[bugfix branch]",
-            "content": "git switch -c bugfix/cart-total",
-            "displayContent": "# 버그픽스 브랜치[bugfix branch]\ngit switch -c bugfix/cart-total\n# 결과: 버그 수정용 브랜치 생성"
-          },
-          {
             "id": "language-git-p02-part-10",
             "title": "페치[git fetch]",
             "content": "git fetch origin",
             "displayContent": "# 페치[git fetch]\ngit fetch origin\n# 결과: 원격 저장소 최신 이력을 가져옴"
           },
           {
-            "id": "language-git-p02-part-11",
-            "title": "프룬[git prune]",
-            "content": "git prune --dry-run",
-            "displayContent": "# 프룬[git prune]\ngit prune --dry-run\n# 결과: 어떤 loose object 가 정리 대상인지 미리 확인"
-          },
-          {
             "id": "language-git-p02-part-12",
             "title": "원격 삭제 브랜치 정리[git fetch --prune]",
             "content": "git fetch --prune origin",
             "displayContent": "# 원격 삭제 브랜치 정리[git fetch --prune]\ngit fetch --prune origin\n# 결과: 원격에서 이미 삭제된 origin/* 추적 브랜치를 정리"
-          },
-          {
-            "id": "language-git-p02-part-13",
-            "title": "원격 추적 브랜치 정리[git remote prune]",
-            "content": "git remote prune origin",
-            "displayContent": "# 원격 추적 브랜치 정리[git remote prune]\ngit remote prune origin\n# 결과: 더 이상 없는 원격 브랜치 참조를 한 번에 정리"
           },
           {
             "id": "language-git-p02-part-14",
@@ -1012,22 +948,10 @@ export const languageTracks: LanguageTrack[] = [
             "displayContent": "# chore - 잡무[chore] — 빌드·설정·의존성\ngit commit -m \"chore(deps): bump react to v18.2.0\""
           },
           {
-            "id": "language-git-temp-part-10",
-            "title": "build - 빌드[build]",
-            "content": "git commit -m \"build: update vite build script\"",
-            "displayContent": "# build - 빌드[build]\ngit commit -m \"build: update vite build script\""
-          },
-          {
             "id": "language-git-temp-part-11",
             "title": "ci - CI/CD[ci]",
             "content": "git commit -m \"ci: add build cache to github actions\"",
             "displayContent": "# ci - CI/CD[ci]\ngit commit -m \"ci: add build cache to github actions\""
-          },
-          {
-            "id": "language-git-temp-part-12",
-            "title": "revert - 되돌림[revert]",
-            "content": "git commit -m \"revert: revert \\\"feat: dark mode support\\\"\"",
-            "displayContent": "# revert - 되돌림[revert]\ngit commit -m \"revert: revert \\\"feat: dark mode support\\\"\""
           },
           {
             "id": "language-git-temp-part-13",
@@ -1040,12 +964,6 @@ export const languageTracks: LanguageTrack[] = [
             "title": "footer로 이슈 연결[closes]",
             "content": "git commit -m \"$(cat <<'EOF'\nfeat(auth): add oauth login\n\nCloses #123\nEOF\n)\"",
             "displayContent": "# footer로 이슈 연결[closes]\ngit commit -m \"$(cat <<'EOF'\nfeat(auth): add oauth login\n\nCloses #123\nEOF\n)\""
-          },
-          {
-            "id": "language-git-temp-part-15",
-            "title": "커밋 템플릿 설정[commit.template]",
-            "content": "git config --global commit.template ~/.gitmessage.txt",
-            "displayContent": "# 커밋 템플릿 설정[commit.template]\n# .gitmessage.txt를 기본 메시지로 쓴다\ngit config --global commit.template ~/.gitmessage.txt"
           }
         ]
       },
@@ -1115,18 +1033,6 @@ export const languageTracks: LanguageTrack[] = [
             "title": "원격 브랜치 삭제[git push -d]",
             "content": "git push origin -d feature/login",
             "displayContent": "# 원격 브랜치 삭제[git push -d]\ngit push origin -d feature/login\n# 결과: 원격 저장소의 feature/login 브랜치 삭제"
-          },
-          {
-            "id": "language-git-p04-part-11",
-            "title": "대소문자 구분[core.ignorecase]",
-            "content": "git config core.ignorecase false",
-            "displayContent": "# 대소문자 구분[core.ignorecase]\ngit config core.ignorecase false\n# 결과: 파일명 대소문자 변경을 git이 추적하도록 설정"
-          },
-          {
-            "id": "language-git-p04-part-12",
-            "title": "커밋 스코프 예시[commit scope]",
-            "content": "git commit -m \"fix(typo): enought -> enough\"\ngit commit -m \"docs(readme): added demo image\"\ngit commit -m \"feat(i18n): add Indonesian translations\"\ngit commit -m \"chore(deps): update dependency typescript to v5.8.2\"",
-            "displayContent": "# 커밋 스코프 예시[commit scope]\n# type(scope): subject 형태로 변경 범위를 명시한다\ngit commit -m \"fix(typo): enought -> enough\"\ngit commit -m \"docs(readme): added demo image\"\ngit commit -m \"feat(i18n): add Indonesian translations\"\ngit commit -m \"chore(deps): update dependency typescript to v5.8.2\"\n# 결과: 스코프로 변경 위치가 한눈에 드러나는 커밋 이력"
           }
         ]
       },
@@ -1150,52 +1056,55 @@ export const languageTracks: LanguageTrack[] = [
             "displayContent": "# 브랜치 만들고 main에 머지[branch + merge]\ngit switch main\ngit pull origin main\ngit switch -c feature/login\n# ... 작업 후 ...\ngit switch main\ngit merge feature/login\ngit push origin main"
           },
           {
-            "id": "language-git-p05-part-3",
-            "title": "체리픽[cherry-pick]",
-            "content": "git switch main\ngit cherry-pick abc1234\ngit push origin main",
-            "displayContent": "# 체리픽[cherry-pick]\n# 다른 브랜치의 커밋 하나만 현재 브랜치로 가져온다\ngit switch main\ngit cherry-pick abc1234\ngit push origin main"
-          },
-          {
-            "id": "language-git-p05-part-4",
-            "title": "리버트[revert]",
-            "content": "git revert abc1234\ngit push origin main",
-            "displayContent": "# 리버트[revert]\n# 이미 공유된 커밋은 reset 대신 되돌리는 새 커밋을 만든다\ngit revert abc1234\ngit push origin main"
-          },
-          {
-            "id": "language-git-p05-part-5",
-            "title": "브랜치 삭제[delete branch]",
-            "content": "git switch main\ngit branch -d feature/login\ngit push origin -d feature/login",
-            "displayContent": "# 브랜치 삭제[delete branch]\ngit switch main\ngit branch -d feature/login\ngit push origin -d feature/login"
-          },
-          {
             "id": "language-git-p05-part-6",
             "title": "커밋 스쿼시[squash]",
             "content": "git reset --soft HEAD~3\ngit commit -m \"feat(auth): add oauth login\"\ngit push --force-with-lease origin feature/login",
             "displayContent": "# 커밋 스쿼시[squash]\n# 최근 커밋 3개를 스테이징에 풀어 한 커밋으로 다시 묶는다\ngit reset --soft HEAD~3\ngit commit -m \"feat(auth): add oauth login\"\ngit push --force-with-lease origin feature/login"
           },
           {
-            "id": "language-git-p05-part-7",
-            "title": "원격 삭제 브랜치 프룬[prune]",
-            "content": "git fetch --prune origin\ngit remote prune origin",
-            "displayContent": "# 원격 삭제 브랜치 프룬[prune]\n# 원격에서 지워진 origin/* 추적 브랜치를 로컬에서 정리한다\ngit fetch --prune origin\ngit remote prune origin"
-          },
-          {
-            "id": "language-git-p05-part-8",
-            "title": "커밋 후 푸시[commit + push]",
-            "content": "git status\ngit add .\ngit commit -m \"fix(api): handle null response\"\ngit push -u origin HEAD",
-            "displayContent": "# 커밋 후 푸시[commit + push]\ngit status\ngit add .\ngit commit -m \"fix(api): handle null response\"\ngit push -u origin HEAD"
-          },
-          {
             "id": "language-git-p05-part-9",
             "title": "원격 확인[remote -v / show]",
             "content": "git remote -v\ngit remote show origin",
-            "displayContent": "# 원격 확인[remote -v / show]\ngit remote -v\ngit remote show origin"
+            "displayContent": "# 원격 확인[remote -v / show]\ngit remote -v # -v 원격 이름과 주소\ngit remote show origin # 추적 브랜치 등 상세 정보"
           },
           {
             "id": "language-git-p05-part-10",
             "title": "오리진 URL 변경[remote set-url]",
             "content": "git remote -v\ngit remote set-url origin https://github.com/user/repo.git\ngit remote -v\ngit push -u origin main",
-            "displayContent": "# 오리진 URL 변경[remote set-url]\ngit remote -v\ngit remote set-url origin https://github.com/user/repo.git\ngit remote -v\ngit push -u origin main"
+            "displayContent": "# 오리진 URL 변경[remote set-url]\ngit remote -v\ngit remote set-url origin https://github.com/user/repo.git # 저장소를 옮겼을 때 주소만 교체\ngit remote -v\ngit push -u origin main # -u 이후 git push만으로 이 브랜치에 올림"
+          }
+        ]
+      },
+      {
+        "id": "language-git-p06",
+        "title": "P06.태그-복구-무시",
+        "fileName": "P06.태그-복구-무시.yaml",
+        "sourcePath": "assets/raw/syntax/git/P06.태그-복구-무시.yaml",
+        "language": "shell",
+        "parts": [
+          {
+            "id": "language-git-p06-part-1",
+            "title": "태그[git tag]",
+            "content": "git tag -a v1.0.0 -m \"release 1.0.0\"\ngit push origin v1.0.0",
+            "displayContent": "# 태그[git tag]\ngit tag -a v1.0.0 -m \"release 1.0.0\" # -a 작성자·메시지가 있는 주석 태그\ngit push origin v1.0.0 # 태그는 일반 push로 안 올라가 따로 올림"
+          },
+          {
+            "id": "language-git-p06-part-2",
+            "title": "변경 되돌리기[git restore]",
+            "content": "git restore src/app.ts\ngit restore --staged src/app.ts",
+            "displayContent": "# 변경 되돌리기[git restore]\ngit restore src/app.ts # 작업 중 변경을 버림. 되돌릴 수 없음\ngit restore --staged src/app.ts # 스테이징만 취소. 파일 내용은 유지"
+          },
+          {
+            "id": "language-git-p06-part-3",
+            "title": "이동 기록 복구[git reflog]",
+            "content": "git reflog\ngit reset --hard HEAD@{1}",
+            "displayContent": "# 이동 기록 복구[git reflog]\ngit reflog # HEAD 이동 기록. reset으로 잃은 커밋도 찾을 수 있음\ngit reset --hard HEAD@{1} # HEAD의 직전 위치로 복구"
+          },
+          {
+            "id": "language-git-p06-part-4",
+            "title": "추적 제외[.gitignore]",
+            "content": "node_modules/\ndist/\n.env\n*.log",
+            "displayContent": "# 추적 제외[.gitignore]\nnode_modules/ # /로 끝나면 폴더\ndist/\n.env # 비밀값은 커밋 금지\n*.log # 이미 추적 중인 파일에는 적용되지 않음"
           }
         ]
       }
@@ -1394,13 +1303,225 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-go-p02-part-13",
             "title": "시간[time]",
             "content": "import (\n\t\"fmt\"\n\t\"time\"\n)\n\nnow := time.Now()\nfmt.Println(now.Format(\"2006-01-02\"))",
-            "displayContent": "// 시간[time]\nimport (\n\t\"fmt\"\n\t\"time\"\n)\n\nnow := time.Now()\nfmt.Println(now.Format(\"2006-01-02\"))"
+            "displayContent": "// 시간[time]\nimport (\n\t\"fmt\"\n\t\"time\"\n)\n\nnow := time.Now()\nfmt.Println(now.Format(\"2006-01-02\")) // Go 포맷은 기준 시각 2006-01-02로 표기"
           },
           {
             "id": "language-go-p02-part-14",
             "title": "HTTP 서버[net/http]",
             "content": "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n)\n\nfunc main() {\n\thttp.HandleFunc(\"/\", func(w http.ResponseWriter, r *http.Request) {\n\t\tfmt.Fprint(w, \"Hello\")\n\t})\n\thttp.ListenAndServe(\":8080\", nil)\n}",
             "displayContent": "// HTTP 서버[net/http] — Hello 응답 최소 예\npackage main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n)\n\nfunc main() {\n\thttp.HandleFunc(\"/\", func(w http.ResponseWriter, r *http.Request) {\n\t\tfmt.Fprint(w, \"Hello\")\n\t})\n\thttp.ListenAndServe(\":8080\", nil)\n}"
+          }
+        ]
+      },
+      {
+        "id": "language-go-p03",
+        "title": "P03.동시성-에러-JSON",
+        "fileName": "P03.동시성-에러-JSON.yaml",
+        "sourcePath": "assets/raw/syntax/go/P03.동시성-에러-JSON.yaml",
+        "language": "go",
+        "parts": [
+          {
+            "id": "language-go-p03-part-1",
+            "title": "지연 실행[defer]",
+            "content": "file, err := os.Open(\"data.txt\")\nif err != nil {\n\treturn err\n}\ndefer file.Close()",
+            "displayContent": "// 지연 실행[defer]\nfile, err := os.Open(\"data.txt\")\nif err != nil {\n\treturn err\n}\ndefer file.Close() // 함수가 끝날 때 실행. 에러 확인 뒤에 둔다"
+          },
+          {
+            "id": "language-go-p03-part-2",
+            "title": "취소·시간 제한[context]",
+            "content": "ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)\ndefer cancel()\n\nreq, err := http.NewRequestWithContext(ctx, \"GET\", url, nil)",
+            "displayContent": "// 취소·시간 제한[context]\nctx, cancel := context.WithTimeout(context.Background(), 3*time.Second) // 3초 뒤 자동 취소되는 context\ndefer cancel() // 자원 해제를 위해 항상 호출\n\nreq, err := http.NewRequestWithContext(ctx, \"GET\", url, nil)"
+          },
+          {
+            "id": "language-go-p03-part-3",
+            "title": "고루틴 대기[WaitGroup]",
+            "content": "var wg sync.WaitGroup\nfor _, url := range urls {\n\twg.Add(1)\n\tgo func(u string) {\n\t\tdefer wg.Done()\n\t\tfetch(u)\n\t}(url)\n}\nwg.Wait()",
+            "displayContent": "// 고루틴 대기[WaitGroup]\nvar wg sync.WaitGroup\nfor _, url := range urls {\n\twg.Add(1) // 고루틴 시작 전에 개수 추가\n\tgo func(u string) {\n\t\tdefer wg.Done() // 끝나면 개수 감소\n\t\tfetch(u)\n\t}(url)\n}\nwg.Wait() // 개수가 0이 될 때까지 대기"
+          },
+          {
+            "id": "language-go-p03-part-4",
+            "title": "상호 배제[Mutex]",
+            "content": "var mu sync.Mutex\nmu.Lock()\ncount++\nmu.Unlock()",
+            "displayContent": "// 상호 배제[Mutex]\nvar mu sync.Mutex\nmu.Lock() // 한 번에 한 고루틴만 통과. count++는 원자적이지 않다\ncount++\nmu.Unlock()"
+          },
+          {
+            "id": "language-go-p03-part-5",
+            "title": "JSON 변환[encoding/json]",
+            "content": "type User struct {\n\tName string `json:\"name\"`\n}\n\nbody, err := json.Marshal(User{Name: \"kim\"})\nerr = json.Unmarshal(body, &user)",
+            "displayContent": "// JSON 변환[encoding/json]\ntype User struct {\n\tName string `json:\"name\"` // 구조체 태그로 JSON 키 지정. 필드는 대문자여야 공개됨\n}\n\nbody, err := json.Marshal(User{Name: \"kim\"})\nerr = json.Unmarshal(body, &user) // 값을 채우려면 포인터(&)를 넘긴다"
+          },
+          {
+            "id": "language-go-p03-part-6",
+            "title": "에러 비교[errors.Is / As]",
+            "content": "if errors.Is(err, os.ErrNotExist) {\n\treturn nil\n}\n\nvar pathErr *os.PathError\nif errors.As(err, &pathErr) {\n\tfmt.Println(pathErr.Path)\n}",
+            "displayContent": "// 에러 비교[errors.Is / As]\nif errors.Is(err, os.ErrNotExist) { // 감싼 에러까지 따라가며 같은 에러인지 비교\n\treturn nil\n}\n\nvar pathErr *os.PathError\nif errors.As(err, &pathErr) { // 특정 타입 에러를 꺼내 필드를 읽음\n\tfmt.Println(pathErr.Path)\n}"
+          },
+          {
+            "id": "language-go-p03-part-7",
+            "title": "제네릭[generics]",
+            "content": "func Map[T, U any](items []T, fn func(T) U) []U {\n\tresult := make([]U, 0, len(items))\n\tfor _, item := range items {\n\t\tresult = append(result, fn(item))\n\t}\n\treturn result\n}",
+            "displayContent": "// 제네릭[generics]\nfunc Map[T, U any](items []T, fn func(T) U) []U { // 타입 매개변수 T, U. any는 모든 타입\n\tresult := make([]U, 0, len(items))\n\tfor _, item := range items {\n\t\tresult = append(result, fn(item))\n\t}\n\treturn result\n}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gradle",
+    "label": "Gradle",
+    "folderName": "gradle",
+    "lessons": [
+      {
+        "id": "language-gradle-p01",
+        "title": "P01.빌드설정-Kotlin-DSL",
+        "fileName": "P01.빌드설정-Kotlin-DSL.yaml",
+        "sourcePath": "assets/raw/syntax/gradle/P01.빌드설정-Kotlin-DSL.yaml",
+        "language": "java",
+        "parts": [
+          {
+            "id": "language-gradle-p01-part-1",
+            "title": "플러그인[plugins]",
+            "content": "plugins {\n    java\n    id(\"org.springframework.boot\") version \"3.5.0\"\n    id(\"io.spring.dependency-management\") version \"1.1.7\"\n}",
+            "displayContent": "// 플러그인[plugins]\nplugins {\n    java // Java 컴파일·테스트 태스크 추가\n    id(\"org.springframework.boot\") version \"3.5.0\" // bootRun, bootJar 태스크 추가\n    id(\"io.spring.dependency-management\") version \"1.1.7\" // 스프링 라이브러리 버전을 맞춰 줌. 버전 번호는 예시\n}"
+          },
+          {
+            "id": "language-gradle-p01-part-2",
+            "title": "자바 버전[toolchain]",
+            "content": "java {\n    toolchain {\n        languageVersion = JavaLanguageVersion.of(21)\n    }\n}",
+            "displayContent": "// 자바 버전[toolchain]\njava {\n    toolchain { // 설치된 JDK와 무관하게 빌드에 쓸 버전을 고정\n        languageVersion = JavaLanguageVersion.of(21)\n    }\n}"
+          },
+          {
+            "id": "language-gradle-p01-part-3",
+            "title": "저장소[repositories]",
+            "content": "group = \"com.example\"\nversion = \"0.0.1\"\n\nrepositories {\n    mavenCentral()\n}",
+            "displayContent": "// 저장소[repositories]\ngroup = \"com.example\"\nversion = \"0.0.1\"\n\nrepositories {\n    mavenCentral() // 라이브러리를 내려받을 곳\n}"
+          },
+          {
+            "id": "language-gradle-p01-part-4",
+            "title": "의존성[dependencies]",
+            "content": "dependencies {\n    implementation(\"org.springframework.boot:spring-boot-starter-web\")\n    implementation(\"org.springframework.boot:spring-boot-starter-data-jpa\")\n    runtimeOnly(\"org.postgresql:postgresql\")\n    testImplementation(\"org.springframework.boot:spring-boot-starter-test\")\n}",
+            "displayContent": "// 의존성[dependencies]\ndependencies {\n    implementation(\"org.springframework.boot:spring-boot-starter-web\") // 컴파일과 실행에 필요. 사용하는 쪽에 노출되지 않음\n    implementation(\"org.springframework.boot:spring-boot-starter-data-jpa\")\n    runtimeOnly(\"org.postgresql:postgresql\") // 실행 때만 필요. JDBC 드라이버가 대표적\n    testImplementation(\"org.springframework.boot:spring-boot-starter-test\") // 테스트에서만 사용\n}"
+          },
+          {
+            "id": "language-gradle-p01-part-5",
+            "title": "테스트 설정[useJUnitPlatform]",
+            "content": "tasks.test {\n    useJUnitPlatform()\n}",
+            "displayContent": "// 테스트 설정[useJUnitPlatform]\ntasks.test {\n    useJUnitPlatform() // JUnit 5 테스트를 실행하려면 필요\n}"
+          },
+          {
+            "id": "language-gradle-p01-part-6",
+            "title": "프로젝트 구성[settings.gradle.kts]",
+            "content": "rootProject.name = \"api\"\ninclude(\"user-service\", \"gateway\")",
+            "displayContent": "// 프로젝트 구성[settings.gradle.kts]\nrootProject.name = \"api\"\ninclude(\"user-service\", \"gateway\") // 멀티 모듈 프로젝트의 하위 모듈 등록"
+          }
+        ]
+      },
+      {
+        "id": "language-gradle-p02",
+        "title": "P02.명령어",
+        "fileName": "P02.명령어.yaml",
+        "sourcePath": "assets/raw/syntax/gradle/P02.명령어.yaml",
+        "language": "shell",
+        "parts": [
+          {
+            "id": "language-gradle-p02-part-1",
+            "title": "빌드[build]",
+            "content": "./gradlew build\n./gradlew clean build\n./gradlew build -x test",
+            "displayContent": "# 빌드[build]\n./gradlew build # gradlew는 프로젝트에 고정된 버전의 Gradle로 실행. 모두 같은 버전으로 빌드\n./gradlew clean build # 이전 결과를 지우고 처음부터\n./gradlew build -x test # 테스트 제외. 임시로만 사용"
+          },
+          {
+            "id": "language-gradle-p02-part-2",
+            "title": "실행[bootRun]",
+            "content": "./gradlew bootRun\n./gradlew bootRun --args='--spring.profiles.active=local'\n./gradlew bootJar",
+            "displayContent": "# 실행[bootRun]\n./gradlew bootRun\n./gradlew bootRun --args='--spring.profiles.active=local' # 앱에 인자 전달. 프로필 지정에 자주 사용\n./gradlew bootJar # 실행 가능한 jar 생성. build/libs 아래"
+          },
+          {
+            "id": "language-gradle-p02-part-3",
+            "title": "테스트[test]",
+            "content": "./gradlew test\n./gradlew test --tests \"*UserServiceTest\"",
+            "displayContent": "# 테스트[test]\n./gradlew test\n./gradlew test --tests \"*UserServiceTest\" # 일부 테스트만 실행. 결과 보고서는 build/reports/tests"
+          },
+          {
+            "id": "language-gradle-p02-part-4",
+            "title": "의존성 확인[dependencies]",
+            "content": "./gradlew dependencies --configuration runtimeClasspath\n./gradlew tasks",
+            "displayContent": "# 의존성 확인[dependencies]\n./gradlew dependencies --configuration runtimeClasspath # 라이브러리 버전 충돌을 트리로 확인\n./gradlew tasks # 실행할 수 있는 태스크 목록"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "html",
+    "label": "HTML",
+    "folderName": "html",
+    "lessons": [
+      {
+        "id": "language-html-p01",
+        "title": "P01.문서-시맨틱-폼",
+        "fileName": "P01.문서-시맨틱-폼.yaml",
+        "sourcePath": "assets/raw/syntax/html/P01.문서-시맨틱-폼.yaml",
+        "language": "html",
+        "parts": [
+          {
+            "id": "language-html-p01-part-1",
+            "title": "문서 골격[document]",
+            "content": "<!doctype html>\n<html lang=\"ko\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <title>제목</title>\n  </head>\n  <body></body>\n</html>",
+            "displayContent": "<!-- 문서 골격[document] -->\n<!doctype html> <!-- 표준 모드로 렌더링하게 함 -->\n<html lang=\"ko\"> <!-- lang 스크린 리더·번역에 쓰이는 언어 -->\n  <head>\n    <meta charset=\"UTF-8\" /> <!-- <head> 앞쪽에 두어 한글 깨짐 방지 -->\n    <title>제목</title>\n  </head>\n  <body></body>\n</html>"
+          },
+          {
+            "id": "language-html-p01-part-2",
+            "title": "메타 태그[meta]",
+            "content": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n<meta name=\"description\" content=\"페이지 설명\" />",
+            "displayContent": "<!-- 메타 태그[meta] -->\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" /> <!-- 모바일 화면 폭에 맞춤. 반응형의 전제 -->\n<meta name=\"description\" content=\"페이지 설명\" /> <!-- 검색 결과 요약에 쓰일 수 있음 -->"
+          },
+          {
+            "id": "language-html-p01-part-3",
+            "title": "자원 연결[link / script]",
+            "content": "<link rel=\"stylesheet\" href=\"/styles.css\" />\n<script type=\"module\" src=\"/main.js\"></script>",
+            "displayContent": "<!-- 자원 연결[link / script] -->\n<link rel=\"stylesheet\" href=\"/styles.css\" />\n<script type=\"module\" src=\"/main.js\"></script> <!-- 모듈 스크립트는 HTML 파싱 후 실행(자동 defer) -->"
+          },
+          {
+            "id": "language-html-p01-part-4",
+            "title": "시맨틱 구조[semantic]",
+            "content": "<header></header>\n<nav></nav>\n<main>\n  <section></section>\n  <article></article>\n</main>\n<aside></aside>\n<footer></footer>",
+            "displayContent": "<!-- 시맨틱 구조[semantic] -->\n<header></header>\n<nav></nav>\n<main> <!-- 페이지의 핵심 내용. 한 문서에 하나 -->\n  <section></section> <!-- 주제로 묶은 구역 -->\n  <article></article> <!-- 따로 떼어도 뜻이 통하는 글 -->\n</main>\n<aside></aside> <!-- 본문과 관련된 보조 내용 -->\n<footer></footer>"
+          },
+          {
+            "id": "language-html-p01-part-5",
+            "title": "링크와 이미지[a / img]",
+            "content": "<a href=\"https://example.com\" target=\"_blank\" rel=\"noopener\">이동</a>\n<img src=\"/logo.png\" alt=\"회사 로고\" loading=\"lazy\" />",
+            "displayContent": "<!-- 링크와 이미지[a / img] -->\n<a href=\"https://example.com\" target=\"_blank\" rel=\"noopener\">이동</a> <!-- 새 탭이 원래 페이지를 조작하지 못하게 함 -->\n<img src=\"/logo.png\" alt=\"회사 로고\" loading=\"lazy\" /> <!-- 이미지 대체 글. 접근성에 필수 -->"
+          },
+          {
+            "id": "language-html-p01-part-6",
+            "title": "목록[ul / ol]",
+            "content": "<ul>\n  <li>항목</li>\n</ul>\n<ol>\n  <li>순서</li>\n</ol>",
+            "displayContent": "<!-- 목록[ul / ol] -->\n<ul> <!-- 순서 없는 목록 -->\n  <li>항목</li>\n</ul>\n<ol> <!-- 순서 있는 목록 -->\n  <li>순서</li>\n</ol>"
+          },
+          {
+            "id": "language-html-p01-part-7",
+            "title": "표[table]",
+            "content": "<table>\n  <thead>\n    <tr><th>이름</th></tr>\n  </thead>\n  <tbody>\n    <tr><td>kim</td></tr>\n  </tbody>\n</table>",
+            "displayContent": "<!-- 표[table] -->\n<table>\n  <thead> <!-- 머리글 행 묶음. th는 제목 칸 -->\n    <tr><th>이름</th></tr>\n  </thead>\n  <tbody> <!-- 데이터 행 묶음. td는 내용 칸 -->\n    <tr><td>kim</td></tr>\n  </tbody>\n</table>"
+          },
+          {
+            "id": "language-html-p01-part-8",
+            "title": "폼[form]",
+            "content": "<form action=\"/login\" method=\"post\">\n  <label for=\"email\">이메일</label>\n  <input id=\"email\" name=\"email\" type=\"email\" required />\n  <button type=\"submit\">로그인</button>\n</form>",
+            "displayContent": "<!-- 폼[form] -->\n<form action=\"/login\" method=\"post\">\n  <label for=\"email\">이메일</label> <!-- for는 input의 id와 연결. 글자를 눌러도 포커스 -->\n  <input id=\"email\" name=\"email\" type=\"email\" required /> <!-- name이 전송 데이터의 키. required는 빈 값 제출 차단 -->\n  <button type=\"submit\">로그인</button> <!-- 폼 안 버튼의 기본값이지만 명시한다 -->\n</form>"
+          },
+          {
+            "id": "language-html-p01-part-9",
+            "title": "선택 입력[select / textarea]",
+            "content": "<select name=\"role\">\n  <option value=\"admin\">관리자</option>\n</select>\n<textarea name=\"memo\" rows=\"3\"></textarea>\n<input type=\"checkbox\" name=\"agree\" />",
+            "displayContent": "<!-- 선택 입력[select / textarea] -->\n<select name=\"role\">\n  <option value=\"admin\">관리자</option> <!-- value가 전송되고, 사이 글자는 화면 표시용 -->\n</select>\n<textarea name=\"memo\" rows=\"3\"></textarea>\n<input type=\"checkbox\" name=\"agree\" /> <!-- 체크 안 하면 값이 전송되지 않음 -->"
+          },
+          {
+            "id": "language-html-p01-part-10",
+            "title": "데이터·접근성 속성[data / aria]",
+            "content": "<button data-id=\"42\" aria-label=\"닫기\" aria-expanded=\"false\">X</button>",
+            "displayContent": "<!-- 데이터·접근성 속성[data / aria] -->\n<button data-id=\"42\" aria-label=\"닫기\" aria-expanded=\"false\">X</button> <!-- data-* 자유 데이터(JS의 dataset.id). aria-* 보조 기술용 정보 -->"
           }
         ]
       }
@@ -1575,13 +1696,58 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-java-p02-part-13",
             "title": "파일 읽기[BufferedReader]",
             "content": "import java.io.BufferedReader;\nimport java.io.FileReader;\nimport java.io.IOException;\n\ntry (BufferedReader reader = new BufferedReader(new FileReader(\"data.txt\"))) {\n    String line = reader.readLine();\n    System.out.println(line);\n} catch (IOException err) {\n    System.out.println(\"io error\");\n}",
-            "displayContent": "// 파일 읽기[BufferedReader]\nimport java.io.BufferedReader;\nimport java.io.FileReader;\nimport java.io.IOException;\n\ntry (BufferedReader reader = new BufferedReader(new FileReader(\"data.txt\"))) {\n    String line = reader.readLine();\n    System.out.println(line);\n} catch (IOException err) {\n    System.out.println(\"io error\");\n}"
+            "displayContent": "// 파일 읽기[BufferedReader]\nimport java.io.BufferedReader;\nimport java.io.FileReader;\nimport java.io.IOException;\n\ntry (BufferedReader reader = new BufferedReader(new FileReader(\"data.txt\"))) { // try-with-resources. 끝나면 자동으로 close\n    String line = reader.readLine();\n    System.out.println(line);\n} catch (IOException err) {\n    System.out.println(\"io error\");\n}"
           },
           {
             "id": "language-java-p02-part-14",
             "title": "스레드[Thread / Runnable]",
             "content": "Runnable task = () -> System.out.println(\"run\");\nThread worker = new Thread(task);\nworker.start();",
             "displayContent": "// 스레드[Thread / Runnable]\n// 작업을 별도 흐름으로 실행하는 개념만\nRunnable task = () -> System.out.println(\"run\");\nThread worker = new Thread(task);\nworker.start();\n// 결과: run"
+          }
+        ]
+      },
+      {
+        "id": "language-java-p03",
+        "title": "P03.모던-자바",
+        "fileName": "P03.모던-자바.yaml",
+        "sourcePath": "assets/raw/syntax/java/P03.모던-자바.yaml",
+        "language": "java",
+        "parts": [
+          {
+            "id": "language-java-p03-part-1",
+            "title": "값 없음 처리[Optional]",
+            "content": "Optional<String> name = Optional.ofNullable(user.getName());\nString result = name.map(String::trim).orElse(\"guest\");",
+            "displayContent": "// 값 없음 처리[Optional]\nOptional<String> name = Optional.ofNullable(user.getName()); // null일 수도 있는 값을 감쌈\nString result = name.map(String::trim).orElse(\"guest\"); // 값이 없으면 기본값"
+          },
+          {
+            "id": "language-java-p03-part-2",
+            "title": "불변 데이터[record]",
+            "content": "public record UserDto(Long id, String name) {}\n\nUserDto dto = new UserDto(1L, \"kim\");\nString name = dto.name();",
+            "displayContent": "// 불변 데이터[record]\npublic record UserDto(Long id, String name) {} // 생성자·접근자·equals를 자동 생성하는 불변 데이터\n\nUserDto dto = new UserDto(1L, \"kim\");\nString name = dto.name(); // 접근자는 get 없이 필드 이름"
+          },
+          {
+            "id": "language-java-p03-part-3",
+            "title": "열거형[enum]",
+            "content": "public enum Status {\n    ACTIVE, INACTIVE;\n}\n\nStatus status = Status.valueOf(\"ACTIVE\");",
+            "displayContent": "// 열거형[enum]\npublic enum Status {\n    ACTIVE, INACTIVE;\n}\n\nStatus status = Status.valueOf(\"ACTIVE\"); // 문자열을 enum으로. 없는 값이면 예외"
+          },
+          {
+            "id": "language-java-p03-part-4",
+            "title": "문자열 조립[StringBuilder]",
+            "content": "StringBuilder builder = new StringBuilder();\nbuilder.append(\"id=\").append(1);\nString text = builder.toString();",
+            "displayContent": "// 문자열 조립[StringBuilder]\nStringBuilder builder = new StringBuilder();\nbuilder.append(\"id=\").append(1); // 반복해서 이어 붙일 때 +보다 효율적\nString text = builder.toString();"
+          },
+          {
+            "id": "language-java-p03-part-5",
+            "title": "불변 컬렉션[List.of / Map.of]",
+            "content": "List<String> names = List.of(\"kim\", \"lee\");\nMap<String, Integer> scores = Map.of(\"kim\", 90);",
+            "displayContent": "// 불변 컬렉션[List.of / Map.of]\nList<String> names = List.of(\"kim\", \"lee\"); // 불변 컬렉션. add하면 예외, null 불가\nMap<String, Integer> scores = Map.of(\"kim\", 90);"
+          },
+          {
+            "id": "language-java-p03-part-6",
+            "title": "날짜[LocalDate]",
+            "content": "LocalDate today = LocalDate.now();\nLocalDate nextWeek = today.plusDays(7);\nLocalDate parsed = LocalDate.parse(\"2026-01-31\");",
+            "displayContent": "// 날짜[LocalDate]\nLocalDate today = LocalDate.now();\nLocalDate nextWeek = today.plusDays(7); // 불변 객체라 새 날짜를 반환\nLocalDate parsed = LocalDate.parse(\"2026-01-31\");"
           }
         ]
       }
@@ -1727,12 +1893,6 @@ export const languageTracks: LanguageTrack[] = [
             "title": "splice vs slice",
             "content": "var spliceArr = ['A', 'B', 'C', 'D', 'E'];\nspliceArr.splice(1, 2);\nspliceArr.splice(1, 0, 'X');\n\n['A', 'B', 'C', 'D'].slice(1, 3)\n['A', 'B', 'C', 'D'].slice(-2)",
             "displayContent": "/* splice vs slice */\nvar spliceArr = ['A', 'B', 'C', 'D', 'E'];\nspliceArr.splice(1, 2);       // 반환[return]: ['B','C'], spliceArr=['A','D','E']\nspliceArr.splice(1, 0, 'X');  // 삽입[insert]: spliceArr=['A','X','D','E']\n\n['A', 'B', 'C', 'D'].slice(1, 3)   // ['B', 'C'] (원본 유지[non-mutating])\n['A', 'B', 'C', 'D'].slice(-2)     // ['C', 'D']"
-          },
-          {
-            "id": "language-javascript-p02-part-8",
-            "title": "fill / copyWithin",
-            "content": "[0, 0, 0].fill(7)\n[1, 2, 3, 4].fill(0, 1, 3)\n[1, 2, 3, 4, 5].copyWithin(0, 3)",
-            "displayContent": "/* fill / copyWithin */\n[0, 0, 0].fill(7)            // [7, 7, 7]\n[1, 2, 3, 4].fill(0, 1, 3)  // [1, 0, 0, 4]\n[1, 2, 3, 4, 5].copyWithin(0, 3)  // [4, 5, 3, 4, 5] (index3부터 index0에 덮어씀[overwrite])"
           },
           {
             "id": "language-javascript-p02-part-9",
@@ -2140,7 +2300,7 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-javascript-p06-part-4",
             "title": "상속[inheritance] - 부모 클래스",
             "content": "class Animal {\n  constructor(name) {\n    this.name = name;\n  }\n  speak() { return `${this.name} makes a noise.`; }\n}",
-            "displayContent": "/* 상속[inheritance] - 부모 클래스 */\nclass Animal {\n  constructor(name) {\n    this.name = name;\n  }\n  speak() { return `${this.name} makes a noise.`; }\n}"
+            "displayContent": "/* 상속[inheritance] - 부모 클래스 */\nclass Animal {\n  constructor(name) {\n    this.name = name;\n  }\n  speak() { return `${this.name} makes a noise.`; } // 메서드는 prototype에 있어 인스턴스끼리 공유\n}"
           },
           {
             "id": "language-javascript-p06-part-5",
@@ -2155,28 +2315,10 @@ export const languageTracks: LanguageTrack[] = [
             "displayContent": "/* 상속[inheritance] - 인스턴스 확인 */\nvar dog1 = new Dog('Rex', 'Labrador');\ndog1.speak()             // 'Rex barks.' (오버라이드 적용)\ndog1.parentSpeak()       // 'Rex makes a noise.'\ndog1 instanceof Dog      // true\ndog1 instanceof Animal   // true (부모 타입으로도 판정)"
           },
           {
-            "id": "language-javascript-p06-part-7",
-            "title": "정적 초기화 블록[static initialization block]",
-            "content": "class Config {\n  static host;\n  static port;\n  static {\n    Config.host = 'localhost';\n    Config.port = 3000;\n  }\n}\nConfig.host\nConfig.port",
-            "displayContent": "/* 정적 초기화 블록[static initialization block] */\nclass Config {\n  static host;\n  static port;\n  static {\n    Config.host = 'localhost';\n    Config.port = 3000;\n  }\n}\nConfig.host  // 'localhost'\nConfig.port  // 3000"
-          },
-          {
             "id": "language-javascript-p06-part-8",
             "title": "클래스 표현식[class expression]",
             "content": "var Rectangle = class {\n  constructor(w, h) {\n    this.w = w;\n    this.h = h;\n  }\n  get area() { return this.w * this.h; }\n};\nnew Rectangle(4, 5).area",
             "displayContent": "/* 클래스 표현식[class expression] */\nvar Rectangle = class {\n  constructor(w, h) {\n    this.w = w;\n    this.h = h;\n  }\n  get area() { return this.w * this.h; }\n};\nnew Rectangle(4, 5).area  // 20"
-          },
-          {
-            "id": "language-javascript-p06-part-9",
-            "title": "믹스인[mixin] 정의",
-            "content": "var Serializable = Base => class extends Base {\n  serialize() { return JSON.stringify(this); }\n};\n\nvar Timestamped = Base => class extends Base {\n  constructor(...args) {\n    super(...args);\n    this.createdAt = new Date().toISOString().slice(0, 10);\n  }\n};",
-            "displayContent": "/* 믹스인[mixin] 정의 - 클래스를 반환하는 함수 */\nvar Serializable = Base => class extends Base {\n  serialize() { return JSON.stringify(this); }\n};\n\nvar Timestamped = Base => class extends Base {\n  constructor(...args) {\n    super(...args);\n    this.createdAt = new Date().toISOString().slice(0, 10);\n  }\n};"
-          },
-          {
-            "id": "language-javascript-p06-part-10",
-            "title": "믹스인[mixin] 적용",
-            "content": "class BaseEntity {\n  constructor(data) { Object.assign(this, data); }\n}\n\nclass UserEntity extends Serializable(Timestamped(BaseEntity)) {}\n\nvar userEntity = new UserEntity({ id: 1, name: 'kim' });\nuserEntity.serialize()",
-            "displayContent": "/* 믹스인[mixin] 적용 - 상속 체인에 끼워 넣기 */\nclass BaseEntity {\n  constructor(data) { Object.assign(this, data); }\n}\n\nclass UserEntity extends Serializable(Timestamped(BaseEntity)) {}\n\nvar userEntity = new UserEntity({ id: 1, name: 'kim' });\nuserEntity.serialize()   // '{\"id\":1,\"name\":\"kim\",\"createdAt\":\"2026-03-18\"}'"
           },
           {
             "id": "language-javascript-p06-part-11",
@@ -2353,12 +2495,6 @@ export const languageTracks: LanguageTrack[] = [
             "displayContent": "/* Set 집합 연산[set operation] */\nvar setX = new Set([1, 2, 3, 4]);\nvar setY = new Set([3, 4, 5, 6]);\n\nvar union        = new Set([...setX, ...setY]);                          // 합집합[union]: {1,2,3,4,5,6}\nvar intersection = new Set([...setX].filter(v =>  setY.has(v)));         // 교집합[intersection]: {3,4}\nvar difference   = new Set([...setX].filter(v => !setY.has(v)));         // 차집합[difference]: {1,2}\n\n[...union]        // [1, 2, 3, 4, 5, 6]\n[...intersection] // [3, 4]\n[...difference]   // [1, 2]"
           },
           {
-            "id": "language-javascript-p08-part-10",
-            "title": "WeakSet - 약한 참조[weak reference] 객체 집합",
-            "content": "var weakSetA = new WeakSet();\nvar wsObj = { id: 1 };\nweakSetA.add(wsObj);\nweakSetA.has(wsObj)",
-            "displayContent": "/* WeakSet - 약한 참조[weak reference] 객체 집합 */\nvar weakSetA = new WeakSet();\nvar wsObj = { id: 1 };\nweakSetA.add(wsObj);\nweakSetA.has(wsObj)   // true\n// wsObj = null; → GC 수거[garbage collection] 시 자동 제거"
-          },
-          {
             "id": "language-javascript-p08-part-11",
             "title": "Symbol - 고유 식별자[unique identifier]",
             "content": "var symA = Symbol('description');\nvar symB = Symbol('description');\nsymA === symB\nsymA.toString()\nsymA.description\ntypeof symA",
@@ -2371,22 +2507,10 @@ export const languageTracks: LanguageTrack[] = [
             "displayContent": "/* Symbol을 객체 키[object key]로 사용 */\nvar symId = Symbol('id');\nvar symRole = Symbol('role');\nvar symObj = {\n  [symId]: 42,\n  [symRole]: 'admin',\n  name: 'kim',\n};\nsymObj[symId]           // 42\nsymObj[symRole]         // 'admin'\nObject.keys(symObj)     // ['name']  (Symbol은 열거[enumeration] 안됨)\nObject.getOwnPropertySymbols(symObj)  // [Symbol(id), Symbol(role)]"
           },
           {
-            "id": "language-javascript-p08-part-13",
-            "title": "Symbol.for - 전역 레지스트리[global registry] (공유[shared] 가능)",
-            "content": "var globalSym1 = Symbol.for('shared');\nvar globalSym2 = Symbol.for('shared');\nglobalSym1 === globalSym2\nSymbol.keyFor(globalSym1)",
-            "displayContent": "/* Symbol.for - 전역 레지스트리[global registry] (공유[shared] 가능) */\nvar globalSym1 = Symbol.for('shared');\nvar globalSym2 = Symbol.for('shared');\nglobalSym1 === globalSym2  // true (같은 키면 동일 심볼)\nSymbol.keyFor(globalSym1)  // 'shared'"
-          },
-          {
             "id": "language-javascript-p08-part-14",
             "title": "Well-known Symbol - Symbol.iterator (이터레이터 프로토콜[iterator protocol])",
             "content": "var rangeObj = {\n  from: 1, to: 3,\n  [Symbol.iterator]() {\n    var cur = this.from, last = this.to;\n    return {\n      next() {\n        return cur <= last\n          ? { value: cur++, done: false }\n          : { value: undefined, done: true };\n      }\n    };\n  }\n};\n[...rangeObj]",
             "displayContent": "/* Well-known Symbol - Symbol.iterator (이터레이터 프로토콜[iterator protocol]) */\nvar rangeObj = {\n  from: 1, to: 3,\n  [Symbol.iterator]() {\n    var cur = this.from, last = this.to;\n    return {\n      next() {\n        return cur <= last\n          ? { value: cur++, done: false }\n          : { value: undefined, done: true };\n      }\n    };\n  }\n};\n[...rangeObj]  // [1, 2, 3]"
-          },
-          {
-            "id": "language-javascript-p08-part-15",
-            "title": "Well-known Symbol - Symbol.toPrimitive (타입 강제 변환[type coercion])",
-            "content": "var customNum = {\n  [Symbol.toPrimitive](hint) {\n    if (hint === 'number') return 42;\n    if (hint === 'string') return 'forty-two';\n    return true;\n  }\n};\n+customNum\n`${customNum}`\ncustomNum + ''",
-            "displayContent": "/* Well-known Symbol - Symbol.toPrimitive (타입 강제 변환[type coercion]) */\nvar customNum = {\n  [Symbol.toPrimitive](hint) {\n    if (hint === 'number') return 42;\n    if (hint === 'string') return 'forty-two';\n    return true;  // 기본값[default hint]\n  }\n};\n+customNum            // 42\n`${customNum}`        // 'forty-two'\ncustomNum + ''        // 'true'"
           }
         ]
       },
@@ -2410,46 +2534,10 @@ export const languageTracks: LanguageTrack[] = [
             "displayContent": "// d  → 인덱스[indices]          - 매치 시작/끝 인덱스 제공\n\n'aBcDeF'.match(/[a-z]/g)   // ['a', 'c', 'e']       (g: 전체)\n'aBcDeF'.match(/[a-z]/gi)  // ['a', 'B', 'c', 'D', 'e', 'F'] (i: 대소문자 무시)\n\n'line1\\nline2'.match(/^\\w+/m)    // ['line1'] (m 없으면 첫 줄만)\n'line1\\nline2'.match(/^\\w+/gm)   // ['line1', 'line2'] (m: 각 줄의 ^)\n\n'hello\\nworld'.match(/hello.world/s)  // ['hello\\nworld'] (s: . 이 \\n 매치)"
           },
           {
-            "id": "language-javascript-p09-part-3",
-            "title": "앵커[anchor]",
-            "content": "'Hello World'.match(/^Hello/)\n'Hello World'.match(/World$/)\n\n'cat cats'.match(/\\bcat\\b/g)\n'cat cats'.match(/cat\\B/g)",
-            "displayContent": "/* 앵커[anchor] */\n'Hello World'.match(/^Hello/)   // ['Hello']  (^ 문자열 시작[start of string])\n'Hello World'.match(/World$/)   // ['World']  ($ 문자열 끝[end of string])\n\n'cat cats'.match(/\\bcat\\b/g)    // ['cat']     (\\b 단어 경계[word boundary])\n'cat cats'.match(/cat\\B/g)      // ['cat']     (\\B 단어 경계가 아님[non-word boundary])"
-          },
-          {
-            "id": "language-javascript-p09-part-4",
-            "title": "문자 클래스[character class]",
-            "content": "'a1 b2'.match(/\\d/g)\n'a1 b2'.match(/\\D/g)\n'a1 b2'.match(/\\w/g)\n'a1 b2'.match(/\\W/g)\n'a1 b2'.match(/\\s/g)\n'a1 b2'.match(/\\S/g)\n'a1.b'.match(/./g)",
-            "displayContent": "/* 문자 클래스[character class] */\n'a1 b2'.match(/\\d/g)   // ['1', '2']       (\\d 숫자[digit] 0-9)\n'a1 b2'.match(/\\D/g)   // ['a', ' ', 'b', ' '] (\\D 비숫자[non-digit])\n'a1 b2'.match(/\\w/g)   // ['a','1','b','2']    (\\w 단어 문자[word char]: [a-zA-Z0-9_])\n'a1 b2'.match(/\\W/g)   // [' ', ' ']           (\\W 비단어[non-word char])\n'a1 b2'.match(/\\s/g)   // [' ', ' ']           (\\s 공백[whitespace])\n'a1 b2'.match(/\\S/g)   // ['a','1','b','2']    (\\S 비공백[non-whitespace])\n'a1.b'.match(/./g)     // ['a','1','.','b']    (. 임의의 한 문자[any char except \\n])"
-          },
-          {
-            "id": "language-javascript-p09-part-5",
-            "title": "문자셋[character set]",
-            "content": "'grey gray'.match(/gr[ae]y/g)\n'hello123'.match(/[a-z]+/g)\n'hello123'.match(/[^a-z]+/g)\n'hello123'.match(/[a-zA-Z0-9]+/g)",
-            "displayContent": "/* 문자셋[character set] */\n'grey gray'.match(/gr[ae]y/g)    // ['grey', 'gray']    ([ae] a 또는 e)\n'hello123'.match(/[a-z]+/g)      // ['hello']           ([a-z] 범위[range])\n'hello123'.match(/[^a-z]+/g)     // ['123']             ([^] 부정[negation])\n'hello123'.match(/[a-zA-Z0-9]+/g) // ['hello123']       (복수 범위)"
-          },
-          {
-            "id": "language-javascript-p09-part-6",
-            "title": "수량자[quantifier]",
-            "content": "'graaay'.match(/gra*y/)\n'gry'.match(/gra*y/)\n'gray'.match(/gra?y/)\n'gry'.match(/gra?y/)\n'gray'.match(/gra+y/)\n'gry'.match(/gra+y/)\n\n'graaay'.match(/gra{2}y/)\n'graay'.match(/gra{2}y/)\n'graaay'.match(/gra{2,}y/)\n'graaay'.match(/gra{2,3}y/)",
-            "displayContent": "/* 수량자[quantifier] */\n'graaay'.match(/gra*y/)    // null   (a*: 0번 이상, y 바로 앞에 없어서 null)\n'gry'.match(/gra*y/)       // ['gry']   (a*: 0번 이상)\n'gray'.match(/gra?y/)      // ['gray']  (a?: 0 또는 1번)\n'gry'.match(/gra?y/)       // ['gry']   (a?: 0 또는 1번)\n'gray'.match(/gra+y/)      // ['gray']  (a+: 1번 이상)\n'gry'.match(/gra+y/)       // null      (a+: 1번 이상, 0번이라 null)\n\n'graaay'.match(/gra{2}y/)   // null     ({2}: 정확히 2번)\n'graay'.match(/gra{2}y/)    // ['graay'] ({2}: 정확히 2번)\n'graaay'.match(/gra{2,}y/)  // ['graaay'] ({2,}: 2번 이상)\n'graaay'.match(/gra{2,3}y/) // ['graaay'] ({2,3}: 2~3번)"
-          },
-          {
             "id": "language-javascript-p09-part-7",
             "title": "탐욕적[greedy] vs 게으른[lazy] 수량자",
             "content": "'<a><b><c>'.match(/<.+>/)\n'<a><b><c>'.match(/<.+?>/)\n'<a><b><c>'.match(/<.*?>/)",
             "displayContent": "/* 탐욕적[greedy] vs 게으른[lazy] 수량자 */\n'<a><b><c>'.match(/<.+>/)    // ['<a><b><c>'] (greedy: 최대한 매치)\n'<a><b><c>'.match(/<.+?>/)   // ['<a>']       (lazy: 최소한 매치, ? 추가)\n'<a><b><c>'.match(/<.*?>/)   // ['<a>']       (lazy)"
-          },
-          {
-            "id": "language-javascript-p09-part-8",
-            "title": "그룹[group]",
-            "content": "'2024-03-18'.match(/(\\d{4})-(\\d{2})-(\\d{2})/)\n\n'grey'.match(/gr(?:a|e)y/)\n'grey'.match(/gr(a|e)y/)",
-            "displayContent": "/* 그룹[group] */\n// (x)    캡처 그룹[capturing group]     - 매치 + 기억\n// (?:x)  비캡처 그룹[non-capturing group] - 매치만, 기억 안함\n// (?<name>x) 네임드 캡처 그룹[named capturing group]\n\n'2024-03-18'.match(/(\\d{4})-(\\d{2})-(\\d{2})/)\n// ['2024-03-18', '2024', '03', '18', index:0, ...]\n// [0]=전체, [1]=year, [2]=month, [3]=day\n\n'grey'.match(/gr(?:a|e)y/)   // ['grey'] (비캡처: 그룹 인덱스 없음)\n'grey'.match(/gr(a|e)y/)     // ['grey', 'e'] (캡처: [1]='e')"
-          },
-          {
-            "id": "language-javascript-p09-part-9",
-            "title": "네임드 캡처 그룹[named capturing group]",
-            "content": "var dateMatch = '2024-03-18'.match(/(?<year>\\d{4})-(?<month>\\d{2})-(?<day>\\d{2})/);\ndateMatch.groups.year\ndateMatch.groups.month\ndateMatch.groups.day",
-            "displayContent": "// 네임드 캡처 그룹[named capturing group]\nvar dateMatch = '2024-03-18'.match(/(?<year>\\d{4})-(?<month>\\d{2})-(?<day>\\d{2})/);\ndateMatch.groups.year    // '2024'\ndateMatch.groups.month   // '03'\ndateMatch.groups.day     // '18'"
           },
           {
             "id": "language-javascript-p09-part-10",
@@ -2482,18 +2570,6 @@ export const languageTracks: LanguageTrack[] = [
             "displayContent": "/* replace + 캡처 그룹 참조 */\n// $1 $2... = 캡처 그룹[capture group] 번호 참조\n// $<name>  = 네임드 그룹[named group] 참조\n// $&       = 매치 전체[entire match]\n// $`       = 매치 이전[before match]\n// $'       = 매치 이후[after match]\n\n'2024-03-18'.replace(/(\\d{4})-(\\d{2})-(\\d{2})/, '$3/$2/$1')  // '18/03/2024'\n'2024-03-18'.replace(/(?<y>\\d{4})-(?<m>\\d{2})-(?<d>\\d{2})/, '$<d>/$<m>/$<y>') // '18/03/2024'\n\n'hello'.replace(/(\\w+)/, '[$&]')  // '[hello]' ($&: 전체 매치)"
           },
           {
-            "id": "language-javascript-p09-part-15",
-            "title": "이메일[email] 검증",
-            "content": "var emailRe = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,}$/;\nemailRe.test('user@example.com')\nemailRe.test('invalid@')",
-            "displayContent": "// 이메일[email] 검증\nvar emailRe = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,}$/;\nemailRe.test('user@example.com')   // true\nemailRe.test('invalid@')           // false"
-          },
-          {
-            "id": "language-javascript-p09-part-16",
-            "title": "전화번호[phone number]",
-            "content": "var phoneRe = /\\d{2,3}[-.\\s]\\d{3,4}[-.\\s]\\d{4}/;\nphoneRe.test('010-1234-5678')\nphoneRe.test('02.123.4567')",
-            "displayContent": "// 전화번호[phone number]\nvar phoneRe = /\\d{2,3}[-.\\s]\\d{3,4}[-.\\s]\\d{4}/;\nphoneRe.test('010-1234-5678')  // true\nphoneRe.test('02.123.4567')    // true"
-          },
-          {
             "id": "language-javascript-p09-part-17",
             "title": "날짜[date] YYYY-MM-DD",
             "content": "var dateRe = /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$/;\ndateRe.test('2024-03-18')\ndateRe.test('2024-13-01')",
@@ -2521,94 +2597,16 @@ export const languageTracks: LanguageTrack[] = [
         "language": "javascript",
         "parts": [
           {
-            "id": "language-javascript-p10-proxy-reflect-part-1",
-            "title": "handler : 트랩[trap]을 정의하는 객체 (트랩이 없으면 target에 그대로 전달)",
-            "content": "var emptyProxy = new Proxy({ a: 1 }, {});\nemptyProxy.a",
-            "displayContent": "// handler : 트랩[trap]을 정의하는 객체 (트랩이 없으면 target에 그대로 전달)\n\nvar emptyProxy = new Proxy({ a: 1 }, {});\nemptyProxy.a   // 1  (트랩 없음 → target에 그대로 전달[passthrough])"
-          },
-          {
             "id": "language-javascript-p10-proxy-reflect-part-2",
-            "title": "get 트랩[get trap] - 속성 읽기[property access] 가로채기",
-            "content": "var getTarget = { name: 'kim', age: 30 };\nvar getProxy = new Proxy(getTarget, {\n  get(target, prop, receiver) {",
-            "displayContent": "/* get 트랩[get trap] - 속성 읽기[property access] 가로채기 */\nvar getTarget = { name: 'kim', age: 30 };\nvar getProxy = new Proxy(getTarget, {\n  get(target, prop, receiver) {"
-          },
-          {
-            "id": "language-javascript-p10-proxy-reflect-part-3",
-            "title": "prop이 없으면 기본값[default value] 반환",
-            "content": "    return prop in target ? Reflect.get(target, prop, receiver) : `[${prop} 없음]`;\n  }\n});\ngetProxy.name\ngetProxy.job",
-            "displayContent": "    // prop이 없으면 기본값[default value] 반환\n    return prop in target ? Reflect.get(target, prop, receiver) : `[${prop} 없음]`;\n  }\n});\ngetProxy.name    // 'kim'\ngetProxy.job     // '[job 없음]'"
-          },
-          {
-            "id": "language-javascript-p10-proxy-reflect-part-4",
-            "title": "set 트랩[set trap] - 속성 쓰기[property assignment] 가로채기",
-            "content": "var setProxy = new Proxy({}, {\n  set(target, prop, value, receiver) {",
-            "displayContent": "/* set 트랩[set trap] - 속성 쓰기[property assignment] 가로채기 */\nvar setProxy = new Proxy({}, {\n  set(target, prop, value, receiver) {"
-          },
-          {
-            "id": "language-javascript-p10-proxy-reflect-part-5",
-            "title": "유효성 검사[validation]: age는 양수 정수만 허용",
-            "content": "    if (prop === 'age') {\n      if (typeof value !== 'number' || value <= 0 || !Number.isInteger(value)) {\n        throw new TypeError(`age는 양수 정수[positive integer]여야 합니다`);\n      }\n    }\n    return Reflect.set(target, prop, value, receiver);\n  }\n});\nsetProxy.name = 'lee';\nsetProxy.age = 25;",
-            "displayContent": "    // 유효성 검사[validation]: age는 양수 정수만 허용\n    if (prop === 'age') {\n      if (typeof value !== 'number' || value <= 0 || !Number.isInteger(value)) {\n        throw new TypeError(`age는 양수 정수[positive integer]여야 합니다`);\n      }\n    }\n    return Reflect.set(target, prop, value, receiver);  // 기본 동작 수행\n  }\n});\nsetProxy.name = 'lee';   // 'lee'\nsetProxy.age = 25;       // 25\n// setProxy.age = -1;    // ❌ TypeError 발생"
-          },
-          {
-            "id": "language-javascript-p10-proxy-reflect-part-6",
-            "title": "has 트랩[has trap] - in 연산자[in operator] 가로채기",
-            "content": "var rangeProxy = new Proxy({ min: 1, max: 100 }, {\n  has(target, prop) {",
-            "displayContent": "/* has 트랩[has trap] - in 연산자[in operator] 가로채기 */\nvar rangeProxy = new Proxy({ min: 1, max: 100 }, {\n  has(target, prop) {"
-          },
-          {
-            "id": "language-javascript-p10-proxy-reflect-part-7",
-            "title": "숫자면 범위 안에 있는지 확인[range check]",
-            "content": "    var num = Number(prop);\n    if (!isNaN(num)) return num >= target.min && num <= target.max;\n    return prop in target;\n  }\n});\n50  in rangeProxy\n150 in rangeProxy\n'min' in rangeProxy",
-            "displayContent": "    // 숫자면 범위 안에 있는지 확인[range check]\n    var num = Number(prop);\n    if (!isNaN(num)) return num >= target.min && num <= target.max;\n    return prop in target;\n  }\n});\n50  in rangeProxy   // true  (범위 내)\n150 in rangeProxy   // false (범위 밖)\n'min' in rangeProxy // true  (속성 존재)"
-          },
-          {
-            "id": "language-javascript-p10-proxy-reflect-part-8",
-            "title": "deleteProperty 트랩 - delete 연산자[delete operator] 가로채기",
-            "content": "var deleteProxy = new Proxy({ pub: 'public', _priv: 'private' }, {\n  deleteProperty(target, prop) {",
-            "displayContent": "/* deleteProperty 트랩 - delete 연산자[delete operator] 가로채기 */\nvar deleteProxy = new Proxy({ pub: 'public', _priv: 'private' }, {\n  deleteProperty(target, prop) {"
-          },
-          {
-            "id": "language-javascript-p10-proxy-reflect-part-9",
-            "title": "_ 로 시작하는 속성은 삭제 금지[deletion forbidden]",
-            "content": "    if (prop.startsWith('_')) {\n      throw new Error(`프라이빗 속성[private property] '${prop}'은 삭제 불가`);\n    }\n    return Reflect.deleteProperty(target, prop);\n  }\n});\ndelete deleteProxy.pub",
-            "displayContent": "    // _ 로 시작하는 속성은 삭제 금지[deletion forbidden]\n    if (prop.startsWith('_')) {\n      throw new Error(`프라이빗 속성[private property] '${prop}'은 삭제 불가`);\n    }\n    return Reflect.deleteProperty(target, prop);\n  }\n});\ndelete deleteProxy.pub    // true"
-          },
-          {
-            "id": "language-javascript-p10-proxy-reflect-part-10",
-            "title": "apply 트랩[apply trap] - 함수 호출[function call] 가로채기",
-            "content": "function multiply(a, b) { return a * b; }\n\nvar applyProxy = new Proxy(multiply, {\n  apply(target, thisArg, args) {\n    console.log(`호출[call]: multiply(${args})`);\n    return Reflect.apply(target, thisArg, args);\n  }\n});\napplyProxy(3, 4)",
-            "displayContent": "/* apply 트랩[apply trap] - 함수 호출[function call] 가로채기 */\nfunction multiply(a, b) { return a * b; }\n\nvar applyProxy = new Proxy(multiply, {\n  apply(target, thisArg, args) {\n    console.log(`호출[call]: multiply(${args})`);  // 로깅[logging]\n    return Reflect.apply(target, thisArg, args);\n  }\n});\napplyProxy(3, 4)   // 로그: '호출[call]: multiply(3,4)', 반환: 12"
-          },
-          {
-            "id": "language-javascript-p10-proxy-reflect-part-11",
-            "title": "construct 트랩[construct trap] - new 연산자[new operator] 가로채기",
-            "content": "function Person(name) { this.name = name; }\n\nvar constructProxy = new Proxy(Person, {\n  construct(target, args, newTarget) {\n    console.log(`인스턴스 생성[instantiation]: ${args[0]}`);\n    var instance = Reflect.construct(target, args, newTarget);\n    instance.createdAt = new Date().toISOString().slice(0, 10);\n    return instance;\n  }\n});\nvar p1 = new constructProxy('kim');\np1.name\np1.createdAt",
-            "displayContent": "/* construct 트랩[construct trap] - new 연산자[new operator] 가로채기 */\nfunction Person(name) { this.name = name; }\n\nvar constructProxy = new Proxy(Person, {\n  construct(target, args, newTarget) {\n    console.log(`인스턴스 생성[instantiation]: ${args[0]}`);\n    var instance = Reflect.construct(target, args, newTarget);\n    instance.createdAt = new Date().toISOString().slice(0, 10);\n    return instance;\n  }\n});\nvar p1 = new constructProxy('kim');\np1.name       // 'kim'\np1.createdAt  // '2026-03-18'"
-          },
-          {
-            "id": "language-javascript-p10-proxy-reflect-part-12",
-            "title": "ownKeys 트랩 - Object.keys / for...in 가로채기",
-            "content": "var ownKeysProxy = new Proxy({ pub: 1, _priv: 2, normal: 3 }, {\n  ownKeys(target) {",
-            "displayContent": "/* ownKeys 트랩 - Object.keys / for...in 가로채기 */\nvar ownKeysProxy = new Proxy({ pub: 1, _priv: 2, normal: 3 }, {\n  ownKeys(target) {"
-          },
-          {
-            "id": "language-javascript-p10-proxy-reflect-part-13",
-            "title": "_ 로 시작하는 키[key] 숨기기",
-            "content": "    return Reflect.ownKeys(target).filter(k => !k.startsWith('_'));\n  }\n});\nObject.keys(ownKeysProxy)",
-            "displayContent": "    // _ 로 시작하는 키[key] 숨기기\n    return Reflect.ownKeys(target).filter(k => !k.startsWith('_'));\n  }\n});\nObject.keys(ownKeysProxy)    // ['pub', 'normal']  (_priv 숨겨짐)"
+            "title": "기본 트랩[get / set trap]",
+            "content": "const user = new Proxy({ age: 30 }, {\n  get(target, prop, receiver) {\n    return prop in target ? Reflect.get(target, prop, receiver) : \"없음\";\n  },\n  set(target, prop, value, receiver) {\n    if (prop === \"age\" && value <= 0) {\n      throw new RangeError(\"age는 양수\");\n    }\n    return Reflect.set(target, prop, value, receiver);\n  },\n});",
+            "displayContent": "// 기본 트랩[get / set trap]\nconst user = new Proxy({ age: 30 }, { // 객체 접근을 가로채는 대리 객체\n  get(target, prop, receiver) {\n    return prop in target ? Reflect.get(target, prop, receiver) : \"없음\"; // Reflect로 원래 동작을 그대로 수행\n  },\n  set(target, prop, value, receiver) {\n    if (prop === \"age\" && value <= 0) {\n      throw new RangeError(\"age는 양수\");\n    }\n    return Reflect.set(target, prop, value, receiver); // set 트랩은 성공 여부를 true/false로 반환\n  },\n});"
           },
           {
             "id": "language-javascript-p10-proxy-reflect-part-14",
             "title": "활용 패턴 1 - 읽기 전용[read-only] 객체",
             "content": "function readOnly(obj) {\n  return new Proxy(obj, {\n    set(target, prop) {\n      throw new Error(`읽기 전용[read-only]: '${prop}' 수정 불가`);\n    },\n    deleteProperty(target, prop) {\n      throw new Error(`읽기 전용[read-only]: '${prop}' 삭제 불가`);\n    }\n  });\n}\nvar frozenConfig = readOnly({ host: 'localhost', port: 3000 });\nfrozenConfig.host",
             "displayContent": "/* 활용 패턴 1 - 읽기 전용[read-only] 객체 */\nfunction readOnly(obj) {\n  return new Proxy(obj, {\n    set(target, prop) {\n      throw new Error(`읽기 전용[read-only]: '${prop}' 수정 불가`);\n    },\n    deleteProperty(target, prop) {\n      throw new Error(`읽기 전용[read-only]: '${prop}' 삭제 불가`);\n    }\n  });\n}\nvar frozenConfig = readOnly({ host: 'localhost', port: 3000 });\nfrozenConfig.host        // 'localhost'\n// frozenConfig.host = 'x'; // ❌ Error 발생"
-          },
-          {
-            "id": "language-javascript-p10-proxy-reflect-part-15",
-            "title": "활용 패턴 2 - 기본값[default value] 제공",
-            "content": "function withDefaults(target, defaults) {\n  return new Proxy(target, {\n    get(obj, prop) {\n      return prop in obj ? obj[prop] : defaults[prop];\n    }\n  });\n}\nvar settings = withDefaults({ theme: 'dark' }, { theme: 'light', lang: 'ko', fontSize: 14 });\nsettings.theme\nsettings.lang\nsettings.fontSize",
-            "displayContent": "/* 활용 패턴 2 - 기본값[default value] 제공 */\nfunction withDefaults(target, defaults) {\n  return new Proxy(target, {\n    get(obj, prop) {\n      return prop in obj ? obj[prop] : defaults[prop];\n    }\n  });\n}\nvar settings = withDefaults({ theme: 'dark' }, { theme: 'light', lang: 'ko', fontSize: 14 });\nsettings.theme     // 'dark'  (직접 설정값 우선)\nsettings.lang      // 'ko'    (기본값[default])\nsettings.fontSize  // 14      (기본값[default])"
           },
           {
             "id": "language-javascript-p10-proxy-reflect-part-16",
@@ -2621,286 +2619,75 @@ export const languageTracks: LanguageTrack[] = [
             "title": "Proxy 트랩 안에서 target에 대한 기본 동작을 안전하게 수행할 때 사용",
             "content": "var refObj = { x: 1 };\n\nReflect.get(refObj, 'x')\nReflect.set(refObj, 'y', 2)\nReflect.has(refObj, 'x')\nReflect.deleteProperty(refObj, 'x')\nReflect.ownKeys(refObj)",
             "displayContent": "// Proxy 트랩 안에서 target에 대한 기본 동작을 안전하게 수행할 때 사용\n\nvar refObj = { x: 1 };\n\nReflect.get(refObj, 'x')             // 1     (refObj.x 와 동일)\nReflect.set(refObj, 'y', 2)          // true  (refObj.y = 2 와 동일)\nReflect.has(refObj, 'x')             // true  ('x' in refObj 와 동일)\nReflect.deleteProperty(refObj, 'x')  // true  (delete refObj.x 와 동일)\nReflect.ownKeys(refObj)              // ['y']"
-          },
-          {
-            "id": "language-javascript-p10-proxy-reflect-part-18",
-            "title": "Reflect.apply - 함수 호출[function invocation]",
-            "content": "Reflect.apply(Math.max, null, [1, 2, 3])",
-            "displayContent": "// Reflect.apply - 함수 호출[function invocation]\nReflect.apply(Math.max, null, [1, 2, 3])  // 3"
-          },
-          {
-            "id": "language-javascript-p10-proxy-reflect-part-19",
-            "title": "Reflect.construct - new 호출[constructor call]",
-            "content": "function Point(x, y) { this.x = x; this.y = y; }\nvar pt = Reflect.construct(Point, [3, 4]);\npt.x\npt.y",
-            "displayContent": "// Reflect.construct - new 호출[constructor call]\nfunction Point(x, y) { this.x = x; this.y = y; }\nvar pt = Reflect.construct(Point, [3, 4]);\npt.x  // 3\npt.y  // 4"
-          },
-          {
-            "id": "language-javascript-p10-proxy-reflect-part-20",
-            "title": "Proxy 취소[revocable proxy]",
-            "content": "var revocable = Proxy.revocable({ data: 42 }, {\n  get(target, prop) { return Reflect.get(target, prop); }\n});\nvar revProxy = revocable.proxy;\nvar revoke = revocable.revoke;\n\nrevProxy.data\nrevoke();",
-            "displayContent": "/* Proxy 취소[revocable proxy] */\nvar revocable = Proxy.revocable({ data: 42 }, {\n  get(target, prop) { return Reflect.get(target, prop); }\n});\nvar revProxy = revocable.proxy;\nvar revoke = revocable.revoke;\n\nrevProxy.data  // 42\nrevoke();      // 프록시 비활성화[deactivate]\n// revProxy.data  // ❌ TypeError: Cannot perform 'get' on a proxy that has been revoked"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "javascript-es6",
-    "label": "JavaScript ES6",
-    "folderName": "javascript-es6",
-    "lessons": [
-      {
-        "id": "language-javascript-es6-p01",
-        "title": "P01.기본-문법",
-        "fileName": "P01.기본-문법.yaml",
-        "sourcePath": "assets/raw/syntax/javascript-es6/P01.기본-문법.yaml",
-        "language": "javascript",
-        "parts": [
-          {
-            "id": "language-javascript-es6-p01-part-1",
-            "title": "상수[const]",
-            "content": "const PI = 3.141593;\nconst user = { name: \"kim\" };\nuser.name = \"lee\";\nconsole.log(PI > 3.0, user.name);",
-            "displayContent": "// 상수[const] — 재할당[reassignment] 불가, 객체 속성[property]은 변경 가능\nconst PI = 3.141593;\nconst user = { name: \"kim\" };\nuser.name = \"lee\";\nconsole.log(PI > 3.0, user.name);\n// 결과: true lee"
-          },
-          {
-            "id": "language-javascript-es6-p01-part-2",
-            "title": "블록 스코프[let]",
-            "content": "let total = 0;\nfor (let i = 0; i < 3; i++) {\n  total += i;\n}\nconsole.log(total);",
-            "displayContent": "// 블록 스코프[block scope] — let은 블록 밖 접근 불가\nlet total = 0;\nfor (let i = 0; i < 3; i++) {\n  total += i;\n}\nconsole.log(total);\n// 결과: 3"
-          },
-          {
-            "id": "language-javascript-es6-p01-part-3",
-            "title": "let 콜백 캡처[closure]",
-            "content": "const callbacks = [];\nfor (let i = 0; i <= 2; i++) {\n  callbacks[i] = () => i * 2;\n}\nconsole.log(callbacks[0](), callbacks[1](), callbacks[2]());",
-            "displayContent": "// let 콜백 캡처[closure] — 반복마다 새 바인딩[binding]\nconst callbacks = [];\nfor (let i = 0; i <= 2; i++) {\n  callbacks[i] = () => i * 2;\n}\nconsole.log(callbacks[0](), callbacks[1](), callbacks[2]());\n// 결과: 0 2 4"
-          },
-          {
-            "id": "language-javascript-es6-p01-part-4",
-            "title": "화살표 함수[arrow function]",
-            "content": "const odds = [1, 2, 3, 4].filter((n) => n % 2 === 1);\nconst doubled = odds.map((v) => v * 2);\nconsole.log(odds, doubled);",
-            "displayContent": "// 화살표 함수[arrow function] — 암묵적 반환[implicit return]\nconst odds = [1, 2, 3, 4].filter((n) => n % 2 === 1);\nconst doubled = odds.map((v) => v * 2);\nconsole.log(odds, doubled);\n// 결과: [1, 3] [2, 6]"
-          },
-          {
-            "id": "language-javascript-es6-p01-part-5",
-            "title": "화살표 this[lexical this]",
-            "content": "const counter = {\n  count: 0,\n  bump() {\n    const inc = () => {\n      this.count += 1;\n    };\n    inc();\n  },\n};\ncounter.bump();\nconsole.log(counter.count);",
-            "displayContent": "// 화살표 this[lexical this] — 바깥 this를 캡처한다\nconst counter = {\n  count: 0,\n  bump() {\n    const inc = () => {\n      this.count += 1;\n    };\n    inc();\n  },\n};\ncounter.bump();\nconsole.log(counter.count);\n// 결과: 1"
-          },
-          {
-            "id": "language-javascript-es6-p01-part-6",
-            "title": "기본 매개변수[default parameter]",
-            "content": "function greet(name = \"guest\", msg = \"hi\") {\n  return `${msg}, ${name}`;\n}\nconsole.log(greet(), greet(\"kim\", \"hello\"));",
-            "displayContent": "// 기본 매개변수[default parameter]\nfunction greet(name = \"guest\", msg = \"hi\") {\n  return `${msg}, ${name}`;\n}\nconsole.log(greet(), greet(\"kim\", \"hello\"));\n// 결과: hi, guest / hello, kim"
-          },
-          {
-            "id": "language-javascript-es6-p01-part-7",
-            "title": "Rest 매개변수[rest parameter]",
-            "content": "function sum(first, ...rest) {\n  return rest.reduce((acc, n) => acc + n, first);\n}\nconsole.log(sum(1, 2, 3, 4));",
-            "displayContent": "// Rest 매개변수[rest parameter] — 나머지 인자를 배열로 모은다\nfunction sum(first, ...rest) {\n  return rest.reduce((acc, n) => acc + n, first);\n}\nconsole.log(sum(1, 2, 3, 4));\n// 결과: 10"
-          },
-          {
-            "id": "language-javascript-es6-p01-part-8",
-            "title": "스프레드[spread] 배열",
-            "content": "const base = [1, 2];\nconst merged = [...base, 3, ...[4, 5]];\nconsole.log(merged);",
-            "displayContent": "// 스프레드[spread] 배열 — 펼쳐서 복사·병합\nconst base = [1, 2];\nconst merged = [...base, 3, ...[4, 5]];\nconsole.log(merged);\n// 결과: [1, 2, 3, 4, 5]"
-          },
-          {
-            "id": "language-javascript-es6-p01-part-9",
-            "title": "스프레드[spread] 객체",
-            "content": "const a = { x: 1, y: 2 };\nconst b = { y: 9, z: 3 };\nconst merged = { ...a, ...b };\nconsole.log(merged);",
-            "displayContent": "// 스프레드[spread] 객체 — 나중 키가 우선[last-wins]\nconst a = { x: 1, y: 2 };\nconst b = { y: 9, z: 3 };\nconst merged = { ...a, ...b };\nconsole.log(merged);\n// 결과: { x: 1, y: 9, z: 3 }"
-          },
-          {
-            "id": "language-javascript-es6-p01-part-10",
-            "title": "템플릿 리터럴[template literal]",
-            "content": "const name = \"kim\";\nconst score = 95;\nconst line = `이름: ${name}, 점수: ${score}`;\nconsole.log(line);",
-            "displayContent": "// 템플릿 리터럴[template literal] — 보간[interpolation] + 멀티라인\nconst name = \"kim\";\nconst score = 95;\nconst line = `이름: ${name}, 점수: ${score}`;\nconsole.log(line);\n// 결과: 이름: kim, 점수: 95"
-          },
-          {
-            "id": "language-javascript-es6-p01-part-11",
-            "title": "객체 단축[shorthand] / 메서드",
-            "content": "const name = \"lee\";\nconst age = 30;\nconst user = {\n  name,\n  age,\n  greet() {\n    return `hi ${this.name}`;\n  },\n};\nconsole.log(user.greet(), user.age);",
-            "displayContent": "// 객체 단축[shorthand property] / 메서드 정의[method definition]\nconst name = \"lee\";\nconst age = 30;\nconst user = {\n  name,\n  age,\n  greet() {\n    return `hi ${this.name}`;\n  },\n};\nconsole.log(user.greet(), user.age);\n// 결과: hi lee 30"
-          },
-          {
-            "id": "language-javascript-es6-p01-part-12",
-            "title": "계산된 속성명[computed property]",
-            "content": "const key = \"item\";\nconst bag = {\n  [key + \"1\"]: \"a\",\n  [key + \"2\"]: \"b\",\n};\nconsole.log(bag.item1, bag.item2);",
-            "displayContent": "// 계산된 속성명[computed property name]\nconst key = \"item\";\nconst bag = {\n  [key + \"1\"]: \"a\",\n  [key + \"2\"]: \"b\",\n};\nconsole.log(bag.item1, bag.item2);\n// 결과: a b"
-          },
-          {
-            "id": "language-javascript-es6-p01-part-13",
-            "title": "배열 구조분해[array destructuring]",
-            "content": "const [first, second] = [10, 20];\nconst [head, ...tail] = [1, 2, 3];\nconsole.log(first, second, head, tail);",
-            "displayContent": "// 배열 구조분해[array destructuring]\nconst [first, second] = [10, 20];\nconst [head, ...tail] = [1, 2, 3];\nconsole.log(first, second, head, tail);\n// 결과: 10 20 1 [2, 3]"
-          },
-          {
-            "id": "language-javascript-es6-p01-part-14",
-            "title": "객체 구조분해[object destructuring]",
-            "content": "const { name: userName, role = \"user\" } = { name: \"kim\" };\nconst { a, ...rest } = { a: 1, b: 2, c: 3 };\nconsole.log(userName, role, a, rest);",
-            "displayContent": "// 객체 구조분해[object destructuring] — 별칭[alias]·기본값[default]\nconst { name: userName, role = \"user\" } = { name: \"kim\" };\nconst { a, ...rest } = { a: 1, b: 2, c: 3 };\nconsole.log(userName, role, a, rest);\n// 결과: kim user 1 { b: 2, c: 3 }"
-          },
-          {
-            "id": "language-javascript-es6-p01-part-15",
-            "title": "파라미터 구조분해[parameter destructuring]",
-            "content": "function showUser({ name, role = \"user\" }) {\n  return `${name}(${role})`;\n}\nconsole.log(showUser({ name: \"kim\" }));",
-            "displayContent": "// 파라미터 구조분해[parameter destructuring]\nfunction showUser({ name, role = \"user\" }) {\n  return `${name}(${role})`;\n}\nconsole.log(showUser({ name: \"kim\" }));\n// 결과: kim(user)"
           }
         ]
       },
       {
-        "id": "language-javascript-es6-p02",
-        "title": "P02.모듈-클래스-컬렉션",
-        "fileName": "P02.모듈-클래스-컬렉션.yaml",
-        "sourcePath": "assets/raw/syntax/javascript-es6/P02.모듈-클래스-컬렉션.yaml",
+        "id": "language-javascript-p11",
+        "title": "P11.모듈-브라우저API",
+        "fileName": "P11.모듈-브라우저API.yaml",
+        "sourcePath": "assets/raw/syntax/javascript/P11.모듈-브라우저API.yaml",
         "language": "javascript",
         "parts": [
           {
-            "id": "language-javascript-es6-p02-part-1",
-            "title": "이름 있는 내보내기[named export]",
-            "content": "export const API_URL = \"/api\";\nexport function add(a, b) {\n  return a + b;\n}\nexport class User {\n  constructor(name) {\n    this.name = name;\n  }\n}",
-            "displayContent": "// 이름 있는 내보내기[named export]\nexport const API_URL = \"/api\";\nexport function add(a, b) {\n  return a + b;\n}\nexport class User {\n  constructor(name) {\n    this.name = name;\n  }\n}"
+            "id": "language-javascript-p11-part-1",
+            "title": "JSON 변환[JSON.parse]",
+            "content": "const text = JSON.stringify({ id: 1 });\nconst data = JSON.parse(text);",
+            "displayContent": "// JSON 변환[JSON.parse]\nconst text = JSON.stringify({ id: 1 }); // 결과: {\"id\":1}\nconst data = JSON.parse(text); // 잘못된 문자열이면 예외. 필요하면 try/catch"
           },
           {
-            "id": "language-javascript-es6-p02-part-2",
+            "id": "language-javascript-p11-part-2",
+            "title": "요소 선택[querySelector]",
+            "content": "const button = document.querySelector(\"#save\");\nconst items = document.querySelectorAll(\".item\");\nbutton.classList.add(\"active\");",
+            "displayContent": "// 요소 선택[querySelector]\nconst button = document.querySelector(\"#save\"); // 첫 요소 하나. 없으면 null\nconst items = document.querySelectorAll(\".item\"); // NodeList 반환. forEach 가능\nbutton.classList.add(\"active\");"
+          },
+          {
+            "id": "language-javascript-p11-part-3",
+            "title": "이벤트 등록[addEventListener]",
+            "content": "button.addEventListener(\"click\", (event) => {\n  event.preventDefault();\n  console.log(event.target);\n});",
+            "displayContent": "// 이벤트 등록[addEventListener]\nbutton.addEventListener(\"click\", (event) => {\n  event.preventDefault(); // 링크 이동, 폼 제출 같은 기본 동작 막기\n  console.log(event.target);\n});"
+          },
+          {
+            "id": "language-javascript-p11-part-4",
+            "title": "브라우저 저장소[localStorage]",
+            "content": "localStorage.setItem(\"theme\", \"dark\");\nconst theme = localStorage.getItem(\"theme\");\nlocalStorage.removeItem(\"theme\");",
+            "displayContent": "// 브라우저 저장소[localStorage]\nlocalStorage.setItem(\"theme\", \"dark\"); // 문자열만 저장. 객체는 JSON.stringify\nconst theme = localStorage.getItem(\"theme\"); // 없으면 null\nlocalStorage.removeItem(\"theme\");"
+          },
+          {
+            "id": "language-javascript-p11-part-5",
+            "title": "요청 취소[AbortController]",
+            "content": "const controller = new AbortController();\nfetch(\"/api/users\", { signal: controller.signal });\ncontroller.abort();",
+            "displayContent": "// 요청 취소[AbortController]\nconst controller = new AbortController();\nfetch(\"/api/users\", { signal: controller.signal }); // signal로 요청과 취소 신호를 연결\ncontroller.abort(); // 진행 중인 fetch가 AbortError로 실패"
+          },
+          {
+            "id": "language-javascript-p11-part-6",
+            "title": "깊은 복사[structuredClone]",
+            "content": "const original = { user: { name: \"kim\" } };\nconst copy = structuredClone(original);",
+            "displayContent": "// 깊은 복사[structuredClone]\nconst original = { user: { name: \"kim\" } };\nconst copy = structuredClone(original); // 중첩 객체까지 복사. 함수는 복사 불가"
+          },
+          {
+            "id": "language-javascript-p11-part-7",
+            "title": "이름 있는 내보내기[named export]",
+            "content": "export const API_URL = \"/api\";\nexport function add(a, b) {\n  return a + b;\n}\nexport class User {\n  constructor(name) {\n    this.name = name;\n  }\n}",
+            "displayContent": "// 이름 있는 내보내기[named export]\nexport const API_URL = \"/api\"; // 이름 있는 내보내기. 가져올 때 같은 이름을 {}로\nexport function add(a, b) {\n  return a + b;\n}\nexport class User {\n  constructor(name) {\n    this.name = name;\n  }\n}"
+          },
+          {
+            "id": "language-javascript-p11-part-8",
             "title": "기본 내보내기[default export]",
             "content": "export default function fetchUser(id) {\n  return { id, name: \"kim\" };\n}",
             "displayContent": "// 기본 내보내기[default export] — 모듈당 하나\nexport default function fetchUser(id) {\n  return { id, name: \"kim\" };\n}"
           },
           {
-            "id": "language-javascript-es6-p02-part-3",
+            "id": "language-javascript-p11-part-9",
             "title": "가져오기[import]",
             "content": "import fetchUser from \"./user.js\";\nimport { API_URL, add as sum } from \"./math.js\";\nimport * as math from \"./math.js\";\nconsole.log(API_URL, sum(1, 2), math.add(3, 4));",
             "displayContent": "// 가져오기[import] — 이름·기본·별칭[alias]\nimport fetchUser from \"./user.js\";\nimport { API_URL, add as sum } from \"./math.js\";\nimport * as math from \"./math.js\";\nconsole.log(API_URL, sum(1, 2), math.add(3, 4));"
           },
           {
-            "id": "language-javascript-es6-p02-part-4",
-            "title": "기본 클래스[class]",
-            "content": "class Circle {\n  constructor(radius) {\n    this.radius = radius;\n  }\n  area() {\n    return Math.PI * this.radius ** 2;\n  }\n}\nconst c = new Circle(5);\nconsole.log(c.area().toFixed(2));",
-            "displayContent": "// 기본 클래스[class]\nclass Circle {\n  constructor(radius) {\n    this.radius = radius;\n  }\n  area() {\n    return Math.PI * this.radius ** 2;\n  }\n}\nconst c = new Circle(5);\nconsole.log(c.area().toFixed(2));\n// 결과: 78.54"
-          },
-          {
-            "id": "language-javascript-es6-p02-part-5",
-            "title": "상속[extends] / super",
-            "content": "class Animal {\n  constructor(name) {\n    this.name = name;\n  }\n  speak() {\n    return `${this.name} makes a sound`;\n  }\n}\nclass Dog extends Animal {\n  constructor(name, breed) {\n    super(name);\n    this.breed = breed;\n  }\n  speak() {\n    return `${super.speak()} — woof`;\n  }\n}\nconsole.log(new Dog(\"Rex\", \"beagle\").speak());",
-            "displayContent": "// 상속[extends] / super\nclass Animal {\n  constructor(name) {\n    this.name = name;\n  }\n  speak() {\n    return `${this.name} makes a sound`;\n  }\n}\nclass Dog extends Animal {\n  constructor(name, breed) {\n    super(name);\n    this.breed = breed;\n  }\n  speak() {\n    return `${super.speak()} — woof`;\n  }\n}\nconsole.log(new Dog(\"Rex\", \"beagle\").speak());\n// 결과: Rex makes a sound — woof"
-          },
-          {
-            "id": "language-javascript-es6-p02-part-6",
-            "title": "static / getter",
-            "content": "class Rect {\n  constructor(w, h) {\n    this.w = w;\n    this.h = h;\n  }\n  get area() {\n    return this.w * this.h;\n  }\n  static square(n) {\n    return new Rect(n, n);\n  }\n}\nconst box = Rect.square(4);\nconsole.log(box.area);",
-            "displayContent": "// static / getter\nclass Rect {\n  constructor(w, h) {\n    this.w = w;\n    this.h = h;\n  }\n  get area() {\n    return this.w * this.h;\n  }\n  static square(n) {\n    return new Rect(n, n);\n  }\n}\nconst box = Rect.square(4);\nconsole.log(box.area);\n// 결과: 16"
-          },
-          {
-            "id": "language-javascript-es6-p02-part-7",
-            "title": "Map",
-            "content": "const store = new Map();\nstore.set(\"name\", \"kim\");\nstore.set(1, \"one\");\nconsole.log(store.get(\"name\"), store.has(1), store.size);",
-            "displayContent": "// Map — 키 타입[key type] 제한 없음\nconst store = new Map();\nstore.set(\"name\", \"kim\");\nstore.set(1, \"one\");\nconsole.log(store.get(\"name\"), store.has(1), store.size);\n// 결과: kim true 2"
-          },
-          {
-            "id": "language-javascript-es6-p02-part-8",
-            "title": "Map 순회[iteration]",
-            "content": "const scores = new Map([\n  [\"kim\", 90],\n  [\"lee\", 80],\n]);\nfor (const [name, score] of scores) {\n  console.log(name, score);\n}",
-            "displayContent": "// Map 순회[iteration]\nconst scores = new Map([\n  [\"kim\", 90],\n  [\"lee\", 80],\n]);\nfor (const [name, score] of scores) {\n  console.log(name, score);\n}\n// 결과: kim 90 / lee 80"
-          },
-          {
-            "id": "language-javascript-es6-p02-part-9",
-            "title": "Set",
-            "content": "const tags = new Set([\"js\", \"ts\", \"js\"]);\ntags.add(\"go\");\nconsole.log(tags.has(\"js\"), tags.size, [...tags]);",
-            "displayContent": "// Set — 중복 없는 값 집합[unique values]\nconst tags = new Set([\"js\", \"ts\", \"js\"]);\ntags.add(\"go\");\nconsole.log(tags.has(\"js\"), tags.size, [...tags]);\n// 결과: true 3 [\"js\", \"ts\", \"go\"]"
-          },
-          {
-            "id": "language-javascript-es6-p02-part-10",
-            "title": "WeakMap / WeakSet",
-            "content": "const meta = new WeakMap();\nconst seen = new WeakSet();\nconst obj = { id: 1 };\nmeta.set(obj, \"cached\");\nseen.add(obj);\nconsole.log(meta.get(obj), seen.has(obj));",
-            "displayContent": "// WeakMap / WeakSet — 객체 키만, GC에 방해 안 됨\nconst meta = new WeakMap();\nconst seen = new WeakSet();\nconst obj = { id: 1 };\nmeta.set(obj, \"cached\");\nseen.add(obj);\nconsole.log(meta.get(obj), seen.has(obj));\n// 결과: cached true"
-          },
-          {
-            "id": "language-javascript-es6-p02-part-11",
-            "title": "Promise then / catch",
-            "content": "Promise.resolve(1)\n  .then((v) => v + 1)\n  .then((v) => {\n    console.log(v);\n    return v;\n  })\n  .catch((e) => console.error(e.message));",
-            "displayContent": "// Promise then / catch\nPromise.resolve(1)\n  .then((v) => v + 1)\n  .then((v) => {\n    console.log(v);\n    return v;\n  })\n  .catch((e) => console.error(e.message));\n// 결과: 2"
-          },
-          {
-            "id": "language-javascript-es6-p02-part-12",
-            "title": "Promise.all",
-            "content": "Promise.all([Promise.resolve(1), Promise.resolve(2)]).then((values) => {\n  console.log(values);\n});",
-            "displayContent": "// Promise.all — 전체 성공 대기[wait for all]\nPromise.all([Promise.resolve(1), Promise.resolve(2)]).then((values) => {\n  console.log(values);\n});\n// 결과: [1, 2]"
-          }
-        ]
-      },
-      {
-        "id": "language-javascript-es6-p03",
-        "title": "P03.심화-내장API",
-        "fileName": "P03.심화-내장API.yaml",
-        "sourcePath": "assets/raw/syntax/javascript-es6/P03.심화-내장API.yaml",
-        "language": "javascript",
-        "parts": [
-          {
-            "id": "language-javascript-es6-p03-part-1",
-            "title": "심볼[Symbol]",
-            "content": "const id = Symbol(\"id\");\nconst user = { name: \"kim\", [id]: 7 };\nconsole.log(user[id], Symbol(\"id\") === id);",
-            "displayContent": "// 심볼[Symbol] — 고유 키[unique key]\nconst id = Symbol(\"id\");\nconst user = { name: \"kim\", [id]: 7 };\nconsole.log(user[id], Symbol(\"id\") === id);\n// 결과: 7 false"
-          },
-          {
-            "id": "language-javascript-es6-p03-part-2",
-            "title": "for...of",
-            "content": "for (const ch of \"hi\") {\n  console.log(ch);\n}\nfor (const n of [10, 20]) {\n  console.log(n);\n}",
-            "displayContent": "// for...of — 이터러블[iterable] 순회\nfor (const ch of \"hi\") {\n  console.log(ch);\n}\nfor (const n of [10, 20]) {\n  console.log(n);\n}\n// 결과: h i / 10 20"
-          },
-          {
-            "id": "language-javascript-es6-p03-part-3",
-            "title": "제너레이터[generator]",
-            "content": "function* range(start, end) {\n  for (let i = start; i <= end; i++) yield i;\n}\nconsole.log([...range(1, 3)]);",
-            "displayContent": "// 제너레이터[generator] — function* + yield\nfunction* range(start, end) {\n  for (let i = start; i <= end; i++) yield i;\n}\nconsole.log([...range(1, 3)]);\n// 결과: [1, 2, 3]"
-          },
-          {
-            "id": "language-javascript-es6-p03-part-4",
-            "title": "Object.assign",
-            "content": "const target = { a: 1 };\nObject.assign(target, { b: 2 }, { c: 3 });\nconst clone = Object.assign({}, target);\nconsole.log(target, clone);",
-            "displayContent": "// Object.assign — 얕은 병합[shallow merge]\nconst target = { a: 1 };\nObject.assign(target, { b: 2 }, { c: 3 });\nconst clone = Object.assign({}, target);\nconsole.log(target, clone);\n// 결과: { a:1, b:2, c:3 } (둘 다 동일 형태)"
-          },
-          {
-            "id": "language-javascript-es6-p03-part-5",
-            "title": "Array.from / find",
-            "content": "const chars = Array.from(\"ABC\");\nconst found = [1, 2, 3, 4].find((n) => n > 2);\nconst idx = [1, 2, 3, 4].findIndex((n) => n > 2);\nconsole.log(chars, found, idx);",
-            "displayContent": "// Array.from / find\nconst chars = Array.from(\"ABC\");\nconst found = [1, 2, 3, 4].find((n) => n > 2);\nconst idx = [1, 2, 3, 4].findIndex((n) => n > 2);\nconsole.log(chars, found, idx);\n// 결과: [\"A\",\"B\",\"C\"] 3 2"
-          },
-          {
-            "id": "language-javascript-es6-p03-part-6",
-            "title": "Array.includes / fill",
-            "content": "console.log([10, 20, 30].includes(20));\nconsole.log([0, 0, 0].fill(7));",
-            "displayContent": "// Array.includes / fill\nconsole.log([10, 20, 30].includes(20));\nconsole.log([0, 0, 0].fill(7));\n// 결과: true / [7, 7, 7]"
-          },
-          {
-            "id": "language-javascript-es6-p03-part-7",
-            "title": "String.includes / startsWith",
-            "content": "const text = \"Hello, World!\";\nconsole.log(text.includes(\"World\"), text.startsWith(\"Hello\"), text.endsWith(\"!\"));",
-            "displayContent": "// String.includes / startsWith / endsWith\nconst text = \"Hello, World!\";\nconsole.log(text.includes(\"World\"), text.startsWith(\"Hello\"), text.endsWith(\"!\"));\n// 결과: true true true"
-          },
-          {
-            "id": "language-javascript-es6-p03-part-8",
-            "title": "String.repeat / String.raw",
-            "content": "console.log(\"ab\".repeat(3));\nconsole.log(String.raw`C:\\Users\\name`);",
-            "displayContent": "// String.repeat / String.raw — 이스케이프 비처리[raw string]\nconsole.log(\"ab\".repeat(3));\nconsole.log(String.raw`C:\\Users\\name`);\n// 결과: ababab / C:\\Users\\name"
-          },
-          {
-            "id": "language-javascript-es6-p03-part-9",
-            "title": "Number.isNaN / isFinite",
-            "content": "console.log(Number.isNaN(NaN), Number.isNaN(\"NaN\"));\nconsole.log(Number.isFinite(10), Number.isFinite(Infinity));",
-            "displayContent": "// Number.isNaN / isFinite — 전역 isNaN보다 안전\nconsole.log(Number.isNaN(NaN), Number.isNaN(\"NaN\"));\nconsole.log(Number.isFinite(10), Number.isFinite(Infinity));\n// 결과: true false / true false"
-          },
-          {
-            "id": "language-javascript-es6-p03-part-10",
-            "title": "2진수·8진수 리터럴[binary octal]",
-            "content": "console.log(0b1010, 0o755);",
-            "displayContent": "// 2진수·8진수 리터럴[binary / octal literal]\nconsole.log(0b1010, 0o755);\n// 결과: 10 493"
-          },
-          {
-            "id": "language-javascript-es6-p03-part-11",
-            "title": "Object.keys / entries",
-            "content": "const sample = { a: 1, b: 2 };\nconsole.log(Object.keys(sample));\nconsole.log(Object.values(sample));\nconsole.log(Object.entries(sample));",
-            "displayContent": "// Object.keys / values / entries\nconst sample = { a: 1, b: 2 };\nconsole.log(Object.keys(sample));\nconsole.log(Object.values(sample));\nconsole.log(Object.entries(sample));\n// 결과: [\"a\",\"b\"] / [1,2] / [[\"a\",1],[\"b\",2]]"
+            "id": "language-javascript-p11-part-10",
+            "title": "let 콜백 캡처[closure]",
+            "content": "const callbacks = [];\nfor (let i = 0; i <= 2; i++) {\n  callbacks[i] = () => i * 2;\n}\nconsole.log(callbacks[0](), callbacks[1](), callbacks[2]());",
+            "displayContent": "// let 콜백 캡처[closure] — 반복마다 새 바인딩[binding]\nconst callbacks = [];\nfor (let i = 0; i <= 2; i++) {\n  callbacks[i] = () => i * 2;\n}\nconsole.log(callbacks[0](), callbacks[1](), callbacks[2]());\n// 결과: 0 2 4"
           }
         ]
       }
@@ -3091,7 +2878,7 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-postgresql-p01-part-2",
             "title": "삽입과 반환[insert returning]",
             "content": "INSERT INTO users (user_name, user_age)\nVALUES ('kim', 30)\nRETURNING user_id, user_name;",
-            "displayContent": "-- 삽입과 반환[insert returning]\nINSERT INTO users (user_name, user_age)\nVALUES ('kim', 30)\nRETURNING user_id, user_name;"
+            "displayContent": "-- 삽입과 반환[insert returning]\nINSERT INTO users (user_name, user_age)\nVALUES ('kim', 30)\nRETURNING user_id, user_name; -- 삽입한 행을 다시 조회 없이 바로 받음. 자동 생성 id에 유용"
           },
           {
             "id": "language-postgresql-p01-part-3",
@@ -3103,13 +2890,13 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-postgresql-p01-part-4",
             "title": "수정과 반환[update returning]",
             "content": "UPDATE users\nSET user_age = 31\nWHERE user_id = 1\nRETURNING user_id, user_age;",
-            "displayContent": "-- 수정과 반환[update returning]\nUPDATE users\nSET user_age = 31\nWHERE user_id = 1\nRETURNING user_id, user_age;"
+            "displayContent": "-- 수정과 반환[update returning]\nUPDATE users\nSET user_age = 31\nWHERE user_id = 1\nRETURNING user_id, user_age; -- 수정 후 값을 반환"
           },
           {
             "id": "language-postgresql-p01-part-5",
             "title": "삭제와 반환[delete returning]",
             "content": "DELETE FROM users\nWHERE user_id = 2\nRETURNING user_id;",
-            "displayContent": "-- 삭제와 반환[delete returning]\nDELETE FROM users\nWHERE user_id = 2\nRETURNING user_id;"
+            "displayContent": "-- 삭제와 반환[delete returning]\nDELETE FROM users\nWHERE user_id = 2\nRETURNING user_id; -- 삭제된 행의 값을 반환"
           },
           {
             "id": "language-postgresql-p01-part-6",
@@ -3121,19 +2908,7 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-postgresql-p01-part-7",
             "title": "정렬·개수제한[order by limit]",
             "content": "SELECT user_name, user_age\nFROM users\nORDER BY user_age DESC\nLIMIT 10;",
-            "displayContent": "-- 정렬·개수제한[order by limit]\nSELECT user_name, user_age\nFROM users\nORDER BY user_age DESC\nLIMIT 10;"
-          },
-          {
-            "id": "language-postgresql-p01-part-8",
-            "title": "내부 조인[inner join]",
-            "content": "SELECT u.user_name, o.total_price\nFROM users u\nINNER JOIN orders o\n  ON u.user_id = o.user_id;",
-            "displayContent": "-- 내부 조인[inner join]\nSELECT u.user_name, o.total_price\nFROM users u\nINNER JOIN orders o\n  ON u.user_id = o.user_id;"
-          },
-          {
-            "id": "language-postgresql-p01-part-9",
-            "title": "왼쪽 조인[left join]",
-            "content": "SELECT u.user_name, o.total_price\nFROM users u\nLEFT JOIN orders o\n  ON u.user_id = o.user_id;",
-            "displayContent": "-- 왼쪽 조인[left join]\nSELECT u.user_name, o.total_price\nFROM users u\nLEFT JOIN orders o\n  ON u.user_id = o.user_id;"
+            "displayContent": "-- 정렬·개수제한[order by limit]\nSELECT user_name, user_age\nFROM users\nORDER BY user_age DESC\nLIMIT 10; -- ORDER BY 없이 쓰면 어떤 행이 나올지 보장되지 않음"
           }
         ]
       },
@@ -3148,13 +2923,7 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-postgresql-p02-part-1",
             "title": "그룹·집계[group by having]",
             "content": "SELECT user_id, COUNT(*) AS order_count\nFROM orders\nGROUP BY user_id\nHAVING COUNT(*) >= 2;",
-            "displayContent": "-- 그룹·집계[group by having]\nSELECT user_id, COUNT(*) AS order_count\nFROM orders\nGROUP BY user_id\nHAVING COUNT(*) >= 2;"
-          },
-          {
-            "id": "language-postgresql-p02-part-2",
-            "title": "공통 테이블 식[with cte]",
-            "content": "WITH order_sum AS (\n    SELECT user_id, SUM(total_price) AS total_amount\n    FROM orders\n    GROUP BY user_id\n)\nSELECT u.user_name, o.total_amount\nFROM users u\nJOIN order_sum o\n  ON u.user_id = o.user_id;",
-            "displayContent": "-- 공통 테이블 식[with cte]\nWITH order_sum AS (\n    SELECT user_id, SUM(total_price) AS total_amount\n    FROM orders\n    GROUP BY user_id\n)\nSELECT u.user_name, o.total_amount\nFROM users u\nJOIN order_sum o\n  ON u.user_id = o.user_id;"
+            "displayContent": "-- 그룹·집계[group by having]\nSELECT user_id, COUNT(*) AS order_count\nFROM orders\nGROUP BY user_id\nHAVING COUNT(*) >= 2; -- WHERE는 그룹 전, HAVING은 그룹 후 조건"
           },
           {
             "id": "language-postgresql-p02-part-3",
@@ -3188,7 +2957,7 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-python-p01-part-1",
             "title": "기본 타입[int float str bool]",
             "content": "user_name = \"kim\"\nuser_age = 30\nscore = 4.5\nis_admin = True\nprint(user_name, user_age, score, is_admin)",
-            "displayContent": "# 기본 타입[int float str bool]\nuser_name = \"kim\"\nuser_age = 30\nscore = 4.5\nis_admin = True\nprint(user_name, user_age, score, is_admin)"
+            "displayContent": "# 기본 타입[int float str bool]\nuser_name = \"kim\"\nuser_age = 30\nscore = 4.5\nis_admin = True # 참거짓은 대문자로 시작(True, False)\nprint(user_name, user_age, score, is_admin)"
           },
           {
             "id": "language-python-p01-part-2",
@@ -3206,13 +2975,13 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-python-p01-part-4",
             "title": "None - 값 없음[None]",
             "content": "email = None\nprint(email)",
-            "displayContent": "# None - 값 없음[None]\nemail = None\nprint(email)"
+            "displayContent": "# None - 값 없음[None]\nemail = None # 값 없음. 비교는 is None으로\nprint(email)"
           },
           {
             "id": "language-python-p01-part-5",
             "title": "조건문[if]",
             "content": "if user[\"age\"] > 20:\n    print(\"성인\")",
-            "displayContent": "# 조건문[if]\nif user[\"age\"] > 20:\n    print(\"성인\")"
+            "displayContent": "# 조건문[if]\nif user[\"age\"] > 20: # 중괄호 대신 콜론과 들여쓰기로 블록을 나눔\n    print(\"성인\")"
           },
           {
             "id": "language-python-p01-part-6",
@@ -3230,13 +2999,13 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-python-p01-part-8",
             "title": "딕셔너리 순회[items]",
             "content": "for key, value in user.items():\n    print(key, value)",
-            "displayContent": "# 딕셔너리 순회[items]\nfor key, value in user.items():\n    print(key, value)"
+            "displayContent": "# 딕셔너리 순회[items]\nfor key, value in user.items(): # (키, 값) 쌍을 하나씩 꺼냄\n    print(key, value)"
           },
           {
             "id": "language-python-p01-part-9",
             "title": "함수[def] - 한 역할",
             "content": "def get_user_name(user):\n    return user[\"name\"]\n\nprint(get_user_name(user))",
-            "displayContent": "# 함수[def] - 한 역할\ndef get_user_name(user):\n    return user[\"name\"]\n\nprint(get_user_name(user))"
+            "displayContent": "# 함수[def] - 한 역할\ndef get_user_name(user):\n    return user[\"name\"] # return이 없으면 None 반환\n\nprint(get_user_name(user))"
           },
           {
             "id": "language-python-p01-part-10",
@@ -3287,7 +3056,7 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-python-p02-part-6",
             "title": "값 추가[dict assign]",
             "content": "user[\"email\"] = \"a@a.com\"\nprint(user[\"email\"])",
-            "displayContent": "# 값 추가[dict assign]\nuser[\"email\"] = \"a@a.com\"\nprint(user[\"email\"])"
+            "displayContent": "# 값 추가[dict assign]\nuser[\"email\"] = \"a@a.com\" # 키가 없으면 추가, 있으면 덮어씀\nprint(user[\"email\"])"
           },
           {
             "id": "language-python-p02-part-7",
@@ -3311,7 +3080,7 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-python-p02-part-10",
             "title": "JSON 문자열화[json.dumps]",
             "content": "import json\n\ntext = json.dumps({\"name\": \"kim\", \"age\": 30})\nprint(text)",
-            "displayContent": "# JSON 문자열화[json.dumps]\nimport json\n\ntext = json.dumps({\"name\": \"kim\", \"age\": 30})\nprint(text)"
+            "displayContent": "# JSON 문자열화[json.dumps]\nimport json\n\ntext = json.dumps({\"name\": \"kim\", \"age\": 30}) # 파이썬 값 → JSON 문자열\nprint(text)"
           },
           {
             "id": "language-python-p02-part-11",
@@ -3324,6 +3093,63 @@ export const languageTracks: LanguageTrack[] = [
             "title": "미션 한 줄[filter + names]",
             "content": "result = [u[\"name\"] for u in users if u[\"age\"] >= 25]\nprint(result)",
             "displayContent": "# 미션 한 줄[filter + names]\n# 25세 이상 이름만\nresult = [u[\"name\"] for u in users if u[\"age\"] >= 25]\nprint(result)\n# 결과: ['kim', 'park']"
+          }
+        ]
+      },
+      {
+        "id": "language-python-p03",
+        "title": "P03.문자열-파일-비동기",
+        "fileName": "P03.문자열-파일-비동기.yaml",
+        "sourcePath": "assets/raw/syntax/python/P03.문자열-파일-비동기.yaml",
+        "language": "python",
+        "parts": [
+          {
+            "id": "language-python-p03-part-1",
+            "title": "포맷 문자열[f-string]",
+            "content": "name = \"kim\"\nage = 30\nprint(f\"{name} is {age}\")",
+            "displayContent": "# 포맷 문자열[f-string]\nname = \"kim\"\nage = 30\nprint(f\"{name} is {age}\") # 결과: kim is 30"
+          },
+          {
+            "id": "language-python-p03-part-2",
+            "title": "파일 읽기[with open]",
+            "content": "with open(\"data.txt\", encoding=\"utf-8\") as file:\n    text = file.read()",
+            "displayContent": "# 파일 읽기[with open]\nwith open(\"data.txt\", encoding=\"utf-8\") as file: # with 블록이 끝나면 파일이 자동으로 닫힘\n    text = file.read()"
+          },
+          {
+            "id": "language-python-p03-part-3",
+            "title": "인덱스 순회[enumerate]",
+            "content": "for index, name in enumerate([\"kim\", \"lee\"]):\n    print(index, name)",
+            "displayContent": "# 인덱스 순회[enumerate]\nfor index, name in enumerate([\"kim\", \"lee\"]): # (순번, 값)을 함께 꺼냄. 순번은 0부터\n    print(index, name)"
+          },
+          {
+            "id": "language-python-p03-part-4",
+            "title": "묶어 순회[zip]",
+            "content": "for name, score in zip([\"kim\", \"lee\"], [90, 80]):\n    print(name, score)",
+            "displayContent": "# 묶어 순회[zip]\nfor name, score in zip([\"kim\", \"lee\"], [90, 80]): # 같은 위치끼리 묶음. 짧은 쪽에 맞춰 끝남\n    print(name, score)"
+          },
+          {
+            "id": "language-python-p03-part-5",
+            "title": "가변 인자[*args / **kwargs]",
+            "content": "def log(*args, **kwargs):\n    print(args, kwargs)\n\nlog(1, 2, level=\"info\")",
+            "displayContent": "# 가변 인자[*args / **kwargs]\ndef log(*args, **kwargs): # *args 위치 인자 튜플, **kwargs 이름 인자 딕셔너리\n    print(args, kwargs)\n\nlog(1, 2, level=\"info\") # 결과: (1, 2) {'level': 'info'}"
+          },
+          {
+            "id": "language-python-p03-part-6",
+            "title": "데이터 클래스[dataclass]",
+            "content": "from dataclasses import dataclass\n\n@dataclass\nclass User:\n    name: str\n    age: int = 0",
+            "displayContent": "# 데이터 클래스[dataclass]\nfrom dataclasses import dataclass\n\n@dataclass # __init__, __repr__ 등을 자동 생성\nclass User:\n    name: str\n    age: int = 0 # 기본값이 있는 필드는 뒤쪽에 둔다"
+          },
+          {
+            "id": "language-python-p03-part-7",
+            "title": "비동기 함수[async def]",
+            "content": "import asyncio\n\nasync def main():\n    await asyncio.sleep(1)\n\nasyncio.run(main())",
+            "displayContent": "# 비동기 함수[async def]\nimport asyncio\n\nasync def main():\n    await asyncio.sleep(1) # await 기다리는 동안 다른 작업에 양보\n\nasyncio.run(main()) # 비동기 함수를 시작하는 진입점"
+          },
+          {
+            "id": "language-python-p03-part-8",
+            "title": "집합[set]",
+            "content": "tags = {\"py\", \"js\", \"py\"}\ntags.add(\"go\")\nunique = set([\"a\", \"a\", \"b\"])",
+            "displayContent": "# 집합[set]\ntags = {\"py\", \"js\", \"py\"} # 중복이 사라짐. 순서 보장 안 됨\ntags.add(\"go\")\nunique = set([\"a\", \"a\", \"b\"]) # 빈 집합은 {}가 아니라 set()"
           }
         ]
       }
@@ -3357,7 +3183,7 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-react-p01-part-3",
             "title": "findIndex + splice 삭제[remove]",
             "content": "type Task = { id: number; title: string; done: boolean };\ntype Member = { id: number; tasks: Task[] };\n\nconst removeTask = (memberId: number, taskId: number) => {\n  setOrg((prev) =>\n    produce(prev, (draft) => {\n      const member = _.find(\n        _.flatMap(draft.teams, (t) => t.members),\n        { id: memberId },\n      ) as Member | undefined;\n      if (!member) return;\n      const idx = _.findIndex(member.tasks, { id: taskId });\n      if (idx >= 0) member.tasks.splice(idx, 1);\n    }),\n  );\n};",
-            "displayContent": "// findIndex + splice 삭제[remove]\ntype Task = { id: number; title: string; done: boolean };\ntype Member = { id: number; tasks: Task[] };\n\nconst removeTask = (memberId: number, taskId: number) => {\n  setOrg((prev) =>\n    produce(prev, (draft) => {\n      const member = _.find(\n        _.flatMap(draft.teams, (t) => t.members),\n        { id: memberId },\n      ) as Member | undefined;\n      if (!member) return;\n      const idx = _.findIndex(member.tasks, { id: taskId });\n      if (idx >= 0) member.tasks.splice(idx, 1);\n    }),\n  );\n};"
+            "displayContent": "// findIndex + splice 삭제[remove]\ntype Task = { id: number; title: string; done: boolean };\ntype Member = { id: number; tasks: Task[] };\n\nconst removeTask = (memberId: number, taskId: number) => {\n  setOrg((prev) =>\n    produce(prev, (draft) => { // draft를 직접 고쳐도 원본은 그대로, 새 상태가 만들어짐\n      const member = _.find(\n        _.flatMap(draft.teams, (t) => t.members),\n        { id: memberId },\n      ) as Member | undefined;\n      if (!member) return;\n      const idx = _.findIndex(member.tasks, { id: taskId });\n      if (idx >= 0) member.tasks.splice(idx, 1); // 못 찾으면 -1. splice(-1, 1)이 마지막 요소를 지우지 않게 막음\n    }),\n  );\n};"
           },
           {
             "id": "language-react-p01-part-4",
@@ -3388,6 +3214,123 @@ export const languageTracks: LanguageTrack[] = [
             "title": "get + 키 재할당[path update]",
             "content": "type Member = { id: number; name: string };\n\nconst renameMember = (memberId: number, name: string) => {\n  setOrg((prev) =>\n    produce(prev, (draft) => {\n      const members = _.get(draft, \"teams[0].members\") as Member[] | undefined;\n      if (!members) return;\n      const idx = _.findIndex(members, { id: memberId });\n      if (idx < 0) return;\n      members[idx] = { ...members[idx], name };\n    }),\n  );\n};",
             "displayContent": "// get + 키 재할당[path update]\n// _.get으로 부모를 찾고, 부모[key]에 새 값을 넣으면 Immer가 경로를 추적한다\ntype Member = { id: number; name: string };\n\nconst renameMember = (memberId: number, name: string) => {\n  setOrg((prev) =>\n    produce(prev, (draft) => {\n      const members = _.get(draft, \"teams[0].members\") as Member[] | undefined;\n      if (!members) return;\n      const idx = _.findIndex(members, { id: memberId });\n      if (idx < 0) return;\n      members[idx] = { ...members[idx], name };\n    }),\n  );\n};"
+          }
+        ]
+      },
+      {
+        "id": "language-react-p02",
+        "title": "P02.훅-컴포넌트",
+        "fileName": "P02.훅-컴포넌트.yaml",
+        "sourcePath": "assets/raw/syntax/react/P02.훅-컴포넌트.yaml",
+        "language": "typescript",
+        "parts": [
+          {
+            "id": "language-react-p02-part-1",
+            "title": "컴포넌트 props[props]",
+            "content": "type GreetingProps = { name: string; age?: number };\n\nfunction Greeting({ name, age = 20 }: GreetingProps) {\n  return <p>{name} ({age})</p>;\n}",
+            "displayContent": "// 컴포넌트 props[props]\ntype GreetingProps = { name: string; age?: number }; // ?는 선택 props\n\nfunction Greeting({ name, age = 20 }: GreetingProps) { // 구조분해 기본값. undefined일 때 적용\n  return <p>{name} ({age})</p>;\n}"
+          },
+          {
+            "id": "language-react-p02-part-2",
+            "title": "children[children]",
+            "content": "function Card({ children }: { children: React.ReactNode }) {\n  return <div className=\"card\">{children}</div>;\n}",
+            "displayContent": "// children[children]\nfunction Card({ children }: { children: React.ReactNode }) { // 태그 사이에 넣은 내용이 children으로 전달됨\n  return <div className=\"card\">{children}</div>;\n}"
+          },
+          {
+            "id": "language-react-p02-part-3",
+            "title": "상태[useState]",
+            "content": "const [count, setCount] = useState(0);\n\n<button onClick={() => setCount((prev) => prev + 1)}>{count}</button>;",
+            "displayContent": "// 상태[useState]\nconst [count, setCount] = useState(0); // [현재 값, 변경 함수]. 값이 바뀌면 다시 렌더링\n\n<button onClick={() => setCount((prev) => prev + 1)}>{count}</button>; // 이전 값 기반 갱신은 함수형으로"
+          },
+          {
+            "id": "language-react-p02-part-4",
+            "title": "객체 상태 갱신[immutable update]",
+            "content": "const [user, setUser] = useState({ name: \"kim\", age: 30 });\n\nsetUser((prev) => ({ ...prev, age: 31 }));",
+            "displayContent": "// 객체 상태 갱신[immutable update]\nconst [user, setUser] = useState({ name: \"kim\", age: 30 });\n\nsetUser((prev) => ({ ...prev, age: 31 })); // 객체를 직접 고치지 않고 새 객체로 교체해야 변경이 감지됨"
+          },
+          {
+            "id": "language-react-p02-part-5",
+            "title": "효과[useEffect]",
+            "content": "useEffect(() => {\n  document.title = title;\n}, [title]);",
+            "displayContent": "// 효과[useEffect]\nuseEffect(() => { // 렌더링 후 실행되는 부수 효과\n  document.title = title;\n}, [title]); // 의존성 배열. title이 바뀔 때만 다시 실행"
+          },
+          {
+            "id": "language-react-p02-part-6",
+            "title": "효과 정리[cleanup]",
+            "content": "useEffect(() => {\n  const timer = setInterval(tick, 1000);\n  return () => clearInterval(timer);\n}, []);",
+            "displayContent": "// 효과 정리[cleanup]\nuseEffect(() => {\n  const timer = setInterval(tick, 1000);\n  return () => clearInterval(timer); // 정리 함수. 언마운트와 재실행 전에 호출\n}, []); // 빈 배열은 마운트 때 한 번만"
+          },
+          {
+            "id": "language-react-p02-part-7",
+            "title": "효과에서 조회[data fetching]",
+            "content": "useEffect(() => {\n  const controller = new AbortController();\n  fetch(url, { signal: controller.signal })\n    .then((res) => res.json())\n    .then(setData);\n  return () => controller.abort();\n}, [url]);",
+            "displayContent": "// 효과에서 조회[data fetching]\nuseEffect(() => {\n  const controller = new AbortController(); // url이 바뀌면 이전 요청을 취소해 늦은 응답의 덮어쓰기를 막음\n  fetch(url, { signal: controller.signal })\n    .then((res) => res.json())\n    .then(setData);\n  return () => controller.abort();\n}, [url]);"
+          },
+          {
+            "id": "language-react-p02-part-8",
+            "title": "참조[useRef]",
+            "content": "const inputRef = useRef<HTMLInputElement>(null);\n\ninputRef.current?.focus();\n\n<input ref={inputRef} />;",
+            "displayContent": "// 참조[useRef]\nconst inputRef = useRef<HTMLInputElement>(null); // current가 바뀌어도 다시 렌더링되지 않음\n\ninputRef.current?.focus(); // 렌더링 전에는 null이라 ?.로 접근. 실제로는 효과나 이벤트 안에서\n\n<input ref={inputRef} />;"
+          },
+          {
+            "id": "language-react-p02-part-9",
+            "title": "값 기억[useMemo]",
+            "content": "const visibleItems = useMemo(\n  () => items.filter((item) => item.active),\n  [items],\n);",
+            "displayContent": "// 값 기억[useMemo]\nconst visibleItems = useMemo( // 비용 큰 계산 결과를 기억\n  () => items.filter((item) => item.active),\n  [items], // items가 바뀔 때만 다시 계산\n);"
+          },
+          {
+            "id": "language-react-p02-part-10",
+            "title": "함수 기억[useCallback]",
+            "content": "const handleSave = useCallback(() => {\n  onSave(form);\n}, [form, onSave]);",
+            "displayContent": "// 함수 기억[useCallback]\nconst handleSave = useCallback(() => { // 함수 참조를 유지. memo 자식에 넘길 때 효과가 있음\n  onSave(form);\n}, [form, onSave]); // 안에서 쓰는 값은 빠짐없이 넣기"
+          },
+          {
+            "id": "language-react-p02-part-11",
+            "title": "컨텍스트[useContext]",
+            "content": "const ThemeContext = createContext(\"light\");\n\nconst theme = useContext(ThemeContext);\n\n<ThemeContext.Provider value=\"dark\">{children}</ThemeContext.Provider>;",
+            "displayContent": "// 컨텍스트[useContext]\nconst ThemeContext = createContext(\"light\"); // 인자는 Provider가 없을 때의 기본값\n\nconst theme = useContext(ThemeContext);\n\n<ThemeContext.Provider value=\"dark\">{children}</ThemeContext.Provider>; // 아래 모든 컴포넌트에 props 없이 값을 전달. 값이 바뀌면 구독자가 다시 렌더링"
+          },
+          {
+            "id": "language-react-p02-part-12",
+            "title": "리듀서[useReducer]",
+            "content": "function reducer(state: State, action: Action): State {\n  switch (action.type) {\n    case \"increment\":\n      return { count: state.count + 1 };\n    default:\n      return state;\n  }\n}\n\nconst [state, dispatch] = useReducer(reducer, { count: 0 });",
+            "displayContent": "// 리듀서[useReducer]\nfunction reducer(state: State, action: Action): State { // 상태와 액션을 받아 새 상태를 돌려주는 순수 함수\n  switch (action.type) {\n    case \"increment\":\n      return { count: state.count + 1 };\n    default:\n      return state;\n  }\n}\n\nconst [state, dispatch] = useReducer(reducer, { count: 0 }); // dispatch({ type: \"increment\" })로 변경 요청"
+          },
+          {
+            "id": "language-react-p02-part-13",
+            "title": "목록과 key[list key]",
+            "content": "<ul>\n  {items.map((item) => (\n    <li key={item.id}>{item.name}</li>\n  ))}\n</ul>;",
+            "displayContent": "// 목록과 key[list key]\n<ul>\n  {items.map((item) => (\n    <li key={item.id}>{item.name}</li> // key로 항목을 구분. 순서가 바뀌는 목록에 index는 피함\n  ))}\n</ul>;"
+          },
+          {
+            "id": "language-react-p02-part-14",
+            "title": "조건부 렌더링[conditional rendering]",
+            "content": "{isLoading ? <Spinner /> : <List items={items} />}\n{error && <ErrorMessage error={error} />}",
+            "displayContent": "// 조건부 렌더링[conditional rendering]\n{isLoading ? <Spinner /> : <List items={items} />} // 둘 중 하나를 그릴 때 삼항\n{error && <ErrorMessage error={error} />} // 있을 때만 그릴 때. 왼쪽이 0이면 0이 그려지니 주의"
+          },
+          {
+            "id": "language-react-p02-part-15",
+            "title": "이벤트[event handler]",
+            "content": "const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {\n  event.preventDefault();\n  onSubmit();\n};",
+            "displayContent": "// 이벤트[event handler]\nconst handleClick = (event: React.MouseEvent<HTMLButtonElement>) => { // 이벤트와 요소 타입을 함께 지정\n  event.preventDefault();\n  onSubmit();\n};"
+          },
+          {
+            "id": "language-react-p02-part-16",
+            "title": "제어 컴포넌트[controlled input]",
+            "content": "const [email, setEmail] = useState(\"\");\n\n<input value={email} onChange={(event) => setEmail(event.target.value)} />;",
+            "displayContent": "// 제어 컴포넌트[controlled input]\nconst [email, setEmail] = useState(\"\");\n\n<input value={email} onChange={(event) => setEmail(event.target.value)} />; // 입력값의 기준이 state. onChange가 없으면 입력되지 않음"
+          },
+          {
+            "id": "language-react-p02-part-17",
+            "title": "커스텀 훅[custom hook]",
+            "content": "function useToggle(initial = false) {\n  const [on, setOn] = useState(initial);\n  const toggle = useCallback(() => setOn((prev) => !prev), []);\n  return [on, toggle] as const;\n}",
+            "displayContent": "// 커스텀 훅[custom hook]\nfunction useToggle(initial = false) { // use로 시작해야 훅 규칙 검사를 받음\n  const [on, setOn] = useState(initial);\n  const toggle = useCallback(() => setOn((prev) => !prev), []);\n  return [on, toggle] as const; // boolean과 함수의 튜플로 추론되게 함\n}"
+          },
+          {
+            "id": "language-react-p02-part-18",
+            "title": "지연 로딩[lazy / Suspense]",
+            "content": "const Chart = lazy(() => import(\"./Chart\"));\n\n<Suspense fallback={<Spinner />}>\n  <Chart />\n</Suspense>;",
+            "displayContent": "// 지연 로딩[lazy / Suspense]\nconst Chart = lazy(() => import(\"./Chart\")); // 처음 그릴 때 코드를 내려받아 초기 번들을 줄임\n\n<Suspense fallback={<Spinner />}> // 로딩 동안 fallback 표시\n  <Chart />\n</Suspense>;"
           }
         ]
       }
@@ -3780,6 +3723,298 @@ export const languageTracks: LanguageTrack[] = [
     ]
   },
   {
+    "id": "spring-boot",
+    "label": "Spring Boot",
+    "folderName": "spring-boot",
+    "lessons": [
+      {
+        "id": "language-spring-boot-p01",
+        "title": "P01.요청-응답",
+        "fileName": "P01.요청-응답.yaml",
+        "sourcePath": "assets/raw/syntax/spring-boot/P01.요청-응답.yaml",
+        "language": "java",
+        "parts": [
+          {
+            "id": "language-spring-boot-p01-part-1",
+            "title": "앱 시작점[@SpringBootApplication]",
+            "content": "@SpringBootApplication\npublic class ApiApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(ApiApplication.class, args);\n    }\n}",
+            "displayContent": "// 앱 시작점[@SpringBootApplication]\n@SpringBootApplication // 자동 설정과 컴포넌트 스캔을 켠다. 이 클래스의 패키지 아래를 스캔\npublic class ApiApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(ApiApplication.class, args); // 내장 서버를 띄우고 앱을 시작\n    }\n}"
+          },
+          {
+            "id": "language-spring-boot-p01-part-2",
+            "title": "컨트롤러[@RestController]",
+            "content": "@RestController\n@RequestMapping(\"/api/users\")\npublic class UserController {\n}",
+            "displayContent": "// 컨트롤러[@RestController]\n@RestController // 반환값을 뷰가 아니라 응답 본문(JSON)으로 보냄\n@RequestMapping(\"/api/users\") // 이 클래스 전체의 공통 경로\npublic class UserController {\n}"
+          },
+          {
+            "id": "language-spring-boot-p01-part-3",
+            "title": "경로 변수[@PathVariable]",
+            "content": "@GetMapping(\"/{id}\")\npublic UserResponse getUser(@PathVariable Long id) {\n    return userService.getUser(id);\n}",
+            "displayContent": "// 경로 변수[@PathVariable]\n@GetMapping(\"/{id}\")\npublic UserResponse getUser(@PathVariable Long id) { // URL의 {id} 값을 받음. 특정 자원 하나를 가리킬 때\n    return userService.getUser(id);\n}"
+          },
+          {
+            "id": "language-spring-boot-p01-part-4",
+            "title": "쿼리 파라미터[@RequestParam]",
+            "content": "@GetMapping\npublic List<UserResponse> search(\n        @RequestParam(defaultValue = \"\") String keyword) {\n    return userService.search(keyword);\n}",
+            "displayContent": "// 쿼리 파라미터[@RequestParam]\n@GetMapping\npublic List<UserResponse> search(\n        @RequestParam(defaultValue = \"\") String keyword) { // ?keyword=kim 값을 받음. 필터·정렬처럼 선택 조건에\n    return userService.search(keyword);\n}"
+          },
+          {
+            "id": "language-spring-boot-p01-part-5",
+            "title": "요청 본문[@RequestBody]",
+            "content": "@PostMapping\npublic UserResponse create(@RequestBody CreateUserRequest request) {\n    return userService.create(request);\n}",
+            "displayContent": "// 요청 본문[@RequestBody]\n@PostMapping\npublic UserResponse create(@RequestBody CreateUserRequest request) { // JSON 본문을 객체로 변환\n    return userService.create(request);\n}"
+          },
+          {
+            "id": "language-spring-boot-p01-part-6",
+            "title": "응답 제어[ResponseEntity]",
+            "content": "@PostMapping\npublic ResponseEntity<UserResponse> create(@RequestBody CreateUserRequest request) {\n    UserResponse user = userService.create(request);\n    URI location = URI.create(\"/api/users/\" + user.id());\n    return ResponseEntity.created(location).body(user);\n}",
+            "displayContent": "// 응답 제어[ResponseEntity]\n@PostMapping\npublic ResponseEntity<UserResponse> create(@RequestBody CreateUserRequest request) { // 상태 코드와 헤더를 직접 정할 때\n    UserResponse user = userService.create(request);\n    URI location = URI.create(\"/api/users/\" + user.id());\n    return ResponseEntity.created(location).body(user); // 상태 코드 201 Created와 Location 헤더\n}"
+          },
+          {
+            "id": "language-spring-boot-p01-part-7",
+            "title": "삭제 응답[204 No Content]",
+            "content": "@DeleteMapping(\"/{id}\")\npublic ResponseEntity<Void> delete(@PathVariable Long id) {\n    userService.delete(id);\n    return ResponseEntity.noContent().build();\n}",
+            "displayContent": "// 삭제 응답[204 No Content]\n@DeleteMapping(\"/{id}\")\npublic ResponseEntity<Void> delete(@PathVariable Long id) {\n    userService.delete(id);\n    return ResponseEntity.noContent().build(); // 성공했지만 돌려줄 본문이 없을 때\n}"
+          },
+          {
+            "id": "language-spring-boot-p01-part-8",
+            "title": "DTO[record]",
+            "content": "public record CreateUserRequest(String name, String email) {}\n\npublic record UserResponse(Long id, String name) {\n    public static UserResponse from(User user) {\n        return new UserResponse(user.getId(), user.getName());\n    }\n}",
+            "displayContent": "// DTO[record]\npublic record CreateUserRequest(String name, String email) {} // 요청·응답 전용 불변 객체. Java 16 이상\n\npublic record UserResponse(Long id, String name) {\n    public static UserResponse from(User user) { // 엔티티를 그대로 내보내지 않고 필요한 필드만 옮김\n        return new UserResponse(user.getId(), user.getName());\n    }\n}"
+          }
+        ]
+      },
+      {
+        "id": "language-spring-boot-p02",
+        "title": "P02.계층-트랜잭션",
+        "fileName": "P02.계층-트랜잭션.yaml",
+        "sourcePath": "assets/raw/syntax/spring-boot/P02.계층-트랜잭션.yaml",
+        "language": "java",
+        "parts": [
+          {
+            "id": "language-spring-boot-p02-part-1",
+            "title": "생성자 주입[constructor injection]",
+            "content": "@Service\npublic class UserService {\n    private final UserRepository userRepository;\n\n    public UserService(UserRepository userRepository) {\n        this.userRepository = userRepository;\n    }\n}",
+            "displayContent": "// 생성자 주입[constructor injection]\n@Service // 업무 로직 계층. 스프링이 빈으로 등록\npublic class UserService {\n    private final UserRepository userRepository; // final이면 주입 누락을 컴파일 때 잡음\n\n    public UserService(UserRepository userRepository) { // 생성자가 하나면 @Autowired 생략 가능\n        this.userRepository = userRepository;\n    }\n}"
+          },
+          {
+            "id": "language-spring-boot-p02-part-2",
+            "title": "쓰기 트랜잭션[@Transactional]",
+            "content": "@Transactional\npublic UserResponse create(CreateUserRequest request) {\n    User user = userRepository.save(new User(request.name(), request.email()));\n    return UserResponse.from(user);\n}",
+            "displayContent": "// 쓰기 트랜잭션[@Transactional]\n@Transactional // 메서드 전체를 한 트랜잭션으로. RuntimeException이면 롤백\npublic UserResponse create(CreateUserRequest request) {\n    User user = userRepository.save(new User(request.name(), request.email()));\n    return UserResponse.from(user);\n}"
+          },
+          {
+            "id": "language-spring-boot-p02-part-3",
+            "title": "읽기 트랜잭션[readOnly]",
+            "content": "@Transactional(readOnly = true)\npublic UserResponse getUser(Long id) {\n    User user = userRepository.findById(id)\n            .orElseThrow(() -> new UserNotFoundException(id));\n    return UserResponse.from(user);\n}",
+            "displayContent": "// 읽기 트랜잭션[readOnly]\n@Transactional(readOnly = true) // 조회 전용 표시. 변경 감지를 줄여 부담을 낮춤\npublic UserResponse getUser(Long id) {\n    User user = userRepository.findById(id)\n            .orElseThrow(() -> new UserNotFoundException(id)); // 없으면 예외. null을 넘기지 않음\n    return UserResponse.from(user);\n}"
+          },
+          {
+            "id": "language-spring-boot-p02-part-4",
+            "title": "입력 검증[@Valid]",
+            "content": "public record CreateUserRequest(\n        @NotBlank String name,\n        @Email String email,\n        @Min(0) int age) {}\n\n@PostMapping\npublic UserResponse create(@Valid @RequestBody CreateUserRequest request) {\n    return userService.create(request);\n}",
+            "displayContent": "// 입력 검증[@Valid]\npublic record CreateUserRequest(\n        @NotBlank String name, // 빈 문자열, 공백만 있는 값, null을 거부\n        @Email String email,\n        @Min(0) int age) {}\n\n@PostMapping\npublic UserResponse create(@Valid @RequestBody CreateUserRequest request) { // 이게 있어야 검증이 실행됨. 실패하면 400 계열 응답. spring-boot-starter-validation 필요\n    return userService.create(request);\n}"
+          },
+          {
+            "id": "language-spring-boot-p02-part-5",
+            "title": "전역 예외 처리[@RestControllerAdvice]",
+            "content": "@RestControllerAdvice\npublic class ApiExceptionHandler {\n    @ExceptionHandler(UserNotFoundException.class)\n    public ResponseEntity<ErrorResponse> handleNotFound(UserNotFoundException e) {\n        return ResponseEntity.status(HttpStatus.NOT_FOUND)\n                .body(new ErrorResponse(e.getMessage()));\n    }\n}",
+            "displayContent": "// 전역 예외 처리[@RestControllerAdvice]\n@RestControllerAdvice // 모든 컨트롤러의 예외를 한곳에서 응답으로 변환\npublic class ApiExceptionHandler {\n    @ExceptionHandler(UserNotFoundException.class) // 처리할 예외 타입 지정\n    public ResponseEntity<ErrorResponse> handleNotFound(UserNotFoundException e) {\n        return ResponseEntity.status(HttpStatus.NOT_FOUND)\n                .body(new ErrorResponse(e.getMessage()));\n    }\n}"
+          },
+          {
+            "id": "language-spring-boot-p02-part-6",
+            "title": "업무 예외[custom exception]",
+            "content": "public class UserNotFoundException extends RuntimeException {\n    public UserNotFoundException(Long id) {\n        super(\"사용자를 찾을 수 없음: \" + id);\n    }\n}",
+            "displayContent": "// 업무 예외[custom exception]\npublic class UserNotFoundException extends RuntimeException { // @Transactional은 기본으로 RuntimeException에 롤백\n    public UserNotFoundException(Long id) {\n        super(\"사용자를 찾을 수 없음: \" + id);\n    }\n}"
+          }
+        ]
+      },
+      {
+        "id": "language-spring-boot-p03",
+        "title": "P03.JPA",
+        "fileName": "P03.JPA.yaml",
+        "sourcePath": "assets/raw/syntax/spring-boot/P03.JPA.yaml",
+        "language": "java",
+        "parts": [
+          {
+            "id": "language-spring-boot-p03-part-1",
+            "title": "엔티티[@Entity]",
+            "content": "@Entity\n@Table(name = \"users\")\npublic class User {\n    @Id\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\n    private Long id;\n\n    @Column(nullable = false, length = 50)\n    private String name;\n\n    protected User() {}\n}",
+            "displayContent": "// 엔티티[@Entity]\n@Entity // 테이블과 연결되는 객체\n@Table(name = \"users\")\npublic class User {\n    @Id\n    @GeneratedValue(strategy = GenerationType.IDENTITY) // DB의 자동 증가 값을 id로 사용\n    private Long id;\n\n    @Column(nullable = false, length = 50)\n    private String name;\n\n    protected User() {} // JPA가 객체를 만들 때 쓰는 기본 생성자. 필수\n}"
+          },
+          {
+            "id": "language-spring-boot-p03-part-2",
+            "title": "연관 관계[@ManyToOne]",
+            "content": "@Entity\npublic class Order {\n    @Id\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\n    private Long id;\n\n    @ManyToOne(fetch = FetchType.LAZY)\n    @JoinColumn(name = \"user_id\")\n    private User user;\n}",
+            "displayContent": "// 연관 관계[@ManyToOne]\n@Entity\npublic class Order {\n    @Id\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\n    private Long id;\n\n    @ManyToOne(fetch = FetchType.LAZY) // 실제로 쓸 때 조회. @ManyToOne 기본은 EAGER라 명시\n    @JoinColumn(name = \"user_id\") // 외래 키 컬럼 지정\n    private User user;\n}"
+          },
+          {
+            "id": "language-spring-boot-p03-part-3",
+            "title": "리포지토리[JpaRepository]",
+            "content": "public interface UserRepository extends JpaRepository<User, Long> {\n}",
+            "displayContent": "// 리포지토리[JpaRepository]\npublic interface UserRepository extends JpaRepository<User, Long> { // <엔티티, id 타입>. save, findById, delete 등을 구현 없이 제공\n}"
+          },
+          {
+            "id": "language-spring-boot-p03-part-4",
+            "title": "쿼리 메서드[query method]",
+            "content": "Optional<User> findByEmail(String email);\nList<User> findByNameContaining(String keyword);\nboolean existsByEmail(String email);",
+            "displayContent": "// 쿼리 메서드[query method]\nOptional<User> findByEmail(String email); // 메서드 이름을 해석해 쿼리를 만듦. 없을 수 있으면 Optional\nList<User> findByNameContaining(String keyword);\nboolean existsByEmail(String email); // 존재 여부만 확인"
+          },
+          {
+            "id": "language-spring-boot-p03-part-5",
+            "title": "직접 쿼리[@Query]",
+            "content": "@Query(\"select o from Order o join fetch o.user where o.id = :id\")\nOptional<Order> findWithUser(@Param(\"id\") Long id);",
+            "displayContent": "// 직접 쿼리[@Query]\n@Query(\"select o from Order o join fetch o.user where o.id = :id\") // 연관 객체를 한 번에 조회. N+1 문제의 대표 해결책\nOptional<Order> findWithUser(@Param(\"id\") Long id); // :id와 메서드 인자를 연결"
+          },
+          {
+            "id": "language-spring-boot-p03-part-6",
+            "title": "페이징[Pageable]",
+            "content": "Page<User> findByNameContaining(String keyword, Pageable pageable);\n\nPageable pageable = PageRequest.of(0, 20, Sort.by(\"id\").descending());",
+            "displayContent": "// 페이징[Pageable]\nPage<User> findByNameContaining(String keyword, Pageable pageable); // 목록과 전체 개수를 함께 반환. 개수 쿼리가 추가로 나감\n\nPageable pageable = PageRequest.of(0, 20, Sort.by(\"id\").descending()); // 페이지 번호는 0부터"
+          },
+          {
+            "id": "language-spring-boot-p03-part-7",
+            "title": "저장과 조회[save / findById]",
+            "content": "User saved = userRepository.save(new User(\"kim\"));\nOptional<User> found = userRepository.findById(saved.getId());\nuserRepository.deleteById(saved.getId());",
+            "displayContent": "// 저장과 조회[save / findById]\nUser saved = userRepository.save(new User(\"kim\"));\nOptional<User> found = userRepository.findById(saved.getId()); // 없을 수 있어 Optional로 반환\nuserRepository.deleteById(saved.getId());"
+          },
+          {
+            "id": "language-spring-boot-p03-part-8",
+            "title": "변경 감지[dirty checking]",
+            "content": "@Transactional\npublic void rename(Long id, String name) {\n    User user = userRepository.findById(id).orElseThrow();\n    user.rename(name);\n}",
+            "displayContent": "// 변경 감지[dirty checking]\n@Transactional\npublic void rename(Long id, String name) {\n    User user = userRepository.findById(id).orElseThrow();\n    user.rename(name); // save를 호출하지 않아도 트랜잭션이 끝날 때 UPDATE. 영속 상태일 때만 동작\n}"
+          }
+        ]
+      },
+      {
+        "id": "language-spring-boot-p04",
+        "title": "P04.설정파일",
+        "fileName": "P04.설정파일.yaml",
+        "sourcePath": "assets/raw/syntax/spring-boot/P04.설정파일.yaml",
+        "language": "shell",
+        "parts": [
+          {
+            "id": "language-spring-boot-p04-part-1",
+            "title": "설정 파일[application.yml]",
+            "content": "server:\n  port: 8080\nspring:\n  datasource:\n    url: jdbc:postgresql://localhost:5432/app\n    username: app\n    password: ${DB_PASSWORD}\n  jpa:\n    hibernate:\n      ddl-auto: validate",
+            "displayContent": "# 설정 파일[application.yml]\nserver:\n  port: 8080\nspring:\n  datasource:\n    url: jdbc:postgresql://localhost:5432/app\n    username: app\n    password: ${DB_PASSWORD} # ${...} 환경 변수에서 읽음. 비밀값을 파일에 적지 않는다\n  jpa:\n    hibernate:\n      ddl-auto: validate # 스키마를 고치지 않고 검사만. 운영에서 create·update는 피함"
+          },
+          {
+            "id": "language-spring-boot-p04-part-2",
+            "title": "프로필[profile]",
+            "content": "spring:\n  config:\n    activate:\n      on-profile: local\nlogging:\n  level:\n    org.hibernate.SQL: debug",
+            "displayContent": "# 프로필[profile]\nspring:\n  config:\n    activate:\n      on-profile: local # local 프로필일 때만 적용. 실행 시 --spring.profiles.active=local\nlogging:\n  level:\n    org.hibernate.SQL: debug # 실행되는 SQL을 로그로 확인"
+          }
+        ]
+      },
+      {
+        "id": "language-spring-boot-p05",
+        "title": "P05.설정-테스트",
+        "fileName": "P05.설정-테스트.yaml",
+        "sourcePath": "assets/raw/syntax/spring-boot/P05.설정-테스트.yaml",
+        "language": "java",
+        "parts": [
+          {
+            "id": "language-spring-boot-p05-part-1",
+            "title": "설정값 읽기[@Value]",
+            "content": "@Value(\"${app.base-url}\")\nprivate String baseUrl;",
+            "displayContent": "// 설정값 읽기[@Value]\n@Value(\"${app.base-url}\") // 값 하나를 읽을 때. 없으면 시작 시 실패\nprivate String baseUrl;"
+          },
+          {
+            "id": "language-spring-boot-p05-part-2",
+            "title": "설정 묶음[@ConfigurationProperties]",
+            "content": "@ConfigurationProperties(prefix = \"app\")\npublic record AppProperties(String baseUrl, int timeoutSeconds) {}",
+            "displayContent": "// 설정 묶음[@ConfigurationProperties]\n@ConfigurationProperties(prefix = \"app\") // 여러 값을 타입 있는 객체로. @ConfigurationPropertiesScan 등으로 등록 필요\npublic record AppProperties(String baseUrl, int timeoutSeconds) {}"
+          },
+          {
+            "id": "language-spring-boot-p05-part-3",
+            "title": "빈 등록[@Bean]",
+            "content": "@Configuration\npublic class ClockConfig {\n    @Bean\n    public Clock clock() {\n        return Clock.systemUTC();\n    }\n}",
+            "displayContent": "// 빈 등록[@Bean]\n@Configuration\npublic class ClockConfig {\n    @Bean // 직접 만든 객체를 빈으로 등록. 외부 라이브러리 객체에 주로 사용\n    public Clock clock() {\n        return Clock.systemUTC();\n    }\n}"
+          },
+          {
+            "id": "language-spring-boot-p05-part-4",
+            "title": "통합 테스트[@SpringBootTest]",
+            "content": "@SpringBootTest\nclass UserServiceTest {\n    @Autowired\n    private UserService userService;\n\n    @Test\n    void createsUser() {\n        UserResponse user = userService.create(new CreateUserRequest(\"kim\", \"kim@example.com\"));\n        assertThat(user.name()).isEqualTo(\"kim\");\n    }\n}",
+            "displayContent": "// 통합 테스트[@SpringBootTest]\n@SpringBootTest // 전체 설정을 올림. 확실하지만 느리다\nclass UserServiceTest {\n    @Autowired\n    private UserService userService;\n\n    @Test\n    void createsUser() {\n        UserResponse user = userService.create(new CreateUserRequest(\"kim\", \"kim@example.com\"));\n        assertThat(user.name()).isEqualTo(\"kim\");\n    }\n}"
+          },
+          {
+            "id": "language-spring-boot-p05-part-5",
+            "title": "컨트롤러 테스트[@WebMvcTest]",
+            "content": "@WebMvcTest(UserController.class)\nclass UserControllerTest {\n    @Autowired\n    private MockMvc mockMvc;\n\n    @MockitoBean\n    private UserService userService;\n\n    @Test\n    void returnsNotFound() throws Exception {\n        when(userService.getUser(1L)).thenThrow(new UserNotFoundException(1L));\n        mockMvc.perform(get(\"/api/users/1\"))\n                .andExpect(status().isNotFound());\n    }\n}",
+            "displayContent": "// 컨트롤러 테스트[@WebMvcTest]\n@WebMvcTest(UserController.class) // 웹 계층만 올려 빠름\nclass UserControllerTest {\n    @Autowired\n    private MockMvc mockMvc;\n\n    @MockitoBean // 서비스를 가짜로 교체. 이전 버전에서는 @MockBean\n    private UserService userService;\n\n    @Test\n    void returnsNotFound() throws Exception {\n        when(userService.getUser(1L)).thenThrow(new UserNotFoundException(1L));\n        mockMvc.perform(get(\"/api/users/1\")) // 서버 없이 요청을 흉내 냄\n                .andExpect(status().isNotFound());\n    }\n}"
+          }
+        ]
+      },
+      {
+        "id": "language-spring-boot-p06",
+        "title": "P06.게이트웨이-설정",
+        "fileName": "P06.게이트웨이-설정.yaml",
+        "sourcePath": "assets/raw/syntax/spring-boot/P06.게이트웨이-설정.yaml",
+        "language": "shell",
+        "parts": [
+          {
+            "id": "language-spring-boot-p06-part-1",
+            "title": "라우트[route]",
+            "content": "spring:\n  cloud:\n    gateway:\n      server:\n        webflux:\n          routes:\n          - id: user-service\n            uri: http://localhost:8081\n            predicates:\n            - Path=/api/users/**\n            filters:\n            - StripPrefix=1",
+            "displayContent": "# 라우트[route]\nspring:\n  cloud:\n    gateway:\n      server:\n        webflux: # 버전 5.0 기준 경로. 예전 버전은 spring.cloud.gateway.routes\n          routes:\n          - id: user-service\n            uri: http://localhost:8081 # 요청을 넘길 내부 서비스 주소\n            predicates:\n            - Path=/api/users/** # Predicate: 이 라우트를 탈 조건\n            filters:\n            - StripPrefix=1 # Filter: 앞 경로 하나를 떼고 전달. /api/users → /users"
+          },
+          {
+            "id": "language-spring-boot-p06-part-2",
+            "title": "요청 제한[RequestRateLimiter]",
+            "content": "filters:\n- name: RequestRateLimiter\n  args:\n    redis-rate-limiter.replenishRate: 10\n    redis-rate-limiter.burstCapacity: 20\n    redis-rate-limiter.requestedTokens: 1\n    key-resolver: \"#{@userKeyResolver}\"",
+            "displayContent": "# 요청 제한[RequestRateLimiter]\nfilters:\n- name: RequestRateLimiter # 한도를 넘으면 429 응답. spring-boot-starter-data-redis-reactive 필요\n  args:\n    redis-rate-limiter.replenishRate: 10 # 초당 채워지는 토큰 수\n    redis-rate-limiter.burstCapacity: 20 # 순간적으로 허용하는 최대치\n    redis-rate-limiter.requestedTokens: 1\n    key-resolver: \"#{@userKeyResolver}\" # 누구 기준으로 셀지 정하는 빈 참조"
+          },
+          {
+            "id": "language-spring-boot-p06-part-3",
+            "title": "서킷 브레이커[CircuitBreaker]",
+            "content": "filters:\n- name: CircuitBreaker\n  args:\n    name: userService\n    fallbackUri: forward:/fallback/users",
+            "displayContent": "# 서킷 브레이커[CircuitBreaker]\nfilters:\n- name: CircuitBreaker # 장애 서비스 호출을 잠시 차단. spring-cloud-starter-circuitbreaker-reactor-resilience4j 필요\n  args:\n    name: userService\n    fallbackUri: forward:/fallback/users # 차단됐을 때 대신 응답할 곳. forward: 만 지원"
+          },
+          {
+            "id": "language-spring-boot-p06-part-4",
+            "title": "CORS[globalcors]",
+            "content": "spring:\n  cloud:\n    gateway:\n      server:\n        webflux:\n          globalcors:\n            cors-configurations:\n              '[/**]':\n                allowedOrigins: \"https://app.example.com\"\n                allowedMethods:\n                - GET\n                - POST",
+            "displayContent": "# CORS[globalcors]\nspring:\n  cloud:\n    gateway:\n      server:\n        webflux:\n          globalcors: # 게이트웨이에서 처리하면 서비스마다 설정하지 않아도 됨\n            cors-configurations:\n              '[/**]': # 모든 경로에 적용. 대괄호와 따옴표가 필요\n                allowedOrigins: \"https://app.example.com\"\n                allowedMethods:\n                - GET\n                - POST"
+          }
+        ]
+      },
+      {
+        "id": "language-spring-boot-p07",
+        "title": "P07.게이트웨이-코드",
+        "fileName": "P07.게이트웨이-코드.yaml",
+        "sourcePath": "assets/raw/syntax/spring-boot/P07.게이트웨이-코드.yaml",
+        "language": "java",
+        "parts": [
+          {
+            "id": "language-spring-boot-p07-part-1",
+            "title": "코드로 라우트 정의[RouteLocator]",
+            "content": "@Bean\npublic RouteLocator routes(RouteLocatorBuilder builder) {\n    return builder.routes()\n            .route(\"user-service\", r -> r.path(\"/api/users/**\")\n                    .filters(f -> f.stripPrefix(1))\n                    .uri(\"http://localhost:8081\"))\n            .build();\n}",
+            "displayContent": "// 코드로 라우트 정의[RouteLocator]\n@Bean\npublic RouteLocator routes(RouteLocatorBuilder builder) { // YAML과 같은 라우트를 코드로. 조건이 복잡할 때 사용\n    return builder.routes()\n            .route(\"user-service\", r -> r.path(\"/api/users/**\")\n                    .filters(f -> f.stripPrefix(1))\n                    .uri(\"http://localhost:8081\"))\n            .build();\n}"
+          },
+          {
+            "id": "language-spring-boot-p07-part-2",
+            "title": "전역 필터[GlobalFilter]",
+            "content": "@Component\npublic class LoggingFilter implements GlobalFilter, Ordered {\n    @Override\n    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {\n        log.info(\"request: {}\", exchange.getRequest().getPath());\n        return chain.filter(exchange);\n    }\n\n    @Override\n    public int getOrder() {\n        return -1;\n    }\n}",
+            "displayContent": "// 전역 필터[GlobalFilter]\n@Component\npublic class LoggingFilter implements GlobalFilter, Ordered { // 모든 라우트에 적용되는 필터\n    @Override\n    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) { // WebFlux의 비동기 결과. 값 없이 완료만 알림\n        log.info(\"request: {}\", exchange.getRequest().getPath());\n        return chain.filter(exchange); // 다음 필터로 넘김. 반환하지 않으면 요청이 끝나지 않음\n    }\n\n    @Override\n    public int getOrder() {\n        return -1; // 작을수록 먼저 실행\n    }\n}"
+          },
+          {
+            "id": "language-spring-boot-p07-part-3",
+            "title": "인증 헤더 검사[auth filter]",
+            "content": "@Override\npublic Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {\n    String token = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);\n    if (token == null) {\n        exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);\n        return exchange.getResponse().setComplete();\n    }\n    return chain.filter(exchange);\n}",
+            "displayContent": "// 인증 헤더 검사[auth filter]\n@Override\npublic Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {\n    String token = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);\n    if (token == null) { // 인증 같은 공통 관심사는 여기서, 업무 규칙은 서비스에서\n        exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);\n        return exchange.getResponse().setComplete(); // 내부 서비스로 넘기지 않고 응답을 끝냄\n    }\n    return chain.filter(exchange);\n}"
+          },
+          {
+            "id": "language-spring-boot-p07-part-4",
+            "title": "제한 기준[KeyResolver]",
+            "content": "@Bean\npublic KeyResolver userKeyResolver() {\n    return exchange -> Mono.justOrEmpty(\n            exchange.getRequest().getHeaders().getFirst(\"X-User-Id\"));\n}",
+            "displayContent": "// 제한 기준[KeyResolver]\n@Bean\npublic KeyResolver userKeyResolver() { // 요청 제한을 사용자별로 세는 기준. BFF와 달리 응답을 조립하지 않고 통과·보호만 담당\n    return exchange -> Mono.justOrEmpty(\n            exchange.getRequest().getHeaders().getFirst(\"X-User-Id\"));\n}"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "sql",
     "label": "SQL",
     "folderName": "sql",
@@ -3795,7 +4030,7 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-sql-p01-part-1",
             "title": "테이블 생성[create table]",
             "content": "CREATE TABLE users (\n    user_id      INTEGER PRIMARY KEY,\n    user_name    VARCHAR(50),\n    user_age     INTEGER,\n    created_at   DATE\n);",
-            "displayContent": "-- 테이블 생성[create table]\nCREATE TABLE users (\n    user_id      INTEGER PRIMARY KEY,\n    user_name    VARCHAR(50),\n    user_age     INTEGER,\n    created_at   DATE\n);"
+            "displayContent": "-- 테이블 생성[create table]\nCREATE TABLE users (\n    user_id      INTEGER PRIMARY KEY, -- 행을 구분하는 유일한 값. NULL 불가\n    user_name    VARCHAR(50),\n    user_age     INTEGER,\n    created_at   DATE\n);"
           },
           {
             "id": "language-sql-p01-part-2",
@@ -3831,13 +4066,13 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-sql-p01-part-7",
             "title": "수정[update]",
             "content": "UPDATE users\nSET user_age = 31\nWHERE user_id = 1;",
-            "displayContent": "-- 수정[update]\nUPDATE users\nSET user_age = 31\nWHERE user_id = 1;"
+            "displayContent": "-- 수정[update]\nUPDATE users\nSET user_age = 31\nWHERE user_id = 1; -- WHERE를 빼면 모든 행이 바뀜"
           },
           {
             "id": "language-sql-p01-part-8",
             "title": "삭제[delete]",
             "content": "DELETE FROM users\nWHERE user_id = 2;",
-            "displayContent": "-- 삭제[delete]\nDELETE FROM users\nWHERE user_id = 2;"
+            "displayContent": "-- 삭제[delete]\nDELETE FROM users\nWHERE user_id = 2; -- WHERE를 빼면 모든 행이 삭제됨"
           },
           {
             "id": "language-sql-p01-part-9",
@@ -3849,7 +4084,7 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-sql-p01-part-10",
             "title": "그룹화[group by]",
             "content": "SELECT created_at, COUNT(*) AS row_count\nFROM users\nGROUP BY created_at;",
-            "displayContent": "-- 그룹화[group by]\nSELECT created_at, COUNT(*) AS row_count\nFROM users\nGROUP BY created_at;"
+            "displayContent": "-- 그룹화[group by]\nSELECT created_at, COUNT(*) AS row_count\nFROM users\nGROUP BY created_at; -- SELECT의 집계 아닌 컬럼은 GROUP BY에도 있어야 함"
           },
           {
             "id": "language-sql-p01-part-11",
@@ -3867,7 +4102,7 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-sql-p01-part-13",
             "title": "공통 테이블 식[CTE]",
             "content": "WITH order_sum AS (\n    SELECT user_id, SUM(total_price) AS total_amount\n    FROM orders\n    GROUP BY user_id\n)\nSELECT u.user_name, o.total_amount\nFROM users u\nJOIN order_sum o\n  ON u.user_id = o.user_id;",
-            "displayContent": "-- 공통 테이블 식[CTE]\nWITH order_sum AS (\n    SELECT user_id, SUM(total_price) AS total_amount\n    FROM orders\n    GROUP BY user_id\n)\nSELECT u.user_name, o.total_amount\nFROM users u\nJOIN order_sum o\n  ON u.user_id = o.user_id;"
+            "displayContent": "-- 공통 테이블 식[CTE]\nWITH order_sum AS ( -- 이름 붙인 임시 결과. 긴 서브쿼리를 읽기 쉽게\n    SELECT user_id, SUM(total_price) AS total_amount\n    FROM orders\n    GROUP BY user_id\n)\nSELECT u.user_name, o.total_amount\nFROM users u\nJOIN order_sum o\n  ON u.user_id = o.user_id;"
           }
         ]
       },
@@ -3984,6 +4219,69 @@ export const languageTracks: LanguageTrack[] = [
             "displayContent": "-- 미매칭 행[left join is null]\n-- 부서에 없는 사원만 찾는다\nSELECT e.emp_name\nFROM employees e\nLEFT JOIN departments d\n  ON e.dept_id = d.dept_id\nWHERE d.dept_id IS NULL;"
           }
         ]
+      },
+      {
+        "id": "language-sql-p04",
+        "title": "P04.구조-트랜잭션-분석",
+        "fileName": "P04.구조-트랜잭션-분석.yaml",
+        "sourcePath": "assets/raw/syntax/sql/P04.구조-트랜잭션-분석.yaml",
+        "language": "sql",
+        "parts": [
+          {
+            "id": "language-sql-p04-part-1",
+            "title": "중복 제거[DISTINCT]",
+            "content": "SELECT DISTINCT user_id\nFROM orders;",
+            "displayContent": "-- 중복 제거[DISTINCT]\nSELECT DISTINCT user_id -- 선택한 컬럼 조합의 중복 행 제거\nFROM orders;"
+          },
+          {
+            "id": "language-sql-p04-part-2",
+            "title": "결과 합치기[UNION]",
+            "content": "SELECT email FROM users\nUNION\nSELECT email FROM admins;",
+            "displayContent": "-- 결과 합치기[UNION]\nSELECT email FROM users\nUNION -- 중복을 제거해 합침. 그대로 합치려면 UNION ALL이 빠름\nSELECT email FROM admins;"
+          },
+          {
+            "id": "language-sql-p04-part-3",
+            "title": "존재 확인[EXISTS]",
+            "content": "SELECT u.user_name\nFROM users u\nWHERE EXISTS (\n  SELECT 1 FROM orders o WHERE o.user_id = u.user_id\n);",
+            "displayContent": "-- 존재 확인[EXISTS]\nSELECT u.user_name\nFROM users u\nWHERE EXISTS ( -- 조건에 맞는 행이 하나라도 있으면 참\n  SELECT 1 FROM orders o WHERE o.user_id = u.user_id -- 값은 쓰지 않으므로 1이면 충분\n);"
+          },
+          {
+            "id": "language-sql-p04-part-4",
+            "title": "윈도 함수[ROW_NUMBER OVER]",
+            "content": "SELECT user_id, total_price,\n  ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY total_price DESC) AS row_num\nFROM orders;",
+            "displayContent": "-- 윈도 함수[ROW_NUMBER OVER]\nSELECT user_id, total_price,\n  ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY total_price DESC) AS row_num -- PARTITION BY 사용자별로 나눠 ORDER BY 순으로 번호. 행 수는 줄지 않음\nFROM orders;"
+          },
+          {
+            "id": "language-sql-p04-part-5",
+            "title": "인덱스 생성[CREATE INDEX]",
+            "content": "CREATE INDEX idx_orders_user_id ON orders (user_id);",
+            "displayContent": "-- 인덱스 생성[CREATE INDEX]\nCREATE INDEX idx_orders_user_id ON orders (user_id); -- 조회는 빨라지고 쓰기는 조금 느려짐"
+          },
+          {
+            "id": "language-sql-p04-part-6",
+            "title": "테이블 변경[ALTER TABLE]",
+            "content": "ALTER TABLE users ADD COLUMN phone VARCHAR(20);\nALTER TABLE users DROP COLUMN phone;",
+            "displayContent": "-- 테이블 변경[ALTER TABLE]\nALTER TABLE users ADD COLUMN phone VARCHAR(20);\nALTER TABLE users DROP COLUMN phone; -- 데이터까지 사라짐. 운영에서는 백업 후"
+          },
+          {
+            "id": "language-sql-p04-part-7",
+            "title": "외래 키[FOREIGN KEY]",
+            "content": "CREATE TABLE orders (\n  order_id INT PRIMARY KEY,\n  user_id INT NOT NULL,\n  FOREIGN KEY (user_id) REFERENCES users (user_id)\n);",
+            "displayContent": "-- 외래 키[FOREIGN KEY]\nCREATE TABLE orders (\n  order_id INT PRIMARY KEY,\n  user_id INT NOT NULL,\n  FOREIGN KEY (user_id) REFERENCES users (user_id) -- users에 없는 user_id는 넣을 수 없음\n);"
+          },
+          {
+            "id": "language-sql-p04-part-8",
+            "title": "트랜잭션[BEGIN]",
+            "content": "BEGIN;\nUPDATE accounts SET balance = balance - 100 WHERE id = 1;\nUPDATE accounts SET balance = balance + 100 WHERE id = 2;\nCOMMIT;",
+            "displayContent": "-- 트랜잭션[BEGIN]\nBEGIN; -- 여기부터 한 덩어리. 전부 성공하거나 전부 취소\nUPDATE accounts SET balance = balance - 100 WHERE id = 1;\nUPDATE accounts SET balance = balance + 100 WHERE id = 2;\nCOMMIT; -- 확정. 취소하려면 ROLLBACK"
+          },
+          {
+            "id": "language-sql-p04-part-9",
+            "title": "실행 계획[EXPLAIN]",
+            "content": "EXPLAIN\nSELECT * FROM orders WHERE user_id = 1;",
+            "displayContent": "-- 실행 계획[EXPLAIN]\nEXPLAIN -- 실행하지 않고 실행 계획만 봄. 인덱스 사용 여부 확인\nSELECT * FROM orders WHERE user_id = 1;"
+          }
+        ]
       }
     ]
   },
@@ -4003,55 +4301,55 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-typescript-p01-part-1",
             "title": "기본 타입[string number boolean]",
             "content": "let name: string = \"kim\";\nlet age: number | null = null;\nlet isLogin: boolean = false;\nconsole.log(name, age, isLogin);",
-            "displayContent": "// 기본 타입[string number boolean]\nlet name: string = \"kim\";\nlet age: number | null = null;\nlet isLogin: boolean = false;\nconsole.log(name, age, isLogin);"
+            "displayContent": "// 기본 타입[string number boolean]\nlet name: string = \"kim\";\nlet age: number | null = null; // | 둘 중 하나. null도 허용\nlet isLogin: boolean = false;\nconsole.log(name, age, isLogin);"
           },
           {
             "id": "language-typescript-p01-part-2",
             "title": "타입 별칭[type User]",
             "content": "type UserId = number;\ntype UserRole = \"admin\" | \"member\";\n\ntype User = {\n  id: UserId;\n  name: string;\n  role: UserRole;\n  email?: string;\n};",
-            "displayContent": "// 타입 별칭[type User]\ntype UserId = number;\ntype UserRole = \"admin\" | \"member\";\n\ntype User = {\n  id: UserId;\n  name: string;\n  role: UserRole;\n  email?: string;\n};"
+            "displayContent": "// 타입 별칭[type User]\ntype UserId = number;\ntype UserRole = \"admin\" | \"member\"; // 문자열 리터럴 유니온. 이 값만 허용\n\ntype User = {\n  id: UserId;\n  name: string;\n  role: UserRole;\n  email?: string; // ?는 없어도 되는 속성\n};"
           },
           {
             "id": "language-typescript-p01-part-3",
             "title": "객체 사용[object]",
             "content": "type User = {\n  id: number;\n  name: string;\n  role: \"admin\" | \"member\";\n  email?: string;\n};\n\nconst u1: User = { id: 1, name: \"A\", role: \"admin\" };\nconst u2: User = { id: 2, name: \"B\", role: \"member\", email: \"b@x.com\" };\nconsole.log(u1.name, u2.email);",
-            "displayContent": "// 객체 사용[object]\ntype User = {\n  id: number;\n  name: string;\n  role: \"admin\" | \"member\";\n  email?: string;\n};\n\nconst u1: User = { id: 1, name: \"A\", role: \"admin\" };\nconst u2: User = { id: 2, name: \"B\", role: \"member\", email: \"b@x.com\" };\nconsole.log(u1.name, u2.email);"
+            "displayContent": "// 객체 사용[object]\ntype User = {\n  id: number;\n  name: string;\n  role: \"admin\" | \"member\";\n  email?: string;\n};\n\nconst u1: User = { id: 1, name: \"A\", role: \"admin\" }; // email은 선택이라 생략 가능\nconst u2: User = { id: 2, name: \"B\", role: \"member\", email: \"b@x.com\" };\nconsole.log(u1.name, u2.email); // u2.email의 타입은 string | undefined"
           },
           {
             "id": "language-typescript-p01-part-4",
             "title": "배열[User[]]",
             "content": "type User = { id: number; name: string };\n\nconst users: User[] = [\n  { id: 1, name: \"kim\" },\n  { id: 2, name: \"lee\" },\n];\nconst ids: number[] = [1, 2, 3];\nconsole.log(users[0].name, ids);",
-            "displayContent": "// 배열[User[]]\ntype User = { id: number; name: string };\n\nconst users: User[] = [\n  { id: 1, name: \"kim\" },\n  { id: 2, name: \"lee\" },\n];\nconst ids: number[] = [1, 2, 3];\nconsole.log(users[0].name, ids);"
+            "displayContent": "// 배열[User[]]\ntype User = { id: number; name: string };\n\nconst users: User[] = [ // T[] 요소가 T인 배열\n  { id: 1, name: \"kim\" },\n  { id: 2, name: \"lee\" },\n];\nconst ids: number[] = [1, 2, 3];\nconsole.log(users[0].name, ids);"
           },
           {
             "id": "language-typescript-p01-part-5",
             "title": "유니온[string | number]",
             "content": "type IdOrName = number | string;\nconst ids: IdOrName[] = [1, \"2\", 3];\nconsole.log(ids);",
-            "displayContent": "// 유니온[string | number]\ntype IdOrName = number | string;\nconst ids: IdOrName[] = [1, \"2\", 3];\nconsole.log(ids);"
+            "displayContent": "// 유니온[string | number]\ntype IdOrName = number | string;\nconst ids: IdOrName[] = [1, \"2\", 3]; // 숫자와 문자열이 섞인 배열. 사용 전에 타입을 좁혀야 함\nconsole.log(ids);"
           },
           {
             "id": "language-typescript-p01-part-6",
             "title": "함수 타입[function]",
             "content": "function add(a: number, b: number): number {\n  return a + b;\n}\n\nfunction log(msg: string): void {\n  console.log(msg);\n}\n\nconsole.log(add(2, 3));\nlog(\"ok\");",
-            "displayContent": "// 함수 타입[function]\nfunction add(a: number, b: number): number {\n  return a + b;\n}\n\nfunction log(msg: string): void {\n  console.log(msg);\n}\n\nconsole.log(add(2, 3));\nlog(\"ok\");"
+            "displayContent": "// 함수 타입[function]\nfunction add(a: number, b: number): number { // 반환 타입은 매개변수 뒤 콜론\n  return a + b;\n}\n\nfunction log(msg: string): void { // void 반환값 없음\n  console.log(msg);\n}\n\nconsole.log(add(2, 3));\nlog(\"ok\");"
           },
           {
             "id": "language-typescript-p01-part-7",
             "title": "화살표 함수 타입[arrow]",
             "content": "const add: (a: number, b: number) => number = (a, b) => a + b;\nconsole.log(add(2, 3));",
-            "displayContent": "// 화살표 함수 타입[arrow]\nconst add: (a: number, b: number) => number = (a, b) => a + b;\nconsole.log(add(2, 3));"
+            "displayContent": "// 화살표 함수 타입[arrow]\nconst add: (a: number, b: number) => number = (a, b) => a + b; // 앞은 함수 타입, 뒤는 구현. 인자 타입은 추론됨\nconsole.log(add(2, 3));"
           },
           {
             "id": "language-typescript-p01-part-8",
             "title": "옵셔널·기본값[optional default]",
             "content": "type SendOptions = { retry?: number };\n\nconst send = (url: string, opts: SendOptions = {}) => {\n  const retry = opts.retry ?? 0;\n  console.log(`send -> ${url} (retry=${retry})`);\n};\n\nsend(\"/ping\");\nsend(\"/ping\", { retry: 3 });",
-            "displayContent": "// 옵셔널·기본값[optional default]\ntype SendOptions = { retry?: number };\n\nconst send = (url: string, opts: SendOptions = {}) => {\n  const retry = opts.retry ?? 0;\n  console.log(`send -> ${url} (retry=${retry})`);\n};\n\nsend(\"/ping\");\nsend(\"/ping\", { retry: 3 });"
+            "displayContent": "// 옵셔널·기본값[optional default]\ntype SendOptions = { retry?: number };\n\nconst send = (url: string, opts: SendOptions = {}) => {\n  const retry = opts.retry ?? 0; // ??는 null/undefined일 때만 기본값. 0은 유지\n  console.log(`send -> ${url} (retry=${retry})`);\n};\n\nsend(\"/ping\");\nsend(\"/ping\", { retry: 3 });"
           },
           {
             "id": "language-typescript-p01-part-9",
             "title": "readonly 필드[readonly]",
             "content": "type User = {\n  readonly id: number;\n  name: string;\n};\n\nconst user: User = { id: 1, name: \"kim\" };\nconsole.log(user.id);",
-            "displayContent": "// readonly 필드[readonly]\ntype User = {\n  readonly id: number;\n  name: string;\n};\n\nconst user: User = { id: 1, name: \"kim\" };\nconsole.log(user.id);"
+            "displayContent": "// readonly 필드[readonly]\ntype User = {\n  readonly id: number; // 다시 대입하면 컴파일 오류\n  name: string;\n};\n\nconst user: User = { id: 1, name: \"kim\" };\nconsole.log(user.id);"
           },
           {
             "id": "language-typescript-p01-part-10",
@@ -4072,61 +4370,61 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-typescript-p02-part-1",
             "title": "interface 확장[extends]",
             "content": "interface BaseEntity {\n  id: number;\n  createdAt: string;\n}\n\ninterface Account extends BaseEntity {\n  email: string;\n}\n\nconst acc: Account = {\n  id: 10,\n  createdAt: \"2025-01-01\",\n  email: \"x@y.com\",\n};\nconsole.log(acc.email);",
-            "displayContent": "// interface 확장[extends]\ninterface BaseEntity {\n  id: number;\n  createdAt: string;\n}\n\ninterface Account extends BaseEntity {\n  email: string;\n}\n\nconst acc: Account = {\n  id: 10,\n  createdAt: \"2025-01-01\",\n  email: \"x@y.com\",\n};\nconsole.log(acc.email);"
+            "displayContent": "// interface 확장[extends]\ninterface BaseEntity {\n  id: number;\n  createdAt: string;\n}\n\ninterface Account extends BaseEntity { // 상위 속성을 물려받음\n  email: string;\n}\n\nconst acc: Account = {\n  id: 10,\n  createdAt: \"2025-01-01\",\n  email: \"x@y.com\",\n};\nconsole.log(acc.email);"
           },
           {
             "id": "language-typescript-p02-part-2",
             "title": "교차 타입[&]",
             "content": "type BaseEntity = { id: number; createdAt: string };\ntype Profile = { displayName: string } & BaseEntity;\n\nconst prof: Profile = {\n  id: 11,\n  createdAt: \"2025-02-01\",\n  displayName: \"Kim\",\n};\nconsole.log(prof.displayName);",
-            "displayContent": "// 교차 타입[&]\ntype BaseEntity = { id: number; createdAt: string };\ntype Profile = { displayName: string } & BaseEntity;\n\nconst prof: Profile = {\n  id: 11,\n  createdAt: \"2025-02-01\",\n  displayName: \"Kim\",\n};\nconsole.log(prof.displayName);"
+            "displayContent": "// 교차 타입[&]\ntype BaseEntity = { id: number; createdAt: string };\ntype Profile = { displayName: string } & BaseEntity; // & 두 타입의 속성을 모두 가짐\n\nconst prof: Profile = {\n  id: 11,\n  createdAt: \"2025-02-01\",\n  displayName: \"Kim\",\n};\nconsole.log(prof.displayName);"
           },
           {
             "id": "language-typescript-p02-part-3",
             "title": "제네릭 함수[wrapArray]",
             "content": "function wrapArray<T>(value: T): T[] {\n  return [value];\n}\n\nconst a1 = wrapArray(123);\nconst a2 = wrapArray({ x: 1 });\nconsole.log(a1, a2);",
-            "displayContent": "// 제네릭 함수[wrapArray]\nfunction wrapArray<T>(value: T): T[] {\n  return [value];\n}\n\nconst a1 = wrapArray(123);\nconst a2 = wrapArray({ x: 1 });\nconsole.log(a1, a2);"
+            "displayContent": "// 제네릭 함수[wrapArray]\nfunction wrapArray<T>(value: T): T[] { // T는 호출할 때 결정되는 타입\n  return [value];\n}\n\nconst a1 = wrapArray(123); // a1의 타입은 number[]로 추론\nconst a2 = wrapArray({ x: 1 });\nconsole.log(a1, a2);"
           },
           {
             "id": "language-typescript-p02-part-4",
             "title": "제네릭 + keyof[getProp]",
             "content": "function getProp<T, K extends keyof T>(obj: T, key: K): T[K] {\n  return obj[key];\n}\n\nconst user = { id: 1, name: \"Lee\", role: \"member\" as const };\nconsole.log(getProp(user, \"name\"));",
-            "displayContent": "// 제네릭 + keyof[getProp]\nfunction getProp<T, K extends keyof T>(obj: T, key: K): T[K] {\n  return obj[key];\n}\n\nconst user = { id: 1, name: \"Lee\", role: \"member\" as const };\nconsole.log(getProp(user, \"name\"));"
+            "displayContent": "// 제네릭 + keyof[getProp]\nfunction getProp<T, K extends keyof T>(obj: T, key: K): T[K] { // K는 T의 키만 허용\n  return obj[key];\n}\n\nconst user = { id: 1, name: \"Lee\", role: \"member\" as const }; // string이 아니라 \"member\" 리터럴로 고정\nconsole.log(getProp(user, \"name\"));"
           },
           {
             "id": "language-typescript-p02-part-5",
             "title": "타입 가드[is string]",
             "content": "function isString(x: unknown): x is string {\n  return typeof x === \"string\";\n}\n\nfunction printLen(x: unknown) {\n  if (isString(x)) {\n    console.log(\"length:\", x.length);\n  } else if (typeof x === \"number\") {\n    console.log(\"double:\", x * 2);\n  }\n}\n\nprintLen(\"abc\");\nprintLen(10);",
-            "displayContent": "// 타입 가드[is string]\nfunction isString(x: unknown): x is string {\n  return typeof x === \"string\";\n}\n\nfunction printLen(x: unknown) {\n  if (isString(x)) {\n    console.log(\"length:\", x.length);\n  } else if (typeof x === \"number\") {\n    console.log(\"double:\", x * 2);\n  }\n}\n\nprintLen(\"abc\");\nprintLen(10);"
+            "displayContent": "// 타입 가드[is string]\nfunction isString(x: unknown): x is string { // 타입 가드. true면 이 블록에서 string으로 좁혀짐\n  return typeof x === \"string\";\n}\n\nfunction printLen(x: unknown) { // unknown은 확인 전에는 사용할 수 없음\n  if (isString(x)) {\n    console.log(\"length:\", x.length);\n  } else if (typeof x === \"number\") {\n    console.log(\"double:\", x * 2);\n  }\n}\n\nprintLen(\"abc\");\nprintLen(10);"
           },
           {
             "id": "language-typescript-p02-part-6",
             "title": "판별 유니온[ok]",
             "content": "type ApiOk<T> = { ok: true; data: T };\ntype ApiErr = { ok: false; error: string };\ntype ApiResult<T> = ApiOk<T> | ApiErr;\n\nfunction handleResult<T>(res: ApiResult<T>) {\n  if (res.ok) {\n    console.log(\"data:\", res.data);\n  } else {\n    console.error(\"error:\", res.error);\n  }\n}\n\nhandleResult({ ok: true, data: { id: 1 } });",
-            "displayContent": "// 판별 유니온[ok]\ntype ApiOk<T> = { ok: true; data: T };\ntype ApiErr = { ok: false; error: string };\ntype ApiResult<T> = ApiOk<T> | ApiErr;\n\nfunction handleResult<T>(res: ApiResult<T>) {\n  if (res.ok) {\n    console.log(\"data:\", res.data);\n  } else {\n    console.error(\"error:\", res.error);\n  }\n}\n\nhandleResult({ ok: true, data: { id: 1 } });"
+            "displayContent": "// 판별 유니온[ok]\ntype ApiOk<T> = { ok: true; data: T };\ntype ApiErr = { ok: false; error: string };\ntype ApiResult<T> = ApiOk<T> | ApiErr; // ok 같은 공통 필드로 구분하는 판별 유니온\n\nfunction handleResult<T>(res: ApiResult<T>) {\n  if (res.ok) { // true인 쪽에서만 data에 접근 가능\n    console.log(\"data:\", res.data);\n  } else {\n    console.error(\"error:\", res.error);\n  }\n}\n\nhandleResult({ ok: true, data: { id: 1 } });"
           },
           {
             "id": "language-typescript-p02-part-7",
             "title": "as const 리터럴[as const]",
             "content": "const ROLES = [\"admin\", \"member\", \"guest\"] as const;\ntype Role = (typeof ROLES)[number];\n\nfunction createUser(name: string, role: Role) {\n  return { id: Date.now(), name, role };\n}\n\nconsole.log(createUser(\"Park\", \"admin\"));",
-            "displayContent": "// as const 리터럴[as const]\nconst ROLES = [\"admin\", \"member\", \"guest\"] as const;\ntype Role = (typeof ROLES)[number];\n\nfunction createUser(name: string, role: Role) {\n  return { id: Date.now(), name, role };\n}\n\nconsole.log(createUser(\"Park\", \"admin\"));"
+            "displayContent": "// as const 리터럴[as const]\nconst ROLES = [\"admin\", \"member\", \"guest\"] as const; // 값이 바뀌지 않는 튜플로 고정\ntype Role = (typeof ROLES)[number]; // 결과: \"admin\" | \"member\" | \"guest\"\n\nfunction createUser(name: string, role: Role) {\n  return { id: Date.now(), name, role };\n}\n\nconsole.log(createUser(\"Park\", \"admin\"));"
           },
           {
             "id": "language-typescript-p02-part-8",
             "title": "Record / keyof[Record]",
             "content": "type Locale = \"en\" | \"ko\" | \"ja\";\nconst messages: Record<Locale, string> = {\n  en: \"Hello\",\n  ko: \"안녕하세요\",\n  ja: \"こんにちは\",\n};\n\ntype MsgKeys = keyof typeof messages;\nfunction t(key: MsgKeys) {\n  return messages[key];\n}\n\nconsole.log(t(\"ko\"));",
-            "displayContent": "// Record / keyof[Record]\ntype Locale = \"en\" | \"ko\" | \"ja\";\nconst messages: Record<Locale, string> = {\n  en: \"Hello\",\n  ko: \"안녕하세요\",\n  ja: \"こんにちは\",\n};\n\ntype MsgKeys = keyof typeof messages;\nfunction t(key: MsgKeys) {\n  return messages[key];\n}\n\nconsole.log(t(\"ko\"));"
+            "displayContent": "// Record / keyof[Record]\ntype Locale = \"en\" | \"ko\" | \"ja\";\nconst messages: Record<Locale, string> = { // 모든 Locale 키가 있어야 함. 빠지면 오류\n  en: \"Hello\",\n  ko: \"안녕하세요\",\n  ja: \"こんにちは\",\n};\n\ntype MsgKeys = keyof typeof messages; // 값의 타입을 뽑은 뒤 키 유니온으로\nfunction t(key: MsgKeys) {\n  return messages[key];\n}\n\nconsole.log(t(\"ko\"));"
           },
           {
             "id": "language-typescript-p02-part-9",
             "title": "typeof로 타입 뽑기[typeof]",
             "content": "const CONFIG = {\n  apiBase: \"/api\",\n  timeoutMs: 3000,\n  features: { metrics: true, beta: false },\n} as const;\n\ntype Config = typeof CONFIG;\ntype FeatureFlags = keyof Config[\"features\"];\n\nfunction isFeatureOn(flag: FeatureFlags) {\n  return CONFIG.features[flag];\n}\n\nconsole.log(isFeatureOn(\"metrics\"));",
-            "displayContent": "// typeof로 타입 뽑기[typeof]\nconst CONFIG = {\n  apiBase: \"/api\",\n  timeoutMs: 3000,\n  features: { metrics: true, beta: false },\n} as const;\n\ntype Config = typeof CONFIG;\ntype FeatureFlags = keyof Config[\"features\"];\n\nfunction isFeatureOn(flag: FeatureFlags) {\n  return CONFIG.features[flag];\n}\n\nconsole.log(isFeatureOn(\"metrics\"));"
+            "displayContent": "// typeof로 타입 뽑기[typeof]\nconst CONFIG = {\n  apiBase: \"/api\",\n  timeoutMs: 3000,\n  features: { metrics: true, beta: false },\n} as const;\n\ntype Config = typeof CONFIG; // typeof 값에서 타입을 뽑아 정의를 한 곳에 유지\ntype FeatureFlags = keyof Config[\"features\"]; // 결과: \"metrics\" | \"beta\"\n\nfunction isFeatureOn(flag: FeatureFlags) {\n  return CONFIG.features[flag];\n}\n\nconsole.log(isFeatureOn(\"metrics\"));"
           },
           {
             "id": "language-typescript-p02-part-10",
             "title": "상태 객체[State]",
             "content": "type User = { id: number; name: string };\n\ntype State = {\n  loading: boolean;\n  data: User | null;\n};\n\nconst state: State = { loading: false, data: null };\nconsole.log(state.loading);",
-            "displayContent": "// 상태 객체[State]\ntype User = { id: number; name: string };\n\ntype State = {\n  loading: boolean;\n  data: User | null;\n};\n\nconst state: State = { loading: false, data: null };\nconsole.log(state.loading);"
+            "displayContent": "// 상태 객체[State]\ntype User = { id: number; name: string };\n\ntype State = {\n  loading: boolean;\n  data: User | null; // 로딩 전에는 null. 사용 전에 확인 필요\n};\n\nconst state: State = { loading: false, data: null };\nconsole.log(state.loading);"
           }
         ]
       },
@@ -4159,43 +4457,100 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-typescript-p03-part-4",
             "title": "Pick - 화면용 축소[Pick]",
             "content": "type UserDTO = {\n  id: number;\n  name: string;\n  email: string;\n  role: \"admin\" | \"member\";\n};\n\ntype UserVM = Pick<UserDTO, \"id\" | \"name\" | \"role\">;\n\nfunction toUserVM(u: UserDTO): UserVM {\n  return { id: u.id, name: u.name, role: u.role };\n}\n\nconsole.log(toUserVM({ id: 1, name: \"Jane\", email: \"j@x.com\", role: \"member\" }));",
-            "displayContent": "// Pick - 화면용 축소[Pick]\ntype UserDTO = {\n  id: number;\n  name: string;\n  email: string;\n  role: \"admin\" | \"member\";\n};\n\ntype UserVM = Pick<UserDTO, \"id\" | \"name\" | \"role\">;\n\nfunction toUserVM(u: UserDTO): UserVM {\n  return { id: u.id, name: u.name, role: u.role };\n}\n\nconsole.log(toUserVM({ id: 1, name: \"Jane\", email: \"j@x.com\", role: \"member\" }));"
+            "displayContent": "// Pick - 화면용 축소[Pick]\ntype UserDTO = {\n  id: number;\n  name: string;\n  email: string;\n  role: \"admin\" | \"member\";\n};\n\ntype UserVM = Pick<UserDTO, \"id\" | \"name\" | \"role\">; // 필요한 필드만 골라 화면용 타입을 만듦\n\nfunction toUserVM(u: UserDTO): UserVM {\n  return { id: u.id, name: u.name, role: u.role };\n}\n\nconsole.log(toUserVM({ id: 1, name: \"Jane\", email: \"j@x.com\", role: \"member\" }));"
           },
           {
             "id": "language-typescript-p03-part-5",
             "title": "Omit - 필드 제외[Omit]",
             "content": "type FullUser = {\n  id: number;\n  name: string;\n  email: string;\n};\n\ntype PublicUser = Omit<FullUser, \"email\">;\n\nconst pub: PublicUser = { id: 1, name: \"Kim\" };\nconsole.log(pub);",
-            "displayContent": "// Omit - 필드 제외[Omit]\ntype FullUser = {\n  id: number;\n  name: string;\n  email: string;\n};\n\ntype PublicUser = Omit<FullUser, \"email\">;\n\nconst pub: PublicUser = { id: 1, name: \"Kim\" };\nconsole.log(pub);"
+            "displayContent": "// Omit - 필드 제외[Omit]\ntype FullUser = {\n  id: number;\n  name: string;\n  email: string;\n};\n\ntype PublicUser = Omit<FullUser, \"email\">; // 지정한 필드만 뺌. Pick의 반대\n\nconst pub: PublicUser = { id: 1, name: \"Kim\" };\nconsole.log(pub);"
           },
           {
             "id": "language-typescript-p03-part-6",
             "title": "Readonly[Readonly]",
             "content": "type UserCard = { id: number; name: string };\ntype FrozenUser = Readonly<UserCard>;\n\nconst fu: FrozenUser = { id: 1, name: \"Kim\" };\nconsole.log(fu.name);",
-            "displayContent": "// Readonly[Readonly]\ntype UserCard = { id: number; name: string };\ntype FrozenUser = Readonly<UserCard>;\n\nconst fu: FrozenUser = { id: 1, name: \"Kim\" };\nconsole.log(fu.name);"
+            "displayContent": "// Readonly[Readonly]\ntype UserCard = { id: number; name: string };\ntype FrozenUser = Readonly<UserCard>; // 모든 속성을 읽기 전용으로. 얕게만 적용\n\nconst fu: FrozenUser = { id: 1, name: \"Kim\" };\nconsole.log(fu.name);"
           },
           {
             "id": "language-typescript-p03-part-7",
             "title": "API 응답 껍데기[ApiEnvelope]",
             "content": "type ApiEnvelope<T> = {\n  status: number;\n  data: T;\n  meta?: { requestId: string };\n};\n\ntype UserDTO = { id: number; name: string };\n\nconst detail: ApiEnvelope<UserDTO> = {\n  status: 200,\n  data: { id: 1, name: \"AA\" },\n};\nconsole.log(detail.data.name);",
-            "displayContent": "// API 응답 껍데기[ApiEnvelope]\ntype ApiEnvelope<T> = {\n  status: number;\n  data: T;\n  meta?: { requestId: string };\n};\n\ntype UserDTO = { id: number; name: string };\n\nconst detail: ApiEnvelope<UserDTO> = {\n  status: 200,\n  data: { id: 1, name: \"AA\" },\n};\nconsole.log(detail.data.name);"
+            "displayContent": "// API 응답 껍데기[ApiEnvelope]\ntype ApiEnvelope<T> = { // 공통 응답 껍데기. data 타입만 바꿔 재사용\n  status: number;\n  data: T;\n  meta?: { requestId: string };\n};\n\ntype UserDTO = { id: number; name: string };\n\nconst detail: ApiEnvelope<UserDTO> = {\n  status: 200,\n  data: { id: 1, name: \"AA\" },\n};\nconsole.log(detail.data.name);"
           },
           {
             "id": "language-typescript-p03-part-8",
             "title": "목록 응답[ListResponse]",
             "content": "type ApiEnvelope<T> = { status: number; data: T };\ntype ListResponse<T> = ApiEnvelope<{ items: T[]; total: number }>;\ntype UserDTO = { id: number; name: string };\n\nconst list: ListResponse<UserDTO> = {\n  status: 200,\n  data: { items: [{ id: 1, name: \"AA\" }], total: 1 },\n};\nconsole.log(list.data.total);",
-            "displayContent": "// 목록 응답[ListResponse]\ntype ApiEnvelope<T> = { status: number; data: T };\ntype ListResponse<T> = ApiEnvelope<{ items: T[]; total: number }>;\ntype UserDTO = { id: number; name: string };\n\nconst list: ListResponse<UserDTO> = {\n  status: 200,\n  data: { items: [{ id: 1, name: \"AA\" }], total: 1 },\n};\nconsole.log(list.data.total);"
+            "displayContent": "// 목록 응답[ListResponse]\ntype ApiEnvelope<T> = { status: number; data: T };\ntype ListResponse<T> = ApiEnvelope<{ items: T[]; total: number }>; // 제네릭 안에 제네릭을 넣어 목록 응답 표현\ntype UserDTO = { id: number; name: string };\n\nconst list: ListResponse<UserDTO> = {\n  status: 200,\n  data: { items: [{ id: 1, name: \"AA\" }], total: 1 },\n};\nconsole.log(list.data.total);"
           },
           {
             "id": "language-typescript-p03-part-9",
             "title": "얕은 머지[spread patch]",
             "content": "type UserDTO = {\n  id: number;\n  name: string;\n  email: string;\n};\ntype PatchUser = Partial<Pick<UserDTO, \"name\" | \"email\">>;\n\nfunction mergeUser(u: UserDTO, patch: PatchUser): UserDTO {\n  return { ...u, ...patch };\n}\n\nconst merged = mergeUser(\n  { id: 1, name: \"Jane\", email: \"j@x.com\" },\n  { name: \"Jane Park\" },\n);\nconsole.log(merged.name);",
-            "displayContent": "// 얕은 머지[spread patch]\ntype UserDTO = {\n  id: number;\n  name: string;\n  email: string;\n};\ntype PatchUser = Partial<Pick<UserDTO, \"name\" | \"email\">>;\n\nfunction mergeUser(u: UserDTO, patch: PatchUser): UserDTO {\n  return { ...u, ...patch };\n}\n\nconst merged = mergeUser(\n  { id: 1, name: \"Jane\", email: \"j@x.com\" },\n  { name: \"Jane Park\" },\n);\nconsole.log(merged.name);"
+            "displayContent": "// 얕은 머지[spread patch]\ntype UserDTO = {\n  id: number;\n  name: string;\n  email: string;\n};\ntype PatchUser = Partial<Pick<UserDTO, \"name\" | \"email\">>; // 고칠 수 있는 필드만 골라 전부 선택 사항으로\n\nfunction mergeUser(u: UserDTO, patch: PatchUser): UserDTO {\n  return { ...u, ...patch }; // 뒤쪽 값이 앞을 덮어씀\n}\n\nconst merged = mergeUser(\n  { id: 1, name: \"Jane\", email: \"j@x.com\" },\n  { name: \"Jane Park\" },\n);\nconsole.log(merged.name);"
           },
           {
             "id": "language-typescript-p03-part-10",
             "title": "React Props 명시[Props]",
             "content": "type ButtonProps = {\n  label: string;\n  onClick: () => void;\n  disabled?: boolean;\n};\n\nfunction Button({ label, onClick, disabled = false }: ButtonProps) {\n  console.log(label, disabled);\n  onClick();\n}\n\nButton({ label: \"Save\", onClick: () => console.log(\"click\") });",
             "displayContent": "// React Props 명시[Props]\n// FC<Props> 대신 props 타입을 직접 적는 패턴\ntype ButtonProps = {\n  label: string;\n  onClick: () => void;\n  disabled?: boolean;\n};\n\nfunction Button({ label, onClick, disabled = false }: ButtonProps) {\n  console.log(label, disabled);\n  onClick();\n}\n\nButton({ label: \"Save\", onClick: () => console.log(\"click\") });"
+          }
+        ]
+      },
+      {
+        "id": "language-typescript-p04",
+        "title": "P04.타입-심화",
+        "fileName": "P04.타입-심화.yaml",
+        "sourcePath": "assets/raw/syntax/typescript/P04.타입-심화.yaml",
+        "language": "typescript",
+        "parts": [
+          {
+            "id": "language-typescript-p04-part-1",
+            "title": "도달 불가 검사[never]",
+            "content": "function assertNever(value: never): never {\n  throw new Error(String(value));\n}",
+            "displayContent": "// 도달 불가 검사[never]\nfunction assertNever(value: never): never { // 모든 case를 처리했는지 컴파일 때 확인. 빠지면 오류\n  throw new Error(String(value));\n}"
+          },
+          {
+            "id": "language-typescript-p04-part-2",
+            "title": "타입 만족 검사[satisfies]",
+            "content": "const routes = {\n  home: \"/\",\n  login: \"/login\",\n} satisfies Record<string, string>;",
+            "displayContent": "// 타입 만족 검사[satisfies]\nconst routes = {\n  home: \"/\",\n  login: \"/login\",\n} satisfies Record<string, string>; // 형식은 검사하되 home의 구체적 타입은 유지"
+          },
+          {
+            "id": "language-typescript-p04-part-3",
+            "title": "반환 타입 추출[ReturnType]",
+            "content": "function createUser() {\n  return { id: 1, name: \"kim\" };\n}\n\ntype User = ReturnType<typeof createUser>;",
+            "displayContent": "// 반환 타입 추출[ReturnType]\nfunction createUser() {\n  return { id: 1, name: \"kim\" };\n}\n\ntype User = ReturnType<typeof createUser>; // 함수의 반환 타입을 뽑음. typeof로 값을 타입으로 바꿈"
+          },
+          {
+            "id": "language-typescript-p04-part-4",
+            "title": "비동기 함수 타입[Promise]",
+            "content": "async function fetchUser(id: number): Promise<User> {\n  const res = await fetch(`/api/users/${id}`);\n  return res.json();\n}",
+            "displayContent": "// 비동기 함수 타입[Promise]\nasync function fetchUser(id: number): Promise<User> { // async 함수는 항상 Promise를 반환\n  const res = await fetch(`/api/users/${id}`);\n  return res.json(); // json()은 any 계열이라 실제 형태는 런타임 검증 필요\n}"
+          },
+          {
+            "id": "language-typescript-p04-part-5",
+            "title": "비동기 결과 추출[Awaited]",
+            "content": "type FetchedUser = Awaited<ReturnType<typeof fetchUser>>;",
+            "displayContent": "// 비동기 결과 추출[Awaited]\ntype FetchedUser = Awaited<ReturnType<typeof fetchUser>>; // Promise를 벗긴 안쪽 타입"
+          },
+          {
+            "id": "language-typescript-p04-part-6",
+            "title": "null 제거[NonNullable]",
+            "content": "type MaybeName = string | null | undefined;\ntype Name = NonNullable<MaybeName>;",
+            "displayContent": "// null 제거[NonNullable]\ntype MaybeName = string | null | undefined;\ntype Name = NonNullable<MaybeName>; // 결과: string"
+          },
+          {
+            "id": "language-typescript-p04-part-7",
+            "title": "인터페이스 구현[implements]",
+            "content": "interface Logger {\n  log(message: string): void;\n}\n\nclass ConsoleLogger implements Logger {\n  log(message: string) {\n    console.log(message);\n  }\n}",
+            "displayContent": "// 인터페이스 구현[implements]\ninterface Logger {\n  log(message: string): void;\n}\n\nclass ConsoleLogger implements Logger { // interface를 빠짐없이 구현했는지 검사. 실행 코드는 물려받지 않음\n  log(message: string) {\n    console.log(message);\n  }\n}"
+          },
+          {
+            "id": "language-typescript-p04-part-8",
+            "title": "타입만 가져오기[import type]",
+            "content": "import type { User } from \"./types\";\nimport { fetchUser, type UserId } from \"./api\";",
+            "displayContent": "// 타입만 가져오기[import type]\nimport type { User } from \"./types\"; // 컴파일 후 사라져 번들에 포함되지 않음\nimport { fetchUser, type UserId } from \"./api\"; // 일반 import 안에서 타입만 표시"
           }
         ]
       }
@@ -4229,7 +4584,7 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-vscode-p01-part-3",
             "title": "Go to Definition[F12]",
             "content": "F12\nAlt+F12",
-            "displayContent": "# Go to Definition[F12]\nF12\nAlt+F12"
+            "displayContent": "# Go to Definition[F12]\nF12\nAlt+F12 # 이동하지 않고 그 자리에서 미리 보기"
           },
           {
             "id": "language-vscode-p01-part-4",
@@ -4265,13 +4620,92 @@ export const languageTracks: LanguageTrack[] = [
             "id": "language-vscode-p01-part-9",
             "title": "파일 내 심볼[Ctrl+Shift+O]",
             "content": "Ctrl+Shift+O",
-            "displayContent": "# 파일 내 심볼[Ctrl+Shift+O]\nCtrl+Shift+O"
+            "displayContent": "# 파일 내 심볼[Ctrl+Shift+O]\nCtrl+Shift+O # 입력창에서 :를 넣으면 종류별로 묶어 보여 줌"
           },
           {
             "id": "language-vscode-p01-part-10",
             "title": "추천 순서[우선순위]",
             "content": "Shift+F12\nCtrl+Shift+F",
             "displayContent": "# 추천 순서[우선순위]\n# 1) Shift+F12 Find All References\n# 2) Call Hierarchy Incoming Calls\n# 3) Ctrl+Shift+F + \\bAAA\\s*\\(\nShift+F12\nCtrl+Shift+F"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "yaml",
+    "label": "YAML",
+    "folderName": "yaml",
+    "lessons": [
+      {
+        "id": "language-yaml-p01",
+        "title": "P01.기본-문법",
+        "fileName": "P01.기본-문법.yaml",
+        "sourcePath": "assets/raw/syntax/yaml/P01.기본-문법.yaml",
+        "language": "shell",
+        "parts": [
+          {
+            "id": "language-yaml-p01-part-1",
+            "title": "키와 값[key-value]",
+            "content": "name: kim\nage: 30\nratio: 0.5\nactive: true\nmemo: null",
+            "displayContent": "# 키와 값[key-value]\nname: kim # 콜론 뒤 공백은 필수. 문자열은 따옴표 없이도 됨\nage: 30 # 숫자로 해석\nratio: 0.5\nactive: true # 불리언으로 해석\nmemo: null # 값 없음. 비워 두어도 null"
+          },
+          {
+            "id": "language-yaml-p01-part-2",
+            "title": "중첩[nesting]",
+            "content": "server:\n  port: 8080\n  ssl:\n    enabled: false",
+            "displayContent": "# 중첩[nesting]\nserver:\n  port: 8080 # 들여쓰기로 계층을 나타냄. 탭은 금지, 공백만 허용\n  ssl:\n    enabled: false"
+          },
+          {
+            "id": "language-yaml-p01-part-3",
+            "title": "목록[list]",
+            "content": "ports:\n  - 80\n  - 443",
+            "displayContent": "# 목록[list]\nports:\n  - 80 # - 뒤 공백 필수. 순서가 있는 값\n  - 443"
+          },
+          {
+            "id": "language-yaml-p01-part-4",
+            "title": "객체 목록[list of objects]",
+            "content": "steps:\n  - name: build\n    run: npm run build\n  - name: test\n    run: npm test",
+            "displayContent": "# 객체 목록[list of objects]\nsteps:\n  - name: build # -가 항목 시작. 같은 항목의 키는 들여쓰기를 맞춘다\n    run: npm run build\n  - name: test\n    run: npm test"
+          },
+          {
+            "id": "language-yaml-p01-part-5",
+            "title": "한 줄 표기[flow style]",
+            "content": "tags: [web, api]\nlimits: { cpu: 1, memory: 512 }",
+            "displayContent": "# 한 줄 표기[flow style]\ntags: [web, api] # JSON과 비슷한 표기. 짧을 때만 사용\nlimits: { cpu: 1, memory: 512 }"
+          },
+          {
+            "id": "language-yaml-p01-part-6",
+            "title": "따옴표가 필요한 값[quoting]",
+            "content": "version: \"1.10\"\nanswer: \"yes\"\nport: \"3000:3000\"\ntitle: \"API: 사용자\"",
+            "displayContent": "# 따옴표가 필요한 값[quoting]\nversion: \"1.10\" # 따옴표가 없으면 숫자 1.1이 됨\nanswer: \"yes\" # yes는 YAML 1.1 파서(SnakeYAML 등)에서 true\nport: \"3000:3000\" # 콜론이 든 값은 문자열로 고정\ntitle: \"API: 사용자\" # 콜론과 공백이 있으면 따옴표 필수"
+          }
+        ]
+      },
+      {
+        "id": "language-yaml-p02",
+        "title": "P02.실무-패턴",
+        "fileName": "P02.실무-패턴.yaml",
+        "sourcePath": "assets/raw/syntax/yaml/P02.실무-패턴.yaml",
+        "language": "shell",
+        "parts": [
+          {
+            "id": "language-yaml-p02-part-1",
+            "title": "여러 줄 문자열[block scalar]",
+            "content": "run: |\n  npm ci\n  npm test\nsummary: >\n  한 문단을\n  이어 씁니다",
+            "displayContent": "# 여러 줄 문자열[block scalar]\nrun: | # | 줄바꿈 유지. 스크립트에 사용\n  npm ci\n  npm test\nsummary: > # > 줄바꿈을 공백으로 접음. 긴 문장에 사용\n  한 문단을\n  이어 씁니다"
+          },
+          {
+            "id": "language-yaml-p02-part-2",
+            "title": "앵커와 별칭[anchor / alias]",
+            "content": "defaults: &defaults\n  restart: always\n  logging: json\n\nweb:\n  <<: *defaults\n  image: nginx",
+            "displayContent": "# 앵커와 별칭[anchor / alias]\ndefaults: &defaults # & 재사용할 블록에 이름 붙이기\n  restart: always\n  logging: json\n\nweb:\n  <<: *defaults # * 불러오기, << 병합. 파서에 따라 지원 여부가 다름\n  image: nginx"
+          },
+          {
+            "id": "language-yaml-p02-part-3",
+            "title": "문서 구분[document separator]",
+            "content": "spring:\n  config:\n    activate:\n      on-profile: local\n---\nspring:\n  config:\n    activate:\n      on-profile: prod",
+            "displayContent": "# 문서 구분[document separator]\nspring:\n  config:\n    activate:\n      on-profile: local\n--- # 한 파일에 여러 문서. 프로필별 설정이나 쿠버네티스 매니페스트에서 사용\nspring:\n  config:\n    activate:\n      on-profile: prod"
           }
         ]
       }

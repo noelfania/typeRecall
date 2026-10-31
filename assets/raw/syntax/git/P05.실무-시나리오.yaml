@@ -38,39 +38,6 @@ parts:
       git switch main
       git merge feature/login
       git push origin main
-  - id: language-git-p05-part-3
-    title: 체리픽[cherry-pick]
-    display: |-
-      # 체리픽[cherry-pick]
-      # 다른 브랜치의 커밋 하나만 현재 브랜치로 가져온다
-      git switch main
-      git cherry-pick abc1234
-      git push origin main
-    typing: |-
-      git switch main
-      git cherry-pick abc1234
-      git push origin main
-  - id: language-git-p05-part-4
-    title: 리버트[revert]
-    display: |-
-      # 리버트[revert]
-      # 이미 공유된 커밋은 reset 대신 되돌리는 새 커밋을 만든다
-      git revert abc1234
-      git push origin main
-    typing: |-
-      git revert abc1234
-      git push origin main
-  - id: language-git-p05-part-5
-    title: 브랜치 삭제[delete branch]
-    display: |-
-      # 브랜치 삭제[delete branch]
-      git switch main
-      git branch -d feature/login
-      git push origin -d feature/login
-    typing: |-
-      git switch main
-      git branch -d feature/login
-      git push origin -d feature/login
   - id: language-git-p05-part-6
     title: 커밋 스쿼시[squash]
     display: |-
@@ -83,35 +50,12 @@ parts:
       git reset --soft HEAD~3
       git commit -m "feat(auth): add oauth login"
       git push --force-with-lease origin feature/login
-  - id: language-git-p05-part-7
-    title: 원격 삭제 브랜치 프룬[prune]
-    display: |-
-      # 원격 삭제 브랜치 프룬[prune]
-      # 원격에서 지워진 origin/* 추적 브랜치를 로컬에서 정리한다
-      git fetch --prune origin
-      git remote prune origin
-    typing: |-
-      git fetch --prune origin
-      git remote prune origin
-  - id: language-git-p05-part-8
-    title: 커밋 후 푸시[commit + push]
-    display: |-
-      # 커밋 후 푸시[commit + push]
-      git status
-      git add .
-      git commit -m "fix(api): handle null response"
-      git push -u origin HEAD
-    typing: |-
-      git status
-      git add .
-      git commit -m "fix(api): handle null response"
-      git push -u origin HEAD
   - id: language-git-p05-part-9
     title: 원격 확인[remote -v / show]
     display: |-
       # 원격 확인[remote -v / show]
-      git remote -v
-      git remote show origin
+      git remote -v # -v 원격 이름과 주소
+      git remote show origin # 추적 브랜치 등 상세 정보
     typing: |-
       git remote -v
       git remote show origin
@@ -120,9 +64,9 @@ parts:
     display: |-
       # 오리진 URL 변경[remote set-url]
       git remote -v
-      git remote set-url origin https://github.com/user/repo.git
+      git remote set-url origin https://github.com/user/repo.git # 저장소를 옮겼을 때 주소만 교체
       git remote -v
-      git push -u origin main
+      git push -u origin main # -u 이후 git push만으로 이 브랜치에 올림
     typing: |-
       git remote -v
       git remote set-url origin https://github.com/user/repo.git

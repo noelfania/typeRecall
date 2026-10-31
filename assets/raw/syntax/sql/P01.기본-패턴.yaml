@@ -14,7 +14,7 @@ parts:
     display: |-
       -- 테이블 생성[create table]
       CREATE TABLE users (
-          user_id      INTEGER PRIMARY KEY,
+          user_id      INTEGER PRIMARY KEY, -- 행을 구분하는 유일한 값. NULL 불가
           user_name    VARCHAR(50),
           user_age     INTEGER,
           created_at   DATE
@@ -98,7 +98,7 @@ parts:
       -- 수정[update]
       UPDATE users
       SET user_age = 31
-      WHERE user_id = 1;
+      WHERE user_id = 1; -- WHERE를 빼면 모든 행이 바뀜
     typing: |-
       UPDATE users
       SET user_age = 31
@@ -108,7 +108,7 @@ parts:
     display: |-
       -- 삭제[delete]
       DELETE FROM users
-      WHERE user_id = 2;
+      WHERE user_id = 2; -- WHERE를 빼면 모든 행이 삭제됨
     typing: |-
       DELETE FROM users
       WHERE user_id = 2;
@@ -130,7 +130,7 @@ parts:
       -- 그룹화[group by]
       SELECT created_at, COUNT(*) AS row_count
       FROM users
-      GROUP BY created_at;
+      GROUP BY created_at; -- SELECT의 집계 아닌 컬럼은 GROUP BY에도 있어야 함
     typing: |-
       SELECT created_at, COUNT(*) AS row_count
       FROM users
@@ -174,7 +174,7 @@ parts:
     title: 공통 테이블 식[CTE]
     display: |-
       -- 공통 테이블 식[CTE]
-      WITH order_sum AS (
+      WITH order_sum AS ( -- 이름 붙인 임시 결과. 긴 서브쿼리를 읽기 쉽게
           SELECT user_id, SUM(total_price) AS total_amount
           FROM orders
           GROUP BY user_id

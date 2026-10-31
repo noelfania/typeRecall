@@ -71,6 +71,7 @@ function validateTerms(file, doc) {
   }
   for (const term of doc.terms) {
     checkId(file, term.id);
+    if (!term.title) fail(file, `term title 누락: ${term.id}`);
     if (!term.prompt) fail(file, `term prompt 누락: ${term.id}`);
     if (!term.answer) fail(file, `term answer 누락: ${term.id}`);
   }
@@ -165,7 +166,9 @@ async function main() {
   const termIds = new Set();
   const scenarioIds = new Set();
   const noteIds = new Set();
-  for (const { doc } of parsed) {
+  for (const { file, doc } of parsed) {
+    // _inbox는 생성기가 읽지 않으므로 참조 대상이 될 수 없다
+    if (path.relative(rawDir, file).startsWith('_inbox')) continue;
     if (doc.kind === 'term') {
       for (const term of doc.terms ?? []) {
         if (term?.id) termIds.add(term.id);

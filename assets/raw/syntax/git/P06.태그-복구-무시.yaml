@@ -1,0 +1,52 @@
+id: language-git-p06
+category: syntax
+kind: command
+language: shell
+track:
+  id: git
+  label: Git
+title: P06.태그-복구-무시
+source:
+  origin: 자료 부족·과잉 점검 2026-10-31
+  note: 고빈도 핵심 문법 보강.
+parts:
+  - id: language-git-p06-part-1
+    title: 태그[git tag]
+    display: |-
+      # 태그[git tag]
+      git tag -a v1.0.0 -m "release 1.0.0" # -a 작성자·메시지가 있는 주석 태그
+      git push origin v1.0.0 # 태그는 일반 push로 안 올라가 따로 올림
+    typing: |-
+      git tag -a v1.0.0 -m "release 1.0.0"
+      git push origin v1.0.0
+  - id: language-git-p06-part-2
+    title: 변경 되돌리기[git restore]
+    display: |-
+      # 변경 되돌리기[git restore]
+      git restore src/app.ts # 작업 중 변경을 버림. 되돌릴 수 없음
+      git restore --staged src/app.ts # 스테이징만 취소. 파일 내용은 유지
+    typing: |-
+      git restore src/app.ts
+      git restore --staged src/app.ts
+  - id: language-git-p06-part-3
+    title: 이동 기록 복구[git reflog]
+    display: |-
+      # 이동 기록 복구[git reflog]
+      git reflog # HEAD 이동 기록. reset으로 잃은 커밋도 찾을 수 있음
+      git reset --hard HEAD@{1} # HEAD의 직전 위치로 복구
+    typing: |-
+      git reflog
+      git reset --hard HEAD@{1}
+  - id: language-git-p06-part-4
+    title: 추적 제외[.gitignore]
+    display: |-
+      # 추적 제외[.gitignore]
+      node_modules/ # /로 끝나면 폴더
+      dist/
+      .env # 비밀값은 커밋 금지
+      *.log # 이미 추적 중인 파일에는 적용되지 않음
+    typing: |-
+      node_modules/
+      dist/
+      .env
+      *.log

@@ -1,0 +1,45 @@
+id: language-bash-shell-p04
+category: syntax
+kind: command
+language: shell
+track:
+  id: bash-shell
+  label: Bash / Shell
+title: P04.원격-텍스트처리
+source:
+  origin: 자료 부족·과잉 점검 2026-10-31
+  note: 고빈도 핵심 문법 보강.
+parts:
+  - id: language-bash-shell-p04-part-1
+    title: 원격 접속[ssh]
+    display: |-
+      # 원격 접속[ssh]
+      ssh user@server.example.com
+      ssh -i ~/.ssh/deploy_key user@server.example.com # -i 접속에 쓸 개인 키 파일 지정
+    typing: |-
+      ssh user@server.example.com
+      ssh -i ~/.ssh/deploy_key user@server.example.com
+  - id: language-bash-shell-p04-part-2
+    title: 원격 복사[scp]
+    display: |-
+      # 원격 복사[scp]
+      scp ./app.tar.gz user@server.example.com:/srv/app/ # 로컬 → 서버 복사
+      scp user@server.example.com:/var/log/app.log ./ # 서버 → 로컬 복사. 순서는 항상 출발지 도착지
+    typing: |-
+      scp ./app.tar.gz user@server.example.com:/srv/app/
+      scp user@server.example.com:/var/log/app.log ./
+  - id: language-bash-shell-p04-part-3
+    title: 문자열 치환[sed]
+    display: |-
+      # 문자열 치환[sed]
+      sed -i 's/localhost/example.com/g' config.txt # -i 파일을 직접 수정, s/찾기/바꾸기/g 줄 안의 모두 치환
+    typing: sed -i 's/localhost/example.com/g' config.txt
+  - id: language-bash-shell-p04-part-4
+    title: 정렬·개수 세기[sort / wc]
+    display: |-
+      # 정렬·개수 세기[sort / wc]
+      sort access.log | uniq -c | sort -rn | head -n 10 # uniq -c는 붙어 있는 중복만 세므로 먼저 정렬. 많이 나온 순 10개
+      wc -l access.log # -l 줄 수
+    typing: |-
+      sort access.log | uniq -c | sort -rn | head -n 10
+      wc -l access.log

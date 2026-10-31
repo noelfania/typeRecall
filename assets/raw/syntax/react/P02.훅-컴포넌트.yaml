@@ -1,0 +1,260 @@
+id: language-react-p02
+category: syntax
+kind: code-snippet
+language: typescript
+track:
+  id: react
+  label: React
+title: P02.훅-컴포넌트
+source:
+  origin: 자료 부족·과잉 점검 2026-10-31
+  note: 고빈도 핵심 문법 보강.
+parts:
+  - id: language-react-p02-part-1
+    title: 컴포넌트 props[props]
+    display: |-
+      // 컴포넌트 props[props]
+      type GreetingProps = { name: string; age?: number }; // ?는 선택 props
+
+      function Greeting({ name, age = 20 }: GreetingProps) { // 구조분해 기본값. undefined일 때 적용
+        return <p>{name} ({age})</p>;
+      }
+    typing: |-
+      type GreetingProps = { name: string; age?: number };
+
+      function Greeting({ name, age = 20 }: GreetingProps) {
+        return <p>{name} ({age})</p>;
+      }
+  - id: language-react-p02-part-2
+    title: children[children]
+    display: |-
+      // children[children]
+      function Card({ children }: { children: React.ReactNode }) { // 태그 사이에 넣은 내용이 children으로 전달됨
+        return <div className="card">{children}</div>;
+      }
+    typing: |-
+      function Card({ children }: { children: React.ReactNode }) {
+        return <div className="card">{children}</div>;
+      }
+  - id: language-react-p02-part-3
+    title: 상태[useState]
+    display: |-
+      // 상태[useState]
+      const [count, setCount] = useState(0); // [현재 값, 변경 함수]. 값이 바뀌면 다시 렌더링
+
+      <button onClick={() => setCount((prev) => prev + 1)}>{count}</button>; // 이전 값 기반 갱신은 함수형으로
+    typing: |-
+      const [count, setCount] = useState(0);
+
+      <button onClick={() => setCount((prev) => prev + 1)}>{count}</button>;
+  - id: language-react-p02-part-4
+    title: 객체 상태 갱신[immutable update]
+    display: |-
+      // 객체 상태 갱신[immutable update]
+      const [user, setUser] = useState({ name: "kim", age: 30 });
+
+      setUser((prev) => ({ ...prev, age: 31 })); // 객체를 직접 고치지 않고 새 객체로 교체해야 변경이 감지됨
+    typing: |-
+      const [user, setUser] = useState({ name: "kim", age: 30 });
+
+      setUser((prev) => ({ ...prev, age: 31 }));
+  - id: language-react-p02-part-5
+    title: 효과[useEffect]
+    display: |-
+      // 효과[useEffect]
+      useEffect(() => { // 렌더링 후 실행되는 부수 효과
+        document.title = title;
+      }, [title]); // 의존성 배열. title이 바뀔 때만 다시 실행
+    typing: |-
+      useEffect(() => {
+        document.title = title;
+      }, [title]);
+  - id: language-react-p02-part-6
+    title: 효과 정리[cleanup]
+    display: |-
+      // 효과 정리[cleanup]
+      useEffect(() => {
+        const timer = setInterval(tick, 1000);
+        return () => clearInterval(timer); // 정리 함수. 언마운트와 재실행 전에 호출
+      }, []); // 빈 배열은 마운트 때 한 번만
+    typing: |-
+      useEffect(() => {
+        const timer = setInterval(tick, 1000);
+        return () => clearInterval(timer);
+      }, []);
+  - id: language-react-p02-part-7
+    title: 효과에서 조회[data fetching]
+    display: |-
+      // 효과에서 조회[data fetching]
+      useEffect(() => {
+        const controller = new AbortController(); // url이 바뀌면 이전 요청을 취소해 늦은 응답의 덮어쓰기를 막음
+        fetch(url, { signal: controller.signal })
+          .then((res) => res.json())
+          .then(setData);
+        return () => controller.abort();
+      }, [url]);
+    typing: |-
+      useEffect(() => {
+        const controller = new AbortController();
+        fetch(url, { signal: controller.signal })
+          .then((res) => res.json())
+          .then(setData);
+        return () => controller.abort();
+      }, [url]);
+  - id: language-react-p02-part-8
+    title: 참조[useRef]
+    display: |-
+      // 참조[useRef]
+      const inputRef = useRef<HTMLInputElement>(null); // current가 바뀌어도 다시 렌더링되지 않음
+
+      inputRef.current?.focus(); // 렌더링 전에는 null이라 ?.로 접근. 실제로는 효과나 이벤트 안에서
+
+      <input ref={inputRef} />;
+    typing: |-
+      const inputRef = useRef<HTMLInputElement>(null);
+
+      inputRef.current?.focus();
+
+      <input ref={inputRef} />;
+  - id: language-react-p02-part-9
+    title: 값 기억[useMemo]
+    display: |-
+      // 값 기억[useMemo]
+      const visibleItems = useMemo( // 비용 큰 계산 결과를 기억
+        () => items.filter((item) => item.active),
+        [items], // items가 바뀔 때만 다시 계산
+      );
+    typing: |-
+      const visibleItems = useMemo(
+        () => items.filter((item) => item.active),
+        [items],
+      );
+  - id: language-react-p02-part-10
+    title: 함수 기억[useCallback]
+    display: |-
+      // 함수 기억[useCallback]
+      const handleSave = useCallback(() => { // 함수 참조를 유지. memo 자식에 넘길 때 효과가 있음
+        onSave(form);
+      }, [form, onSave]); // 안에서 쓰는 값은 빠짐없이 넣기
+    typing: |-
+      const handleSave = useCallback(() => {
+        onSave(form);
+      }, [form, onSave]);
+  - id: language-react-p02-part-11
+    title: 컨텍스트[useContext]
+    display: |-
+      // 컨텍스트[useContext]
+      const ThemeContext = createContext("light"); // 인자는 Provider가 없을 때의 기본값
+
+      const theme = useContext(ThemeContext);
+
+      <ThemeContext.Provider value="dark">{children}</ThemeContext.Provider>; // 아래 모든 컴포넌트에 props 없이 값을 전달. 값이 바뀌면 구독자가 다시 렌더링
+    typing: |-
+      const ThemeContext = createContext("light");
+
+      const theme = useContext(ThemeContext);
+
+      <ThemeContext.Provider value="dark">{children}</ThemeContext.Provider>;
+  - id: language-react-p02-part-12
+    title: 리듀서[useReducer]
+    display: |-
+      // 리듀서[useReducer]
+      function reducer(state: State, action: Action): State { // 상태와 액션을 받아 새 상태를 돌려주는 순수 함수
+        switch (action.type) {
+          case "increment":
+            return { count: state.count + 1 };
+          default:
+            return state;
+        }
+      }
+
+      const [state, dispatch] = useReducer(reducer, { count: 0 }); // dispatch({ type: "increment" })로 변경 요청
+    typing: |-
+      function reducer(state: State, action: Action): State {
+        switch (action.type) {
+          case "increment":
+            return { count: state.count + 1 };
+          default:
+            return state;
+        }
+      }
+
+      const [state, dispatch] = useReducer(reducer, { count: 0 });
+  - id: language-react-p02-part-13
+    title: 목록과 key[list key]
+    display: |-
+      // 목록과 key[list key]
+      <ul>
+        {items.map((item) => (
+          <li key={item.id}>{item.name}</li> // key로 항목을 구분. 순서가 바뀌는 목록에 index는 피함
+        ))}
+      </ul>;
+    typing: |-
+      <ul>
+        {items.map((item) => (
+          <li key={item.id}>{item.name}</li>
+        ))}
+      </ul>;
+  - id: language-react-p02-part-14
+    title: 조건부 렌더링[conditional rendering]
+    display: |-
+      // 조건부 렌더링[conditional rendering]
+      {isLoading ? <Spinner /> : <List items={items} />} // 둘 중 하나를 그릴 때 삼항
+      {error && <ErrorMessage error={error} />} // 있을 때만 그릴 때. 왼쪽이 0이면 0이 그려지니 주의
+    typing: |-
+      {isLoading ? <Spinner /> : <List items={items} />}
+      {error && <ErrorMessage error={error} />}
+  - id: language-react-p02-part-15
+    title: 이벤트[event handler]
+    display: |-
+      // 이벤트[event handler]
+      const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => { // 이벤트와 요소 타입을 함께 지정
+        event.preventDefault();
+        onSubmit();
+      };
+    typing: |-
+      const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+        onSubmit();
+      };
+  - id: language-react-p02-part-16
+    title: 제어 컴포넌트[controlled input]
+    display: |-
+      // 제어 컴포넌트[controlled input]
+      const [email, setEmail] = useState("");
+
+      <input value={email} onChange={(event) => setEmail(event.target.value)} />; // 입력값의 기준이 state. onChange가 없으면 입력되지 않음
+    typing: |-
+      const [email, setEmail] = useState("");
+
+      <input value={email} onChange={(event) => setEmail(event.target.value)} />;
+  - id: language-react-p02-part-17
+    title: 커스텀 훅[custom hook]
+    display: |-
+      // 커스텀 훅[custom hook]
+      function useToggle(initial = false) { // use로 시작해야 훅 규칙 검사를 받음
+        const [on, setOn] = useState(initial);
+        const toggle = useCallback(() => setOn((prev) => !prev), []);
+        return [on, toggle] as const; // boolean과 함수의 튜플로 추론되게 함
+      }
+    typing: |-
+      function useToggle(initial = false) {
+        const [on, setOn] = useState(initial);
+        const toggle = useCallback(() => setOn((prev) => !prev), []);
+        return [on, toggle] as const;
+      }
+  - id: language-react-p02-part-18
+    title: 지연 로딩[lazy / Suspense]
+    display: |-
+      // 지연 로딩[lazy / Suspense]
+      const Chart = lazy(() => import("./Chart")); // 처음 그릴 때 코드를 내려받아 초기 번들을 줄임
+
+      <Suspense fallback={<Spinner />}> // 로딩 동안 fallback 표시
+        <Chart />
+      </Suspense>;
+    typing: |-
+      const Chart = lazy(() => import("./Chart"));
+
+      <Suspense fallback={<Spinner />}>
+        <Chart />
+      </Suspense>;

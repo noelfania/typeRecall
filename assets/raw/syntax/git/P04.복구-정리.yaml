@@ -106,26 +106,3 @@ parts:
       # 결과: 원격 저장소의 feature/login 브랜치 삭제
     typing: |-
       git push origin -d feature/login
-  - id: language-git-p04-part-11
-    title: 대소문자 구분[core.ignorecase]
-    display: |-
-      # 대소문자 구분[core.ignorecase]
-      git config core.ignorecase false
-      # 결과: 파일명 대소문자 변경을 git이 추적하도록 설정
-    typing: |-
-      git config core.ignorecase false
-  - id: language-git-p04-part-12
-    title: 커밋 스코프 예시[commit scope]
-    display: |-
-      # 커밋 스코프 예시[commit scope]
-      # type(scope): subject 형태로 변경 범위를 명시한다
-      git commit -m "fix(typo): enought -> enough"
-      git commit -m "docs(readme): added demo image"
-      git commit -m "feat(i18n): add Indonesian translations"
-      git commit -m "chore(deps): update dependency typescript to v5.8.2"
-      # 결과: 스코프로 변경 위치가 한눈에 드러나는 커밋 이력
-    typing: |-
-      git commit -m "fix(typo): enought -> enough"
-      git commit -m "docs(readme): added demo image"
-      git commit -m "feat(i18n): add Indonesian translations"
-      git commit -m "chore(deps): update dependency typescript to v5.8.2"

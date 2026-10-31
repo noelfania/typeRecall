@@ -22,7 +22,7 @@ parts:
     display: |-
       # 목록[docker ps]
       docker ps
-      docker ps -a
+      docker ps -a # -a 멈춘 컨테이너까지
     typing: |-
       docker ps
       docker ps -a
@@ -30,8 +30,8 @@ parts:
     title: 중지·시작·재시작[stop start restart]
     display: |-
       # 중지·시작·재시작[stop start restart]
-      docker stop web
-      docker start web
+      docker stop web # 정상 종료 요청 후 대기
+      docker start web # 멈춘 컨테이너 재실행. 새로 만들지 않음
       docker restart web
     typing: |-
       docker stop web
@@ -52,7 +52,7 @@ parts:
     display: |-
       # 이미지 받기[docker pull]
       docker pull nginx
-      docker pull nginx:1.27
+      docker pull nginx:1.27 # 태그로 버전 고정. 없으면 latest
     typing: |-
       docker pull nginx
       docker pull nginx:1.27
@@ -67,7 +67,7 @@ parts:
     display: |-
       # 이미지 삭제[docker rmi]
       docker rmi nginx
-      docker rmi nginx:1.27
+      docker rmi nginx:1.27 # 사용 중인 컨테이너가 있으면 먼저 지워야 함
     typing: |-
       docker rmi nginx
       docker rmi nginx:1.27

@@ -24,8 +24,8 @@ parts:
     title: 변수[variable]
     display: |-
       # 변수[variable]
-      NAME="kim"
-      echo "hello $NAME"
+      NAME="kim" # = 양옆에 공백을 넣으면 오류
+      echo "hello $NAME" # 결과: hello kim
       echo "home=$HOME"
     typing: |-
       NAME="kim"
@@ -35,7 +35,7 @@ parts:
     title: 조건문[if]
     display: |-
       # 조건문[if]
-      if [ -f app.log ]; then
+      if [ -f app.log ]; then # -f 파일이 있으면 참. [ ] 안쪽 공백은 필수
         echo "log exists"
       else
         echo "no log"
@@ -50,8 +50,8 @@ parts:
     title: 반복문[for]
     display: |-
       # 반복문[for]
-      for f in *.txt; do
-        echo "File: $f"
+      for f in *.txt; do # *.txt가 파일 목록으로 펼쳐짐
+        echo "File: $f" # 변수는 따옴표로 감싸 공백이 든 이름도 안전하게
       done
     typing: |-
       for f in *.txt; do
@@ -71,7 +71,7 @@ parts:
     display: |-
       # 실행 권한 후 실행[chmod +x]
       chmod +x deploy.sh
-      ./deploy.sh
+      ./deploy.sh # ./ 현재 폴더의 파일을 지정. 없으면 PATH에서만 찾음
     typing: |-
       chmod +x deploy.sh
       ./deploy.sh
@@ -79,7 +79,7 @@ parts:
     title: 로그 찾기 조합[find + grep]
     display: |-
       # 로그 찾기 조합[find + grep]
-      find . -name "*.log" | xargs grep "ERROR"
+      find . -name "*.log" | xargs grep "ERROR" # xargs 앞 출력을 뒤 명령의 인자로 넘김
       grep -rn "ERROR" /var/log/app
     typing: |-
       find . -name "*.log" | xargs grep "ERROR"
@@ -89,7 +89,7 @@ parts:
     display: |-
       # wget 다운로드
       wget https://example.com/file.tar.gz
-      wget -O out.tar.gz https://example.com/file.tar.gz
+      wget -O out.tar.gz https://example.com/file.tar.gz # -O 저장할 파일 이름 지정
     typing: |-
       wget https://example.com/file.tar.gz
       wget -O out.tar.gz https://example.com/file.tar.gz
@@ -97,8 +97,8 @@ parts:
     title: 디스크·용량[df du]
     display: |-
       # 디스크·용량[df du]
-      df -h
-      du -sh *
+      df -h # 디스크 전체 사용량. -h 읽기 쉬운 단위
+      du -sh * # -s 항목별 합계. 큰 폴더 찾을 때
     typing: |-
       df -h
       du -sh *
@@ -109,7 +109,7 @@ parts:
       pwd
       git status
       curl -I https://example.com
-      ss -tulpn | grep 3000
+      ss -tulpn | grep 3000 # 포트를 쓰는 프로세스 확인. 3000번 점유 여부
     typing: |-
       pwd
       git status

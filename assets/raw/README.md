@@ -62,7 +62,7 @@ source:
   - part: `id`, `title`, `display`(주석 포함 화면 표시용), `typing`(실제 타이핑 대상)
   - 파트 분할 규칙은 `.cursor/rules/syntax/authoring.mdc` 기준
 - **`term`** — `topic`, `terms[]`
-  - term: `id`, `section`, `title`, `prompt`(설명), `answer`(타이핑할 영어), `aliases[]`(복수 답안), `example`
+  - term: `id`, `section`, `title`, `prompt`(설명), `answer`(타이핑할 영어), `answerDisplay`(카드에 함께 보여 줄 표기), `aliases[]`(참고용 다른 이름, 판정에는 쓰지 않음), `example`
 - **`visual`** — 섹션 폴더마다 `meta.yaml` (`title.ko`, `caption.ko`, `explanation.ko`, `images[]`, `typingUnits[]`)
 - **`note`** — `topic` + 자유 본문(`body` 또는 구조화 필드). 타이핑 비대상 참고 자료.
   - 판단 훈련: `scenarios[]` — `id`, `title`, `context`, `symptom`, `options[{id,label,whenPreferred,whenAvoid}]`, `defaultPick`, `rationale`, `relatedTermIds[]`

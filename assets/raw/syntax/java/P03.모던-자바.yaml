@@ -1,0 +1,80 @@
+id: language-java-p03
+category: syntax
+kind: code-snippet
+language: java
+track:
+  id: java
+  label: Java
+title: P03.모던-자바
+source:
+  origin: 자료 부족·과잉 점검 2026-10-31
+  note: 고빈도 핵심 문법 보강.
+parts:
+  - id: language-java-p03-part-1
+    title: 값 없음 처리[Optional]
+    display: |-
+      // 값 없음 처리[Optional]
+      Optional<String> name = Optional.ofNullable(user.getName()); // null일 수도 있는 값을 감쌈
+      String result = name.map(String::trim).orElse("guest"); // 값이 없으면 기본값
+    typing: |-
+      Optional<String> name = Optional.ofNullable(user.getName());
+      String result = name.map(String::trim).orElse("guest");
+  - id: language-java-p03-part-2
+    title: 불변 데이터[record]
+    display: |-
+      // 불변 데이터[record]
+      public record UserDto(Long id, String name) {} // 생성자·접근자·equals를 자동 생성하는 불변 데이터
+
+      UserDto dto = new UserDto(1L, "kim");
+      String name = dto.name(); // 접근자는 get 없이 필드 이름
+    typing: |-
+      public record UserDto(Long id, String name) {}
+
+      UserDto dto = new UserDto(1L, "kim");
+      String name = dto.name();
+  - id: language-java-p03-part-3
+    title: 열거형[enum]
+    display: |-
+      // 열거형[enum]
+      public enum Status {
+          ACTIVE, INACTIVE;
+      }
+
+      Status status = Status.valueOf("ACTIVE"); // 문자열을 enum으로. 없는 값이면 예외
+    typing: |-
+      public enum Status {
+          ACTIVE, INACTIVE;
+      }
+
+      Status status = Status.valueOf("ACTIVE");
+  - id: language-java-p03-part-4
+    title: 문자열 조립[StringBuilder]
+    display: |-
+      // 문자열 조립[StringBuilder]
+      StringBuilder builder = new StringBuilder();
+      builder.append("id=").append(1); // 반복해서 이어 붙일 때 +보다 효율적
+      String text = builder.toString();
+    typing: |-
+      StringBuilder builder = new StringBuilder();
+      builder.append("id=").append(1);
+      String text = builder.toString();
+  - id: language-java-p03-part-5
+    title: 불변 컬렉션[List.of / Map.of]
+    display: |-
+      // 불변 컬렉션[List.of / Map.of]
+      List<String> names = List.of("kim", "lee"); // 불변 컬렉션. add하면 예외, null 불가
+      Map<String, Integer> scores = Map.of("kim", 90);
+    typing: |-
+      List<String> names = List.of("kim", "lee");
+      Map<String, Integer> scores = Map.of("kim", 90);
+  - id: language-java-p03-part-6
+    title: 날짜[LocalDate]
+    display: |-
+      // 날짜[LocalDate]
+      LocalDate today = LocalDate.now();
+      LocalDate nextWeek = today.plusDays(7); // 불변 객체라 새 날짜를 반환
+      LocalDate parsed = LocalDate.parse("2026-01-31");
+    typing: |-
+      LocalDate today = LocalDate.now();
+      LocalDate nextWeek = today.plusDays(7);
+      LocalDate parsed = LocalDate.parse("2026-01-31");

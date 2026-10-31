@@ -4,7 +4,7 @@ export type VisualPart = {
   content: string;
   displayContent: string;
   language: string;
-  imagePath: string;
+  imagePaths: string[];
   caption: string;
   explanation: string;
   displayCaptions: string[];
